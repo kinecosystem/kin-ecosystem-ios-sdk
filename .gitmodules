@@ -1,0 +1,6 @@
+[submodule "Dependencies/CoreDataStack"]
+	path = Dependencies/CoreDataStack
+	url = https://github.com/ashevin/CoreDataStack.git
+[submodule "Dependencies/kin-sdk-core-stellar-ios"]
+	path = Dependencies/kin-sdk-core-stellar-ios
+	url = https://github.com/kinfoundation/kin-sdk-core-stellar-ios.git
