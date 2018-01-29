@@ -1,21 +1,4 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="MultiChoicePoll" representedClassName="MultiChoicePoll" syncable="YES" codeGenerationType="class"/>
-    <entity name="Offer" representedClassName="Offer" syncable="YES" codeGenerationType="class">
-        <attribute name="amount" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="offer_description" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_image" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_title" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="offer_type" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="offer_content" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OfferContent" inverseName="offer" inverseEntity="OfferContent" syncable="YES"/>
-    </entity>
-    <entity name="OfferContent" representedClassName="OfferContent" isAbstract="YES" syncable="YES" codeGenerationType="class">
-        <relationship name="offer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Offer" inverseName="offer_content" inverseEntity="Offer" syncable="YES"/>
-    </entity>
-    <elements>
-        <element name="Offer" positionX="-27666" positionY="-13248" width="128" height="148"/>
-        <element name="OfferContent" positionX="-27479" positionY="-13237" width="128" height="58"/>
-        <element name="MultiChoicePoll" positionX="-27416" positionY="-13057" width="128" height="43"/>
-    </elements>
+    <elements/>
 </model>

@@ -4,3 +4,6 @@
 [submodule "Dependencies/kin-sdk-core-stellar-ios"]
 	path = Dependencies/kin-sdk-core-stellar-ios
 	url = https://github.com/kinfoundation/kin-sdk-core-stellar-ios.git
+[submodule "Dependencies/Alamofire"]
+	path = Dependencies/Alamofire
+	url = https://github.com/Alamofire/Alamofire.git
