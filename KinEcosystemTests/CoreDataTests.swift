@@ -22,6 +22,7 @@ class CoreDataTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
+        TestsHelper.stubAllTheNetworks()
         let net = EcosystemNet(config: ESConfigProduction())
         guard let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem", ofType: "momd") else { fatalError() }
         guard let dataStore = try? EcosystemData(modelName: "KinEcosystem", modelURL: URL(string: modelPath)!, storeType: NSInMemoryStoreType) else { fatalError() }
@@ -29,8 +30,8 @@ class CoreDataTests: XCTestCase {
     }
     
     override func tearDown() {
-        
         super.tearDown()
+        TestsHelper.unstubAllTheNetworks()
     }
     
     func testSimpleInsertion() {

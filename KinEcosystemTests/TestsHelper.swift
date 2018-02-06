@@ -12,6 +12,27 @@
 import Foundation
 @testable import KinEcosystem
 
-public struct ESConfigProduction: EcosystemConfiguration {
-    public let baseURL = URL(string: "http://api.kinmarketplace.com/v1")!
+class TestsHelper {
+    
+    static func stubAllTheNetworks() {
+        let baseURL = URL(string: "http://api.kinmarketplace.com/v1")!
+        var stub = StubRequest(method: .GET, url: baseURL.appendingPathComponent("offers"))
+        var response = StubResponse(statusCode: 200)
+        response.body = try! Data(contentsOf: Bundle(for: TestsHelper.self).url(forResource: "10_ok_offers", withExtension: "json")!)
+        stub.response = response
+        Hippolyte.shared.add(stubbedRequest: stub)
+        Hippolyte.shared.start()
+    }
+    
+    static func unstubAllTheNetworks() {
+        Hippolyte.shared.stop()
+    }
 }
+
+struct ESConfigProduction: EcosystemConfiguration {
+    let baseURL = URL(string: "http://api.kinmarketplace.com/v1")!
+}
+
+
+
+
