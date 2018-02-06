@@ -12,7 +12,7 @@ import Foundation
 
 extension Bundle {
     class var ecosystem: Bundle {
-        let bundle = Bundle(for: Kin.self)
+        let bundle = Bundle(for: Ecosystem.self)
         if  let bundlePath = bundle.path(forResource: "KinEcosystem", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath) {
             return bundle

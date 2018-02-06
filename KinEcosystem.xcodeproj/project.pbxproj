@@ -7,40 +7,22 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E92D18E72029B041002E357D /* lol.png in Resources */ = {isa = PBXBuildFile; fileRef = E92D18E62029B041002E357D /* lol.png */; };
+		E92D18E92029C234002E357D /* CoreDataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18E82029C234002E357D /* CoreDataTests.swift */; };
+		E92D18EB2029C260002E357D /* TestsHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18EA2029C260002E357D /* TestsHelper.swift */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
-		E96F24E8201729690017EF68 /* KinEcosystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24E7201729690017EF68 /* KinEcosystemTests.swift */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
 		E96F24FA2018D50D0017EF68 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F92018D50D0017EF68 /* Core.swift */; };
 		E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */; };
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
-		E98E49F2201FB98600CB8CC2 /* AlamofireImplementations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49D5201FB98600CB8CC2 /* AlamofireImplementations.swift */; };
-		E98E49F3201FB98600CB8CC2 /* APIHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49D6201FB98600CB8CC2 /* APIHelper.swift */; };
-		E98E49F4201FB98600CB8CC2 /* EcosystemAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49D8201FB98600CB8CC2 /* EcosystemAPI.swift */; };
-		E98E49F5201FB98600CB8CC2 /* APIs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49D9201FB98600CB8CC2 /* APIs.swift */; };
-		E98E49F6201FB98600CB8CC2 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49DA201FB98600CB8CC2 /* Configuration.swift */; };
-		E98E49F7201FB98700CB8CC2 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49DB201FB98600CB8CC2 /* Extensions.swift */; };
-		E98E49F8201FB98700CB8CC2 /* Coupon.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49DD201FB98600CB8CC2 /* Coupon.swift */; };
-		E98E49F9201FB98700CB8CC2 /* EarnResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49DE201FB98600CB8CC2 /* EarnResult.swift */; };
-		E98E49FA201FB98700CB8CC2 /* EarnSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49DF201FB98600CB8CC2 /* EarnSubmission.swift */; };
-		E98E49FB201FB98700CB8CC2 /* Limits.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E0201FB98600CB8CC2 /* Limits.swift */; };
-		E98E49FC201FB98700CB8CC2 /* ModelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E1201FB98600CB8CC2 /* ModelError.swift */; };
-		E98E49FD201FB98700CB8CC2 /* MultiChoicePoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E2201FB98600CB8CC2 /* MultiChoicePoll.swift */; };
-		E98E49FE201FB98700CB8CC2 /* MultiChoicePollAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E3201FB98600CB8CC2 /* MultiChoicePollAnswer.swift */; };
-		E98E49FF201FB98700CB8CC2 /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E4201FB98600CB8CC2 /* Offer.swift */; };
-		E98E4A00201FB98700CB8CC2 /* OfferList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E5201FB98600CB8CC2 /* OfferList.swift */; };
-		E98E4A01201FB98700CB8CC2 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E6201FB98600CB8CC2 /* Order.swift */; };
-		E98E4A02201FB98700CB8CC2 /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E7201FB98600CB8CC2 /* Question.swift */; };
-		E98E4A03201FB98700CB8CC2 /* SliderPoll.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E8201FB98600CB8CC2 /* SliderPoll.swift */; };
-		E98E4A04201FB98700CB8CC2 /* SliderPollAnswer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49E9201FB98600CB8CC2 /* SliderPollAnswer.swift */; };
-		E98E4A05201FB98700CB8CC2 /* SpendResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49EA201FB98600CB8CC2 /* SpendResult.swift */; };
-		E98E4A06201FB98700CB8CC2 /* SpendResultAsset.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49EB201FB98600CB8CC2 /* SpendResultAsset.swift */; };
-		E98E4A07201FB98700CB8CC2 /* SpendSubmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49EC201FB98600CB8CC2 /* SpendSubmission.swift */; };
-		E98E4A08201FB98700CB8CC2 /* Submission.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49ED201FB98600CB8CC2 /* Submission.swift */; };
-		E98E4A09201FB98700CB8CC2 /* SubmissionResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49EE201FB98600CB8CC2 /* SubmissionResult.swift */; };
-		E98E4A0A201FB98700CB8CC2 /* TransactionHistoryItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49EF201FB98600CB8CC2 /* TransactionHistoryItem.swift */; };
-		E98E4A0B201FB98700CB8CC2 /* TransactionHistoryList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49F0201FB98600CB8CC2 /* TransactionHistoryList.swift */; };
-		E98E4A0C201FB98700CB8CC2 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E49F1201FB98600CB8CC2 /* Models.swift */; };
+		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
+		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
+		E9DFCC3F202711AF00F115FA /* OffersList.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3E202711AF00F115FA /* OffersList.swift */; };
+		E9EBA01B202851A500B21DFD /* Ecosystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA01A202851A500B21DFD /* Ecosystem.swift */; };
+		E9EBA02320287BB600B21DFD /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02220287BB600B21DFD /* Promise.swift */; };
+		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
+		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -100,70 +82,16 @@
 			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
 			remoteInfo = KinSDK;
 		};
-		E98E49C4201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3319A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
-		E98E49C6201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F8111E3E19A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS Tests";
-		};
-		E98E49C8201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4DD67C0B1A5C55C900ED2280;
-			remoteInfo = "Alamofire macOS";
-		};
-		E98E49CA201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = F829C6B21A7A94F100A2CD59;
-			remoteInfo = "Alamofire macOS Tests";
-		};
-		E98E49CC201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626EF1BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS";
-		};
-		E98E49CE201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 4CF626F81BA7CB3E0011A099;
-			remoteInfo = "Alamofire tvOS Tests";
-		};
-		E98E49D0201F86C100CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = E4202FE01B667AA100C997FB;
-			remoteInfo = "Alamofire watchOS";
-		};
-		E98E49D2201F86D000CB8CC2 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = F8111E3219A95C8B0040E7D1;
-			remoteInfo = "Alamofire iOS";
-		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E92D18E62029B041002E357D /* lol.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = lol.png; sourceTree = "<group>"; };
+		E92D18E82029C234002E357D /* CoreDataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataTests.swift; sourceTree = "<group>"; };
+		E92D18EA2029C260002E357D /* TestsHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestsHelper.swift; sourceTree = "<group>"; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24DC201729690017EF68 /* KinEcosystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinEcosystem.h; sourceTree = "<group>"; };
 		E96F24DD201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24E2201729690017EF68 /* KinEcosystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinEcosystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E96F24E7201729690017EF68 /* KinEcosystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinEcosystemTests.swift; sourceTree = "<group>"; };
 		E96F24E9201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24F62018A8AC0017EF68 /* Kin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kin.swift; sourceTree = "<group>"; };
 		E96F24F92018D50D0017EF68 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
@@ -171,34 +99,13 @@
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E98E48B9201F626F00CB8CC2 /* KinSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinSDK.xcodeproj"; sourceTree = "<group>"; };
 		E98E48C6201F629300CB8CC2 /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
-		E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = Dependencies/Alamofire/Alamofire.xcodeproj; sourceTree = "<group>"; };
-		E98E49D5201FB98600CB8CC2 /* AlamofireImplementations.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlamofireImplementations.swift; sourceTree = "<group>"; };
-		E98E49D6201FB98600CB8CC2 /* APIHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIHelper.swift; sourceTree = "<group>"; };
-		E98E49D8201FB98600CB8CC2 /* EcosystemAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EcosystemAPI.swift; sourceTree = "<group>"; };
-		E98E49D9201FB98600CB8CC2 /* APIs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = APIs.swift; sourceTree = "<group>"; };
-		E98E49DA201FB98600CB8CC2 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		E98E49DB201FB98600CB8CC2 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
-		E98E49DD201FB98600CB8CC2 /* Coupon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Coupon.swift; sourceTree = "<group>"; };
-		E98E49DE201FB98600CB8CC2 /* EarnResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarnResult.swift; sourceTree = "<group>"; };
-		E98E49DF201FB98600CB8CC2 /* EarnSubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EarnSubmission.swift; sourceTree = "<group>"; };
-		E98E49E0201FB98600CB8CC2 /* Limits.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Limits.swift; sourceTree = "<group>"; };
-		E98E49E1201FB98600CB8CC2 /* ModelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ModelError.swift; sourceTree = "<group>"; };
-		E98E49E2201FB98600CB8CC2 /* MultiChoicePoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiChoicePoll.swift; sourceTree = "<group>"; };
-		E98E49E3201FB98600CB8CC2 /* MultiChoicePollAnswer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MultiChoicePollAnswer.swift; sourceTree = "<group>"; };
-		E98E49E4201FB98600CB8CC2 /* Offer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
-		E98E49E5201FB98600CB8CC2 /* OfferList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OfferList.swift; sourceTree = "<group>"; };
-		E98E49E6201FB98600CB8CC2 /* Order.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
-		E98E49E7201FB98600CB8CC2 /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
-		E98E49E8201FB98600CB8CC2 /* SliderPoll.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderPoll.swift; sourceTree = "<group>"; };
-		E98E49E9201FB98600CB8CC2 /* SliderPollAnswer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderPollAnswer.swift; sourceTree = "<group>"; };
-		E98E49EA201FB98600CB8CC2 /* SpendResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendResult.swift; sourceTree = "<group>"; };
-		E98E49EB201FB98600CB8CC2 /* SpendResultAsset.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendResultAsset.swift; sourceTree = "<group>"; };
-		E98E49EC201FB98600CB8CC2 /* SpendSubmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpendSubmission.swift; sourceTree = "<group>"; };
-		E98E49ED201FB98600CB8CC2 /* Submission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Submission.swift; sourceTree = "<group>"; };
-		E98E49EE201FB98600CB8CC2 /* SubmissionResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SubmissionResult.swift; sourceTree = "<group>"; };
-		E98E49EF201FB98600CB8CC2 /* TransactionHistoryItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryItem.swift; sourceTree = "<group>"; };
-		E98E49F0201FB98600CB8CC2 /* TransactionHistoryList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransactionHistoryList.swift; sourceTree = "<group>"; };
-		E98E49F1201FB98600CB8CC2 /* Models.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
+		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
+		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
+		E9DFCC3E202711AF00F115FA /* OffersList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersList.swift; sourceTree = "<group>"; };
+		E9EBA01A202851A500B21DFD /* Ecosystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ecosystem.swift; sourceTree = "<group>"; };
+		E9EBA02220287BB600B21DFD /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
+		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
+		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -220,15 +127,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92D18DF2029ACE2002E357D /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
-				E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */,
 				E98E48C6201F629300CB8CC2 /* CoreDataStack.xcodeproj */,
 				E98E48B9201F626F00CB8CC2 /* KinSDK.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E96F24DA201729690017EF68 /* Products */,
+				E92D18DF2029ACE2002E357D /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -244,7 +158,8 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
-				E98E49D4201FB98600CB8CC2 /* API */,
+				E92D18E62029B041002E357D /* lol.png */,
+				E9DFCC39202710F000F115FA /* API */,
 				E98E48B4201A128900CB8CC2 /* Model */,
 				E98E4897201A02C700CB8CC2 /* extensions */,
 				E96F24F52018A88D0017EF68 /* Core */,
@@ -257,8 +172,9 @@
 		E96F24E6201729690017EF68 /* KinEcosystemTests */ = {
 			isa = PBXGroup;
 			children = (
-				E96F24E7201729690017EF68 /* KinEcosystemTests.swift */,
 				E96F24E9201729690017EF68 /* Info.plist */,
+				E92D18E82029C234002E357D /* CoreDataTests.swift */,
+				E92D18EA2029C260002E357D /* TestsHelper.swift */,
 			);
 			path = KinEcosystemTests;
 			sourceTree = "<group>";
@@ -266,6 +182,7 @@
 		E96F24F52018A88D0017EF68 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E9EBA02220287BB600B21DFD /* Promise.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
 				E96F24F92018D50D0017EF68 /* Core.swift */,
 			);
@@ -276,6 +193,7 @@
 			isa = PBXGroup;
 			children = (
 				E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */,
+				E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -284,6 +202,9 @@
 			isa = PBXGroup;
 			children = (
 				E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */,
+				E9DFCC3C2027117700F115FA /* Offer.swift */,
+				E9DFCC3E202711AF00F115FA /* OffersList.swift */,
+				E9EBA02420287F0500B21DFD /* EcosystemData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -307,68 +228,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E98E49BA201F86C100CB8CC2 /* Products */ = {
+		E9DFCC39202710F000F115FA /* API */ = {
 			isa = PBXGroup;
 			children = (
-				E98E49C5201F86C100CB8CC2 /* Alamofire.framework */,
-				E98E49C7201F86C100CB8CC2 /* Alamofire iOS Tests.xctest */,
-				E98E49C9201F86C100CB8CC2 /* Alamofire.framework */,
-				E98E49CB201F86C100CB8CC2 /* Alamofire macOS Tests.xctest */,
-				E98E49CD201F86C100CB8CC2 /* Alamofire.framework */,
-				E98E49CF201F86C100CB8CC2 /* Alamofire tvOS Tests.xctest */,
-				E98E49D1201F86C100CB8CC2 /* Alamofire.framework */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		E98E49D4201FB98600CB8CC2 /* API */ = {
-			isa = PBXGroup;
-			children = (
-				E98E49D5201FB98600CB8CC2 /* AlamofireImplementations.swift */,
-				E98E49D6201FB98600CB8CC2 /* APIHelper.swift */,
-				E98E49D7201FB98600CB8CC2 /* APIs */,
-				E98E49D9201FB98600CB8CC2 /* APIs.swift */,
-				E98E49DA201FB98600CB8CC2 /* Configuration.swift */,
-				E98E49DB201FB98600CB8CC2 /* Extensions.swift */,
-				E98E49DC201FB98600CB8CC2 /* Models */,
-				E98E49F1201FB98600CB8CC2 /* Models.swift */,
+				E9EBA01A202851A500B21DFD /* Ecosystem.swift */,
+				E9EBA02620288C1800B21DFD /* EcosystemNet.swift */,
 			);
 			path = API;
-			sourceTree = "<group>";
-		};
-		E98E49D7201FB98600CB8CC2 /* APIs */ = {
-			isa = PBXGroup;
-			children = (
-				E98E49D8201FB98600CB8CC2 /* EcosystemAPI.swift */,
-			);
-			path = APIs;
-			sourceTree = "<group>";
-		};
-		E98E49DC201FB98600CB8CC2 /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				E98E49DD201FB98600CB8CC2 /* Coupon.swift */,
-				E98E49DE201FB98600CB8CC2 /* EarnResult.swift */,
-				E98E49DF201FB98600CB8CC2 /* EarnSubmission.swift */,
-				E98E49E0201FB98600CB8CC2 /* Limits.swift */,
-				E98E49E1201FB98600CB8CC2 /* ModelError.swift */,
-				E98E49E2201FB98600CB8CC2 /* MultiChoicePoll.swift */,
-				E98E49E3201FB98600CB8CC2 /* MultiChoicePollAnswer.swift */,
-				E98E49E4201FB98600CB8CC2 /* Offer.swift */,
-				E98E49E5201FB98600CB8CC2 /* OfferList.swift */,
-				E98E49E6201FB98600CB8CC2 /* Order.swift */,
-				E98E49E7201FB98600CB8CC2 /* Question.swift */,
-				E98E49E8201FB98600CB8CC2 /* SliderPoll.swift */,
-				E98E49E9201FB98600CB8CC2 /* SliderPollAnswer.swift */,
-				E98E49EA201FB98600CB8CC2 /* SpendResult.swift */,
-				E98E49EB201FB98600CB8CC2 /* SpendResultAsset.swift */,
-				E98E49EC201FB98600CB8CC2 /* SpendSubmission.swift */,
-				E98E49ED201FB98600CB8CC2 /* Submission.swift */,
-				E98E49EE201FB98600CB8CC2 /* SubmissionResult.swift */,
-				E98E49EF201FB98600CB8CC2 /* TransactionHistoryItem.swift */,
-				E98E49F0201FB98600CB8CC2 /* TransactionHistoryList.swift */,
-			);
-			path = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,7 +263,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				E98E49D3201F86D000CB8CC2 /* PBXTargetDependency */,
 				E98E48D0201F62A000CB8CC2 /* PBXTargetDependency */,
 				E98E48D2201F62A000CB8CC2 /* PBXTargetDependency */,
 			);
@@ -457,10 +322,6 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
-					ProductGroup = E98E49BA201F86C100CB8CC2 /* Products */;
-					ProjectRef = E98E49B9201F86C100CB8CC2 /* Alamofire.xcodeproj */;
-				},
-				{
 					ProductGroup = E98E48C7201F629300CB8CC2 /* Products */;
 					ProjectRef = E98E48C6201F629300CB8CC2 /* CoreDataStack.xcodeproj */;
 				},
@@ -513,55 +374,6 @@
 			remoteRef = E98E48CD201F629300CB8CC2 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E98E49C5201F86C100CB8CC2 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = E98E49C4201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49C7201F86C100CB8CC2 /* Alamofire iOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire iOS Tests.xctest";
-			remoteRef = E98E49C6201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49C9201F86C100CB8CC2 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = E98E49C8201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49CB201F86C100CB8CC2 /* Alamofire macOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire macOS Tests.xctest";
-			remoteRef = E98E49CA201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49CD201F86C100CB8CC2 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = E98E49CC201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49CF201F86C100CB8CC2 /* Alamofire tvOS Tests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "Alamofire tvOS Tests.xctest";
-			remoteRef = E98E49CE201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		E98E49D1201F86C100CB8CC2 /* Alamofire.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = Alamofire.framework;
-			remoteRef = E98E49D0201F86C100CB8CC2 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -569,6 +381,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92D18E72029B041002E357D /* lol.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -586,37 +399,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98E4A0A201FB98700CB8CC2 /* TransactionHistoryItem.swift in Sources */,
-				E98E49F3201FB98600CB8CC2 /* APIHelper.swift in Sources */,
-				E98E4A06201FB98700CB8CC2 /* SpendResultAsset.swift in Sources */,
-				E98E4A0B201FB98700CB8CC2 /* TransactionHistoryList.swift in Sources */,
+				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
-				E98E4A01201FB98700CB8CC2 /* Order.swift in Sources */,
-				E98E49FC201FB98700CB8CC2 /* ModelError.swift in Sources */,
-				E98E49F5201FB98600CB8CC2 /* APIs.swift in Sources */,
-				E98E4A07201FB98700CB8CC2 /* SpendSubmission.swift in Sources */,
-				E98E4A00201FB98700CB8CC2 /* OfferList.swift in Sources */,
-				E98E49FE201FB98700CB8CC2 /* MultiChoicePollAnswer.swift in Sources */,
-				E98E49FB201FB98700CB8CC2 /* Limits.swift in Sources */,
-				E98E49FF201FB98700CB8CC2 /* Offer.swift in Sources */,
-				E98E49FA201FB98700CB8CC2 /* EarnSubmission.swift in Sources */,
-				E98E49F6201FB98600CB8CC2 /* Configuration.swift in Sources */,
-				E98E49F9201FB98700CB8CC2 /* EarnResult.swift in Sources */,
-				E98E4A02201FB98700CB8CC2 /* Question.swift in Sources */,
-				E98E4A05201FB98700CB8CC2 /* SpendResult.swift in Sources */,
-				E98E4A09201FB98700CB8CC2 /* SubmissionResult.swift in Sources */,
-				E98E4A04201FB98700CB8CC2 /* SliderPollAnswer.swift in Sources */,
 				E96F24FA2018D50D0017EF68 /* Core.swift in Sources */,
-				E98E49F8201FB98700CB8CC2 /* Coupon.swift in Sources */,
-				E98E49F7201FB98700CB8CC2 /* Extensions.swift in Sources */,
+				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
+				E9DFCC3F202711AF00F115FA /* OffersList.swift in Sources */,
+				E9EBA02320287BB600B21DFD /* Promise.swift in Sources */,
+				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
-				E98E4A0C201FB98700CB8CC2 /* Models.swift in Sources */,
-				E98E4A08201FB98700CB8CC2 /* Submission.swift in Sources */,
+				E9EBA01B202851A500B21DFD /* Ecosystem.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
-				E98E49FD201FB98700CB8CC2 /* MultiChoicePoll.swift in Sources */,
-				E98E4A03201FB98700CB8CC2 /* SliderPoll.swift in Sources */,
-				E98E49F4201FB98600CB8CC2 /* EcosystemAPI.swift in Sources */,
-				E98E49F2201FB98600CB8CC2 /* AlamofireImplementations.swift in Sources */,
+				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -624,7 +417,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E96F24E8201729690017EF68 /* KinEcosystemTests.swift in Sources */,
+				E92D18EB2029C260002E357D /* TestsHelper.swift in Sources */,
+				E92D18E92029C234002E357D /* CoreDataTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -645,11 +439,6 @@
 			isa = PBXTargetDependency;
 			name = KinSDK;
 			targetProxy = E98E48D1201F62A000CB8CC2 /* PBXContainerItemProxy */;
-		};
-		E98E49D3201F86D000CB8CC2 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "Alamofire iOS";
-			targetProxy = E98E49D2201F86D000CB8CC2 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -780,6 +569,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinEcosystem/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystem;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -803,6 +593,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinEcosystem/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystem;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
