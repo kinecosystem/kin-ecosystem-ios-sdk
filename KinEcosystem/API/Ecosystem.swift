@@ -28,6 +28,7 @@ class Ecosystem {
         network.offers()
             .then { data in
                 self.dataStore.syncOffersFromNetworkData(data: data)
+            }.then {
                 p.signal(())
             }.error { error in
                 p.signal(error)

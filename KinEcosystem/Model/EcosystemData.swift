@@ -25,7 +25,7 @@ class EcosystemData {
         stack = try CoreDataStack(modelName: modelName, storeType: storeType, modelURL: modelURL)
     }
     
-    @discardableResult
+    
     func syncOffersFromNetworkData(data: Data) -> Promise<Void> {
         let p = Promise<Void>()
         
@@ -55,8 +55,8 @@ class EcosystemData {
             
                         
         }) { error in
-            if let error = error {
-                p.signal(error)
+            if let stackErorr = error {
+                p.signal(stackErorr)
             } else {
                 p.signal(())
             }
