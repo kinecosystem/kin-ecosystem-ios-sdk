@@ -42,13 +42,10 @@ class CoreDataTests: XCTestCase {
         
         let getOffers = self.expectation(description: "get data, parse and persist")
         
-        DispatchQueue.global().async {
-            self.ecosystem.updateOffers().then {
-                getOffers.fulfill()
-                }.error { error in
-                    XCTAssert(false, error.localizedDescription)
-                    getOffers.fulfill()
-            }
+        self.ecosystem.updateOffers().then {
+            getOffers.fulfill()
+            }.error { error in
+                XCTAssert(false, error.localizedDescription)
         }
         
         self.wait(for: [getOffers], timeout: 10.0)

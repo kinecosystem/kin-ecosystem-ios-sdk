@@ -24,16 +24,10 @@ class Ecosystem {
     }
     
     func updateOffers() -> Promise<Void> {
-        let p = Promise<Void>()
-        network.offers()
+        return network.offers()
             .then { data in
                 self.dataStore.syncOffersFromNetworkData(data: data)
-            }.then {
-                p.signal(())
-            }.error { error in
-                p.signal(error)
         }
-        return p
     }
 
 }

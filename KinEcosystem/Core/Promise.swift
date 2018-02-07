@@ -2,140 +2,132 @@
 //  Promise.swift
 //  StellarKit
 //
-//  Created by Avi Shevin on 30/01/2018.
+//  Created by Kin Foundation.
 //  Copyright © 2018 Kin Foundation. All rights reserved.
 //
 
 import Foundation
 
-public typealias ErrorHandler = (Error) -> Void
+private enum Result<Value> {
+    case value(Value)
+    case error(Error)
+}
 
-public final class Promise<Value> {
-    public private(set) var result: Value? = nil
-    public private(set) var error: Error? = nil
-
-    private var errorHandler: ErrorHandler?
-
-    private var signaled: Bool {
-        return result != nil || error != nil
+public class Promise<Value> {
+    private var callbacks = [((Result<Value>) -> Void)]()
+    private var errorHandler: ((Error) -> Void)?
+    
+    private var result: Result<Value>? {
+        didSet {
+            callbacks.forEach { c in result.map { c($0) } }
+            
+            if let result = result {
+                switch result {
+                case .value: break
+                case .error(let error): errorHandler?(error)
+                }
+            }
+        }
     }
-
-    private let waitGroup = DispatchGroup()
-    private var finished = false
-
+    
     public init() {
-        waitGroup.enter()
+        
     }
-
-    convenience public init(_ result: Value) {
+    
+    public convenience init(_ value: Value) {
         self.init()
-
-        signal(result)
+        
+        result = .value(value)
     }
-
-    convenience public init(_ error: Error) {
+    
+    public convenience init(_ error: Error) {
         self.init()
-
-        signal(error)
+        
+        result = .error(error)
     }
-
+    
     @discardableResult
-    public func signal(_ result: Value) -> Promise<Value> {
-        return commonSignal(result)
-    }
-
-    @discardableResult
-    public func signal(_ error: Error) -> Promise<Value> {
-        return commonSignal(error)
-    }
-
-    @discardableResult
-    public func then<NewValue>(_ handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue> {
-        if finished {
-            let p = Promise<NewValue>()
-            p.errorHandler = errorHandler
-            p.error = error
-
-            return p
-        }
-
-        waitGroup.wait()
-
-        finished = true
-
-        if let result = result {
-            var res: Any? = nil
-
-            do {
-                res = try handler(result)
-            }
-            catch {
-                self.error = error
-            }
-
-            if let promise = res as? Promise<NewValue> {
-                return promise
-            }
-        }
-
-        let p = Promise<NewValue>()
-        if let error = error {
-            p.errorHandler = errorHandler
-            p.signal(error)
-        }
-
-        return p
-    }
-
-    @discardableResult
-    public func then(_ handler: @escaping (Value) throws -> Void) -> Promise {
-        if finished {
-            return self
-        }
-
-        waitGroup.wait()
-
-        finished = true
-
-        if let result = result {
-            do {
-                try handler(result)
-            }
-            catch {
-                self.error = error
-            }
-        }
-
-        if let error = error {
-            errorHandler?(error)
-        }
-
+    public func signal(_ value: Value) -> Promise {
+        result = .value(value)
+        
         return self
     }
     
-    public func error(_ handler: @escaping ErrorHandler) {
-        if let error = error {
-            handler(error)
-        }
-        else {
-            errorHandler = handler
-        }
-    }
-
-    private func commonSignal(_ value: Any) -> Promise<Value> {
-        guard signaled == false else {
-            return self
-        }
-
-        if let value = value as? Value {
-            self.result = value
-        }
-        else if let error = value as? Error {
-            self.error = error
-        }
-
-        waitGroup.leave()
-
+    @discardableResult
+    public func signal(_ error: Error) -> Promise {
+        result = .error(error)
+        
         return self
     }
+    
+    private func observe(callback: @escaping (Result<Value>) -> Void) {
+        callbacks.append(callback)
+        
+        result.map { callback($0) }
+    }
+    
+    @discardableResult
+    public func then(handler: @escaping (Value) throws -> Void) -> Promise {
+        let p = Promise<Value>()
+        
+        observe { result in
+            switch result {
+            case .value(let value):
+                do {
+                    try handler(value)
+                }
+                catch {
+                    p.signal(error)
+                }
+                
+            case .error(let error):
+                p.signal(error)
+            }
+        }
+        
+        return p
+    }
+    
+    @discardableResult
+    public func then<NewValue>(handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue> {
+        let p = Promise<NewValue>()
+        
+        observe { result in
+            switch result {
+            case .value(let value):
+                do {
+                    let promise = try handler(value)
+                    
+                    promise.observe { result in
+                        switch result {
+                        case .value(let value):
+                            p.signal(value)
+                        case .error(let error):
+                            p.signal(error)
+                        }
+                    }
+                }
+                catch {
+                    p.signal(error)
+                }
+                
+            case .error(let error):
+                p.signal(error)
+            }
+        }
+        
+        return p
+    }
+    
+    public func error(handler: @escaping (Error) -> Void) {
+        errorHandler = handler
+        
+        if let result = result {
+            switch result {
+            case .value: break
+            case .error(let error): errorHandler?(error)
+            }
+        }
+    }
 }
+

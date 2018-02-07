@@ -25,11 +25,11 @@ class EcosystemData {
         stack = try CoreDataStack(modelName: modelName, storeType: storeType, modelURL: modelURL)
     }
     
-    
     func syncOffersFromNetworkData(data: Data) -> Promise<Void> {
+        
         let p = Promise<Void>()
         
-        stack.perform({ (context, shouldSave) in
+        self.stack.perform({ context, shouldSave in
             
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = context
@@ -53,14 +53,15 @@ class EcosystemData {
                 }
             }
             
-                        
+            
         }) { error in
-            if let stackErorr = error {
-                p.signal(stackErorr)
+            if let stackError = error {
+                p.signal(stackError)
             } else {
                 p.signal(())
             }
         }
+        
         return p
     }
     
