@@ -11,7 +11,18 @@
 import Foundation
 import CoreData
 
-public class Offer: NSManagedObject, Decodable {
+enum OfferType: String {
+    case earn
+    case spend
+}
+
+class OffersList: Codable {
+    
+    var offers: [Offer]
+    
+}
+
+class Offer: NSManagedObject, Decodable {
     
     /*
      
@@ -29,13 +40,18 @@ public class Offer: NSManagedObject, Decodable {
      }
      
     */
-    
+
     @NSManaged public var amount: Int32
     @NSManaged public var description_: String
     @NSManaged public var id: String
     @NSManaged public var image: String
     @NSManaged public var offer_type: String
     @NSManaged public var title: String
+    
+    var offerType: OfferType {
+        get { return OfferType(rawValue: offer_type)! }
+        set { offer_type = newValue.rawValue }
+    }
     
     enum OfferKeys: String, CodingKey {
         case amount

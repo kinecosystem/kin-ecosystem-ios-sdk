@@ -1,6 +1,6 @@
 //
 //
-//  CoreDataTests.swift
+//  EcosystemTests.swift
 //
 //  Created by Kin Foundation
 //  Copyright © 2018 Kin Foundation. All rights reserved.
@@ -35,31 +35,26 @@ class CoreDataTests: XCTestCase {
         super.tearDown()
         mockNet.stop()
     }
-    
-    func testSimpleInsertion() {
+ 
+    func testUpdateOffers() {
         
-        mockNet.stub("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
+        mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
         
-        let getOffers = self.expectation(description: "get data, parse and persist")
+        let updateOffers = self.expectation(description: "get data, parse and persist")
         
         self.ecosystem.updateOffers().then {
-            getOffers.fulfill()
+            XCTAssert(self.ecosystem.offersViewModel?.offers.count == 10)
+            self.ecosystem.dataStore.stack.query { context in
+                let request = NSFetchRequest<Offer>(entityName: "Offer")
+                let diskOffers = try! context.fetch(request)
+                XCTAssert(diskOffers.count == 10)
+                updateOffers.fulfill()
+                }
             }.error { error in
                 XCTAssert(false, error.localizedDescription)
         }
         
-        self.wait(for: [getOffers], timeout: 10.0)
-        
-        let query = self.expectation(description: "coredata query")
-        
-        self.ecosystem.dataStore.stack.query { context in
-            let request = NSFetchRequest<Offer>(entityName: "Offer")
-            let diskOffers = try! context.fetch(request)
-            XCTAssert(diskOffers.count == 10)
-            query.fulfill()
-        }
-        
-        self.wait(for: [query], timeout: 10.0)
+        self.wait(for: [updateOffers], timeout: 1.0)
         
     }
     

@@ -28,7 +28,7 @@ class MockNet {
         Hippolyte.shared.stop()
     }
     
-    func stub(_ path: String, method: HTTPMethod, statusCode: Int, responseFilename: String? = nil, error: Error? = nil) {
+    func stubRequest(_ path: String, method: HTTPMethod, statusCode: Int, responseFilename: String? = nil, error: Error? = nil) {
        
         var response:StubResponse!
         if let responseError = error {
@@ -45,12 +45,29 @@ class MockNet {
         
         Hippolyte.shared.add(stubbedRequest: request)
     }
+    
+    func stubImage(_ name: String, imageBundleURL: URL) {
+       
+        var response:StubResponse!
+        
+        response = StubResponse()
+        response.headers = ["Content-Type": "image/png"]
+        response.body = try! Data(contentsOf: imageBundleURL)
+        let url = baseURL.appendingPathComponent(name)
+        let request = StubRequest.Builder().stubRequest(withMethod: .GET, url: url).addResponse(response).build()
+        
+        Hippolyte.shared.add(stubbedRequest: request)
+    }
 }
 
 struct ESConfigProduction: EcosystemConfiguration {
     let baseURL = URL(string: "http://api.kinmarketplace.com/v1")!
 }
 
-
+extension StubResponse {
+    var data: Data? {
+        return self.body
+    }
+}
 
 
