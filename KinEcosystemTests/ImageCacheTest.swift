@@ -30,8 +30,7 @@ class ImageCacheTest: XCTestCase {
     func testImageCache() {
         
         mockNet.stubImage("kid.png", imageBundleURL: Bundle(for: ImageCacheTest.self).url(forResource: "kid", withExtension: "png")!)
-        let imageURL = mockNet.baseURL.appendingPathComponent("kid.png").absoluteString
-        
+        let imageURL = mockNet.baseURL.appendingPathComponent("kid.png")
         let imageWait1 = self.expectation(description: "image")
         ImageCache.shared.image(for: imageURL).then { result in
             XCTAssert(result.cached == false)
@@ -40,7 +39,7 @@ class ImageCacheTest: XCTestCase {
                 XCTAssert(false)
                 imageWait1.fulfill()
         }
-        self.wait(for: [imageWait1], timeout: 5.0)
+        self.wait(for: [imageWait1], timeout: 1.0)
         let imageWait2 = self.expectation(description: "image")
         ImageCache.shared.image(for: imageURL).then { result in
             XCTAssert(result.cached == true)
@@ -49,7 +48,7 @@ class ImageCacheTest: XCTestCase {
                 XCTAssert(false)
                 imageWait2.fulfill()
         }
-        self.wait(for: [imageWait2], timeout: 5.0)
+        self.wait(for: [imageWait2], timeout: 1.0)
     }
     
 }

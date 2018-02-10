@@ -23,7 +23,7 @@ struct ImageCacheResult {
     let cached: Bool
 }
 
-// lightweight 10mb in-memory cache for images
+// 100mb disk cache for images
 
 final class ImageCache {
     
@@ -34,19 +34,15 @@ final class ImageCache {
     
     private init() {
         let config = URLSessionConfiguration.default
-        cache = URLCache(memoryCapacity: 10 * 1024 * 1024, diskCapacity: 0, diskPath: nil)
+        cache = URLCache(memoryCapacity: 0, diskCapacity: 100 * 1024 * 1024, diskPath: "com.kin.kinfoundsation")
         config.urlCache = cache
         session = URLSession(configuration: config)
     }
     
-    // memory only cache
-    
     @discardableResult
-    func image(for string: String) -> Promise<ImageCacheResult> {
+    func image(for url: URL?) -> Promise<ImageCacheResult> {
         let p = Promise<ImageCacheResult>()
-        guard let url = URL(string: string) else {
-            return p.signal(ImageCacheError.invalidURL)
-        }
+        guard let url = url else { return p.signal(ImageCacheError.invalidURL) }
         let request = URLRequest(url: url)
         if  let cachedResponse = cache.cachedResponse(for: request),
             let image = UIImage(data: cachedResponse.data) {
