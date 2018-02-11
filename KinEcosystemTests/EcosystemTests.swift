@@ -17,7 +17,7 @@ import CoreDataStack
 
 
 
-class CoreDataTests: XCTestCase {
+class EcosystemTests: XCTestCase {
     
     var ecosystem:Ecosystem!
     let mockNet = MockNet(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!)

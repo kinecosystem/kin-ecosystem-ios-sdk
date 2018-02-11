@@ -30,7 +30,7 @@ class ImageCacheTest: XCTestCase {
     func testImageCache() {
         
         mockNet.stubImage("kid.png", imageBundleURL: Bundle(for: ImageCacheTest.self).url(forResource: "kid", withExtension: "png")!)
-        let imageURL = mockNet.baseURL.appendingPathComponent("kid.png").absoluteString
+        let imageURL = mockNet.baseURL.appendingPathComponent("kid.png")
         
         let imageWait1 = self.expectation(description: "image")
         ImageCache.shared.image(for: imageURL).then { result in

@@ -22,7 +22,7 @@ struct OfferViewModel: Decodable {
     fileprivate var imageSource: String
     var image: Promise<ImageCacheResult> {
         get {
-            return ImageCache.shared.image(for: imageSource)
+            return ImageCache.shared.image(for: URL(string:imageSource))
         }
     }
     fileprivate(set) var offerType: OfferType
