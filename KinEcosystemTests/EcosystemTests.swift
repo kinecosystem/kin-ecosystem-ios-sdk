@@ -10,10 +10,14 @@
 
 
 import XCTest
+import CoreData
+import CoreDataStack
 
 @testable import KinEcosystem
 
-class EcosystemTests: XCTestCase {
+
+
+class CoreDataTests: XCTestCase {
     
     var ecosystem:Ecosystem!
     let mockNet = MockNet(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!)
@@ -22,7 +26,9 @@ class EcosystemTests: XCTestCase {
         super.setUp()
         mockNet.start()
         let net = EcosystemNet(config: ESConfigProduction())
-        ecosystem = Ecosystem(network: net)
+        guard let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem", ofType: "momd") else { fatalError() }
+        guard let dataStore = try? EcosystemData(modelName: "KinEcosystem", modelURL: URL(string: modelPath)!, storeType: NSInMemoryStoreType) else { fatalError() }
+        ecosystem = Ecosystem(network: net, dataStore: dataStore)
     }
     
     override func tearDown() {
@@ -37,17 +43,19 @@ class EcosystemTests: XCTestCase {
         let updateOffers = self.expectation(description: "get data, parse and persist")
         
         self.ecosystem.updateOffers().then {
-            XCTAssert(self.ecosystem.offersViewModel?.count == 10)
-            XCTAssert(self.ecosystem.offers?.count == 10)
-            for index in 0..<10 {
-                XCTAssert(self.ecosystem.offersViewModel?[index].id == self.ecosystem.offersViewModel?[index].id)
-            }
-            updateOffers.fulfill()
-            }.error { error in
-                XCTAssert(false)
+            XCTAssert(self.ecosystem.offersViewModel?.offers.count == 10)
+            self.ecosystem.dataStore.stack.query { context in
+                let request = NSFetchRequest<Offer>(entityName: "Offer")
+                let diskOffers = try! context.fetch(request)
+                XCTAssert(diskOffers.count == 10)
                 updateOffers.fulfill()
+                }
+            }.error { error in
+                XCTAssert(false, error.localizedDescription)
         }
+        
         self.wait(for: [updateOffers], timeout: 1.0)
+        
     }
     
 }

@@ -12,32 +12,39 @@
 import Foundation
 import UIKit
 
-enum OfferType: String {
-    case earn
-    case spend
+struct OffersListViewModel: Decodable {
+    var offers: [OfferViewModel]
 }
 
-struct OfferViewModel {
+struct OfferViewModel: Decodable {
     
-    let id: String
-    let description: String
-    let imageSource: String
+    fileprivate(set) var description: String
+    fileprivate var imageSource: String
     var image: Promise<ImageCacheResult> {
         get {
-            return ImageCache.shared.image(for: URL(string: imageSource))
+            return ImageCache.shared.image(for: imageSource)
         }
     }
-    let offerType: OfferType
-    let title: String
-    let amount: Int
+    fileprivate(set) var offerType: OfferType
+    fileprivate(set) var title: String
+    fileprivate(set) var amount: Int
     
-    init(from model: Offer) {
-        id = model.id
-        description = model.description
-        title = model.title
-        imageSource = model.image
-        offerType = OfferType(rawValue: model.offer_type)!
-        amount = model.amount
+    enum OfferViewModelKeys: String, CodingKey {
+        case description
+        case title
+        case image
+        case offer_type
+        case amount
+    }
+    
+    init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: OfferViewModelKeys.self)
+        description = try values.decode(String.self, forKey: .description)
+        title = try values.decode(String.self, forKey: .title)
+        imageSource = try values.decode(String.self, forKey: .image)
+        let offerTypeDecoded = try values.decode(String.self, forKey: .offer_type)
+        offerType = OfferType(rawValue: offerTypeDecoded)!
+        amount = try values.decode(Int.self, forKey: .amount)
     }
     
 }

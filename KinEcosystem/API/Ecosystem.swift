@@ -11,42 +11,35 @@
 
 import Foundation
 
+
+
 class Ecosystem {
     
     let network: EcosystemNet
-    var offersViewModel: [OfferViewModel]?
-    var offers: [Offer]?
+    let dataStore: EcosystemData
+    var offersViewModel: OffersListViewModel?
     
-    init(network: EcosystemNet) {
+    init(network: EcosystemNet, dataStore: EcosystemData) {
         self.network = network
+        self.dataStore = dataStore
     }
     
     func updateOffers() -> Promise<Void> {
-        let p = Promise<Void>()
-        network.offers().then { data in
-            self.decodeOffers(from: data)
-            }.then { list in
-                self.updateOffersViewModel(model: list)
-                p.signal(())
+        return network.offers().then { data in
+            self.updateOffersViewModel(data: data)
+            }.then { data in
+                self.dataStore.syncOffersFromNetworkData(data: data)
         }
-        return p
     }
     
-    fileprivate func decodeOffers(from data: Data) -> Promise<[Offer]> {
-        let p = Promise<[Offer]>()
+    fileprivate func updateOffersViewModel(data: Data) -> Promise<Data> {
+        let p = Promise<Data>()
         do {
-            let list = try JSONDecoder().decode(OffersList.self, from: data)
-            offers = list.offers
-            return p.signal(list.offers)
+            self.offersViewModel = try JSONDecoder().decode(OffersListViewModel.self, from: data)
         } catch {
             return p.signal(error)
         }
-    }
-    
-    fileprivate func updateOffersViewModel(model: [Offer]) {
-        offersViewModel = model.map { offer in
-            OfferViewModel(from: offer)
-        }
+        return p.signal(data)
     }
 
 }
