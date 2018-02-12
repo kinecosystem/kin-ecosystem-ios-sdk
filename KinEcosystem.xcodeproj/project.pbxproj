@@ -24,15 +24,21 @@
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8AA202C9A4800DD4B8E /* kid.png in Resources */ = {isa = PBXBuildFile; fileRef = E942F8A9202C9A4800DD4B8E /* kid.png */; };
 		E942F8AE202C9BC300DD4B8E /* ImageCacheTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8AD202C9BC300DD4B8E /* ImageCacheTest.swift */; };
+		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
+		E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DA2031120D00DD4B8E /* AppDelegate.swift */; };
+		E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DC2031120D00DD4B8E /* ViewController.swift */; };
+		E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8DE2031120D00DD4B8E /* Main.storyboard */; };
+		E942F8E22031120D00DD4B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E12031120D00DD4B8E /* Assets.xcassets */; };
+		E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */; };
+		E942F8EF203112DB00DD4B8E /* kid.png in Resources */ = {isa = PBXBuildFile; fileRef = E942F8A9202C9A4800DD4B8E /* kid.png */; };
+		E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */ = {isa = PBXBuildFile; fileRef = E92D190D2029EAF0002E357D /* 10_ok_offers.json */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
-		E96F24FA2018D50D0017EF68 /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F92018D50D0017EF68 /* Core.swift */; };
 		E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */; };
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
 		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
-		E9EBA01B202851A500B21DFD /* Ecosystem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA01A202851A500B21DFD /* Ecosystem.swift */; };
 		E9EBA02320287BB600B21DFD /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02220287BB600B21DFD /* Promise.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
 		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
@@ -88,6 +94,13 @@
 			remoteGlobalIDString = 8246E72D1FC84AEE0087140A;
 			remoteInfo = CoreDataStack;
 		};
+		E942F8EA2031121B00DD4B8E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E96F24D0201729690017EF68 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E942F8D72031120D00DD4B8E;
+			remoteInfo = KinEcosystemTestsHost;
+		};
 		E96F24E4201729690017EF68 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E96F24D0201729690017EF68 /* Project object */;
@@ -117,24 +130,37 @@
 		E942F8AD202C9BC300DD4B8E /* ImageCacheTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCacheTest.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
 		E942F8BE203081A500DD4B8E /* KinSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinSDK.xcodeproj"; sourceTree = "<group>"; };
+		E942F8D22030DD7D00DD4B8E /* Blockchain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockchain.swift; sourceTree = "<group>"; };
+		E942F8D82031120D00DD4B8E /* KinEcosystemTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinEcosystemTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		E942F8DA2031120D00DD4B8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		E942F8DC2031120D00DD4B8E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		E942F8DF2031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		E942F8E12031120D00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24DC201729690017EF68 /* KinEcosystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinEcosystem.h; sourceTree = "<group>"; };
 		E96F24DD201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24E2201729690017EF68 /* KinEcosystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinEcosystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24E9201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24F62018A8AC0017EF68 /* Kin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kin.swift; sourceTree = "<group>"; };
-		E96F24F92018D50D0017EF68 /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
 		E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
 		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
-		E9EBA01A202851A500B21DFD /* Ecosystem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Ecosystem.swift; sourceTree = "<group>"; };
 		E9EBA02220287BB600B21DFD /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
 		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		E942F8D52031120D00DD4B8E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E96F24D5201729690017EF68 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -214,6 +240,27 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		E942F8D12030DD6000DD4B8E /* Blockchain */ = {
+			isa = PBXGroup;
+			children = (
+				E942F8D22030DD7D00DD4B8E /* Blockchain.swift */,
+			);
+			path = Blockchain;
+			sourceTree = "<group>";
+		};
+		E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */ = {
+			isa = PBXGroup;
+			children = (
+				E942F8DA2031120D00DD4B8E /* AppDelegate.swift */,
+				E942F8DC2031120D00DD4B8E /* ViewController.swift */,
+				E942F8DE2031120D00DD4B8E /* Main.storyboard */,
+				E942F8E12031120D00DD4B8E /* Assets.xcassets */,
+				E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */,
+				E942F8E62031120D00DD4B8E /* Info.plist */,
+			);
+			path = KinEcosystemTestsHost;
+			sourceTree = "<group>";
+		};
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
@@ -221,6 +268,7 @@
 				E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
+				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
 				E96F24DA201729690017EF68 /* Products */,
 				E92D18DF2029ACE2002E357D /* Frameworks */,
 			);
@@ -231,6 +279,7 @@
 			children = (
 				E96F24D9201729690017EF68 /* KinEcosystem.framework */,
 				E96F24E2201729690017EF68 /* KinEcosystemTests.xctest */,
+				E942F8D82031120D00DD4B8E /* KinEcosystemTestsHost.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -238,6 +287,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E942F8D12030DD6000DD4B8E /* Blockchain */,
 				E942F8A3202C4C4A00DD4B8E /* ViewModel */,
 				E9DFCC39202710F000F115FA /* API */,
 				E98E48B4201A128900CB8CC2 /* Model */,
@@ -267,7 +317,6 @@
 			children = (
 				E9EBA02220287BB600B21DFD /* Promise.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
-				E96F24F92018D50D0017EF68 /* Core.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 			);
 			path = Core;
@@ -295,7 +344,6 @@
 		E9DFCC39202710F000F115FA /* API */ = {
 			isa = PBXGroup;
 			children = (
-				E9EBA01A202851A500B21DFD /* Ecosystem.swift */,
 				E9EBA02620288C1800B21DFD /* EcosystemNet.swift */,
 			);
 			path = API;
@@ -315,6 +363,23 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		E942F8D72031120D00DD4B8E /* KinEcosystemTestsHost */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E942F8E72031120D00DD4B8E /* Build configuration list for PBXNativeTarget "KinEcosystemTestsHost" */;
+			buildPhases = (
+				E942F8D42031120D00DD4B8E /* Sources */,
+				E942F8D52031120D00DD4B8E /* Frameworks */,
+				E942F8D62031120D00DD4B8E /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = KinEcosystemTestsHost;
+			productName = KinEcosystemTestsHost;
+			productReference = E942F8D82031120D00DD4B8E /* KinEcosystemTestsHost.app */;
+			productType = "com.apple.product-type.application";
+		};
 		E96F24D8201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E96F24ED201729690017EF68 /* Build configuration list for PBXNativeTarget "KinEcosystem" */;
@@ -347,6 +412,7 @@
 			);
 			dependencies = (
 				E96F24E5201729690017EF68 /* PBXTargetDependency */,
+				E942F8EB2031121B00DD4B8E /* PBXTargetDependency */,
 			);
 			name = KinEcosystemTests;
 			productName = KinEcosystemTests;
@@ -363,6 +429,10 @@
 				LastUpgradeCheck = 0910;
 				ORGANIZATIONNAME = "Kik Interactive";
 				TargetAttributes = {
+					E942F8D72031120D00DD4B8E = {
+						CreatedOnToolsVersion = 9.1;
+						ProvisioningStyle = Automatic;
+					};
 					E96F24D8201729690017EF68 = {
 						CreatedOnToolsVersion = 9.1;
 						LastSwiftMigration = 0910;
@@ -371,6 +441,7 @@
 					E96F24E1201729690017EF68 = {
 						CreatedOnToolsVersion = 9.1;
 						ProvisioningStyle = Automatic;
+						TestTargetID = E942F8D72031120D00DD4B8E;
 					};
 				};
 			};
@@ -380,6 +451,7 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
+				Base,
 			);
 			mainGroup = E96F24CF201729690017EF68;
 			productRefGroup = E96F24DA201729690017EF68 /* Products */;
@@ -398,6 +470,7 @@
 			targets = (
 				E96F24D8201729690017EF68 /* KinEcosystem */,
 				E96F24E1201729690017EF68 /* KinEcosystemTests */,
+				E942F8D72031120D00DD4B8E /* KinEcosystemTestsHost */,
 			);
 		};
 /* End PBXProject section */
@@ -441,6 +514,18 @@
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
+		E942F8D62031120D00DD4B8E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */,
+				E942F8E22031120D00DD4B8E /* Assets.xcassets in Resources */,
+				E942F8EF203112DB00DD4B8E /* kid.png in Resources */,
+				E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */,
+				E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E96F24D7201729690017EF68 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -460,6 +545,15 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		E942F8D42031120D00DD4B8E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */,
+				E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E96F24D4201729690017EF68 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -468,12 +562,11 @@
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
-				E96F24FA2018D50D0017EF68 /* Core.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
+				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E9EBA02320287BB600B21DFD /* Promise.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
-				E9EBA01B202851A500B21DFD /* Ecosystem.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
@@ -512,6 +605,11 @@
 			name = CoreDataStack;
 			targetProxy = E942F8CD203081B400DD4B8E /* PBXContainerItemProxy */;
 		};
+		E942F8EB2031121B00DD4B8E /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E942F8D72031120D00DD4B8E /* KinEcosystemTestsHost */;
+			targetProxy = E942F8EA2031121B00DD4B8E /* PBXContainerItemProxy */;
+		};
 		E96F24E5201729690017EF68 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = E96F24D8201729690017EF68 /* KinEcosystem */;
@@ -519,7 +617,56 @@
 		};
 /* End PBXTargetDependency section */
 
+/* Begin PBXVariantGroup section */
+		E942F8DE2031120D00DD4B8E /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E942F8DF2031120D00DD4B8E /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E942F8E42031120D00DD4B8E /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		E942F8E82031120D00DD4B8E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z37J743B3H;
+				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		E942F8E92031120D00DD4B8E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = Z37J743B3H;
+				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 4.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		E96F24EB201729690017EF68 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -692,6 +839,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinEcosystemTestsHost.app/KinEcosystemTestsHost";
 			};
 			name = Debug;
 		};
@@ -707,12 +855,22 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/KinEcosystemTestsHost.app/KinEcosystemTestsHost";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		E942F8E72031120D00DD4B8E /* Build configuration list for PBXNativeTarget "KinEcosystemTestsHost" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E942F8E82031120D00DD4B8E /* Debug */,
+				E942F8E92031120D00DD4B8E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		E96F24D3201729690017EF68 /* Build configuration list for PBXProject "KinEcosystem" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

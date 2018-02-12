@@ -14,7 +14,6 @@ import XCTest
 
 class ImageCacheTest: XCTestCase {
     
-    var ecosystem:Ecosystem!
     let mockNet = MockNet(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!)
     
     override func setUp() {

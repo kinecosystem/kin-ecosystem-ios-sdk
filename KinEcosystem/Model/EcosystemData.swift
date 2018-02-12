@@ -21,7 +21,7 @@ class EcosystemData {
     
     let stack: CoreDataStack
     
-    init(modelName: String, modelURL: URL, storeType: String = NSSQLiteStoreType) throws {
+    init(modelName: String, modelURL: URL, storeType: String = NSInMemoryStoreType) throws {
         stack = try CoreDataStack(modelName: modelName, storeType: storeType, modelURL: modelURL)
     }
     
@@ -65,5 +65,17 @@ class EcosystemData {
         return p
     }
     
+    func offers() -> Promise<[Offer]> {
+        let p = Promise<[Offer]>()
+        stack.query { context in
+            let request = NSFetchRequest<Offer>(entityName: "Offer")
+            guard let offers = try? context.fetch(request) else {
+                p.signal(EcosystemDataError.fetchError)
+                return
+            }
+            p.signal(offers)
+        }
+        return p
+    }
 }
 

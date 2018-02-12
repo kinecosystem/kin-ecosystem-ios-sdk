@@ -11,8 +11,10 @@
 
 import Foundation
 
-public protocol EcosystemConfiguration {
-    var baseURL: URL { get }
+struct EcosystemConfiguration {
+    var baseURL: URL
+    var apiKey: String
+    var userId: String
 }
 
 enum EcosystemNetError: Error {

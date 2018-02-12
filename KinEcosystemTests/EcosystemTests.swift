@@ -15,47 +15,35 @@ import CoreDataStack
 
 @testable import KinEcosystem
 
-
-
 class EcosystemTests: XCTestCase {
     
-    var ecosystem:Ecosystem!
     let mockNet = MockNet(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!)
     
     override func setUp() {
         super.setUp()
         mockNet.start()
-        let net = EcosystemNet(config: ESConfigProduction())
-        guard let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem", ofType: "momd") else { fatalError() }
-        guard let dataStore = try? EcosystemData(modelName: "KinEcosystem", modelURL: URL(string: modelPath)!, storeType: NSInMemoryStoreType) else { fatalError() }
-        ecosystem = Ecosystem(network: net, dataStore: dataStore)
     }
     
     override func tearDown() {
         super.tearDown()
         mockNet.stop()
     }
- 
-    func testUpdateOffers() {
-        
+    
+    func testStartKin() {
         mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
-        
-        let updateOffers = self.expectation(description: "get data, parse and persist")
-        
-        self.ecosystem.updateOffers().then {
-            XCTAssert(self.ecosystem.offersViewModel?.offers.count == 10)
-            self.ecosystem.dataStore.stack.query { context in
-                let request = NSFetchRequest<Offer>(entityName: "Offer")
-                let diskOffers = try! context.fetch(request)
-                XCTAssert(diskOffers.count == 10)
-                updateOffers.fulfill()
-                }
+        let start = self.expectation(description: "")
+        Kin.shared.start(apiKey: "a", userId: "b")
+        XCTAssert(Kin.shared.started)
+        Kin.shared.updateOffers().then {
+            Kin.shared.generateViewModel().then { offerViewModels in
+                XCTAssert(offerViewModels.count == 10)
+                start.fulfill()
+            }
             }.error { error in
-                XCTAssert(false, error.localizedDescription)
+                XCTAssert(false)
+                start.fulfill()
         }
-        
-        self.wait(for: [updateOffers], timeout: 1.0)
-        
+        self.wait(for: [start], timeout: 1.0)
     }
     
 }

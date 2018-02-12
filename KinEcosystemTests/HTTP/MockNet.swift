@@ -60,14 +60,3 @@ class MockNet {
     }
 }
 
-struct ESConfigProduction: EcosystemConfiguration {
-    let baseURL = URL(string: "http://api.kinmarketplace.com/v1")!
-}
-
-extension StubResponse {
-    var data: Data? {
-        return self.body
-    }
-}
-
-
