@@ -12,6 +12,7 @@
 import XCTest
 import CoreData
 import CoreDataStack
+@testable import KinSDK
 
 @testable import KinEcosystem
 
@@ -21,19 +22,27 @@ class EcosystemTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        mockNet.start()
     }
     
     override func tearDown() {
         super.tearDown()
-        mockNet.stop()
     }
     
     func testStartKin() {
-        mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
+        
         let start = self.expectation(description: "")
         Kin.shared.start(apiKey: "a", userId: "b")
         XCTAssert(Kin.shared.started)
+        let balanceExp = self.expectation(description: "")
+        Kin.shared.balance { balance in
+            print("balance: \(balance)")
+            balanceExp.fulfill()
+        }
+        self.wait(for: [balanceExp], timeout: 30.0)
+        
+        mockNet.start()
+        mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
+        
         Kin.shared.updateOffers().then {
             Kin.shared.data.offers()
             }.then { offers in
@@ -43,7 +52,9 @@ class EcosystemTests: XCTestCase {
                 XCTAssert(false)
                 start.fulfill()
         }
+        
         self.wait(for: [start], timeout: 1.0)
+        mockNet.stop()
     }
     
 }

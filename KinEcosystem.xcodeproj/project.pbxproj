@@ -32,6 +32,7 @@
 		E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */; };
 		E942F8EF203112DB00DD4B8E /* kid.png in Resources */ = {isa = PBXBuildFile; fileRef = E942F8A9202C9A4800DD4B8E /* kid.png */; };
 		E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */ = {isa = PBXBuildFile; fileRef = E92D190D2029EAF0002E357D /* 10_ok_offers.json */; };
+		E942F8F32031B54800DD4B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F22031B54800DD4B8E /* Logger.swift */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
@@ -138,6 +139,7 @@
 		E942F8E12031120D00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E942F8F22031B54800DD4B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24DC201729690017EF68 /* KinEcosystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinEcosystem.h; sourceTree = "<group>"; };
 		E96F24DD201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -261,6 +263,13 @@
 			path = KinEcosystemTestsHost;
 			sourceTree = "<group>";
 		};
+		E942F8F1203191F600DD4B8E /* View */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
@@ -287,6 +296,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E942F8F1203191F600DD4B8E /* View */,
 				E942F8D12030DD6000DD4B8E /* Blockchain */,
 				E942F8A3202C4C4A00DD4B8E /* ViewModel */,
 				E9DFCC39202710F000F115FA /* API */,
@@ -318,6 +328,7 @@
 				E9EBA02220287BB600B21DFD /* Promise.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
+				E942F8F22031B54800DD4B8E /* Logger.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -565,6 +576,7 @@
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E9EBA02320287BB600B21DFD /* Promise.swift in Sources */,
+				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,

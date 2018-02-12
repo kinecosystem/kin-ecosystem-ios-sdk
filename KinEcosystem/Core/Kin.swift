@@ -30,6 +30,7 @@ public class Kin {
                                                modelURL: URL(string: modelPath)!),
                 let chain = try? Blockchain(networkId: networkId) else {
             // TODO: Analytics + no start
+            logError("start failed")
             return false
         }
         blockchain = chain
@@ -39,6 +40,27 @@ public class Kin {
         started = true
         // TODO: prefetching
         return true
+    }
+    
+    public func balance(_ completion: @escaping (Decimal) -> ()) {
+        guard started else {
+            logError("Kin not started")
+            completion(0)
+            return
+        }
+        DispatchQueue.global().async {
+            guard let account = self.blockchain.client.accounts[0] else {
+                logError("Failed to retrieve account")
+                completion(0)
+                return
+            }
+            guard let balance = try? account.balance() else {
+                logError("Failed to retrieve account balance")
+                completion(0)
+                return
+            }
+            completion(balance)
+        }
     }
     
     /// Internal ///
