@@ -9,12 +9,27 @@
 import Foundation
 import KinSDK
 
+struct BlockchainProvider: ServiceProvider {
+    let url: URL
+    let networkId: NetworkId
+    
+    init(networkId: NetworkId) {
+        self.networkId = networkId
+        switch networkId {
+        case .mainNet:
+            self.url = URL(string: "/////")!
+        case .testNet:
+            self.url = URL(string: "https://horizon-testnet.stellar.org")!
+        default:
+            self.url = URL(string: "https://horizon-testnet.stellar.org")!
+        }
+    }
+}
+
 class Blockchain {
     let client: KinClient
-    init() throws {
-        // TODO: inject test/main
-        client = try KinClient(with: URL(string: "https://horizon-testnet.stellar.org")!, networkId: .custom(issuer: "GBOJSMAO3YZ3CQYUJOUWWFV37IFLQVNVKHVRQDEJ4M3O364H5FEGGMBH",
-            stellarNetworkId: NetworkId.testNet.stellarNetworkId))
+    init(networkId: NetworkId) throws {
+        client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         if client.accounts[0] == nil {
             _ = try client.addAccount(with: "")
         }

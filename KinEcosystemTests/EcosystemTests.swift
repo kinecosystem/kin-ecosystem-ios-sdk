@@ -35,10 +35,10 @@ class EcosystemTests: XCTestCase {
         Kin.shared.start(apiKey: "a", userId: "b")
         XCTAssert(Kin.shared.started)
         Kin.shared.updateOffers().then {
-            Kin.shared.generateViewModel().then { offerViewModels in
-                XCTAssert(offerViewModels.count == 10)
+            Kin.shared.data.offers()
+            }.then { offers in
+                XCTAssert(offers.count == 10)
                 start.fulfill()
-            }
             }.error { error in
                 XCTAssert(false)
                 start.fulfill()

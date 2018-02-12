@@ -14,21 +14,21 @@ import KinSDK
 public class Kin {
     
     public static let shared = Kin()
-    fileprivate var network: EcosystemNet!
-    fileprivate var data: EcosystemData!
-    fileprivate var blockchain: Blockchain!
+    fileprivate(set) var network: EcosystemNet!
+    fileprivate(set) var data: EcosystemData!
+    fileprivate(set) var blockchain: Blockchain!
     fileprivate(set) var started = false
     
     fileprivate init() { }
     
     @discardableResult
-    public func start(apiKey: String, userId: String) -> Bool {
+    public func start(apiKey: String, userId: String, networkId: NetworkId = .testNet) -> Bool {
         guard started == false else { return true }
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd"),
                 let store = try? EcosystemData(modelName: "KinEcosystem",
                                                modelURL: URL(string: modelPath)!),
-                let chain = try? Blockchain() else {
+                let chain = try? Blockchain(networkId: networkId) else {
             // TODO: Analytics + no start
             return false
         }
@@ -49,13 +49,4 @@ public class Kin {
         }
     }
     
-    func generateViewModel() -> Promise<[OfferViewModel]> {
-        let p = Promise<[OfferViewModel]>()
-        data.offers().then { offers in
-            p.signal(offers.map({ offer  in
-                OfferViewModel(with: offer)
-            }))
-        }
-        return p
-    }
 }

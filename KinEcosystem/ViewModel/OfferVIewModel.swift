@@ -24,7 +24,7 @@ struct OfferViewModel {
     }
     fileprivate(set) var offerType: OfferType
     fileprivate(set) var title: String
-    fileprivate(set) var amount: Int
+    fileprivate(set) var amount: Int32
     
     init(with model: Offer) {
         description = model.description_

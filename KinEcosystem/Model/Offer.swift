@@ -41,7 +41,7 @@ class Offer: NSManagedObject, Decodable {
      
     */
 
-    @NSManaged public var amount: Int
+    @NSManaged public var amount: Int32
     @NSManaged public var description_: String
     @NSManaged public var id: String
     @NSManaged public var image: String
@@ -75,7 +75,7 @@ class Offer: NSManagedObject, Decodable {
         title = try values.decode(String.self, forKey: .title)
         description_ = try values.decode(String.self, forKey: .description)
         image = try values.decode(String.self, forKey: .image)
-        amount = try values.decode(Int.self, forKey: .amount)
+        amount = try values.decode(Int32.self, forKey: .amount)
         offer_type = try values.decode(String.self, forKey: .offer_type)
     }
     
