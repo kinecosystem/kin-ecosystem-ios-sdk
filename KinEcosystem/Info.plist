@@ -25,5 +25,9 @@
 	</dict>
 	<key>NSPrincipalClass</key>
 	<string></string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Roboto-Regular</string>
+	</array>
 </dict>
 </plist>

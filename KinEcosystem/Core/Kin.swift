@@ -72,6 +72,10 @@ public class Kin {
         }
     }
     
+    public func launchMarketplace(from parentViewController: UIViewController) {
+        
+    }
+    
     /// Internal ///
     
     func updateOffers() -> Promise<Void> {
