@@ -77,5 +77,27 @@ class EcosystemData {
         }
         return p
     }
+    
+    func resetStore() -> Promise<Void> {
+        let p = Promise<Void>()
+        stack.perform({ (context, shouldSave) in
+            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Offer")
+            let offers = try context.fetch(request)
+            guard offers.count > 0 else {
+                p.signal(())
+                return
+            }
+            offers.forEach({ offer in
+                context.delete(offer as! NSManagedObject)
+            })
+        }) { error in
+            if let error = error {
+                p.signal(error)
+            } else {
+                p.signal(())
+            }
+        }
+        return p
+    }
 }
 

@@ -28,11 +28,14 @@ struct BlockchainProvider: ServiceProvider {
 
 class Blockchain {
     let client: KinClient
+    var activated = false
     init(networkId: NetworkId) throws {
         client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         if client.accounts[0] == nil {
             _ = try client.addAccount(with: "")
         }
     }
+    
+    // TODO: activate with promise
 }
 

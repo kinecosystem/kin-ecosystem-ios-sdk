@@ -67,21 +67,30 @@ public class Promise<Value> {
     }
     
     @discardableResult
-    public func then(handler: @escaping (Value) throws -> Void) -> Promise {
+    public func then(on queue: DispatchQueue? = nil, handler: @escaping (Value) throws -> Void) -> Promise {
         let p = Promise<Value>()
         
         observe { result in
-            switch result {
-            case .value(let value):
-                do {
-                    try handler(value)
-                }
-                catch {
+            let block = {
+                switch result {
+                case .value(let value):
+                    do {
+                        try handler(value)
+                    }
+                    catch {
+                        p.signal(error)
+                    }
+                    
+                case .error(let error):
                     p.signal(error)
                 }
-                
-            case .error(let error):
-                p.signal(error)
+            }
+            if let queue = queue {
+                queue.async {
+                    block()
+                }
+            } else {
+                block()
             }
         }
         
@@ -89,33 +98,41 @@ public class Promise<Value> {
     }
     
     @discardableResult
-    public func then<NewValue>(handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue> {
+    public func then<NewValue>(on queue: DispatchQueue? = nil, handler: @escaping (Value) throws -> Promise<NewValue>) -> Promise<NewValue> {
         let p = Promise<NewValue>()
         
         observe { result in
-            switch result {
-            case .value(let value):
-                do {
-                    let promise = try handler(value)
-                    
-                    promise.observe { result in
-                        switch result {
-                        case .value(let value):
-                            p.signal(value)
-                        case .error(let error):
-                            p.signal(error)
+            let block = {
+                switch result {
+                case .value(let value):
+                    do {
+                        let promise = try handler(value)
+                        
+                        promise.observe { result in
+                            switch result {
+                            case .value(let value):
+                                p.signal(value)
+                            case .error(let error):
+                                p.signal(error)
+                            }
                         }
                     }
-                }
-                catch {
+                    catch {
+                        p.signal(error)
+                    }
+                    
+                case .error(let error):
                     p.signal(error)
                 }
-                
-            case .error(let error):
-                p.signal(error)
+            }
+            if let queue = queue {
+                queue.async {
+                    block()
+                }
+            } else {
+                block()
             }
         }
-        
         return p
     }
     

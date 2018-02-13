@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		E92D18E92029C234002E357D /* EcosystemTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18E82029C234002E357D /* EcosystemTests.swift */; };
 		E92D19012029E818002E357D /* Hippolyte.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F32029E818002E357D /* Hippolyte.swift */; };
 		E92D19022029E818002E357D /* HTTPClientHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F42029E818002E357D /* HTTPClientHook.swift */; };
 		E92D19032029E818002E357D /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F52029E818002E357D /* HTTPRequest.swift */; };
@@ -33,6 +32,8 @@
 		E942F8EF203112DB00DD4B8E /* kid.png in Resources */ = {isa = PBXBuildFile; fileRef = E942F8A9202C9A4800DD4B8E /* kid.png */; };
 		E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */ = {isa = PBXBuildFile; fileRef = E92D190D2029EAF0002E357D /* 10_ok_offers.json */; };
 		E942F8F32031B54800DD4B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F22031B54800DD4B8E /* Logger.swift */; };
+		E942F8F52032D7E300DD4B8E /* NetworkTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F42032D7E300DD4B8E /* NetworkTests.swift */; };
+		E942F8F72032D7F500DD4B8E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F62032D7F500DD4B8E /* DataTests.swift */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
@@ -112,7 +113,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		E92D18E82029C234002E357D /* EcosystemTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemTests.swift; sourceTree = "<group>"; };
 		E92D18F32029E818002E357D /* Hippolyte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hippolyte.swift; sourceTree = "<group>"; };
 		E92D18F42029E818002E357D /* HTTPClientHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientHook.swift; sourceTree = "<group>"; };
 		E92D18F52029E818002E357D /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
@@ -140,6 +140,8 @@
 		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E942F8F22031B54800DD4B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		E942F8F42032D7E300DD4B8E /* NetworkTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTests.swift; sourceTree = "<group>"; };
+		E942F8F62032D7F500DD4B8E /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24DC201729690017EF68 /* KinEcosystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinEcosystem.h; sourceTree = "<group>"; };
 		E96F24DD201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -316,8 +318,9 @@
 				E92D18F12029E818002E357D /* Hippolyte */,
 				E92D190C2029EAF0002E357D /* HTTP */,
 				E96F24E9201729690017EF68 /* Info.plist */,
-				E92D18E82029C234002E357D /* EcosystemTests.swift */,
 				E942F8AD202C9BC300DD4B8E /* ImageCacheTest.swift */,
+				E942F8F42032D7E300DD4B8E /* NetworkTests.swift */,
+				E942F8F62032D7F500DD4B8E /* DataTests.swift */,
 			);
 			path = KinEcosystemTests;
 			sourceTree = "<group>";
@@ -588,14 +591,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E942F8F52032D7E300DD4B8E /* NetworkTests.swift in Sources */,
 				E92D19082029E818002E357D /* StubResponse.swift in Sources */,
 				E942F8AE202C9BC300DD4B8E /* ImageCacheTest.swift in Sources */,
 				E92D19012029E818002E357D /* Hippolyte.swift in Sources */,
+				E942F8F72032D7F500DD4B8E /* DataTests.swift in Sources */,
 				E92D190B2029E818002E357D /* URLSessionHook.swift in Sources */,
 				E92D1910202A4009002E357D /* MockNet.swift in Sources */,
 				E92D19032029E818002E357D /* HTTPRequest.swift in Sources */,
 				E92D19072029E818002E357D /* StubRequest.swift in Sources */,
-				E92D18E92029C234002E357D /* EcosystemTests.swift in Sources */,
 				E92D190A2029E818002E357D /* URLHook.swift in Sources */,
 				E92D19092029E818002E357D /* URL+HippolyteAdditions.swift in Sources */,
 				E92D19062029E818002E357D /* Matcher.swift in Sources */,

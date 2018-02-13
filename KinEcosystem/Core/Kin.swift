@@ -11,6 +11,10 @@
 import Foundation
 import KinSDK
 
+enum KinError: Error {
+    case kinNotStarted
+}
+
 public class Kin {
     
     public static let shared = Kin()
@@ -48,6 +52,11 @@ public class Kin {
             completion(0)
             return
         }
+        guard blockchain.activated else {
+            logWarn("Kin account queried but isn't active on the blockchain yet")
+            completion(0)
+            return
+        }
         DispatchQueue.global().async {
             guard let account = self.blockchain.client.accounts[0] else {
                 logError("Failed to retrieve account")
@@ -66,9 +75,15 @@ public class Kin {
     /// Internal ///
     
     func updateOffers() -> Promise<Void> {
+        guard started else {
+            logError("Kin not started")
+            return Promise<Void>().signal(KinError.kinNotStarted)
+        }
         return network.offers().then { data in
             self.data.syncOffersFromNetworkData(data: data)
         }
     }
+    
+    
     
 }
