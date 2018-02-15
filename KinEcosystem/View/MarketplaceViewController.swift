@@ -23,7 +23,6 @@ class MarketplaceViewController: UIViewController {
         super.viewDidLoad()
         // collection view
         
-
         earnOffersCollectionView.contentInset = .zero
         earnOffersCollectionView.register(UINib(nibName: cellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: cellName)
         

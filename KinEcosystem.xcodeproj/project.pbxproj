@@ -38,7 +38,7 @@
 		E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */; };
 		E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F904203321FC00DD4B8E /* Assets.xcassets */; };
 		E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90A2034138100DD4B8E /* EarnOfferCell.swift */; };
-		E942F90D2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */; };
+		E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */; };
 		E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F90E2034268300DD4B8E /* EarnOfferCell.xib */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -152,7 +152,7 @@
 		E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E942F904203321FC00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E942F90A2034138100DD4B8E /* EarnOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferCell.swift; sourceTree = "<group>"; };
-		E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCellCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E942F90E2034268300DD4B8E /* EarnOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnOfferCell.xib; sourceTree = "<group>"; };
 		E942F94E2034751000DD4B8E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -284,7 +284,7 @@
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */,
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
-				E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */,
+				E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 			);
 			path = View;
@@ -607,7 +607,7 @@
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
-				E942F90D2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift in Sources */,
+				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
