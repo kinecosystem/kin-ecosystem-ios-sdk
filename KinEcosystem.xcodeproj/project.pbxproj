@@ -27,7 +27,6 @@
 		E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DA2031120D00DD4B8E /* AppDelegate.swift */; };
 		E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DC2031120D00DD4B8E /* ViewController.swift */; };
 		E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8DE2031120D00DD4B8E /* Main.storyboard */; };
-		E942F8E22031120D00DD4B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E12031120D00DD4B8E /* Assets.xcassets */; };
 		E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */; };
 		E942F8EF203112DB00DD4B8E /* kid.png in Resources */ = {isa = PBXBuildFile; fileRef = E942F8A9202C9A4800DD4B8E /* kid.png */; };
 		E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */ = {isa = PBXBuildFile; fileRef = E92D190D2029EAF0002E357D /* 10_ok_offers.json */; };
@@ -38,6 +37,9 @@
 		E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */; };
 		E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */; };
 		E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F904203321FC00DD4B8E /* Assets.xcassets */; };
+		E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90A2034138100DD4B8E /* EarnOfferCell.swift */; };
+		E942F90D2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */; };
+		E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F90E2034268300DD4B8E /* EarnOfferCell.xib */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
@@ -140,7 +142,6 @@
 		E942F8DA2031120D00DD4B8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E942F8DC2031120D00DD4B8E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E942F8DF2031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E942F8E12031120D00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E942F8F22031B54800DD4B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
@@ -150,6 +151,10 @@
 		E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceViewController.swift; sourceTree = "<group>"; };
 		E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E942F904203321FC00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E942F90A2034138100DD4B8E /* EarnOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferCell.swift; sourceTree = "<group>"; };
+		E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CenterCellCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
+		E942F90E2034268300DD4B8E /* EarnOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnOfferCell.xib; sourceTree = "<group>"; };
+		E942F94E2034751000DD4B8E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E96F24D9201729690017EF68 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24DC201729690017EF68 /* KinEcosystem.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KinEcosystem.h; sourceTree = "<group>"; };
 		E96F24DD201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -194,6 +199,7 @@
 		E92D18DF2029ACE2002E357D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E942F94E2034751000DD4B8E /* CoreData.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -266,7 +272,6 @@
 				E942F8DA2031120D00DD4B8E /* AppDelegate.swift */,
 				E942F8DC2031120D00DD4B8E /* ViewController.swift */,
 				E942F8DE2031120D00DD4B8E /* Main.storyboard */,
-				E942F8E12031120D00DD4B8E /* Assets.xcassets */,
 				E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */,
 				E942F8E62031120D00DD4B8E /* Info.plist */,
 			);
@@ -278,6 +283,9 @@
 			children = (
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */,
+				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
+				E942F90C2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift */,
+				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -545,7 +553,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */,
-				E942F8E22031120D00DD4B8E /* Assets.xcassets in Resources */,
 				E942F8EF203112DB00DD4B8E /* kid.png in Resources */,
 				E942F8F0203112DB00DD4B8E /* 10_ok_offers.json in Resources */,
 				E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */,
@@ -557,6 +564,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */,
+				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -586,6 +594,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
@@ -598,6 +607,7 @@
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
+				E942F90D2034213400DD4B8E /* CenterCellCollectionViewFlowLayout.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -732,6 +742,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -792,6 +803,7 @@
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;

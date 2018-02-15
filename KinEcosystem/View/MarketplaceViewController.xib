@@ -14,8 +14,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketplaceViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
-                <outlet property="bottomViewContainer" destination="W7W-QE-sIj" id="oCJ-i3-bLG"/>
-                <outlet property="topViewContainer" destination="8OG-aI-7kM" id="fzG-OH-OIP"/>
+                <outlet property="earnOffersCollectionView" destination="dP8-d6-KQw" id="z7r-B2-uKa"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -30,49 +29,143 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="N13-oT-xpC">
                             <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
                             <subviews>
-                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-y2-7pb">
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kin Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-y2-7pb">
                                     <rect key="frame" x="19" y="17" width="200" height="20"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="20" id="3zi-pC-Tct"/>
                                     </constraints>
-                                    <attributedString key="attributedText">
-                                        <fragment content="Kin Balance">
-                                            <attributes>
-                                                <font key="NSFont" size="20" name="Roboto-Regular"/>
-                                                <paragraphStyle key="NSParagraphStyle" alignment="natural" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
-                                            </attributes>
-                                        </fragment>
-                                    </attributedString>
+                                    <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                    <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kik - Completed poll" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bQd-LW-MLp">
+                                    <rect key="frame" x="19" y="41" width="200" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="qb4-Ts-A2D"/>
+                                        <constraint firstAttribute="width" constant="200" id="wkN-cs-l1J"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <nil key="highlightedColor"/>
                                 </label>
                             </subviews>
                             <constraints>
+                                <constraint firstItem="bQd-LW-MLp" firstAttribute="leading" secondItem="Ymm-y2-7pb" secondAttribute="leading" id="GCx-nt-nvR"/>
                                 <constraint firstAttribute="trailing" secondItem="Ymm-y2-7pb" secondAttribute="trailing" constant="156" id="P8N-Su-ui9"/>
+                                <constraint firstItem="bQd-LW-MLp" firstAttribute="top" secondItem="Ymm-y2-7pb" secondAttribute="bottom" constant="4" id="l1B-Q2-PNd"/>
                                 <constraint firstItem="Ymm-y2-7pb" firstAttribute="leading" secondItem="N13-oT-xpC" secondAttribute="leading" constant="19" id="m8e-Tq-eLu"/>
                                 <constraint firstAttribute="height" constant="74" id="mSq-vB-A2z"/>
                                 <constraint firstItem="Ymm-y2-7pb" firstAttribute="top" secondItem="N13-oT-xpC" secondAttribute="top" constant="17" id="zVP-SI-sVD"/>
                             </constraints>
                         </view>
-                        <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ari-fU-Bnz">
-                            <rect key="frame" x="0.0" y="74" width="375" height="6"/>
-                            <constraints>
-                                <constraint firstAttribute="height" constant="6" id="eSR-hK-7ov"/>
-                            </constraints>
-                            <color key="progressTintColor" red="0.12661548973255438" green="0.50972439933135993" blue="0.91511496113989632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <color key="trackTintColor" red="0.66037645162853453" green="0.78488576802279153" blue="0.91511496113989632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                        </progressView>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OG-aI-7kM">
-                            <rect key="frame" x="0.0" y="80" width="375" height="284"/>
-                        </view>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bd-DH-A8K">
-                            <rect key="frame" x="0.0" y="364" width="375" height="3"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cb4-Z4-2kk">
+                            <rect key="frame" x="0.0" y="74" width="375" height="1"/>
                             <color key="backgroundColor" name="lightBlueGrey"/>
                             <constraints>
-                                <constraint firstAttribute="height" constant="3" id="czP-Zq-xl5"/>
+                                <constraint firstAttribute="height" constant="1" id="J43-SG-tdc"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="OeJ-1m-vtm"/>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8OG-aI-7kM">
+                            <rect key="frame" x="0.0" y="75" width="375" height="287.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ldk-2q-Yxe">
+                                    <rect key="frame" x="19" y="17" width="58" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="58" id="Ayf-PY-kVm"/>
+                                        <constraint firstAttribute="height" constant="21" id="Zdo-U1-Myp"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                    <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete tasks and earn Kin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zKE-bT-GE5">
+                                    <rect key="frame" x="19" y="43" width="246" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="16" id="44E-n4-JRn"/>
+                                        <constraint firstAttribute="width" constant="246" id="h20-0Y-ekN"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dP8-d6-KQw">
+                                    <rect key="frame" x="0.0" y="74" width="375" height="198.5"/>
+                                    <color key="backgroundColor" name="white"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="fjP-x3-fov" customClass="CenterCellCollectionViewFlowLayout" customModule="KinEcosystem" customModuleProvider="target">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                    <connections>
+                                        <outlet property="dataSource" destination="-1" id="V3o-GN-AkC"/>
+                                        <outlet property="delegate" destination="-1" id="Bus-o2-Ctl"/>
+                                    </connections>
+                                </collectionView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Ldk-2q-Yxe" firstAttribute="top" secondItem="8OG-aI-7kM" secondAttribute="top" constant="17" id="44J-Te-bbk"/>
+                                <constraint firstItem="zKE-bT-GE5" firstAttribute="leading" secondItem="Ldk-2q-Yxe" secondAttribute="leading" id="NHo-T5-ZRo"/>
+                                <constraint firstAttribute="bottom" secondItem="dP8-d6-KQw" secondAttribute="bottom" constant="15" id="ScH-mD-Vrt"/>
+                                <constraint firstItem="Ldk-2q-Yxe" firstAttribute="leading" secondItem="8OG-aI-7kM" secondAttribute="leading" constant="19" id="eHG-dR-1k6"/>
+                                <constraint firstAttribute="trailing" secondItem="dP8-d6-KQw" secondAttribute="trailing" id="nNl-jF-VlL"/>
+                                <constraint firstItem="dP8-d6-KQw" firstAttribute="leading" secondItem="8OG-aI-7kM" secondAttribute="leading" id="rcV-2L-Vp3"/>
+                                <constraint firstItem="dP8-d6-KQw" firstAttribute="top" secondItem="zKE-bT-GE5" secondAttribute="bottom" constant="15" id="tBa-MQ-7Bk"/>
+                                <constraint firstItem="zKE-bT-GE5" firstAttribute="top" secondItem="Ldk-2q-Yxe" secondAttribute="bottom" constant="5" id="wuc-SW-e9W"/>
+                            </constraints>
+                        </view>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bd-DH-A8K">
+                            <rect key="frame" x="0.0" y="362.5" width="375" height="1"/>
+                            <color key="backgroundColor" name="lightBlueGrey"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="czP-Zq-xl5"/>
                             </constraints>
                         </view>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="W7W-QE-sIj">
-                            <rect key="frame" x="0.0" y="367" width="375" height="280"/>
+                            <rect key="frame" x="0.0" y="363.5" width="375" height="283.5"/>
+                            <subviews>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QqM-Pw-RRa">
+                                    <rect key="frame" x="19" y="17" width="58" height="21"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="21" id="RVT-nJ-zuN"/>
+                                        <constraint firstAttribute="width" constant="58" id="iWt-qj-O64"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
+                                    <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use your Kin to enjoy stuff you like" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ATm-bw-b07">
+                                    <rect key="frame" x="19" y="43" width="246" height="16"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="246" id="AOV-06-7pc"/>
+                                        <constraint firstAttribute="height" constant="16" id="bWx-yi-3HY"/>
+                                    </constraints>
+                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                    <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="KAu-pp-CcY">
+                                    <rect key="frame" x="0.0" y="74" width="375" height="194.5"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="0pk-fs-Usn">
+                                        <size key="itemSize" width="50" height="50"/>
+                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                    </collectionViewFlowLayout>
+                                </collectionView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstItem="Ftp-zq-Sr0" firstAttribute="bottom" secondItem="KAu-pp-CcY" secondAttribute="bottom" constant="15" id="FKW-JJ-Gcd"/>
+                                <constraint firstItem="ATm-bw-b07" firstAttribute="leading" secondItem="QqM-Pw-RRa" secondAttribute="leading" id="PgX-YA-EwM"/>
+                                <constraint firstItem="KAu-pp-CcY" firstAttribute="top" secondItem="ATm-bw-b07" secondAttribute="bottom" constant="15" id="RRF-vL-SN8"/>
+                                <constraint firstItem="Ftp-zq-Sr0" firstAttribute="trailing" secondItem="KAu-pp-CcY" secondAttribute="trailing" id="ZMZ-JM-Vj6"/>
+                                <constraint firstItem="KAu-pp-CcY" firstAttribute="leading" secondItem="Ftp-zq-Sr0" secondAttribute="leading" id="aaM-V1-Jfl"/>
+                                <constraint firstItem="QqM-Pw-RRa" firstAttribute="top" secondItem="Ftp-zq-Sr0" secondAttribute="top" constant="17" id="b6t-Ht-88x"/>
+                                <constraint firstItem="ATm-bw-b07" firstAttribute="top" secondItem="QqM-Pw-RRa" secondAttribute="bottom" constant="5" id="m4S-Wv-XSV"/>
+                                <constraint firstItem="QqM-Pw-RRa" firstAttribute="leading" secondItem="Ftp-zq-Sr0" secondAttribute="leading" constant="19" id="rYF-dP-vbx"/>
+                            </constraints>
                             <viewLayoutGuide key="safeArea" id="Ftp-zq-Sr0"/>
                         </view>
                     </subviews>
@@ -80,21 +173,35 @@
                         <constraint firstItem="8OG-aI-7kM" firstAttribute="height" secondItem="W7W-QE-sIj" secondAttribute="height" multiplier="65:64" id="wll-WK-J4N"/>
                     </constraints>
                 </stackView>
+                <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="Ari-fU-Bnz">
+                    <rect key="frame" x="0.0" y="92.5" width="375" height="3"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="3" id="eSR-hK-7ov"/>
+                    </constraints>
+                    <color key="progressTintColor" red="0.12661548973255438" green="0.50972439933135993" blue="0.91511496113989632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <color key="trackTintColor" red="0.66037645162853453" green="0.78488576802279153" blue="0.91511496113989632" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </progressView>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ari-fU-Bnz" secondAttribute="trailing" id="Eum-Lw-gNC"/>
+                <constraint firstItem="Ari-fU-Bnz" firstAttribute="centerY" secondItem="Cb4-Z4-2kk" secondAttribute="centerY" id="LRL-9J-6ou"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="Ift-Lg-5zQ" secondAttribute="bottom" id="NMH-66-1cS"/>
+                <constraint firstItem="Ari-fU-Bnz" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="RPP-6z-9y0"/>
                 <constraint firstItem="Ift-Lg-5zQ" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="Yea-9h-Dr0"/>
                 <constraint firstItem="Ift-Lg-5zQ" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="bbs-7e-hU1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="Ift-Lg-5zQ" secondAttribute="trailing" id="wBi-GN-xXt"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
-            <point key="canvasLocation" x="21.5" y="55.5"/>
+            <point key="canvasLocation" x="50" y="50"/>
         </view>
     </objects>
     <resources>
         <namedColor name="lightBlueGrey">
-            <color red="0.84299999475479126" green="0.86299997568130493" blue="0.91399997472763062" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <color red="0.84299999479999999" green="0.86299997569999998" blue="0.91399997470000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </namedColor>
+        <namedColor name="white">
+            <color red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
         </namedColor>
     </resources>
 </document>

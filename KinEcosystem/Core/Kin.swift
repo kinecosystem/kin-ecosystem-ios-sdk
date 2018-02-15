@@ -43,6 +43,7 @@ public class Kin {
         // TODO: Login
         started = true
         // TODO: prefetching
+        updateOffers()
         return true
     }
     
@@ -73,11 +74,21 @@ public class Kin {
     }
     
     public func launchMarketplace(from parentViewController: UIViewController) {
+        guard started else {
+            logError("Kin not started")
+            return
+        }
         
+        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
+        mpViewController.data = data
+        mpViewController.network = network
+        
+        let navigationController = UINavigationController(rootViewController: mpViewController)
+        parentViewController.present(navigationController, animated: true, completion: nil)
     }
     
     /// Internal ///
-    
+    @discardableResult
     func updateOffers() -> Promise<Void> {
         guard started else {
             logError("Kin not started")
