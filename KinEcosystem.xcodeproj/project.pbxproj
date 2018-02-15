@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90441592035C83000E3E261 /* SpendOfferCell.swift */; };
+		E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E904415A2035C83000E3E261 /* SpendOfferCell.xib */; };
 		E92D19012029E818002E357D /* Hippolyte.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F32029E818002E357D /* Hippolyte.swift */; };
 		E92D19022029E818002E357D /* HTTPClientHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F42029E818002E357D /* HTTPClientHook.swift */; };
 		E92D19032029E818002E357D /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F52029E818002E357D /* HTTPRequest.swift */; };
@@ -119,6 +121,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E90441592035C83000E3E261 /* SpendOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferCell.swift; sourceTree = "<group>"; };
+		E904415A2035C83000E3E261 /* SpendOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferCell.xib; sourceTree = "<group>"; };
 		E92D18F32029E818002E357D /* Hippolyte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hippolyte.swift; sourceTree = "<group>"; };
 		E92D18F42029E818002E357D /* HTTPClientHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientHook.swift; sourceTree = "<group>"; };
 		E92D18F52029E818002E357D /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
@@ -286,6 +290,8 @@
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
 				E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
+				E90441592035C83000E3E261 /* SpendOfferCell.swift */,
+				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -566,6 +572,7 @@
 				E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */,
+				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -605,6 +612,7 @@
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
+				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,

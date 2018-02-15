@@ -16,19 +16,26 @@ class MarketplaceViewController: UIViewController {
     weak var network: EcosystemNet!
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
-    fileprivate let cellName = "EarnOfferCell"
+    fileprivate let earnCellName = "EarnOfferCell"
+    fileprivate let spendCellName = "SpendOfferCell"
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
+    @IBOutlet weak var spendOffersCollectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // collection view
+        // collection views
         
         earnOffersCollectionView.contentInset = .zero
-        earnOffersCollectionView.register(UINib(nibName: cellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: cellName)
+        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: earnCellName)
+        earnOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        
+        spendOffersCollectionView.contentInset = .zero
+        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: spendCellName)
+        spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
         
         // frc
         
-        let section = FetchedResultsCollectionSection(collection: earnOffersCollectionView, frc: resultsController()) { [weak self] cell, ip in
+        let earnSection = FetchedResultsCollectionSection(collection: earnOffersCollectionView, frc: resultsController(for: .earn)) { [weak self] cell, ip in
             guard   let this = self,
                     let offer = this.earnOffersCollectionView.objectForCollection(at: ip) as? Offer,
                     let earnCell = cell as? EarnOfferCell else {
@@ -53,7 +60,35 @@ class MarketplaceViewController: UIViewController {
             earnCell.amount.text = "\(viewModel.amount) Kin"
             earnCell.subtitle.text = viewModel.description
         }
-        earnOffersCollectionView.add(fetchedResultsSection: section)
+        earnOffersCollectionView.add(fetchedResultsSection: earnSection)
+        
+        let spendSection = FetchedResultsCollectionSection(collection: spendOffersCollectionView, frc: resultsController(for: .spend)) { [weak self] cell, ip in
+            guard   let this = self,
+                let offer = this.spendOffersCollectionView.objectForCollection(at: ip) as? Offer,
+                let spendCell = cell as? SpendOfferCell else {
+                    logWarn("cell configure failed")
+                    return
+            }
+            
+            var viewModel: OfferViewModel
+            if let offerViewModel = this.offerViewModels[offer.id] {
+                viewModel = offerViewModel
+            } else {
+                viewModel = OfferViewModel(with: offer)
+                this.offerViewModels[offer.id] = viewModel
+            }
+            spendCell.title.text = viewModel.title
+            spendCell.imageView.image = nil
+            viewModel.image.then(on: DispatchQueue.main) { [weak spendCell] result in
+                spendCell?.imageView.image = result.image
+                }.error { error in
+                    logWarn("cell image error: \(error)")
+            }
+            spendCell.amount.text = "\(viewModel.amount) Kin"
+            spendCell.subtitle.text = viewModel.description
+        }
+        spendOffersCollectionView.add(fetchedResultsSection: spendSection)
+        
         
         // dependencies
         
@@ -62,6 +97,7 @@ class MarketplaceViewController: UIViewController {
                 self.data.syncOffersFromNetworkData(data: data)
             }.then(on: DispatchQueue.main) {
                 self.earnOffersCollectionView.reloadData()
+                self.spendOffersCollectionView.reloadData()
             }.error { error in
                 logError("error getting offers data")
         }
@@ -71,9 +107,9 @@ class MarketplaceViewController: UIViewController {
         self.title = "Kin Marketplace"
     }
     
-    func resultsController() -> NSFetchedResultsController<NSManagedObject> {
+    func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
         let request = NSFetchRequest<Offer>(entityName: Offer.entityName)
-        request.predicate = NSPredicate(with: ["offer_type" : OfferType.earn.rawValue])
+        request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
@@ -90,14 +126,37 @@ class MarketplaceViewController: UIViewController {
 
 extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return earnOffersCollectionView.fetchedResultsSectionCount
+        switch collectionView {
+        case earnOffersCollectionView:
+            return earnOffersCollectionView.fetchedResultsSectionCount
+        case spendOffersCollectionView:
+            return spendOffersCollectionView.fetchedResultsSectionCount
+        default:
+            return 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return earnOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
+        switch collectionView {
+        case earnOffersCollectionView:
+            return earnOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
+        case spendOffersCollectionView:
+            return spendOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
+        default:
+            return 0
+        }
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = earnOffersCollectionView.dequeueReusableCell(withReuseIdentifier: cellName, for: indexPath)
-        let frcSection = earnOffersCollectionView.fetchedResultsSection(for: indexPath.section)
+        var cellIdentifier: String
+        switch collectionView {
+        case earnOffersCollectionView:
+            cellIdentifier = earnCellName
+        case spendOffersCollectionView:
+            cellIdentifier = spendCellName
+        default:
+            cellIdentifier = ""
+        }
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellIdentifier, for: indexPath)
+        let frcSection = collectionView.fetchedResultsSection(for: indexPath.section)
         frcSection?.configureBlock?(cell, indexPath)
         return cell
     }
