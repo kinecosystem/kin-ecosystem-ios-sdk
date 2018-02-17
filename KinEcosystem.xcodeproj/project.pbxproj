@@ -38,7 +38,6 @@
 		E942F8FD2033157600DD4B8E /* PromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8FC2033157600DD4B8E /* PromiseTests.swift */; };
 		E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */; };
 		E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */; };
-		E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F904203321FC00DD4B8E /* Assets.xcassets */; };
 		E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90A2034138100DD4B8E /* EarnOfferCell.swift */; };
 		E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */; };
 		E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F90E2034268300DD4B8E /* EarnOfferCell.xib */; };
@@ -154,7 +153,6 @@
 		E942F8FC2033157600DD4B8E /* PromiseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceViewController.swift; sourceTree = "<group>"; };
 		E942F8FF20331AAE00DD4B8E /* MarketplaceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
-		E942F904203321FC00DD4B8E /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E942F90A2034138100DD4B8E /* EarnOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferCell.swift; sourceTree = "<group>"; };
 		E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E942F90E2034268300DD4B8E /* EarnOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnOfferCell.xib; sourceTree = "<group>"; };
@@ -331,7 +329,6 @@
 				E96F24F52018A88D0017EF68 /* Core */,
 				E96F24DC201729690017EF68 /* KinEcosystem.h */,
 				E96F24DD201729690017EF68 /* Info.plist */,
-				E942F904203321FC00DD4B8E /* Assets.xcassets */,
 			);
 			path = KinEcosystem;
 			sourceTree = "<group>";
@@ -569,7 +566,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E942F905203321FC00DD4B8E /* Assets.xcassets in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,

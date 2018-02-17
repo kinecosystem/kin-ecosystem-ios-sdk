@@ -56,6 +56,7 @@
                     </label>
                 </subviews>
             </view>
+            <color key="backgroundColor" red="0.84771913290000001" green="0.86196905369999999" blue="0.90982341769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
                 <constraint firstItem="UYp-3W-1bh" firstAttribute="top" secondItem="gTV-IL-0wX" secondAttribute="top" id="13u-01-DP7"/>
                 <constraint firstItem="crH-D8-f4w" firstAttribute="leading" secondItem="UYp-3W-1bh" secondAttribute="leading" id="5dv-AN-r07"/>

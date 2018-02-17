@@ -15,15 +15,18 @@ class MarketplaceViewController: UIViewController {
     weak var data: EcosystemData!
     weak var network: EcosystemNet!
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
-    @IBOutlet weak var collectionViewHeight: NSLayoutConstraint!
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
+    @IBOutlet weak var earnOffersCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
+    @IBOutlet weak var spendOffersCollectionViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // collection views
+        
         
         earnOffersCollectionView.contentInset = .zero
         earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: earnCellName)
@@ -108,7 +111,7 @@ class MarketplaceViewController: UIViewController {
     }
     
     func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
-        let request = NSFetchRequest<Offer>(entityName: Offer.entityName)
+        let request = NSFetchRequest<Offer>(entityName: "Offer")
         request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -116,10 +119,22 @@ class MarketplaceViewController: UIViewController {
         return frc
     }
 
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    override func viewWillLayoutSubviews() {
+        let screenWidth = earnOffersCollectionView.bounds.width
+        let earnLayout = (earnOffersCollectionView.collectionViewLayout as! OffersCollectionViewFlowLayout)
+        let earnSpaces = earnLayout.minimumLineSpacing * 2.0
+        let earnInset = earnLayout.sectionInset.left
+        let earnItemWidth = (screenWidth - earnSpaces - earnInset) / 2.24
+        let earnItemHeight = earnItemWidth / earnLayout.itemWHRatio
+        earnOffersCollectionViewHeight.constant = earnItemHeight
+        let spendLayout = (spendOffersCollectionView.collectionViewLayout as! OffersCollectionViewFlowLayout)
+        let spendSpaces = spendLayout.minimumLineSpacing
+        let spendInset = spendLayout.sectionInset.left
+        let spendItemWidth = (screenWidth - spendSpaces - spendInset) / 1.11
+        let spendItemHeight = spendItemWidth / spendLayout.itemWHRatio
+        spendOffersCollectionViewHeight.constant = spendItemHeight
         
-        
+        super.viewWillLayoutSubviews()
     }
 
 }
