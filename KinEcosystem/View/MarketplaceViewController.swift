@@ -10,40 +10,48 @@ import UIKit
 import CoreData
 import CoreDataStack
 
-class MarketplaceViewController: UIViewController {
+class MarketplaceViewController: KinBaseViewController {
 
     weak var data: EcosystemData!
     weak var network: EcosystemNet!
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
-    @IBOutlet weak var earnOffersCollectionViewHeight: NSLayoutConstraint!
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
-    @IBOutlet weak var spendOffersCollectionViewHeight: NSLayoutConstraint!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        // collection views
-        
-        
-        earnOffersCollectionView.contentInset = .zero
-        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: earnCellName)
-        earnOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        
-        spendOffersCollectionView.contentInset = .zero
-        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: spendCellName)
-        spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
-        
-        // frc
-        
+        setupCollectionViews()
+        setupFRCSections()
+        network.offers()
+            .then { data in
+                self.data.syncOffersFromNetworkData(data: data)
+            }.then(on: DispatchQueue.main) {
+                self.earnOffersCollectionView.reloadData()
+                self.spendOffersCollectionView.reloadData()
+            }.error { error in
+                logError("error getting offers data")
+        }
+        self.title = "Kin Marketplace"
+    }
+    
+    fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
+        let request = NSFetchRequest<Offer>(entityName: "Offer")
+        request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
+        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        try? frc.performFetch()
+        return frc
+    }
+    
+    fileprivate func setupFRCSections() {
         let earnSection = FetchedResultsCollectionSection(collection: earnOffersCollectionView, frc: resultsController(for: .earn)) { [weak self] cell, ip in
             guard   let this = self,
-                    let offer = this.earnOffersCollectionView.objectForCollection(at: ip) as? Offer,
-                    let earnCell = cell as? EarnOfferCell else {
-                        logWarn("cell configure failed")
-                        return
+                let offer = this.earnOffersCollectionView.objectForCollection(at: ip) as? Offer,
+                let earnCell = cell as? EarnOfferCell else {
+                    logWarn("cell configure failed")
+                    return
             }
             
             var viewModel: OfferViewModel
@@ -91,50 +99,15 @@ class MarketplaceViewController: UIViewController {
             spendCell.subtitle.text = viewModel.description
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
-        
-        
-        // dependencies
-        
-        network.offers()
-            .then { data in
-                self.data.syncOffersFromNetworkData(data: data)
-            }.then(on: DispatchQueue.main) {
-                self.earnOffersCollectionView.reloadData()
-                self.spendOffersCollectionView.reloadData()
-            }.error { error in
-                logError("error getting offers data")
-        }
-        
-        // controller
-        
-        self.title = "Kin Marketplace"
     }
     
-    func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
-        let request = NSFetchRequest<Offer>(entityName: "Offer")
-        request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        try? frc.performFetch()
-        return frc
-    }
-
-    override func viewWillLayoutSubviews() {
-        let screenWidth = earnOffersCollectionView.bounds.width
-        let earnLayout = (earnOffersCollectionView.collectionViewLayout as! OffersCollectionViewFlowLayout)
-        let earnSpaces = earnLayout.minimumLineSpacing * 2.0
-        let earnInset = earnLayout.sectionInset.left
-        let earnItemWidth = (screenWidth - earnSpaces - earnInset) / 2.24
-        let earnItemHeight = earnItemWidth / earnLayout.itemWHRatio
-        earnOffersCollectionViewHeight.constant = earnItemHeight
-        let spendLayout = (spendOffersCollectionView.collectionViewLayout as! OffersCollectionViewFlowLayout)
-        let spendSpaces = spendLayout.minimumLineSpacing
-        let spendInset = spendLayout.sectionInset.left
-        let spendItemWidth = (screenWidth - spendSpaces - spendInset) / 1.11
-        let spendItemHeight = spendItemWidth / spendLayout.itemWHRatio
-        spendOffersCollectionViewHeight.constant = spendItemHeight
-        
-        super.viewWillLayoutSubviews()
+    fileprivate func setupCollectionViews() {
+        earnOffersCollectionView.contentInset = .zero
+        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: earnCellName)
+        earnOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        spendOffersCollectionView.contentInset = .zero
+        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: spendCellName)
+        spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
 
 }

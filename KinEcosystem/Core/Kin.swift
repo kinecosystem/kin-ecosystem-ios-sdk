@@ -83,7 +83,7 @@ public class Kin {
         mpViewController.data = data
         mpViewController.network = network
         
-        let navigationController = UINavigationController(rootViewController: mpViewController)
+        let navigationController = KinBaseNavigationController(rootViewController: mpViewController)
         parentViewController.present(navigationController, animated: true, completion: nil)
     }
     

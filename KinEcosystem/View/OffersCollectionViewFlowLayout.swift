@@ -38,11 +38,24 @@ class OffersCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
         }
         
-        let closestValidOffset = availableOffsets.reduce(maxOffset) { (offset, availableOffset) -> CGFloat in
+        guard availableOffsets.count > 1 else {
+            return super.targetContentOffset(forProposedContentOffset: proposedContentOffset)
+        }
+        
+        availableOffsets.sort()
+        
+        var closestValidOffset = availableOffsets.reduce(maxOffset) { (offset, availableOffset) -> CGFloat in
             if  abs(proposedContentOffset.x - availableOffset) < abs(proposedContentOffset.x - offset) {
                 return availableOffset
             }
             return offset
+        }
+        
+        let index = availableOffsets.index(of: closestValidOffset)!
+        if collectionView.contentOffset.x > closestValidOffset, velocity.x > 0, index + 1 < availableOffsets.count {
+            closestValidOffset = availableOffsets[index + 1]
+        } else if collectionView.contentOffset.x < closestValidOffset, velocity.x < 0, index - 1 >= 0 {
+            closestValidOffset = availableOffsets[index - 1]
         }
         
         return CGPoint(x: closestValidOffset, y:0)

@@ -16,6 +16,11 @@ enum OfferType: String {
     case spend
 }
 
+enum OfferContentType: String {
+    case poll
+    case coupon
+}
+
 class OffersList: Codable {
     
     var offers: [Offer]
@@ -25,20 +30,14 @@ class OffersList: Codable {
 class Offer: NSManagedObject, Decodable {
     
     /*
-     
-     {
-         "id": "spend_offer1.png",
-         "title": "Gift Card",
-         "description": "$10 gift card",
-         "image": "https://s3.amazonaws.com/kinmarketplace-assets/version1/spend_offer1.png",
-         "amount": 8000,
-         "content": {
-             "content_type": "Coupon",
-             "description": "aaa-bbb-ccc-ddd"
-         },
-         "offer_type": "spend"
-     }
-     
+     "amount": 4000,
+     "content": "{\"pages\":[{\"description\":\"whats up sdkjhfdlskjhfg skldjfhks ljhf lsdhjfklsd hflksdl sdjhfkl s\",\"answers\":[\"dfhjksdhfksd sdf\",\"sdfsdjiosdjfl\",\"333333333333333333333333333333\",\"44444444444444444444\",\"555555555555555555555555555555\",\"666666666666666666666666666666\",\"7777777777777777777777777777777777777777\",\"888888888888888\"],\"title\":\"hi there\"},{\"description\":\"whats up sdkjhfdlskjhfg skldjfhks ljhf lsdhjfklsd hflksdl sdjhfkl s\",\"answers\":[\"dfhjksdhfksd sdf\",\"sdfsdjiosdjfl\",\"333333333333333333333333333333\",\"44444444444444444444\",\"555555555555555555555555555555\",\"666666666666666666666666666666\",\"7777777777777777777777777777777777777777\",\"888888888888888\"],\"title\":\"hi there\"}]}",
+     "content_type": "poll",
+     "description": "Tell us about yourself",
+     "id": "earn_offer1.png",
+     "image": "https://s3.amazonaws.com/kinmarketplace-assets/version1/earn_offer1.png",
+     "offer_type": "earn",
+     "title": "Answer a poll"
     */
 
     @NSManaged public var amount: Int32
@@ -46,11 +45,18 @@ class Offer: NSManagedObject, Decodable {
     @NSManaged public var id: String
     @NSManaged public var image: String
     @NSManaged public var offer_type: String
+    @NSManaged public var content_type: String
+    @NSManaged public var content: String
     @NSManaged public var title: String
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }
         set { offer_type = newValue.rawValue }
+    }
+    
+    var offerContentType: OfferContentType {
+        get { return OfferContentType(rawValue: content_type)! }
+        set { content_type = newValue.rawValue }
     }
     
     enum OfferKeys: String, CodingKey {
@@ -60,6 +66,8 @@ class Offer: NSManagedObject, Decodable {
         case image
         case offer_type
         case title
+        case content
+        case content_type
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -77,6 +85,8 @@ class Offer: NSManagedObject, Decodable {
         image = try values.decode(String.self, forKey: .image)
         amount = try values.decode(Int32.self, forKey: .amount)
         offer_type = try values.decode(String.self, forKey: .offer_type)
+        content_type = try values.decode(String.self, forKey: .content_type)
+        content = try values.decode(String.self, forKey: .content)
     }
     
     func update(_ from: Offer) {
@@ -85,6 +95,8 @@ class Offer: NSManagedObject, Decodable {
         offer_type = from.offer_type
         image = from.image
         title = from.title
+        content_type = from.content_type
+        content =  from.content
     }
     
 }
@@ -98,6 +110,8 @@ extension Offer: Encodable {
         try container.encode(image, forKey: .id)
         try container.encode(amount, forKey: .amount)
         try container.encode(offer_type, forKey: .offer_type)
+        try container.encode(content_type, forKey: .content_type)
+        try container.encode(content, forKey: .content)
     }
 }
 

@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90441592035C83000E3E261 /* SpendOfferCell.swift */; };
 		E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E904415A2035C83000E3E261 /* SpendOfferCell.xib */; };
+		E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */; };
+		E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */; };
+		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
 		E92D19012029E818002E357D /* Hippolyte.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F32029E818002E357D /* Hippolyte.swift */; };
 		E92D19022029E818002E357D /* HTTPClientHook.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F42029E818002E357D /* HTTPClientHook.swift */; };
 		E92D19032029E818002E357D /* HTTPRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92D18F52029E818002E357D /* HTTPRequest.swift */; };
@@ -51,6 +54,7 @@
 		E9EBA02320287BB600B21DFD /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02220287BB600B21DFD /* Promise.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
 		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
+		E9FC5984203AD07900D1DA2B /* KinBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC5983203AD07900D1DA2B /* KinBaseViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -122,6 +126,9 @@
 /* Begin PBXFileReference section */
 		E90441592035C83000E3E261 /* SpendOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferCell.swift; sourceTree = "<group>"; };
 		E904415A2035C83000E3E261 /* SpendOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferCell.xib; sourceTree = "<group>"; };
+		E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+gradient.swift"; sourceTree = "<group>"; };
+		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
+		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		E92D18F32029E818002E357D /* Hippolyte.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hippolyte.swift; sourceTree = "<group>"; };
 		E92D18F42029E818002E357D /* HTTPClientHook.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPClientHook.swift; sourceTree = "<group>"; };
 		E92D18F52029E818002E357D /* HTTPRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HTTPRequest.swift; sourceTree = "<group>"; };
@@ -170,6 +177,7 @@
 		E9EBA02220287BB600B21DFD /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
 		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
+		E9FC5983203AD07900D1DA2B /* KinBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -290,6 +298,8 @@
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 				E90441592035C83000E3E261 /* SpendOfferCell.swift */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
+				E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */,
+				E9FC5983203AD07900D1DA2B /* KinBaseViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -362,8 +372,10 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */,
 				E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */,
 				E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */,
+				E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -597,11 +609,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
+				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
+				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E9EBA02320287BB600B21DFD /* Promise.swift in Sources */,
@@ -612,6 +627,7 @@
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
+				E9FC5984203AD07900D1DA2B /* KinBaseViewController.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
