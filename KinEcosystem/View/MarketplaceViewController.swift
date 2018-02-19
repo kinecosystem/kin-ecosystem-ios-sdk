@@ -9,16 +9,20 @@
 import UIKit
 import CoreData
 import CoreDataStack
+import StellarKit
+import KinSDK
 
 class MarketplaceViewController: KinBaseViewController {
 
     weak var data: EcosystemData!
     weak var network: EcosystemNet!
+    weak var blockchain: Blockchain!
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
+    @IBOutlet weak var balance: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +36,12 @@ class MarketplaceViewController: KinBaseViewController {
                 self.spendOffersCollectionView.reloadData()
             }.error { error in
                 logError("error getting offers data")
+        }
+        blockchain.balance().then(on: DispatchQueue.main) { [weak self] balance in
+            self?.balance.text = balance.currencyString()
+            }.error { [weak self] error in
+                self?.balance.text = Decimal(0).currencyString()
+                logWarn("showing zero for balance because real balance retrieve failed:")
         }
         self.title = "Kin Marketplace"
     }

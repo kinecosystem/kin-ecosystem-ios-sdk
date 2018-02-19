@@ -11,7 +11,7 @@
 import Foundation
 import KinSDK
 
-enum KinError: Error {
+enum KinEcosystemError: Error {
     case kinNotStarted
 }
 
@@ -48,28 +48,11 @@ public class Kin {
     }
     
     public func balance(_ completion: @escaping (Decimal) -> ()) {
-        guard started else {
-            logError("Kin not started")
-            completion(0)
-            return
-        }
-        guard blockchain.activated else {
-            logWarn("Kin account queried but isn't active on the blockchain yet")
-            completion(0)
-            return
-        }
-        DispatchQueue.global().async {
-            guard let account = self.blockchain.client.accounts[0] else {
-                logError("Failed to retrieve account")
-                completion(0)
-                return
-            }
-            guard let balance = try? account.balance() else {
-                logError("Failed to retrieve account balance")
-                completion(0)
-                return
-            }
+        blockchain.balance().then(on: DispatchQueue.main) { balance in
             completion(balance)
+            }.error { error in
+                logWarn("returning zero for balance because real balance retreive failed, error: \(error)")
+                completion(0)
         }
     }
     
@@ -82,9 +65,9 @@ public class Kin {
         let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
         mpViewController.data = data
         mpViewController.network = network
-        
+        mpViewController.blockchain = blockchain
         let navigationController = KinBaseNavigationController(rootViewController: mpViewController)
-        parentViewController.present(navigationController, animated: true, completion: nil)
+        parentViewController.present(navigationController, animated: true)
     }
     
     /// Internal ///
@@ -92,7 +75,7 @@ public class Kin {
     func updateOffers() -> Promise<Void> {
         guard started else {
             logError("Kin not started")
-            return Promise<Void>().signal(KinError.kinNotStarted)
+            return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
         return network.offers().then { data in
             self.data.syncOffersFromNetworkData(data: data)

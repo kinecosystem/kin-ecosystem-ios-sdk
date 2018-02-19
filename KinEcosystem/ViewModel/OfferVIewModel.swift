@@ -23,6 +23,7 @@ struct OfferViewModel {
         }
     }
     fileprivate(set) var offerType: OfferType
+    fileprivate(set) var contentType: OfferContentType
     fileprivate(set) var title: String
     fileprivate(set) var amount: Int32
     
@@ -30,6 +31,7 @@ struct OfferViewModel {
         description = model.description_
         imageSource = model.image
         offerType = model.offerType
+        contentType = model.offerContentType
         title = model.title
         amount = model.amount
         id = model.id

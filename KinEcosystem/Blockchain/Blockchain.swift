@@ -8,10 +8,12 @@
 
 import Foundation
 import KinSDK
+import StellarKit
 
 struct BlockchainProvider: ServiceProvider {
     let url: URL
     let networkId: NetworkId
+    
     
     init(networkId: NetworkId) {
         self.networkId = networkId
@@ -27,13 +29,55 @@ struct BlockchainProvider: ServiceProvider {
 }
 
 class Blockchain {
+    
     let client: KinClient
     var activated = false
+    let account: KinAccount!
+    
     init(networkId: NetworkId) throws {
         client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         if client.accounts[0] == nil {
             _ = try client.addAccount(with: "")
         }
+        account = client.accounts[0]!
+    }
+    
+    func balance() -> Promise<Decimal> {
+        let p = Promise<Decimal>()
+        account.balance(completion: { balance, error in
+            if let error = error {
+                switch error {
+                case KinError.internalInconsistency:
+                    logError("account can't be quering now (\(error))")
+                        // try again
+                case KinError.accountDeleted:
+                        logError("account state is invalid. Everything should be reset and redone")
+                        // probably delete everything and restart
+                case KinError.balanceQueryFailed(let queryError):
+                    switch queryError {
+                    case StellarKit.StellarError.missingAccount,
+                         StellarKit.StellarError.missingBalance:
+                        logWarn("account missing or isn't funded yet (needs onboarding)")
+                        // do onboarding if we're not already doing
+                    case StellarKit.StellarError.unknownError:
+                        logError("stellar server did not respond well. try again later")
+                    default:
+                        logError("account can't be quering now. try again later (\(error))")
+                        // unknown error bad
+                    }
+                default:
+                    logError("account can't be quering now. try again later (\(error))")
+                    // unknown error bad
+                }
+                p.signal(error)
+            } else if let balance = balance {
+                p.signal(balance)
+            } else {
+                p.signal(KinError.internalInconsistency)
+            }
+        })
+        
+        return p
     }
     
     // TODO: activate with promise

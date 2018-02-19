@@ -13,6 +13,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketplaceViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
+                <outlet property="balance" destination="ahy-V6-WUc" id="Ydx-jS-gqD"/>
                 <outlet property="earnOffersCollectionView" destination="dP8-d6-KQw" id="z7r-B2-uKa"/>
                 <outlet property="spendOffersCollectionView" destination="KAu-pp-CcY" id="br5-hG-c0Z"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
@@ -38,7 +39,7 @@
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="KX1-kL-bzq" userLabel="Labels">
-                                    <rect key="frame" x="20" y="12.666666666666671" width="374" height="45"/>
+                                    <rect key="frame" x="20" y="12.666666666666671" width="334.33333333333331" height="45"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kin Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ymm-y2-7pb">
                                             <rect key="frame" x="0.0" y="0.0" width="102.33333333333333" height="24"/>
@@ -54,6 +55,15 @@
                                         </label>
                                     </subviews>
                                 </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="..." textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ahy-V6-WUc">
+                                    <rect key="frame" x="354.33333333333331" y="20.666666666666671" width="19.666666666666686" height="28.666666666666671"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" red="0.018012944608926773" green="0.48562967777252197" blue="0.98989969491958618" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="arrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="RUy-qe-mbo">
+                                    <rect key="frame" x="374" y="25" width="20" height="20"/>
+                                </imageView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="abB-je-X1A" userLabel="Spacer">
                                     <rect key="frame" x="394" y="10" width="20" height="50"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -112,7 +122,7 @@
                                     <viewLayoutGuide key="safeArea" id="Lf0-8i-nGx"/>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dP8-d6-KQw">
-                                    <rect key="frame" x="0.0" y="97.000000000000014" width="414" height="183.33333333333337"/>
+                                    <rect key="frame" x="0.0" y="96.999999999999986" width="414" height="183.66666666666663"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="dP8-d6-KQw" secondAttribute="height" multiplier="375:166" id="J2A-Be-zet"/>
@@ -223,4 +233,7 @@
             <point key="canvasLocation" x="-34" y="70"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrowRight" width="20" height="20"/>
+    </resources>
 </document>
