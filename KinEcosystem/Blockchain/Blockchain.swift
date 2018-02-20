@@ -49,16 +49,19 @@ class Blockchain {
                 switch error {
                 case KinError.internalInconsistency:
                     logError("account can't be quering now (\(error))")
-                        // try again
+                        // code error
                 case KinError.accountDeleted:
                         logError("account state is invalid. Everything should be reset and redone")
                         // probably delete everything and restart
                 case KinError.balanceQueryFailed(let queryError):
                     switch queryError {
-                    case StellarKit.StellarError.missingAccount,
-                         StellarKit.StellarError.missingBalance:
-                        logWarn("account missing or isn't funded yet (needs onboarding)")
+                    case StellarKit.StellarError.missingAccount:
+                        logWarn("account not yet created on network")
+                        // tell ecosystem server to create account
+                    case StellarKit.StellarError.missingBalance:
+                        logWarn("Kin issuer isn't trusted yet")
                         // do onboarding if we're not already doing
+                        // account.activate(passphrase: "", completion: <#T##(String?, Error?) -> Void#>)
                     case StellarKit.StellarError.unknownError:
                         logError("stellar server did not respond well. try again later")
                     default:
