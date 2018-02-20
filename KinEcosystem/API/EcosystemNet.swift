@@ -65,5 +65,42 @@ class EcosystemNet {
         }
         return p
     }
-    
+
+    func create(account: String) -> Promise<Bool> {
+        let p = Promise<Bool>()
+
+        let url = URL(string: "")!.appendingPathComponent("friendbot")
+        var comps = URLComponents(url: url, resolvingAgainstBaseURL: false)!
+        comps.query = "addr=\(account)"
+
+        URLSession
+            .shared
+            .dataTask(with: comps.url!, completionHandler: { (data, response, error) in
+                var success = true
+
+                defer {
+                    p.signal(success)
+                }
+
+                guard
+                    let d = data,
+                    let jsonOpt = try? JSONSerialization.jsonObject(with: d,
+                                                                    options: []) as? [String: Any],
+                    let json = jsonOpt
+                    else {
+                        success = false
+
+                        return
+                }
+
+                if let status = json["status"] as? Int, status == 400 {
+                    success = false
+                }
+            })
+            .resume()
+
+
+        return p
+    }
+
 }

@@ -10,6 +10,7 @@
 
 import Foundation
 import KinSDK
+import StellarKit
 
 enum KinEcosystemError: Error {
     case kinNotStarted
@@ -56,12 +57,12 @@ public class Kin {
         }
         return true
     }
-    
+
     public func balance(_ completion: @escaping (Decimal) -> ()) {
         blockchain.balance().then(on: DispatchQueue.main) { balance in
             completion(balance)
             }.error { error in
-                logWarn("returning zero for balance because real balance retreive failed, error: \(error)")
+                logWarn("returning zero for balance because real balance retrieve failed, error: \(error)")
                 completion(0)
         }
     }
@@ -80,6 +81,62 @@ public class Kin {
         parentViewController.present(navigationController, animated: true)
     }
     
+    func onboard() -> Promise<Bool> {
+        let p = Promise<Bool>()
+
+        if blockchain.onboarded {
+            return p.signal(true)
+        }
+
+        let activate = {
+            self.blockchain.account.activate(passphrase: "") { _, error in
+                if let error = error {
+                    p.signal(error)
+
+                    return
+                }
+
+                p.signal(true)
+            }
+        }
+
+        blockchain.balance()
+            .then { _ in
+                self.blockchain.onboarded = true
+
+                p.signal(true)
+            }
+            .error { (bError) in
+                if case let KinError.balanceQueryFailed(error) = bError {
+                    if let error = error as? StellarError {
+                        switch error {
+                        case .missingAccount:
+                            self.network.create(account: self.blockchain.account.publicAddress)
+                                .then { _ in
+                                    activate()
+                                }
+                                .error { error in
+                                    p.signal(error)
+                            }
+                            break
+                        case .missingBalance:
+                            activate()
+                        default:
+                            p.signal(KinError.unknown)
+                        }
+                    }
+                    else {
+                        p.signal(bError)
+                    }
+                }
+                else {
+                    p.signal(bError)
+                }
+        }
+
+        return p
+    }
+
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard started else {
             logError("Kin not started")
@@ -89,6 +146,5 @@ public class Kin {
             self.data.sync(dataPresentorType, with: data)
         }
     }
-    
     
 }

@@ -33,6 +33,16 @@ class Blockchain {
     let client: KinClient
     var activated = false
     let account: KinAccount!
+
+    var onboarded: Bool {
+        get {
+            return account.extra != nil
+        }
+
+        set {
+            account.extra = Data()
+        }
+    }
     
     init(networkId: NetworkId) throws {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
