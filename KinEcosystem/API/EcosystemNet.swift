@@ -69,7 +69,7 @@ class EcosystemNet {
     func create(account: String) -> Promise<Bool> {
         let p = Promise<Bool>()
 
-        let url = URL(string: "")!.appendingPathComponent("friendbot")
+        let url = URL(string: "https://horizon-testnet.stellar.org")!.appendingPathComponent("friendbot")
         var comps = URLComponents(url: url, resolvingAgainstBaseURL: false)!
         comps.query = "addr=\(account)"
 

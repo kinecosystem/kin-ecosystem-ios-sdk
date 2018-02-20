@@ -96,6 +96,8 @@ public class Kin {
                     return
                 }
 
+                self.blockchain.onboarded = true
+
                 p.signal(true)
             }
         }
