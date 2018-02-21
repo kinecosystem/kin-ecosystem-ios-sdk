@@ -32,7 +32,7 @@ class Blockchain {
     
     let client: KinClient
     var activated = false
-    let account: KinAccount!
+    var account: KinAccount!
 
     var onboarded: Bool {
         get {
