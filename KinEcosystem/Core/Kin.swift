@@ -26,7 +26,7 @@ public class Kin {
     fileprivate init() { }
     
     @discardableResult
-    public func start(apiKey: String, userId: String, networkId: NetworkId = .testNet) -> Bool {
+    public func start(apiKey: String, userId: String, jwt: String? = nil, networkId: NetworkId = .testNet) -> Bool {
         guard started == false else { return true }
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd"),
@@ -39,7 +39,14 @@ public class Kin {
         }
         blockchain = chain
         data = store
-        network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!, apiKey: apiKey, userId: userId))
+        var url: URL
+        switch networkId {
+        case .mainNet:
+            url = URL(string: "http://api.kinmarketplace.com/v1")!
+        default:
+            url = URL(string: "http://localhost:3000/v1")!
+        }
+        network = EcosystemNet(config: EcosystemConfiguration(baseURL: url, apiKey: apiKey, userId: userId, jwt: jwt, publicAddress: blockchain.account.publicAddress))
         // TODO: Login
         started = true
         // TODO: prefetching

@@ -11,20 +11,17 @@ import XCTest
 
 class DataTests: XCTestCase {
     
-    let mockNet = MockNet(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!)
-    let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://api.kinmarketplace.com/v1")!, apiKey: "apiKey", userId: "userId"))
+    let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://localhost:3000/v1")!, apiKey: "apiKey", userId: "userId", jwt: nil, publicAddress: "ABCDEFGGG9837645998h"))
     var data: EcosystemData!
     
     override func setUp() {
         super.setUp()
-        mockNet.start()
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem", ofType: "momd"),
             let store = try? EcosystemData(modelName: "KinEcosystem", modelURL: URL(string: modelPath)!) else { fatalError() }
         data = store
     }
     
     override func tearDown() {
-        mockNet.stop()
         let sema = DispatchSemaphore(value: 1)
         DispatchQueue.global().async {
             self.data.resetStore().then {
@@ -40,7 +37,6 @@ class DataTests: XCTestCase {
     func testStoreOffers() {
 
         let fetch = self.expectation(description: "")
-        mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
 
         network.offers().then { data in
             self.data.syncOffersFromNetworkData(data: data)
@@ -49,12 +45,12 @@ class DataTests: XCTestCase {
                     XCTAssert(offers.count == 10)
                     fetch.fulfill()
                 }
-            }.error { _ in
-                XCTAssert(false)
+            }.error { error in
+                XCTAssert(false, "\n\(error)\n")
                 fetch.fulfill()
         }
 
-        self.wait(for: [fetch], timeout: 1.0)
+        self.wait(for: [fetch], timeout: 5.0)
         
     }
     
@@ -65,10 +61,9 @@ class DataTests: XCTestCase {
             XCTAssert(offers.count == 0)
             ex1.fulfill()
         }
-        self.wait(for: [ex1], timeout: 1.0)
+        self.wait(for: [ex1], timeout: 5.0)
 
         let fetch = self.expectation(description: "2")
-        mockNet.stubRequest("offers", method: .GET, statusCode: 200, responseFilename: "10_ok_offers")
 
         network.offers().then { data in
             self.data.syncOffersFromNetworkData(data: data)
@@ -82,11 +77,12 @@ class DataTests: XCTestCase {
             }.then { offers in
                 XCTAssert(offers.count == 0)
                 fetch.fulfill()
-            }.error { _ in
+            }.error { error in
+                XCTAssert(false, "\n\(error)\n")
                 fetch.fulfill()
         }
 
-        self.wait(for: [fetch], timeout: 1.0)
+        self.wait(for: [fetch], timeout: 5.0)
 
     }
     

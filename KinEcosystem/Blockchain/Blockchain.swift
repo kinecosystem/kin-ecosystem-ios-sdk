@@ -35,11 +35,9 @@ class Blockchain {
     let account: KinAccount!
     
     init(networkId: NetworkId) throws {
-        client = try KinClient(provider: BlockchainProvider(networkId: networkId))
-        if client.accounts[0] == nil {
-            _ = try client.addAccount(with: "")
-        }
-        account = client.accounts[0]!
+        let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
+        self.client = client
+        account = try client.accounts[0] ?? client.addAccount(with: "")
     }
     
     func balance() -> Promise<Decimal> {

@@ -21,7 +21,7 @@ enum OfferContentType: String {
     case coupon
 }
 
-class OffersList: Codable {
+class OffersList: Decodable {
     
     var offers: [Offer]
     
@@ -99,20 +99,6 @@ class Offer: NSManagedObject, Decodable {
         content =  from.content
     }
     
-}
-
-extension Offer: Encodable {
-    public func encode(to encoder: Encoder) throws {
-        var container = encoder.container(keyedBy: OfferKeys.self)
-        try container.encode(id, forKey: .id)
-        try container.encode(title, forKey: .title)
-        try container.encode(description_, forKey: .description)
-        try container.encode(image, forKey: .id)
-        try container.encode(amount, forKey: .amount)
-        try container.encode(offer_type, forKey: .offer_type)
-        try container.encode(content_type, forKey: .content_type)
-        try container.encode(content, forKey: .content)
-    }
 }
 
 

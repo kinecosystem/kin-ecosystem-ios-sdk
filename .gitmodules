@@ -1,6 +1,3 @@
-[submodule "Dependencies/Hippolyte"]
-	path = Dependencies/Hippolyte
-	url = https://github.com/JanGorman/Hippolyte.git
 [submodule "Dependencies/CoreDataStack"]
 	path = Dependencies/CoreDataStack
 	url = https://github.com/ashevin/CoreDataStack.git
