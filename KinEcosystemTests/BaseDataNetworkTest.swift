@@ -1,5 +1,5 @@
 //
-//  NetworkTests.swift
+//  BaseDataNetworkTest.swift
 //  KinEcosystemTests
 //
 //  Created by Elazar Yifrach on 13/02/2018.
@@ -9,9 +9,13 @@
 import XCTest
 @testable import KinEcosystem
 
-class NetworkTests: XCTestCase {
+class BaseDataNetworkTest: XCTestCase {
     
-    let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://localhost:3000/v1")!, apiKey: "apiKey", userId: "userId", jwt: nil, publicAddress: "ABCDEFGGG9837645998h"))
+    let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://localhost:3000/v1")!,
+                                                              apiKey: "apiKey",
+                                                              userId: "userId",
+                                                              jwt: nil,
+                                                              publicAddress: "ABCDEFGGG9837645998h"))
     var data: EcosystemData!
     
     override func setUp() {
@@ -22,7 +26,7 @@ class NetworkTests: XCTestCase {
     }
     
     override func tearDown() {
-        let sema = DispatchSemaphore(value: 0)
+        let sema = DispatchSemaphore(value: 1)
         data.resetStore().then {
             sema.signal()
             }.error {_ in

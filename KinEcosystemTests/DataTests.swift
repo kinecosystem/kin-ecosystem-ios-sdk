@@ -9,30 +9,7 @@
 import XCTest
 @testable import KinEcosystem
 
-class DataTests: XCTestCase {
-    
-    let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://localhost:3000/v1")!, apiKey: "apiKey", userId: "userId", jwt: nil, publicAddress: "ABCDEFGGG9837645998h"))
-    var data: EcosystemData!
-    
-    override func setUp() {
-        super.setUp()
-        guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem", ofType: "momd"),
-            let store = try? EcosystemData(modelName: "KinEcosystem", modelURL: URL(string: modelPath)!) else { fatalError() }
-        data = store
-    }
-    
-    override func tearDown() {
-        let sema = DispatchSemaphore(value: 1)
-        DispatchQueue.global().async {
-            self.data.resetStore().then {
-                sema.signal()
-                }.error {_ in
-                    fatalError()
-            }
-        }
-        sema.wait()
-        super.tearDown()
-    }
+class DataTests: BaseDataNetworkTest {
     
     func testStoreOffers() {
 
@@ -42,7 +19,7 @@ class DataTests: XCTestCase {
             self.data.syncOffersFromNetworkData(data: data)
             }.then {
                 self.data.offers().then { offers in
-                    XCTAssert(offers.count == 10)
+                    XCTAssert(offers.count > 0)
                     fetch.fulfill()
                 }
             }.error { error in
@@ -70,7 +47,7 @@ class DataTests: XCTestCase {
             }.then {
                 self.data.offers()
             }.then { offers in
-                XCTAssert(offers.count == 10)
+                XCTAssert(offers.count > 0)
                 return self.data.resetStore()
             }.then {
                 self.data.offers()

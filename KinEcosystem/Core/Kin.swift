@@ -49,7 +49,7 @@ public class Kin {
         network = EcosystemNet(config: EcosystemConfiguration(baseURL: url, apiKey: apiKey, userId: userId, jwt: jwt, publicAddress: blockchain.account.publicAddress))
         // TODO: Login
         started = true
-        // TODO: prefetching
+        // TODO: move this to dev initiated (not on start)
         updateOffers()
         return true
     }
