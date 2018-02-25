@@ -47,10 +47,13 @@ public class Kin {
             url = URL(string: "http://localhost:3000/v1")!
         }
         network = EcosystemNet(config: EcosystemConfiguration(baseURL: url, apiKey: apiKey, userId: userId, jwt: jwt, publicAddress: blockchain.account.publicAddress))
-        // TODO: Login
         started = true
         // TODO: move this to dev initiated (not on start)
-        updateOffers()
+        updateData(with: OffersList.self, from: "offers").then {
+            self.updateData(with: OrdersList.self, from: "orders")
+            }.error { error in
+                logError("data sync failed")
+        }
         return true
     }
     
@@ -77,18 +80,15 @@ public class Kin {
         parentViewController.present(navigationController, animated: true)
     }
     
-    /// Internal ///
-    @discardableResult
-    func updateOffers() -> Promise<Void> {
+    func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard started else {
             logError("Kin not started")
             return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
-        return network.offers().then { data in
-            self.data.sync(OffersList.self, with: data)
+        return network.getDataAtPath(path).then { data in
+            self.data.sync(dataPresentorType, with: data)
         }
     }
-    
     
     
 }

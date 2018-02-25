@@ -52,10 +52,10 @@ class EcosystemNet {
         return p
     }
     
-    func offers() -> Promise<Data> {
+    func getDataAtPath(_ path: String) -> Promise<Data> {
         let p = Promise<Data>()
         authorize().then {
-                self.client.buildRequest(path: "offers", method: .get)
+                self.client.buildRequest(path: path, method: .get)
             }.then { request in
                 self.client.dataRequest(request)
             }.then { data in
@@ -65,21 +65,5 @@ class EcosystemNet {
         }
         return p
     }
-    
-    func orders() -> Promise<Data> {
-        let p = Promise<Data>()
-        authorize().then {
-                self.client.buildRequest(path: "orders", method: .get)
-            }.then { request in
-                self.client.dataRequest(request)
-            }.then { data in
-                p.signal(data)
-            }.error { error in
-                p.signal(error)
-        }
-        return p
-    }
-    
-    
     
 }

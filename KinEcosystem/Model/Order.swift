@@ -49,7 +49,16 @@ class Order: NSManagedObject, NetworkSyncable {
     }
     
     func update(_ from: Order) {
-        
+        completion_date = from.completion_date
+        offer_type = from.offer_type
+        order_id = from.order_id
+        status = from.status
+        title = from.title
+        description_ = from.description_
+        call_to_action = from.call_to_action
+        amount = from.amount
+        blockchain_data = from.blockchain_data
+        result = from.result
     }
     
     var syncId: String {
