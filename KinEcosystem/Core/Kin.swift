@@ -85,7 +85,7 @@ public class Kin {
             return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
         return network.offers().then { data in
-            self.data.syncOffersFromNetworkData(data: data)
+            self.data.sync(OffersList.self, with: data)
         }
     }
     

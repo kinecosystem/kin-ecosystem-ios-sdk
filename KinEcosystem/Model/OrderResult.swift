@@ -13,7 +13,7 @@ class OrderResult: NSManagedObject, Decodable {
     
     @NSManaged public var coupon_code: String?
     @NSManaged public var failure_message: String?
-    //@NSManaged public var order: Order?
+    @NSManaged public var order: Order?
     
     enum OrderResultKeys: String, CodingKey {
         case coupon_code

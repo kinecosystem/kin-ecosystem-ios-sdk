@@ -28,15 +28,6 @@ class MarketplaceViewController: KinBaseViewController {
         super.viewDidLoad()
         setupCollectionViews()
         setupFRCSections()
-        network.offers()
-            .then { data in
-                self.data.syncOffersFromNetworkData(data: data)
-            }.then(on: DispatchQueue.main) {
-                self.earnOffersCollectionView.reloadData()
-                self.spendOffersCollectionView.reloadData()
-            }.error { error in
-                logError("error getting offers data")
-        }
         blockchain.balance().then(on: DispatchQueue.main) { [weak self] balance in
             self?.balance.text = balance.currencyString()
             }.error { [weak self] error in

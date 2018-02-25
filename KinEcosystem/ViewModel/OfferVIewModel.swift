@@ -24,7 +24,7 @@ struct OfferViewModel {
     }
     fileprivate(set) var offerType: OfferType
     fileprivate(set) var contentType: OfferContentType
-    fileprivate(set) var title: String
+    fileprivate(set) var title: String // TODO attributed base on balance
     fileprivate(set) var amount: Int32
     
     init(with model: Offer) {

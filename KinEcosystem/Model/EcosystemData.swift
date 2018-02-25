@@ -17,6 +17,16 @@ enum EcosystemDataError: Error {
     case decodeError
 }
 
+protocol NetworkSyncable: Decodable {
+    func update(_ from: Self)
+    var syncId: String { get }
+}
+
+protocol EntityPresentor: Decodable {
+    associatedtype entitiy: NSManagedObject, NetworkSyncable
+    var entities: [entitiy] { get }
+}
+
 class EcosystemData {
     
     let stack: CoreDataStack
@@ -25,7 +35,7 @@ class EcosystemData {
         stack = try CoreDataStack(modelName: modelName, storeType: storeType, modelURL: modelURL)
     }
     
-    func syncOffersFromNetworkData(data: Data) -> Promise<Void> {
+    func sync<E: EntityPresentor>(_ presentorType: E.Type, with data: Data) -> Promise<Void> {
         
         let p = Promise<Void>()
         
@@ -34,26 +44,25 @@ class EcosystemData {
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = context
             
-            let request = NSFetchRequest<Offer>(entityName: "Offer")
-            let diskOffers = try context.fetch(request)
-            let networkOffers = try decoder.decode(OffersList.self, from: data).offers as [Offer]
+            let request = NSFetchRequest<E.entitiy>(entityName: String(describing: E.entitiy.self))
+            let diskEntities = try context.fetch(request)
+            let networkEntities = try decoder.decode(presentorType, from: data).entities
             
-            for offer in networkOffers {
-                context.insert(offer)
+            for networkEntity in networkEntities {
+                context.insert(networkEntity)
             }
             
-            for diskOffer in diskOffers {
-                if let networkOffer = networkOffers.first(where: { offer -> Bool in
-                    offer.id == diskOffer.id
+            for diskEntity in diskEntities {
+                if let networkEntity = networkEntities.first(where: { entity -> Bool in
+                    entity.syncId == diskEntity.syncId
                 }) {
-                    diskOffer.update(networkOffer)
-                    context.delete(networkOffer)
+                    diskEntity.update(networkEntity)
+                    context.delete(networkEntity)
                 } else {
-                    context.delete(diskOffer)
+                    context.delete(diskEntity)
                 }
             }
-            
-            
+             
         }) { error in
             if let stackError = error {
                 p.signal(stackError)
@@ -65,18 +74,20 @@ class EcosystemData {
         return p
     }
     
-    func offers() -> Promise<[Offer]> {
-        let p = Promise<[Offer]>()
+    func objects<T: NSFetchRequestResult>(of type: T.Type) -> Promise<[T]> {
+        let p = Promise<[T]>()
         stack.query { context in
-            let request = NSFetchRequest<Offer>(entityName: "Offer")
-            guard let offers = try? context.fetch(request) else {
+            let request = NSFetchRequest<T>(entityName: String(describing: type))
+            guard let objects = try? context.fetch(request) else {
                 p.signal(EcosystemDataError.fetchError)
                 return
             }
-            p.signal(offers)
+            p.signal(objects)
         }
         return p
     }
+    
+    // Testing
     
     func resetStore() -> Promise<Void> {
         let p = Promise<Void>()

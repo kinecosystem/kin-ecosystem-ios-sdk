@@ -9,7 +9,15 @@
 import Foundation
 import CoreData
 
-class Order: NSManagedObject, Decodable {
+class OrdersList: EntityPresentor {
+    typealias entitiy = Order
+    var orders: [Order]
+    var entities: [Order] {
+        return orders
+    }
+}
+
+class Order: NSManagedObject, NetworkSyncable {
     
     @NSManaged public var completion_date: NSDate
     @NSManaged public var offer_type: String
@@ -38,6 +46,14 @@ class Order: NSManagedObject, Decodable {
         case amount
         case blockchain_data
         case result
+    }
+    
+    func update(_ from: Order) {
+        
+    }
+    
+    var syncId: String {
+        return order_id
     }
     
     required convenience public init(from decoder: Decoder) throws {

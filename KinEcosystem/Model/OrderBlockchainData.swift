@@ -14,6 +14,7 @@ class OrderBlockchainData: NSManagedObject, Decodable {
     @NSManaged public var transaction_id: String?
     @NSManaged public var sender_address: String?
     @NSManaged public var recipient_address: String?
+    @NSManaged public var order: Order?
     
     enum OrderBlockchainDataKeys: String, CodingKey {
         case transaction_id

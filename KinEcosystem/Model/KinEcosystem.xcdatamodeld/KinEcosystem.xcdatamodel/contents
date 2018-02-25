@@ -23,6 +23,9 @@
         <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
     </entity>
     <entity name="OrderBlockchainData" representedClassName=".OrderBlockchainData" syncable="YES">
+        <attribute name="recipient_address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="sender_address" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="transaction_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="blockchain_data" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="OrderResult" representedClassName=".OrderResult" syncable="YES">
@@ -33,7 +36,7 @@
     <elements>
         <element name="Offer" positionX="-245" positionY="-72" width="128" height="163"/>
         <element name="Order" positionX="-72" positionY="-45" width="128" height="193"/>
-        <element name="OrderBlockchainData" positionX="207" positionY="90" width="128" height="58"/>
+        <element name="OrderBlockchainData" positionX="207" positionY="90" width="128" height="103"/>
         <element name="OrderResult" positionX="115" positionY="224" width="128" height="88"/>
     </elements>
 </model>

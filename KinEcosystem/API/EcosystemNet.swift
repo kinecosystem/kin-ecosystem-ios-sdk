@@ -33,7 +33,6 @@ class EcosystemNet {
         if client.authToken != nil {
             return p.signal(())
         }
-        logInfo(String(describing: client.signInData))
         guard let data = try? JSONEncoder().encode(client.signInData) else {
             return p.signal(EcosystemNetError.requestBuild)
         }

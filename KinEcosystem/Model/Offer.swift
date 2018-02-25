@@ -21,24 +21,15 @@ enum OfferContentType: String {
     case coupon
 }
 
-class OffersList: Decodable {
-    
+class OffersList: EntityPresentor {
+    typealias entitiy = Offer
     var offers: [Offer]
-    
+    var entities: [Offer] {
+        return offers
+    }
 }
 
-class Offer: NSManagedObject, Decodable {
-    
-    /*
-     "amount": 4000,
-     "content": "{\"pages\":[{\"description\":\"whats up sdkjhfdlskjhfg skldjfhks ljhf lsdhjfklsd hflksdl sdjhfkl s\",\"answers\":[\"dfhjksdhfksd sdf\",\"sdfsdjiosdjfl\",\"333333333333333333333333333333\",\"44444444444444444444\",\"555555555555555555555555555555\",\"666666666666666666666666666666\",\"7777777777777777777777777777777777777777\",\"888888888888888\"],\"title\":\"hi there\"},{\"description\":\"whats up sdkjhfdlskjhfg skldjfhks ljhf lsdhjfklsd hflksdl sdjhfkl s\",\"answers\":[\"dfhjksdhfksd sdf\",\"sdfsdjiosdjfl\",\"333333333333333333333333333333\",\"44444444444444444444\",\"555555555555555555555555555555\",\"666666666666666666666666666666\",\"7777777777777777777777777777777777777777\",\"888888888888888\"],\"title\":\"hi there\"}]}",
-     "content_type": "poll",
-     "description": "Tell us about yourself",
-     "id": "earn_offer1.png",
-     "image": "https://s3.amazonaws.com/kinmarketplace-assets/version1/earn_offer1.png",
-     "offer_type": "earn",
-     "title": "Answer a poll"
-    */
+class Offer: NSManagedObject, NetworkSyncable {
 
     @NSManaged public var amount: Int32
     @NSManaged public var description_: String
@@ -87,6 +78,10 @@ class Offer: NSManagedObject, Decodable {
         offer_type = try values.decode(String.self, forKey: .offer_type)
         content_type = try values.decode(String.self, forKey: .content_type)
         content = try values.decode(String.self, forKey: .content)
+    }
+    
+    var syncId: String {
+        return id
     }
     
     func update(_ from: Offer) {

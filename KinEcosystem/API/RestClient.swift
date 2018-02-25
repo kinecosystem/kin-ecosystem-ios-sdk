@@ -55,7 +55,7 @@ class RestClient {
                 let data = tokenJson.data(using: .utf8),
                 let token = try? JSONDecoder().decode(AuthToken.self, from: data),
                 let expiryDate = Iso8601DateFormatter.date(from: token.expiration_date),
-                Date().compare(expiryDate) == .orderedAscending{
+                Date().compare(expiryDate) == .orderedAscending {
                 lastToken = token
                 return token
             }
@@ -128,7 +128,8 @@ class RestClient {
                 p.signal(EcosystemNetError.noDataInResponse)
                 return
             }
-            guard let _ = response as? HTTPURLResponse else {
+            guard   let response = response as? HTTPURLResponse,
+                        response.statusCode == 200 else {
                 if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
                     logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
                     p.signal(EcosystemNetError.serviceError(responseError))
@@ -139,7 +140,7 @@ class RestClient {
                 return
             }
             p.signal(data)
-            }.resume()
+        }.resume()
         return p
     }
     
@@ -151,18 +152,20 @@ class RestClient {
                 p.signal(EcosystemNetError.network(error))
                 return
             }
-            guard let response = response as? HTTPURLResponse,
-                response.statusCode == 200 else {
+            guard   let response = response as? HTTPURLResponse,
+                        response.statusCode == 200 else {
                     if  let data = data,
                         let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
+                        logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
                         p.signal(EcosystemNetError.serviceError(responseError))
                     } else {
+                        logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason")
                         p.signal(EcosystemNetError.unknown)
                     }
                     return
             }
             p.signal(())
-            }.resume()
+        }.resume()
         return p
     }
     
