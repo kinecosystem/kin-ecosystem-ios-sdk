@@ -10,6 +10,7 @@
 
 
 import Foundation
+import KinUtil
 
 struct EcosystemConfiguration {
     var baseURL: URL

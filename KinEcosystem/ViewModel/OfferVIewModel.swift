@@ -11,6 +11,7 @@
 
 import Foundation
 import UIKit
+import KinUtil
 
 struct OfferViewModel {
     

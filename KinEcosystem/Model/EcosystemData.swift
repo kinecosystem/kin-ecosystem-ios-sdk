@@ -11,6 +11,7 @@
 import Foundation
 import CoreDataStack
 import CoreData
+import KinUtil
 
 enum EcosystemDataError: Error {
     case fetchError

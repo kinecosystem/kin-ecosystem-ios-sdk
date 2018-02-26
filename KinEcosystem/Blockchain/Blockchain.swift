@@ -8,6 +8,7 @@
 
 import Foundation
 import KinSDK
+import KinUtil
 import StellarKit
 
 struct BlockchainProvider: ServiceProvider {

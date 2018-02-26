@@ -8,6 +8,7 @@
 
 import Foundation
 import AdSupport
+import KinUtil
 
 enum EcosystemNetError: Error {
     case network(Error)

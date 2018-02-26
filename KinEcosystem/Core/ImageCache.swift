@@ -11,6 +11,7 @@
 
 import Foundation
 import UIKit
+import KinUtil
 
 enum ImageCacheError: Error {
     case network(Error?)

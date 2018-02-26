@@ -41,7 +41,6 @@
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
 		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
-		E9EBA02320287BB600B21DFD /* Promise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02220287BB600B21DFD /* Promise.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
 		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
 		E9FC5984203AD07900D1DA2B /* KinBaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC5983203AD07900D1DA2B /* KinBaseViewController.swift */; };
@@ -159,7 +158,6 @@
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
 		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
-		E9EBA02220287BB600B21DFD /* Promise.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Promise.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
 		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
 		E9FC5983203AD07900D1DA2B /* KinBaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseViewController.swift; sourceTree = "<group>"; };
@@ -319,7 +317,6 @@
 		E96F24F52018A88D0017EF68 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				E9EBA02220287BB600B21DFD /* Promise.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 				E942F8F22031B54800DD4B8E /* Logger.swift */,
@@ -586,7 +583,6 @@
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
-				E9EBA02320287BB600B21DFD /* Promise.swift in Sources */,
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,

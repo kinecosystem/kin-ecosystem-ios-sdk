@@ -10,6 +10,7 @@
 
 import Foundation
 import KinSDK
+import KinUtil
 
 enum KinEcosystemError: Error {
     case kinNotStarted
