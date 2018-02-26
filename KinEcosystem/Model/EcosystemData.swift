@@ -23,8 +23,8 @@ protocol NetworkSyncable: Decodable {
 }
 
 protocol EntityPresentor: Decodable {
-    associatedtype entitiy: NSManagedObject, NetworkSyncable
-    var entities: [entitiy] { get }
+    associatedtype entity: NSManagedObject, NetworkSyncable
+    var entities: [entity] { get }
 }
 
 class EcosystemData {
@@ -44,7 +44,7 @@ class EcosystemData {
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = context
             
-            let request = NSFetchRequest<E.entitiy>(entityName: String(describing: E.entitiy.self))
+            let request = NSFetchRequest<E.entity>(entityName: String(describing: E.entity.self))
             let diskEntities = try context.fetch(request)
             let networkEntities = try decoder.decode(presentorType, from: data).entities
             

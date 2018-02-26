@@ -10,9 +10,9 @@ import Foundation
 import CoreData
 
 class OrdersList: EntityPresentor {
-    typealias entitiy = Order
-    var orders: [Order]
-    var entities: [Order] {
+    typealias entity = Order
+    var orders: [entity]
+    var entities: [entity] {
         return orders
     }
 }

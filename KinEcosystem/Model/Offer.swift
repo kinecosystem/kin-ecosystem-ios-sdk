@@ -22,9 +22,9 @@ enum OfferContentType: String {
 }
 
 class OffersList: EntityPresentor {
-    typealias entitiy = Offer
-    var offers: [Offer]
-    var entities: [Offer] {
+    typealias entity = Offer
+    var offers: [entity]
+    var entities: [entity] {
         return offers
     }
 }
