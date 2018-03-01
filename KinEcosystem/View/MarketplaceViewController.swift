@@ -12,8 +12,8 @@ import CoreDataStack
 import StellarKit
 import KinSDK
 
-class MarketplaceViewController: KinBaseViewController {
-
+class MarketplaceViewController: KinNavigationChildController {
+    
     weak var data: EcosystemData!
     weak var network: EcosystemNet!
     weak var blockchain: Blockchain!
@@ -22,16 +22,16 @@ class MarketplaceViewController: KinBaseViewController {
     fileprivate let spendCellName = "SpendOfferCell"
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
-    @IBOutlet weak var balance: UILabel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         setupCollectionViews()
         setupFRCSections()
         blockchain.balance().then(on: DispatchQueue.main) { [weak self] balance in
-            self?.balance.text = balance.currencyString()
+            //self?.balance.text = balance.currencyString()
             }.error { [weak self] error in
-                self?.balance.text = Decimal(0).currencyString()
+                //self?.balance.text = Decimal(0).currencyString()
                 logWarn("showing zero for balance because real balance retrieve failed:")
         }
         self.title = "Kin Marketplace"
@@ -150,6 +150,9 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
+        self.kinNavigationController?.push(ordersController, animated: true)
         
     }
 }

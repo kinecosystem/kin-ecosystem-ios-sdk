@@ -15,7 +15,6 @@ struct BlockchainProvider: ServiceProvider {
     let url: URL
     let networkId: NetworkId
     
-    
     init(networkId: NetworkId) {
         self.networkId = networkId
         switch networkId {

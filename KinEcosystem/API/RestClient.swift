@@ -50,6 +50,7 @@ class RestClient {
     var authToken: AuthToken? {
         get {
             if lastToken != nil {
+                // TODO: check expiry once more
                 return lastToken
             }
             if  let tokenJson = UserDefaults.standard.string(forKey: "authToken"),

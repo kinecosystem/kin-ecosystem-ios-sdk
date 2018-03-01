@@ -77,7 +77,9 @@ public class Kin {
         mpViewController.data = data
         mpViewController.network = network
         mpViewController.blockchain = blockchain
-        let navigationController = KinBaseNavigationController(rootViewController: mpViewController)
+        let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
+                                                                bundle: Bundle.ecosystem,
+                                                                rootViewController: mpViewController)
         parentViewController.present(navigationController, animated: true)
     }
     
