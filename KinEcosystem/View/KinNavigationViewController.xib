@@ -95,6 +95,7 @@
                             </subviews>
                         </stackView>
                     </subviews>
+                    <gestureRecognizers/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="bX1-h2-ZYl" secondAttribute="trailing" id="8ZB-vu-Xek"/>
                         <constraint firstItem="bX1-h2-ZYl" firstAttribute="top" secondItem="cJQ-dP-SZ6" secondAttribute="top" id="SWA-ZV-kka"/>
@@ -102,6 +103,13 @@
                         <constraint firstAttribute="bottom" secondItem="bX1-h2-ZYl" secondAttribute="bottom" id="jN1-Ly-ve6"/>
                         <constraint firstAttribute="height" constant="70" id="tU0-m8-KKq"/>
                     </constraints>
+                    <connections>
+                        <outlet property="balanceAmount" destination="Wd3-zb-ZO6" id="qiy-nt-sPp"/>
+                        <outlet property="rightAmountConstraint" destination="46i-ZO-YdV" id="acj-BU-yAF"/>
+                        <outlet property="rightArrowImage" destination="X1i-Km-3Zu" id="ZMh-dp-f5x"/>
+                        <outlet property="subtitle" destination="ezm-lw-sJ3" id="bLm-36-neX"/>
+                        <outlet property="title" destination="myX-Ts-Jkf" id="79Z-t7-GCq"/>
+                    </connections>
                 </view>
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

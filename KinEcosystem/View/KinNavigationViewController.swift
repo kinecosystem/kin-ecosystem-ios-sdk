@@ -12,17 +12,16 @@ class KinNavigationChildController : UIViewController {
     weak var kinNavigationController: KinNavigationViewController?
 }
 
-class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
+class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var balanceView: UIView!
+    @IBOutlet weak var balanceView: BalanceView!
     @IBOutlet weak var barBackground: UIImageView!
     
-    var isPopping = false
-    
-    let transitionController = UIViewController()
-    var rootViewController: KinNavigationChildController!
-    var viewDidLoadBlock: (() -> ())?
+    fileprivate let transitionController = UIViewController()
+    fileprivate var rootViewController: KinNavigationChildController!
+    fileprivate var viewDidLoadBlock: (() -> ())?
+    fileprivate var tapRecognizer: UITapGestureRecognizer!
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -37,6 +36,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
         super.viewDidLoad()
         setupNavigationBarAppearance()
         setupTransitionController()
+        setupBalanceView()
         push(rootViewController, animated: false)
         viewDidLoadBlock?()
     }
@@ -67,6 +67,20 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
         transitionController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
+    fileprivate func setupBalanceView() {
+        tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(balanceTapped(sender:)))
+        tapRecognizer.delegate = self
+        balanceView.addGestureRecognizer(tapRecognizer)
+    }
+    
+    @objc fileprivate func balanceTapped(sender: UIGestureRecognizer) {
+        guard (transitionController.childViewControllers.last is OrdersViewController) == false else {
+            return
+        }
+        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
+        push(ordersController, animated: true)
+    }
+    
     func push(_ viewController: KinNavigationChildController, animated: Bool, completion: (() -> Void)? = nil) {
         
         guard isViewLoaded else {
@@ -77,7 +91,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
         }
         
         guard let container = transitionController.view else { return }
-        
+
         let shiftLeft = CGAffineTransform(translationX: -container.bounds.width, y: 0.0)
         let rightFrame = CGRect(x: container.bounds.width, y: 0.0, width: container.bounds.width, height: container.bounds.height)
         let p = rightFrame.origin.applying(shiftLeft)
@@ -96,6 +110,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
         
         transitionController.addChildViewController(viewController)
         viewController.kinNavigationController = self
+        
+        balanceView.setSelected(viewController is OrdersViewController, animated: animated)
 
         guard animated else {
             outView?.removeFromSuperview()
@@ -104,12 +120,15 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
             return
         }
         
+        tapRecognizer.isEnabled = false
+        
         UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), animations: {
             viewController.view.frame = frame
             outView?.frame = leftFrame
         }, completion: { (finished) in
             outView?.removeFromSuperview()
             viewController.didMove(toParentViewController: self.transitionController)
+            self.tapRecognizer.isEnabled = true
             completion?()
         })
         
@@ -136,6 +155,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
         inView.frame = leftFrame
         container.addSubview(inView)
         
+        balanceView.setSelected(transitionController.childViewControllers[count - 2] is OrdersViewController, animated: animated)
+        
         guard animated else {
             inView.frame = frame
             outView.removeFromSuperview()
@@ -145,6 +166,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
             return
         }
         
+        tapRecognizer.isEnabled = false
+        
         UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), animations: {
             inView.frame = frame
             outView.frame = rightFrame
@@ -152,6 +175,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate {
             outView.removeFromSuperview()
             outController.willMove(toParentViewController: nil)
             outController.removeFromParentViewController()
+            self.tapRecognizer.isEnabled = true
             completion?()
         })
     }
