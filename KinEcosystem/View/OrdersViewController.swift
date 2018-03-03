@@ -65,7 +65,7 @@ class OrdersViewController : KinNavigationChildController {
             orderCell.title.attributedText = viewModel.title
             orderCell.subtitle.attributedText = viewModel.subtitle
         }
-        tableView.add(fetchedResultsSection: section)
+        tableView.add(tableSection: section)
     }
     
     @objc fileprivate func didTapInfo(sender: Any?) {
@@ -76,12 +76,12 @@ class OrdersViewController : KinNavigationChildController {
 
 extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return tableView.fetchedResultsSection(for: section)?.objectCount ?? 0
+        return tableView.tableSection(for: section)?.objectCount ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderCellName, for: indexPath)
-        let section = tableView.fetchedResultsSection(for: indexPath.section)
+        let section = tableView.tableSection(for: indexPath.section)
         section?.configureBlock?(cell, indexPath)
         return cell
     }
