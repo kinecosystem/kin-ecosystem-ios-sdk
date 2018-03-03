@@ -17,11 +17,17 @@ class OrdersList: EntityPresentor {
     }
 }
 
+enum OrderStatus: String {
+    case pending
+    case completed
+    case failed
+}
+
 class Order: NSManagedObject, NetworkSyncable {
     
     @NSManaged public var completion_date: NSDate
     @NSManaged public var offer_type: String
-    @NSManaged public var order_id: String
+    @NSManaged public var id: String
     @NSManaged public var status: String
     @NSManaged public var title: String
     @NSManaged public var description_: String
@@ -35,10 +41,15 @@ class Order: NSManagedObject, NetworkSyncable {
         set { offer_type = newValue.rawValue }
     }
     
+    var orderStatut: OrderStatus {
+        get { return OrderStatus(rawValue: status)! }
+        set { status = newValue.rawValue }
+    }
+    
     enum OrderKeys: String, CodingKey {
         case completion_date
         case offer_type
-        case order_id
+        case id
         case status
         case title
         case description
@@ -51,7 +62,7 @@ class Order: NSManagedObject, NetworkSyncable {
     func update(_ from: Order) {
         completion_date = from.completion_date
         offer_type = from.offer_type
-        order_id = from.order_id
+        id = from.id
         status = from.status
         title = from.title
         description_ = from.description_
@@ -62,7 +73,7 @@ class Order: NSManagedObject, NetworkSyncable {
     }
     
     var syncId: String {
-        return order_id
+        return id
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -71,7 +82,7 @@ class Order: NSManagedObject, NetworkSyncable {
                 fatalError()
         }
         
-        self.init(entity: entity, insertInto: nil)
+        self.init(entity: entity, insertInto: managedObjectContext)
         let values = try decoder.container(keyedBy: OrderKeys.self)
         
         if  let dateString = try? values.decode(String.self, forKey: .completion_date),
@@ -79,7 +90,7 @@ class Order: NSManagedObject, NetworkSyncable {
             completion_date = date as NSDate
         }
         offer_type = try values.decode(String.self, forKey: .offer_type)
-        order_id = try values.decode(String.self, forKey: .order_id)
+        id = try values.decode(String.self, forKey: .id)
         status = try values.decode(String.self, forKey: .status)
         title = try values.decode(String.self, forKey: .title)
         description_ = try values.decode(String.self, forKey: .description)

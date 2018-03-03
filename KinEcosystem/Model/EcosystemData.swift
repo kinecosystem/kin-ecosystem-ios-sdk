@@ -49,9 +49,7 @@ class EcosystemData {
             let diskEntities = try context.fetch(request)
             let networkEntities = try decoder.decode(presentorType, from: data).entities
             
-            for networkEntity in networkEntities {
-                context.insert(networkEntity)
-            }
+            // network entities are already inserted by their decoders
             
             for diskEntity in diskEntities {
                 if let networkEntity = networkEntities.first(where: { entity -> Bool in

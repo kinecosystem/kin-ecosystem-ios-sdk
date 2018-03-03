@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import KinEcosystem
+@testable import KinUtil
 
 class PromiseTests: XCTestCase {
     

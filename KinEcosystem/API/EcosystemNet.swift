@@ -15,6 +15,7 @@ import KinUtil
 struct EcosystemConfiguration {
     var baseURL: URL
     var apiKey: String
+    var appId: String
     var userId: String
     var jwt: String?
     var publicAddress: String

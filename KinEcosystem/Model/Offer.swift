@@ -67,7 +67,7 @@ class Offer: NSManagedObject, NetworkSyncable {
                 fatalError()
         }
         
-        self.init(entity: entity, insertInto: nil)
+        self.init(entity: entity, insertInto: managedObjectContext)
         let values = try decoder.container(keyedBy: OfferKeys.self)
         
         id = try values.decode(String.self, forKey: .id)

@@ -17,6 +17,7 @@ class MarketplaceViewController: KinNavigationChildController {
     weak var data: EcosystemData!
     weak var network: EcosystemNet!
     weak var blockchain: Blockchain!
+    
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
@@ -25,15 +26,21 @@ class MarketplaceViewController: KinNavigationChildController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        
         setupCollectionViews()
         setupFRCSections()
+        setupNavigationItem()
         blockchain.balance().then(on: DispatchQueue.main) { [weak self] balance in
             //self?.balance.text = balance.currencyString()
             }.error { [weak self] error in
                 //self?.balance.text = Decimal(0).currencyString()
                 logWarn("showing zero for balance because real balance retrieve failed:")
         }
+        
+    }
+    
+    fileprivate func setupNavigationItem() {
+        navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         self.title = "Kin Marketplace"
     }
     

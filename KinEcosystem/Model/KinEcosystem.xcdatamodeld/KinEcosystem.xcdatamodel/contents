@@ -15,28 +15,28 @@
         <attribute name="call_to_action" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="completion_date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="description_" attributeType="String" syncable="YES"/>
+        <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
-        <attribute name="order_id" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderBlockchainData" inverseName="order" inverseEntity="OrderBlockchainData" syncable="YES"/>
-        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
     </entity>
     <entity name="OrderBlockchainData" representedClassName=".OrderBlockchainData" syncable="YES">
         <attribute name="recipient_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transaction_id" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="blockchain_data" inverseEntity="Order" syncable="YES"/>
+        <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="blockchain_data" inverseEntity="Order" syncable="YES"/>
     </entity>
     <entity name="OrderResult" representedClassName=".OrderResult" syncable="YES">
         <attribute name="coupon_code" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="failure_message" optional="YES" attributeType="String" syncable="YES"/>
-        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
+        <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
         <element name="Offer" positionX="-245" positionY="-72" width="128" height="163"/>
-        <element name="Order" positionX="-72" positionY="-45" width="128" height="193"/>
-        <element name="OrderBlockchainData" positionX="207" positionY="90" width="128" height="103"/>
-        <element name="OrderResult" positionX="115" positionY="224" width="128" height="88"/>
+        <element name="Order" positionX="-81" positionY="-58" width="128" height="193"/>
+        <element name="OrderBlockchainData" positionX="313" positionY="72" width="128" height="103"/>
+        <element name="OrderResult" positionX="144" positionY="236" width="128" height="88"/>
     </elements>
 </model>

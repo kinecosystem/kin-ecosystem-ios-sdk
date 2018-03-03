@@ -27,7 +27,7 @@ public class Kin {
     fileprivate init() { }
     
     @discardableResult
-    public func start(apiKey: String, userId: String, jwt: String? = nil, networkId: NetworkId = .testNet) -> Bool {
+    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet) -> Bool {
         guard started == false else { return true }
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd"),
@@ -47,7 +47,7 @@ public class Kin {
         default:
             url = URL(string: "http://localhost:3000/v1")!
         }
-        network = EcosystemNet(config: EcosystemConfiguration(baseURL: url, apiKey: apiKey, userId: userId, jwt: jwt, publicAddress: blockchain.account.publicAddress))
+        network = EcosystemNet(config: EcosystemConfiguration(baseURL: url, apiKey: apiKey, appId: appId, userId: userId, jwt: jwt, publicAddress: blockchain.account.publicAddress))
         started = true
         // TODO: move this to dev initiated (not on start)
         updateData(with: OffersList.self, from: "offers").then {
@@ -80,6 +80,9 @@ public class Kin {
         let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
                                                                 bundle: Bundle.ecosystem,
                                                                 rootViewController: mpViewController)
+        navigationController.data = data
+        navigationController.network = network
+        navigationController.blockchain = blockchain
         parentViewController.present(navigationController, animated: true)
     }
     

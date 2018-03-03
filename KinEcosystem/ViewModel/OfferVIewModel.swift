@@ -15,18 +15,18 @@ import KinUtil
 
 struct OfferViewModel {
     
-    fileprivate(set) var id: String
-    fileprivate(set) var description: String
+    let id: String
+    let description: String
     fileprivate var imageSource: String
     var image: Promise<ImageCacheResult> {
         get {
             return ImageCache.shared.image(for: URL(string:imageSource))
         }
     }
-    fileprivate(set) var offerType: OfferType
-    fileprivate(set) var contentType: OfferContentType
-    fileprivate(set) var title: String // TODO attributed base on balance
-    fileprivate(set) var amount: Int32
+    let offerType: OfferType
+    let contentType: OfferContentType
+    let title: String // TODO attributed base on balance
+    let amount: Int32
     
     init(with model: Offer) {
         description = model.description_

@@ -24,7 +24,6 @@ class RestClient {
     fileprivate var config: EcosystemConfiguration
     lazy var signInData: SignInData = {
         
-        let displayName = (Bundle.main.object(forInfoDictionaryKey: "CFBundleDisplayName") as? String) ?? "unknwon"
         var identifier = ASIdentifierManager.shared().advertisingIdentifier.uuidString
         let letters = NSCharacterSet.letters
         if identifier.rangeOfCharacter(from: letters) == nil {
@@ -40,7 +39,7 @@ class RestClient {
         }
         return SignInData(jwt: config.jwt ?? nil,
                           user_id: config.userId,
-                          app_id: displayName,
+                          app_id: config.appId,
                           device_id: identifier,
                           public_address: config.publicAddress,
                           sign_in_type: config.jwt != nil ? SignInType.jwt.rawValue : SignInType.whitelist.rawValue)
@@ -79,6 +78,7 @@ class RestClient {
     
     init(_ config: EcosystemConfiguration) {
         self.config = config
+        self.authToken = nil
     }
     
     func buildRequest(path: String, method: HTTPMethod, contentType: ContentType = .json, body: Data? = nil, parameters: [String: String]? = nil) -> Promise<URLRequest> {

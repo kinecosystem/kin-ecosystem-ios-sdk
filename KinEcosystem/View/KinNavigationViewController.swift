@@ -13,7 +13,11 @@ class KinNavigationChildController : UIViewController {
 }
 
 class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
-
+    
+    weak var data: EcosystemData!
+    weak var network: EcosystemNet!
+    weak var blockchain: Blockchain!
+    
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var balanceView: BalanceView!
     @IBOutlet weak var barBackground: UIImageView!
@@ -22,7 +26,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
     fileprivate var rootViewController: KinNavigationChildController!
     fileprivate var viewDidLoadBlock: (() -> ())?
     fileprivate var tapRecognizer: UITapGestureRecognizer!
-    
+    fileprivate let transitionDuration = TimeInterval(0.3)
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -78,6 +82,9 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             return
         }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
+        ordersController.data = data
+        ordersController.network = network
+        ordersController.blockchain = blockchain
         push(ordersController, animated: true)
     }
     
@@ -122,7 +129,10 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         
         tapRecognizer.isEnabled = false
         
-        UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), animations: {
+        UIView.animate(withDuration: transitionDuration,
+                       delay: 0.0,
+                       options: [.curveEaseOut],
+                       animations: {
             viewController.view.frame = frame
             outView?.frame = leftFrame
         }, completion: { (finished) in
@@ -168,7 +178,10 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         
         tapRecognizer.isEnabled = false
         
-        UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration), animations: {
+        UIView.animate(withDuration: transitionDuration,
+                       delay: 0.0,
+                       options: [.curveEaseOut],
+                       animations: {
             inView.frame = frame
             outView.frame = rightFrame
         }, completion: { (finished) in

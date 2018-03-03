@@ -26,7 +26,7 @@ class OrderResult: NSManagedObject, Decodable {
                 fatalError()
         }
         
-        self.init(entity: entity, insertInto: nil)
+        self.init(entity: entity, insertInto: managedObjectContext)
         let values = try decoder.container(keyedBy: OrderResultKeys.self)
         
         coupon_code = try values.decodeIfPresent(String.self, forKey: .coupon_code)

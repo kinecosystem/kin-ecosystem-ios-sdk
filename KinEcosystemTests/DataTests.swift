@@ -15,52 +15,41 @@ class DataTests: BaseDataNetworkTest {
 
         let fetch = self.expectation(description: "")
 
-        network.offers().then { data in
-            self.data.syncOffersFromNetworkData(data: data)
+        network.getDataAtPath("offers").then { data in
+                self.data.sync(OffersList.self, with: data)
             }.then {
-                self.data.offers().then { offers in
-                    XCTAssert(offers.count > 0)
-                    fetch.fulfill()
-                }
+                self.data.objects(of: Offer.self)
+            }.then { offers in
+                XCTAssert(offers.count > 0)
+                fetch.fulfill()
             }.error { error in
-                XCTAssert(false, "\n\(error)\n")
+                XCTAssert(false, String(describing: error))
                 fetch.fulfill()
         }
-
+        
         self.wait(for: [fetch], timeout: 5.0)
         
     }
     
-    func testDeleteStore() {
-
-        let ex1 = self.expectation(description: "")
-        self.data.offers().then { offers in
-            XCTAssert(offers.count == 0)
-            ex1.fulfill()
-        }
-        self.wait(for: [ex1], timeout: 5.0)
-
-        let fetch = self.expectation(description: "2")
-
-        network.offers().then { data in
-            self.data.syncOffersFromNetworkData(data: data)
+    func testStoreOrders() {
+        
+        let fetch = self.expectation(description: "")
+        
+        network.getDataAtPath("orders").then { data in
+                self.data.sync(OrdersList.self, with: data)
             }.then {
-                self.data.offers()
-            }.then { offers in
-                XCTAssert(offers.count > 0)
-                return self.data.resetStore()
-            }.then {
-                self.data.offers()
-            }.then { offers in
-                XCTAssert(offers.count == 0)
+                self.data.objects(of: Order.self)
+            }.then { orders in
+                XCTAssert(orders.count > 0)
                 fetch.fulfill()
             }.error { error in
-                XCTAssert(false, "\n\(error)\n")
+                XCTAssert(false, String(describing: error))
                 fetch.fulfill()
         }
-
+        
         self.wait(for: [fetch], timeout: 5.0)
-
+        
     }
+    
     
 }

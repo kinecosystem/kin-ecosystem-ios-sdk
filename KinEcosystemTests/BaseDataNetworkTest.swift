@@ -13,7 +13,8 @@ class BaseDataNetworkTest: XCTestCase {
     
     let network = EcosystemNet(config: EcosystemConfiguration(baseURL: URL(string: "http://localhost:3000/v1")!,
                                                               apiKey: "apiKey",
-                                                              userId: "userId",
+                                                              appId: "kik",
+                                                              userId: "doody",
                                                               jwt: nil,
                                                               publicAddress: "ABCDEFGGG9837645998h"))
     var data: EcosystemData!

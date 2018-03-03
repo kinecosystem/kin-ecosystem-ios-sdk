@@ -28,7 +28,7 @@ class OrderBlockchainData: NSManagedObject, Decodable {
                 fatalError()
         }
         
-        self.init(entity: entity, insertInto: nil)
+        self.init(entity: entity, insertInto: managedObjectContext)
         let values = try decoder.container(keyedBy: OrderBlockchainDataKeys.self)
         
         transaction_id = try values.decodeIfPresent(String.self, forKey: .transaction_id)
