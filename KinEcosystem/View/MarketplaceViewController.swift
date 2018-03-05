@@ -14,9 +14,7 @@ import KinSDK
 
 class MarketplaceViewController: KinNavigationChildController {
     
-    weak var data: EcosystemData!
-    weak var network: EcosystemNet!
-    weak var blockchain: Blockchain!
+    weak var core: Core!
     
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
@@ -30,12 +28,6 @@ class MarketplaceViewController: KinNavigationChildController {
         setupCollectionViews()
         setupFRCSections()
         setupNavigationItem()
-        blockchain.balance().then(on: DispatchQueue.main) { [weak self] balance in
-            //self?.balance.text = balance.currencyString()
-            }.error { [weak self] error in
-                //self?.balance.text = Decimal(0).currencyString()
-                logWarn("showing zero for balance because real balance retrieve failed:")
-        }
         
     }
     
@@ -48,7 +40,7 @@ class MarketplaceViewController: KinNavigationChildController {
         let request = NSFetchRequest<Offer>(entityName: "Offer")
         request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
         return frc
     }

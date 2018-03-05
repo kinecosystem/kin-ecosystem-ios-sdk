@@ -12,7 +12,7 @@
     </entity>
     <entity name="Order" representedClassName=".Order" syncable="YES">
         <attribute name="amount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="call_to_action" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="call_to_action" attributeType="String" syncable="YES"/>
         <attribute name="completion_date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="description_" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>

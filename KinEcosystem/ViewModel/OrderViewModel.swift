@@ -14,19 +14,51 @@ class OrderViewModel {
     let title: NSAttributedString
     let subtitle: NSAttributedString
     let amount: NSAttributedString
+    let image: UIImage?
+    let last: Bool
+    let color: UIColor
     
-    init(with model: Order) {
-        // TODO: include call for action / text per order status / define
-        title = NSAttributedString(string: model.title, attributes:
-            [.font : UIFont.systemFont(ofSize: 18.0, weight: .regular),
-             .foregroundColor : UIColor.kinBlueGrey])
-        subtitle = NSAttributedString(string: model.description_, attributes:
-            [.font : UIFont.systemFont(ofSize: 14.0, weight: .regular),
-             .foregroundColor : UIColor.kinBlueGreyTwo])
+    init(with model: Order, last: Bool) {
+        self.last = last
         id = model.id
-        let amountString = (model.offerType == .earn ? "+" : "-") + "\(model.amount)"
-        amount = NSAttributedString(string: amountString, attributes:
-            [.font : UIFont.systemFont(ofSize: 16.0, weight: .medium),
-             .foregroundColor : UIColor.kinBlueGreyTwo])
+        let details: String
+        var indicatorColor: UIColor = .kinLightBlueGrey
+        var titleColor: UIColor = .kinBlueGrey
+        var detailsColor: UIColor = .kinDeepSkyBlue
+        switch model.offerType {
+        case .spend:
+            image = UIImage(named: "invoice", in: Bundle.ecosystem, compatibleWith: nil)
+            switch model.orderStatus {
+            case .completed:
+                indicatorColor = .kinDeepSkyBlue
+                titleColor = .kinDeepSkyBlue
+                if let action = model.call_to_action {
+                    details = " - " + action
+                } else {
+                    details =  ""
+                }
+            case .failed:
+                indicatorColor = .kinWatermelon
+                detailsColor = .kinWatermelon
+                details = " - " + (model.result?.failure_message ?? "Transaction failed")
+            default:
+                details = ""
+            }
+        default:
+            image = UIImage(named: "coins", in: Bundle.ecosystem, compatibleWith: nil)
+            details = ""
+        }
+        color = indicatorColor
+        title = model.title.attributed(18.0, weight: .regular, color: titleColor) +
+                details.attributed(14.0, weight: .regular, color: detailsColor)
+        var subtitleString = model.description_
+        if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
+            subtitleString = subtitleString + " - " + shortDate
+        }
+        subtitle = subtitleString.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
+        
+        amount = ((model.offerType == .earn ? "+" : "-") + "\(model.amount)").attributed(16.0, weight: .medium, color: .kinBlueGreyTwo)
+
+        
     }
 }

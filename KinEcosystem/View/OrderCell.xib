@@ -23,11 +23,12 @@
                     <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="QQO-YT-FAa">
                         <rect key="frame" x="0.0" y="0.0" width="438" height="145.5"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rZ-Qm-6Oy">
-                                <rect key="frame" x="0.0" y="1" width="38" height="143.5"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3rZ-Qm-6Oy" customClass="OrderCellTimelineView" customModule="KinEcosystem" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="32.5" width="38" height="81"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="38" id="luf-0m-M2X"/>
+                                    <constraint firstAttribute="height" constant="81" id="vYb-Iy-8mY"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Ngc-7h-V6F">
@@ -100,7 +101,9 @@
             <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
             <connections>
                 <outlet property="amount" destination="eje-9L-ZuE" id="7bZ-G7-QjR"/>
+                <outlet property="icon" destination="UmD-Xw-JBv" id="AHl-gG-DvM"/>
                 <outlet property="subtitle" destination="DKg-xg-Rvk" id="U6d-pQ-ADc"/>
+                <outlet property="timelineView" destination="3rZ-Qm-6Oy" id="i5M-qv-L6b"/>
                 <outlet property="title" destination="vE3-uK-QJA" id="4lL-G3-3aJ"/>
             </connections>
             <point key="canvasLocation" x="-123" y="54"/>

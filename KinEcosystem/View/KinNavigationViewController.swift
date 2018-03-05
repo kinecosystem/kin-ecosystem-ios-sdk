@@ -14,9 +14,7 @@ class KinNavigationChildController : UIViewController {
 
 class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
     
-    weak var data: EcosystemData!
-    weak var network: EcosystemNet!
-    weak var blockchain: Blockchain!
+    var core: Core!
     
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var balanceView: BalanceView!
@@ -82,9 +80,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             return
         }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
-        ordersController.data = data
-        ordersController.network = network
-        ordersController.blockchain = blockchain
+        ordersController.core = core
         push(ordersController, animated: true)
     }
     

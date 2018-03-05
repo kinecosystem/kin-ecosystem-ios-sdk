@@ -12,9 +12,7 @@ import CoreDataStack
 
 class OrdersViewController : KinNavigationChildController {
 
-    weak var data: EcosystemData!
-    weak var network: EcosystemNet!
-    weak var blockchain: Blockchain!
+    var core: Core!
     
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
@@ -43,8 +41,9 @@ class OrdersViewController : KinNavigationChildController {
     
     fileprivate func setupFRCSections() {
         let request = NSFetchRequest<Order>(entityName: "Order")
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
-        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
+        request.predicate = !NSPredicate(with: ["status" : "pending"])
+        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
         let section = FetchedResultsTableSection(table: tableView, frc: frc) { [weak self] cell, ip in
             guard   let this = self,
@@ -57,13 +56,17 @@ class OrdersViewController : KinNavigationChildController {
             if let orderViewModel = this.orderViewModels[order.id] {
                 viewModel = orderViewModel
             } else {
-                viewModel = OrderViewModel(with: order)
+                viewModel = OrderViewModel(with: order, last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1)
                 this.orderViewModels[order.id] = viewModel
             }
             
             orderCell.amount.attributedText = viewModel.amount
             orderCell.title.attributedText = viewModel.title
             orderCell.subtitle.attributedText = viewModel.subtitle
+            orderCell.icon.image = viewModel.image
+            orderCell.last = viewModel.last
+            orderCell.color = viewModel.color
+            
         }
         tableView.add(tableSection: section)
     }

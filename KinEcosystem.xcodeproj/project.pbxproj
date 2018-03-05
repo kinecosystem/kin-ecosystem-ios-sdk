@@ -45,6 +45,11 @@
 		E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D175A20481D8900FEB57A /* OrderCell.swift */; };
 		E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D175B20481D8900FEB57A /* OrderCell.xib */; };
 		E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1763204840C500FEB57A /* OrderViewModel.swift */; };
+		E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1779204BF92700FEB57A /* BalanceViewController.swift */; };
+		E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D177A204BF92700FEB57A /* BalanceViewController.xib */; };
+		E98D177E204BF94200FEB57A /* Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D177D204BF94200FEB57A /* Core.swift */; };
+		E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D177F204D2B3D00FEB57A /* NSAttributedString+extensions.swift */; };
+		E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1781204D7D1800FEB57A /* OrderCellTimelineView.swift */; };
 		E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */; };
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
 		E9A66F462047DDAB00A78508 /* BalanceView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9A66F452047DDAB00A78508 /* BalanceView.swift */; };
@@ -170,6 +175,11 @@
 		E98D175A20481D8900FEB57A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		E98D175B20481D8900FEB57A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
 		E98D1763204840C500FEB57A /* OrderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderViewModel.swift; sourceTree = "<group>"; };
+		E98D1779204BF92700FEB57A /* BalanceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceViewController.swift; sourceTree = "<group>"; };
+		E98D177A204BF92700FEB57A /* BalanceViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = BalanceViewController.xib; sourceTree = "<group>"; };
+		E98D177D204BF94200FEB57A /* Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Core.swift; sourceTree = "<group>"; };
+		E98D177F204D2B3D00FEB57A /* NSAttributedString+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "NSAttributedString+extensions.swift"; sourceTree = "<group>"; };
+		E98D1781204D7D1800FEB57A /* OrderCellTimelineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCellTimelineView.swift; sourceTree = "<group>"; };
 		E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E9A66F452047DDAB00A78508 /* BalanceView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BalanceView.swift; sourceTree = "<group>"; };
@@ -284,6 +294,9 @@
 				E9A66F452047DDAB00A78508 /* BalanceView.swift */,
 				E98D175A20481D8900FEB57A /* OrderCell.swift */,
 				E98D175B20481D8900FEB57A /* OrderCell.xib */,
+				E98D1779204BF92700FEB57A /* BalanceViewController.swift */,
+				E98D177A204BF92700FEB57A /* BalanceViewController.xib */,
+				E98D1781204D7D1800FEB57A /* OrderCellTimelineView.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -346,6 +359,7 @@
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 				E942F8F22031B54800DD4B8E /* Logger.swift */,
 				E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */,
+				E98D177D204BF94200FEB57A /* Core.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -359,6 +373,7 @@
 				E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */,
 				E9FC5996203B167B00D1DA2B /* Notification+Kin.swift */,
 				E9FC599A203B24C100D1DA2B /* Decimal+Currency.swift */,
+				E98D177F204D2B3D00FEB57A /* NSAttributedString+extensions.swift */,
 			);
 			path = extensions;
 			sourceTree = "<group>";
@@ -571,6 +586,7 @@
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
+				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -598,8 +614,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */,
+				E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
+				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
 				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
@@ -617,6 +635,7 @@
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E9FC5997203B167B00D1DA2B /* Notification+Kin.swift in Sources */,
+				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
@@ -624,6 +643,7 @@
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
+				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9A66F462047DDAB00A78508 /* BalanceView.swift in Sources */,

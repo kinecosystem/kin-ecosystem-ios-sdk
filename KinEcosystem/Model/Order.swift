@@ -41,7 +41,7 @@ class Order: NSManagedObject, NetworkSyncable {
         set { offer_type = newValue.rawValue }
     }
     
-    var orderStatut: OrderStatus {
+    var orderStatus: OrderStatus {
         get { return OrderStatus(rawValue: status)! }
         set { status = newValue.rawValue }
     }

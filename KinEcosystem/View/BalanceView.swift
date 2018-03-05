@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import KinUtil
+import KinSDK
 
 class BalanceView : UIView {
     
@@ -18,6 +20,33 @@ class BalanceView : UIView {
     @IBOutlet weak var rightArrowImage: UIImageView!
     
     fileprivate var selected = false
+    private var watch: BalanceWatch?
+    fileprivate let linkBag = LinkBag()
+    var core: Core!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    fileprivate func commonInit() {
+        watchBalance()
+    }
+    
+    fileprivate func watchBalance() {
+//        watch = try? core.blockchain.account.watchBalance()
+//        watch?.emitter.on(queue: .main, next: { [weak self] balance in
+//            self?.balanceAmount.text = balance.balance.currencyString()
+//        }).on(error: { error in
+//            logWarn("showing zero for balance because real balance retrieve failed with error: \(error)")
+//        })
+//        .add(to: linkBag)
+    }
     
     func setSelected(_ selected: Bool, animated: Bool) {
         guard self.selected != selected else { return }

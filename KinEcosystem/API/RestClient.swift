@@ -48,8 +48,9 @@ class RestClient {
     fileprivate var lastToken: AuthToken?
     var authToken: AuthToken? {
         get {
-            if lastToken != nil {
-                // TODO: check expiry once more
+            if  let token = lastToken,
+                let expiryDate = Iso8601DateFormatter.date(from: token.expiration_date),
+                Date().compare(expiryDate) == .orderedAscending {
                 return lastToken
             }
             if  let tokenJson = UserDefaults.standard.string(forKey: "authToken"),
@@ -78,7 +79,6 @@ class RestClient {
     
     init(_ config: EcosystemConfiguration) {
         self.config = config
-        self.authToken = nil
     }
     
     func buildRequest(path: String, method: HTTPMethod, contentType: ContentType = .json, body: Data? = nil, parameters: [String: String]? = nil) -> Promise<URLRequest> {
@@ -136,7 +136,11 @@ class RestClient {
                     logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
                     p.signal(EcosystemNetError.serviceError(responseError))
                 } else {
-                    logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason")
+                    var errorJson: String?
+                    if let jsonString = String(data: data, encoding: .utf8) {
+                        errorJson = jsonString
+                    }
+                    logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason, extra info:\n" + (errorJson ?? "none lol"))
                     p.signal(EcosystemNetError.unknown)
                 }
                 return
