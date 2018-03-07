@@ -16,26 +16,22 @@ import KinUtil
 struct OfferViewModel {
     
     let id: String
-    let description: String
+    let subtitle: NSAttributedString
     fileprivate var imageSource: String
     var image: Promise<ImageCacheResult> {
         get {
             return ImageCache.shared.image(for: URL(string:imageSource))
         }
     }
-    let offerType: OfferType
-    let contentType: OfferContentType
-    let title: String // TODO attributed base on balance
-    let amount: Int32
+    let title: NSAttributedString
+    let amount: NSAttributedString
     
     init(with model: Offer) {
-        description = model.description_
-        imageSource = model.image
-        offerType = model.offerType
-        contentType = model.offerContentType
-        title = model.title
-        amount = model.amount
         id = model.id
+        imageSource = model.image
+        title = model.title.attributed(16.0, weight: .regular, color: .kinBlueGrey)
+        subtitle = model.description_.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
+        amount = "\(model.amount) Kin".attributed(14.0, weight: .medium, color: .kinDeepSkyBlue)
     }
     
 }

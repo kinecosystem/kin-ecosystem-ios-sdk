@@ -61,15 +61,15 @@ class MarketplaceViewController: KinNavigationChildController {
                 viewModel = OfferViewModel(with: offer)
                 this.offerViewModels[offer.id] = viewModel
             }
-            earnCell.title.text = viewModel.title
+            earnCell.title.attributedText = viewModel.title
             earnCell.imageView.image = nil
-            viewModel.image.then(on: DispatchQueue.main) { [weak earnCell] result in
+            viewModel.image.then(on: .main) { [weak earnCell] result in
                 earnCell?.imageView.image = result.image
                 }.error { error in
                     logWarn("cell image error: \(error)")
             }
-            earnCell.amount.text = "\(viewModel.amount) Kin"
-            earnCell.subtitle.text = viewModel.description
+            earnCell.amount.attributedText = viewModel.amount
+            earnCell.subtitle.attributedText = viewModel.subtitle
         }
         earnOffersCollectionView.add(fetchedResultsSection: earnSection)
         
@@ -88,15 +88,15 @@ class MarketplaceViewController: KinNavigationChildController {
                 viewModel = OfferViewModel(with: offer)
                 this.offerViewModels[offer.id] = viewModel
             }
-            spendCell.title.text = viewModel.title
+            spendCell.title.attributedText = viewModel.title
             spendCell.imageView.image = nil
-            viewModel.image.then(on: DispatchQueue.main) { [weak spendCell] result in
+            viewModel.image.then(on: .main) { [weak spendCell] result in
                 spendCell?.imageView.image = result.image
                 }.error { error in
                     logWarn("cell image error: \(error)")
             }
-            spendCell.amount.text = "\(viewModel.amount) Kin"
-            spendCell.subtitle.text = viewModel.description
+            spendCell.amount.attributedText = viewModel.amount
+            spendCell.subtitle.attributedText = viewModel.subtitle
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
     }

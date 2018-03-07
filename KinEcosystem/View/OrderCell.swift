@@ -31,6 +31,7 @@ class OrderCell: UITableViewCell {
         }
     }
     
+    
     var isAwake = false
     
     

@@ -30,7 +30,7 @@ class OrderCellTimelineView: UIView {
             return
         }
         let top = CGPoint(x: rect.midX, y: 0.0)
-        let mid = CGPoint(x: rect.midX, y: rect.midY)
+        let mid = CGPoint(x: rect.midX, y: rect.midY - 10.0)
         let bottom = CGPoint(x: rect.midX, y: rect.height)
         let line = UIBezierPath()
         
@@ -48,13 +48,14 @@ class OrderCellTimelineView: UIView {
         line.stroke()
         
         UIColor.white.setFill()
-        let circleFrame = UIBezierPath(ovalIn: CGRect(x: mid.x - 6.0, y: mid.y - 6.0, width: 12.0, height: 12.0))
+        let circleRect = CGRect(x: mid.x - 6.0, y: mid.y - 6.0, width: 12.0, height: 12.0)
+        let circleFrame = UIBezierPath(ovalIn: circleRect)
         circleFrame.lineWidth = 1.0
         circleFrame.fill()
         circleFrame.stroke()
         
         color.setFill()
-        let circle = UIBezierPath(ovalIn: CGRect(x: mid.x - 4.0, y: mid.y - 4.0, width: 8.0, height: 8.0))
+        let circle = UIBezierPath(ovalIn: circleRect.insetBy(dx: 2.0, dy: 2.0))
         circle.lineWidth = 0.0
         circle.fill()
         

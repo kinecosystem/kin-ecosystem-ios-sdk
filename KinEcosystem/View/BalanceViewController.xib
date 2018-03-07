@@ -1,22 +1,98 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13142" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12042"/>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceViewController" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
-                <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
+                <outlet property="balance" destination="orx-UV-ApP" id="Ovc-ev-j6f"/>
+                <outlet property="balanceAmount" destination="EJE-YY-uhe" id="qt8-WD-oXc"/>
+                <outlet property="rightAmountConstraint" destination="7d9-W1-xYb" id="lQK-VH-nYQ"/>
+                <outlet property="rightArrowImage" destination="VDj-Yp-cSF" id="BxW-JZ-kLi"/>
+                <outlet property="subtitle" destination="YlI-Eb-H1b" id="vSg-I2-9nK"/>
+                <outlet property="view" destination="QOW-eh-esg" id="51R-6y-Ut7"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
+        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QOW-eh-esg">
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-            <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="SIM-1m-R8g">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                    <subviews>
+                        <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="Rz9-MA-2Ly" userLabel="Balance Header">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="666"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Arz-ES-elu" userLabel="Spacer">
+                                    <rect key="frame" x="0.0" y="298.5" width="20" height="69"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="4ka-rZ-s90"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="clU-fJ-7Xc" userLabel="Labels">
+                                    <rect key="frame" x="20" y="310.5" width="264" height="45"/>
+                                    <subviews>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kin Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orx-UV-ApP">
+                                            <rect key="frame" x="0.0" y="0.0" width="102.5" height="24"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                            <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kik - Completed poll" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YlI-Eb-H1b">
+                                            <rect key="frame" x="0.0" y="28" width="132" height="17"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                    </subviews>
+                                </stackView>
+                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="0.00" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJE-YY-uhe">
+                                    <rect key="frame" x="284" y="318.5" width="51" height="29"/>
+                                    <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                    <color key="textColor" red="0.018012944610000001" green="0.48562967779999999" blue="0.98989969489999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    <nil key="highlightedColor"/>
+                                </label>
+                                <imageView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" image="arrowRight" translatesAutoresizingMaskIntoConstraints="NO" id="VDj-Yp-cSF">
+                                    <rect key="frame" x="335" y="323" width="20" height="20"/>
+                                </imageView>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UZ-hN-XIE" userLabel="Spacer">
+                                    <rect key="frame" x="355" y="308" width="20" height="50"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" constant="20" id="7d9-W1-xYb"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                        </stackView>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VUc-Uu-uTn" userLabel="Separator 1">
+                            <rect key="frame" x="0.0" y="666" width="375" height="1"/>
+                            <color key="backgroundColor" red="0.84771913290000001" green="0.86196905369999999" blue="0.90982341769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <constraints>
+                                <constraint firstAttribute="height" constant="1" id="mnG-jp-EoY"/>
+                            </constraints>
+                            <viewLayoutGuide key="safeArea" id="tO3-b9-4q7"/>
+                        </view>
+                    </subviews>
+                </stackView>
+            </subviews>
+            <gestureRecognizers/>
+            <constraints>
+                <constraint firstItem="SIM-1m-R8g" firstAttribute="top" secondItem="QOW-eh-esg" secondAttribute="top" id="8i7-KX-b4b"/>
+                <constraint firstAttribute="trailing" secondItem="SIM-1m-R8g" secondAttribute="trailing" id="Tc5-Or-09R"/>
+                <constraint firstAttribute="bottom" secondItem="SIM-1m-R8g" secondAttribute="bottom" id="l8I-gK-yJP"/>
+                <constraint firstItem="SIM-1m-R8g" firstAttribute="leading" secondItem="QOW-eh-esg" secondAttribute="leading" id="udc-oB-e6J"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="u5a-gz-U7y"/>
+            <point key="canvasLocation" x="-39" y="32"/>
         </view>
     </objects>
+    <resources>
+        <image name="arrowRight" width="20" height="20"/>
+    </resources>
 </document>

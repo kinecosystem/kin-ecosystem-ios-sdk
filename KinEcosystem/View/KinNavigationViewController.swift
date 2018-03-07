@@ -14,17 +14,23 @@ class KinNavigationChildController : UIViewController {
 
 class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
     
-    var core: Core!
+    var core: Core! {
+        didSet {
+            balanceViewController.core = core
+        }
+    }
     
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var balanceView: BalanceView!
     @IBOutlet weak var barBackground: UIImageView!
+    @IBOutlet weak var balanceViewContainer: UIView!
     
     fileprivate let transitionController = UIViewController()
     fileprivate var rootViewController: KinNavigationChildController!
     fileprivate var viewDidLoadBlock: (() -> ())?
     fileprivate var tapRecognizer: UITapGestureRecognizer!
     fileprivate let transitionDuration = TimeInterval(0.3)
+    fileprivate var balanceViewController: BalanceViewController!
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -46,6 +52,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
     convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, rootViewController: KinNavigationChildController) {
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.rootViewController = rootViewController
+        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem)
     }
     
     fileprivate func setupNavigationBarAppearance() {
@@ -65,14 +72,17 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         view.addSubview(transitionController.view)
         transitionController.view.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
         transitionController.view.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        transitionController.view.topAnchor.constraint(equalTo: balanceView.bottomAnchor).isActive = true
+        transitionController.view.topAnchor.constraint(equalTo: balanceViewContainer.bottomAnchor).isActive = true
         transitionController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
     }
     
     fileprivate func setupBalanceView() {
+        balanceViewContainer.addSubview(balanceViewController.view)
+        balanceViewController.view.fillSuperview()
+        balanceViewController.view.layoutIfNeeded()
         tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(balanceTapped(sender:)))
         tapRecognizer.delegate = self
-        balanceView.addGestureRecognizer(tapRecognizer)
+        balanceViewController.view.addGestureRecognizer(tapRecognizer)
     }
     
     @objc fileprivate func balanceTapped(sender: UIGestureRecognizer) {
@@ -114,7 +124,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         transitionController.addChildViewController(viewController)
         viewController.kinNavigationController = self
         
-        balanceView.setSelected(viewController is OrdersViewController, animated: animated)
+        balanceViewController.setSelected(viewController is OrdersViewController, animated: animated)
 
         guard animated else {
             outView?.removeFromSuperview()
@@ -161,7 +171,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         inView.frame = leftFrame
         container.addSubview(inView)
         
-        balanceView.setSelected(transitionController.childViewControllers[count - 2] is OrdersViewController, animated: animated)
+        balanceViewController.setSelected(transitionController.childViewControllers[count - 2] is OrdersViewController, animated: animated)
         
         guard animated else {
             inView.frame = frame
