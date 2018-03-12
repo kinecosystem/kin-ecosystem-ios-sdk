@@ -18,3 +18,34 @@ extension UIView {
         self.trailingAnchor.constraint(equalTo: parent.trailingAnchor).isActive = true
     }
 }
+
+class KinGradientLayer : CAGradientLayer {
+    override var colors: [Any]? {
+        get {
+            return [UIColor.kinAzureTwo.cgColor, UIColor.kinDeepSkyBlueTwo.cgColor]
+        }
+        set { super.colors = newValue }
+    }
+    
+    override var startPoint: CGPoint {
+        get {
+            return CGPoint(x: 0, y: 1)
+        }
+        set { super.startPoint = newValue }
+    }
+    
+    override var endPoint: CGPoint {
+        get {
+            return CGPoint(x: 0, y: 0)
+        }
+        set { super.endPoint = newValue }
+    }
+}
+
+class KinGradientView : UIView {
+    override open class var layerClass : Swift.AnyClass {
+        get {
+            return KinGradientLayer.self
+        }
+    }
+}

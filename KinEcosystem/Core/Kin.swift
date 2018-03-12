@@ -77,13 +77,19 @@ public class Kin {
             return
         }
         
-        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
-        mpViewController.core = core
-        let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                bundle: Bundle.ecosystem,
-                                                                rootViewController: mpViewController)
-        navigationController.core = core
-        parentViewController.present(navigationController, animated: true)
+//        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
+//        mpViewController.core = core
+//        let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
+//                                                                bundle: Bundle.ecosystem,
+//                                                                rootViewController: mpViewController)
+//        navigationController.core = core
+//        parentViewController.present(navigationController, animated: true)
+        
+        
+        // TODO: check here if blockcahin is onboarded and decide if welcome or marketplace
+        let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
+        welcomeVC.core = core
+        parentViewController.present(welcomeVC, animated: true)
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {

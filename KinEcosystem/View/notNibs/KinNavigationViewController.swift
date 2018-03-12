@@ -128,6 +128,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
 
         guard animated else {
             outView?.removeFromSuperview()
+            viewController.view.frame = frame
             viewController.didMove(toParentViewController: transitionController)
             completion?()
             return
@@ -176,8 +177,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         guard animated else {
             inView.frame = frame
             outView.removeFromSuperview()
+            outController.willMove(toParentViewController: nil)
             outController.removeFromParentViewController()
-            
             completion?()
             return
         }
