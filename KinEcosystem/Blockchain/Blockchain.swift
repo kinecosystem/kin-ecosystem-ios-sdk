@@ -13,9 +13,9 @@ import StellarKit
 
 struct BlockchainProvider: ServiceProvider {
     let url: URL
-    let networkId: NetworkId
+    let networkId: KinSDK.NetworkId
     
-    init(networkId: NetworkId) {
+    init(networkId: KinSDK.NetworkId) {
         self.networkId = networkId
         switch networkId {
         case .mainNet:
@@ -34,10 +34,10 @@ class Blockchain {
     var activated = false
     let account: KinAccount!
     
-    init(networkId: NetworkId) throws {
+    init(networkId: KinSDK.NetworkId) throws {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         self.client = client
-        account = try client.accounts[0] ?? client.addAccount(with: "")
+        account = try client.accounts[0] ?? client.addAccount()
     }
     
     func balance() -> Promise<Decimal> {
