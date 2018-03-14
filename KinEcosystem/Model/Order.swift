@@ -35,6 +35,7 @@ class Order: NSManagedObject, NetworkSyncable {
     @NSManaged public var amount: Int32
     @NSManaged public var blockchain_data: OrderBlockchainData?
     @NSManaged public var result: OrderResult?
+    @NSManaged public var error: OrderError?
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }
@@ -57,6 +58,7 @@ class Order: NSManagedObject, NetworkSyncable {
         case amount
         case blockchain_data
         case result
+        case error
     }
     
     func update(_ from: Order) {
@@ -70,6 +72,7 @@ class Order: NSManagedObject, NetworkSyncable {
         amount = from.amount
         blockchain_data = from.blockchain_data
         result = from.result
+        error = from.error
     }
     
     var syncId: String {
@@ -97,7 +100,13 @@ class Order: NSManagedObject, NetworkSyncable {
         call_to_action = try values.decodeIfPresent(String.self, forKey: .call_to_action)
         amount = try values.decode(Int32.self, forKey: .amount)
         blockchain_data = try values.decodeIfPresent(OrderBlockchainData.self, forKey: .blockchain_data)
-        result = try values.decodeIfPresent(OrderResult.self, forKey: .result)
+        error = try values.decodeIfPresent(OrderError.self, forKey: .error)
+        
+        // initializing subclasses of OrderResult is more coutious than other classes.
+        // Mind and keep the order of checks here
+        if let coupon = try? values.decodeIfPresent(CouponCode.self, forKey: .result) {
+            result = coupon
+        } // when jwt adds, it adds here
         
     }
 }

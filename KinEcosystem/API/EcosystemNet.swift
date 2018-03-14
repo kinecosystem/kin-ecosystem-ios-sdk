@@ -24,7 +24,14 @@ struct EcosystemConfiguration {
 class EcosystemNet {
     
     var client: RestClient!
-    
+    var tosAccepted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: "tosAccepted")
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: "tosAccepted")
+        }
+    }
     init(config: EcosystemConfiguration) {
         client = RestClient(config)
     }
@@ -38,6 +45,7 @@ class EcosystemNet {
         guard let data = try? JSONEncoder().encode(client.signInData) else {
             return p.signal(EcosystemNetError.requestBuild)
         }
+        logInfo("sign data: \(String(data: data, encoding: .utf8)!)")
         client.buildRequest(path: "users", method: .post, body: data)
             .then { request in
                 self.client.dataRequest(request)
@@ -46,6 +54,30 @@ class EcosystemNet {
                     p.signal(EcosystemNetError.responseParseError)
                     return
                 }
+                self.client.authToken = token
+                p.signal(())
+            }.error { error in
+                p.signal(error)
+        }
+        return p
+    }
+    
+    func acceptTOS() -> Promise<Void> {
+        let p = Promise<Void>()
+        guard tosAccepted == false else {
+            return p.signal(())
+        }
+        authorize().then {
+                self.client.buildRequest(path: "users/me/activate", method: .post)
+            }.then { request in
+                self.client.dataRequest(request)
+            }.then { data in
+                guard let token = try? JSONDecoder().decode(AuthToken.self, from: data),
+                      token.activated else {
+                    p.signal(EcosystemNetError.responseParseError)
+                    return
+                }
+                self.tosAccepted = true
                 self.client.authToken = token
                 p.signal(())
             }.error { error in
@@ -66,6 +98,11 @@ class EcosystemNet {
                 p.signal(error)
         }
         return p
+    }
+    
+    func resetUser() {
+        tosAccepted = false
+        client.authToken = nil
     }
     
 }

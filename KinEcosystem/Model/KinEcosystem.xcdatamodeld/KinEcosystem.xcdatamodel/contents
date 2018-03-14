@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="13533" systemVersion="16G29" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="CouponCode" representedClassName=".CouponCode" parentEntity="OrderResult" syncable="YES">
+        <attribute name="coupon_code" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="Offer" representedClassName=".Offer" syncable="YES">
         <attribute name="amount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="content" attributeType="String" syncable="YES"/>
@@ -12,14 +15,16 @@
     </entity>
     <entity name="Order" representedClassName=".Order" syncable="YES">
         <attribute name="amount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
-        <attribute name="call_to_action" attributeType="String" syncable="YES"/>
+        <attribute name="call_to_action" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="completion_date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderBlockchainData" inverseName="order" inverseEntity="OrderBlockchainData" syncable="YES"/>
+        <relationship name="error" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderError" inverseName="order" inverseEntity="OrderError" syncable="YES"/>
         <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
     </entity>
     <entity name="OrderBlockchainData" representedClassName=".OrderBlockchainData" syncable="YES">
@@ -28,15 +33,22 @@
         <attribute name="transaction_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="blockchain_data" inverseEntity="Order" syncable="YES"/>
     </entity>
-    <entity name="OrderResult" representedClassName=".OrderResult" syncable="YES">
-        <attribute name="coupon_code" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="failure_message" optional="YES" attributeType="String" syncable="YES"/>
+    <entity name="OrderError" representedClassName=".OrderError" syncable="YES">
+        <attribute name="code" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="error" attributeType="String" syncable="YES"/>
+        <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="error" inverseEntity="Order" syncable="YES"/>
+    </entity>
+    <entity name="OrderResult" representedClassName=".OrderResult" isAbstract="YES" syncable="YES">
+        <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
         <element name="Offer" positionX="-245" positionY="-72" width="128" height="163"/>
-        <element name="Order" positionX="-81" positionY="-58" width="128" height="193"/>
+        <element name="Order" positionX="-81" positionY="-58" width="128" height="223"/>
         <element name="OrderBlockchainData" positionX="313" positionY="72" width="128" height="103"/>
-        <element name="OrderResult" positionX="144" positionY="236" width="128" height="88"/>
+        <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
+        <element name="CouponCode" positionX="117" positionY="315" width="128" height="58"/>
+        <element name="OrderResult" positionX="115" positionY="212" width="128" height="73"/>
     </elements>
 </model>

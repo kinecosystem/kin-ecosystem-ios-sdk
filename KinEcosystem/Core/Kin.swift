@@ -42,6 +42,18 @@ public class Kin {
         default:
             url = URL(string: "http://localhost:3000/v1")!
         }
+        //// testing / clearing users
+        var shouldReset = false
+        if let lastUser = UserDefaults.standard.string(forKey: "lastSignedInUser"),
+            lastUser != userId {
+            shouldReset = true
+            logInfo("new user detected - resetting everything")
+        }
+        UserDefaults.standard.set(userId, forKey: "lastSignedInUser")
+        ////
+        if shouldReset {
+            chain.resetAccount()
+        }
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: url,
                                                                   apiKey: apiKey,
                                                                   appId: appId,
@@ -49,11 +61,24 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = Core(network: network, data: store, blockchain: chain)
-        // TODO: move this to dev initiated (not on start)
-        updateData(with: OffersList.self, from: "offers").then {
-            self.updateData(with: OrdersList.self, from: "orders")
-            }.error { error in
-                logError("data sync failed")
+        
+        if shouldReset {
+            network.resetUser()
+        }
+        
+        network.authorize().then {
+            self.updateData(with: OffersList.self, from: "offers").then {
+                self.updateData(with: OrdersList.self, from: "orders")
+                }.error { error in
+                    logError("data sync failed (\(error))")
+            }
+            self.core!.blockchain.onboard()
+                .then {
+                    logInfo("blockchain onboarded successfully")
+                }
+                .error(handler: { error in
+                    logError("blockchain onboarding failed - \(error)")
+                })
         }
         return true
     }
@@ -66,7 +91,7 @@ public class Kin {
         core.blockchain.balance().then(on: DispatchQueue.main) { balance in
             completion(balance)
             }.error { error in
-                logWarn("returning zero for balance because real balance retreive failed, error: \(error)")
+                logWarn("returning zero for balance because real balance retrieve failed, error: \(error)")
                 completion(0)
         }
     }
@@ -77,19 +102,20 @@ public class Kin {
             return
         }
         
-//        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
-//        mpViewController.core = core
-//        let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-//                                                                bundle: Bundle.ecosystem,
-//                                                                rootViewController: mpViewController)
-//        navigationController.core = core
-//        parentViewController.present(navigationController, animated: true)
+        if core.network.tosAccepted {
+            let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
+            mpViewController.core = core
+            let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
+                                                                   bundle: Bundle.ecosystem,
+                                                                   rootViewController: mpViewController)
+            navigationController.core = core
+            parentViewController.present(navigationController, animated: true)
+        } else {
+            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
+            welcomeVC.core = core
+            parentViewController.present(welcomeVC, animated: true)
+        }
         
-        
-        // TODO: check here if blockcahin is onboarded and decide if welcome or marketplace
-        let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
-        welcomeVC.core = core
-        parentViewController.present(welcomeVC, animated: true)
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
@@ -98,7 +124,8 @@ public class Kin {
             return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
         return core.network.getDataAtPath(path).then { data in
-            self.core!.data.sync(dataPresentorType, with: data)
+            logVerbose("network data: \(String(data: data, encoding: .utf8)!)")
+            return self.core!.data.sync(dataPresentorType, with: data)
         }
     }
     

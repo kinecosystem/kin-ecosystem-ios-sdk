@@ -42,7 +42,8 @@ class RestClient {
                           app_id: config.appId,
                           device_id: identifier,
                           public_address: config.publicAddress,
-                          sign_in_type: config.jwt != nil ? SignInType.jwt.rawValue : SignInType.whitelist.rawValue)
+                          sign_in_type: config.jwt != nil ? SignInType.jwt.rawValue : SignInType.whitelist.rawValue,
+                          api_key: config.apiKey)
     }()
     
     fileprivate var lastToken: AuthToken?

@@ -14,6 +14,8 @@ class WelcomeViewController: UIViewController {
 
     var core: Core!
     var transition: SplashTransition?
+    let linkBag = LinkBag()
+    
     @IBOutlet weak var diggingText: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var tosText: UILabel!
@@ -25,6 +27,7 @@ class WelcomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getStartedButton.adjustsImageWhenDisabled = false
         setupTextLabels()
     }
     
@@ -33,11 +36,12 @@ class WelcomeViewController: UIViewController {
     }
 
     @IBAction func getStartedTapped(_ sender: Any) {
+        getStartedButton.isEnabled = false
         shrinkButton()
-            .then { [weak self] in
+            .then(on: .main) { [weak self] in
                 self?.diamondsLoader.startAnimating()
                 self?.waitForOnboarding()
-            .then {
+            .then(on: .main) {
                 self?.diamondsLoader.stopAnimating() {
                     self?.presentMarketplace()
                 }
@@ -100,8 +104,14 @@ class WelcomeViewController: UIViewController {
     
     func waitForOnboarding() -> Promise<Void> {
         let p = Promise<Void>()
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5.0) {
-            p.signal(())
+        core.network.acceptTOS().then {
+            if (self.core.blockchain.onboarded) {
+                p.signal(())
+            } else {
+                self.core.blockchain.onboardEvent.on(next: { _ in
+                    p.signal(())
+                }).add(to: self.linkBag)
+            }
         }
         return p
     }

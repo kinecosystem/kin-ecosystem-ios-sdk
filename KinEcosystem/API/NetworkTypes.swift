@@ -38,6 +38,7 @@ struct SignInData: Encodable {
     var device_id: String
     var public_address: String
     var sign_in_type: String
+    var api_key: String
 }
 
 struct AuthToken: Codable {

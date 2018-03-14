@@ -39,6 +39,8 @@
 		E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A60D2056B86A00F01C8A /* SplashTransition.swift */; };
 		E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A60F205711CE00F01C8A /* CGPoint+functions.swift */; };
 		E954A6192057BA9900F01C8A /* KinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8C6203081A500DD4B8E /* KinSDK.framework */; };
+		E954A62D2058163C00F01C8A /* OrderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A62C2058163C00F01C8A /* OrderError.swift */; };
+		E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A62E205817AD00F01C8A /* CouponCode.swift */; };
 		E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9657F3A203F5F0700D993F9 /* RestClient.swift */; };
 		E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96A582E204458AF00285C7B /* OrdersViewController.swift */; };
 		E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E96A582F204458AF00285C7B /* OrdersViewController.xib */; };
@@ -177,6 +179,8 @@
 		E954A60820568B9600F01C8A /* DiamondsLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondsLoaderView.swift; sourceTree = "<group>"; };
 		E954A60D2056B86A00F01C8A /* SplashTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTransition.swift; sourceTree = "<group>"; };
 		E954A60F205711CE00F01C8A /* CGPoint+functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+functions.swift"; sourceTree = "<group>"; };
+		E954A62C2058163C00F01C8A /* OrderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderError.swift; sourceTree = "<group>"; };
+		E954A62E205817AD00F01C8A /* CouponCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCode.swift; sourceTree = "<group>"; };
 		E9657F3A203F5F0700D993F9 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		E96A582E204458AF00285C7B /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		E96A582F204458AF00285C7B /* OrdersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 				E912B4E1203C5792005ADBA1 /* OrderResult.swift */,
 				E912B4E6203C5AE0005ADBA1 /* Order.swift */,
 				E912B4EA203C6683005ADBA1 /* OrderBlockchainData.swift */,
+				E954A62C2058163C00F01C8A /* OrderError.swift */,
+				E954A62E205817AD00F01C8A /* CouponCode.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -669,6 +675,7 @@
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
 				E98D1784204FD09200FEB57A /* UIView+extensions.swift in Sources */,
+				E954A62D2058163C00F01C8A /* OrderError.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
 				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
@@ -684,6 +691,7 @@
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
+				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
