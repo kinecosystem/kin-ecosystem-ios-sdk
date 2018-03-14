@@ -34,6 +34,10 @@ class EcosystemNet {
     }
     init(config: EcosystemConfiguration) {
         client = RestClient(config)
+        if Kin.shared.needsReset {
+            tosAccepted = false
+            client.authToken = nil
+        }
     }
     
     @discardableResult
@@ -98,11 +102,6 @@ class EcosystemNet {
                 p.signal(error)
         }
         return p
-    }
-    
-    func resetUser() {
-        tosAccepted = false
-        client.authToken = nil
     }
     
 }

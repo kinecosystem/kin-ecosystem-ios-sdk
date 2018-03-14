@@ -49,6 +49,9 @@ class Blockchain {
     init(networkId: KinSDK.NetworkId) throws {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         self.client = client
+        if Kin.shared.needsReset {
+            try? client.deleteAccount(at: 0)
+        }
         account = try client.accounts[0] ?? client.addAccount()
     }
     
@@ -158,12 +161,6 @@ class Blockchain {
         })
         .add(to: linkBag)
         return p
-    }
-    
-    // this method should only be called when doing a hard reset of the client sdk, mainly for switching users/testing
-    func resetAccount() {
-        try? client.deleteAccount(at: 0)
-        account = try? client.accounts[0] ?? client.addAccount()
     }
 
 }

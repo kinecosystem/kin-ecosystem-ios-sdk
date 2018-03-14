@@ -7,6 +7,8 @@
 //
 
 import UIKit
+import KinSDK
+import KinUtil
 
 class BalanceViewController: UIViewController {
 
@@ -18,6 +20,23 @@ class BalanceViewController: UIViewController {
     @IBOutlet weak var rightArrowImage: UIImageView!
     
     fileprivate var selected = false
+    fileprivate var watch: BalanceWatch!
+    fileprivate let bag = LinkBag()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        DispatchQueue.global().async { [weak self] in
+            guard let this = self else { return }
+            let balance = try? this.core.blockchain.account.balance()
+            this.watch = try? this.core.blockchain.account.watchBalance(balance ?? 0)
+            this.watch?.emitter.on(queue: .main, next: { balance in
+                logInfo("balance updated: \(balance.currencyString())")
+                this.balanceAmount.attributedText = "\(balance.currencyString())".attributed(24.0, weight: .regular, color: .kinDeepSkyBlue)
+            })
+            .add(to: this.bag)
+        }
+        
+    }
     
     func setSelected(_ selected: Bool, animated: Bool) {
         guard self.selected != selected else { return }

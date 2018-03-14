@@ -20,18 +20,24 @@ public class Kin {
     
     public static let shared = Kin()
     fileprivate(set) var core: Core?
+    fileprivate(set) var needsReset = false
     
     fileprivate init() { }
     
     @discardableResult
     public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet) -> Bool {
         guard core == nil else { return true }
+        if let  lastUser = UserDefaults.standard.string(forKey: "lastSignedInUser"),
+            lastUser != userId {
+            needsReset = true
+            logInfo("new user detected - resetting everything")
+        }
+        UserDefaults.standard.set(userId, forKey: "lastSignedInUser")
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd"),
                 let store = try? EcosystemData(modelName: "KinEcosystem",
                                                modelURL: URL(string: modelPath)!),
                 let chain = try? Blockchain(networkId: networkId) else {
-            // TODO: Analytics + no start
             logError("start failed")
             return false
         }
@@ -42,18 +48,6 @@ public class Kin {
         default:
             url = URL(string: "http://localhost:3000/v1")!
         }
-        //// testing / clearing users
-        var shouldReset = false
-        if let lastUser = UserDefaults.standard.string(forKey: "lastSignedInUser"),
-            lastUser != userId {
-            shouldReset = true
-            logInfo("new user detected - resetting everything")
-        }
-        UserDefaults.standard.set(userId, forKey: "lastSignedInUser")
-        ////
-        if shouldReset {
-            chain.resetAccount()
-        }
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: url,
                                                                   apiKey: apiKey,
                                                                   appId: appId,
@@ -61,10 +55,6 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = Core(network: network, data: store, blockchain: chain)
-        
-        if shouldReset {
-            network.resetUser()
-        }
         
         network.authorize().then {
             self.updateData(with: OffersList.self, from: "offers").then {
@@ -90,8 +80,7 @@ public class Kin {
         }
         core.blockchain.balance().then(on: DispatchQueue.main) { balance in
             completion(balance)
-            }.error { error in
-                logWarn("returning zero for balance because real balance retrieve failed, error: \(error)")
+            }.error { _ in
                 completion(0)
         }
     }
