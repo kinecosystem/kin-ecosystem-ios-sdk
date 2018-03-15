@@ -55,7 +55,7 @@ class EcosystemNet {
                 self.client.dataRequest(request)
             }.then { data in
                 guard let token = try? JSONDecoder().decode(AuthToken.self, from: data) else {
-                    p.signal(EcosystemNetError.responseParseError)
+                    p.signal(EcosystemNetError.responseParse)
                     return
                 }
                 self.client.authToken = token
@@ -76,9 +76,12 @@ class EcosystemNet {
             }.then { request in
                 self.client.dataRequest(request)
             }.then { data in
-                guard let token = try? JSONDecoder().decode(AuthToken.self, from: data),
-                      token.activated else {
-                    p.signal(EcosystemNetError.responseParseError)
+                guard let token = try? JSONDecoder().decode(AuthToken.self, from: data) else {
+                    p.signal(EcosystemNetError.responseParse)
+                    return
+                }
+                guard token.activated else {
+                    p.signal(EcosystemNetError.server("server returned non active token"))
                     return
                 }
                 self.tosAccepted = true

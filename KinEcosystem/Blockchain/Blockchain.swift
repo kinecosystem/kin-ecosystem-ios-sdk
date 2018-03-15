@@ -39,6 +39,10 @@ class Blockchain {
             return account.extra != nil
         }
         set {
+            guard newValue else {
+                account.extra = nil
+                return
+            }
             onboardEvent.next(true)
             onboardEvent.finish()
             account.extra = Data()

@@ -112,6 +112,12 @@ class WelcomeViewController: UIViewController {
                     p.signal(())
                 }).add(to: self.linkBag)
             }
+            }.error { error in
+                if case let EcosystemNetError.server(errString) = error {
+                    logError("server returned bad answer: \(errString)")
+                } else {
+                    logError("onboarding wait failed - \(error)")
+                }
         }
         return p
     }

@@ -12,10 +12,11 @@ import KinUtil
 
 enum EcosystemNetError: Error {
     case network(Error)
-    case serviceError(ResponseError)
+    case service(ResponseError)
     case requestBuild
     case noDataInResponse
-    case responseParseError
+    case responseParse
+    case server(String)
     case unknown
 }
 
@@ -135,7 +136,7 @@ class RestClient {
                         response.statusCode == 200 else {
                 if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
                     logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
-                    p.signal(EcosystemNetError.serviceError(responseError))
+                    p.signal(EcosystemNetError.service(responseError))
                 } else {
                     var errorJson: String?
                     if let jsonString = String(data: data, encoding: .utf8) {
@@ -164,7 +165,7 @@ class RestClient {
                     if  let data = data,
                         let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
                         logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
-                        p.signal(EcosystemNetError.serviceError(responseError))
+                        p.signal(EcosystemNetError.service(responseError))
                     } else {
                         logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason")
                         p.signal(EcosystemNetError.unknown)
