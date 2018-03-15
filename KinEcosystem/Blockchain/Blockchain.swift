@@ -32,7 +32,6 @@ class Blockchain {
     
     let client: KinClient
     fileprivate(set) var account: KinAccount!
-    private var creationWatch: CreationWatch?
     private let linkBag = LinkBag()
     let onboardEvent = Observable<Bool>()
     fileprivate(set) var onboarded: Bool {
@@ -106,16 +105,20 @@ class Blockchain {
                     if let error = error as? StellarError {
                         switch error {
                         case .missingAccount:
-                            self.watchCreation().then {
-                                    self.activate()
-                                }.then {
+                            do {
+                                try self.account.watchCreation().then {
+                                    self.account.activate()
+                                }.then { _ in
                                     self.onboarded = true
                                     p.signal(())
                                 }.error(handler: { error in
                                     p.signal(error)
                                 })
+                            } catch {
+                                p.signal(error)
+                            }
                         case .missingBalance:
-                            self.activate().then {
+                            self.account.activate().then { _ in
                                 self.onboarded = true
                                 p.signal(())
                             }.error(handler: { error in
@@ -134,32 +137,6 @@ class Blockchain {
                 }
         }
         
-        return p
-    }
-    
-    func activate() -> Promise<Void> {
-        let p = Promise<Void>()
-        self.account.activate { _, error in
-            if let error = error {
-                p.signal(error)
-                return
-            }
-            logInfo("Stellar account activated")
-            p.signal(())
-        }
-        return p
-    }
-    
-    func watchCreation() -> Promise<Void> {
-        let p = Promise<Void>()
-        creationWatch = try? account.watchCreation()
-        logInfo("creation watch created, waiting for signal")
-        creationWatch?.emitter.on(queue: .main, next: { [weak self] _ in
-            self?.creationWatch = nil
-            logInfo("Stellar account valid on network")
-            p.signal(())
-        })
-        .add(to: linkBag)
         return p
     }
 
