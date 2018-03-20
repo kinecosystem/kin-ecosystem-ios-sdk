@@ -11,6 +11,14 @@ import CoreData
 import CoreDataStack
 import StellarKit
 import KinSDK
+import KinUtil
+
+fileprivate struct EarnPromiseHelper {
+    weak var this: MarketplaceViewController?
+    var openOrder: OpenOrder?
+    var htmlResult: String?
+    var memo: PaymentMemoIdentifier?
+}
 
 class MarketplaceViewController: KinNavigationChildController {
     
@@ -19,6 +27,9 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
+    fileprivate weak var htmlController: EarnOfferViewController?
+    fileprivate var openOrder: OpenOrder?
+    fileprivate var htmlResult: String?
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
     
@@ -103,11 +114,90 @@ class MarketplaceViewController: KinNavigationChildController {
     
     fileprivate func setupCollectionViews() {
         earnOffersCollectionView.contentInset = .zero
-        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: earnCellName)
+        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem),
+                                          forCellWithReuseIdentifier: earnCellName)
         earnOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
         spendOffersCollectionView.contentInset = .zero
-        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem), forCellWithReuseIdentifier: spendCellName)
+        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem),
+                                           forCellWithReuseIdentifier: spendCellName)
         spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+    }
+    
+    fileprivate func earn(with controller: EarnOfferViewController) {
+        
+        // this is beautyful if you don't like it you're a hater
+        core.network.objectAtPath("offers/\(controller.offerId!)/orders", type: OpenOrder.self, method: .post)
+            .then { [weak self] order -> Promise<(String, OpenOrder)> in
+                guard let this = self else { throw KinError.internalInconsistency }
+                this.openOrder = order
+                return controller.earn
+                    .then { htmlResult in
+                        Promise<(String, OpenOrder)>().signal((htmlResult, order))
+                }
+            }.then(on: .main) { [weak self] htmlResult, order -> Promise<(String, OpenOrder, PaymentMemoIdentifier, Core)> in
+                guard let this = self else { throw KinError.internalInconsistency }
+                if let controller = this.htmlController {
+                    controller.dismiss(animated: true) {
+                        this.htmlController = nil
+                    }
+                }
+                let memo = PaymentMemoIdentifier(appId: this.core.network.client.config.appId,
+                                                 id: order.id)
+                return Promise<(String, OpenOrder, PaymentMemoIdentifier, Core)>().signal((htmlResult, order, memo, this.core))
+            }.then { htmlResult, order, memo, core in
+                try core.blockchain.startWatchingForNewPayments(with: memo)
+            }.then { htmlResult, order, memo, core -> Promise<(Data, PaymentMemoIdentifier, Core)> in
+                let result = EarnResult(content: htmlResult)
+                let content = try JSONEncoder().encode(result)
+                return core.network.dataAtPath("orders/\(order.id)", method: .post, body: content)
+                    .then { data in
+                        Promise<(Data, PaymentMemoIdentifier, Core)>().signal((data, memo, core))
+                }
+            }.then { [weak self] data, memo, core -> Promise<(PaymentMemoIdentifier, Core)> in
+                self?.openOrder = nil
+                return core.data.save(Order.self, with: data)
+                    .then {
+                        Promise<(PaymentMemoIdentifier, Core)>().signal((memo, core))
+                }
+            }.then { memo, core -> Promise<(PaymentMemoIdentifier, Core)> in
+                return core.blockchain.waitForNewPayment(with: memo)
+                    .then {
+                        Promise<(PaymentMemoIdentifier, Core)>().signal((memo, core))
+                }
+            }.then { memo, core in
+                core.blockchain.stopWatchingForNewPayments(with: memo)
+            }.error { error in
+                if case let EarnOfferHTMLError.js(jsError) = error {
+                    logError("earn flow JS error: \(jsError)")
+                } else {
+                    switch error {
+                    case is KinError,
+                         is BlockchainError:
+                        Kin.shared.core?.blockchain.stopWatchingForNewPayments()
+                        logError("earn flow error: \(error)")
+                    default:
+                        logError("earn flow error: \(error)")
+                    }
+                }
+            }.finally { [weak self] in
+                if let order = self?.openOrder {
+                    self?.core.network.delete("orders/\(order.id)").then {
+                        logInfo("order canceled: \(order.id)")
+                        }.error { error in
+                            logError("error canceling order: \(order.id)")
+                    }
+                }
+                self?.openOrder = nil
+                if let controller = self?.htmlController {
+                    DispatchQueue.main.async {
+                        controller.dismiss(animated: true) {
+                            self?.htmlController = nil
+                        }
+                    }
+                    
+                }
+        }
+        
     }
 
 }
@@ -150,8 +240,14 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        
-        
+        if let offer = collectionView.objectForCollection(at: indexPath) as? Offer {
+            let html = EarnOfferViewController()
+            html.core = core
+            html.offerId = offer.id
+            htmlController = html
+            self.kinNavigationController?.present(html, animated: true)
+            self.earn(with: html)
+        }
     }
 }
 

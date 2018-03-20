@@ -41,6 +41,7 @@
 		E954A6192057BA9900F01C8A /* KinSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8C6203081A500DD4B8E /* KinSDK.framework */; };
 		E954A62D2058163C00F01C8A /* OrderError.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A62C2058163C00F01C8A /* OrderError.swift */; };
 		E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A62E205817AD00F01C8A /* CouponCode.swift */; };
+		E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */; };
 		E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9657F3A203F5F0700D993F9 /* RestClient.swift */; };
 		E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96A582E204458AF00285C7B /* OrdersViewController.swift */; };
 		E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E96A582F204458AF00285C7B /* OrdersViewController.xib */; };
@@ -181,6 +182,8 @@
 		E954A60F205711CE00F01C8A /* CGPoint+functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+functions.swift"; sourceTree = "<group>"; };
 		E954A62C2058163C00F01C8A /* OrderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderError.swift; sourceTree = "<group>"; };
 		E954A62E205817AD00F01C8A /* CouponCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCode.swift; sourceTree = "<group>"; };
+		E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferViewController.swift; sourceTree = "<group>"; };
+		E954A64720600B1200F01C8A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E9657F3A203F5F0700D993F9 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		E96A582E204458AF00285C7B /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		E96A582F204458AF00285C7B /* OrdersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
@@ -243,6 +246,7 @@
 		E92D18DF2029ACE2002E357D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				E954A64720600B1200F01C8A /* WebKit.framework */,
 				E98D17562047FD6100FEB57A /* KinUtil.framework */,
 				E942F94E2034751000DD4B8E /* CoreData.framework */,
 			);
@@ -401,6 +405,7 @@
 				E98D17852050205C00FEB57A /* WelcomeViewController.swift */,
 				E954A60820568B9600F01C8A /* DiamondsLoaderView.swift */,
 				E954A60D2056B86A00F01C8A /* SplashTransition.swift */,
+				E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -685,6 +690,7 @@
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,
+				E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */,
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,

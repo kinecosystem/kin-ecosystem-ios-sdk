@@ -73,10 +73,43 @@ class EcosystemData {
         return p
     }
     
-    func objects<T: NSFetchRequestResult>(of type: T.Type) -> Promise<[T]> {
+    func save<T>(_ type:T.Type, with data: Data) -> Promise<Void> where T : NSManagedObject & NetworkSyncable {
+        
+        let p = Promise<Void>()
+        
+        self.stack.perform({ context, shouldSave in
+            
+            let decoder = JSONDecoder()
+            decoder.userInfo[.context] = context
+            let networkEntity = try decoder.decode(type, from: data)
+            
+            
+            let request = NSFetchRequest<T>(entityName: String(describing: T.self))
+            request.predicate = NSPredicate(with: ["id" : networkEntity.syncId])
+            let diskEntity = try context.fetch(request).first
+            
+            if diskEntity != nil {
+                diskEntity?.update(networkEntity)
+                context.delete(networkEntity)
+            }
+            
+        }) { error in
+            if let stackError = error {
+                p.signal(stackError)
+            } else {
+                p.signal(())
+            }
+        }
+        
+        return p
+        
+    }
+    
+    func objects<T: NSFetchRequestResult>(of type: T.Type, with predicate: NSPredicate? = nil) -> Promise<[T]> {
         let p = Promise<[T]>()
         stack.query { context in
             let request = NSFetchRequest<T>(entityName: String(describing: type))
+            request.predicate = predicate
             guard let objects = try? context.fetch(request) else {
                 p.signal(EcosystemDataError.fetchError)
                 return

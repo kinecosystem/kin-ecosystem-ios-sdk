@@ -93,18 +93,37 @@ class EcosystemNet {
         return p
     }
     
-    func getDataAtPath(_ path: String) -> Promise<Data> {
-        let p = Promise<Data>()
-        authorize().then {
-                self.client.buildRequest(path: path, method: .get)
+    func dataAtPath(_ path: String,
+                    method: HTTPMethod = .get,
+                    contentType: ContentType = .json,
+                    body: Data? = nil,
+                    parameters: [String: String]? = nil) -> Promise<Data> {
+        return authorize().then {
+                self.client.buildRequest(path: path, method: method)
             }.then { request in
                 self.client.dataRequest(request)
-            }.then { data in
-                p.signal(data)
-            }.error { error in
-                p.signal(error)
+            }
+    }
+    
+    func objectAtPath<T: Decodable>(_ path: String,
+                                    type: T.Type,
+                                    method: HTTPMethod = .get,
+                                    contentType: ContentType = .json,
+                                    body: Data? = nil,
+                                    parameters: [String: String]? = nil) -> Promise<T> {
+        let p = Promise<T>()
+        dataAtPath(path, method: method).then { data in
+            return p.signal(try JSONDecoder().decode(type, from: data))
         }
         return p
+    }
+    
+    func delete(_ path: String, parameters: [String: String]? = nil) -> Promise<Void> {
+        return authorize().then {
+            self.client.buildRequest(path: path, method: .delete, parameters: parameters)
+            }.then { request in
+                self.client.request(request)
+        }
     }
     
 }

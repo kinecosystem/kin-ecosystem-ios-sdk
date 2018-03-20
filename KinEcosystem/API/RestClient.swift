@@ -22,7 +22,7 @@ enum EcosystemNetError: Error {
 
 class RestClient {
     
-    fileprivate var config: EcosystemConfiguration
+    fileprivate(set) var config: EcosystemConfiguration
     lazy var signInData: SignInData = {
         
         var identifier = ASIdentifierManager.shared().advertisingIdentifier.uuidString
@@ -133,7 +133,7 @@ class RestClient {
                 return
             }
             guard   let response = response as? HTTPURLResponse,
-                        response.statusCode == 200 else {
+                        200 ... 299 ~= response.statusCode else {
                 if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
                     logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
                     p.signal(EcosystemNetError.service(responseError))
@@ -161,7 +161,7 @@ class RestClient {
                 return
             }
             guard   let response = response as? HTTPURLResponse,
-                        response.statusCode == 200 else {
+                        200 ... 299 ~= response.statusCode else {
                     if  let data = data,
                         let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
                         logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")

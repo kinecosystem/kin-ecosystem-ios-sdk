@@ -28,12 +28,45 @@ struct BlockchainProvider: ServiceProvider {
     }
 }
 
+struct PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
+    var hashValue: Int {
+        return description.hashValue
+    }
+    
+    let version = "1"
+    var appId: String
+    var id: String
+    
+    var description: String {
+        return "\(version)-\(appId)-\(id)"
+    }
+    
+    static func ==(lhs: PaymentMemoIdentifier, rhs: PaymentMemoIdentifier) -> Bool {
+        return lhs.description == rhs.description
+    }
+}
+
+enum BlockchainError: Error {
+    case watchNotStarted
+    case watchTimedOut
+}
+
+enum StatfulBalance {
+    case pendind(Decimal)
+    case errored(Decimal)
+    case verified(Decimal)
+}
+
 class Blockchain {
     
     let client: KinClient
     fileprivate(set) var account: KinAccount!
     private let linkBag = LinkBag()
+    private var paymentObservers = [PaymentMemoIdentifier : Observable<Void>]()
+    private var watcher: KinSDK.PaymentWatch?
     let onboardEvent = Observable<Bool>()
+    fileprivate var lastBalance: Decimal = 0
+    fileprivate(set) var currentBalance = Observable<StatfulBalance>()
     fileprivate(set) var onboarded: Bool {
         get {
             return account.extra != nil
@@ -56,11 +89,13 @@ class Blockchain {
             try? client.deleteAccount(at: 0)
         }
         account = try client.accounts[0] ?? client.addAccount()
+        currentBalance.next(.pendind(lastBalance))
+        _ = balance()
     }
     
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
-        account.balance(completion: { balance, error in
+        account.balance(completion: { [weak self] balance, error in
             if let error = error {
                 switch error {
                 case KinError.internalInconsistency:
@@ -81,10 +116,14 @@ class Blockchain {
                 default:
                     logError("account can't be quering now. try again later (\(error))")
                 }
+                self?.currentBalance.next(.errored((self?.lastBalance)!))
                 p.signal(error)
             } else if let balance = balance {
+                self?.lastBalance = balance
+                self?.currentBalance.next(.verified(balance))
                 p.signal(balance)
             } else {
+                self?.currentBalance.next(.errored((self?.lastBalance)!))
                 p.signal(KinError.internalInconsistency)
             }
         })
@@ -143,6 +182,66 @@ class Blockchain {
         
         return p
     }
+    
+    func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
+        guard watcher == nil else {
+            logInfo("payment watcher already started, added watch for \(memo)...")
+            paymentObservers[memo] = Observable<Void>()
+            return
+        }
+        watcher = try account.watchPayments(cursor: "now")
+        watcher?.emitter.on(next: { [weak self] paymentInfo  in
+            guard let metadata = paymentInfo.memoText else { return }
+            guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
+                memoKey.description == metadata
+            })?.value else { return }
+            logInfo("payment found in blockchain for \(metadata)...")
+            match.next(())
+            match.finish()
+        }).add(to: linkBag)
+        logInfo("added watch for \(memo)...")
+        paymentObservers[memo] = Observable<Void>()
+    }
+    
+    func stopWatchingForNewPayments(with memo: PaymentMemoIdentifier? = nil) {
+        guard let memo = memo else {
+            paymentObservers.removeAll()
+            watcher = nil
+            logInfo("removed all payment observers")
+            return
+        }
+        paymentObservers.removeValue(forKey: memo)
+        if paymentObservers.count == 0 {
+            watcher = nil
+        }
+        logInfo("removed payment observer for \(memo)")
+    }
+    
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 40.0) -> Promise<Void> {
+        let p = Promise<Void>()
+        guard paymentObservers.keys.contains(where: { key -> Bool in
+            key == memo
+        }) else {
+            return p.signal(BlockchainError.watchNotStarted)
+        }
+        currentBalance.next(.pendind(lastBalance))
+        var found = false
+        paymentObservers[memo]?.on(next: { [weak self] _ in
+            found = true
+            _ = self?.balance()
+            p.signal(())
+        }).add(to: linkBag)
+        DispatchQueue.global().asyncAfter(deadline: .now() + timeout) { [weak self] in
+            if !found {
+                self?.currentBalance.next(.errored((self?.lastBalance)!))
+                p.signal(BlockchainError.watchTimedOut)
+            }
+        }
+        return p
+    }
+    
+    
+    
 
 }
 

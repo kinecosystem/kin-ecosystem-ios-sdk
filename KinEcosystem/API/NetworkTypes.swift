@@ -46,3 +46,19 @@ struct AuthToken: Codable {
     var activated: Bool
     var expiration_date: String
 }
+
+struct EarnResult: Encodable {
+    var content: String
+}
+
+struct OpenOrderData: Decodable {
+    var transaction_id: String?
+    var sender_address: String?
+    var recipient_address: String?
+}
+struct OpenOrder: Decodable {
+    var id: String
+    var expiration_date: String
+    var recipient_address: String?
+    var blockchain_data: OpenOrderData?
+}

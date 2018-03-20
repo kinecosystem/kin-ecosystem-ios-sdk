@@ -26,12 +26,28 @@ class BalanceViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        core.blockchain.account.balance().then(on: .main) { [weak self] balance in
+        core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
             guard let this = self else { return }
-            logInfo("balance updated: \(balance.currencyString())")
-            this.balanceAmount.attributedText = "\(balance.currencyString())".attributed(24.0, weight: .regular, color: .kinDeepSkyBlue)
-        }
-        
+            logInfo("balance: \(balanceState)")
+            
+            if case let .pendind(value) = balanceState {
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
+                                                                                           weight: .regular,
+                                                                                           color: .kinBlueGreyTwo)
+            }
+            if case let .errored(value) = balanceState {
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
+                                                                                           weight: .regular,
+                                                                                           color: .kinCoralPink)
+            }
+            if case let .verified(value) = balanceState {
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
+                                                                                           weight: .regular,
+                                                                                           color: .kinDeepSkyBlue)
+            }
+
+        }).add(to: bag)
+        _ = core.blockchain.balance()
     }
     
     func setSelected(_ selected: Bool, animated: Bool) {

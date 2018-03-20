@@ -46,7 +46,7 @@ public class Kin {
         case .mainNet:
             url = URL(string: "http://api.kinmarketplace.com/v1")!
         default:
-            url = URL(string: "http://localhost:3000/v1")!
+            url = URL(string:"http://api.kinmarketplace.com/v1"/* "http://localhost:3000/v1"*/)!
         }
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: url,
                                                                   apiKey: apiKey,
@@ -112,7 +112,7 @@ public class Kin {
             logError("Kin not started")
             return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
-        return core.network.getDataAtPath(path).then { data in
+        return core.network.dataAtPath(path).then { data in
             logVerbose("network data: \(String(data: data, encoding: .utf8)!)")
             return self.core!.data.sync(dataPresentorType, with: data)
         }

@@ -15,7 +15,7 @@ class DataTests: BaseDataNetworkTest {
 
         let fetch = self.expectation(description: "")
 
-        network.getDataAtPath("offers").then { data in
+        network.dataAtPath("offers").then { data in
                 self.data.sync(OffersList.self, with: data)
             }.then {
                 self.data.objects(of: Offer.self)
@@ -35,7 +35,7 @@ class DataTests: BaseDataNetworkTest {
         
         let fetch = self.expectation(description: "")
         
-        network.getDataAtPath("orders").then { data in
+        network.dataAtPath("orders").then { data in
                 self.data.sync(OrdersList.self, with: data)
             }.then {
                 self.data.objects(of: Order.self)
