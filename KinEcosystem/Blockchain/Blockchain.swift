@@ -57,6 +57,10 @@ enum StatfulBalance {
     case verified(Decimal)
 }
 
+struct CachedBalance: Codable {
+    var balance: Decimal
+}
+
 class Blockchain {
     
     let client: KinClient
@@ -65,7 +69,22 @@ class Blockchain {
     private var paymentObservers = [PaymentMemoIdentifier : Observable<Void>]()
     private var watcher: KinSDK.PaymentWatch?
     let onboardEvent = Observable<Bool>()
-    fileprivate var lastBalance: Decimal = 0
+    fileprivate var localLastBalance: Decimal = 0
+    fileprivate var lastBalance: Decimal {
+        get {
+            if  let data = UserDefaults.standard.data(forKey: "lastBalance"),
+                let cachedBalance = try? JSONDecoder().decode(CachedBalance.self, from: data) {
+                    return cachedBalance.balance
+            }
+            return localLastBalance
+        }
+        set {
+            if let data = try? JSONEncoder().encode(CachedBalance(balance: newValue)) {
+                UserDefaults.standard.set(data, forKey: "lastBalance")
+            }
+            localLastBalance = newValue
+        }
+    }
     fileprivate(set) var currentBalance = Observable<StatfulBalance>()
     fileprivate(set) var onboarded: Bool {
         get {
@@ -86,6 +105,7 @@ class Blockchain {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         self.client = client
         if Kin.shared.needsReset {
+            lastBalance = 0
             try? client.deleteAccount(at: 0)
         }
         account = try client.accounts[0] ?? client.addAccount()
@@ -190,7 +210,8 @@ class Blockchain {
             return
         }
         watcher = try account.watchPayments(cursor: "now")
-        watcher?.emitter.on(next: { [weak self] paymentInfo  in
+        watcher?.emitter.on(next: { [weak self] paymentInfo in
+            logInfo("payment event -")
             guard let metadata = paymentInfo.memoText else { return }
             guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
                 memoKey.description == metadata
@@ -217,7 +238,7 @@ class Blockchain {
         logInfo("removed payment observer for \(memo)")
     }
     
-    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 40.0) -> Promise<Void> {
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 640.0) -> Promise<Void> {
         let p = Promise<Void>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
             key == memo

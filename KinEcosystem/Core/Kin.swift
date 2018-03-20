@@ -46,7 +46,7 @@ public class Kin {
         case .mainNet:
             url = URL(string: "http://api.kinmarketplace.com/v1")!
         default:
-            url = URL(string:"http://api.kinmarketplace.com/v1"/* "http://localhost:3000/v1"*/)!
+            url = URL(string: "http://localhost:3000/v1")!
         }
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: url,
                                                                   apiKey: apiKey,

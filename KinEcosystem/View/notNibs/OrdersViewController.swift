@@ -44,7 +44,6 @@ class OrdersViewController : KinNavigationChildController {
         request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
         request.predicate = !NSPredicate(with: ["status" : "pending"])
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
-        try? frc.performFetch()
         let section = FetchedResultsTableSection(table: tableView, frc: frc) { [weak self] cell, ip in
             guard   let this = self,
                 let order = this.tableView.objectForTable(at: ip) as? Order,
@@ -69,6 +68,7 @@ class OrdersViewController : KinNavigationChildController {
             
         }
         tableView.add(tableSection: section)
+        try? frc.performFetch()
     }
     
     @objc fileprivate func didTapInfo(sender: Any?) {

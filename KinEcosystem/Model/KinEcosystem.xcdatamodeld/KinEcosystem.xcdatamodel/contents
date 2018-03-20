@@ -20,6 +20,7 @@
         <attribute name="content" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="description_" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
+        <attribute name="offer_id" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
@@ -44,11 +45,11 @@
         <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
-        <element name="Offer" positionX="-245" positionY="-72" width="128" height="163"/>
-        <element name="Order" positionX="-81" positionY="-58" width="128" height="223"/>
+        <element name="CouponCode" positionX="117" positionY="315" width="128" height="58"/>
+        <element name="Offer" positionX="-308" positionY="-82" width="128" height="163"/>
+        <element name="Order" positionX="-90" positionY="-63" width="128" height="238"/>
         <element name="OrderBlockchainData" positionX="313" positionY="72" width="128" height="103"/>
         <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
-        <element name="CouponCode" positionX="117" positionY="315" width="128" height="58"/>
         <element name="OrderResult" positionX="115" positionY="212" width="128" height="73"/>
     </elements>
 </model>

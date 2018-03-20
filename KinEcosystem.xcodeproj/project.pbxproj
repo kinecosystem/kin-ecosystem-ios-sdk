@@ -19,6 +19,7 @@
 		E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */; };
 		E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */; };
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
+		E92501BA20614A4400E2E738 /* EarnPromise.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* EarnPromise.swift */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
@@ -156,6 +157,7 @@
 		E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+gradient.swift"; sourceTree = "<group>"; };
 		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
+		E92501B920614A4400E2E738 /* EarnPromise.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnPromise.swift; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
@@ -183,7 +185,6 @@
 		E954A62C2058163C00F01C8A /* OrderError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderError.swift; sourceTree = "<group>"; };
 		E954A62E205817AD00F01C8A /* CouponCode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponCode.swift; sourceTree = "<group>"; };
 		E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferViewController.swift; sourceTree = "<group>"; };
-		E954A64720600B1200F01C8A /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		E9657F3A203F5F0700D993F9 /* RestClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestClient.swift; sourceTree = "<group>"; };
 		E96A582E204458AF00285C7B /* OrdersViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrdersViewController.swift; sourceTree = "<group>"; };
 		E96A582F204458AF00285C7B /* OrdersViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrdersViewController.xib; sourceTree = "<group>"; };
@@ -243,10 +244,17 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E92501B820614A3300E2E738 /* Promises */ = {
+			isa = PBXGroup;
+			children = (
+				E92501B920614A4400E2E738 /* EarnPromise.swift */,
+			);
+			path = Promises;
+			sourceTree = "<group>";
+		};
 		E92D18DF2029ACE2002E357D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				E954A64720600B1200F01C8A /* WebKit.framework */,
 				E98D17562047FD6100FEB57A /* KinUtil.framework */,
 				E942F94E2034751000DD4B8E /* CoreData.framework */,
 			);
@@ -337,6 +345,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E92501B820614A3300E2E738 /* Promises */,
 				E942F8F1203191F600DD4B8E /* View */,
 				E942F8D12030DD6000DD4B8E /* Blockchain */,
 				E942F8A3202C4C4A00DD4B8E /* ViewModel */,
@@ -705,6 +714,7 @@
 				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
+				E92501BA20614A4400E2E738 /* EarnPromise.swift in Sources */,
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,

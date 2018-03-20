@@ -19,6 +19,7 @@ enum JSFunctions: String {
 
 enum EarnOfferHTMLError: Error {
     case userCanceled
+    case invalidJSResult
     case js(Error)
 }
 
@@ -61,7 +62,7 @@ class EarnOfferViewController: UIViewController {
             }
             let content = offer.content
             DispatchQueue.main.async {
-                self.web.evaluateJavaScript("window.kin.renderPoll(\(content)") { result, error in
+                self.web.evaluateJavaScript("window.kin.renderPoll(\(content))") { result, error in
                     if let error = error {
                         self.earn.signal(EarnOfferHTMLError.js(error))
                     }
@@ -79,7 +80,13 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
         case JSFunctions.loaded.rawValue:
             loadContent()
         case JSFunctions.handleResult.rawValue:
-            earn.signal(message.body as! String)
+            guard   JSONSerialization.isValidJSONObject(message.body),
+                let json = try? JSONSerialization.data(withJSONObject: message.body, options: []),
+                    let jsonString = String(data: json, encoding: .utf8)?.replacingOccurrences(of: "\\\"", with: "\"") else {
+                earn.signal(EarnOfferHTMLError.invalidJSResult)
+                        return
+            }
+            earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
             earn.signal(EarnOfferHTMLError.userCanceled)
         default:
@@ -87,7 +94,7 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
         }
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-        self.loadContent()
+        
     }
 }
 

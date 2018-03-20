@@ -28,6 +28,7 @@ class Order: NSManagedObject, NetworkSyncable {
     @NSManaged public var completion_date: NSDate
     @NSManaged public var offer_type: String
     @NSManaged public var id: String
+    @NSManaged public var offer_id: String
     @NSManaged public var status: String
     @NSManaged public var title: String
     @NSManaged public var description_: String
@@ -51,6 +52,7 @@ class Order: NSManagedObject, NetworkSyncable {
         case completion_date
         case offer_type
         case id
+        case offer_id
         case status
         case title
         case description
@@ -65,6 +67,7 @@ class Order: NSManagedObject, NetworkSyncable {
         completion_date = from.completion_date
         offer_type = from.offer_type
         id = from.id
+        offer_id = from.offer_id
         status = from.status
         title = from.title
         description_ = from.description_
@@ -94,6 +97,7 @@ class Order: NSManagedObject, NetworkSyncable {
         }
         offer_type = try values.decode(String.self, forKey: .offer_type)
         id = try values.decode(String.self, forKey: .id)
+        offer_id = try values.decode(String.self, forKey: .offer_id)
         status = try values.decode(String.self, forKey: .status)
         title = try values.decode(String.self, forKey: .title)
         description_ = try values.decode(String.self, forKey: .description)
