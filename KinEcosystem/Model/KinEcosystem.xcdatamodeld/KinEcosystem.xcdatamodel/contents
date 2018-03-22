@@ -25,8 +25,8 @@
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderBlockchainData" inverseName="order" inverseEntity="OrderBlockchainData" syncable="YES"/>
-        <relationship name="error" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderError" inverseName="order" inverseEntity="OrderError" syncable="YES"/>
-        <relationship name="result" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
+        <relationship name="error" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderError" inverseName="order" inverseEntity="OrderError" syncable="YES"/>
+        <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
     </entity>
     <entity name="OrderBlockchainData" representedClassName=".OrderBlockchainData" syncable="YES">
         <attribute name="recipient_address" optional="YES" attributeType="String" syncable="YES"/>

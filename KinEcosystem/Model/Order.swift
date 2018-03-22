@@ -63,7 +63,8 @@ class Order: NSManagedObject, NetworkSyncable {
         case error
     }
     
-    func update(_ from: Order) {
+    func update(_ from: Order, in context: NSManagedObjectContext) {
+        guard from != self else { return }
         completion_date = from.completion_date
         offer_type = from.offer_type
         id = from.id
@@ -73,8 +74,17 @@ class Order: NSManagedObject, NetworkSyncable {
         description_ = from.description_
         call_to_action = from.call_to_action
         amount = from.amount
+        if let data = blockchain_data, data != from.blockchain_data {
+            context.delete(data)
+        }
         blockchain_data = from.blockchain_data
+        if let res = result, res != from.result {
+            context.delete(res)
+        }
         result = from.result
+        if let err = error, err != from.error {
+            context.delete(err)
+        }
         error = from.error
     }
     

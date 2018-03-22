@@ -84,7 +84,8 @@ class Offer: NSManagedObject, NetworkSyncable {
         return id
     }
     
-    func update(_ from: Offer) {
+    func update(_ from: Offer, in context: NSManagedObjectContext) {
+        guard self != from else { return }
         amount = from.amount
         description_ = from.description_
         offer_type = from.offer_type

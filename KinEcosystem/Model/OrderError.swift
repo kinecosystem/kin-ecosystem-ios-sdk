@@ -14,6 +14,7 @@ class OrderError: NSManagedObject, Decodable {
     @NSManaged public var code: Int32
     @NSManaged public var error: String
     @NSManaged public var message: String?
+    @NSManaged public var order: Order?
     
     enum OrderErrorKeys: String, CodingKey {
         case code

@@ -39,21 +39,30 @@ class EarnPromise {
                 return Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
                 try core.blockchain.startWatchingForNewPayments(with: memo)
-            }.then { htmlResult, order, memo -> Promise<(Data, PaymentMemoIdentifier)> in
+            }.then { htmlResult, order, memo -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
                 let result = EarnResult(content: htmlResult)
                 let content = try JSONEncoder().encode(result)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post, body: content)
                     .then { data in
-                        Promise<(Data, PaymentMemoIdentifier)>().signal((data, memo))
+                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
                 }
-            }.then { data, memo -> Promise<PaymentMemoIdentifier> in
+            }.then { data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
                 self.openOrder = nil
                 return core.data.save(Order.self, with: data)
                     .then {
-                        Promise<PaymentMemoIdentifier>().signal(memo)
+                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
                 }
-            }.then { memo -> Promise<PaymentMemoIdentifier> in
+            }.then { data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
+                    .then {
+                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
+                }
+            }.then { data, memo, order in
+                return core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                    if let completedOrder = orders.first {
+                        completedOrder.orderStatus = .completed
+                    }
+                }, with: NSPredicate(with: ["id": order.id]))
                     .then {
                         Promise<PaymentMemoIdentifier>().signal(memo)
                 }
@@ -89,11 +98,6 @@ class EarnPromise {
                         }
                     }
                 }
-                core.network.dataAtPath("orders").then { data in
-                    core.data.sync(OrdersList.self, with: data)
-                    }.error { error in
-                        logError("data sync error: \(error)")
-                    }
         }
     }
     

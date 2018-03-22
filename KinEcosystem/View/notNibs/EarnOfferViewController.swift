@@ -55,7 +55,7 @@ class EarnOfferViewController: UIViewController {
             logError("webview didn't receive any offer to load when presented")
             return
         }
-        core.data.objects(of: Offer.self, with: NSPredicate(with: ["id" : oid])).then { result in
+        core.data.queryObjects(of: Offer.self, with: NSPredicate(with: ["id" : oid])).then { result in
             guard let offer = result.first else {
                 logError("failed to fetch order given to html controller from store")
                 return

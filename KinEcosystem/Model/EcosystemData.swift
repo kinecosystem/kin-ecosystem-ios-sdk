@@ -19,7 +19,7 @@ enum EcosystemDataError: Error {
 }
 
 protocol NetworkSyncable: Decodable {
-    func update(_ from: Self)
+    func update(_ from: Self, in context: NSManagedObjectContext)
     var syncId: String { get }
 }
 
@@ -27,6 +27,8 @@ protocol EntityPresentor: Decodable {
     associatedtype entity: NSManagedObject, NetworkSyncable
     var entities: [entity] { get }
 }
+
+typealias DataChangeBlock<T> = ([T]) -> ()
 
 class EcosystemData {
     
@@ -55,7 +57,7 @@ class EcosystemData {
                 if let networkEntity = networkEntities.first(where: { entity -> Bool in
                     entity.syncId == diskEntity.syncId
                 }) {
-                    diskEntity.update(networkEntity)
+                    diskEntity.update(networkEntity, in: context)
                     context.delete(networkEntity)
                 } else {
                     context.delete(diskEntity)
@@ -79,17 +81,17 @@ class EcosystemData {
         
         self.stack.perform({ context, shouldSave in
             
+            let request = NSFetchRequest<T>(entityName: String(describing: T.self))
+            let diskEntities = try context.fetch(request)
+            
             let decoder = JSONDecoder()
             decoder.userInfo[.context] = context
             let networkEntity = try decoder.decode(type, from: data)
             
-            
-            let request = NSFetchRequest<T>(entityName: String(describing: T.self))
-            request.predicate = NSPredicate(with: ["id" : networkEntity.syncId])
-            let diskEntity = try context.fetch(request).first
-            
-            if diskEntity != nil {
-                diskEntity?.update(networkEntity)
+            if let diskEntity = diskEntities.first(where: { entity -> Bool in
+                entity.syncId == networkEntity.syncId
+            }) {
+                diskEntity.update(networkEntity, in: context)
                 context.delete(networkEntity)
             }
             
@@ -105,7 +107,7 @@ class EcosystemData {
         
     }
     
-    func objects<T: NSFetchRequestResult>(of type: T.Type, with predicate: NSPredicate? = nil) -> Promise<[T]> {
+    func queryObjects<T: NSFetchRequestResult>(of type: T.Type, with predicate: NSPredicate? = nil) -> Promise<[T]> {
         let p = Promise<[T]>()
         stack.query { context in
             let request = NSFetchRequest<T>(entityName: String(describing: type))
@@ -115,6 +117,23 @@ class EcosystemData {
                 return
             }
             p.signal(objects)
+        }
+        return p
+    }
+    
+    func changeObjects<T: NSFetchRequestResult>(of type: T.Type, changeBlock: @escaping DataChangeBlock<T>, with predicate: NSPredicate? = nil) -> Promise<Void> {
+        let p = Promise<Void>()
+        stack.perform({ context, shouldSave in
+            let request = NSFetchRequest<T>(entityName: String(describing: type))
+            request.predicate = predicate
+            let objects = try context.fetch(request)
+            changeBlock(objects)
+        }) { error in
+            if let stackError = error {
+                p.signal(stackError)
+            } else {
+                p.signal(())
+            }
         }
         return p
     }
