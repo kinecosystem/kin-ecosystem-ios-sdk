@@ -94,8 +94,10 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
             earn.signal(EarnOfferHTMLError.userCanceled)
+            guard self.navigationController?.isBeingDismissed == false else { return }
             self.navigationController?.dismiss(animated: true)
         case JSFunctions.handleClose.rawValue:
+            guard self.navigationController?.isBeingDismissed == false else { return }
             self.navigationController?.dismiss(animated: true)
         case JSFunctions.displayTopBar.rawValue:
             if let displayed = message.body as? Bool {
