@@ -14,7 +14,9 @@ import KinUtil
 enum JSFunctions: String {
     case handleResult
     case handleCancel
+    case handleClose
     case loaded
+    case displayTopBar
 }
 
 enum EarnOfferHTMLError: Error {
@@ -38,6 +40,8 @@ class EarnOfferViewController: UIViewController {
         contentController.add(self, name: JSFunctions.handleResult.rawValue)
         contentController.add(self, name: JSFunctions.handleCancel.rawValue)
         contentController.add(self, name: JSFunctions.loaded.rawValue)
+        contentController.add(self, name: JSFunctions.handleClose.rawValue)
+        contentController.add(self, name: JSFunctions.displayTopBar.rawValue)
         config.userContentController = contentController
         web = WKWebView(frame: .zero, configuration: config)
         web.navigationDelegate = self
@@ -83,12 +87,20 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
             guard   JSONSerialization.isValidJSONObject(message.body),
                 let json = try? JSONSerialization.data(withJSONObject: message.body, options: []),
                     let jsonString = String(data: json, encoding: .utf8)?.replacingOccurrences(of: "\\\"", with: "\"") else {
-                earn.signal(EarnOfferHTMLError.invalidJSResult)
+                        earn.signal(EarnOfferHTMLError.invalidJSResult)
+                        self.navigationController?.dismiss(animated: true)
                         return
             }
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
             earn.signal(EarnOfferHTMLError.userCanceled)
+            self.navigationController?.dismiss(animated: true)
+        case JSFunctions.handleClose.rawValue:
+            self.navigationController?.dismiss(animated: true)
+        case JSFunctions.displayTopBar.rawValue:
+            if let displayed = message.body as? Bool {
+                self.navigationController?.setNavigationBarHidden(!displayed, animated: true)
+            }
         default:
             logWarn("unhandled webkit message received: \(message)")
         }

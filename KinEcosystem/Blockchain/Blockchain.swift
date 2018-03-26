@@ -10,6 +10,7 @@ import Foundation
 import KinSDK
 import KinUtil
 import StellarKit
+import StellarErrors
 
 struct BlockchainProvider: ServiceProvider {
     let url: URL
@@ -124,11 +125,11 @@ class Blockchain {
                         logError("account state is invalid. Everything should be reset and redone")
                 case KinError.balanceQueryFailed(let queryError):
                     switch queryError {
-                    case StellarKit.StellarError.missingAccount:
+                    case StellarError.missingAccount:
                         logWarn("account not yet created on network")
-                    case StellarKit.StellarError.missingBalance:
+                    case StellarError.missingBalance:
                         logWarn("Kin issuer isn't trusted yet")
-                    case StellarKit.StellarError.unknownError:
+                    case StellarError.unknownError:
                         logError("stellar server did not respond well. try again later")
                     default:
                         logError("account can't be quering now. try again later (\(error))")
@@ -174,9 +175,9 @@ class Blockchain {
                                 }.then { _ in
                                     self.onboarded = true
                                     p.signal(())
-                                }.error(handler: { error in
+                                }.error { error in
                                     p.signal(error)
-                                })
+                                }
                             } catch {
                                 p.signal(error)
                             }
@@ -184,9 +185,9 @@ class Blockchain {
                             self.account.activate().then { _ in
                                 self.onboarded = true
                                 p.signal(())
-                            }.error(handler: { error in
+                            }.error { error in
                                 p.signal(error)
-                            })
+                            }
                         default:
                             p.signal(KinError.unknown)
                         }

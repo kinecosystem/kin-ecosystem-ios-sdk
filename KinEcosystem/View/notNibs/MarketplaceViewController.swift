@@ -49,7 +49,8 @@ class MarketplaceViewController: KinNavigationChildController {
     
     fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
         let request = NSFetchRequest<Offer>(entityName: "Offer")
-        request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue])
+        request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue,
+                                               "pending" : false])
         request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
@@ -123,9 +124,9 @@ class MarketplaceViewController: KinNavigationChildController {
         spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
     
-    fileprivate func earn(with controller: EarnOfferViewController) {
+    fileprivate func earn(with controller: EarnOfferViewController, offerId: String) {
         
-        EarnPromise().earn(with: controller, core: core)
+        EarnPromise().earn(offerId: offerId, resultPromise: controller.earn, core: core)
         
     }
 
@@ -169,14 +170,17 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let offer = collectionView.objectForCollection(at: indexPath) as? Offer {
-            let html = EarnOfferViewController()
-            html.core = core
-            html.offerId = offer.id
-            htmlController = html
-            self.kinNavigationController?.present(html, animated: true)
-            self.earn(with: html)
-        }
+        guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
+            
+        let html = EarnOfferViewController()
+        html.core = core
+        html.offerId = offer.id
+        html.title = offer.title
+        htmlController = html
+        let navContoller = KinBaseNavigationController(rootViewController: html)
+        self.kinNavigationController?.present(navContoller, animated: true)
+        self.earn(with: html, offerId: offer.id)
+        
     }
 }
 

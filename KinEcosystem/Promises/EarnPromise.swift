@@ -16,24 +16,18 @@ import KinUtil
 
 class EarnPromise {
     
-    weak var htmlController: EarnOfferViewController?
     var openOrder: OpenOrder?
     
-    func earn(with controller: EarnOfferViewController, core: Core) {
-        self.htmlController = controller
-        core.network.objectAtPath("offers/\(controller.offerId!)/orders", type: OpenOrder.self, method: .post)
-            .then { order -> Promise<(String, OpenOrder)> in
-                self.openOrder = order
-                return controller.earn
+    func earn(offerId: String, resultPromise: Promise<String>, core: Core) {
+        
+        core.network.objectAtPath("offers/\(offerId)/orders", type: OpenOrder.self, method: .post)
+            .then { [weak self] order -> Promise<(String, OpenOrder)> in
+                self?.openOrder = order
+                return resultPromise
                     .then { htmlResult in
                         Promise<(String, OpenOrder)>().signal((htmlResult, order))
                 }
             }.then(on: .main) { htmlResult, order -> Promise<(String, OpenOrder, PaymentMemoIdentifier)> in
-                if let controller = self.htmlController {
-                    controller.dismiss(animated: true) {
-                        self.htmlController = nil
-                    }
-                }
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId,
                                                  id: order.id)
                 return Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
@@ -46,12 +40,15 @@ class EarnPromise {
                     .then { data in
                         Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
                 }
-            }.then { data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
-                self.openOrder = nil
-                return core.data.save(Order.self, with: data)
-                    .then {
-                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
-                }
+            }.then { [weak self] data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
+                self?.openOrder = nil
+                return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
+                        offers.first?.pending = true
+                    }, with: NSPredicate(with:["id": offerId])).then {
+                        core.data.save(Order.self, with: data)
+                    }.then {
+                            Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
+                    }
             }.then { data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
@@ -76,29 +73,27 @@ class EarnPromise {
                     case is KinError,
                          is BlockchainError,
                          is EarnOfferHTMLError:
-                        Kin.shared.core?.blockchain.stopWatchingForNewPayments()
+                        core.blockchain.stopWatchingForNewPayments()
                         logError("earn flow error: \(error)")
                     default:
                         logError("earn flow error: \(error)")
                     }
                 }
-            }.finally {
-                if let order = self.openOrder {
+            }.finally { [weak self] in
+                if let order = self?.openOrder {
                     core.network.delete("orders/\(order.id)").then {
                         logInfo("order canceled: \(order.id)")
                         }.error { error in
                             logError("error canceling order: \(order.id)")
                     }
                 }
-                self.openOrder = nil
-                if let controller = self.htmlController {
-                    DispatchQueue.main.async {
-                        controller.dismiss(animated: true) {
-                            self.htmlController = nil
-                        }
-                    }
+                self?.openOrder = nil
+                core.network.dataAtPath("offers").then { data in
+                    core.data.sync(OffersList.self, with: data)
                 }
         }
+        
+        
     }
     
 }

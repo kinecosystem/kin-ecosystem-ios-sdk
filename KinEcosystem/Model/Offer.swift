@@ -39,6 +39,8 @@ class Offer: NSManagedObject, NetworkSyncable {
     @NSManaged public var content_type: String
     @NSManaged public var content: String
     @NSManaged public var title: String
+    // not a decoded property.
+    @NSManaged public var pending: Bool
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }
@@ -93,6 +95,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         title = from.title
         content_type = from.content_type
         content =  from.content
+        pending = from.pending
     }
     
 }

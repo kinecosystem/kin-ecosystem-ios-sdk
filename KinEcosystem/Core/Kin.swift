@@ -66,9 +66,9 @@ public class Kin {
                 .then {
                     logInfo("blockchain onboarded successfully")
                 }
-                .error(handler: { error in
+                .error { error in
                     logError("blockchain onboarding failed - \(error)")
-                })
+                }
         }
         return true
     }

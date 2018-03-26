@@ -11,6 +11,7 @@ import CoreGraphics
 
 class CircularDashedLoader : CAShapeLayer {
     
+    
     var lines = [CAShapeLayer]()
     var completion: (() -> ())?
     let dashes = 16
@@ -23,10 +24,9 @@ class CircularDashedLoader : CAShapeLayer {
         super.init()
     }
     
-    convenience init(size: CGSize) {
+    convenience init(size: CGSize, lineWidth: CGFloat = 2.0, lineColor: UIColor = .kinLightAqua) {
         self.init()
         
-        let lineWidth = CGFloat(2.0)
         let boundsRect = CGRect(x: 0.0, y: 0.0, width: size.width, height: size.height)
         let lineRect = boundsRect.insetBy(dx: lineWidth / 2.0, dy: lineWidth / 2.0)
         let radius = lineRect.width / 2.0
@@ -39,7 +39,7 @@ class CircularDashedLoader : CAShapeLayer {
             shape.strokeEnd = 0.0
             shape.path = UIBezierPath(roundedRect: lineRect, cornerRadius: radius).cgPath
             shape.lineWidth = lineWidth
-            shape.strokeColor = UIColor.kinLightAqua.cgColor
+            shape.strokeColor = lineColor.cgColor
             shape.lineCap = "round"
             shape.fillColor = UIColor.clear.cgColor
             if (i == 1) {
@@ -161,6 +161,12 @@ extension CircularDashedLoader : CAAnimationDelegate {
 
 class DiamondsLoaderView : UIView {
     
+    @IBInspectable
+    var lineWidth: CGFloat = 2.0
+    
+    @IBInspectable
+    var lineColor: UIColor = .kinLightAqua
+    
     var timer: Timer!
     var imageView: UIImageView!
     var loader: CircularDashedLoader!
@@ -175,6 +181,9 @@ class DiamondsLoaderView : UIView {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+    }
+    
+    override func awakeFromNib() {
         commonInit()
     }
     
@@ -184,16 +193,15 @@ class DiamondsLoaderView : UIView {
     }
     
     func commonInit() {
-        loader = CircularDashedLoader(size: self.bounds.size)
+        loader = CircularDashedLoader(size: self.bounds.size, lineWidth: lineWidth, lineColor: lineColor)
         self.layer.addSublayer(loader)
-        
-        imageView = UIImageView(frame: bounds)
+        let imageBounds = bounds.insetBy(dx: (bounds.width * 0.42) / 2.0, dy: (bounds.width * 0.42) / 2.0)
+        imageView = UIImageView(frame: imageBounds)
         imageView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
         imageView.layer.position = CGPoint(x: bounds.midX, y: bounds.midY)
         imageView.backgroundColor = .clear
-        imageView.contentMode = .center
+        imageView.contentMode = .scaleAspectFit
         addSubview(imageView)
-        
     }
     
     @objc func timerFired(timer: Timer) {
@@ -213,6 +221,7 @@ class DiamondsLoaderView : UIView {
     }
     
     func startAnimating() {
+        guard animated == false else { return }
         animated = true
         if timer != nil {
             timer.invalidate()
@@ -224,6 +233,10 @@ class DiamondsLoaderView : UIView {
     }
     
     func stopAnimating(completion: (() -> ())?) {
+        guard animated else {
+            completion?()
+            return
+        }
         animated = false
         loader.stopAnimating {
             completion?()

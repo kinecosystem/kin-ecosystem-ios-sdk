@@ -74,6 +74,7 @@ class Order: NSManagedObject, NetworkSyncable {
         description_ = from.description_
         call_to_action = from.call_to_action
         amount = from.amount
+        // don't leave dangling relationships
         if let data = blockchain_data, data != from.blockchain_data {
             context.delete(data)
         }

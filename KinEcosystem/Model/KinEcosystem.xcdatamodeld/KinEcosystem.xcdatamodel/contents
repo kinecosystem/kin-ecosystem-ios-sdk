@@ -11,6 +11,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="image" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
+        <attribute name="pending" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="Order" representedClassName=".Order" syncable="YES">
@@ -46,7 +47,7 @@
     </entity>
     <elements>
         <element name="CouponCode" positionX="117" positionY="315" width="128" height="58"/>
-        <element name="Offer" positionX="-308" positionY="-82" width="128" height="163"/>
+        <element name="Offer" positionX="-308" positionY="-82" width="128" height="178"/>
         <element name="Order" positionX="-90" positionY="-63" width="128" height="238"/>
         <element name="OrderBlockchainData" positionX="313" positionY="72" width="128" height="103"/>
         <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
