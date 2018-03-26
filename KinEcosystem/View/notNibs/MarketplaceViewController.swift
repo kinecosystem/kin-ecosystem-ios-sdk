@@ -171,15 +171,22 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
-            
-        let html = EarnOfferViewController()
-        html.core = core
-        html.offerId = offer.id
-        html.title = offer.title
-        htmlController = html
-        let navContoller = KinBaseNavigationController(rootViewController: html)
-        self.kinNavigationController?.present(navContoller, animated: true)
-        self.earn(with: html, offerId: offer.id)
+        
+        switch offer.offerType {
+        case .earn:
+            let html = EarnOfferViewController()
+            html.core = core
+            html.offerId = offer.id
+            html.title = offer.title
+            htmlController = html
+            let navContoller = KinBaseNavigationController(rootViewController: html)
+            self.kinNavigationController?.present(navContoller, animated: true)
+            self.earn(with: html, offerId: offer.id)
+        default: // spend
+            logInfo(offer.content)
+        }
+        
+        
         
     }
 }

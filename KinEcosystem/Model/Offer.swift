@@ -39,6 +39,7 @@ class Offer: NSManagedObject, NetworkSyncable {
     @NSManaged public var content_type: String
     @NSManaged public var content: String
     @NSManaged public var title: String
+    @NSManaged public var blockchain_data: BlockchainData?
     // not a decoded property.
     @NSManaged public var pending: Bool
     
@@ -61,6 +62,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         case title
         case content
         case content_type
+        case blockchain_data
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -80,6 +82,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         offer_type = try values.decode(String.self, forKey: .offer_type)
         content_type = try values.decode(String.self, forKey: .content_type)
         content = try values.decode(String.self, forKey: .content)
+        blockchain_data = try values.decodeIfPresent(BlockchainData.self, forKey: .blockchain_data)
     }
     
     var syncId: String {
@@ -96,6 +99,11 @@ class Offer: NSManagedObject, NetworkSyncable {
         content_type = from.content_type
         content =  from.content
         pending = from.pending
+        // don't leave dangling relationships
+        if let data = blockchain_data, data != from.blockchain_data {
+            context.delete(data)
+        }
+        blockchain_data = from.blockchain_data
     }
     
 }

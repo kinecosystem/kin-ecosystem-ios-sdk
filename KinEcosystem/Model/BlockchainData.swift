@@ -1,5 +1,5 @@
 //
-//  OrderBlockchainData.swift
+//  BlockchainData.swift
 //  KinEcosystem
 //
 //  Created by Elazar Yifrach on 20/02/2018.
@@ -9,14 +9,15 @@
 import Foundation
 import CoreData
 
-class OrderBlockchainData: NSManagedObject, Decodable {
+class BlockchainData: NSManagedObject, Decodable {
     
     @NSManaged public var transaction_id: String?
     @NSManaged public var sender_address: String?
     @NSManaged public var recipient_address: String?
     @NSManaged public var order: Order?
+    @NSManaged public var offer: Offer?
     
-    enum OrderBlockchainDataKeys: String, CodingKey {
+    enum BlockchainDataKeys: String, CodingKey {
         case transaction_id
         case sender_address
         case recipient_address
@@ -24,12 +25,12 @@ class OrderBlockchainData: NSManagedObject, Decodable {
     
     required convenience public init(from decoder: Decoder) throws {
         guard let managedObjectContext = decoder.userInfo[.context] as? NSManagedObjectContext,
-            let entity = NSEntityDescription.entity(forEntityName: "OrderBlockchainData", in: managedObjectContext) else {
+            let entity = NSEntityDescription.entity(forEntityName: "BlockchainData", in: managedObjectContext) else {
                 fatalError()
         }
         
         self.init(entity: entity, insertInto: managedObjectContext)
-        let values = try decoder.container(keyedBy: OrderBlockchainDataKeys.self)
+        let values = try decoder.container(keyedBy: BlockchainDataKeys.self)
         
         transaction_id = try values.decodeIfPresent(String.self, forKey: .transaction_id)
         sender_address = try values.decodeIfPresent(String.self, forKey: .sender_address)

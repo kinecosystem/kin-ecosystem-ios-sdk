@@ -12,7 +12,7 @@
 		E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4E1203C5792005ADBA1 /* OrderResult.swift */; };
 		E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4E6203C5AE0005ADBA1 /* Order.swift */; };
 		E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */; };
-		E912B4EB203C6683005ADBA1 /* OrderBlockchainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4EA203C6683005ADBA1 /* OrderBlockchainData.swift */; };
+		E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4EA203C6683005ADBA1 /* BlockchainData.swift */; };
 		E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4EC203D69FE005ADBA1 /* NetworkTypes.swift */; };
 		E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E913AD95204692190071D329 /* KinNavigationViewController.swift */; };
 		E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E913AD96204692190071D329 /* KinNavigationViewController.xib */; };
@@ -150,7 +150,7 @@
 		E912B4E1203C5792005ADBA1 /* OrderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResult.swift; sourceTree = "<group>"; };
 		E912B4E6203C5AE0005ADBA1 /* Order.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Order.swift; sourceTree = "<group>"; };
 		E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Iso8601DateFormatter.swift; sourceTree = "<group>"; };
-		E912B4EA203C6683005ADBA1 /* OrderBlockchainData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderBlockchainData.swift; sourceTree = "<group>"; };
+		E912B4EA203C6683005ADBA1 /* BlockchainData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BlockchainData.swift; sourceTree = "<group>"; };
 		E912B4EC203D69FE005ADBA1 /* NetworkTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkTypes.swift; sourceTree = "<group>"; };
 		E913AD95204692190071D329 /* KinNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinNavigationViewController.swift; sourceTree = "<group>"; };
 		E913AD96204692190071D329 /* KinNavigationViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = KinNavigationViewController.xib; sourceTree = "<group>"; };
@@ -443,7 +443,7 @@
 				E9EBA02420287F0500B21DFD /* EcosystemData.swift */,
 				E912B4E1203C5792005ADBA1 /* OrderResult.swift */,
 				E912B4E6203C5AE0005ADBA1 /* Order.swift */,
-				E912B4EA203C6683005ADBA1 /* OrderBlockchainData.swift */,
+				E912B4EA203C6683005ADBA1 /* BlockchainData.swift */,
 				E954A62C2058163C00F01C8A /* OrderError.swift */,
 				E954A62E205817AD00F01C8A /* CouponCode.swift */,
 			);
@@ -695,7 +695,7 @@
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
-				E912B4EB203C6683005ADBA1 /* OrderBlockchainData.swift in Sources */,
+				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,

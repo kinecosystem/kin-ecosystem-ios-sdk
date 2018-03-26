@@ -34,7 +34,7 @@ class Order: NSManagedObject, NetworkSyncable {
     @NSManaged public var description_: String
     @NSManaged public var call_to_action: String?
     @NSManaged public var amount: Int32
-    @NSManaged public var blockchain_data: OrderBlockchainData?
+    @NSManaged public var blockchain_data: BlockchainData?
     @NSManaged public var result: OrderResult?
     @NSManaged public var error: OrderError?
     
@@ -114,7 +114,7 @@ class Order: NSManagedObject, NetworkSyncable {
         description_ = try values.decode(String.self, forKey: .description)
         call_to_action = try values.decodeIfPresent(String.self, forKey: .call_to_action)
         amount = try values.decode(Int32.self, forKey: .amount)
-        blockchain_data = try values.decodeIfPresent(OrderBlockchainData.self, forKey: .blockchain_data)
+        blockchain_data = try values.decodeIfPresent(BlockchainData.self, forKey: .blockchain_data)
         error = try values.decodeIfPresent(OrderError.self, forKey: .error)
         
         // initializing subclasses of OrderResult is more coutious than other classes.
