@@ -113,7 +113,6 @@ public class Kin {
             return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
         }
         return core.network.dataAtPath(path).then { data in
-            logVerbose("network data: \(String(data: data, encoding: .utf8)!)")
             return self.core!.data.sync(dataPresentorType, with: data)
         }
     }

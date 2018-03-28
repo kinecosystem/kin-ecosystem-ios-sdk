@@ -37,6 +37,8 @@ class Order: NSManagedObject, NetworkSyncable {
     @NSManaged public var blockchain_data: BlockchainData?
     @NSManaged public var result: OrderResult?
     @NSManaged public var error: OrderError?
+    // not a decoded property
+    @NSManaged public var position: Int32
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }

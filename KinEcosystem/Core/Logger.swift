@@ -18,7 +18,7 @@ enum LogLevel: String {
 
 class Logger {
     fileprivate static let shared = Logger()
-    var levels: [LogLevel] = [.info, .warn, .error]
+    var levels: [LogLevel] = [.info, .warn, .error, .verbose]
     fileprivate func log(_ level: LogLevel, _ message: String, function: String, file: String, line: Int) {
         guard levels.isEmpty || levels.contains(level) else { return }
         let fileString = URL(string: file)?.deletingPathExtension().lastPathComponent

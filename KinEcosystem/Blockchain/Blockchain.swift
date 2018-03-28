@@ -212,7 +212,6 @@ class Blockchain {
         }
         watcher = try account.watchPayments(cursor: "now")
         watcher?.emitter.on(next: { [weak self] paymentInfo in
-            logInfo("payment event -")
             guard let metadata = paymentInfo.memoText else { return }
             guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
                 memoKey.description == metadata
@@ -239,7 +238,7 @@ class Blockchain {
         logInfo("removed payment observer for \(memo)")
     }
     
-    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 640.0) -> Promise<Void> {
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0) -> Promise<Void> {
         let p = Promise<Void>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
             key == memo
@@ -261,8 +260,6 @@ class Blockchain {
         }
         return p
     }
-    
-    
     
 
 }

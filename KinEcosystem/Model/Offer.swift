@@ -40,8 +40,9 @@ class Offer: NSManagedObject, NetworkSyncable {
     @NSManaged public var content: String
     @NSManaged public var title: String
     @NSManaged public var blockchain_data: BlockchainData?
-    // not a decoded property.
+    // not decoded properties
     @NSManaged public var pending: Bool
+    @NSManaged public var position: Int32
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }

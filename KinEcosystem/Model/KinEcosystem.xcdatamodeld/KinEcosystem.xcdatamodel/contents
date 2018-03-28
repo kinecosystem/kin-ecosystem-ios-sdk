@@ -19,6 +19,7 @@
         <attribute name="image" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
         <attribute name="pending" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="position" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BlockchainData" inverseName="offer" inverseEntity="BlockchainData" syncable="YES"/>
     </entity>
@@ -31,6 +32,7 @@
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="offer_id" attributeType="String" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
+        <attribute name="position" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="status" attributeType="String" syncable="YES"/>
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BlockchainData" inverseName="order" inverseEntity="BlockchainData" syncable="YES"/>
@@ -48,10 +50,10 @@
         <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
-        <element name="CouponCode" positionX="97" positionY="225" width="128" height="58"/>
-        <element name="Offer" positionX="-504" positionY="90" width="128" height="193"/>
-        <element name="Order" positionX="-90" positionY="63" width="128" height="238"/>
         <element name="BlockchainData" positionX="-281" positionY="72" width="128" height="118"/>
+        <element name="CouponCode" positionX="97" positionY="225" width="128" height="58"/>
+        <element name="Offer" positionX="-504" positionY="90" width="128" height="208"/>
+        <element name="Order" positionX="-90" positionY="63" width="128" height="253"/>
         <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
         <element name="OrderResult" positionX="97" positionY="117" width="128" height="73"/>
     </elements>

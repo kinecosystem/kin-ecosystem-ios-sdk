@@ -27,9 +27,7 @@ class BalanceViewController: UIViewController {
         super.viewDidLoad()
         
         core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
-            guard let this = self else { return }
-            logInfo("balance: \(balanceState)")
-            
+            guard let this = self else { return }            
             if case let .pendind(value) = balanceState {
                 this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
                                                                                            weight: .regular,

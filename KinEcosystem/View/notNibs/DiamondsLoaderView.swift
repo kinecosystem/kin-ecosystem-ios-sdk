@@ -54,46 +54,19 @@ class CircularDashedLoader : CAShapeLayer {
         
     }
     
-    func animation(with keyPath: String,
-                   duration: TimeInterval,
-                   beginTime: TimeInterval,
-                   from: Any,
-                   to: Any,
-                   curve: CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)) -> CABasicAnimation {
-        let animation = CABasicAnimation(keyPath: keyPath)
-        animation.duration = duration
-        animation.fromValue = from
-        animation.toValue = to
-        animation.beginTime = beginTime
-        animation.timingFunction = curve
-        animation.fillMode = kCAFillModeForwards
-        return animation
-    }
-    
-    func animationGroup(animations: [CABasicAnimation], duration: TimeInterval) -> CAAnimationGroup {
-        let group = CAAnimationGroup()
-        group.animations = animations
-        group.duration = duration
-        group.repeatCount = 1
-        group.isRemovedOnCompletion = false
-        group.fillMode = kCAFillModeForwards
-        group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
-        return group
-    }
-    
     func startAnimating() {
         
         lines.forEach { line in
             line.removeAllAnimations()
         }
         
-        let strokeEnd = animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: 0.0, from: 0.0, to: 1.0)
-        let strokeStart = animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
+        let strokeEnd = Animations.animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: 0.0, from: 0.0, to: 1.0)
+        let strokeStart = Animations.animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
         
-        let dashStrokeEnd = animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
+        let dashStrokeEnd = Animations.animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
         
-        let lineGroup = animationGroup(animations: [strokeStart, strokeEnd], duration: animationDuration)
-        let dashGroup = animationGroup(animations: [dashStrokeEnd], duration: animationDuration)
+        let lineGroup = Animations.animationGroup(animations: [strokeStart, strokeEnd], duration: animationDuration)
+        let dashGroup = Animations.animationGroup(animations: [dashStrokeEnd], duration: animationDuration)
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.byValue = Float.pi * 2
@@ -118,13 +91,13 @@ class CircularDashedLoader : CAShapeLayer {
         lines.last?.strokeStart = 0.0
         lines.last?.strokeEnd = 1.0
         
-        let strokeStart = animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
-        let strokeEnd = animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: 0.0, from: 0.0, to: 1.0)
-        let dashStrokeStart = animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
+        let strokeStart = Animations.animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
+        let strokeEnd = Animations.animation(with: "strokeEnd", duration: animationDuration * 0.8, beginTime: 0.0, from: 0.0, to: 1.0)
+        let dashStrokeStart = Animations.animation(with: "strokeStart", duration: animationDuration * 0.8, beginTime: animationDuration * 0.2, from: 0.0, to: 1.0)
         
         
-        let lineGroup = animationGroup(animations: [strokeStart, strokeEnd], duration: animationDuration)
-        let dashGroup = animationGroup(animations: [dashStrokeStart], duration: animationDuration)
+        let lineGroup = Animations.animationGroup(animations: [strokeStart, strokeEnd], duration: animationDuration)
+        let dashGroup = Animations.animationGroup(animations: [dashStrokeStart], duration: animationDuration)
         
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.byValue = Float.pi * 2

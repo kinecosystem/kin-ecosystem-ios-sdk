@@ -51,7 +51,7 @@ class MarketplaceViewController: KinNavigationChildController {
         let request = NSFetchRequest<Offer>(entityName: "Offer")
         request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue,
                                                "pending" : false])
-        request.sortDescriptors = [NSSortDescriptor(key: "id", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
         return frc
@@ -123,12 +123,6 @@ class MarketplaceViewController: KinNavigationChildController {
                                            forCellWithReuseIdentifier: spendCellName)
         spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
-    
-    fileprivate func earn(with controller: EarnOfferViewController, offerId: String) {
-        
-        EarnPromise().earn(offerId: offerId, resultPromise: controller.earn, core: core)
-        
-    }
 
 }
 
@@ -181,9 +175,20 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             htmlController = html
             let navContoller = KinBaseNavigationController(rootViewController: html)
             self.kinNavigationController?.present(navContoller, animated: true)
-            self.earn(with: html, offerId: offer.id)
+            Flows.earn(offerId: offer.id, resultPromise: html.earn, core: core)
         default: // spend
-            logInfo(offer.content)
+            guard   let data = offer.content.data(using: .utf8),
+                    let viewModel = try? JSONDecoder().decode(SpendViewModel.self, from: data) else {
+                        logError("offer content is not in the correct format")
+                        return
+            }
+            let controller = SpendOfferViewController(nibName: "SpendOfferViewController", bundle: Bundle.ecosystem)
+            controller.viewModel = viewModel
+            let transition = SpendTransition()
+            controller.modalPresentationStyle = .custom
+            controller.transitioningDelegate = transition
+            self.kinNavigationController?.present(controller, animated: true)
+            Flows.spend(offerId: offer.id, confirmPromise: controller.spend, core: core)
         }
         
         

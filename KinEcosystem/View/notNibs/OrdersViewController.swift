@@ -42,8 +42,11 @@ class OrdersViewController : KinNavigationChildController {
     fileprivate func setupFRCSections() {
         let request = NSFetchRequest<Order>(entityName: "Order")
         request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
-        request.predicate = !NSPredicate(with: ["status" : "pending"])
-        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
+        request.predicate = !NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
+        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
+                                                              managedObjectContext: core.data.stack.viewContext,
+                                                              sectionNameKeyPath: nil,
+                                                              cacheName: nil)
         let section = FetchedResultsTableSection(table: tableView, frc: frc) { [weak self] cell, ip in
             guard   let this = self,
                 let order = this.tableView.objectForTable(at: ip) as? Order,

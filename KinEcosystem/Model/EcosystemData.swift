@@ -21,6 +21,7 @@ enum EcosystemDataError: Error {
 protocol NetworkSyncable: Decodable {
     func update(_ from: Self, in context: NSManagedObjectContext)
     var syncId: String { get }
+    var position: Int32 { get set }
 }
 
 protocol EntityPresentor: Decodable {
@@ -50,6 +51,12 @@ class EcosystemData {
             let request = NSFetchRequest<E.entity>(entityName: String(describing: E.entity.self))
             let diskEntities = try context.fetch(request)
             let networkEntities = try decoder.decode(presentorType, from: data).entities
+            
+            // set entities order based on network's order return
+            networkEntities.enumerated().forEach({ (arg) in
+                var (index, entity) = arg
+                entity.position = Int32(index)
+            })
             
             // network entities are already inserted by their decoders
             
