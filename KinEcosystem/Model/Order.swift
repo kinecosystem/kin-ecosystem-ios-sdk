@@ -33,6 +33,7 @@ class Order: NSManagedObject, NetworkSyncable {
     @NSManaged public var title: String
     @NSManaged public var description_: String
     @NSManaged public var call_to_action: String?
+    @NSManaged public var content: String?
     @NSManaged public var amount: Int32
     @NSManaged public var blockchain_data: BlockchainData?
     @NSManaged public var result: OrderResult?
@@ -59,6 +60,7 @@ class Order: NSManagedObject, NetworkSyncable {
         case title
         case description
         case call_to_action
+        case content
         case amount
         case blockchain_data
         case result
@@ -71,11 +73,15 @@ class Order: NSManagedObject, NetworkSyncable {
         offer_type = from.offer_type
         id = from.id
         offer_id = from.offer_id
-        status = from.status
+        if orderStatus != .completed {
+            status = from.status
+        }
         title = from.title
         description_ = from.description_
         call_to_action = from.call_to_action
         amount = from.amount
+        content = from.content
+        position = from.position
         // don't leave dangling relationships
         if let data = blockchain_data, data != from.blockchain_data {
             context.delete(data)
@@ -115,6 +121,7 @@ class Order: NSManagedObject, NetworkSyncable {
         title = try values.decode(String.self, forKey: .title)
         description_ = try values.decode(String.self, forKey: .description)
         call_to_action = try values.decodeIfPresent(String.self, forKey: .call_to_action)
+        content = try values.decodeIfPresent(String.self, forKey: .content)
         amount = try values.decode(Int32.self, forKey: .amount)
         blockchain_data = try values.decodeIfPresent(BlockchainData.self, forKey: .blockchain_data)
         error = try values.decodeIfPresent(OrderError.self, forKey: .error)

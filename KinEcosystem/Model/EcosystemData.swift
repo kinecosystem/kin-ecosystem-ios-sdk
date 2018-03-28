@@ -82,6 +82,32 @@ class EcosystemData {
         return p
     }
     
+    func read<T>(_ type:T.Type, with data: Data, readBlock: ((T) -> ())?) -> Promise<Void> where T : NSManagedObject & NetworkSyncable {
+        
+        let p = Promise<Void>()
+        
+        self.stack.perform({ context, shouldSave in
+            
+            shouldSave = false
+            let decoder = JSONDecoder()
+            decoder.userInfo[.context] = context
+            let networkEntity = try decoder.decode(type, from: data)
+            
+            readBlock?(networkEntity)
+            context.delete(networkEntity)
+            
+        }) { error in
+            if let stackError = error {
+                p.signal(stackError)
+            } else {
+                p.signal(())
+            }
+        }
+        
+        return p
+        
+    }
+    
     func save<T>(_ type:T.Type, with data: Data) -> Promise<Void> where T : NSManagedObject & NetworkSyncable {
         
         let p = Promise<Void>()

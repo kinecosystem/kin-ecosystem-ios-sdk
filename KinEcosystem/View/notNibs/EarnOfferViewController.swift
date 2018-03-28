@@ -100,7 +100,7 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
             guard self.navigationController?.isBeingDismissed == false else { return }
             self.navigationController?.dismiss(animated: true)
         case JSFunctions.displayTopBar.rawValue:
-            if let displayed = message.body as? Bool {
+            if let displayed = (message.body as? NSArray)?.firstObject as? Bool {
                 self.navigationController?.setNavigationBarHidden(!displayed, animated: true)
             }
         default:

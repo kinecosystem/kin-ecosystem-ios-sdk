@@ -100,6 +100,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         content_type = from.content_type
         content =  from.content
         pending = from.pending
+        position = from.position
         // don't leave dangling relationships
         if let data = blockchain_data, data != from.blockchain_data {
             context.delete(data)

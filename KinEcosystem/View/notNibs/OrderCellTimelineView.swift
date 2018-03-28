@@ -29,9 +29,10 @@ class OrderCellTimelineView: UIView {
             super.draw(rect)
             return
         }
-        let top = CGPoint(x: rect.midX, y: 0.0)
-        let mid = CGPoint(x: rect.midX, y: rect.midY - 10.0)
-        let bottom = CGPoint(x: rect.midX, y: rect.height)
+        let midX = rect.midX + 4.0
+        let top = CGPoint(x: midX, y: 0.0)
+        let mid = CGPoint(x: midX, y: rect.midY - 10.0)
+        let bottom = CGPoint(x: midX, y: rect.height)
         let line = UIBezierPath()
         
         line.lineWidth = 1.0

@@ -82,17 +82,28 @@ class SpendOfferViewController: UIViewController {
         let vPathGroup = Animations.animationGroup(animations: [vPathAnimation], duration: duration)
         shape.add(shapeGroup, forKey: "shrink")
         vShape.add(vPathGroup, forKey: "vStroke")
-        UIView.animate(withDuration: duration / 4.0, animations: { [weak self] in
+        
+        let fadeDuration = duration / 2.0
+        
+        UIView.animate(withDuration: 0.1, animations: {  [weak self] in
             self?.closeButton.alpha = 0.0
         }) { [weak self] finished in
             self?.closeButton.isHidden = true
         }
-        UIView.transition(with: spendTitle, duration: duration / 7.0, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.spendTitle.attributedText = self?.viewModel.confirmation?.title
-        })
-        UIView.transition(with: spendDescription, duration: duration / 7.0, options: .transitionCrossDissolve, animations: { [weak self] in
-            self?.spendDescription.attributedText = self?.viewModel.confirmation?.description
-        })
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + duration * 0.72) { [weak self] in
+            
+            
+            guard   let spendTitle = self?.spendTitle,
+                    let spendDescription = self?.spendDescription else  { return }
+            UIView.transition(with: spendTitle, duration: fadeDuration, options: .transitionCrossDissolve, animations: {
+                self?.spendTitle.attributedText = self?.viewModel.confirmation?.title
+            })
+            UIView.transition(with: spendDescription, duration: fadeDuration, options: .transitionCrossDissolve, animations: {
+                self?.spendDescription.attributedText = self?.viewModel.confirmation?.description
+            })
+        }
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + duration + 2.0) {
             let transition = SpendTransition()
             self.modalPresentationStyle = .custom

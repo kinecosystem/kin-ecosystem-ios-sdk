@@ -54,6 +54,9 @@
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
+		E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9753C10206BD4AB0023CF94 /* CouponViewController.swift */; };
+		E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9753C11206BD4AB0023CF94 /* CouponViewController.xib */; };
+		E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9753C18206BD95A0023CF94 /* CouponViewModel.swift */; };
 		E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D175A20481D8900FEB57A /* OrderCell.swift */; };
 		E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D175B20481D8900FEB57A /* OrderCell.xib */; };
 		E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1763204840C500FEB57A /* OrderViewModel.swift */; };
@@ -204,6 +207,9 @@
 		E96F24E2201729690017EF68 /* KinEcosystemTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = KinEcosystemTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E96F24E9201729690017EF68 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E96F24F62018A8AC0017EF68 /* Kin.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Kin.swift; sourceTree = "<group>"; };
+		E9753C10206BD4AB0023CF94 /* CouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
+		E9753C11206BD4AB0023CF94 /* CouponViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponViewController.xib; sourceTree = "<group>"; };
+		E9753C18206BD95A0023CF94 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		E98D17562047FD6100FEB57A /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98D175A20481D8900FEB57A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		E98D175B20481D8900FEB57A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
@@ -277,6 +283,7 @@
 				E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */,
 				E98D1763204840C500FEB57A /* OrderViewModel.swift */,
 				E92F7B7E206921BC008A027F /* SpendViewModel.swift */,
+				E9753C18206BD95A0023CF94 /* CouponViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -406,6 +413,7 @@
 				E98D177A204BF92700FEB57A /* BalanceViewController.xib */,
 				E98D17862050205C00FEB57A /* WelcomeViewController.xib */,
 				E92F7B7B20691403008A027F /* SpendOfferViewController.xib */,
+				E9753C11206BD4AB0023CF94 /* CouponViewController.xib */,
 			);
 			path = nibs;
 			sourceTree = "<group>";
@@ -430,6 +438,7 @@
 				E92F7B7A20691403008A027F /* SpendOfferViewController.swift */,
 				E92F7B80206923A0008A027F /* SpendTransition.swift */,
 				E92F7B872069992A008A027F /* Animations.swift */,
+				E9753C10206BD4AB0023CF94 /* CouponViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -670,6 +679,7 @@
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
+				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -704,6 +714,7 @@
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
+				E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
 				E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */,
 				E98D1784204FD09200FEB57A /* UIView+extensions.swift in Sources */,
@@ -721,6 +732,7 @@
 				E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */,
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
+				E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,

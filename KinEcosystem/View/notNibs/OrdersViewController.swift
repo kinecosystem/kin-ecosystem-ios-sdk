@@ -54,6 +54,7 @@ class OrdersViewController : KinNavigationChildController {
                     logWarn("cell configure failed")
                     return
             }
+            orderCell.selectionStyle = .none
             var viewModel: OrderViewModel
             if let orderViewModel = this.orderViewModels[order.id] {
                 viewModel = orderViewModel
@@ -92,5 +93,20 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard   let order = tableView.objectForTable(at: indexPath) as? Order,
+                let content = order.content,
+                let data = content.data(using: .utf8),
+                let viewModel = try? JSONDecoder().decode(CouponViewModel.self, from: data) else {
+                logError("offer content is not in the correct format")
+                return
+        }
+        let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
+        controller.viewModel = viewModel
+        let transition = SpendTransition()
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = transition
+        self.kinNavigationController?.present(controller, animated: true)
+    }
     
 }
