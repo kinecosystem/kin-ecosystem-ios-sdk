@@ -26,6 +26,11 @@ class OrdersViewController : KinNavigationChildController {
         setupNavigationItem()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"), object: nil)
+    }
+    
     fileprivate func setupNavigationItem() {
         self.title = "Transaction History"
         let buttonEdit: UIButton = UIButton(type: .custom) as UIButton
@@ -42,7 +47,7 @@ class OrdersViewController : KinNavigationChildController {
     fileprivate func setupFRCSections() {
         let request = NSFetchRequest<Order>(entityName: "Order")
         request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
-        request.predicate = !NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
+        request.predicate = !NSPredicate(with: ["status" : OrderStatus.pending.rawValue]).or(["status" : OrderStatus.delayed.rawValue])
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
                                                               managedObjectContext: core.data.stack.viewContext,
                                                               sectionNameKeyPath: nil,
@@ -95,15 +100,16 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         guard   let order = tableView.objectForTable(at: indexPath) as? Order,
-                let content = order.content,
-                let data = content.data(using: .utf8),
+                let couponCode = (order.result as? CouponCode)?.coupon_code,
+                let data =  order.content?.data(using: .utf8),
                 let viewModel = try? JSONDecoder().decode(CouponViewModel.self, from: data) else {
                 logError("offer content is not in the correct format")
                 return
         }
+        viewModel.coupon_code = couponCode
         let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
         controller.viewModel = viewModel
-        let transition = SpendTransition()
+        let transition = SheetTransition()
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = transition
         self.kinNavigationController?.present(controller, animated: true)

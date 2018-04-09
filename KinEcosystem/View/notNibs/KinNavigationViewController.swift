@@ -112,14 +112,20 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         let leftFrame = CGRect(origin: frame.origin.applying(shiftLeft), size: rightFrame.size)
         
         viewController.view.frame = animated ? rightFrame : frame
+        viewController.beginAppearanceTransition(true, animated: animated)
         container.addSubview(viewController.view)
-        let outView = transitionController.childViewControllers.last?.view
+        let outController = transitionController.childViewControllers.last
+        
+        let outView = outController?.view
         
         if viewController == rootViewController {
             navigationBar.items = [rootViewController.navigationItem]
         } else {
             navigationBar.pushItem(viewController.navigationItem, animated: animated)
         }
+        
+        
+        outController?.beginAppearanceTransition(false, animated: animated)
         
         transitionController.addChildViewController(viewController)
         viewController.kinNavigationController = self
@@ -130,6 +136,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             outView?.removeFromSuperview()
             viewController.view.frame = frame
             viewController.didMove(toParentViewController: transitionController)
+            viewController.endAppearanceTransition()
+            outController?.endAppearanceTransition()
             completion?()
             return
         }
@@ -146,6 +154,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             outView?.removeFromSuperview()
             viewController.didMove(toParentViewController: self.transitionController)
             self.tapRecognizer.isEnabled = true
+            viewController.endAppearanceTransition()
+            outController?.endAppearanceTransition()
             completion?()
         })
         
@@ -162,23 +172,29 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             return
         }
         
+        
+        let inController = transitionController.childViewControllers[count - 2]
         let shiftLeft = CGAffineTransform(translationX: -container.bounds.width, y: 0.0)
         let rightFrame = CGRect(x: container.bounds.width, y: 0.0, width: container.bounds.width, height: container.bounds.height)
         let p = rightFrame.origin.applying(shiftLeft)
         let frame = CGRect(origin: p, size: rightFrame.size)
         let leftFrame = CGRect(origin: frame.origin.applying(shiftLeft), size: rightFrame.size)
         
+        inController.beginAppearanceTransition(true, animated: animated)
+        outController.beginAppearanceTransition(false, animated: animated)
         
         inView.frame = leftFrame
         container.addSubview(inView)
         
-        balanceViewController.setSelected(transitionController.childViewControllers[count - 2] is OrdersViewController, animated: animated)
+        balanceViewController.setSelected(inController is OrdersViewController, animated: animated)
         
         guard animated else {
             inView.frame = frame
             outView.removeFromSuperview()
             outController.willMove(toParentViewController: nil)
             outController.removeFromParentViewController()
+            inController.endAppearanceTransition()
+            outController.endAppearanceTransition()
             completion?()
             return
         }
@@ -195,6 +211,8 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
             outView.removeFromSuperview()
             outController.willMove(toParentViewController: nil)
             outController.removeFromParentViewController()
+            inController.endAppearanceTransition()
+            outController.endAppearanceTransition()
             self.tapRecognizer.isEnabled = true
             completion?()
         })

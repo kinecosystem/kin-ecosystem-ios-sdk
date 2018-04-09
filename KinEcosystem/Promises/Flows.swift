@@ -22,6 +22,7 @@ struct Flows {
         
         core.network.objectAtPath("offers/\(offerId)/orders", type: OpenOrder.self, method: .post)
             .then { order -> Promise<(String, OpenOrder)> in
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"), object: order.id)
                 openOrder = order
                 return resultPromise
                     .then { htmlResult in
@@ -33,21 +34,23 @@ struct Flows {
                 return Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
                 try core.blockchain.startWatchingForNewPayments(with: memo)
-            }.then { htmlResult, order, memo -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
+            }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 let result = EarnResult(content: htmlResult)
                 let content = try JSONEncoder().encode(result)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post, body: content)
                     .then { data in
-                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
+                        core.data.save(Order.self, with: data)
+                    }.then {
+                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { data, memo, order -> Promise<(Data, PaymentMemoIdentifier, OpenOrder)> in
+            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
                     offers.first?.pending = true
                 }, with: NSPredicate(with:["id": offerId]))
                     .then {
-                        Promise<(Data, PaymentMemoIdentifier, OpenOrder)>().signal((data, memo, order))
+                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { data, memo, order -> Promise<PaymentMemoIdentifier> in
+            }.then { memo, order -> Promise<PaymentMemoIdentifier> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
                         Promise<PaymentMemoIdentifier>().signal(memo)
@@ -55,24 +58,13 @@ struct Flows {
             }.then { memo in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
             }.error { error in
-                if case let EarnOfferHTMLError.js(jsError) = error {
-                    logError("earn flow JS error: \(jsError)")
-                } else {
-                    switch error {
-                    case is KinError,
-                         is BlockchainError,
-                         EarnOfferHTMLError.invalidJSResult:
-                        core.blockchain.stopWatchingForNewPayments()
-                        if let order = openOrder {
-                            core.network.delete("orders/\(order.id)").then {
-                                logInfo("order canceled: \(order.id)")
-                                }.error { error in
-                                    logError("error canceling order: \(order.id)")
-                            }
-                        }
-                        logError("earn flow error: \(error)")
-                    default:
-                        logError("earn flow error: \(error)")
+                core.blockchain.stopWatchingForNewPayments()
+                logError("earn flow error: \(error)")
+                if let order = openOrder {
+                    core.network.delete("orders/\(order.id)").then {
+                        logInfo("order canceled: \(order.id)")
+                        }.error { error in
+                            logError("error canceling order: \(order.id), \(error)")
                     }
                 }
                 openOrder = nil
@@ -87,7 +79,8 @@ struct Flows {
                     }.then {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
-                                if let completedOrder = orders.first {
+                                if let  completedOrder = orders.first,
+                                        completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
                                 }
                             }, with: NSPredicate(with: ["id": order.id]))
@@ -105,6 +98,7 @@ struct Flows {
         core.network.objectAtPath("offers/\(offerId)/orders", type: OpenOrder.self, method: .post)
             .then { order -> Promise<(String, Decimal, OpenOrder)> in
                 openOrder = order
+                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"), object: order.id)
                 logVerbose("created order \(order.id)")
                 return confirmPromise
                     .then {
@@ -122,6 +116,8 @@ struct Flows {
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
+                        core.data.save(Order.self, with: data)
+                    }.then {
                         logVerbose("Submitted order \(order.id)")
                         return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
@@ -149,10 +145,10 @@ struct Flows {
             }.then { memo, order -> Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let p = Promise<Void>()
-                let retries: [UInt32] = [2, 4, 8, 16, 32]
+                let retries: [UInt32] = [2, 4, 8, 16, 32, 32, 32, 32]
                 
                 DispatchQueue.global().async {
-                    var retryIndex = 0
+                    var retryIndex = -1
                     var success = false
                     while success == false && retryIndex < retries.count {
                         
@@ -164,15 +160,25 @@ struct Flows {
                             .then { data in
                                 core.data.read(Order.self, with: data, readBlock: { networkOrder in
                                     success = (networkOrder.orderStatus != .pending)
+                                    logVerbose("order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \((networkOrder.result as? CouponCode)?.coupon_code != nil ? "👍🏼" : "nil")")
                                 })
                             }.then {
                                 if success == false {
-                                    sleep(retries[retryIndex])
                                     retryIndex = retryIndex + 1
-                                    if retryIndex == 5 {
-                                        // set balance message to "Sorry - this may take some time"
+                                    if retryIndex < retries.count {
+                                        sleep(retries[retryIndex])
                                     }
-                                    
+                                    if retryIndex == 5 || retryIndex == retries.count {
+                                        dispatchGroup.enter()
+                                        core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                                            if let order = orders.first {
+                                                order.orderStatus = retryIndex == 5 ? .delayed : .failed
+                                            }
+                                        }, with: NSPredicate(with: ["id":order.id]))
+                                            .finally {
+                                                dispatchGroup.leave()
+                                        }
+                                    }
                                 }
                             }.finally {
                                 dispatchGroup.leave()
@@ -185,7 +191,6 @@ struct Flows {
                         logVerbose("got order with non pending state")
                         p.signal(())
                     } else {
-                        // set balance message to "Oops! Something went wrong"
                         p.signal(KinError.internalInconsistency)
                     }
                 }
@@ -217,7 +222,8 @@ struct Flows {
                     }.then {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
-                                if let completedOrder = orders.first {
+                                if let  completedOrder = orders.first,
+                                        completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
                                 }
                             }, with: NSPredicate(with: ["id": order.id]))

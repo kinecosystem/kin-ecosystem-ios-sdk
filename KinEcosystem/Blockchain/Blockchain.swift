@@ -126,9 +126,9 @@ class Blockchain {
                 case KinError.balanceQueryFailed(let queryError):
                     switch queryError {
                     case StellarError.missingAccount:
-                        logWarn("account not yet created on network")
+                        logInfo("account not yet created on network")
                     case StellarError.missingBalance:
-                        logWarn("Kin issuer isn't trusted yet")
+                        logInfo("Kin issuer isn't trusted yet")
                     case StellarError.unknownError:
                         logError("stellar server did not respond well. try again later")
                     default:

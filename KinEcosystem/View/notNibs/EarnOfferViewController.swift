@@ -31,6 +31,7 @@ class EarnOfferViewController: UIViewController {
     var offerId: String?
     var core: Core!
     fileprivate(set) var earn = Promise<String>()
+    fileprivate var hideStatusBar = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -49,9 +50,13 @@ class EarnOfferViewController: UIViewController {
         view.addSubview(web)
         web.fillSuperview()
         web.layoutIfNeeded()
-        var request = URLRequest(url: URL(string: "http://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com")!)
-        request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        let request = URLRequest(url: URL(string: "http://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com")!)
+        //request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
         web.load(request)
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return hideStatusBar
     }
     
     func loadContent() {
@@ -84,9 +89,7 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
         case JSFunctions.loaded.rawValue:
             loadContent()
         case JSFunctions.handleResult.rawValue:
-            guard   JSONSerialization.isValidJSONObject(message.body),
-                let json = try? JSONSerialization.data(withJSONObject: message.body, options: []),
-                    let jsonString = String(data: json, encoding: .utf8)?.replacingOccurrences(of: "\\\"", with: "\"") else {
+            guard let jsonString = (message.body as? NSArray)?.firstObject as? String else {
                         earn.signal(EarnOfferHTMLError.invalidJSResult)
                         self.navigationController?.dismiss(animated: true)
                         return
@@ -102,6 +105,8 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
         case JSFunctions.displayTopBar.rawValue:
             if let displayed = (message.body as? NSArray)?.firstObject as? Bool {
                 self.navigationController?.setNavigationBarHidden(!displayed, animated: true)
+                hideStatusBar = !displayed
+                setNeedsStatusBarAppearanceUpdate()
             }
         default:
             logWarn("unhandled webkit message received: \(message)")

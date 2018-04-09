@@ -57,7 +57,7 @@ class OrderViewModel {
         }
         subtitle = subtitleString.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
         
-        amount = ((model.offerType == .earn ? "+" : "-") + "\(model.amount)").attributed(16.0, weight: .medium, color: .kinBlueGreyTwo)
+        amount = ((model.offerType == .earn ? "+" : "-") + "\(model.amount) ").attributed(16.0, weight: .medium, color: .kinBlueGreyTwo)
 
         
     }

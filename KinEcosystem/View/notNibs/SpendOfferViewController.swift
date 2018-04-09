@@ -39,7 +39,7 @@ class SpendOfferViewController: UIViewController {
     
     @IBAction func closeButtonTapped(_ sender: Any) {
         spend.signal(SpendOfferError.userCanceled)
-        let transition = SpendTransition()
+        let transition = SheetTransition()
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = transition
         self.dismiss(animated: true)
@@ -105,7 +105,7 @@ class SpendOfferViewController: UIViewController {
         }
         
         DispatchQueue.main.asyncAfter(deadline: .now() + duration + 2.0) {
-            let transition = SpendTransition()
+            let transition = SheetTransition()
             self.modalPresentationStyle = .custom
             self.transitioningDelegate = transition
             self.dismiss(animated: true)

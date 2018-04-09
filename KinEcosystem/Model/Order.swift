@@ -20,6 +20,7 @@ class OrdersList: EntityPresentor {
 enum OrderStatus: String {
     case pending
     case completed
+    case delayed
     case failed
 }
 
@@ -51,6 +52,12 @@ class Order: NSManagedObject, NetworkSyncable {
         set { status = newValue.rawValue }
     }
     
+    let allowedStatusChanges: [OrderStatus:[OrderStatus]] = [.pending:[.completed,
+                                                                       .failed,
+                                                                       .delayed],
+                                                             .delayed:[.completed,
+                                                                       .failed]]
+    
     enum OrderKeys: String, CodingKey {
         case completion_date
         case offer_type
@@ -73,7 +80,9 @@ class Order: NSManagedObject, NetworkSyncable {
         offer_type = from.offer_type
         id = from.id
         offer_id = from.offer_id
-        if orderStatus != .completed {
+        if allowedStatusChanges.contains(where: { key, value -> Bool in
+            return (key == orderStatus && value.contains(from.orderStatus))
+        }) {
             status = from.status
         }
         title = from.title

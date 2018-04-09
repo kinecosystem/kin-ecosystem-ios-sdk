@@ -1,5 +1,5 @@
 //
-//  SpendTransition.swift
+//  SheetTransition.swift
 //  KinEcosystem
 //
 //  Created by Elazar Yifrach on 26/03/2018.
@@ -10,7 +10,7 @@ import Foundation
 
 import UIKit
 
-class SpendTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, CAAnimationDelegate {
+class SheetTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, CAAnimationDelegate {
     
     var isPresenting = true
     var transitionDuration: TimeInterval = 0.6
@@ -26,8 +26,10 @@ class SpendTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewCo
 
         let frame = transitionContext.containerView.bounds
         
-        let inFrame = CGRect(x: 0.0, y: frame.midY, width: frame.width, height: frame.height / 2.0)
-        let outFrame = CGRect(x: 0.0, y: frame.height, width: frame.width, height: frame.height / 2.0)
+        let recommandedHeight: CGFloat = max(335.0, frame.height / 2.0)
+        
+        let inFrame = CGRect(x: 0.0, y: frame.height - recommandedHeight, width: frame.width, height: recommandedHeight)
+        let outFrame = CGRect(x: 0.0, y: frame.height, width: frame.width, height: recommandedHeight)
         let spendController = transitionContext.viewController(forKey: isPresenting ? .to : .from)!
         let presentor = transitionContext.viewController(forKey: isPresenting ? .from : .to)!
         spendController.view.frame = isPresenting ? outFrame : inFrame

@@ -25,13 +25,17 @@ class CouponViewController: UIViewController {
         }
         couponTitle.attributedText = viewModel.title
         couponDescription.attributedText = viewModel.description
+        couponCode.attributedText = viewModel.code
         copyCodeButton.setAttributedTitle(viewModel.buttonLabel, for: .normal)
         copyCodeButton.backgroundColor = .kinDeepSkyBlue
         copyCodeButton.adjustsImageWhenDisabled = false
+        couponCode.layer.borderWidth = 2.0
+        couponCode.layer.cornerRadius = 4.0
+        couponCode.layer.borderColor = UIColor.kinLightBlueGrey.cgColor
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
-        let transition = SpendTransition()
+        let transition = SheetTransition()
         self.modalPresentationStyle = .custom
         self.transitioningDelegate = transition
         self.dismiss(animated: true)

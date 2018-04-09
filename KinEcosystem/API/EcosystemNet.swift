@@ -99,7 +99,7 @@ class EcosystemNet {
                     body: Data? = nil,
                     parameters: [String: String]? = nil) -> Promise<Data> {
         return authorize().then {
-                self.client.buildRequest(path: path, method: method)
+                self.client.buildRequest(path: path, method: method, body: body, parameters: parameters)
             }.then { request in
                 self.client.dataRequest(request)
             }

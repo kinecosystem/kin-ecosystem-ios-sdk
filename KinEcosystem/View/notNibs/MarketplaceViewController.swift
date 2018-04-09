@@ -184,7 +184,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController", bundle: Bundle.ecosystem)
             controller.viewModel = viewModel
-            let transition = SpendTransition()
+            let transition = SheetTransition()
             controller.modalPresentationStyle = .custom
             controller.transitioningDelegate = transition
             self.kinNavigationController?.present(controller, animated: true)

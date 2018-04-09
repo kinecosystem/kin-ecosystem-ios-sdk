@@ -24,7 +24,12 @@ class CouponViewModel: Decodable {
             return ImageCache.shared.image(for: URL(string:imageSource))
         }
     }
-    var code: NSAttributedString?
+    var coupon_code: String?
+    var code: NSAttributedString {
+        get {
+            return (coupon_code ?? "").attributed(16.0, weight: .regular, color: .kinBlueGreyTwo)
+        }
+    }
     
     enum CouponCodingKeys: String, CodingKey {
         case title
