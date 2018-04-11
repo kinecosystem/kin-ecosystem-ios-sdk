@@ -21,7 +21,7 @@ public class Kin {
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate(set) var needsReset = false
-    
+    fileprivate weak var mpPresentingController: UIViewController?
     fileprivate init() { }
     
     @discardableResult
@@ -90,7 +90,7 @@ public class Kin {
             logError("Kin not started")
             return
         }
-        
+        mpPresentingController = parentViewController
         if core.network.tosAccepted {
             let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
             mpViewController.core = core
@@ -117,5 +117,7 @@ public class Kin {
         }
     }
     
-    
+    func closeMarketPlace() {
+        mpPresentingController?.dismiss(animated: true, completion: nil)
+    }
 }

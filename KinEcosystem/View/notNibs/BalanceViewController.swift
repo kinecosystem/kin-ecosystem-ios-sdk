@@ -70,10 +70,7 @@ class BalanceViewController: UIViewController {
                     return
                 }
                 guard let label = self?.subtitle else { return }
-                UIView.transition(with: label, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                    label.attributedText = "Welcome to Kin Marketplace".attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-                }, completion: nil)
-                
+                self?.switchLabel(label, text: "Welcome to Kin Marketplace".attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
                 self?.watchedOrderId = nil
                 self?.watchedOrderStatus = nil
                 return
@@ -105,6 +102,21 @@ class BalanceViewController: UIViewController {
         }
     }
     
+    func switchLabel(_ label: UILabel, text: NSAttributedString) {
+        if let string = label.attributedText?.string {
+            guard string != text.string else { return }
+        }
+        label.layer.transform = CATransform3DIdentity
+        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState], animations: {
+            label.layer.transform = CATransform3DRotate(label.layer.transform, CGFloat.pi / 2.0, 1.0, 0.0, 0.0)
+        }) { finished in
+            label.attributedText = text
+            UIView.animate(withDuration: 0.04, delay: 0.1, options: [.beginFromCurrentState], animations: {
+                label.layer.transform = CATransform3DIdentity
+            })
+        }
+    }
+    
     func setupOrderWatcherFor(_ orderId: String) {
         if let watcher = try? EntityWatcher<Order>(predicate: NSPredicate(with: ["id":orderId]), sortDescriptors: [], context: core.data.stack.viewContext) {
             entityWatcher = watcher
@@ -121,24 +133,14 @@ class BalanceViewController: UIViewController {
                     guard let label = self?.subtitle else { return }
                     switch status {
                     case .completed:
-                        UIView.transition(with: label, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                            label.attributedText = (spend ? "Great, your code is ready" : "Done! \(amount) Kin earned").attributed(14.0, weight: .regular, color: .kinDeepSkyBlue)
-                        }, completion: nil)
-                        
+                        self?.switchLabel(label, text: (spend ? "Great, your code is ready" : "Done! \(amount) Kin earned").attributed(14.0, weight: .regular, color: .kinDeepSkyBlue))
                     case .pending:
-                        UIView.transition(with: label, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                            label.attributedText = (spend ? "Thanks! We're generating your code..." : "Thanks! \(amount) Kin are on the way").attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-                        }, completion: nil)
+                        self?.switchLabel(label, text: (spend ? "Thanks! We're generating your code..." : "Thanks! \(amount) Kin are on the way").attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
                     case .failed:
-                        UIView.transition(with: label, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                            label.attributedText = "Oops - something went wrong".attributed(14.0, weight: .regular, color: .kinCoralPink)
-                        }, completion: nil)
+                        self?.switchLabel(label, text: "Oops - something went wrong".attributed(14.0, weight: .regular, color: .kinCoralPink))
                     case .delayed:
-                        UIView.transition(with: label, duration: 0.3, options: .transitionCrossDissolve, animations: {
-                            label.attributedText = "Sorry - this may take some time".attributed(14.0, weight: .regular, color: .kinMango)
-                        }, completion: nil)
+                        self?.switchLabel(label, text: "Sorry - this may take some time".attributed(14.0, weight: .regular, color: .kinMango))
                     }
-                    
                 }
             })
         }

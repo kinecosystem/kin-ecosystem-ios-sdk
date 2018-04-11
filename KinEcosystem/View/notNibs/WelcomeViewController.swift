@@ -40,7 +40,7 @@ class WelcomeViewController: UIViewController {
         shrinkButton()
             .then(on: .main) { [weak self] in
                 self?.diamondsLoader.startAnimating()
-                self?.waitForOnboarding()
+                self?.acceptTosAndOnboard()
             .then(on: .main) {
                 self?.diamondsLoader.stopAnimating() {
                     self?.presentMarketplace()
@@ -102,7 +102,7 @@ class WelcomeViewController: UIViewController {
        return p
     }
     
-    func waitForOnboarding() -> Promise<Void> {
+    func acceptTosAndOnboard() -> Promise<Void> {
         let p = Promise<Void>()
         core.network.acceptTOS().then {
             if (self.core.blockchain.onboarded) {

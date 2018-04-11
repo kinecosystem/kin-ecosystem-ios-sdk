@@ -13,13 +13,6 @@ import StellarKit
 import KinSDK
 import KinUtil
 
-fileprivate struct EarnPromiseHelper {
-    weak var this: MarketplaceViewController?
-    var openOrder: OpenOrder?
-    var htmlResult: String?
-    var memo: PaymentMemoIdentifier?
-}
-
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
@@ -30,6 +23,8 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate weak var htmlController: EarnOfferViewController?
     fileprivate var openOrder: OpenOrder?
     fileprivate var htmlResult: String?
+    fileprivate let bag = LinkBag()
+    fileprivate var balanceSnapshot: Decimal = 0
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
     
@@ -39,12 +34,29 @@ class MarketplaceViewController: KinNavigationChildController {
         setupCollectionViews()
         setupFRCSections()
         setupNavigationItem()
-        
+        setupBalanceWatch()
+    }
+    
+    fileprivate func setupBalanceWatch() {
+        core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
+            guard let this = self else { return }
+            switch balanceState {
+            case let .pendind(value):
+                this.balanceSnapshot = value
+            case let .errored(value):
+                this.balanceSnapshot = value
+            case let .verified(value):
+                this.balanceSnapshot = value
+            }
+        }).add(to: bag)
     }
     
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        self.title = "Kin Marketplace"
+        title = "Kin Marketplace"
+        let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
+        item.tintColor = .white
+        navigationItem.rightBarButtonItem = item
     }
     
     fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
@@ -123,6 +135,10 @@ class MarketplaceViewController: KinNavigationChildController {
                                            forCellWithReuseIdentifier: spendCellName)
         spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
     }
+    
+    @objc func close() {
+        Kin.shared.closeMarketPlace()
+    }
 
 }
 
@@ -181,6 +197,14 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                     let viewModel = try? JSONDecoder().decode(SpendViewModel.self, from: data) else {
                         logError("offer content is not in the correct format")
                         return
+            }
+            guard balanceSnapshot >= Decimal(offer.amount) else {
+                let transition = SheetTransition()
+                let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController", bundle: Bundle.ecosystem)
+                controller.modalPresentationStyle = .custom
+                controller.transitioningDelegate = transition
+                self.kinNavigationController?.present(controller, animated: true)
+                return
             }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController", bundle: Bundle.ecosystem)
             controller.viewModel = viewModel

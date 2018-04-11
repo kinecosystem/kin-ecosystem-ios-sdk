@@ -132,7 +132,7 @@ struct Flows {
                         Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
-                return core.blockchain.account.sendTransaction(to: recipient, kin: amount, memo: memo.description)
+                return core.blockchain.pay(to: recipient, kin: amount, memo: memo.description)
                     .then { _ in
                         logVerbose("\(amount) kin sent to \(recipient)")
                         return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))

@@ -112,6 +112,7 @@ class Blockchain {
         account = try client.accounts[0] ?? client.addAccount()
         currentBalance.next(.pendind(lastBalance))
         _ = balance()
+        
     }
     
     func balance() -> Promise<Decimal> {
@@ -202,6 +203,17 @@ class Blockchain {
         }
         
         return p
+    }
+    
+
+    func pay(to recipient: String, kin: Decimal, memo: String?) -> Promise<TransactionId> {
+        updateBalance(beforePaymentOf: kin)
+        return account.sendTransaction(to: recipient, kin: kin, memo: memo)
+    }
+    
+    func updateBalance(beforePaymentOf kin:Decimal) {
+        lastBalance = lastBalance - kin
+        currentBalance.next(.pendind(lastBalance))
     }
     
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {

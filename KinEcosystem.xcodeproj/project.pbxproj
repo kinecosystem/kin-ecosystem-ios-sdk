@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */; };
+		E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9037502207DFC8E00704DBB /* InsufficientFundsViewController.xib */; };
 		E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90441592035C83000E3E261 /* SpendOfferCell.swift */; };
 		E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E904415A2035C83000E3E261 /* SpendOfferCell.xib */; };
 		E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = E912B4E1203C5792005ADBA1 /* OrderResult.swift */; };
@@ -153,6 +155,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsufficientFundsViewController.swift; sourceTree = "<group>"; };
+		E9037502207DFC8E00704DBB /* InsufficientFundsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsufficientFundsViewController.xib; sourceTree = "<group>"; };
 		E90441592035C83000E3E261 /* SpendOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferCell.swift; sourceTree = "<group>"; };
 		E904415A2035C83000E3E261 /* SpendOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferCell.xib; sourceTree = "<group>"; };
 		E912B4E1203C5792005ADBA1 /* OrderResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderResult.swift; sourceTree = "<group>"; };
@@ -414,6 +418,7 @@
 				E98D17862050205C00FEB57A /* WelcomeViewController.xib */,
 				E92F7B7B20691403008A027F /* SpendOfferViewController.xib */,
 				E9753C11206BD4AB0023CF94 /* CouponViewController.xib */,
+				E9037502207DFC8E00704DBB /* InsufficientFundsViewController.xib */,
 			);
 			path = nibs;
 			sourceTree = "<group>";
@@ -439,6 +444,7 @@
 				E92F7B80206923A0008A027F /* SheetTransition.swift */,
 				E92F7B872069992A008A027F /* Animations.swift */,
 				E9753C10206BD4AB0023CF94 /* CouponViewController.swift */,
+				E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -675,6 +681,7 @@
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E942F90120331AAE00DD4B8E /* MarketplaceViewController.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
+				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
@@ -724,6 +731,7 @@
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
+				E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */,
 				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
