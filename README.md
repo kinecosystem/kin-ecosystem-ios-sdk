@@ -49,4 +49,4 @@ Some of the main to-do's still left:
 - [ ] More control over Logger
 
 ## License
-The kin-ecosystem-android-sdk library is licensed under [MIT license](LICENSE.md).
+The kin-ecosystem-ios-sdk library is licensed under [MIT license](LICENSE.md).
