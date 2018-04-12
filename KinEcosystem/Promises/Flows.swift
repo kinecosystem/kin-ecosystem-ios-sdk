@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 import CoreData
-import CoreDataStack
+import SimpleCoreDataStack
 import StellarKit
 import KinSDK
 import KinUtil

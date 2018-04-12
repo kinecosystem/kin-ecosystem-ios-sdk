@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import CoreDataStack
+import SimpleCoreDataStack
 import KinUtil
 
 enum SpendOfferError: Error {

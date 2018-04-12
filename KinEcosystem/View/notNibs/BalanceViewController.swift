@@ -10,7 +10,7 @@ import UIKit
 import KinSDK
 import KinUtil
 import StellarKit
-import CoreDataStack
+import SimpleCoreDataStack
 
 class BalanceViewController: UIViewController {
 
