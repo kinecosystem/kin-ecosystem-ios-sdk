@@ -61,11 +61,16 @@ struct Flows {
                 core.blockchain.stopWatchingForNewPayments()
                 logError("earn flow error: \(error)")
                 if let order = openOrder {
+                    let group = DispatchGroup()
+                    group.enter()
                     core.network.delete("orders/\(order.id)").then {
                         logInfo("order canceled: \(order.id)")
                         }.error { error in
-                            logError("error canceling order: \(order.id), \(error)")
+                            logError("error canceling order: \(order.id)")
+                        }.finally {
+                            group.leave()
                     }
+                    group.wait()
                 }
                 openOrder = nil
             }.finally {
@@ -204,11 +209,16 @@ struct Flows {
                 }
                 _ = core.blockchain.balance()
                 if let order = openOrder {
+                    let group = DispatchGroup()
+                    group.enter()
                     core.network.delete("orders/\(order.id)").then {
                         logInfo("order canceled: \(order.id)")
                         }.error { error in
                             logError("error canceling order: \(order.id)")
+                        }.finally {
+                            group.leave()
                     }
+                    group.wait()
                 }
                 openOrder = nil
             }.finally {

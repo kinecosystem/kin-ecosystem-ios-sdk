@@ -48,10 +48,10 @@ class SpendOfferViewController: UIViewController {
     @IBAction func confirmTapped(_ sender: Any) {
         spendButton.isEnabled = false
         spend.signal(())
-        trasitionToConfirmed()
+        transitionToConfirmed()
     }
     
-    func trasitionToConfirmed() {
+    func transitionToConfirmed() {
         let shape = CAShapeLayer()
         shape.frame = view.convert(spendButton.bounds, from: spendButton).insetBy(dx: 1.0, dy: 1.0)
         shape.fillColor = UIColor.kinDeepSkyBlue.cgColor

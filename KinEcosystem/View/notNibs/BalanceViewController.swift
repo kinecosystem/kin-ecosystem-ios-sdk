@@ -46,17 +46,17 @@ class BalanceViewController: UIViewController {
         core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
             guard let this = self else { return }            
             if case let .pendind(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value)".attributed(24.0,
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
                                                                                            weight: .regular,
                                                                                            color: .kinBlueGreyTwo)
             }
             if case let .errored(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value)".attributed(24.0,
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
                                                                                            weight: .regular,
                                                                                            color: .kinCoralPink)
             }
             if case let .verified(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value)".attributed(24.0,
+                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
                                                                                            weight: .regular,
                                                                                            color: .kinDeepSkyBlue)
             }

@@ -45,7 +45,7 @@ class SpendViewModel: Decodable {
         if confirmation != nil {
             guard let amount = amount else { throw KinError.internalInconsistency }
             title = (titleString + " - ").attributed(22.0, weight: .regular, color: .kinBlueGrey) +
-            "\(amount) Kin".attributed(22.0, weight: .regular, color: .kinDeepSkyBlue)
+            "\(Decimal(amount).currencyString()) Kin".attributed(22.0, weight: .regular, color: .kinDeepSkyBlue)
         } else {
             title = titleString.attributed(22.0, weight: .regular, color: .kinBlueGrey)
         }

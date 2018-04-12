@@ -35,6 +35,9 @@ class EarnOfferViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(userCanceled))
+        item.tintColor = .white
+        navigationItem.rightBarButtonItem = item
         view.backgroundColor = .white
         let config = WKWebViewConfiguration()
         let contentController = WKUserContentController()
@@ -80,6 +83,12 @@ class EarnOfferViewController: UIViewController {
             
         }
     }
+    
+    @objc func userCanceled() {
+        earn.signal(EarnOfferHTMLError.userCanceled)
+        guard self.navigationController?.isBeingDismissed == false else { return }
+        self.navigationController?.dismiss(animated: true)
+    }
 }
 
 extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate {
@@ -96,9 +105,7 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
             }
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
-            earn.signal(EarnOfferHTMLError.userCanceled)
-            guard self.navigationController?.isBeingDismissed == false else { return }
-            self.navigationController?.dismiss(animated: true)
+            userCanceled()
         case JSFunctions.handleClose.rawValue:
             guard self.navigationController?.isBeingDismissed == false else { return }
             self.navigationController?.dismiss(animated: true)

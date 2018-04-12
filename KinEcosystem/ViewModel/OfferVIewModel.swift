@@ -31,7 +31,7 @@ struct OfferViewModel {
         imageSource = model.image
         title = model.title.attributed(16.0, weight: .regular, color: .kinBlueGrey)
         subtitle = model.description_.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-        amount = "\(model.amount) Kin".attributed(14.0, weight: .medium, color: .kinDeepSkyBlue)
+        amount = ((model.offerType == .earn ? "+" : "") + "\(Decimal(model.amount).currencyString()) Kin").attributed(14.0, weight: .medium, color: .kinDeepSkyBlue)
     }
     
 }

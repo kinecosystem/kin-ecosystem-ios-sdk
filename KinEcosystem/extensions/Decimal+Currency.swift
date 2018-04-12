@@ -14,6 +14,9 @@ extension Decimal {
         let f = NumberFormatter()
         f.numberStyle = .currency
         f.currencySymbol = ""
+        f.usesGroupingSeparator = true
+        f.maximumFractionDigits = 0
+        f.groupingSeparator = ","
         return f
     }()
     
