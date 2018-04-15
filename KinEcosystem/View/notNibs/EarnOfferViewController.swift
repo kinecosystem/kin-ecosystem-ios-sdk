@@ -8,7 +8,7 @@
 
 import UIKit
 import WebKit
-import SimpleCoreDataStack
+import CoreDataStack
 import KinUtil
 
 enum JSFunctions: String {

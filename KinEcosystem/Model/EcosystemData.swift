@@ -9,7 +9,7 @@
 //
 
 import Foundation
-import SimpleCoreDataStack
+import CoreDataStack
 import CoreData
 import KinUtil
 

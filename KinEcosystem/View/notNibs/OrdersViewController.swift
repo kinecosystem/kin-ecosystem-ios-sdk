@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import SimpleCoreDataStack
+import CoreDataStack
 
 class OrdersViewController : KinNavigationChildController {
 

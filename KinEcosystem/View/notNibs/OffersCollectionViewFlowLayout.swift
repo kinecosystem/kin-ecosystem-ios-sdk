@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import SimpleCoreDataStack
+import CoreDataStack
 
 class OffersCollectionViewFlowLayout: UICollectionViewFlowLayout {
    

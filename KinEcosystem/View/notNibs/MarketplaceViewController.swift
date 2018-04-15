@@ -8,7 +8,7 @@
 
 import UIKit
 import CoreData
-import SimpleCoreDataStack
+import CoreDataStack
 import StellarKit
 import KinSDK
 import KinUtil
