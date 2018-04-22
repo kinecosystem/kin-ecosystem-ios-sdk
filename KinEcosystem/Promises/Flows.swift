@@ -14,6 +14,10 @@ import StellarKit
 import KinSDK
 import KinUtil
 
+enum OrderStatusError: Error {
+    case orderStillPending
+}
+
 struct Flows {
     
     static func earn(offerId: String, resultPromise: Promise<String>, core: Core) {
@@ -50,13 +54,46 @@ struct Flows {
                     .then {
                         Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<PaymentMemoIdentifier> in
+            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
-                        Promise<PaymentMemoIdentifier>().signal(memo)
+                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo in
+            }.then { memo, order -> Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
+                let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+                return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
+                    let p = Promise<Void>()
+                    logInfo("attempt to get earn order with !pending state: (\(attemptNumber)/9)")
+                    var pending = true
+                    core.network.dataAtPath("orders/\(order.id)")
+                        .then { data in
+                            core.data.read(Order.self, with: data, readBlock: { networkOrder in
+                                logVerbose("earn order \(networkOrder.id) status: \(networkOrder.orderStatus)")
+                                if networkOrder.orderStatus != .pending {
+                                    pending = false
+                                }
+                            }).then {
+                                if pending {
+                                    if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
+                                        logWarn("attempts reached \(attemptNumber)")
+                                        _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                                            if let order = orders.first {
+                                                order.orderStatus = attemptNumber == 5 ? .delayed : .failed
+                                            }
+                                        }, with: NSPredicate(with: ["id":order.id]))
+                                    }
+                                    p.signal(OrderStatusError.orderStillPending)
+                                } else {
+                                    p.signal(())
+                                }
+                            }
+                    }
+                    return p
+                })
+            }.then {
+                
+        
             }.error { error in
                 core.blockchain.stopWatchingForNewPayments()
                 logError("earn flow error: \(error)")
@@ -149,58 +186,41 @@ struct Flows {
                 }
             }.then { memo, order -> Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
-                let p = Promise<Void>()
-                let retries: [UInt32] = [2, 4, 8, 16, 32, 32, 32, 32]
-                
-                DispatchQueue.global().async {
-                    var retryIndex = -1
-                    var success = false
-                    while success == false && retryIndex < retries.count {
-                        
-                        let dispatchGroup = DispatchGroup()
-                        dispatchGroup.enter()
-                        
-                        logVerbose("attempting to receive order with complete/failed status (\(retryIndex + 1)/\(retries.count)")
-                        core.network.dataAtPath("orders/\(order.id)")
-                            .then { data in
-                                core.data.read(Order.self, with: data, readBlock: { networkOrder in
-                                    success = (networkOrder.orderStatus != .pending)
-                                    logVerbose("order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \((networkOrder.result as? CouponCode)?.coupon_code != nil ? "👍🏼" : "nil")")
-                                })
-                            }.then {
-                                if success == false {
-                                    retryIndex = retryIndex + 1
-                                    if retryIndex < retries.count {
-                                        sleep(retries[retryIndex])
-                                    }
-                                    if retryIndex == 5 || retryIndex == retries.count {
-                                        dispatchGroup.enter()
-                                        core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+                return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
+                    let p = Promise<Void>()
+                    logInfo("attempt to get spend order with !pending state: (\(attemptNumber)/9)")
+                    var pending = true
+                    core.network.dataAtPath("orders/\(order.id)")
+                        .then { data in
+                            core.data.read(Order.self, with: data, readBlock: { networkOrder in
+                                logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \((networkOrder.result as? CouponCode)?.coupon_code != nil ? "👍🏼" : "nil")")
+                                if networkOrder.orderStatus != .pending {
+                                    pending = false
+                                }
+                            }).then {
+                                if pending {
+                                    if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
+                                        logWarn("attempts reached \(attemptNumber)")
+                                        _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
                                             if let order = orders.first {
-                                                order.orderStatus = retryIndex == 5 ? .delayed : .failed
+                                                order.orderStatus = attemptNumber == 5 ? .delayed : .failed
                                             }
                                         }, with: NSPredicate(with: ["id":order.id]))
-                                            .finally {
-                                                dispatchGroup.leave()
-                                        }
                                     }
+                                    p.signal(OrderStatusError.orderStillPending)
+                                } else {
+                                    p.signal(())
                                 }
-                            }.finally {
-                                dispatchGroup.leave()
-                        }
-                        
-                        dispatchGroup.wait()
-                        
+                            }
                     }
-                    if success {
-                        logVerbose("got order with non pending state")
-                        p.signal(())
-                    } else {
-                        p.signal(KinError.internalInconsistency)
-                    }
-                }
-                return p
-            }.error { error in
+                    return p
+                })
+                
+            }.then {
+                
+            }
+            .error { error in
                 if case SpendOfferError.userCanceled = error  {
                     logVerbose("user canceled spend")
                 } else {
@@ -222,6 +242,7 @@ struct Flows {
                 }
                 openOrder = nil
             }.finally {
+                logInfo("ended")
                 core.network.dataAtPath("offers")
                     .then { data in
                         core.data.sync(OffersList.self, with: data)
