@@ -59,7 +59,7 @@ class WelcomeViewController: UIViewController {
         diggingText.adjustsFontSizeToFitWidth = true
         diggingText.minimumScaleFactor = 0.5
         diggingText.allowsDefaultTighteningForTruncation = true
-        let digg = "Kin is a new currency for use in everyday digital services. In our Marketplace you’ll be able to earn Kin by completing tasks and spend Kin on top brands"
+        let digg = "Kin puts you at the center of your digital life by letting you get recognized and rewarded for the time, energy, thoughts, ideas, opinions, and creativity you share online."
         let mutableDigging = NSMutableAttributedString(attributedString:
             digg.attributed(14.0, weight: .regular, color: .white))
         mutableDigging.addAttributes([ .paragraphStyle : style],
@@ -83,7 +83,7 @@ class WelcomeViewController: UIViewController {
             ], range: NSRange(location: 78, length: 14))
         tosText.attributedText = attributedString
         // TODO: add links
-        getStartedButton.titleLabel?.attributedText = "Let’s Get Started".attributed(18.0, weight: .regular, color: .kinDeepSkyBlue)
+        getStartedButton.setAttributedTitle("I agree – Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
     }
     
     func shrinkButton() -> Promise<Void> {

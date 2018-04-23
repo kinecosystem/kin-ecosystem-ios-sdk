@@ -33,6 +33,10 @@ class EarnOfferViewController: UIViewController {
     fileprivate(set) var earn = Promise<String>()
     fileprivate var hideStatusBar = false
     
+    let viewportScriptString = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); meta.setAttribute('initial-scale', '1.0'); meta.setAttribute('maximum-scale', '1.0'); meta.setAttribute('minimum-scale', '1.0'); meta.setAttribute('user-scalable', 'no'); document.getElementsByTagName('head')[0].appendChild(meta);"
+    let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"
+    let disableCalloutScriptString = "document.documentElement.style.webkitTouchCallout='none';"
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(userCanceled))
@@ -41,13 +45,28 @@ class EarnOfferViewController: UIViewController {
         view.backgroundColor = .white
         let config = WKWebViewConfiguration()
         let contentController = WKUserContentController()
+        let viewportScript = WKUserScript(source: viewportScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableSelectionScript = WKUserScript(source: disableSelectionScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        let disableCalloutScript = WKUserScript(source: disableCalloutScriptString, injectionTime: .atDocumentEnd, forMainFrameOnly: true)
+        
         contentController.add(self, name: JSFunctions.handleResult.rawValue)
         contentController.add(self, name: JSFunctions.handleCancel.rawValue)
         contentController.add(self, name: JSFunctions.loaded.rawValue)
         contentController.add(self, name: JSFunctions.handleClose.rawValue)
         contentController.add(self, name: JSFunctions.displayTopBar.rawValue)
+        
+        contentController.addUserScript(viewportScript)
+        contentController.addUserScript(disableSelectionScript)
+        contentController.addUserScript(disableCalloutScript)
+        
         config.userContentController = contentController
         web = WKWebView(frame: .zero, configuration: config)
+        web.scrollView.delaysContentTouches = false
+        web.scrollView.isScrollEnabled = true
+        web.scrollView.bounces = false
+        web.allowsBackForwardNavigationGestures = false
+        web.contentMode = .scaleToFill
+        web.scrollView.delegate = self
         web.navigationDelegate = self
         web.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(web)
@@ -91,7 +110,7 @@ class EarnOfferViewController: UIViewController {
     }
 }
 
-extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate {
+extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         logInfo("got messgae: \(message.name)")
         switch message.name {
@@ -121,6 +140,10 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate 
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
         
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        return nil
     }
 }
 

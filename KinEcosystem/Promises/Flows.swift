@@ -64,7 +64,7 @@ struct Flows {
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
                     let p = Promise<Void>()
-                    logInfo("attempt to get earn order with !pending state: (\(attemptNumber)/9)")
+                    logInfo("attempt to get earn order with !pending state: (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
                         .then { data in
@@ -92,8 +92,7 @@ struct Flows {
                     return p
                 })
             }.then {
-                
-        
+                // do not remove me
             }.error { error in
                 core.blockchain.stopWatchingForNewPayments()
                 logError("earn flow error: \(error)")
@@ -189,13 +188,14 @@ struct Flows {
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
                     let p = Promise<Void>()
-                    logInfo("attempt to get spend order with !pending state: (\(attemptNumber)/9)")
+                    logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
                         .then { data in
                             core.data.read(Order.self, with: data, readBlock: { networkOrder in
-                                logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \((networkOrder.result as? CouponCode)?.coupon_code != nil ? "👍🏼" : "nil")")
-                                if networkOrder.orderStatus != .pending {
+                                let hasResult = (networkOrder.result as? CouponCode)?.coupon_code != nil
+                                logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
+                                if networkOrder.orderStatus != .pending && hasResult {
                                     pending = false
                                 }
                             }).then {
@@ -218,7 +218,7 @@ struct Flows {
                 })
                 
             }.then {
-                
+                // do not remove me
             }
             .error { error in
                 if case SpendOfferError.userCanceled = error  {
