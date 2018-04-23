@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 class CouponViewController: UIViewController {
 
     var viewModel: CouponViewModel!

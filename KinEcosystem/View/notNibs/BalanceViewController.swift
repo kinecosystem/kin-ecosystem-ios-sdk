@@ -12,6 +12,7 @@ import KinUtil
 import StellarKit
 import CoreDataStack
 
+@available(iOS 9.0, *)
 class BalanceViewController: KinViewController {
 
     var core: Core!
@@ -20,11 +21,11 @@ class BalanceViewController: KinViewController {
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var rightAmountConstraint: NSLayoutConstraint!
     @IBOutlet weak var rightArrowImage: UIImageView!
-    
+
     fileprivate var selected = false
     fileprivate let bag = LinkBag()
     fileprivate var watchedOrderStatus: OrderStatus?
-    
+
     fileprivate var entityWatcher: EntityWatcher<Order>?
     fileprivate var currentOrderId: String?
     var watchedOrderId: String? {
@@ -39,22 +40,22 @@ class BalanceViewController: KinViewController {
             setupOrderWatcherFor(orderId)
         }
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
-            guard let this = self else { return }            
-            
+            guard let this = self else { return }
+
             this.balanceAmount.attributedText = "\(balance.amount.currencyString())".attributed(24.0, weight: .regular,
                                                                                         color: .kinDeepSkyBlue)
-            
+
 
         }).add(to: bag)
         _ = core.blockchain.balance()
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WatchOrderNotification"), object: nil, queue: .main) { [weak self] note in
             guard let orderId = note.object as? String else {
-                
+
                 guard let status = self?.watchedOrderStatus, status != .pending else {
                     return
                 }
@@ -67,30 +68,30 @@ class BalanceViewController: KinViewController {
             self?.watchedOrderId = orderId
         }
     }
-    
-    
-    
+
+
+
     func setSelected(_ selected: Bool, animated: Bool) {
         guard self.selected != selected else { return }
-        
+
         self.selected = selected
-        
+
         self.rightAmountConstraint.constant = selected ? 0.0 : 20.0
         let block = {
             self.rightArrowImage.alpha = selected ? 0.0 : 1.0
             self.view.layoutIfNeeded()
         }
-        
+
         guard animated else {
             block()
             return
         }
-        
+
         UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration)) {
             block()
         }
     }
-    
+
     func switchLabel(_ label: UILabel, text: NSAttributedString) {
         if let string = label.attributedText?.string {
             guard string != text.string else { return }
@@ -105,7 +106,7 @@ class BalanceViewController: KinViewController {
             })
         }
     }
-    
+
     func setupOrderWatcherFor(_ orderId: String) {
         if let watcher = try? EntityWatcher<Order>(predicate: NSPredicate(with: ["id":orderId]), sortDescriptors: [], context: core.data.stack.viewContext) {
             entityWatcher = watcher
@@ -134,5 +135,5 @@ class BalanceViewController: KinViewController {
             })
         }
     }
-    
+
 }

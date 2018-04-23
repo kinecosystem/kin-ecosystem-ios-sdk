@@ -10,6 +10,7 @@
 
 import Foundation
 
+@available(iOS 9.0, *)
 extension Bundle {
     class var ecosystem: Bundle {
         let bundle = Bundle(for: Kin.self)

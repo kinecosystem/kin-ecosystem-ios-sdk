@@ -9,6 +9,7 @@
 import UIKit
 import KinSDK
 
+@available(iOS 9.0, *)
 class WelcomeViewController: KinViewController {
 
     var core: Core!
@@ -21,14 +22,14 @@ class WelcomeViewController: KinViewController {
     @IBOutlet weak var getStartedTrailing: NSLayoutConstraint!
     @IBOutlet weak var getStartedLeading: NSLayoutConstraint!
     @IBOutlet weak var diamondsLoader: DiamondsLoaderView!
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
         getStartedButton.adjustsImageWhenDisabled = false
         setupTextLabels()
     }
-    
+
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -45,10 +46,10 @@ class WelcomeViewController: KinViewController {
                 }
             }
         }.error { error in
-                
+
         }
     }
-    
+
     func setupTextLabels() {
         let style = NSMutableParagraphStyle()
         style.minimumLineHeight = 22
@@ -62,7 +63,7 @@ class WelcomeViewController: KinViewController {
             digg.attributed(14.0, weight: .regular, color: .white))
         mutableDigging.addAttributes([ .paragraphStyle : style],
                                      range: NSRange(location: 0, length: digg.count))
-        
+
         let context = NSStringDrawingContext()
         context.minimumScaleFactor = 0.5
         diggingText.attributedText = mutableDigging
@@ -72,7 +73,7 @@ class WelcomeViewController: KinViewController {
         getStartedButton.setAttributedTitle("Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
         getStartedButton.titleLabel?.isUserInteractionEnabled = false
     }
-    
+
     func shrinkButton() -> Promise<Void> {
         let p = Promise<Void>()
         UIView.animate(withDuration: 0.1, animations: {
@@ -88,7 +89,7 @@ class WelcomeViewController: KinViewController {
         }
        return p
     }
-    
+
     func acceptTosAndOnboard() -> Promise<Void> {
         let p = Promise<Void>()
         core.network.acceptTOS().then {
@@ -108,7 +109,7 @@ class WelcomeViewController: KinViewController {
         }
         return p
     }
-    
+
     func presentMarketplace() {
         transition = SplashTransition(animatedView: getStartedButton)
         let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)

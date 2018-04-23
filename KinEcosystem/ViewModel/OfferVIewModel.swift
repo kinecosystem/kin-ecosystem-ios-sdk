@@ -13,6 +13,7 @@ import Foundation
 import UIKit
 import KinUtil
 
+@available(iOS 9.0, *)
 struct OfferViewModel {
     
     let id: String

@@ -24,6 +24,7 @@ enum FirstSpendError: Error {
     case spendFailed
 }
 
+@available(iOS 9.0, *)
 struct Flows {
         
     static func earn(offerId: String,

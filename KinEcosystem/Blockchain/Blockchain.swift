@@ -14,7 +14,7 @@ import StellarErrors
 struct BlockchainProvider: ServiceProvider {
     let url: URL
     let networkId: KinSDK.NetworkId
-    
+
     init(networkId: KinSDK.NetworkId) {
         self.networkId = networkId
         switch networkId {
@@ -32,15 +32,15 @@ struct PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
     var hashValue: Int {
         return description.hashValue
     }
-    
+
     let version = "1"
     var appId: String
     var id: String
-    
+
     var description: String {
         return "\(version)-\(appId)-\(id)"
     }
-    
+
     static func ==(lhs: PaymentMemoIdentifier, rhs: PaymentMemoIdentifier) -> Bool {
         return lhs.description == rhs.description
     }
@@ -51,8 +51,9 @@ enum BlockchainError: Error {
     case watchTimedOut
 }
 
+@available(iOS 9.0, *)
 class Blockchain {
-    
+
     let client: KinClient
     fileprivate(set) var account: KinAccount!
     private let linkBag = LinkBag()
@@ -84,8 +85,8 @@ class Blockchain {
                 updateBalanceObservers()
             }
         }
-        
-        
+
+
     }
     fileprivate(set) var onboarded: Bool {
         get {
@@ -101,7 +102,7 @@ class Blockchain {
             account.extra = Data()
         }
     }
-    
+
     init(networkId: KinSDK.NetworkId) throws {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         self.client = client
@@ -111,9 +112,9 @@ class Blockchain {
         }
         account = try client.accounts[0] ?? client.addAccount()
         _ = balance()
-        
+
     }
-    
+
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
         account.balance(completion: { [weak self] balance, error in
@@ -145,17 +146,17 @@ class Blockchain {
                 p.signal(KinError.internalInconsistency)
             }
         })
-        
+
         return p
     }
-    
+
     func onboard() -> Promise<Void> {
         let p = Promise<Void>()
-        
+
         if onboarded {
             return p.signal(())
         }
-        
+
         balance()
             .then { _ in
                 self.onboarded = true
@@ -197,15 +198,15 @@ class Blockchain {
                     p.signal(bError)
                 }
         }
-        
+
         return p
     }
-    
+
 
     func pay(to recipient: String, kin: Decimal, memo: String?) -> Promise<TransactionId> {
         return account.sendTransaction(to: recipient, kin: kin, memo: memo)
     }
-    
+
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
         guard paymentsWatcher == nil else {
             logInfo("payment watcher already started, added watch for \(memo)...")
@@ -225,7 +226,7 @@ class Blockchain {
         logInfo("added watch for \(memo)...")
         paymentObservers[memo] = Observable<Void>()
     }
-    
+
     func stopWatchingForNewPayments(with memo: PaymentMemoIdentifier? = nil) {
         guard let memo = memo else {
             paymentObservers.removeAll()
@@ -239,7 +240,7 @@ class Blockchain {
         }
         logInfo("removed payment observer for \(memo)")
     }
-    
+
     func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0) -> Promise<Void> {
         let p = Promise<Void>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
@@ -260,19 +261,19 @@ class Blockchain {
         }
         return p
     }
-    
+
     private func updateBalanceObservers() {
         guard let balance = lastBalance else { return }
         balanceObservers.values.forEach { block in
             block(balance)
         }
     }
-    
+
     func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
-        
+
         let identifier = UUID().uuidString
         balanceObservers[identifier] = block
-        
+
         if balanceWatcher == nil {
             balanceWatcher = try account.watchBalance(lastBalance?.amount)
             balanceWatcher?.emitter.on(next: { [weak self] amount in
@@ -282,10 +283,10 @@ class Blockchain {
         if let balance = lastBalance {
             block(balance)
         }
-        
+
         return identifier
     }
-    
+
     func removeBalanceObserver(with identifier: String) {
         balanceObservers[identifier] = nil
         if balanceObservers.count == 0 {
@@ -294,4 +295,3 @@ class Blockchain {
         }
     }
 }
-

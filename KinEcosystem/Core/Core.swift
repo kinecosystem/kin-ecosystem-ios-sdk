@@ -6,6 +6,7 @@
 //  Copyright © 2018 Kik Interactive. All rights reserved.
 //
 
+@available(iOS 9.0, *)
 class Core {
     
     let network: EcosystemNet

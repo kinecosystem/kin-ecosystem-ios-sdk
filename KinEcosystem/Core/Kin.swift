@@ -19,7 +19,7 @@ public enum ExternalOrderStatus {
     case failed
     case completed(String)
 }
-
+@available(iOS 9.0, *)
 public class Kin {
     
     public static let shared = Kin()

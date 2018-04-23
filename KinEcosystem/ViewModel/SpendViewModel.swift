@@ -10,6 +10,7 @@ import Foundation
 import KinUtil
 import KinSDK
 
+@available(iOS 9.0, *)
 class SpendViewModel: Decodable {
     
     var title: NSAttributedString

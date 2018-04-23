@@ -11,6 +11,7 @@ import CoreData
 import CoreDataStack
 import KinSDK
 
+@available(iOS 9.0, *)
 class OrdersViewController : KinNavigationChildController {
 
     var core: Core!
@@ -97,7 +98,7 @@ class OrdersViewController : KinNavigationChildController {
     }
 
 }
-
+@available(iOS 9.0, *)
 extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableView.tableSection(for: section)?.objectCount ?? 0

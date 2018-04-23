@@ -9,6 +9,7 @@
 import Foundation
 import UIKit
 
+@available(iOS 9.0, *)
 extension UIView {
     func fillSuperview() {
         guard let parent = superview else { return }

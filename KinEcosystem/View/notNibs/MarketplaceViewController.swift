@@ -12,6 +12,7 @@ import CoreDataStack
 import StellarKit
 import KinSDK
 
+@available(iOS 9.0, *)
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
@@ -134,6 +135,7 @@ class MarketplaceViewController: KinNavigationChildController {
 
 }
 
+@available(iOS 9.0, *)
 extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {

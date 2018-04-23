@@ -14,6 +14,7 @@ enum SpendOfferError: Error {
     case userCanceled
 }
 
+@available(iOS 9.0, *)
 class SpendOfferViewController: KinViewController {
 
     var viewModel: SpendViewModel!
@@ -23,7 +24,7 @@ class SpendOfferViewController: KinViewController {
     @IBOutlet weak var spendDescription: UILabel!
     @IBOutlet weak var spendButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         viewModel.image.then(on: .main) { [weak self] result in
@@ -36,7 +37,7 @@ class SpendOfferViewController: KinViewController {
         spendButton.backgroundColor = .kinDeepSkyBlue
         spendButton.adjustsImageWhenDisabled = false
     }
-    
+
     @IBAction func closeButtonTapped(_ sender: Any) {
         spend.signal(SpendOfferError.userCanceled)
         let transition = SheetTransition()
@@ -44,13 +45,13 @@ class SpendOfferViewController: KinViewController {
         self.transitioningDelegate = transition
         self.dismiss(animated: true)
     }
-    
+
     @IBAction func confirmTapped(_ sender: Any) {
         spendButton.isEnabled = false
         spend.signal(())
         transitionToConfirmed()
     }
-    
+
     func transitionToConfirmed() {
         let shape = CAShapeLayer()
         shape.frame = view.convert(spendButton.bounds, from: spendButton).insetBy(dx: 1.0, dy: 1.0)
@@ -82,18 +83,18 @@ class SpendOfferViewController: KinViewController {
         let vPathGroup = Animations.animationGroup(animations: [vPathAnimation], duration: duration)
         shape.add(shapeGroup, forKey: "shrink")
         vShape.add(vPathGroup, forKey: "vStroke")
-        
+
         let fadeDuration = duration / 2.0
-        
+
         UIView.animate(withDuration: 0.1, animations: {  [weak self] in
             self?.closeButton.alpha = 0.0
         }) { [weak self] finished in
             self?.closeButton.isHidden = true
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + duration * 0.72) { [weak self] in
-            
-            
+
+
             guard   let spendTitle = self?.spendTitle,
                     let spendDescription = self?.spendDescription else  { return }
             UIView.transition(with: spendTitle, duration: fadeDuration, options: .transitionCrossDissolve, animations: {
@@ -103,14 +104,14 @@ class SpendOfferViewController: KinViewController {
                 self?.spendDescription.attributedText = self?.viewModel.confirmation?.description
             })
         }
-        
+
         DispatchQueue.main.asyncAfter(deadline: .now() + duration + 2.0) {
             let transition = SheetTransition()
             self.modalPresentationStyle = .custom
             self.transitioningDelegate = transition
             self.dismiss(animated: true)
         }
-        
+
     }
 
 }

@@ -21,6 +21,7 @@ struct EcosystemConfiguration {
     var publicAddress: String
 }
 
+@available(iOS 9.0, *)
 class EcosystemNet {
     
     var client: RestClient!
