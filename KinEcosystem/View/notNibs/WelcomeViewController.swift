@@ -84,6 +84,7 @@ class WelcomeViewController: UIViewController {
         tosText.attributedText = attributedString
         // TODO: add links
         getStartedButton.setAttributedTitle("I agree – Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
+        getStartedButton.titleLabel?.isUserInteractionEnabled = false
     }
     
     func shrinkButton() -> Promise<Void> {

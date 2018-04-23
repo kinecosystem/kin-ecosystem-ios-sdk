@@ -81,14 +81,21 @@
                                 <constraint firstAttribute="height" priority="998" constant="16" id="IaO-TO-53e"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0r0-Fx-fEq">
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" hasAttributedTitle="YES" translatesAutoresizingMaskIntoConstraints="NO" id="0r0-Fx-fEq">
                             <rect key="frame" x="37.5" y="370.5" width="245" height="50"/>
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="R9U-0b-u5h"/>
                             </constraints>
-                            <state key="normal" title="Let’s Get Started">
-                                <color key="titleColor" red="0.16199849550000001" green="0.37733814119999998" blue="0.96476399899999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            <state key="normal">
+                                <attributedString key="attributedTitle">
+                                    <fragment content="Let’s Get Started">
+                                        <attributes>
+                                            <color key="NSColor" red="0.16199849550000001" green="0.37733814119999998" blue="0.96476399899999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                            <font key="NSFont" metaFont="system" size="18"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
                             </state>
                             <userDefinedRuntimeAttributes>
                                 <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
@@ -125,7 +132,7 @@
                         <constraint firstAttribute="trailing" secondItem="5zZ-l3-Cv0" secondAttribute="trailing" id="x9V-eF-vID"/>
                     </constraints>
                 </stackView>
-                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjF-1r-BcI" customClass="DiamondsLoaderView" customModule="KinEcosystem" customModuleProvider="target">
+                <view userInteractionEnabled="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FjF-1r-BcI" customClass="DiamondsLoaderView" customModule="KinEcosystem" customModuleProvider="target">
                     <rect key="frame" x="131" y="439" width="58" height="58"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="58" id="EAc-nt-5yW"/>
