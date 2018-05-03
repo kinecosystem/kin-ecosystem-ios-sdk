@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'KinEcosystem'
-  s.version          = '0.2.5'
+  s.version          = '0.2.6'
   s.summary          = 'Kin Ecosystem mobile sdk for iOS'
   s.description      = <<-DESC
 Kin ecosystem mobile sdk for iOS
@@ -16,6 +16,6 @@ Kin ecosystem mobile sdk for iOS
   s.source_files = 'KinEcosystem/**/*.{h,m,swift}'
   s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json}'
   s.swift_version = '4.0'
-  s.dependency 'SimpleCoreDataStack', '0.1.3'
+  s.dependency 'SimpleCoreDataStack', '0.1.4'
   s.dependency 'KinSDK', '0.7.4'
 end
