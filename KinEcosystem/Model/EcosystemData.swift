@@ -12,6 +12,7 @@ import Foundation
 import CoreDataStack
 import CoreData
 import KinUtil
+import KinSDK
 
 enum EcosystemDataError: Error {
     case fetchError
@@ -26,7 +27,7 @@ protocol NetworkSyncable: Decodable {
 
 protocol EntityPresentor: Decodable {
     associatedtype entity: NSManagedObject, NetworkSyncable
-    var entities: [entity] { get }
+    var entities: [entity]? { get }
 }
 
 typealias DataChangeBlock<T> = ([T]) -> ()
@@ -50,7 +51,11 @@ class EcosystemData {
             
             let request = NSFetchRequest<E.entity>(entityName: String(describing: E.entity.self))
             let diskEntities = try context.fetch(request)
-            let networkEntities = try decoder.decode(presentorType, from: data).entities
+            guard let networkEntities = try decoder.decode(presentorType, from: data).entities else {
+                shouldSave = false
+                p.signal(KinError.internalInconsistency)
+                return
+            }
             
             // set entities order based on network's order return
             networkEntities.enumerated().forEach({ (arg) in

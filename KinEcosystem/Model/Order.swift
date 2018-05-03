@@ -11,8 +11,8 @@ import CoreData
 
 class OrdersList: EntityPresentor {
     typealias entity = Order
-    var orders: [entity]
-    var entities: [entity] {
+    var orders: [entity]?
+    var entities: [entity]? {
         return orders
     }
 }

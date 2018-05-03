@@ -15,7 +15,7 @@ A stellar wallet and account will be created behind the scenes for the user. <br
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.2.5'
+pod 'KinEcosystem', '0.2.7'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
@@ -27,7 +27,8 @@ The ecosystem sdk needs at least three inputs to begin:
 2. An app API key. You obtain one by contacting Kin Foundation.
 3. A unique identifier for the current user.
 
-> Note: There are a few more things you can configure when starting the sdk, such as running on test net or main net, using a jwt or a whitelist for user validation etc, but the above three are enough for a default run on the testnet.
+> Note: There are a few more things you can configure when starting the sdk, such as running on test net or main net, using a jwt or a whitelist for user validation etc, but the above three are enough for a default run on the testnet.</br>
+To view an example of logging in with a [JWT](http://jwt.io), check out the [sample app](https://github.com/kinecosystem/kin-ecosystem-ios-sample-app)
 
 Once your app can provide a unique user id, call:
 
