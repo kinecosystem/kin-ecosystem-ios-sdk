@@ -73,6 +73,7 @@
 		E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D178D20518B3600FEB57A /* UIImage+extensions.swift */; };
 		E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */; };
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
+		E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
 		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
@@ -229,6 +230,7 @@
 		E98D178D20518B3600FEB57A /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
+		E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTConfirmation.swift; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
 		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
@@ -476,6 +478,7 @@
 				E912B4EA203C6683005ADBA1 /* BlockchainData.swift */,
 				E954A62C2058163C00F01C8A /* OrderError.swift */,
 				E954A62E205817AD00F01C8A /* CouponCode.swift */,
+				E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -761,6 +764,7 @@
 				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
+				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);

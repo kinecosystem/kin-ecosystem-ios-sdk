@@ -139,7 +139,9 @@ class Order: NSManagedObject, NetworkSyncable {
         // Mind and keep the order of checks here
         if let coupon = try? values.decodeIfPresent(CouponCode.self, forKey: .result) {
             result = coupon
-        } // when jwt adds, it adds here
+        } else if let jwt = try? values.decodeIfPresent(JWTConfirmation.self, forKey: .result) {
+            result = jwt
+        }
         
     }
 }

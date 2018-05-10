@@ -42,7 +42,7 @@ class RestClient {
                           user_id: config.userId,
                           app_id: config.appId,
                           device_id: identifier,
-                          public_address: config.publicAddress,
+                          wallet_address: config.publicAddress,
                           sign_in_type: config.jwt != nil ? SignInType.jwt.rawValue : SignInType.whitelist.rawValue,
                           api_key: config.apiKey)
     }()
@@ -135,7 +135,7 @@ class RestClient {
             guard   let response = response as? HTTPURLResponse,
                         200 ... 299 ~= response.statusCode else {
                 if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
-                    logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
+                    logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
                     p.signal(EcosystemNetError.service(responseError))
                 } else {
                     var errorJson: String?
@@ -164,7 +164,7 @@ class RestClient {
                         200 ... 299 ~= response.statusCode else {
                     if  let data = data,
                         let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
-                        logError("request \(String(describing: request.url?.absoluteString)) failed, service ok but returned \(responseError.code)")
+                        logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
                         p.signal(EcosystemNetError.service(responseError))
                     } else {
                         logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason")

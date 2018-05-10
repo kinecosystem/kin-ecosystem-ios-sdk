@@ -11,6 +11,7 @@ import CoreData
 
 enum OrderResultType: String {
     case coupon
+    case jwt
 }
 
 class OrderResult: NSManagedObject {

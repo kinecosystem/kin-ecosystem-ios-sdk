@@ -13,6 +13,13 @@ struct ResponseError: Decodable, Error {
     var error: String
     var message: String?
     var code: Int32
+    var localizedDescription: String {
+        return """
+        error:      \(error)
+        message:    \(message ?? "n/a")
+        code:       \(code)
+        """
+    }
 }
 
 enum ContentType: String {
@@ -36,7 +43,7 @@ struct SignInData: Encodable {
     var user_id: String
     var app_id: String
     var device_id: String
-    var public_address: String
+    var wallet_address: String
     var sign_in_type: String
     var api_key: String
 }
@@ -56,9 +63,18 @@ struct OpenOrderData: Decodable {
     var sender_address: String?
     var recipient_address: String?
 }
+
 struct OpenOrder: Decodable {
     var id: String
     var expiration_date: String
-    var recipient_address: String?
     var blockchain_data: OpenOrderData?
+    var offer_id: String
+    var offer_type: String
+    var title: String
+    var description: String
+    var amount: Int32
+}
+
+struct JWTOrderSubmission: Encodable {
+    var jwt: String
 }

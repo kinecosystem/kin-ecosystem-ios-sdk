@@ -17,6 +17,7 @@ import KinSDK
 enum EcosystemDataError: Error {
     case fetchError
     case decodeError
+    case encodeError
 }
 
 protocol NetworkSyncable: Decodable {

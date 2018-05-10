@@ -112,8 +112,12 @@ class EcosystemNet {
                                     body: Data? = nil,
                                     parameters: [String: String]? = nil) -> Promise<T> {
         let p = Promise<T>()
-        dataAtPath(path, method: method).then { data in
-            return p.signal(try JSONDecoder().decode(type, from: data))
+        dataAtPath(path, method: method, body: body).then { data in
+            guard let object = try? JSONDecoder().decode(type, from: data) else {
+                p.signal(EcosystemDataError.decodeError)
+                return
+            }
+            p.signal(object)
         }
         return p
     }

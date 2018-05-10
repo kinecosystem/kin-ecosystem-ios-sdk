@@ -121,7 +121,7 @@ struct Flows {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
                                 if let  completedOrder = orders.first,
-                                        completedOrder.orderStatus != .failed {
+                                    completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
                                 }
                             }, with: NSPredicate(with: ["id": order.id]))
@@ -254,7 +254,7 @@ struct Flows {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
                                 if let  completedOrder = orders.first,
-                                        completedOrder.orderStatus != .failed {
+                                    completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
                                 }
                             }, with: NSPredicate(with: ["id": order.id]))
@@ -264,6 +264,140 @@ struct Flows {
                 
         }
         
+    }
+    
+    static func nativeSpend(jwt: String, core: Core) -> Promise<String> {
+        let jwtPromise = Promise<String>()
+        var jwtConfirmation: String?
+        guard let jwtSubmission = try? JSONEncoder().encode(JWTOrderSubmission(jwt: jwt)) else {
+            return jwtPromise.signal(EcosystemDataError.encodeError)
+        }
+        var openOrder: OpenOrder?
+        
+        core.network.objectAtPath("offers/external/orders", type: OpenOrder.self, method: .post, body: jwtSubmission)
+            .then { order -> Promise<(String, Decimal, OpenOrder)> in
+                openOrder = order
+                logVerbose("created order \(order.id)")
+                guard let recipient = order.blockchain_data?.recipient_address else {
+                    return Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                }
+                logVerbose("spend offer id \(order.offer_id), recipient \(recipient)")
+                return Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(order.amount), order))
+                
+            }.then { recipient, amount, order -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+                let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
+                try core.blockchain.startWatchingForNewPayments(with: memo)
+                return core.network.dataAtPath("orders/\(order.id)", method: .post)
+                    .then { data in
+                        core.data.save(Order.self, with: data)
+                    }.then {
+                        logVerbose("Submitted order \(order.id)")
+                        return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                }
+            }.then { recipient, amount, order, memo -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+                return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
+                    if let offer = offers.first {
+                        offer.pending = true
+                        logVerbose("changed offer \(offer.id) status to pending")
+                    }
+                }, with: NSPredicate(with: ["id" : order.offer_id]))
+                    .then {
+                        Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                }
+            }.then { recipient, amount, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+                return core.blockchain.pay(to: recipient, kin: amount, memo: memo.description)
+                    .then { _ in
+                        logVerbose("\(amount) kin sent to \(recipient)")
+                        return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                }
+            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+                return core.blockchain.waitForNewPayment(with: memo)
+                    .then {
+                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                }
+            }.then { memo, order -> Promise<Void> in
+                core.blockchain.stopWatchingForNewPayments(with: memo)
+                let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+                return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
+                    let p = Promise<Void>()
+                    logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
+                    var pending = true
+                    core.network.dataAtPath("orders/\(order.id)")
+                        .then { data in
+                            core.data.read(Order.self, with: data, readBlock: { networkOrder in
+                                jwtConfirmation = (networkOrder.result as? JWTConfirmation)?.jwt
+                                let hasResult = jwtConfirmation != nil
+                                logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
+                                if networkOrder.orderStatus != .pending && hasResult {
+                                    pending = false
+                                }
+                            }).then {
+                                if pending {
+                                    if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
+                                        logWarn("attempts reached \(attemptNumber)")
+                                        _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                                            if let order = orders.first {
+                                                order.orderStatus = attemptNumber == 5 ? .delayed : .failed
+                                            }
+                                        }, with: NSPredicate(with: ["id":order.id]))
+                                    }
+                                    p.signal(OrderStatusError.orderStillPending)
+                                } else {
+                                    p.signal(())
+                                }
+                            }
+                    }
+                    return p
+                })
+                
+            }.then {
+                if let confirmation = jwtConfirmation {
+                    jwtPromise.signal(confirmation)
+                } else {
+                    jwtPromise.signal(KinError.internalInconsistency)
+                }
+            }
+            .error { error in
+                
+                logError("\(error)")
+                core.blockchain.stopWatchingForNewPayments()
+                _ = core.blockchain.balance()
+                if let order = openOrder {
+                    core.network.delete("orders/\(order.id)")
+                        .then {
+                            logInfo("order canceled: \(order.id)")
+                        }.error { error in
+                            logError("error canceling order: \(order.id)")
+                        }.finally {
+                            jwtPromise.signal(error)
+                    }
+                }
+                openOrder = nil
+                
+            }.finally {
+                logInfo("ended")
+                core.network.dataAtPath("offers")
+                    .then { data in
+                        core.data.sync(OffersList.self, with: data)
+                    }.then {
+                        core.network.dataAtPath("orders")
+                    }.then { data in
+                        core.data.sync(OrdersList.self, with: data)
+                    }.then {
+                        if let order = openOrder {
+                            _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                                if let  completedOrder = orders.first,
+                                    completedOrder.orderStatus != .failed {
+                                    completedOrder.orderStatus = .completed
+                                }
+                            }, with: NSPredicate(with: ["id": order.id]))
+                        }
+                        openOrder = nil
+                }
+                
+        }
+        
+        return jwtPromise
     }
     
 }

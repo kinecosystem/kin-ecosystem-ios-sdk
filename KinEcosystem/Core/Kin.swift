@@ -16,6 +16,8 @@ enum KinEcosystemError: Error {
     case kinNotStarted
 }
 
+public typealias PurchaseCallback = (String?, Error?) -> ()
+
 public class Kin {
     
     public static let shared = Kin()
@@ -25,8 +27,11 @@ public class Kin {
     fileprivate init() { }
     
     @discardableResult
-    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet) -> Bool {
-        guard core == nil else { return true }
+    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet, completion: ((Error?) -> ())? = nil) -> Bool {
+        guard core == nil else {
+            completion?(nil)
+            return true
+        }
         if let  lastUser = UserDefaults.standard.string(forKey: "lastSignedInUser"),
             lastUser != userId {
             needsReset = true
@@ -39,6 +44,7 @@ public class Kin {
                                                modelURL: URL(string: modelPath)!),
                 let chain = try? Blockchain(networkId: networkId) else {
             logError("start failed")
+            completion?(KinError.internalInconsistency)
             return false
         }
         var url: URL
@@ -65,10 +71,12 @@ public class Kin {
             self.core!.blockchain.onboard()
                 .then {
                     logInfo("blockchain onboarded successfully")
+                    completion?(nil)
                 }
                 .error { error in
                     logError("blockchain onboarding failed - \(error)")
-                }
+                    completion?(error)
+            }
         }
         return true
     }
@@ -83,6 +91,14 @@ public class Kin {
             }.error { _ in
                 completion(0)
         }
+    }
+    
+    public func publicAddress() -> String? {
+        guard let core = core else {
+            logError("Kin not started")
+            return nil
+        }
+        return core.blockchain.account.publicAddress
     }
     
     public func launchMarketplace(from parentViewController: UIViewController) {
@@ -105,6 +121,22 @@ public class Kin {
             parentViewController.present(welcomeVC, animated: true)
         }
         
+    }
+    
+    public func purchase(offerJWT: String, completion: @escaping PurchaseCallback) -> Bool {
+        guard let core = core else {
+            logError("Kin not started")
+            completion(nil, KinEcosystemError.kinNotStarted)
+            return false
+        }
+        defer {
+            Flows.nativeSpend(jwt: offerJWT, core: core).then { jwt in
+                completion(jwt, nil)
+                }.error { error in
+                    completion(nil, error)
+            }
+        }
+        return true
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
