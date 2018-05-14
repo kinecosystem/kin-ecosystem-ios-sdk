@@ -16,13 +16,15 @@ import KinUtil
 
 enum OrderStatusError: Error {
     case orderStillPending
+    case orderProcessingFailed
 }
 
 struct Flows {
-    
+        
     static func earn(offerId: String, resultPromise: Promise<String>, core: Core) {
         
         var openOrder: OpenOrder?
+        var canCancelOrder = true
         
         core.network.objectAtPath("offers/\(offerId)/orders", type: OpenOrder.self, method: .post)
             .then { order -> Promise<(String, OpenOrder)> in
@@ -45,7 +47,8 @@ struct Flows {
                     .then { data in
                         core.data.save(Order.self, with: data)
                     }.then {
-                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        canCancelOrder = false
+                        return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
             }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
@@ -96,7 +99,7 @@ struct Flows {
             }.error { error in
                 core.blockchain.stopWatchingForNewPayments()
                 logError("earn flow error: \(error)")
-                if let order = openOrder {
+                if let order = openOrder, canCancelOrder {
                     let group = DispatchGroup()
                     group.enter()
                     core.network.delete("orders/\(order.id)").then {
@@ -135,6 +138,7 @@ struct Flows {
     static func spend(offerId: String, confirmPromise: Promise<Void>, core: Core) {
         
         var openOrder: OpenOrder?
+        var canCancelOrder = true
         
         core.network.objectAtPath("offers/\(offerId)/orders", type: OpenOrder.self, method: .post)
             .then { order -> Promise<(String, Decimal, OpenOrder)> in
@@ -159,6 +163,7 @@ struct Flows {
                     .then { data in
                         core.data.save(Order.self, with: data)
                     }.then {
+                        canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
                         return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
@@ -195,7 +200,7 @@ struct Flows {
                             core.data.read(Order.self, with: data, readBlock: { networkOrder in
                                 let hasResult = (networkOrder.result as? CouponCode)?.coupon_code != nil
                                 logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
-                                if networkOrder.orderStatus != .pending && hasResult {
+                                if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
                                     pending = false
                                 }
                             }).then {
@@ -228,7 +233,7 @@ struct Flows {
                     core.blockchain.stopWatchingForNewPayments()
                 }
                 _ = core.blockchain.balance()
-                if let order = openOrder {
+                if let order = openOrder, canCancelOrder {
                     let group = DispatchGroup()
                     group.enter()
                     core.network.delete("orders/\(order.id)").then {
@@ -273,6 +278,7 @@ struct Flows {
             return jwtPromise.signal(EcosystemDataError.encodeError)
         }
         var openOrder: OpenOrder?
+        var canCancelOrder = true
         
         core.network.objectAtPath("offers/external/orders", type: OpenOrder.self, method: .post, body: jwtSubmission)
             .then { order -> Promise<(String, Decimal, OpenOrder)> in
@@ -291,6 +297,7 @@ struct Flows {
                     .then { data in
                         core.data.save(Order.self, with: data)
                     }.then {
+                        canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
                         return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
@@ -328,7 +335,7 @@ struct Flows {
                                 jwtConfirmation = (networkOrder.result as? JWTConfirmation)?.jwt
                                 let hasResult = jwtConfirmation != nil
                                 logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
-                                if networkOrder.orderStatus != .pending && hasResult {
+                                if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
                                     pending = false
                                 }
                             }).then {
@@ -354,7 +361,7 @@ struct Flows {
                 if let confirmation = jwtConfirmation {
                     jwtPromise.signal(confirmation)
                 } else {
-                    jwtPromise.signal(KinError.internalInconsistency)
+                    jwtPromise.signal(OrderStatusError.orderProcessingFailed)
                 }
             }
             .error { error in
@@ -362,7 +369,7 @@ struct Flows {
                 logError("\(error)")
                 core.blockchain.stopWatchingForNewPayments()
                 _ = core.blockchain.balance()
-                if let order = openOrder {
+                if let order = openOrder, canCancelOrder {
                     core.network.delete("orders/\(order.id)")
                         .then {
                             logInfo("order canceled: \(order.id)")
