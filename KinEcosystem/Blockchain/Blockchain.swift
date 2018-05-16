@@ -52,7 +52,7 @@ enum BlockchainError: Error {
     case watchTimedOut
 }
 
-enum StatfulBalance {
+public enum StatfulBalance {
     case pendind(Decimal)
     case errored(Decimal)
     case verified(Decimal)
@@ -86,7 +86,7 @@ class Blockchain {
             localLastBalance = newValue
         }
     }
-    fileprivate(set) var currentBalance = Observable<StatfulBalance>()
+    var currentBalance = Observable<StatfulBalance>()
     fileprivate(set) var onboarded: Bool {
         get {
             return account.extra != nil
@@ -207,22 +207,22 @@ class Blockchain {
     
 
     func pay(to recipient: String, kin: Decimal, memo: String?) -> Promise<TransactionId> {
-        updateBalance(beforePaymentOf: kin)
         return account.sendTransaction(to: recipient, kin: kin, memo: memo)
     }
     
-    func updateBalance(beforePaymentOf kin:Decimal) {
-        lastBalance = lastBalance - kin
+    func updatePendingBalance(with expectedAmount:Decimal) {
+        lastBalance = lastBalance + expectedAmount
         currentBalance.next(.pendind(lastBalance))
     }
     
-    func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
+    func startWatchingForNewPayments(with memo: PaymentMemoIdentifier, expectedAmount: Decimal = 0) throws {
         guard watcher == nil else {
             logInfo("payment watcher already started, added watch for \(memo)...")
             paymentObservers[memo] = Observable<Void>()
             return
         }
         watcher = try account.watchPayments(cursor: "now")
+        updatePendingBalance(with: expectedAmount)
         watcher?.emitter.on(next: { [weak self] paymentInfo in
             guard let metadata = paymentInfo.memoText else { return }
             guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
@@ -257,7 +257,6 @@ class Blockchain {
         }) else {
             return p.signal(BlockchainError.watchNotStarted)
         }
-        currentBalance.next(.pendind(lastBalance))
         var found = false
         paymentObservers[memo]?.on(next: { [weak self] _ in
             found = true

@@ -26,6 +26,20 @@ public class Kin {
     fileprivate weak var mpPresentingController: UIViewController?
     fileprivate init() { }
     
+    public var balanceObserver: Observable<StatfulBalance>? {
+        guard let core = Kin.shared.core else {
+            return nil
+        }
+        return core.blockchain.currentBalance
+    }
+    
+    public var publicAddres: String? {
+        guard let core = Kin.shared.core else {
+            return nil
+        }
+        return core.blockchain.account.publicAddress
+    }
+    
     @discardableResult
     public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet, completion: ((Error?) -> ())? = nil) -> Bool {
         guard core == nil else {
@@ -91,14 +105,6 @@ public class Kin {
             }.error { _ in
                 completion(0)
         }
-    }
-    
-    public func publicAddress() -> String? {
-        guard let core = core else {
-            logError("Kin not started")
-            return nil
-        }
-        return core.blockchain.account.publicAddress
     }
     
     public func launchMarketplace(from parentViewController: UIViewController) {

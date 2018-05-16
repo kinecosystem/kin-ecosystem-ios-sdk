@@ -39,7 +39,7 @@ struct Flows {
                                                  id: order.id)
                 return Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
-                try core.blockchain.startWatchingForNewPayments(with: memo)
+                try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: Decimal(order.amount))
             }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 let result = EarnResult(content: htmlResult)
                 let content = try JSONEncoder().encode(result)
@@ -158,7 +158,7 @@ struct Flows {
                 }
             }.then { recipient, amount, order -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
-                try core.blockchain.startWatchingForNewPayments(with: memo)
+                try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: -Decimal(order.amount))
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
                         core.data.save(Order.self, with: data)
@@ -292,7 +292,7 @@ struct Flows {
                 
             }.then { recipient, amount, order -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
-                try core.blockchain.startWatchingForNewPayments(with: memo)
+                try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: -Decimal(order.amount))
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
                         core.data.save(Order.self, with: data)
