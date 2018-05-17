@@ -33,11 +33,6 @@ class OrdersViewController : KinNavigationChildController {
     
     fileprivate func setupNavigationItem() {
         self.title = "Transaction History"
-        let buttonEdit: UIButton = UIButton(type: .custom) as UIButton
-        buttonEdit.frame = CGRect(x: 0, y: 0, width: 40, height: 40)
-        buttonEdit.setImage(UIImage(named: "whatsKin", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal), for: .normal)
-        buttonEdit.addTarget(self, action: #selector(didTapInfo), for: .touchUpInside)
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(customView: buttonEdit)
     }
     
     fileprivate func setupTableView() {
@@ -78,10 +73,6 @@ class OrdersViewController : KinNavigationChildController {
         }
         tableView.add(tableSection: section)
         try? frc.performFetch()
-    }
-    
-    @objc fileprivate func didTapInfo(sender: Any?) {
-
     }
 
 }

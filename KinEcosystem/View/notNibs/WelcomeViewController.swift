@@ -18,7 +18,6 @@ class WelcomeViewController: UIViewController {
     
     @IBOutlet weak var diggingText: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
-    @IBOutlet weak var tosText: UILabel!
     @IBOutlet weak var diggingTextHeight: NSLayoutConstraint!
     @IBOutlet weak var getStartedTrailing: NSLayoutConstraint!
     @IBOutlet weak var getStartedLeading: NSLayoutConstraint!
@@ -71,19 +70,7 @@ class WelcomeViewController: UIViewController {
         diggingTextHeight.constant = mutableDigging.boundingRect(with: CGSize(width: diggingText.bounds.width, height: .greatestFiniteMagnitude),
                                                                  options: [.usesLineFragmentOrigin, .usesFontLeading], context: context).height
         diggingText.layoutIfNeeded()
-        
-        let attributedString = NSMutableAttributedString(string: "By clicking “Let’s Get Started” you are agreeing  to our Terms of Service and Privacy Policy")
-        attributedString.addAttributes([
-            .font: UIFont.systemFont(ofSize: 12.0, weight: .medium),
-            .foregroundColor: UIColor.kinLightAqua
-            ], range: NSRange(location: 57, length: 16))
-        attributedString.addAttributes([
-            .font: UIFont.systemFont(ofSize: 12.0, weight: .medium),
-            .foregroundColor: UIColor.kinLightAqua
-            ], range: NSRange(location: 78, length: 14))
-        tosText.attributedText = attributedString
-        // TODO: add links
-        getStartedButton.setAttributedTitle("I agree – Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
+        getStartedButton.setAttributedTitle("Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
         getStartedButton.titleLabel?.isUserInteractionEnabled = false
     }
     
