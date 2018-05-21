@@ -11,8 +11,8 @@ import UIKit
 import CoreData
 import CoreDataStack
 import StellarKit
-import KinSDK
 import KinUtil
+import KinSDK
 
 enum OrderStatusError: Error {
     case orderStillPending
@@ -32,12 +32,12 @@ struct Flows {
                 openOrder = order
                 return resultPromise
                     .then { htmlResult in
-                        Promise<(String, OpenOrder)>().signal((htmlResult, order))
+                        KinUtil.Promise<(String, OpenOrder)>().signal((htmlResult, order))
                 }
             }.then(on: .main) { htmlResult, order -> Promise<(String, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId,
                                                  id: order.id)
-                return Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
+                return KinUtil.Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
                 try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: Decimal(order.amount))
             }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
@@ -48,25 +48,25 @@ struct Flows {
                         core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
-                        return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
             }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
                     offers.first?.pending = true
                 }, with: NSPredicate(with:["id": offerId]))
                     .then {
-                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+            }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
-                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
             }.then { memo, order -> Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
-                    let p = Promise<Void>()
+                    let p = KinUtil.Promise<Void>()
                     logInfo("attempt to get earn order with !pending state: (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
@@ -151,12 +151,12 @@ struct Flows {
                     }.then { offers in
                         guard   let offer = offers.first,
                             let recipient = offer.blockchain_data?.recipient_address else {
-                                return Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
                         }
                         logVerbose("spend offer id \(offer.id), recipient \(recipient)")
-                        return Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(offer.amount), order))
+                        return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(offer.amount), order))
                 }
-            }.then { recipient, amount, order -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+            }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: -Decimal(order.amount))
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
@@ -165,9 +165,9 @@ struct Flows {
                     }.then {
                         canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
-                        return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        return KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
-            }.then { recipient, amount, order, memo -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+            }.then { recipient, amount, order, memo -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
                     if let offer = offers.first {
                         offer.pending = true
@@ -175,24 +175,24 @@ struct Flows {
                     }
                 }, with: NSPredicate(with: ["id" : offerId]))
                     .then {
-                        Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
-            }.then { recipient, amount, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+            }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.pay(to: recipient, kin: amount, memo: memo.description)
                     .then { _ in
                         logVerbose("\(amount) kin sent to \(recipient)")
-                        return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+            }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
-                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<Void> in
+            }.then { memo, order -> KinUtil.Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
-                    let p = Promise<Void>()
+                    let p = KinUtil.Promise<Void>()
                     logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
@@ -272,7 +272,7 @@ struct Flows {
     }
     
     static func nativeSpend(jwt: String, core: Core) -> Promise<String> {
-        let jwtPromise = Promise<String>()
+        let jwtPromise = KinUtil.Promise<String>()
         var jwtConfirmation: String?
         guard let jwtSubmission = try? JSONEncoder().encode(JWTOrderSubmission(jwt: jwt)) else {
             return jwtPromise.signal(EcosystemDataError.encodeError)
@@ -281,16 +281,16 @@ struct Flows {
         var canCancelOrder = true
         
         core.network.objectAtPath("offers/external/orders", type: OpenOrder.self, method: .post, body: jwtSubmission)
-            .then { order -> Promise<(String, Decimal, OpenOrder)> in
+            .then { order -> KinUtil.Promise<(String, Decimal, OpenOrder)> in
                 openOrder = order
                 logVerbose("created order \(order.id)")
                 guard let recipient = order.blockchain_data?.recipient_address else {
-                    return Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                    return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
                 }
                 logVerbose("spend offer id \(order.offer_id), recipient \(recipient)")
-                return Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(order.amount), order))
+                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(order.amount), order))
                 
-            }.then { recipient, amount, order -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+            }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo, expectedAmount: -Decimal(order.amount))
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
@@ -299,7 +299,7 @@ struct Flows {
                     }.then {
                         canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
-                        return Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        return KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 return core.data.changeObjects(of: Offer.self, changeBlock: { offers in
@@ -309,24 +309,24 @@ struct Flows {
                     }
                 }, with: NSPredicate(with: ["id" : order.offer_id]))
                     .then {
-                        Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
                 }
-            }.then { recipient, amount, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+            }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.pay(to: recipient, kin: amount, memo: memo.description)
                     .then { _ in
                         logVerbose("\(amount) kin sent to \(recipient)")
-                        return Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
+            }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
                     .then {
-                        Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<Void> in
+            }.then { memo, order -> KinUtil.Promise<Void> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-                return attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
-                    let p = Promise<Void>()
+                return KinUtil.attempt(retryIntervals: intervals, closure: { attemptNumber -> Promise<Void> in
+                    let p = KinUtil.Promise<Void>()
                     logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")

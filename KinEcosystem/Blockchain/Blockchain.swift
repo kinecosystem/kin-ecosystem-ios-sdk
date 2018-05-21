@@ -8,7 +8,6 @@
 
 import Foundation
 import KinSDK
-import KinUtil
 import StellarKit
 import StellarErrors
 

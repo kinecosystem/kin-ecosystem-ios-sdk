@@ -11,7 +11,6 @@
 import Foundation
 import CoreDataStack
 import CoreData
-import KinUtil
 import KinSDK
 
 enum EcosystemDataError: Error {
