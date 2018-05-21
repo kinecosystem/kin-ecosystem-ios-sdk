@@ -159,15 +159,15 @@ A native spend offer requires you prepare an encoded jwt object, describing the 
 
 1. We will support `ES256` signature algorithm later on, right now you can use `RS512`.
 2. Header will follow this template
-    ```aidl
+```aidl
     {
         "alg": "RS512", // We will support ES256 signature algorithem
         "typ": "JWT",
         "kid": string" // identifier of the keypair that was used to sign the JWT. identifiers and public keys will be provided by signer authority. This enables using multiple private/public key pairs (a list of public keys and their ids need to be provided by signer authority to verifier in advanced)
     }
-    ```
+```
 3. SpendOffer payload template
-    ```aidl
+```aidl
     {
         // common/ standard fields
         iat: number;  // issued at - seconds from epoc
@@ -175,16 +175,19 @@ A native spend offer requires you prepare an encoded jwt object, describing the 
         exp: number; // expiration
         sub: "spend"
 
-        // application fields
-        offer: {
-                id: string; // offer id is decided by you (internal)
-                title: string; // offer title - appears in order history
-                description: string; // offer description - appears in order history
-                amount: number; // amount of kin for this offer - price
-                wallet_address: string; // address the client should send kin to to acquire this offer
-            }
+       // application fields
+       offer: {
+               id: string; // offer id is decided by you (internal)
+               amount: number; // amount of kin for this offer - price
+       }
+
+       sender: {
+              user_id: string; // optional: user_id who will perform the order
+              title: string; // order title - appears in order history
+              description: string; // order description - appears in order history
+       }
     }
-    ```
+```
 
 And to actually perform the purchase, call:
 ```swift
