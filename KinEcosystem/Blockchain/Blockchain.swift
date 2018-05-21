@@ -19,11 +19,11 @@ struct BlockchainProvider: ServiceProvider {
         self.networkId = networkId
         switch networkId {
         case .mainNet:
-            self.url = URL(string: "https://horizon-testnet.stellar.org")!
+            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
         case .testNet:
-            self.url = URL(string: "https://horizon-testnet.stellar.org")!
+            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
         default:
-            self.url = URL(string: "https://horizon-testnet.stellar.org")!
+            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
         }
     }
 }
