@@ -14,13 +14,12 @@ class KinBaseNavigationController: UINavigationController {
         return .lightContent
     }
     
-    override var navigationBar: UINavigationBar {
-        let bar = super.navigationBar
-        bar.isTranslucent = false
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        navigationBar.isTranslucent = false
         let colors = [UIColor.kinAzure, UIColor.kinBrightBlueTwo]
-        bar.applyNavigationGradient(colors: colors)
-        bar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        return bar
+        navigationBar.applyNavigationGradient(colors: colors)
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
 
     override var edgesForExtendedLayout: UIRectEdge {
