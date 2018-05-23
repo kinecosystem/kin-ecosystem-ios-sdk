@@ -45,12 +45,13 @@ public class Kin {
             completion?(nil)
             return true
         }
-        if let  lastUser = UserDefaults.standard.string(forKey: "lastSignedInUser"),
+        if let  lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue),
             lastUser != userId {
             needsReset = true
             logInfo("new user detected - resetting everything")
+            UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
-        UserDefaults.standard.set(userId, forKey: "lastSignedInUser")
+        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd"),
                 let store = try? EcosystemData(modelName: "KinEcosystem",

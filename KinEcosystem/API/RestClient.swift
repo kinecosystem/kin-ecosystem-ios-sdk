@@ -30,11 +30,11 @@ class RestClient {
         if identifier.rangeOfCharacter(from: letters) == nil {
             if let vendorIdentifier = UIDevice.current.identifierForVendor?.uuidString {
                 identifier = vendorIdentifier
-            } else if let uuid = UserDefaults.standard.string(forKey: "ecosystemUUID") {
+            } else if let uuid = UserDefaults.standard.string(forKey: KinPreferenceKey.ecosystemUUID.rawValue) {
                 identifier = uuid
             } else {
                 let uuid = UUID().uuidString
-                UserDefaults.standard.set(uuid, forKey: "ecosystemUUID")
+                UserDefaults.standard.set(uuid, forKey: KinPreferenceKey.ecosystemUUID.rawValue)
                 identifier = uuid
             }
         }
@@ -55,7 +55,7 @@ class RestClient {
                 Date().compare(expiryDate) == .orderedAscending {
                 return lastToken
             }
-            if  let tokenJson = UserDefaults.standard.string(forKey: "authToken"),
+            if  let tokenJson = UserDefaults.standard.string(forKey: KinPreferenceKey.authToken.rawValue),
                 let data = tokenJson.data(using: .utf8),
                 let token = try? JSONDecoder().decode(AuthToken.self, from: data),
                 let expiryDate = Iso8601DateFormatter.date(from: token.expiration_date),
@@ -68,13 +68,13 @@ class RestClient {
         set {
             guard newValue != nil else {
                 lastToken = nil
-                UserDefaults.standard.removeObject(forKey: "authToken")
+                UserDefaults.standard.removeObject(forKey: KinPreferenceKey.authToken.rawValue)
                 return
             }
             if  let tokenData = try? JSONEncoder().encode(newValue),
                 let tokenString = String(data: tokenData, encoding: .utf8) {
                 lastToken = newValue
-                UserDefaults.standard.set(tokenString, forKey: "authToken")
+                UserDefaults.standard.set(tokenString, forKey: KinPreferenceKey.authToken.rawValue)
             }
         }
     }

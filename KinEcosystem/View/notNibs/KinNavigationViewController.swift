@@ -31,6 +31,10 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
     fileprivate let transitionDuration = TimeInterval(0.3)
     fileprivate var balanceViewController: BalanceViewController!
     
+    var kinChildViewControllers: [KinNavigationChildController] {
+        return transitionController.childViewControllers as! [KinNavigationChildController]
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -86,7 +90,11 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
     }
     
     @objc fileprivate func balanceTapped(sender: UIGestureRecognizer) {
-        guard (transitionController.childViewControllers.last is OrdersViewController) == false else {
+        transitionToOrders()
+    }
+    
+    func transitionToOrders() {
+        guard (kinChildViewControllers.last is OrdersViewController) == false else {
             return
         }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
@@ -114,7 +122,7 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
         viewController.view.frame = animated ? rightFrame : frame
         viewController.beginAppearanceTransition(true, animated: animated)
         container.addSubview(viewController.view)
-        let outController = transitionController.childViewControllers.last
+        let outController = kinChildViewControllers.last
         
         let outView = outController?.view
         
@@ -162,18 +170,18 @@ class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UI
     }
     
     func popViewController(animated: Bool, completion: (() -> Void)? = nil) {
-        let count = transitionController.childViewControllers.count
+        let count = kinChildViewControllers.count
         guard   count > 1,
             let container = transitionController.view,
-            let outController = transitionController.childViewControllers.last,
+            let outController = kinChildViewControllers.last,
             let outView = outController.view,
-            let inView = transitionController.childViewControllers[count - 2].view else {
+            let inView = kinChildViewControllers[count - 2].view else {
             completion?()
             return
         }
         
         
-        let inController = transitionController.childViewControllers[count - 2]
+        let inController = kinChildViewControllers[count - 2]
         let shiftLeft = CGAffineTransform(translationX: -container.bounds.width, y: 0.0)
         let rightFrame = CGRect(x: container.bounds.width, y: 0.0, width: container.bounds.width, height: container.bounds.height)
         let p = rightFrame.origin.applying(shiftLeft)

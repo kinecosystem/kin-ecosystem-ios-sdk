@@ -11,7 +11,6 @@ import CoreData
 import CoreDataStack
 import StellarKit
 import KinSDK
-import KinUtil
 
 class MarketplaceViewController: KinNavigationChildController {
     
@@ -27,6 +26,15 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate var balanceSnapshot: Decimal = 0
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
+    
+    fileprivate var firstSpendSubmitted: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -200,19 +208,51 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             }
             guard balanceSnapshot >= Decimal(offer.amount) else {
                 let transition = SheetTransition()
-                let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController", bundle: Bundle.ecosystem)
+                let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
+                                                                 bundle: Bundle.ecosystem)
                 controller.modalPresentationStyle = .custom
                 controller.transitioningDelegate = transition
                 self.kinNavigationController?.present(controller, animated: true)
                 return
             }
-            let controller = SpendOfferViewController(nibName: "SpendOfferViewController", bundle: Bundle.ecosystem)
+            let controller = SpendOfferViewController(nibName: "SpendOfferViewController",
+                                                      bundle: Bundle.ecosystem)
             controller.viewModel = viewModel
             let transition = SheetTransition()
             controller.modalPresentationStyle = .custom
             controller.transitioningDelegate = transition
             self.kinNavigationController?.present(controller, animated: true)
-            Flows.spend(offerId: offer.id, confirmPromise: controller.spend, core: core)
+            
+            var submissionPromise: Promise<Void>? = nil
+            var successPromise: Promise<Order>? = nil
+            
+            if firstSpendSubmitted == false {
+                firstSpendSubmitted = true
+                submissionPromise = Promise<Void>()
+                successPromise = Promise<Order>()
+                submissionPromise!.then { [weak self] in
+                    guard let this = self else { return }
+                    DispatchQueue.main.async {
+                        this.kinNavigationController?.transitionToOrders()
+                    }
+                }
+                successPromise!.then { [weak self] order in
+                    guard let this = self else { return }
+                    DispatchQueue.main.async {
+                        if let ordersController = this.kinNavigationController?.kinChildViewControllers.last as? OrdersViewController {
+                            ordersController.presentCoupon(for: order)
+                        }
+                    }
+                }
+            }
+            
+            Flows.spend(offerId: offer.id,
+                        confirmPromise: controller.spend,
+                        submissionPromise: submissionPromise,
+                        successPromise: successPromise,
+                        core: core)
+            
+            
         }
         
         

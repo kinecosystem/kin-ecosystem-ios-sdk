@@ -72,7 +72,7 @@ class Blockchain {
     fileprivate var localLastBalance: Decimal = 0
     fileprivate var lastBalance: Decimal {
         get {
-            if  let data = UserDefaults.standard.data(forKey: "lastBalance"),
+            if  let data = UserDefaults.standard.data(forKey: KinPreferenceKey.lastBalance.rawValue),
                 let cachedBalance = try? JSONDecoder().decode(CachedBalance.self, from: data) {
                     return cachedBalance.balance
             }
@@ -80,7 +80,7 @@ class Blockchain {
         }
         set {
             if let data = try? JSONEncoder().encode(CachedBalance(balance: newValue)) {
-                UserDefaults.standard.set(data, forKey: "lastBalance")
+                UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastBalance.rawValue)
             }
             localLastBalance = newValue
         }

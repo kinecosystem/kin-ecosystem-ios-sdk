@@ -9,6 +9,7 @@
 import UIKit
 import CoreData
 import CoreDataStack
+import KinSDK
 
 class OrdersViewController : KinNavigationChildController {
 
@@ -16,7 +17,7 @@ class OrdersViewController : KinNavigationChildController {
     
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
-
+    
     @IBOutlet weak var tableView: UITableView!
     
     override func viewDidLoad() {
@@ -74,6 +75,22 @@ class OrdersViewController : KinNavigationChildController {
         tableView.add(tableSection: section)
         try? frc.performFetch()
     }
+    
+    func presentCoupon(for order: Order) {
+        guard   let couponCode = (order.result as? CouponCode)?.coupon_code,
+                let data =  order.content?.data(using: .utf8),
+                let viewModel = try? JSONDecoder().decode(CouponViewModel.self, from: data) else {
+            logError("offer content is not in the correct format")
+            return
+        }
+        viewModel.coupon_code = couponCode
+        let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
+        controller.viewModel = viewModel
+        let transition = SheetTransition()
+        controller.modalPresentationStyle = .custom
+        controller.transitioningDelegate = transition
+        kinNavigationController?.present(controller, animated: true)
+    }
 
 }
 
@@ -90,20 +107,11 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard   let order = tableView.objectForTable(at: indexPath) as? Order,
-                let couponCode = (order.result as? CouponCode)?.coupon_code,
-                let data =  order.content?.data(using: .utf8),
-                let viewModel = try? JSONDecoder().decode(CouponViewModel.self, from: data) else {
+        guard   let order = tableView.objectForTable(at: indexPath) as? Order else {
                 logError("offer content is not in the correct format")
                 return
         }
-        viewModel.coupon_code = couponCode
-        let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
-        controller.viewModel = viewModel
-        let transition = SheetTransition()
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = transition
-        self.kinNavigationController?.present(controller, animated: true)
+        presentCoupon(for: order)
     }
     
 }

@@ -26,10 +26,10 @@ class EcosystemNet {
     var client: RestClient!
     var tosAccepted: Bool {
         get {
-            return UserDefaults.standard.bool(forKey: "tosAccepted")
+            return UserDefaults.standard.bool(forKey: KinPreferenceKey.tosAccepted.rawValue)
         }
         set {
-            UserDefaults.standard.set(newValue, forKey: "tosAccepted")
+            UserDefaults.standard.set(newValue, forKey: KinPreferenceKey.tosAccepted.rawValue)
         }
     }
     init(config: EcosystemConfiguration) {
