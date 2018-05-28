@@ -170,15 +170,24 @@ struct Flows {
                 logVerbose("created order \(order.id)")
                 return confirmPromise
                     .then {
-                        core.data.queryObjects(of: Offer.self,
-                                               with: NSPredicate(with: ["id" : offerId, "offer_type" : OfferType.spend.rawValue]))
-                    }.then { offers in
-                        guard   let offer = offers.first,
-                            let recipient = offer.blockchain_data?.recipient_address else {
-                                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                        var recipient: String? = nil
+                        var amount: Decimal? = nil
+                        return core.data.queryObjects(of: Offer.self,
+                                                      with: NSPredicate(with: ["id" : offerId, "offer_type" : OfferType.spend.rawValue])) { offers in
+                                                        guard let offer = offers.first,
+                                                            let amountRecipient = offer.blockchain_data?.recipient_address else {
+                                                                return
+                                                        }
+                                                        recipient = amountRecipient
+                                                        amount = Decimal(offer.amount)
+                            }.then {
+                                guard let r = recipient, let a = amount else {
+                                    return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                                }
+                                logVerbose("spend offer id \(offerId), recipient \(r)")
+                                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((r, a, order))
                         }
-                        logVerbose("spend offer id \(offer.id), recipient \(recipient)")
-                        return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(offer.amount), order))
+                        
                 }
             }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)

@@ -145,16 +145,19 @@ class EcosystemData {
         
     }
     
-    func queryObjects<T: NSFetchRequestResult>(of type: T.Type, with predicate: NSPredicate? = nil) -> Promise<[T]> {
-        let p = Promise<[T]>()
+    @discardableResult
+    func queryObjects<T: NSFetchRequestResult>(of type: T.Type, with predicate: NSPredicate? = nil, queryBlock: @escaping ([T]) -> ()) -> Promise<Void> {
+        let p = Promise<Void>()
         stack.query { context in
             let request = NSFetchRequest<T>(entityName: String(describing: type))
             request.predicate = predicate
-            guard let objects = try? context.fetch(request) else {
-                p.signal(EcosystemDataError.fetchError)
-                return
+            do {
+                let objects = try context.fetch(request)
+                queryBlock(objects)
+                p.signal(())
+            } catch {
+                p.signal(error)
             }
-            p.signal(objects)
         }
         return p
     }
@@ -176,28 +179,5 @@ class EcosystemData {
         return p
     }
     
-    // Testing
-    
-    func resetStore() -> Promise<Void> {
-        let p = Promise<Void>()
-        stack.perform({ (context, shouldSave) in
-            let request = NSFetchRequest<NSFetchRequestResult>(entityName: "Offer")
-            let offers = try context.fetch(request)
-            guard offers.count > 0 else {
-                p.signal(())
-                return
-            }
-            offers.forEach({ offer in
-                context.delete(offer as! NSManagedObject)
-            })
-        }) { error in
-            if let error = error {
-                p.signal(error)
-            } else {
-                p.signal(())
-            }
-        }
-        return p
-    }
 }
 
