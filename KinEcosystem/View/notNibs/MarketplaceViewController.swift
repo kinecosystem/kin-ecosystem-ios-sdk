@@ -38,7 +38,6 @@ class MarketplaceViewController: KinNavigationChildController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setupCollectionViews()
         setupFRCSections()
         setupNavigationItem()
@@ -49,7 +48,7 @@ class MarketplaceViewController: KinNavigationChildController {
         core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
             guard let this = self else { return }
             switch balanceState {
-            case let .pendind(value):
+            case let .pending(value):
                 this.balanceSnapshot = value
             case let .errored(value):
                 this.balanceSnapshot = value

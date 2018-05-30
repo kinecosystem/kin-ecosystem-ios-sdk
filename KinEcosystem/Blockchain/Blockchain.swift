@@ -51,8 +51,8 @@ enum BlockchainError: Error {
     case watchTimedOut
 }
 
-public enum StatfulBalance {
-    case pendind(Decimal)
+public enum StatefulBalance {
+    case pending(Decimal)
     case errored(Decimal)
     case verified(Decimal)
 }
@@ -85,7 +85,7 @@ class Blockchain {
             localLastBalance = newValue
         }
     }
-    var currentBalance = Observable<StatfulBalance>()
+    var currentBalance = Observable<StatefulBalance>()
     fileprivate(set) var onboarded: Bool {
         get {
             return account.extra != nil
@@ -109,7 +109,7 @@ class Blockchain {
             try? client.deleteAccount(at: 0)
         }
         account = try client.accounts[0] ?? client.addAccount()
-        currentBalance.next(.pendind(lastBalance))
+        currentBalance.next(.pending(lastBalance))
         _ = balance()
         
     }
@@ -211,7 +211,7 @@ class Blockchain {
     
     func updatePendingBalance(with expectedAmount:Decimal) {
         lastBalance = lastBalance + expectedAmount
-        currentBalance.next(.pendind(lastBalance))
+        currentBalance.next(.pending(lastBalance))
     }
     
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier, expectedAmount: Decimal = 0) throws {

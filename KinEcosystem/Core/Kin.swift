@@ -11,11 +11,14 @@
 import Foundation
 import KinSDK
 
-enum KinEcosystemError: Error {
-    case kinNotStarted
-}
-
 public typealias PurchaseCallback = (String?, Error?) -> ()
+public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
+
+public enum ExternalOrderStatus {
+    case pending
+    case failed
+    case completed(String)
+}
 
 public class Kin {
     
@@ -25,7 +28,7 @@ public class Kin {
     fileprivate weak var mpPresentingController: UIViewController?
     fileprivate init() { }
     
-    public var balanceObserver: Observable<StatfulBalance>? {
+    public var balanceObserver: Observable<StatefulBalance>? {
         guard let core = Kin.shared.core else {
             return nil
         }
@@ -39,28 +42,40 @@ public class Kin {
         return core.blockchain.account.publicAddress
     }
     
-    @discardableResult
-    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet, completion: ((Error?) -> ())? = nil) -> Bool {
-        guard core == nil else {
-            completion?(nil)
-            return true
+    public var isActivated: Bool {
+        guard let core = Kin.shared.core else {
+            return false
         }
-        if let  lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue),
-            lastUser != userId {
+        return core.blockchain.onboarded && core.network.tosAccepted
+    }
+    
+    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet) throws {
+        guard core == nil else {
+            return
+        }
+        let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        if lastUser != userId {
             needsReset = true
             logInfo("new user detected - resetting everything")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
         UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
-                                                      ofType: "momd"),
-                let store = try? EcosystemData(modelName: "KinEcosystem",
-                                               modelURL: URL(string: modelPath)!),
-                let chain = try? Blockchain(networkId: networkId) else {
+                                                      ofType: "momd") else {
             logError("start failed")
-            completion?(KinError.internalInconsistency)
-            return false
+            throw KinEcosystemError.startFailed(KinError.internalInconsistency)
         }
+        let store: EcosystemData!
+        let chain: Blockchain!
+        do {
+            store = try EcosystemData(modelName: "KinEcosystem",
+                                      modelURL: URL(string: modelPath)!)
+            chain = try Blockchain(networkId: networkId)
+        } catch {
+            logError("start failed")
+            throw KinEcosystemError.startFailed(error)
+        }
+        
         var url: URL
         switch networkId {
         case .mainNet:
@@ -75,35 +90,39 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = Core(network: network, data: store, blockchain: chain)
-        
-        network.authorize().then {
-            self.updateData(with: OffersList.self, from: "offers").then {
-                self.updateData(with: OrdersList.self, from: "orders")
-                }.error { error in
-                    logError("data sync failed (\(error))")
-            }
-            self.core!.blockchain.onboard()
+        let tosAccepted = core!.network.tosAccepted
+        network.authorize().then { [weak self] in
+            self?.core!.blockchain.onboard()
                 .then {
                     logInfo("blockchain onboarded successfully")
-                    completion?(nil)
                 }
                 .error { error in
                     logError("blockchain onboarding failed - \(error)")
-                    completion?(error)
+            }
+            self?.updateData(with: OffersList.self, from: "offers").error { error in
+                    logError("data sync failed (\(error))")
+            }
+            if tosAccepted {
+                self?.updateData(with: OrdersList.self, from: "orders").error { error in
+                    logError("data sync failed (\(error))")
+                }
             }
         }
-        return true
+        
+        
+        
     }
     
-    public func balance(_ completion: @escaping (Decimal) -> ()) {
+    public func balance(_ completion: @escaping BalanceCompletion) {
         guard let core = core else {
             logError("Kin not started")
+            completion(nil, KinEcosystemError.notStarted)
             return
         }
         core.blockchain.balance().then(on: DispatchQueue.main) { balance in
-            completion(balance)
-            }.error { _ in
-                completion(0)
+            completion(balance, nil)
+            }.error { error in
+                completion(nil, KinEcosystemError.blockchain(error))
         }
     }
     
@@ -132,7 +151,7 @@ public class Kin {
     public func purchase(offerJWT: String, completion: @escaping PurchaseCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
-            completion(nil, KinEcosystemError.kinNotStarted)
+            completion(nil, KinEcosystemError.notStarted)
             return false
         }
         defer {
@@ -145,10 +164,50 @@ public class Kin {
         return true
     }
     
+    public func orderConfirmation(for offerID: String, completion: @escaping OrderConfirmationCallback) {
+        guard let core = core else {
+            logError("Kin not started")
+            completion(nil, KinEcosystemError.notStarted)
+            return
+        }
+        core.network.authorize().then { [weak self] () -> Promise<Void> in
+            guard let this = self else {
+                return Promise<Void>().signal(KinError.internalInconsistency)
+            }
+            return this.updateData(with: OrdersList.self, from: "orders")
+            }.then { 
+                core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
+                    guard let order = orders.first else {
+                        completion(nil, KinEcosystemError.notFound)
+                        return
+                    }
+                    switch order.orderStatus {
+                    case .pending,
+                         .delayed:
+                       completion(.pending, nil)
+                    case .completed:
+                        guard let jwt = (order.result as? JWTConfirmation)?.jwt else {
+                            completion(nil, KinEcosystemError.service)
+                            return
+                        }
+                        completion(.completed(jwt), nil)
+                    case .failed:
+                        completion(.failed, nil)
+                    }
+                })
+            }.error { error in
+              completion(nil, KinEcosystemError.internal(error))
+        }
+    }
+    
+    public func setLogLevel(_ level: LogLevel) {
+        Logger.setLogLevel(level)
+    }
+    
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
-            return Promise<Void>().signal(KinEcosystemError.kinNotStarted)
+            return Promise<Void>().signal(KinEcosystemError.notStarted)
         }
         return core.network.dataAtPath(path).then { data in
             return self.core!.data.sync(dataPresentorType, with: data)

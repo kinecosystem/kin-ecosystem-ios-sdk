@@ -25,7 +25,7 @@ enum EarnOfferHTMLError: Error {
     case js(Error)
 }
 
-class EarnOfferViewController: UIViewController {
+class EarnOfferViewController: KinViewController {
 
     var web: WKWebView!
     var offerId: String?
@@ -113,7 +113,7 @@ class EarnOfferViewController: UIViewController {
 
 extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
-        logInfo("got messgae: \(message.name)")
+        logVerbose("got messgae: \(message.name)")
         switch message.name {
         case JSFunctions.loaded.rawValue:
             loadContent()

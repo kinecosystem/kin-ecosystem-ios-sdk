@@ -12,7 +12,7 @@ import KinUtil
 import StellarKit
 import CoreDataStack
 
-class BalanceViewController: UIViewController {
+class BalanceViewController: KinViewController {
 
     var core: Core!
     @IBOutlet weak var balanceAmount: UILabel!
@@ -45,7 +45,7 @@ class BalanceViewController: UIViewController {
         
         core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
             guard let this = self else { return }            
-            if case let .pendind(value) = balanceState {
+            if case let .pending(value) = balanceState {
                 this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
                                                                                            weight: .regular,
                                                                                            color: .kinBlueGreyTwo)
@@ -145,4 +145,5 @@ class BalanceViewController: UIViewController {
             })
         }
     }
+    
 }

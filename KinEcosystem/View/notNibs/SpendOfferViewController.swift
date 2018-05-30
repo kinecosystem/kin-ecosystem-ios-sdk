@@ -14,7 +14,7 @@ enum SpendOfferError: Error {
     case userCanceled
 }
 
-class SpendOfferViewController: UIViewController {
+class SpendOfferViewController: KinViewController {
 
     var viewModel: SpendViewModel!
     fileprivate(set) var spend = Promise<Void>()

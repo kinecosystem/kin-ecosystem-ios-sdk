@@ -81,7 +81,7 @@ struct Flows {
                 return attempt(retryIntervals: intervals,
                                closure: { attemptNumber -> Promise<Void> in
                     let p = KinUtil.Promise<Void>()
-                    logInfo("attempt to get earn order with !pending state: (\(attemptNumber)/\(intervals.count + 1))")
+                    logVerbose("attempt to get earn order with !pending state: (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
                         .then { data in
@@ -235,7 +235,7 @@ struct Flows {
                 return attempt(retryIntervals: intervals,
                                closure: { attemptNumber -> Promise<Void> in
                     let p = KinUtil.Promise<Void>()
-                    logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
+                    logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
                         .then { data in
@@ -392,7 +392,7 @@ struct Flows {
                 return KinUtil.attempt(retryIntervals: intervals,
                                        closure: { attemptNumber -> Promise<Void> in
                     let p = KinUtil.Promise<Void>()
-                    logInfo("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
+                    logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
                         .then { data in

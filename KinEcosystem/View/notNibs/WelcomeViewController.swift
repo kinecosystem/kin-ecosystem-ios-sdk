@@ -9,12 +9,12 @@
 import UIKit
 import KinSDK
 
-class WelcomeViewController: UIViewController {
+class WelcomeViewController: KinViewController {
 
     var core: Core!
     var transition: SplashTransition?
     let linkBag = LinkBag()
-    
+
     @IBOutlet weak var diggingText: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var diggingTextHeight: NSLayoutConstraint!

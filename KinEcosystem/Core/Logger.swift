@@ -8,7 +8,8 @@
 
 import Foundation
 
-enum LogLevel: String {
+public enum LogLevel: String {
+    case mute = "MUTE"
     case verbose = "VERBOSE"
     case info = "INFO"
     case warn = "WARNING"
@@ -17,7 +18,10 @@ enum LogLevel: String {
 
 class Logger {
     fileprivate static let shared = Logger()
-    var logLevel: LogLevel = .verbose
+    static func setLogLevel(_ level: LogLevel) {
+        Logger.shared.logLevel = level
+    }
+    var logLevel: LogLevel = .mute
     let levels: [LogLevel] = [.verbose, .info, .warn, .error]
     fileprivate func log(_ level: LogLevel, _ message: String, function: String, file: String, line: Int) {
         guard   let currentLevelIndex = levels.index(of: logLevel),
@@ -27,6 +31,8 @@ class Logger {
         print("\(level.rawValue) (\(fileString ?? "unknown file"): \(function), \(line)):", message)
     }
 }
+
+
 
 func logVerbose(_ message: String, file: String = #file, function: String = #function, line: Int = #line) {
     Logger.shared.log(.verbose, message, function: function, file: file, line: line)

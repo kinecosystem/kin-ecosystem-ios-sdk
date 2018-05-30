@@ -8,11 +8,11 @@
 
 import UIKit
 
-class KinNavigationChildController : UIViewController {
+class KinNavigationChildController : KinViewController {
     weak var kinNavigationController: KinNavigationViewController?
 }
 
-class KinNavigationViewController: UIViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
     
     var core: Core! {
         didSet {

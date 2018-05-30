@@ -15,7 +15,7 @@ A stellar wallet and account will be created behind the scenes for the user. <br
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.3.7'
+pod 'KinEcosystem', '0.3.8'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
@@ -123,8 +123,8 @@ Kin.shared.balance { balance in
 
 When observing balance this way, you get a stateful balance object:
 ```swift
-public enum StatfulBalance {
-    case pendind(Decimal)
+public enum StatefulBalance {
+    case pending(Decimal)
     case errored(Decimal)
     case verified(Decimal)
 }

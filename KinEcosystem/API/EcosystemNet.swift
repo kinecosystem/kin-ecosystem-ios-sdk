@@ -49,7 +49,7 @@ class EcosystemNet {
         guard let data = try? JSONEncoder().encode(client.signInData) else {
             return p.signal(EcosystemNetError.requestBuild)
         }
-        logInfo("sign data: \(String(data: data, encoding: .utf8)!)")
+        logVerbose("sign data: \(String(data: data, encoding: .utf8)!)")
         client.buildRequest(path: "users", method: .post, body: data)
             .then { request in
                 self.client.dataRequest(request)
@@ -118,6 +118,8 @@ class EcosystemNet {
                 return
             }
             p.signal(object)
+        }.error { error in
+            p.signal(error)
         }
         return p
     }
