@@ -132,9 +132,10 @@ class RestClient {
                 p.signal(EcosystemNetError.noDataInResponse)
                 return
             }
-            guard   let response = response as? HTTPURLResponse,
-                        200 ... 299 ~= response.statusCode else {
+            guard   let httpResponse = response as? HTTPURLResponse,
+                        200 ... 299 ~= httpResponse.statusCode else {
                 if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
+                    responseError.httpResponse = (response as? HTTPURLResponse)
                     logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
                     p.signal(EcosystemNetError.service(responseError))
                 } else {
@@ -160,10 +161,11 @@ class RestClient {
                 p.signal(EcosystemNetError.network(error))
                 return
             }
-            guard   let response = response as? HTTPURLResponse,
-                        200 ... 299 ~= response.statusCode else {
+            guard   let httpResponse = response as? HTTPURLResponse,
+                        200 ... 299 ~= httpResponse.statusCode else {
                     if  let data = data,
                         let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
+                        responseError.httpResponse = (response as? HTTPURLResponse)
                         logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
                         p.signal(EcosystemNetError.service(responseError))
                     } else {

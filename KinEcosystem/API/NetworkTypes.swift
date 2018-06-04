@@ -9,16 +9,30 @@
 import Foundation
 
 
-struct ResponseError: Decodable, Error {
+class ResponseError: Decodable, Error {
     var error: String
     var message: String?
     var code: Int32
+    var httpResponse: HTTPURLResponse?
     var localizedDescription: String {
         return """
         error:      \(error)
         message:    \(message ?? "n/a")
         code:       \(code)
         """
+    }
+    
+    enum ResponseKeys: String, CodingKey {
+        case error
+        case message
+        case code
+    }
+    
+    required init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: ResponseKeys.self)
+        error = try values.decode(String.self, forKey: .error)
+        message = try values.decodeIfPresent(String.self, forKey: .message)
+        code = try values.decode(Int32.self, forKey: .code)
     }
 }
 

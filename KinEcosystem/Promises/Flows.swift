@@ -16,6 +16,7 @@ import KinSDK
 
 enum OrderStatusError: Error {
     case orderStillPending
+    case orderNotFound
     case orderProcessingFailed
 }
 
@@ -298,7 +299,7 @@ struct Flows {
                     sucp.signal(FirstSpendError.spendFailed)
                 }
             }.finally {
-                logInfo("ended")
+                
                 core.network.dataAtPath("offers")
                     .then { data in
                         core.data.sync(OffersList.self, with: data)
@@ -446,13 +447,70 @@ struct Flows {
                         }.finally {
                             jwtPromise.signal(error)
                     }
+                } else if case let EcosystemNetError.service(responseError) = error,
+                    responseError.code == 4091,
+                    let order = (responseError.httpResponse?.allHeaderFields["Location"] as? String)?.split(separator: "/").last {
+                    openOrder = nil
+                    logInfo("Order already pending or complete: (\(order))")
+                    let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+                    _ = KinUtil.attempt(retryIntervals: intervals,
+                                        closure: { attemptNumber -> Promise<Void> in
+                                            let p = KinUtil.Promise<Void>()
+                                            logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
+                                            var pending = true
+                                            
+                                            core.network.dataAtPath("orders/\(order)")
+                                                .then { data in
+                                                    core.data.save(Order.self, with: data)
+                                                }.then {
+                                                    core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["id":order])) { orders in
+                                                        guard let networkOrder = orders.first else {
+                                                            p.signal(())
+                                                            return
+                                                        }
+                                                        jwtConfirmation = (networkOrder.result as? JWTConfirmation)?.jwt
+                                                        let hasResult = jwtConfirmation != nil
+                                                        logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
+                                                        if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
+                                                            pending = false
+                                                        }
+                                                    }.then {
+                                                        if pending {
+                                                            if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
+                                                                logWarn("attempts reached \(attemptNumber)")
+                                                                _ = core.data.changeObjects(of: Order.self,
+                                                                                            changeBlock: { orders in
+                                                                                                if let order = orders.first {
+                                                                                                    order.orderStatus = attemptNumber == 5 ? .delayed : .failed
+                                                                                                }
+                                                                }, with: NSPredicate(with: ["id":order]))
+                                                            }
+                                                            p.signal(OrderStatusError.orderStillPending)
+                                                        } else {
+                                                            p.signal(())
+                                                        }
+                                                    }
+                                            }.error { error in
+                                                 p.signal(())
+                                            }
+                        return p
+                    }).then {
+                        if let jwt = jwtConfirmation {
+                            jwtPromise.signal(jwt)
+                        } else  {
+                            jwtPromise.signal(KinEcosystemError.service)
+                        }
+                    }.error { error in
+                            jwtPromise.signal(KinEcosystemError.service)
+                    }
                 } else {
+                    openOrder = nil
                     jwtPromise.signal(error)
                 }
-                openOrder = nil
+                
                 
             }.finally {
-                logInfo("ended")
+                
                 core.network.dataAtPath("offers")
                     .then { data in
                         core.data.sync(OffersList.self, with: data)
