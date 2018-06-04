@@ -15,7 +15,7 @@ A stellar wallet and account will be created behind the scenes for the user. <br
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.3.8'
+pod 'KinEcosystem', '0.3.9'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
@@ -85,16 +85,6 @@ Kin.shared.start(apiKey: "", userId: "myUserId", appId: "myAppId", jwt: encodedJ
 This will create the stack needed for running the ecosystem. All account creation and activation is handled for you by the sdk.</br>
 Because blockchain onboarding might take a few seconds, It is strongly recommended to call this function as soon as you can provide a user id.
 
-Also provided is a completion block you can pass to the start method:
-```swift
-Kin.shared.start(apiKey: "myAppKey", userId: "myUserId", appId: "myAppId") { error in
-    if let error = error {
-      print("start failed")
-      return
-    }
-    // do stuff with kin
-}
-```
 ### Launching the marketplace experience
 To launch the marketplace experience, with earn and spend opportunities, from a viewController, simply call:
 
@@ -113,11 +103,16 @@ You can get your current balance using one of two ways:
 
 #### Single asynchronous call:
 ```swift
-Kin.shared.balance { balance in
-    print("you have \(balance) kin")
+Kin.shared.balance { balance, error in
+    guard let balance = balance else {
+        if let error = error {
+            print("balance fetch error: \(error)")
+        }
+        return
+    }
+    print("your balance is \(balance) KIN")
 }
 ```
-> note: this call will simply return 0 if balance could not be read from blockchain
 
 #### Observing balance (recommended):
 
