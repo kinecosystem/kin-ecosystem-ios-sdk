@@ -43,23 +43,12 @@ class BalanceViewController: KinViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
+        core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
             guard let this = self else { return }            
-            if case let .pending(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
-                                                                                           weight: .regular,
-                                                                                           color: .kinBlueGreyTwo)
-            }
-            if case let .errored(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
-                                                                                           weight: .regular,
-                                                                                           color: .kinCoralPink)
-            }
-            if case let .verified(value) = balanceState {
-                this.balanceAmount.attributedText = "\(value.currencyString())".attributed(24.0,
-                                                                                           weight: .regular,
-                                                                                           color: .kinDeepSkyBlue)
-            }
+            
+            this.balanceAmount.attributedText = "\(balance.amount.currencyString())".attributed(24.0, weight: .regular,
+                                                                                        color: .kinDeepSkyBlue)
+            
 
         }).add(to: bag)
         _ = core.blockchain.balance()

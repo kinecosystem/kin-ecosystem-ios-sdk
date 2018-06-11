@@ -84,6 +84,10 @@ class OrdersViewController : KinNavigationChildController {
             return
         }
         viewModel.coupon_code = couponCode
+        presentCoupon(with: viewModel)
+    }
+    
+    func presentCoupon(with viewModel: CouponViewModel) {
         let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
         controller.viewModel = viewModel
         let transition = SheetTransition()

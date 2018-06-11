@@ -49,8 +49,7 @@ struct Flows {
                                                  id: order.id)
                 return KinUtil.Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
-                try core.blockchain.startWatchingForNewPayments(with: memo,
-                                                                expectedAmount: Decimal(order.amount))
+                try core.blockchain.startWatchingForNewPayments(with: memo)
             }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 let result = EarnResult(content: htmlResult)
                 let content = try JSONEncoder().encode(result)
@@ -155,7 +154,7 @@ struct Flows {
     static func spend(offerId: String,
                       confirmPromise: Promise<Void>,
                       submissionPromise: Promise<Void>? = nil,
-                      successPromise: Promise<Order>? = nil,
+                      successPromise: Promise<String>? = nil,
                       core: Core) {
         
         var openOrder: OpenOrder?
@@ -192,8 +191,7 @@ struct Flows {
                 }
             }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
-                try core.blockchain.startWatchingForNewPayments(with: memo,
-                                                                expectedAmount: -Decimal(order.amount))
+                try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)",
                     method: .post)
                     .then { data in
@@ -315,7 +313,7 @@ struct Flows {
                                     completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
                                     if let p = successPromise {
-                                        p.signal(completedOrder)
+                                        p.signal(completedOrder.id)
                                     }
                                 }
                             }, with: NSPredicate(with: ["id": order.id]))
@@ -353,8 +351,7 @@ struct Flows {
             }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
                 let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId,
                                                  id: order.id)
-                try core.blockchain.startWatchingForNewPayments(with: memo,
-                                                                expectedAmount: -Decimal(order.amount))
+                try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
                         core.data.save(Order.self, with: data)

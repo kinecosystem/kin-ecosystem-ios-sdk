@@ -41,21 +41,6 @@ class MarketplaceViewController: KinNavigationChildController {
         setupCollectionViews()
         setupFRCSections()
         setupNavigationItem()
-        setupBalanceWatch()
-    }
-    
-    fileprivate func setupBalanceWatch() {
-        core.blockchain.currentBalance.on(queue: .main, next: { [weak self] balanceState in
-            guard let this = self else { return }
-            switch balanceState {
-            case let .pending(value):
-                this.balanceSnapshot = value
-            case let .errored(value):
-                this.balanceSnapshot = value
-            case let .verified(value):
-                this.balanceSnapshot = value
-            }
-        }).add(to: bag)
     }
     
     fileprivate func setupNavigationItem() {
@@ -205,7 +190,8 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                         logError("offer content is not in the correct format")
                         return
             }
-            guard balanceSnapshot >= Decimal(offer.amount) else {
+            guard let amount = core.blockchain.lastBalance?.amount,
+                        amount >= Decimal(offer.amount) else {
                 let transition = SheetTransition()
                 let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
                                                                  bundle: Bundle.ecosystem)
@@ -223,25 +209,35 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             self.kinNavigationController?.present(controller, animated: true)
             
             var submissionPromise: Promise<Void>? = nil
-            var successPromise: Promise<Order>? = nil
+            var successPromise: Promise<String>? = nil
             
             if firstSpendSubmitted == false {
                 firstSpendSubmitted = true
                 submissionPromise = Promise<Void>()
-                successPromise = Promise<Order>()
+                successPromise = Promise<String>()
                 submissionPromise!.then { [weak self] in
                     guard let this = self else { return }
                     DispatchQueue.main.async {
                         this.kinNavigationController?.transitionToOrders()
                     }
                 }
-                successPromise!.then { [weak self] order in
+                successPromise!.then { [weak self] orderId in
                     guard let this = self else { return }
-                    DispatchQueue.main.async {
-                        if let ordersController = this.kinNavigationController?.kinChildViewControllers.last as? OrdersViewController {
-                            ordersController.presentCoupon(for: order)
+                    this.core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["id":orderId]), queryBlock: { orders in
+                        guard   let order = orders.first,
+                                let couponCode = (order.result as? CouponCode)?.coupon_code,
+                                let data =  order.content?.data(using: .utf8),
+                                let couponViewModel = try? JSONDecoder().decode(CouponViewModel.self, from: data) else {
+                                logError("offer content is not in the correct format")
+                                return
                         }
-                    }
+                        couponViewModel.coupon_code = couponCode
+                        DispatchQueue.main.async {
+                            if let ordersController = this.kinNavigationController?.kinChildViewControllers.last as? OrdersViewController {
+                                ordersController.presentCoupon(with: couponViewModel)
+                            }
+                        }
+                    })
                 }
             }
             

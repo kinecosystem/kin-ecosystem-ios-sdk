@@ -51,41 +51,42 @@ enum BlockchainError: Error {
     case watchTimedOut
 }
 
-public enum StatefulBalance {
-    case pending(Decimal)
-    case errored(Decimal)
-    case verified(Decimal)
-}
-
-struct CachedBalance: Codable {
-    var balance: Decimal
-}
-
 class Blockchain {
     
     let client: KinClient
     fileprivate(set) var account: KinAccount!
     private let linkBag = LinkBag()
     private var paymentObservers = [PaymentMemoIdentifier : Observable<Void>]()
-    private var watcher: KinSDK.PaymentWatch?
+    private var balanceObservers = [String : (Balance) -> ()]()
+    private var paymentsWatcher: KinSDK.PaymentWatch?
+    private var balanceWatcher: KinSDK.BalanceWatch?
     let onboardEvent = Observable<Bool>()
-    fileprivate var localLastBalance: Decimal = 0
-    fileprivate var lastBalance: Decimal {
+    fileprivate(set) var balanceObservable = Observable<Balance>()
+    fileprivate(set) var lastBalance: Balance? {
         get {
             if  let data = UserDefaults.standard.data(forKey: KinPreferenceKey.lastBalance.rawValue),
-                let cachedBalance = try? JSONDecoder().decode(CachedBalance.self, from: data) {
-                    return cachedBalance.balance
+                let cachedBalance = try? JSONDecoder().decode(Balance.self, from: data) {
+                    return cachedBalance
             }
-            return localLastBalance
+            return nil
         }
         set {
-            if let data = try? JSONEncoder().encode(CachedBalance(balance: newValue)) {
+            let oldValue = lastBalance
+            if let data = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastBalance.rawValue)
             }
-            localLastBalance = newValue
+            if let balance = newValue {
+                balanceObservable.next(balance)
+            } else {
+                UserDefaults.standard.set(nil, forKey: KinPreferenceKey.lastBalance.rawValue)
+            }
+            if newValue != oldValue {
+                updateBalanceObservers()
+            }
         }
+        
+        
     }
-    var currentBalance = Observable<StatefulBalance>()
     fileprivate(set) var onboarded: Bool {
         get {
             return account.extra != nil
@@ -105,11 +106,10 @@ class Blockchain {
         let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
         self.client = client
         if Kin.shared.needsReset {
-            lastBalance = 0
+            lastBalance = nil
             try? client.deleteAccount(at: 0)
         }
         account = try client.accounts[0] ?? client.addAccount()
-        currentBalance.next(.pending(lastBalance))
         _ = balance()
         
     }
@@ -137,14 +137,11 @@ class Blockchain {
                 default:
                     logError("account can't be quering now. try again later (\(error))")
                 }
-                self?.currentBalance.next(.errored((self?.lastBalance)!))
                 p.signal(error)
             } else if let balance = balance {
-                self?.lastBalance = balance
-                self?.currentBalance.next(.verified(balance))
+                self?.lastBalance = Balance(amount: balance)
                 p.signal(balance)
             } else {
-                self?.currentBalance.next(.errored((self?.lastBalance)!))
                 p.signal(KinError.internalInconsistency)
             }
         })
@@ -209,20 +206,14 @@ class Blockchain {
         return account.sendTransaction(to: recipient, kin: kin, memo: memo)
     }
     
-    func updatePendingBalance(with expectedAmount:Decimal) {
-        lastBalance = lastBalance + expectedAmount
-        currentBalance.next(.pending(lastBalance))
-    }
-    
-    func startWatchingForNewPayments(with memo: PaymentMemoIdentifier, expectedAmount: Decimal = 0) throws {
-        guard watcher == nil else {
+    func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
+        guard paymentsWatcher == nil else {
             logInfo("payment watcher already started, added watch for \(memo)...")
             paymentObservers[memo] = Observable<Void>()
             return
         }
-        watcher = try account.watchPayments(cursor: "now")
-        updatePendingBalance(with: expectedAmount)
-        watcher?.emitter.on(next: { [weak self] paymentInfo in
+        paymentsWatcher = try account.watchPayments(cursor: "now")
+        paymentsWatcher?.emitter.on(next: { [weak self] paymentInfo in
             guard let metadata = paymentInfo.memoText else { return }
             guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
                 memoKey.description == metadata
@@ -238,13 +229,13 @@ class Blockchain {
     func stopWatchingForNewPayments(with memo: PaymentMemoIdentifier? = nil) {
         guard let memo = memo else {
             paymentObservers.removeAll()
-            watcher = nil
+            paymentsWatcher = nil
             logInfo("removed all payment observers")
             return
         }
         paymentObservers.removeValue(forKey: memo)
         if paymentObservers.count == 0 {
-            watcher = nil
+            paymentsWatcher = nil
         }
         logInfo("removed payment observer for \(memo)")
     }
@@ -262,15 +253,46 @@ class Blockchain {
             _ = self?.balance()
             p.signal(())
         }).add(to: linkBag)
-        DispatchQueue.global().asyncAfter(deadline: .now() + timeout) { [weak self] in
+        DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
             if !found {
-                self?.currentBalance.next(.errored((self?.lastBalance)!))
                 p.signal(BlockchainError.watchTimedOut)
             }
         }
         return p
     }
     
-
+    private func updateBalanceObservers() {
+        guard let balance = lastBalance else { return }
+        balanceObservers.values.forEach { block in
+            block(balance)
+        }
+    }
+    
+    func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
+        
+        let identifier = UUID().uuidString
+        balanceObservers[identifier] = block
+        
+        if balanceWatcher == nil {
+            balanceWatcher = try account.watchBalance(lastBalance?.amount)
+            balanceWatcher?.emitter.on(next: { [weak self] amount in
+                self?.lastBalance = Balance(amount: amount)
+            }).add(to: linkBag)
+        } else {
+            if let balance = self.lastBalance {
+                block(balance)
+            }
+        }
+        
+        return identifier
+    }
+    
+    func removeBalanceOserver(with identifier: String) {
+        balanceObservers[identifier] = nil
+        if balanceObservers.count == 0 {
+            balanceWatcher?.emitter.unlink()
+            balanceWatcher = nil
+        }
+    }
 }
 

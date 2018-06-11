@@ -28,11 +28,11 @@ public class Kin {
     fileprivate weak var mpPresentingController: UIViewController?
     fileprivate init() { }
     
-    public var balanceObserver: Observable<StatefulBalance>? {
+    public var lastKnownBalance: Balance? {
         guard let core = Kin.shared.core else {
             return nil
         }
-        return core.blockchain.currentBalance
+        return core.blockchain.lastBalance
     }
     
     public var publicAddres: String? {
@@ -125,6 +125,23 @@ public class Kin {
                 completion(nil, KinEcosystemError.blockchain(error))
         }
     }
+    
+    public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
+        guard let core = core else {
+            logError("Kin not started")
+            throw KinEcosystemError.notStarted
+        }
+        return try core.blockchain.addBalanceObserver(with: block)
+    }
+    
+    public func removeBalanceOserver(with identifier: String) {
+        guard let core = core else {
+            logError("Kin not started")
+            return
+        }
+        core.blockchain.removeBalanceOserver(with: identifier)
+    }
+        
     
     public func launchMarketplace(from parentViewController: UIViewController) {
         guard let core = core else {
