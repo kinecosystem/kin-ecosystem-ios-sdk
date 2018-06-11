@@ -278,10 +278,9 @@ class Blockchain {
             balanceWatcher?.emitter.on(next: { [weak self] amount in
                 self?.lastBalance = Balance(amount: amount)
             }).add(to: linkBag)
-        } else {
-            if let balance = self.lastBalance {
-                block(balance)
-            }
+        }
+        if let balance = lastBalance {
+            block(balance)
         }
         
         return identifier
