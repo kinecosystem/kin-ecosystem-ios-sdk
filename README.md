@@ -15,7 +15,7 @@ A stellar wallet and account will be created behind the scenes for the user. <br
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.3.9'
+pod 'KinEcosystem', '0.4.0'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
@@ -99,54 +99,57 @@ Kin.shared.publicAddress
 > note: this variable will return nil if called before kin is onboarded
 
 ### Getting your balance
-You can get your current balance using one of two ways:
 
-#### Single asynchronous call:
+Balance is represented by a `Balance` struct:
+```swift
+public struct Balance: Codable, Equatable {
+    public var amount: Decimal
+}
+```
+
+You can get your current balance using one of three ways:
+
+#### Synchronously get the last known balance for the current account:
+
+```swift
+if let amount = Kin.shared.lastKnownBalance?.amount {
+    print("your balance is \(amount) KIN")
+} else {
+  // Kin is not started or an account wasn't created yet.
+}
+```
+
+#### Asynchronous call to the blockchain network:
 ```swift
 Kin.shared.balance { balance, error in
-    guard let balance = balance else {
+    guard let amount = balance?.amount else {
         if let error = error {
             print("balance fetch error: \(error)")
         }
         return
     }
-    print("your balance is \(balance) KIN")
+    print("your balance is \(amount) KIN")
 }
 ```
 
-#### Observing balance (recommended):
+#### Observing balance with a blockchain network observer:
 
-When observing balance this way, you get a stateful balance object:
 ```swift
-public enum StatefulBalance {
-    case pending(Decimal)
-    case errored(Decimal)
-    case verified(Decimal)
-}
-```
-##### Balance states
-###### pending
- The associated amount is expected to be the verified amount. The balance observer moves to a pending state before a transaction (in or out) is expected by the sdk, or before any actual blockchain balance was verified.
-###### errored
-The blockchain balance could not be read at this time. You may get this value if an account isn't yet created or funded, or an actual error occurred while trying to access the blockchain.
-###### verified
-The associated value was just read from the blockchain.
-##### Usage
-```swift
-import KinUtil
-
-// a link bag is an optional kin utility you should use for observing
-let bag = LinkBag()
-...
-func observeBalance() {
-    if let balance = Kin.shared.balanceObserver {
-        balance.on(queue: .main, next: { balanceState in
-            print("balance: \(balanceState)")
-        }).add(to: self.bag)
+var balanceObserverId: String? = nil
+do {
+    balanceObserverId = try Kin.shared.addBalanceObserver { balance in
+        print("balance: \(balance.amount)")
     }
+} catch {
+    print("Error setting balance observer: \(error)")
+}
+
+// when you're done listening to balance changes, remove the observer:
+
+if let observerId = balanceObserverId {
+    Kin.shared.removeBalanceObserver(observerId)
 }
 ```
-> note: `balanceObserver` will return nil if called before kin is onboarded
 
 ### Using kin for native spend experience
 A native spend is a mechanism allowing your users to buy virtual goods you define, using Kin on Kin Ecosystem API’s.</br>

@@ -286,7 +286,7 @@ class Blockchain {
         return identifier
     }
     
-    func removeBalanceOserver(with identifier: String) {
+    func removeBalanceObserver(with identifier: String) {
         balanceObservers[identifier] = nil
         if balanceObservers.count == 0 {
             balanceWatcher?.emitter.unlink()

@@ -113,14 +113,14 @@ public class Kin {
         
     }
     
-    public func balance(_ completion: @escaping BalanceCompletion) {
+    public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
         guard let core = core else {
             logError("Kin not started")
             completion(nil, KinEcosystemError.notStarted)
             return
         }
         core.blockchain.balance().then(on: DispatchQueue.main) { balance in
-            completion(balance, nil)
+            completion(Balance(amount: balance), nil)
             }.error { error in
                 completion(nil, KinEcosystemError.blockchain(error))
         }
@@ -134,12 +134,12 @@ public class Kin {
         return try core.blockchain.addBalanceObserver(with: block)
     }
     
-    public func removeBalanceOserver(with identifier: String) {
+    public func removeBalanceObserver(_ identifier: String) {
         guard let core = core else {
             logError("Kin not started")
             return
         }
-        core.blockchain.removeBalanceOserver(with: identifier)
+        core.blockchain.removeBalanceObserver(with: identifier)
     }
         
     
