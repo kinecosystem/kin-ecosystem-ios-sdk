@@ -10,6 +10,7 @@
 
 import Foundation
 import KinSDK
+import StellarErrors
 
 public typealias PurchaseCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
@@ -63,7 +64,7 @@ public class Kin {
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
-            throw KinEcosystemError.startFailed(KinError.internalInconsistency)
+            throw KinEcosystemError.client(.internalInconsistency, nil)
         }
         let store: EcosystemData!
         let chain: Blockchain!
@@ -73,7 +74,7 @@ public class Kin {
             chain = try Blockchain(networkId: networkId)
         } catch {
             logError("start failed")
-            throw KinEcosystemError.startFailed(error)
+            throw KinEcosystemError.client(.internalInconsistency, nil)
         }
         
         var url: URL
@@ -116,20 +117,39 @@ public class Kin {
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
         guard let core = core else {
             logError("Kin not started")
-            completion(nil, KinEcosystemError.notStarted)
+            completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
         core.blockchain.balance().then(on: DispatchQueue.main) { balance in
             completion(Balance(amount: balance), nil)
             }.error { error in
-                completion(nil, KinEcosystemError.blockchain(error))
+                let esError: KinEcosystemError
+                switch error {
+                    case KinError.internalInconsistency,
+                         KinError.accountDeleted:
+                        esError = KinEcosystemError.client(.internalInconsistency, error)
+                    case KinError.balanceQueryFailed(let queryError):
+                        switch queryError {
+                        case StellarError.missingAccount:
+                            esError = KinEcosystemError.blockchain(.notFound, error)
+                        case StellarError.missingBalance:
+                            esError = KinEcosystemError.blockchain(.activation, error)
+                        case StellarError.unknownError:
+                            esError = KinEcosystemError.unknown(.unknown, error)
+                        default:
+                            esError = KinEcosystemError.unknown(.unknown, error)
+                        }
+                    default:
+                        esError = KinEcosystemError.unknown(.unknown, error)
+                }
+                completion(nil, esError)
         }
     }
     
     public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
         guard let core = core else {
             logError("Kin not started")
-            throw KinEcosystemError.notStarted
+            throw KinEcosystemError.client(.notStarted, nil)
         }
         return try core.blockchain.addBalanceObserver(with: block)
     }
@@ -168,14 +188,14 @@ public class Kin {
     public func purchase(offerJWT: String, completion: @escaping PurchaseCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
-            completion(nil, KinEcosystemError.notStarted)
+            completion(nil, KinEcosystemError.client(.notStarted, nil))
             return false
         }
         defer {
             Flows.nativeSpend(jwt: offerJWT, core: core).then { jwt in
                 completion(jwt, nil)
                 }.error { error in
-                    completion(nil, error)
+                    completion(nil, KinEcosystemError.transform(error))
             }
         }
         return true
@@ -184,7 +204,7 @@ public class Kin {
     public func orderConfirmation(for offerID: String, completion: @escaping OrderConfirmationCallback) {
         guard let core = core else {
             logError("Kin not started")
-            completion(nil, KinEcosystemError.notStarted)
+            completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
         core.network.authorize().then { [weak self] () -> Promise<Void> in
@@ -195,7 +215,8 @@ public class Kin {
             }.then { 
                 core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
                     guard let order = orders.first else {
-                        completion(nil, KinEcosystemError.notFound)
+                        let responseError = ResponseError(code: 4043, error: "NotFound", message: "Order not found")
+                        completion(nil, KinEcosystemError.service(.response, responseError))
                         return
                     }
                     switch order.orderStatus {
@@ -204,7 +225,7 @@ public class Kin {
                        completion(.pending, nil)
                     case .completed:
                         guard let jwt = (order.result as? JWTConfirmation)?.jwt else {
-                            completion(nil, KinEcosystemError.service)
+                            completion(nil, KinEcosystemError.client(.internalInconsistency, nil))
                             return
                         }
                         completion(.completed(jwt), nil)
@@ -213,7 +234,7 @@ public class Kin {
                     }
                 })
             }.error { error in
-              completion(nil, KinEcosystemError.internal(error))
+                completion(nil, KinEcosystemError.transform(error))
         }
     }
     
@@ -224,7 +245,7 @@ public class Kin {
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
-            return Promise<Void>().signal(KinEcosystemError.notStarted)
+            return Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
         }
         return core.network.dataAtPath(path).then { data in
             return self.core!.data.sync(dataPresentorType, with: data)

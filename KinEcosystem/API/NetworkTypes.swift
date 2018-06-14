@@ -9,11 +9,14 @@
 import Foundation
 
 
-class ResponseError: Decodable, Error {
+class ResponseError: Decodable, LocalizedError {
     var error: String
     var message: String?
     var code: Int32
     var httpResponse: HTTPURLResponse?
+    var errorDescription: String? {
+        return localizedDescription
+    }
     var localizedDescription: String {
         return """
         error:      \(error)
@@ -33,6 +36,12 @@ class ResponseError: Decodable, Error {
         error = try values.decode(String.self, forKey: .error)
         message = try values.decodeIfPresent(String.self, forKey: .message)
         code = try values.decode(Int32.self, forKey: .code)
+    }
+    
+    init(code: Int32, error: String, message: String?) {
+        self.code = code
+        self.error = error
+        self.message = message
     }
 }
 

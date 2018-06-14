@@ -496,10 +496,10 @@ struct Flows {
                         if let jwt = jwtConfirmation {
                             jwtPromise.signal(jwt)
                         } else  {
-                            jwtPromise.signal(KinEcosystemError.service)
+                            jwtPromise.signal(KinEcosystemError.service(.timeout, nil))
                         }
                     }.error { error in
-                            jwtPromise.signal(KinEcosystemError.service)
+                        jwtPromise.signal(error)
                     }
                 } else {
                     openOrder = nil

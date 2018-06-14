@@ -119,25 +119,6 @@ class Blockchain {
         let p = Promise<Decimal>()
         account.balance(completion: { [weak self] balance, error in
             if let error = error {
-                switch error {
-                case KinError.internalInconsistency:
-                    logError("account can't be queried now (\(error))")
-                case KinError.accountDeleted:
-                        logError("account state is invalid. Everything should be reset and redone")
-                case KinError.balanceQueryFailed(let queryError):
-                    switch queryError {
-                    case StellarError.missingAccount:
-                        logInfo("account not yet created on network")
-                    case StellarError.missingBalance:
-                        logInfo("Kin issuer isn't trusted yet")
-                    case StellarError.unknownError:
-                        logError("stellar server did not respond well. try again later")
-                    default:
-                        logError("account can't be quering now. try again later (\(error))")
-                    }
-                default:
-                    logError("account can't be quering now. try again later (\(error))")
-                }
                 p.signal(error)
             } else if let balance = balance {
                 self?.lastBalance = Balance(amount: balance)
