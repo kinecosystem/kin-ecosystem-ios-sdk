@@ -9,4 +9,8 @@ import Foundation
 
 public struct Balance: Codable, Equatable {
     public var amount: Decimal
+
+    public static func ==(lhs: ProductTransactionParameters, rhs: ProductTransactionParameters) -> Bool {
+        return lhs.amount == rhs.balance
+    }
 }
