@@ -14,6 +14,15 @@ public struct EnvironmentProperties: Codable, Equatable {
     let marketplaceURL: String
     let webURL: String
     let BIURL: String
+
+    public static func ==(lhs: EnvironmentProperties, rhs: EnvironmentProperties) -> Bool {
+        return lhs.blockchainURL == rhs.blockchainURL &&
+            lhs.blockchainPassphrase == rhs.blockchainPassphrase &&
+            lhs.kinIssuer == rhs.kinIssuer &&
+            lhs.marketplaceURL == rhs.marketplaceURL &&
+            lhs.webURL == rhs.webURL &&
+            lhs.BIURL == rhs.BIURL
+    }
 }
 
 public enum Environment {
