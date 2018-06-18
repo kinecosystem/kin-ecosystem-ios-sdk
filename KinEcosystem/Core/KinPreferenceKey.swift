@@ -14,4 +14,5 @@ enum KinPreferenceKey: String, CodingKey {
     case lastBalance
     case lastSignedInUser
     case firstSpendSubmitted
+    case lastEnvironment
 }

@@ -15,7 +15,7 @@ A stellar wallet and account will be created behind the scenes for the user. <br
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.4.0'
+pod 'KinEcosystem', '0.4.1'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
@@ -67,18 +67,24 @@ Digital services will have to authorised client request using one of the followi
     }
     ```
 
+## Environment
+Kin Ecosystem provides two working environments:
+1. PRODUCTION - Production ecosystem servers and the main private blockchain network.
+2. PLAYGROUND - A staging and testing environment running on test ecosystem servers and a private blockchain test network.<br>
+You must specify an Environment on `Kin.shared.start(...)` as you will see in the following section.
 
 
 ### Onboarding
+
 Once your app can provide a unique user id, call (depending on your onboarding method):
 
 #### app id and key:
 ```swift
-Kin.shared.start(apiKey: "myAppKey"", userId: "myUserId", appId: "myAppId")
+Kin.shared.start(apiKey: "myAppKey"", userId: "myUserId", appId: "myAppId", environment: .playground)
 ```
 #### jwt:
 ```swift
-Kin.shared.start(apiKey: "", userId: "myUserId", appId: "myAppId", jwt: encodedJWT)
+Kin.shared.start(apiKey: "", userId: "myUserId", appId: "myAppId", jwt: encodedJWT, environment: .playground)
 ```
 >To view a full example of logging in with a [JWT](http://jwt.io) or an app key and id, check out the [sample app](https://github.com/kinecosystem/kin-ecosystem-ios-sample-app)
 

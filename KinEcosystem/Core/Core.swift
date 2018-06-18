@@ -12,10 +12,11 @@ class Core {
     let network: EcosystemNet
     let data: EcosystemData
     let blockchain: Blockchain
-    
-    init(network: EcosystemNet, data: EcosystemData, blockchain: Blockchain) {
+    let environment: Environment
+    init(environment: Environment, network: EcosystemNet, data: EcosystemData, blockchain: Blockchain) {
         self.network = network
         self.data = data
         self.blockchain = blockchain
+        self.environment = environment
     }
 }

@@ -14,18 +14,6 @@ import StellarErrors
 struct BlockchainProvider: ServiceProvider {
     let url: URL
     let networkId: KinSDK.NetworkId
-
-    init(networkId: KinSDK.NetworkId) {
-        self.networkId = networkId
-        switch networkId {
-        case .mainNet:
-            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
-        case .testNet:
-            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
-        default:
-            self.url = URL(string: "https://horizon-kik.kininfrastructure.com")!
-        }
-    }
 }
 
 struct PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
@@ -103,8 +91,12 @@ class Blockchain {
         }
     }
 
-    init(networkId: KinSDK.NetworkId) throws {
-        let client = try KinClient(provider: BlockchainProvider(networkId: networkId))
+    init(environment: Environment) throws {
+        guard let bURL = URL(string: environment.blockchainURL) else {
+            throw KinEcosystemError.client(.badRequest, nil)
+        }
+        let provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
+        let client = try KinClient(provider: provider)
         self.client = client
         if Kin.shared.needsReset {
             lastBalance = nil

@@ -73,8 +73,7 @@ class EarnOfferViewController: KinViewController {
         view.addSubview(web)
         web.fillSuperview()
         web.layoutIfNeeded()
-        let request = URLRequest(url: URL(string: "http://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com")!)
-        //request.cachePolicy = .reloadIgnoringLocalAndRemoteCacheData
+        let request = URLRequest(url: URL(string: core.environment.webURL)!)
         web.load(request)
     }
 

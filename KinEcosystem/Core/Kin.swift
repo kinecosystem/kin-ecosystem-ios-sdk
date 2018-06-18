@@ -50,15 +50,27 @@ public class Kin {
         return core.blockchain.onboarded && core.network.tosAccepted
     }
     
-    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, networkId: NetworkId = .testNet) throws {
+    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, environment: Environment) throws {
         guard core == nil else {
             return
         }
         let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        var environmentChanged = true
+        if  let lastEnvironmentPropertiesData = UserDefaults.standard.data(forKey: KinPreferenceKey.lastEnvironment.rawValue),
+            let props = try? JSONDecoder().decode(EnvironmentProperties.self, from: lastEnvironmentPropertiesData), props == environment.properties {
+            environmentChanged = false
+        }
         if lastUser != userId {
             needsReset = true
             logInfo("new user detected - resetting everything")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
+        }
+        if environmentChanged {
+            needsReset = true
+            logInfo("environment change detected - resetting everything")
+            if let data = try? JSONEncoder().encode(environment.properties) {
+                UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastEnvironment.rawValue)
+            }
         }
         UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
@@ -71,26 +83,22 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(networkId: networkId)
+            chain = try Blockchain(environment: environment)
         } catch {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
         }
         
-        var url: URL
-        switch networkId {
-        case .mainNet:
-            url = URL(string: "http://api.kinmarketplace.com/v1")!
-        default:
-            url = URL(string: "http://api.kinmarketplace.com/v1")!
+        guard let marketplaceURL = URL(string: environment.marketplaceURL) else {
+            throw KinEcosystemError.client(.badRequest, nil)
         }
-        let network = EcosystemNet(config: EcosystemConfiguration(baseURL: url,
+        let network = EcosystemNet(config: EcosystemConfiguration(baseURL: marketplaceURL,
                                                                   apiKey: apiKey,
                                                                   appId: appId,
                                                                   userId: userId,
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
-        core = Core(network: network, data: store, blockchain: chain)
+        core = Core(environment: environment, network: network, data: store, blockchain: chain)
         let tosAccepted = core!.network.tosAccepted
         network.authorize().then { [weak self] in
             self?.core!.blockchain.onboard()
