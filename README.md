@@ -53,7 +53,8 @@ The PRODUCTION enviorment is runnig on main production blockchain and containing
 
 ### JWT Registration specs
 1. Playground will support `ES256` and `RS512` signature algorithm.
-2. The header will follow this template
+2. PRODUCTION will only support `ES256` signature algorithm.
+3. The header will follow this template
     ```aidl
     {
         "alg": "RS512", // We will support ES256 signature algorithem
