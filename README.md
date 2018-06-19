@@ -1,17 +1,10 @@
 # kin-ecosystem-ios-sdk
 
-## Disclaimer
-The SDK support 2 predfined enviorments , Production and Playground.<br/>
-You can test the SDK with the Playground enviorment using the test credtials.<br/>
-The production enviorment is runnig on main production blockchain with real earn and spend offers and therfore required a specifc credtials per digital services, please contact us for more details<br/>
-The Playground enviorment SLA of is not guaranteed.<br/>
-Playground transaction are running on Kin playground blockchain transactions are currently and not on main net.<br/>
-
-
 ## Intro
 The ecosystem "5 minute SDK" supports rich user experience and seamless blockchain integration. <br/>
 Once the ecosystem SDK is integrated within a digital service, users will be be able to interact with rich earn and spend marketplace experiences, and view their account balance and order history.<br/>
 A stellar wallet and account will be created behind the scenes for the user. <br/>
+
 
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
@@ -22,6 +15,18 @@ pod 'KinEcosystem', '0.4.1'
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
 
 ## Usage
+
+## Environment
+Kin Ecosystem provides two working environments:
+1. PRODUCTION - Production ecosystem servers and the main private blockchain network.
+2. PLAYGROUND - A staging and testing environment running on test ecosystem servers and a private blockchain test network.<br>
+You must specify an Environment on `Kin.shared.start(...)` as you will see in the following section.
+
+You should test the SDK with the Playground enviorment using the test credtials.<br/>
+The PLAYGROUND enviorment SLA of is not guaranteed.<br/>
+Playground transaction are running on Kin PLAYGROUND blockchain.<br/>
+
+The PRODUCTION enviorment is runnig on main production blockchain and containing real earn/spend offers, therfore required specifc credtials per digital services, please contact us for more details<br/>
 
 ### Registration for Ecosystem backend service
 
@@ -67,13 +72,6 @@ Digital services will have to authorised client request using one of the followi
         user_id: string; // id of the user - or a deterministic unique id for the user (hash)
     }
     ```
-
-## Environment
-Kin Ecosystem provides two working environments:
-1. PRODUCTION - Production ecosystem servers and the main private blockchain network.
-2. PLAYGROUND - A staging and testing environment running on test ecosystem servers and a private blockchain test network.<br>
-You must specify an Environment on `Kin.shared.start(...)` as you will see in the following section.
-
 
 ### Onboarding
 
