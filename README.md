@@ -4,6 +4,8 @@
 The ecosystem "5 minute SDK" supports rich user experience and seamless blockchain integration. <br/>
 Once the ecosystem SDK is integrated within a digital service, users will be be able to interact with rich earn and spend marketplace experiences, and view their account balance and order history.<br/>
 A stellar wallet and account will be created behind the scenes for the user. <br/>
+The SDK also support purchase API to allow users to create spend transaction within the app - see the following section: [Using kin for native spend experience.](#using-kin-for-native-spend-experience)<br/>
+Next version of the SDK and API will also suport native earn and P2P transactions.<br/>
 
 
 ## Installation
@@ -15,18 +17,6 @@ pod 'KinEcosystem', '0.4.1'
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
 
 ## Usage
-
-## Environment
-Kin Ecosystem provides two working environments:
-1. PRODUCTION - Production ecosystem servers and the main private blockchain network.
-2. PLAYGROUND - A staging and testing environment running on test ecosystem servers and a private blockchain test network.<br>
-You must specify an Environment on `Kin.shared.start(...)` as you will see in the following section.
-
-You should test the SDK with the Playground enviorment using the test credtials.<br/>
-The PLAYGROUND enviorment SLA of is not guaranteed.<br/>
-Playground transaction are running on Kin PLAYGROUND blockchain.<br/>
-
-The PRODUCTION enviorment is runnig on main production blockchain and containing real earn/spend offers, therfore required specifc credtials per digital services, please contact us for more details<br/>
 
 ### Registration for Ecosystem backend service
 
@@ -47,9 +37,22 @@ Digital services will have to authorised client request using one of the followi
     1. "JWT" registration" use a Server side signed JWT token to authenticated client request.
     1. You can learn more [here](https://jwt.io)
     1. Please contact us to receive your JWT issuer identifier (iss key) and provide us with your public signature key and its corresponding 'keyid'
+    
+## Environment
+Kin Ecosystem provides two working environments:
+1. PRODUCTION - Production ecosystem servers and the main private blockchain network.
+2. PLAYGROUND - A staging and testing environment running on test ecosystem servers and a private blockchain test network.<br>
+You must specify an Environment on `Kin.shared.start(...)` as you will see in the following [section](app-id-and-key).
+
+You should test the SDK with the PLAYGROUND enviorment using [PLAYGROUND test credentials](#playground-test-credentials).<br/>
+
+The PLAYGROUND enviorment SLA of is not guaranteed.<br/>
+Playground transaction are running on Kin PLAYGROUND blockchain.<br/>
+
+The PRODUCTION enviorment is runnig on main production blockchain and containing real earn/spend offers, therfore required specifc credtials per digital services, please contact us for more details.<br/>
 
 ### JWT Registration specs
-1. We will support `ES256` signature algorithm later on, right now you should use `RS512`.
+1. Playground will support `ES256` and `RS512` signature algorithm.
 2. The header will follow this template
     ```aidl
     {
@@ -72,6 +75,12 @@ Digital services will have to authorised client request using one of the followi
         user_id: string; // id of the user - or a deterministic unique id for the user (hash)
     }
     ```
+#### Playground test credentials
+
+    
+    RS512_PRIVATE_KEY="MIICWwIBAAKBgQDdlatRjRjogo3WojgGHFHYLugdUWAY9iR3fy4arWNA1KoS8kVw33cJibXr8bvwUAUparCwlvdbH6dvEOfou0/gCFQsHUfQrSDv+MuSUMAe8jzKE4qW+jK+xQU9a03GUnKHkkle+Q0pX/g6jXZ7r1/xAK5Do2kQ+X5xK9cipRgEKwIDAQABAoGAD+onAtVye4ic7VR7V50DF9bOnwRwNXrARcDhq9LWNRrRGElESYYTQ6EbatXS3MCyjjX2eMhu/aF5YhXBwkppwxg+EOmXeh+MzL7Zh284OuPbkglAaGhV9bb6/5CpuGb1esyPbYW+Ty2PC0GSZfIXkXs76jXAu9TOBvD0ybc2YlkCQQDywg2R/7t3Q2OE2+yo382CLJdrlSLVROWKwb4tb2PjhY4XAwV8d1vy0RenxTB+K5Mu57uVSTHtrMK0GAtFr833AkEA6avx20OHo61Yela/4k5kQDtjEf1N0LfI+BcWZtxsS3jDM3i1Hp0KSu5rsCPb8acJo5RO26gGVrfAsDcIXKC+bQJAZZ2XIpsitLyPpuiMOvBbzPavd4gY6Z8KWrfYzJoI/Q9FuBo6rKwl4BFoToD7WIUS+hpkagwWiz+6zLoX1dbOZwJACmH5fSSjAkLRi54PKJ8TFUeOP15h9sQzydI8zJU+upvDEKZsZc/UhT/SySDOxQ4G/523Y0sz/OZtSWcol/UMgQJALesy++GdvoIDLfJX5GBQpuFgFenRiRDabxrE9MNUZ2aPFaFp+DyAe+b4nDwuJaW2LURbr8AEZga7oQj0uYxcYw\=\="
+    APP_ID="test"
+    API_KEY="A2XEJTdN8hGiuUvg9VSHZ"
 
 ### Onboarding
 
