@@ -1,10 +1,11 @@
 # kin-ecosystem-ios-sdk
 
 ## Disclaimer
-The iOS Kin Ecosystem sdk is still work in progress, meaning, you are welcome to try it,<br/>
-but don't integrate it into your production app just yet.
-The backend service supporting the ecosystem sdk is in test mode and SLA is not guarantee.<br/>
-All blockchain transactions are currently running on Stellar test net and not on main net.<br/>
+The SDK support 2 predfined enviorments , Production and Playground.<br/>
+You can test the SDK with the Playground enviorment using the test credtials.<br/>
+The production enviorment is runnig on main production blockchain with real earn and spend offers and therfore required a specifc credtials per digital services, please contact us for more details<br/>
+The Playground enviorment SLA of is not guaranteed.<br/>
+Playground transaction are running on Kin playground blockchain transactions are currently and not on main net.<br/>
 
 
 ## Intro
