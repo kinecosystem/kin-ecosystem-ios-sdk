@@ -50,10 +50,15 @@ public class Kin {
         return core.blockchain.onboarded && core.network.tosAccepted
     }
     
-    public func start(apiKey: String, userId: String, appId: String, jwt: String? = nil, environment: Environment) throws {
+    public func start(userId: String,
+                      apiKey: String? = nil,
+                      appId: String? = nil,
+                      jwt: String? = nil,
+                      environment: Environment) throws {
         guard core == nil else {
             return
         }
+        
         let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
         var environmentChanged = true
         if  let lastEnvironmentPropertiesData = UserDefaults.standard.data(forKey: KinPreferenceKey.lastEnvironment.rawValue),
@@ -63,7 +68,6 @@ public class Kin {
         if lastUser != userId {
             needsReset = true
             logInfo("new user detected - resetting everything")
-            UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
         if environmentChanged {
             needsReset = true
@@ -71,6 +75,9 @@ public class Kin {
             if let data = try? JSONEncoder().encode(environment.properties) {
                 UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastEnvironment.rawValue)
             }
+        }
+        if needsReset {
+            UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
         UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
@@ -100,7 +107,7 @@ public class Kin {
                                                                   publicAddress: chain.account.publicAddress))
         core = Core(environment: environment, network: network, data: store, blockchain: chain)
         let tosAccepted = core!.network.tosAccepted
-        network.authorize().then { [weak self] in
+        network.authorize().then { [weak self] _ in
             self?.core!.blockchain.onboard()
                 .then {
                     logInfo("blockchain onboarded successfully")
@@ -215,7 +222,7 @@ public class Kin {
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.network.authorize().then { [weak self] () -> Promise<Void> in
+        core.network.authorize().then { [weak self] (_) -> Promise<Void> in
             guard let this = self else {
                 return Promise<Void>().signal(KinError.internalInconsistency)
             }

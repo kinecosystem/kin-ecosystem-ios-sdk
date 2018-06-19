@@ -24,6 +24,10 @@ enum FirstSpendError: Error {
     case spendFailed
 }
 
+typealias SDOPFlowPromise = KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>
+typealias SDOFlowPromise = KinUtil.Promise<(String, Decimal, OpenOrder)>
+typealias SOPFlowPromise = KinUtil.Promise<(String, OpenOrder, PaymentMemoIdentifier)>
+
 @available(iOS 9.0, *)
 struct Flows {
         
@@ -45,10 +49,13 @@ struct Flows {
                     .then { htmlResult in
                         KinUtil.Promise<(String, OpenOrder)>().signal((htmlResult, order))
                 }
-            }.then(on: .main) { htmlResult, order -> Promise<(String, OpenOrder, PaymentMemoIdentifier)> in
-                let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId,
+            }.then(on: .main) { htmlResult, order -> SOPFlowPromise in
+                guard let appId = core.network.client.authToken?.app_id else {
+                    return SOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
+                }
+                let memo = PaymentMemoIdentifier(appId: appId,
                                                  id: order.id)
-                return KinUtil.Promise<(String, OpenOrder, PaymentMemoIdentifier)>().signal((htmlResult, order, memo))
+                return SOPFlowPromise().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo in
                 try core.blockchain.startWatchingForNewPayments(with: memo)
             }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
@@ -164,7 +171,7 @@ struct Flows {
         core.network.objectAtPath("offers/\(offerId)/orders",
             type: OpenOrder.self,
             method: .post)
-            .then { order -> Promise<(String, Decimal, OpenOrder)> in
+            .then { order -> SDOFlowPromise in
                 openOrder = order
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
@@ -183,15 +190,18 @@ struct Flows {
                                                         amount = Decimal(offer.amount)
                             }.then {
                                 guard let r = recipient, let a = amount else {
-                                    return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                                    return SDOFlowPromise().signal(KinError.internalInconsistency)
                                 }
                                 logVerbose("spend offer id \(offerId), recipient \(r)")
-                                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((r, a, order))
+                                return SDOFlowPromise().signal((r, a, order))
                         }
                         
                 }
-            }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
-                let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId, id: order.id)
+            }.then { recipient, amount, order -> SDOPFlowPromise in
+                guard let appId = core.network.client.authToken?.app_id else {
+                    return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
+                }
+                let memo = PaymentMemoIdentifier(appId: appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)",
                     method: .post)
@@ -203,9 +213,9 @@ struct Flows {
                         if let p = submissionPromise {
                             p.signal(())
                         }
-                        return KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        return SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
-            }.then { recipient, amount, order, memo -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+            }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
                                                changeBlock: { offers in
                     if let offer = offers.first {
@@ -214,7 +224,7 @@ struct Flows {
                     }
                 }, with: NSPredicate(with: ["id" : offerId]))
                     .then {
-                        KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.pay(to: recipient,
@@ -340,17 +350,20 @@ struct Flows {
                                   type: OpenOrder.self,
                                   method: .post,
                                   body: jwtSubmission)
-            .then { order -> KinUtil.Promise<(String, Decimal, OpenOrder)> in
+            .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
                 guard let recipient = order.blockchain_data?.recipient_address else {
-                    return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal(KinError.internalInconsistency)
+                    return SDOFlowPromise().signal(KinError.internalInconsistency)
                 }
                 logVerbose("spend offer id \(order.offer_id), recipient \(recipient)")
-                return KinUtil.Promise<(String, Decimal, OpenOrder)>().signal((recipient, Decimal(order.amount), order))
+                return SDOFlowPromise().signal((recipient, Decimal(order.amount), order))
                 
-            }.then { recipient, amount, order -> KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
-                let memo = PaymentMemoIdentifier(appId: core.network.client.config.appId,
+            }.then { recipient, amount, order -> SDOPFlowPromise in
+                guard let appId = core.network.client.authToken?.app_id else {
+                    return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
+                }
+                let memo = PaymentMemoIdentifier(appId: appId,
                                                  id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
@@ -359,9 +372,9 @@ struct Flows {
                     }.then {
                         canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
-                        return KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        return SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
-            }.then { recipient, amount, order, memo -> Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)> in
+            }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
                                                changeBlock: { offers in
                     if let offer = offers.first {
@@ -370,7 +383,7 @@ struct Flows {
                     }
                 }, with: NSPredicate(with: ["id" : order.offer_id]))
                     .then {
-                        KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>().signal((recipient, amount, order, memo))
+                        SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.pay(to: recipient,

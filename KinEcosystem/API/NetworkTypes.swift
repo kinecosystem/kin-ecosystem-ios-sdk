@@ -63,18 +63,21 @@ enum SignInType: String {
 
 struct SignInData: Encodable {
     var jwt: String?
-    var user_id: String
-    var app_id: String
+    var user_id: String?
+    var app_id: String?
     var device_id: String
     var wallet_address: String
     var sign_in_type: String
-    var api_key: String
+    var api_key: String?
 }
 
 struct AuthToken: Codable {
     var token: String
     var activated: Bool
     var expiration_date: String
+    var app_id: String
+    var user_id: String
+    var ecosystem_user_id: String
 }
 
 struct EarnResult: Encodable {

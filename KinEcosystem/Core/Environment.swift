@@ -57,9 +57,9 @@ public enum Environment {
     public var marketplaceURL: String {
         switch self {
         case .playground:
-            return "http://api.kinplayground.com/v1"
+            return "https://api.kinplayground.com/v1"
         case .production:
-            return "http://api.kinmarketplace.com/v1"
+            return "https://api.kinmarketplace.com/v1"
         case .custom(let envProps):
             return envProps.marketplaceURL
         }
@@ -70,7 +70,7 @@ public enum Environment {
         case .playground:
             return "https://s3.amazonaws.com/assets.kinecosystembeta.com/index.html"
         case .production:
-            return "http://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com"
+            return "https://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com"
         case .custom(let envProps):
             return envProps.webURL
         }

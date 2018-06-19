@@ -14,9 +14,9 @@ import KinUtil
 
 struct EcosystemConfiguration {
     var baseURL: URL
-    var apiKey: String
-    var appId: String
-    var userId: String
+    var apiKey: String?
+    var appId: String?
+    var userId: String?
     var jwt: String?
     var publicAddress: String
 }
@@ -42,10 +42,10 @@ class EcosystemNet {
     }
     
     @discardableResult
-    func authorize() -> Promise<Void> {
-        let p = Promise<Void>()
-        if client.authToken != nil {
-            return p.signal(())
+    func authorize() -> Promise<AuthToken> {
+        let p = Promise<AuthToken>()
+        if let auth = client.authToken {
+            return p.signal(auth)
         }
         guard let data = try? JSONEncoder().encode(client.signInData) else {
             return p.signal(EcosystemNetError.requestBuild)
@@ -60,7 +60,7 @@ class EcosystemNet {
                     return
                 }
                 self.client.authToken = token
-                p.signal(())
+                p.signal(token)
             }.error { error in
                 p.signal(error)
         }
@@ -72,7 +72,7 @@ class EcosystemNet {
         guard tosAccepted == false else {
             return p.signal(())
         }
-        authorize().then {
+        authorize().then { _ in
                 self.client.buildRequest(path: "users/me/activate", method: .post)
             }.then { request in
                 self.client.dataRequest(request)
@@ -99,7 +99,7 @@ class EcosystemNet {
                     contentType: ContentType = .json,
                     body: Data? = nil,
                     parameters: [String: String]? = nil) -> Promise<Data> {
-        return authorize().then {
+        return authorize().then {_ in
                 self.client.buildRequest(path: path, method: method, body: body, parameters: parameters)
             }.then { request in
                 self.client.dataRequest(request)
@@ -126,7 +126,7 @@ class EcosystemNet {
     }
     
     func delete(_ path: String, parameters: [String: String]? = nil) -> Promise<Void> {
-        return authorize().then {
+        return authorize().then { _ in
             self.client.buildRequest(path: path, method: .delete, parameters: parameters)
             }.then { request in
                 self.client.request(request)

@@ -8,7 +8,6 @@
 
 @available(iOS 9.0, *)
 class Core {
-    
     let network: EcosystemNet
     let data: EcosystemData
     let blockchain: Blockchain
