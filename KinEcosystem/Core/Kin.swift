@@ -60,23 +60,9 @@ public class Kin {
         }
         
         let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        var environmentChanged = true
-        if  let lastEnvironmentPropertiesData = UserDefaults.standard.data(forKey: KinPreferenceKey.lastEnvironment.rawValue),
-            let props = try? JSONDecoder().decode(EnvironmentProperties.self, from: lastEnvironmentPropertiesData), props == environment.properties {
-            environmentChanged = false
-        }
         if lastUser != userId {
             needsReset = true
             logInfo("new user detected - resetting everything")
-        }
-        if environmentChanged {
-            needsReset = true
-            logInfo("environment change detected - resetting everything")
-            if let data = try? JSONEncoder().encode(environment.properties) {
-                UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastEnvironment.rawValue)
-            }
-        }
-        if needsReset {
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
         UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)

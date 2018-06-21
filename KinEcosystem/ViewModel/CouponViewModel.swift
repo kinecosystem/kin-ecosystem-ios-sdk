@@ -14,7 +14,7 @@ import KinSDK
 class CouponViewModel: Decodable {
     
     var title: NSAttributedString
-    var description: NSAttributedString
+    var description: NSMutableAttributedString
     fileprivate var imageSource: String
     var confirmation: SpendViewModel?
     var buttonLabel: NSAttributedString?
@@ -50,6 +50,14 @@ class CouponViewModel: Decodable {
         title = titleString.attributed(22.0, weight: .regular, color: .kinBlueGrey)
         description = (descriptionString + " ").attributed(14.0, weight: .regular, color: .kinBlueGrey) +
                         linkString.attributed(14.0, weight: .regular, color: .kinDeepSkyBlue)
+        let nsDescriptionString = description.string as NSString
+        let linkRange = nsDescriptionString.range(of: linkString)
+        if linkRange.location != NSNotFound {
+            description.addAttribute(.link, value: linkString, range: linkRange)
+        }
+        let pStyle = NSMutableParagraphStyle()
+        pStyle.alignment = .center
+        description.addAttribute(.paragraphStyle, value: pStyle, range: NSMakeRange(0, description.string.count))
         buttonLabel = "Copy Code".attributed(16.0, weight: .regular, color: .kinWhite)
     }
 }
