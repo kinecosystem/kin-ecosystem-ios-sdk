@@ -1,6 +1,5 @@
 //
 //  Environment.swift
-//  Base64
 //
 //  Created by Elazar Yifrach on 18/06/2018.
 //

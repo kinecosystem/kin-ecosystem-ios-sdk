@@ -102,7 +102,7 @@ class CouponViewController: UIViewController, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        UIApplication.shared.openURL(URL)
+        //UIApplication.shared.openURL(URL)
         return false
     }
 }
