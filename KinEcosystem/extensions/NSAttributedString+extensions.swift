@@ -19,7 +19,7 @@ extension String {
     
 }
 
-func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSAttributedString
+func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString
 {
     let result = NSMutableAttributedString()
     result.append(lhs)

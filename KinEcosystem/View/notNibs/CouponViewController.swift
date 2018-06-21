@@ -9,12 +9,12 @@
 import UIKit
 
 @available(iOS 9.0, *)
-class CouponViewController: UIViewController {
+class CouponViewController: UIViewController, UITextViewDelegate {
 
     var viewModel: CouponViewModel!
     @IBOutlet weak var couponImageView: UIImageView!
     @IBOutlet weak var couponTitle: UILabel!
-    @IBOutlet weak var couponDescription: UILabel!
+    @IBOutlet weak var couponDescription: UITextView!
     @IBOutlet weak var couponCode: UILabel!
     @IBOutlet weak var copyCodeButton: UIButton!
     @IBOutlet weak var closeButton: UIButton!
@@ -24,6 +24,9 @@ class CouponViewController: UIViewController {
         viewModel.image.then(on: .main) { [weak self] result in
             self?.couponImageView.image = result.image
         }
+        couponDescription.textContainer.maximumNumberOfLines = 1
+        couponDescription.textContainer.lineBreakMode = .byTruncatingTail
+        couponDescription.textContainerInset = .zero
         couponTitle.attributedText = viewModel.title
         couponDescription.attributedText = viewModel.description
         couponCode.attributedText = viewModel.code
@@ -98,4 +101,8 @@ class CouponViewController: UIViewController {
         
     }
 
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        UIApplication.shared.openURL(URL)
+        return false
+    }
 }
