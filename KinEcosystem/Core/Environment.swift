@@ -13,6 +13,19 @@ public struct EnvironmentProperties: Codable, Equatable {
     let marketplaceURL: String
     let webURL: String
     let BIURL: String
+    public init(blockchainURL: String,
+                blockchainPassphrase: String,
+                kinIssuer: String,
+                marketplaceURL: String,
+                webURL: String,
+                BIURL: String) {
+        self.blockchainURL = blockchainURL
+        self.blockchainPassphrase = blockchainPassphrase
+        self.kinIssuer = kinIssuer
+        self.marketplaceURL = marketplaceURL
+        self.webURL = webURL
+        self.BIURL = BIURL
+    }
 }
 
 public enum Environment {
@@ -25,7 +38,7 @@ public enum Environment {
         case .playground:
             return "https://stellar.kinplayground.com"
         case .production:
-            return "https://horizon-kik.kininfrastructure.com"
+            return "https://horizon-kin-ecosystem.kininfrastructure.com"
         case .custom(let envProps):
             return envProps.blockchainURL
         }
@@ -36,7 +49,7 @@ public enum Environment {
         case .playground:
             return "ecosystem playground"
         case .production:
-            return "private testnet"
+            return "Public Global Kin Ecosystem Network ; June 2018"
         case .custom(let envProps):
             return envProps.blockchainPassphrase
         }
@@ -47,7 +60,7 @@ public enum Environment {
         case .playground:
             return "GDVIWJ2NYBCPHMGTIBO5BBZCP5QCYC4YT4VINTV5PZOSE7BAJCH5JI64"
         case .production:
-            return "GBQ3DQOA7NF52FVV7ES3CR3ZMHUEY4LTHDAQKDTO6S546JCLFPEQGCPK"
+            return "GDF42M3IPERQCBLWFEZKQRK77JQ65SCKTU3CW36HZVCX7XX5A5QXZIVK"
         case .custom(let envProps):
             return envProps.kinIssuer
         }
@@ -69,7 +82,7 @@ public enum Environment {
         case .playground:
             return "https://s3.amazonaws.com/assets.kinecosystembeta.com/index.html"
         case .production:
-            return "https://htmlpoll.kinecosystem.com.s3-website-us-east-1.amazonaws.com"
+            return "https://cdn.kinmarketplace.com"
         case .custom(let envProps):
             return envProps.webURL
         }

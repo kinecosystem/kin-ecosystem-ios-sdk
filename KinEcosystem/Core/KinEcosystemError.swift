@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KinSDK
 
 public enum KinClientErrorCode: Int {
     case notStarted             = 4001
@@ -92,6 +93,8 @@ public enum KinEcosystemError: LocalizedError {
     public static func transform(_ rawError: Error) -> Error {
         if rawError is ResponseError {
             return KinEcosystemError.service(.response, rawError)
+        } else if case KinError.insufficientFunds = rawError {
+            return KinEcosystemError.blockchain(.insufficientFunds, rawError)
         } else if case let EcosystemNetError.service(responseError) = rawError {
             return KinEcosystemError.service(.response, responseError)
         } else if case let EcosystemNetError.network(networkError) = rawError {

@@ -46,6 +46,8 @@
 		E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90A2034138100DD4B8E /* EarnOfferCell.swift */; };
 		E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */; };
 		E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E942F90E2034268300DD4B8E /* EarnOfferCell.xib */; };
+		E9540F5020E01BAF0038FF49 /* Environment.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9540F4B20E01BAF0038FF49 /* Environment.swift */; };
+		E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9540F5920E01DAC0038FF49 /* Balance.swift */; };
 		E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A60820568B9600F01C8A /* DiamondsLoaderView.swift */; };
 		E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A60D2056B86A00F01C8A /* SplashTransition.swift */; };
 		E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A60F205711CE00F01C8A /* CGPoint+functions.swift */; };
@@ -203,6 +205,8 @@
 		E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
 		E942F90E2034268300DD4B8E /* EarnOfferCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = EarnOfferCell.xib; sourceTree = "<group>"; };
 		E942F94E2034751000DD4B8E /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		E9540F4B20E01BAF0038FF49 /* Environment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Environment.swift; sourceTree = "<group>"; };
+		E9540F5920E01DAC0038FF49 /* Balance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Balance.swift; sourceTree = "<group>"; };
 		E954A60820568B9600F01C8A /* DiamondsLoaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiamondsLoaderView.swift; sourceTree = "<group>"; };
 		E954A60D2056B86A00F01C8A /* SplashTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashTransition.swift; sourceTree = "<group>"; };
 		E954A60F205711CE00F01C8A /* CGPoint+functions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGPoint+functions.swift"; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 		E942F8D12030DD6000DD4B8E /* Blockchain */ = {
 			isa = PBXGroup;
 			children = (
+				E9540F5920E01DAC0038FF49 /* Balance.swift */,
 				E942F8D22030DD7D00DD4B8E /* Blockchain.swift */,
 			);
 			path = Blockchain;
@@ -404,6 +409,7 @@
 		E96F24F52018A88D0017EF68 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				E9540F4B20E01BAF0038FF49 /* Environment.swift */,
 				91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */,
 				91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
@@ -754,6 +760,7 @@
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
 				E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */,
+				E9540F5020E01BAF0038FF49 /* Environment.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
@@ -778,6 +785,7 @@
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
+				E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
