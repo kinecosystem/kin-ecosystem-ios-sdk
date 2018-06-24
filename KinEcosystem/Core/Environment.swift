@@ -80,7 +80,7 @@ public enum Environment {
     public var webURL: String {
         switch self {
         case .playground:
-            return "https://s3.amazonaws.com/assets.kinecosystembeta.com/index.html"
+            return "https://s3.amazonaws.com/assets.kinplayground.com/web-offers/cards-based/index.html"
         case .production:
             return "https://cdn.kinmarketplace.com"
         case .custom(let envProps):
