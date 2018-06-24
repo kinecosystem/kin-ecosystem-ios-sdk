@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SafariServices
 
 @available(iOS 9.0, *)
 class CouponViewController: UIViewController, UITextViewDelegate {
@@ -102,7 +103,17 @@ class CouponViewController: UIViewController, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
-        //UIApplication.shared.openURL(URL)
+        var urlToOpen = URL
+        if URL.scheme == nil {
+            if let finalURL = Foundation.URL(string: "http://\(URL.absoluteString)") {
+                urlToOpen = finalURL
+            } else {
+                return false
+            }
+        }
+        let sfController = SFSafariViewController(url: urlToOpen)
+        sfController.modalPresentationStyle = .overFullScreen
+        self.present(sfController, animated: true)
         return false
     }
 }
