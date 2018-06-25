@@ -36,7 +36,7 @@ public class Kin {
         return core.blockchain.lastBalance
     }
     
-    public var publicAddres: String? {
+    public var publicAddress: String? {
         guard let core = Kin.shared.core else {
             return nil
         }
