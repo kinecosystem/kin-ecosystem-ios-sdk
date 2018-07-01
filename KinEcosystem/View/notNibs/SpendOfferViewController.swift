@@ -16,8 +16,13 @@ enum SpendOfferError: Error {
 
 @available(iOS 9.0, *)
 class SpendOfferViewController: KinViewController {
-
+    
+    struct BIData {
+        var amount: Double
+        var offerId: String
+    }
     var viewModel: SpendViewModel!
+    var biData: BIData!
     fileprivate(set) var spend = Promise<Void>()
     @IBOutlet weak var spendImageView: UIImageView!
     @IBOutlet weak var spendTitle: UILabel!
@@ -36,6 +41,7 @@ class SpendOfferViewController: KinViewController {
         spendButton.setAttributedTitle(viewModel.buttonLabel, for: .normal)
         spendButton.backgroundColor = .kinDeepSkyBlue
         spendButton.adjustsImageWhenDisabled = false
+        Kin.track { try ConfirmPurchasePageViewed(kinAmount: biData.amount, offerID: biData.offerId, orderID: "") }
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -47,6 +53,7 @@ class SpendOfferViewController: KinViewController {
     }
 
     @IBAction func confirmTapped(_ sender: Any) {
+        Kin.track { try ConfirmPurchaseButtonTapped(kinAmount: biData.amount, offerID: biData.offerId, orderID: "" ) }
         spendButton.isEnabled = false
         spend.signal(())
         transitionToConfirmed()
@@ -91,9 +98,10 @@ class SpendOfferViewController: KinViewController {
         }) { [weak self] finished in
             self?.closeButton.isHidden = true
         }
+        
+        Kin.track { try SpendThankyouPageViewed(kinAmount: biData.amount, offerID: biData.offerId, orderID: "") }
 
         DispatchQueue.main.asyncAfter(deadline: .now() + duration * 0.72) { [weak self] in
-
 
             guard   let spendTitle = self?.spendTitle,
                     let spendDescription = self?.spendDescription else  { return }

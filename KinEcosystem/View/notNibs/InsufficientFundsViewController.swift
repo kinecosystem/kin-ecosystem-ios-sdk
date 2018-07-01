@@ -23,6 +23,7 @@ class InsufficientFundsViewController: UIViewController {
         goButton.setAttributedTitle("Earn Offers".attributed(16.0, weight: .regular, color: .kinWhite), for: .normal)
         goButton.backgroundColor = .kinDeepSkyBlue
         goButton.adjustsImageWhenDisabled = false
+        Kin.track { try NotEnoughKinPageViewed() }
     }
 
     @IBAction func goTapped(_ sender: Any) {

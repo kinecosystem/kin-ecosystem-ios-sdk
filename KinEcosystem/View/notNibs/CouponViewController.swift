@@ -9,10 +9,20 @@
 import UIKit
 import SafariServices
 
+
+
 @available(iOS 9.0, *)
 class CouponViewController: UIViewController, UITextViewDelegate {
 
+    struct BIData {
+        var offerId: String
+        var orderId: String
+        var amount: Double
+        var trigger: KBITypes.RedeemTrigger
+    }
+    
     var viewModel: CouponViewModel!
+    var biData: BIData!
     @IBOutlet weak var couponImageView: UIImageView!
     @IBOutlet weak var couponTitle: UILabel!
     @IBOutlet weak var couponDescription: UITextView!
@@ -41,6 +51,7 @@ class CouponViewController: UIViewController, UITextViewDelegate {
         shape.strokeColor = UIColor.kinLightBlueGrey.cgColor
         shape.lineWidth = 2.0
         couponCode.layer.addSublayer(shape)
+        Kin.track { try SpendRedeemPageViewed(kinAmount: biData.amount, offerID: biData.offerId, orderID: biData.orderId, redeemTrigger: biData.trigger) }
     }
 
     @IBAction func closeButtonTapped(_ sender: Any) {
@@ -53,6 +64,7 @@ class CouponViewController: UIViewController, UITextViewDelegate {
     @IBAction func copyCodeButtonTapped(_ sender: Any) {
         UIPasteboard.general.string = viewModel.code.string
         transitionToConfirmed()
+        Kin.track { try SpendRedeemButtonTapped(kinAmount: biData.amount, offerID: biData.offerId, orderID: biData.orderId) }
     }
     
     func transitionToConfirmed() {
@@ -103,6 +115,7 @@ class CouponViewController: UIViewController, UITextViewDelegate {
     }
 
     func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange) -> Bool {
+        Kin.track { try RedeemURLTapped() }
         var urlToOpen = URL
         if URL.scheme == nil {
             if let finalURL = Foundation.URL(string: "http://\(URL.absoluteString)") {

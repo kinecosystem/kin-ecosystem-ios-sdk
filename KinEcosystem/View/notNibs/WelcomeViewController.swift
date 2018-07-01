@@ -28,6 +28,7 @@ class WelcomeViewController: KinViewController {
         super.viewDidLoad()
         getStartedButton.adjustsImageWhenDisabled = false
         setupTextLabels()
+        Kin.track { try WelcomeScreenPageViewed() }
     }
 
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -35,6 +36,7 @@ class WelcomeViewController: KinViewController {
     }
 
     @IBAction func getStartedTapped(_ sender: Any) {
+        Kin.track { try WelcomeScreenButtonTapped() }
         getStartedButton.isEnabled = false
         shrinkButton()
             .then(on: .main) { [weak self] in

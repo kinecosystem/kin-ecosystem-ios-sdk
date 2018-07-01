@@ -42,6 +42,7 @@ class MarketplaceViewController: KinNavigationChildController {
         setupCollectionViews()
         setupFRCSections()
         setupNavigationItem()
+        Kin.track { try MarketplacePageViewed() }
     }
     
     fileprivate func setupNavigationItem() {
@@ -130,6 +131,7 @@ class MarketplaceViewController: KinNavigationChildController {
     }
     
     @objc func close() {
+        Kin.track { try BackButtonOnMarketplacePageTapped() }
         Kin.shared.closeMarketPlace()
     }
 
@@ -185,6 +187,11 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             htmlController = html
             let navContoller = KinBaseNavigationController(rootViewController: html)
             self.kinNavigationController?.present(navContoller, animated: true)
+            
+            if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
+                Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type) }
+                Kin.track { try EarnOrderCreationRequested(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type) }
+            }
             Flows.earn(offerId: offer.id, resultPromise: html.earn, core: core)
         default: // spend
             guard   let data = offer.content.data(using: .utf8),
@@ -202,9 +209,11 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                 self.kinNavigationController?.present(controller, animated: true)
                 return
             }
+            Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, orderID: "") }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController",
                                                       bundle: Bundle.ecosystem)
             controller.viewModel = viewModel
+            controller.biData = SpendOfferViewController.BIData(amount: Double(offer.amount), offerId: offer.id)
             let transition = SheetTransition()
             controller.modalPresentationStyle = .custom
             controller.transitioningDelegate = transition
@@ -234,9 +243,10 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                                 return
                         }
                         couponViewModel.coupon_code = couponCode
+                        let biData = CouponViewController.BIData(offerId: order.offer_id, orderId: order.id, amount: Double(order.amount), trigger: .systemInit)
                         DispatchQueue.main.async {
                             if let ordersController = this.kinNavigationController?.kinChildViewControllers.last as? OrdersViewController {
-                                ordersController.presentCoupon(with: couponViewModel)
+                                ordersController.presentCoupon(with: couponViewModel, biData: biData)
                             }
                         }
                     })

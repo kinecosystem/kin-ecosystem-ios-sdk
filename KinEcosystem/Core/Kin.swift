@@ -27,6 +27,7 @@ public class Kin {
     fileprivate(set) var core: Core?
     fileprivate(set) var needsReset = false
     fileprivate weak var mpPresentingController: UIViewController?
+    fileprivate var bi: BIClient!
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
@@ -50,6 +51,15 @@ public class Kin {
         return core.blockchain.onboarded && core.network.tosAccepted
     }
     
+    static func track<T: KBIEvent>(block: () throws -> (T)) {
+        do {
+            let event = try block()
+            try Kin.shared.bi.send(event)
+        } catch {
+            logError("failed to send event, error: \(error)")
+        }
+    }
+    
     public func start(userId: String,
                       apiKey: String? = nil,
                       appId: String? = nil,
@@ -58,14 +68,18 @@ public class Kin {
         guard core == nil else {
             return
         }
-        
+        bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
+        setupBIProxies()
+        Kin.track { try KinSDKInitiated() }
         let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        if lastUser != userId {
+        let lastEnvironmentName = UserDefaults.standard.string(forKey: KinPreferenceKey.lastEnvironment.rawValue)
+        if lastUser != userId || (lastEnvironmentName != nil && lastEnvironmentName != environment.name) {
             needsReset = true
-            logInfo("new user detected - resetting everything")
+            logInfo("new user or environment type detected - resetting everything")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
         UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
@@ -77,6 +91,7 @@ public class Kin {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
             chain = try Blockchain(environment: environment)
+            try chain.startAccount()
         } catch {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
@@ -91,7 +106,8 @@ public class Kin {
                                                                   userId: userId,
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
-        core = Core(environment: environment, network: network, data: store, blockchain: chain)
+        core = try Core(environment: environment, network: network, data: store, blockchain: chain)
+
         let tosAccepted = core!.network.tosAccepted
         network.authorize().then { [weak self] _ in
             self?.core!.blockchain.onboard()
@@ -165,6 +181,7 @@ public class Kin {
         
     
     public func launchMarketplace(from parentViewController: UIViewController) {
+        Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
             logError("Kin not started")
             return
@@ -255,5 +272,70 @@ public class Kin {
     
     func closeMarketPlace() {
         mpPresentingController?.dismiss(animated: true, completion: nil)
+    }
+    
+    fileprivate func setupBIProxies() {
+        EventsStore.shared.userProxy = UserProxy(balance: { [weak self] () -> (Double) in
+            guard let balance = self?.core?.blockchain.lastBalance else {
+                return 0
+            }
+            return NSDecimalNumber(decimal: balance.amount).doubleValue
+            }, digitalServiceID: { [weak self] () -> (String) in
+                guard let appId = self?.core?.network.client.authToken?.app_id else {
+                    if let startAppid = self?.core?.network.client.config.appId {
+                        return startAppid
+                    }
+                    return ""
+                }
+                return appId
+            }, digitalServiceUserID: { [weak self] () -> (String) in
+                guard let uid = self?.core?.network.client.authToken?.user_id else {
+                    if let startUid = self?.core?.network.client.config.userId {
+                        return startUid
+                    } else if let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue) {
+                        return lastUser
+                    }
+                    return ""
+                }
+                return uid
+            }, earnCount: { () -> (Int) in
+                0
+        }, entryPointParam: { () -> (String) in
+            ""
+        }, spendCount: { () -> (Int) in
+            0
+        }, totalKinEarned: { () -> (Double) in
+            0
+        }, totalKinSpent: { () -> (Double) in
+            0
+        }, transactionCount: { () -> (Int) in
+            0
+        })
+        
+        EventsStore.shared.clientProxy = ClientProxy(carrier: { [weak self] () -> (String) in
+            return self?.bi.networkInfo.subscriberCellularProvider?.carrierName ?? ""
+            }, deviceID: { () -> (String) in
+                DeviceData.deviceId
+            }, deviceManufacturer: { () -> (String) in
+                "Apple"
+        }, deviceModel: { () -> (String) in
+            UIDevice.current.model
+        }, language: { () -> (String) in
+            Locale.autoupdatingCurrent.languageCode ?? ""
+        }, os: { () -> (String) in
+            UIDevice.current.systemVersion
+        })
+        
+        EventsStore.shared.commonProxy = CommonProxy(eventID: { () -> (String) in
+            UUID().uuidString
+        }, platform: { () -> (String) in
+            "iOS"
+        }, timestamp: { () -> (String) in
+            "\(Date().timeIntervalSince1970)"
+        }, userID: { [weak self] () -> (String) in
+            self?.core?.network.client.authToken?.ecosystem_user_id ?? ""
+            }, version: { () -> (String) in
+                "0.4.6"
+        })
     }
 }

@@ -92,11 +92,16 @@ class EarnOfferViewController: KinViewController {
                 logError("failed to fetch order given to html controller from store")
                 return
             }
+            let contentType = offer.offerContentType
             let content = offer.content
             DispatchQueue.main.async {
                 self.web.evaluateJavaScript("window.kin.renderPoll(\(content))") { result, error in
                     if let error = error {
                         self.earn.signal(EarnOfferHTMLError.js(error))
+                    } else {
+                        if let type = KBITypes.OfferType(rawValue: contentType.rawValue) {
+                            Kin.track { try EarnPageLoaded(offerType: type) }
+                        }
                     }
                 }
             }

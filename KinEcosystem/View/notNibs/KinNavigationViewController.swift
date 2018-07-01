@@ -99,6 +99,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         guard (kinChildViewControllers.last is OrdersViewController) == false else {
             return
         }
+        Kin.track { try BalanceTapped() }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
         ordersController.core = core
         push(ordersController, animated: true)

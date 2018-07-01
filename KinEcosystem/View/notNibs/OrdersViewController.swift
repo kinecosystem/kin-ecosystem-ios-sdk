@@ -26,6 +26,7 @@ class OrdersViewController : KinNavigationChildController {
         setupTableView()
         setupFRCSections()
         setupNavigationItem()
+        Kin.track { try OrderHistoryPageViewed() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -84,13 +85,15 @@ class OrdersViewController : KinNavigationChildController {
             logError("offer content is not in the correct format")
             return
         }
+        Kin.track { try OrderHistoryItemTapped(offerID: order.offer_id, orderID: order.id) }
         viewModel.coupon_code = couponCode
-        presentCoupon(with: viewModel)
+        presentCoupon(with: viewModel, biData: CouponViewController.BIData(offerId: order.offer_id, orderId: order.id, amount: Double(order.amount), trigger: .userInit))
     }
     
-    func presentCoupon(with viewModel: CouponViewModel) {
+    func presentCoupon(with viewModel: CouponViewModel, biData: CouponViewController.BIData) {
         let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
         controller.viewModel = viewModel
+        controller.biData = biData
         let transition = SheetTransition()
         controller.modalPresentationStyle = .custom
         controller.transitioningDelegate = transition
