@@ -45,7 +45,7 @@ class Blockchain {
     let client: KinClient
     fileprivate(set) var account: KinAccount!
     private let linkBag = LinkBag()
-    private var paymentObservers = [PaymentMemoIdentifier : Observable<Void>]()
+    private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
     private var balanceObservers = [String : (Balance) -> ()]()
     private var paymentsWatcher: KinSDK.PaymentWatch?
     private var balanceWatcher: KinSDK.BalanceWatch?
@@ -98,15 +98,22 @@ class Blockchain {
         let provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
         let client = try KinClient(provider: provider)
         self.client = client
+    }
+
+    func startAccount() throws {
         if Kin.shared.needsReset {
             lastBalance = nil
             try? client.deleteAccount(at: 0)
         }
-        account = try client.accounts[0] ?? client.addAccount()
+        if let acc = client.accounts[0] {
+            account = acc
+        } else {
+            Kin.track { try StellarAccountCreationRequested() }
+            account = try client.addAccount()
+        }
         _ = balance()
-
     }
-
+    
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
         account.balance(completion: { [weak self] balance, error in
@@ -144,9 +151,12 @@ class Blockchain {
                                 try self.account.watchCreation().then {
                                     self.account.activate()
                                 }.then { _ in
+                                    Kin.track { try StellarKinTrustlineSetupSucceeded() }
+                                    Kin.track { try WalletCreationSucceeded() }
                                     self.onboarded = true
                                     p.signal(())
                                 }.error { error in
+                                    Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
                                     p.signal(error)
                                 }
                             } catch {
@@ -154,9 +164,12 @@ class Blockchain {
                             }
                         case .missingBalance:
                             self.account.activate().then { _ in
+                                Kin.track { try StellarKinTrustlineSetupSucceeded() }
+                                Kin.track { try WalletCreationSucceeded() }
                                 self.onboarded = true
                                 p.signal(())
                             }.error { error in
+                                Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
                                 p.signal(error)
                             }
                         default:
@@ -183,7 +196,7 @@ class Blockchain {
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
         guard paymentsWatcher == nil else {
             logInfo("payment watcher already started, added watch for \(memo)...")
-            paymentObservers[memo] = Observable<Void>()
+            paymentObservers[memo] = Observable<String>()
             return
         }
         paymentsWatcher = try account.watchPayments(cursor: "now")
@@ -193,11 +206,11 @@ class Blockchain {
                 memoKey.description == metadata
             })?.value else { return }
             logInfo("payment found in blockchain for \(metadata)...")
-            match.next(())
+            match.next(paymentInfo.hash)
             match.finish()
         }).add(to: linkBag)
         logInfo("added watch for \(memo)...")
-        paymentObservers[memo] = Observable<Void>()
+        paymentObservers[memo] = Observable<String>()
     }
 
     func stopWatchingForNewPayments(with memo: PaymentMemoIdentifier? = nil) {
@@ -214,18 +227,18 @@ class Blockchain {
         logInfo("removed payment observer for \(memo)")
     }
 
-    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0) -> Promise<Void> {
-        let p = Promise<Void>()
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0) -> Promise<String> {
+        let p = Promise<String>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
             key == memo
         }) else {
             return p.signal(BlockchainError.watchNotStarted)
         }
         var found = false
-        paymentObservers[memo]?.on(next: { [weak self] _ in
+        paymentObservers[memo]?.on(next: { [weak self] txHash in
             found = true
             _ = self?.balance()
-            p.signal(())
+            p.signal(txHash)
         }).add(to: linkBag)
         DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
             if !found {

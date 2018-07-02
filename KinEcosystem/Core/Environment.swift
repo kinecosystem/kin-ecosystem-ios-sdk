@@ -33,6 +33,17 @@ public enum Environment {
     case production
     case custom(EnvironmentProperties)
     
+    public var name: String {
+        switch self {
+        case .playground:
+            return "playground"
+        case .production:
+            return "production"
+        case .custom(_):
+            return "custom"
+        }
+    }
+    
     public var blockchainURL: String {
         switch self {
         case .playground:
@@ -91,9 +102,9 @@ public enum Environment {
     public var BIURL: String {
         switch self {
         case .playground:
-            return ""
+            return "https://kin-bi.appspot.com/eco_play_"
         case .production:
-            return ""
+            return "https://kin-bi.appspot.com/eco_"
         case .custom(let envProps):
             return envProps.BIURL
         }

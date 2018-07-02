@@ -37,6 +37,7 @@ struct Flows {
         
         var openOrder: OpenOrder?
         var canCancelOrder = true
+        let prevBalance = core.blockchain.lastBalance
         
         core.network.objectAtPath("offers/\(offerId)/orders",
             type: OpenOrder.self,
@@ -45,6 +46,7 @@ struct Flows {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
                 openOrder = order
+                Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id) }
                 return resultPromise
                     .then { htmlResult in
                         KinUtil.Promise<(String, OpenOrder)>().signal((htmlResult, order))
@@ -65,7 +67,8 @@ struct Flows {
                     method: .post,
                     body: content)
                     .then { data in
-                        core.data.save(Order.self, with: data)
+                        Kin.track { try EarnOrderCompletionSubmitted(offerID: order.offer_id, orderID: order.id) }
+                        return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
                         return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
@@ -80,10 +83,11 @@ struct Flows {
                 }
             }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
-                    .then {
-                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                    .then { txHash in
+                        Kin.track { try EarnOrderPaymentConfirmed(orderID: order.id, transactionID: txHash) }
+                        return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> Promise<Void> in
+            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals,
@@ -116,13 +120,31 @@ struct Flows {
                             }
                     }
                     return p
-                })
-            }.then {
-                // do not remove me
+                }).then {
+                    KinUtil.Promise<OpenOrder>().signal(order)
+                }
+            }.then { order in
+                core.data.queryObjects(of: Offer.self, with: NSPredicate(with: ["id" : order.offer_id])) { result in
+                    guard let offer = result.first else {
+                        return
+                    }
+                    if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
+                        Kin.track { try EarnOrderCompleted(kinAmount: Double(order.amount), offerID: order.offer_id, offerType: type, orderID: order.id) }
+                    }
+                }
             }.error { error in
                 core.blockchain.stopWatchingForNewPayments()
                 logError("earn flow error: \(error)")
+                if  case let EcosystemNetError.service(responseError) = error,
+                    let url = responseError.httpResponse?.url,
+                    url.pathComponents.contains("offers") {
+                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: offerId) }
+                }
+                Kin.track { try EarnOrderFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
                 if let order = openOrder, canCancelOrder {
+                    if case EarnOfferHTMLError.userCanceled = error {
+                        Kin.track { try EarnOrderCancelled(offerID: order.offer_id, orderID: order.id) }
+                    }
                     let group = DispatchGroup()
                     group.enter()
                     core.network.delete("orders/\(order.id)").then {
@@ -155,6 +177,11 @@ struct Flows {
                         }
                         openOrder = nil
                 }
+                if  let prev = prevBalance,
+                    let next = core.blockchain.lastBalance,
+                    prev.amount != next.amount {
+                    Kin.track { try KinBalanceUpdated(previousBalance: (prev.amount as NSDecimalNumber).doubleValue) }
+                }
         }
         
     }
@@ -167,7 +194,8 @@ struct Flows {
         
         var openOrder: OpenOrder?
         var canCancelOrder = true
-        
+        let prevBalance = core.blockchain.lastBalance
+        Kin.track { try SpendOrderCreationRequested(isNative: false, offerID: offerId) }
         core.network.objectAtPath("offers/\(offerId)/orders",
             type: OpenOrder.self,
             method: .post)
@@ -176,6 +204,7 @@ struct Flows {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
                 logVerbose("created order \(order.id)")
+                Kin.track { try SpendOrderCreationReceived(isNative: false, offerID: offerId, orderID: order.id) }
                 return confirmPromise
                     .then {
                         var recipient: String? = nil
@@ -206,7 +235,8 @@ struct Flows {
                 return core.network.dataAtPath("orders/\(order.id)",
                     method: .post)
                     .then { data in
-                        core.data.save(Order.self, with: data)
+                        Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id) }
+                        return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
@@ -227,19 +257,21 @@ struct Flows {
                         SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
+                Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
                                            memo: memo.description)
-                    .then { _ in
+                    .then { txId in
+                        Kin.track { try SpendTransactionBroadcastToBlockchainSucceeded(offerID: order.offer_id, orderID: order.id, transactionID: txId) }
                         logVerbose("\(amount) kin sent to \(recipient)")
                         return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
-                    .then {
-                        KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
+                    .then { txHash in
+                        return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<Void> in
+            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals,
@@ -275,18 +307,34 @@ struct Flows {
                             }
                     }
                     return p
-                })
+                }).then {
+                    KinUtil.Promise<OpenOrder>().signal(order)
+                }
                 
-            }.then {
-                // do not remove me
+            }.then { order in
+                Kin.track { try SpendOrderCompleted(isNative: false, offerID: order.offer_id, orderID: order.id) }
             }
             .error { error in
                 if case SpendOfferError.userCanceled = error  {
                     logVerbose("user canceled spend")
+                    Kin.track { try SpendOrderCancelled(offerID: offerId, orderID: openOrder?.id ?? "") }
                 } else {
                     logError("\(error)")
                     core.blockchain.stopWatchingForNewPayments()
                 }
+                if case KinError.insufficientFunds = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
+                } else if case let KinError.paymentFailed(payError) = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(payError)", offerID: offerId, orderID: openOrder?.id ?? "") }
+                } else if case KinError.invalidAmount = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
+                }
+                if  case let EcosystemNetError.service(responseError) = error,
+                    let url = responseError.httpResponse?.url,
+                    url.pathComponents.contains("offers") {
+                    Kin.track { try SpendOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", isNative: false, offerID: offerId) }
+                }
+                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: false, offerID: offerId, orderID: openOrder?.id ?? "") }
                 _ = core.blockchain.balance()
                 if let order = openOrder, canCancelOrder {
                     let group = DispatchGroup()
@@ -332,6 +380,12 @@ struct Flows {
                         openOrder = nil
                 }
                 
+                if  let prev = prevBalance,
+                    let next = core.blockchain.lastBalance,
+                    prev.amount != next.amount {
+                    Kin.track { try KinBalanceUpdated(previousBalance: (prev.amount as NSDecimalNumber).doubleValue) }
+                }
+                
         }
         
     }
@@ -345,7 +399,8 @@ struct Flows {
         }
         var openOrder: OpenOrder?
         var canCancelOrder = true
-        
+        let prevBalance = core.blockchain.lastBalance
+        Kin.track { try SpendOrderCreationRequested(isNative: true, offerID: "") }
         core.network.objectAtPath("offers/external/orders",
                                   type: OpenOrder.self,
                                   method: .post,
@@ -353,6 +408,7 @@ struct Flows {
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
+                Kin.track { try SpendOrderCreationReceived(isNative: true, offerID: order.offer_id, orderID: order.id) }
                 guard let recipient = order.blockchain_data?.recipient_address else {
                     return SDOFlowPromise().signal(KinError.internalInconsistency)
                 }
@@ -368,7 +424,8 @@ struct Flows {
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
-                        core.data.save(Order.self, with: data)
+                        Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id) }
+                        return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
                         logVerbose("Submitted order \(order.id)")
@@ -386,19 +443,21 @@ struct Flows {
                         SDOPFlowPromise().signal((recipient, amount, order, memo))
                 }
             }.then { recipient, amount, order, memo -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
+                Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
                                            memo: memo.description)
-                    .then { _ in
+                    .then { txId in
+                        Kin.track { try SpendTransactionBroadcastToBlockchainSucceeded(offerID: order.offer_id, orderID: order.id, transactionID: txId) }
                         logVerbose("\(amount) kin sent to \(recipient)")
                         return KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.blockchain.waitForNewPayment(with: memo)
-                    .then {
+                    .then { txHash in
                         KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<Void> in
+            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return KinUtil.attempt(retryIntervals: intervals,
@@ -435,9 +494,12 @@ struct Flows {
                             }
                     }
                     return p
-                })
+                }).then {
+                    KinUtil.Promise<OpenOrder>().signal(order)
+                }
                 
-            }.then {
+            }.then { order in
+                Kin.track { try SpendOrderCompleted(isNative: true, offerID: order.offer_id, orderID: order.id) }
                 if let confirmation = jwtConfirmation {
                     jwtPromise.signal(confirmation)
                 } else {
@@ -445,8 +507,21 @@ struct Flows {
                 }
             }
             .error { error in
-                
                 logError("\(error)")
+                if case KinError.insufficientFunds = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
+                } else if case let KinError.paymentFailed(payError) = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(payError)", offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
+                } else if case KinError.invalidAmount = error {
+                    Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
+                }
+                
+                if  case let EcosystemNetError.service(responseError) = error,
+                    let url = responseError.httpResponse?.url,
+                    url.pathComponents.contains("external") {
+                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: openOrder?.offer_id ?? "") }
+                }
+                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
                 core.blockchain.stopWatchingForNewPayments()
                 _ = core.blockchain.balance()
                 if let order = openOrder, canCancelOrder {
@@ -540,6 +615,12 @@ struct Flows {
                             }, with: NSPredicate(with: ["id": order.id]))
                         }
                         openOrder = nil
+                }
+                
+                if  let prev = prevBalance,
+                    let next = core.blockchain.lastBalance,
+                    prev.amount != next.amount {
+                    Kin.track { try KinBalanceUpdated(previousBalance: (prev.amount as NSDecimalNumber).doubleValue) }
                 }
                 
         }

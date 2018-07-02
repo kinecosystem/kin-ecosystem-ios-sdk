@@ -41,7 +41,7 @@ class OrderViewModel {
             case .failed:
                 indicatorColor = .kinWatermelon
                 detailsColor = .kinWatermelon
-                details = " - " + (model.error?.message ?? "Transaction failed")
+                details = " - " + (model.error?.error ?? "Transaction failed")
             default:
                 details = ""
             }

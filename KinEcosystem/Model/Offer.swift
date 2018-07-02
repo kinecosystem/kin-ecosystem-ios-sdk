@@ -19,6 +19,9 @@ enum OfferType: String {
 enum OfferContentType: String {
     case poll
     case coupon
+    case external
+    case quiz
+    case tutorial
 }
 
 class OffersList: EntityPresentor {
