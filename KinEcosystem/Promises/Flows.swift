@@ -415,7 +415,16 @@ struct Flows {
                 logVerbose("spend offer id \(order.offer_id), recipient \(recipient)")
                 return SDOFlowPromise().signal((recipient, Decimal(order.amount), order))
                 
-            }.then { recipient, amount, order -> SDOPFlowPromise in
+            }.then { recipient, amount, order  -> SDOFlowPromise in
+                return core.blockchain.balance().then { currentBalance in
+                    if (currentBalance as NSDecimalNumber).int32Value < order.amount {
+                        return SDOFlowPromise().signal(KinError.insufficientFunds)
+                    } else {
+                        return SDOFlowPromise().signal((recipient, amount, order))
+                    }
+                }
+            }
+            .then { recipient, amount, order -> SDOPFlowPromise in
                 guard let appId = core.network.client.authToken?.app_id else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
