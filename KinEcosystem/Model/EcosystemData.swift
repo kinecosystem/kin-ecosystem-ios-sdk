@@ -14,6 +14,7 @@ import CoreData
 import KinSDK
 
 enum EcosystemDataError: Error {
+    case internalInconsistency
     case fetchError
     case decodeError
     case encodeError
@@ -21,6 +22,7 @@ enum EcosystemDataError: Error {
 
 protocol NetworkSyncable: Decodable {
     func update(_ from: Self, in context: NSManagedObjectContext)
+    func willDelete() -> Bool
     var syncId: String { get }
     var position: Int32 { get set }
 }
@@ -30,7 +32,7 @@ protocol EntityPresentor: Decodable {
     var entities: [entity]? { get }
 }
 
-typealias DataChangeBlock<T> = ([T]) -> ()
+typealias DataChangeBlock<T> = (NSManagedObjectContext, [T]) -> ()
 
 class EcosystemData {
     
@@ -72,7 +74,9 @@ class EcosystemData {
                     diskEntity.update(networkEntity, in: context)
                     context.delete(networkEntity)
                 } else {
-                    context.delete(diskEntity)
+                    if diskEntity.willDelete() {
+                        context.delete(diskEntity)
+                    }
                 }
             }
              
@@ -168,7 +172,7 @@ class EcosystemData {
             let request = NSFetchRequest<T>(entityName: String(describing: type))
             request.predicate = predicate
             let objects = try context.fetch(request)
-            changeBlock(objects)
+            changeBlock(context, objects)
         }) { error in
             if let stackError = error {
                 p.signal(stackError)

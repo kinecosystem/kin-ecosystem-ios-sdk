@@ -57,7 +57,15 @@ class MarketplaceViewController: KinNavigationChildController {
         let request = NSFetchRequest<Offer>(entityName: "Offer")
         request.predicate = NSPredicate(with: ["offer_type" : offerType.rawValue,
                                                "pending" : false])
-        request.sortDescriptors = [NSSortDescriptor(key: "position", ascending: true)]
+        request.sortDescriptors = [NSSortDescriptor(key: "content_type",
+                                                    ascending: true,
+                                                    comparator: { typeA, typeB -> ComparisonResult in
+            if typeA as? String == OfferContentType.external.rawValue {
+                return .orderedAscending
+            }
+            return .orderedDescending
+        }),
+            NSSortDescriptor(key: "position", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
         try? frc.performFetch()
         return frc
@@ -177,7 +185,11 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
-        
+        guard offer.offerContentType != .external else {
+            let nativeOffer = offer.nativeOffer
+            Kin.shared.nativeOfferHandler?(nativeOffer)
+            return
+        }
         switch offer.offerType {
         case .earn:
             let html = EarnOfferViewController()

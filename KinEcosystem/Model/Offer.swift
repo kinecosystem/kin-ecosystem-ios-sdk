@@ -69,6 +69,14 @@ class Offer: NSManagedObject, NetworkSyncable {
         case blockchain_data
     }
     
+    var nativeOffer: NativeOffer {
+        return NativeOffer(id: id,
+                           title: title,
+                           description: description_,
+                           amount: amount,
+                           image: image)
+    }
+    
     required convenience public init(from decoder: Decoder) throws {
         guard let managedObjectContext = decoder.userInfo[.context] as? NSManagedObjectContext,
             let entity = NSEntityDescription.entity(forEntityName: "Offer", in: managedObjectContext) else {
@@ -87,6 +95,21 @@ class Offer: NSManagedObject, NetworkSyncable {
         content_type = try values.decode(String.self, forKey: .content_type)
         content = try values.decode(String.self, forKey: .content)
         blockchain_data = try values.decodeIfPresent(BlockchainData.self, forKey: .blockchain_data)
+    }
+    
+    convenience init(with nativeOffer: NativeOffer, in managedObjectContext: NSManagedObjectContext) throws {
+        guard let entity = NSEntityDescription.entity(forEntityName: "Offer", in: managedObjectContext) else {
+            throw EcosystemDataError.internalInconsistency
+        }
+        self.init(entity: entity, insertInto: managedObjectContext)
+        id = nativeOffer.id
+        title = nativeOffer.title
+        description_ = nativeOffer.description
+        image = nativeOffer.image
+        amount = nativeOffer.amount
+        offerType = .spend
+        offerContentType = .external
+        content = ""
     }
     
     var syncId: String {
@@ -111,6 +134,9 @@ class Offer: NSManagedObject, NetworkSyncable {
         blockchain_data = from.blockchain_data
     }
     
+    func willDelete() -> Bool {
+        return offerContentType != .external
+    }
 }
 
 

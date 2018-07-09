@@ -144,4 +144,8 @@ class Order: NSManagedObject, NetworkSyncable {
         }
         
     }
+    
+    func willDelete() -> Bool {
+        return true
+    }
 }
