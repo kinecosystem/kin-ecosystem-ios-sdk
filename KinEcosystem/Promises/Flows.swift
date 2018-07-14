@@ -75,7 +75,7 @@ struct Flows {
                 }
             }.then { memo, order -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 return core.data.changeObjects(of: Offer.self,
-                                               changeBlock: { offers in
+                                               changeBlock: { _, offers in
                     offers.first?.pending = true
                 }, with: NSPredicate(with:["id": offerId]))
                     .then {
@@ -107,7 +107,7 @@ struct Flows {
                                 if pending {
                                     if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
                                         logWarn("attempts reached \(attemptNumber)")
-                                        _ = core.data.changeObjects(of: Order.self, changeBlock: { orders in
+                                        _ = core.data.changeObjects(of: Order.self, changeBlock: { _, orders in
                                             if let order = orders.first {
                                                 order.orderStatus = attemptNumber == 5 ? .delayed : .failed
                                             }
@@ -168,7 +168,7 @@ struct Flows {
                     }.then {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self,
-                                                        changeBlock: { orders in
+                                                        changeBlock: { _, orders in
                                 if let  completedOrder = orders.first,
                                     completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
@@ -247,7 +247,7 @@ struct Flows {
                 }
             }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
-                                               changeBlock: { offers in
+                                               changeBlock: { _, offers in
                     if let offer = offers.first {
                         offer.pending = true
                         logVerbose("changed offer \(offer.id) status to pending")
@@ -294,7 +294,7 @@ struct Flows {
                                     if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
                                         logWarn("attempts reached \(attemptNumber)")
                                         _ = core.data.changeObjects(of: Order.self,
-                                                                    changeBlock: { orders in
+                                                                    changeBlock: { _, orders in
                                             if let order = orders.first {
                                                 order.orderStatus = attemptNumber == 5 ? .delayed : .failed
                                             }
@@ -367,7 +367,7 @@ struct Flows {
                     }.then {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self,
-                                                        changeBlock: { orders in
+                                                        changeBlock: { _, orders in
                                 if let  completedOrder = orders.first,
                                     completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed
@@ -415,7 +415,16 @@ struct Flows {
                 logVerbose("spend offer id \(order.offer_id), recipient \(recipient)")
                 return SDOFlowPromise().signal((recipient, Decimal(order.amount), order))
                 
-            }.then { recipient, amount, order -> SDOPFlowPromise in
+            }.then { recipient, amount, order  -> SDOFlowPromise in
+                return core.blockchain.balance().then { currentBalance in
+                    if (currentBalance as NSDecimalNumber).int32Value < order.amount {
+                        return SDOFlowPromise().signal(KinError.insufficientFunds)
+                    } else {
+                        return SDOFlowPromise().signal((recipient, amount, order))
+                    }
+                }
+            }
+            .then { recipient, amount, order -> SDOPFlowPromise in
                 guard let appId = core.network.client.authToken?.app_id else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
@@ -433,7 +442,7 @@ struct Flows {
                 }
             }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
-                                               changeBlock: { offers in
+                                               changeBlock: { _, offers in
                     if let offer = offers.first {
                         offer.pending = true
                         logVerbose("changed offer \(offer.id) status to pending")
@@ -481,7 +490,7 @@ struct Flows {
                                     if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
                                         logWarn("attempts reached \(attemptNumber)")
                                         _ = core.data.changeObjects(of: Order.self,
-                                                                    changeBlock: { orders in
+                                                                    changeBlock: { _, orders in
                                             if let order = orders.first {
                                                 order.orderStatus = attemptNumber == 5 ? .delayed : .failed
                                             }
@@ -565,7 +574,7 @@ struct Flows {
                                                             if attemptNumber == 5 || attemptNumber == intervals.count + 1 {
                                                                 logWarn("attempts reached \(attemptNumber)")
                                                                 _ = core.data.changeObjects(of: Order.self,
-                                                                                            changeBlock: { orders in
+                                                                                            changeBlock: { _, orders in
                                                                                                 if let order = orders.first {
                                                                                                     order.orderStatus = attemptNumber == 5 ? .delayed : .failed
                                                                                                 }
@@ -607,7 +616,7 @@ struct Flows {
                     }.then {
                         if let order = openOrder {
                             _ = core.data.changeObjects(of: Order.self,
-                                                        changeBlock: { orders in
+                                                        changeBlock: { _, orders in
                                 if let  completedOrder = orders.first,
                                     completedOrder.orderStatus != .failed {
                                     completedOrder.orderStatus = .completed

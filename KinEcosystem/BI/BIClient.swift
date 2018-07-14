@@ -44,7 +44,7 @@ class BIClient {
     func send<T: KBIEvent>(_ event: T) throws {
         let data = try encoder.encode(event)
         let url = logboxURL.appendingPathComponent("\(event.common.eventID).json")
-        logVerbose("event:\n\n\(String(data: data, encoding: .utf8) ?? "no data")\n\n")
+        logVerbose("bi: \(event.eventName)")
 
         try data.write(to: url, options: .atomic)
         wrap(data, at: url, eventId: event.common.eventID)
@@ -72,6 +72,7 @@ class BIClient {
                 guard   let httpResponse = response as? HTTPURLResponse,
                     200 ... 299 ~= httpResponse.statusCode else {
                     success = false
+                    logError("failed to send event")
                     return
                 }
                 group.leave()
@@ -81,7 +82,7 @@ class BIClient {
                 do {
                     try this.fm.removeItem(at: url)
                 } catch {
-                    logError("failed to send event file")
+                    logError("failed to remove event file")
                 }
             }
         }

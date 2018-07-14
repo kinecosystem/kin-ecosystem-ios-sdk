@@ -20,6 +20,26 @@ public enum ExternalOrderStatus {
     case failed
     case completed(String)
 }
+
+public struct NativeOffer: Equatable {
+    public let id: String
+    public let title: String
+    public let description: String
+    public let amount: Int32
+    public let image: String
+    public init(id: String,
+                title: String,
+                description: String,
+                amount: Int32,
+                image: String) {
+        self.id = id
+        self.title = title
+        self.description = description
+        self.amount = amount
+        self.image = image
+    }
+}
+
 @available(iOS 9.0, *)
 public class Kin {
     
@@ -50,6 +70,8 @@ public class Kin {
         }
         return core.blockchain.onboarded && core.network.tosAccepted
     }
+    
+    public var nativeOfferHandler: ((NativeOffer) -> ())?
     
     static func track<T: KBIEvent>(block: () throws -> (T)) {
         do {
@@ -260,6 +282,34 @@ public class Kin {
         Logger.setLogLevel(level)
     }
     
+    public func add(nativeOffer: NativeOffer) throws {
+        guard let core = core else {
+            logError("Kin not started")
+            throw KinEcosystemError.client(.notStarted, nil)
+        }
+        var offerExists = false
+        core.data.queryObjects(of: Offer.self, with: NSPredicate(with: ["id" : nativeOffer.id])) { offers in
+            offerExists = offers.count > 0
+            }.then {
+                guard offerExists == false else { return }
+                core.data.stack.perform({ (context, _) in
+                    let _ = try? Offer(with: nativeOffer, in: context)
+                })
+        }
+    }
+    
+    public func remove(nativeOfferId: String) throws {
+        guard let core = core else {
+            logError("Kin not started")
+            throw KinEcosystemError.client(.notStarted, nil)
+        }
+        _ = core.data.changeObjects(of: Offer.self, changeBlock: { context, offers in
+            if let offer = offers.first {
+                context.delete(offer)
+            }
+        }, with: NSPredicate(with: ["id" : nativeOfferId]))
+    }
+    
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
@@ -335,7 +385,7 @@ public class Kin {
         }, userID: { [weak self] () -> (String) in
             self?.core?.network.client.authToken?.ecosystem_user_id ?? ""
             }, version: { () -> (String) in
-                "0.4.6"
+                "0.4.7"
         })
     }
 }
