@@ -385,7 +385,7 @@ public class Kin {
         }, userID: { [weak self] () -> (String) in
             self?.core?.network.client.authToken?.ecosystem_user_id ?? ""
             }, version: { () -> (String) in
-                "0.4.6"
+                "0.4.7"
         })
     }
 }
