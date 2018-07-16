@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14133" systemVersion="17E199" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="BlockchainData" representedClassName=".BlockchainData" syncable="YES">
         <attribute name="recipient_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_address" optional="YES" attributeType="String" syncable="YES"/>
@@ -20,6 +20,7 @@
         <attribute name="description_" attributeType="String" syncable="YES"/>
         <attribute name="id" attributeType="String" syncable="YES"/>
         <attribute name="image" attributeType="String" syncable="YES"/>
+        <attribute name="isModal" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="offer_type" attributeType="String" syncable="YES"/>
         <attribute name="pending" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="position" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -55,10 +56,10 @@
     <elements>
         <element name="BlockchainData" positionX="-281" positionY="72" width="128" height="118"/>
         <element name="CouponCode" positionX="-2" positionY="423" width="128" height="58"/>
-        <element name="Offer" positionX="-461" positionY="72" width="128" height="208"/>
+        <element name="JWTConfirmation" positionX="160" positionY="423" width="128" height="58"/>
+        <element name="Offer" positionX="-461" positionY="72" width="128" height="225"/>
         <element name="Order" positionX="-101" positionY="72" width="128" height="253"/>
         <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
         <element name="OrderResult" positionX="72" positionY="252" width="128" height="73"/>
-        <element name="JWTConfirmation" positionX="160" positionY="423" width="128" height="58"/>
     </elements>
 </model>

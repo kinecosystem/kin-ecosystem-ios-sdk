@@ -46,6 +46,7 @@ class Offer: NSManagedObject, NetworkSyncable {
     // not decoded properties
     @NSManaged public var pending: Bool
     @NSManaged public var position: Int32
+    @NSManaged public var isModal: Bool
     
     var offerType: OfferType {
         get { return OfferType(rawValue: offer_type)! }
@@ -65,6 +66,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         case offer_type
         case title
         case content
+        case isModal
         case content_type
         case blockchain_data
     }
@@ -74,7 +76,8 @@ class Offer: NSManagedObject, NetworkSyncable {
                            title: title,
                            description: description_,
                            amount: amount,
-                           image: image)
+                           image: image,
+                           isModal: isModal)
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -110,6 +113,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         offerType = .spend
         offerContentType = .external
         content = ""
+        isModal = nativeOffer.isModal
     }
     
     var syncId: String {
@@ -126,6 +130,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         content_type = from.content_type
         content =  from.content
         pending = from.pending
+        isModal = from.isModal
         position = from.position
         // don't leave dangling relationships
         if let data = blockchain_data, data != from.blockchain_data {
