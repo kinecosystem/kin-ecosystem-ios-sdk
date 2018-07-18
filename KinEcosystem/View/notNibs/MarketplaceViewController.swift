@@ -63,7 +63,7 @@ class MarketplaceViewController: KinNavigationChildController {
             if typeA as? String == OfferContentType.external.rawValue {
                 return .orderedAscending
             }
-            return .orderedDescending
+            return .orderedSame
         }),
             NSSortDescriptor(key: "position", ascending: true)]
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>, managedObjectContext: core.data.stack.viewContext, sectionNameKeyPath: nil, cacheName: nil)
@@ -187,7 +187,13 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer
-            Kin.shared.nativeOfferHandler?(nativeOffer)
+            if nativeOffer.isModal {
+                Kin.shared.closeMarketPlace() {
+                    Kin.shared.nativeOfferHandler?(nativeOffer)
+                }
+            } else {
+                Kin.shared.nativeOfferHandler?(nativeOffer)
+            }
             return
         }
         switch offer.offerType {

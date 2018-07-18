@@ -27,16 +27,19 @@ public struct NativeOffer: Equatable {
     public let description: String
     public let amount: Int32
     public let image: String
+    public let isModal: Bool
     public init(id: String,
                 title: String,
                 description: String,
                 amount: Int32,
-                image: String) {
+                image: String,
+                isModal: Bool = false) {
         self.id = id
         self.title = title
         self.description = description
         self.amount = amount
         self.image = image
+        self.isModal = isModal
     }
 }
 
@@ -320,8 +323,8 @@ public class Kin {
         }
     }
     
-    func closeMarketPlace() {
-        mpPresentingController?.dismiss(animated: true, completion: nil)
+    func closeMarketPlace(completion: (() -> ())? = nil) {
+        mpPresentingController?.dismiss(animated: true, completion: completion)
     }
     
     fileprivate func setupBIProxies() {
@@ -385,7 +388,7 @@ public class Kin {
         }, userID: { [weak self] () -> (String) in
             self?.core?.network.client.authToken?.ecosystem_user_id ?? ""
             }, version: { () -> (String) in
-                "0.4.7"
+                "0.4.8"
         })
     }
 }
