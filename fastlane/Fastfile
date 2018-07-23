@@ -1,0 +1,62 @@
+# This file contains the fastlane.tools configuration
+# You can find the documentation at https://docs.fastlane.tools
+#
+# For a list of all available actions, check out
+#
+#     https://docs.fastlane.tools/actions
+#
+# For a list of all available plugins, check out
+#
+#     https://docs.fastlane.tools/plugins/available-plugins
+#
+
+# Uncomment the line if you want fastlane to automatically update itself
+# update_fastlane
+
+default_platform(:ios)
+
+platform :ios do
+  desc "Release a new pod version"
+  lane :release do
+    podspecPath = "KinEcosystem.podspec"
+    kinFile = "KinEcosystem/Core/Kin.swift"
+    readmeFile = "README.md"
+    ensure_git_branch(branch: 'master')
+    ensure_git_status_clean(show_uncommitted_changes: true)
+    current = version_get_podspec(path: podspecPath)
+    version = prompt(text: "Please enter a new pod version (current version is #{current}):")
+    UI.user_error!("Version specified is current. don't.") unless version != current
+    version_bump_podspec(path: podspecPath,
+                       bump_type: "patch",
+                       version_number: version)
+    Dir.chdir("..") do
+      updated = File.read(kinFile).gsub(/^.*let SDKVersion = .*$/, "let SDKVersion = \"#{version}\"")
+      File.open(kinFile, "w") { |file| file.puts updated }
+      updated = File.read(readmeFile).gsub(/^.*pod 'KinEcosystem',.*$/, "pod 'KinEcosystem', '#{version}'")
+      File.open(readmeFile, "w") { |file| file.puts updated }
+    end
+    git_add
+    git_commit(path: ".", message: "release #{version}")
+    add_git_tag(tag: version)
+    push_to_git_remote(tags: false)
+    push_git_tags(tag: version)
+    pod_push
+    puts "Pod succefully release."
+    if UI.confirm("""Create a release on github for \(version)?
+            you will need to provide a github api personal access token with push access""") == true
+      token = prompt(text: "Github api personal access token:", secure_text: true)
+      draft = prompt(text: "Mark release as draft?", boolean: true)
+      pre = prompt(text: "Mark release as pre-release?", boolean: true)
+      changelog = prompt(text: "Please enter release notes", multi_line_end_keyword: "END")
+      set_github_release(repository_name: "kinecosystem/kin-ecosystem-ios-sdk",
+                       server_url: "https://api.github.com",
+                       api_token: token,
+                       tag_name: version,
+                       name: version,
+                       commitish: nil,
+                       description: changelog,
+                       is_draft: draft,
+                       is_prerelease: pre)
+    end
+  end
+end
