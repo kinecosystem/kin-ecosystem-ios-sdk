@@ -12,6 +12,8 @@ import Foundation
 import KinSDK
 import StellarErrors
 
+let SDKVersion = "0.4.8"
+
 public typealias PurchaseCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
@@ -388,7 +390,7 @@ public class Kin {
         }, userID: { [weak self] () -> (String) in
             self?.core?.network.client.authToken?.ecosystem_user_id ?? ""
             }, version: { () -> (String) in
-                "0.4.8"
+                SDKVersion
         })
     }
 }
