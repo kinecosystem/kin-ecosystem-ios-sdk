@@ -255,10 +255,10 @@ class Blockchain {
         }
     }
 
-    func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
+    func addBalanceObserver(with block:@escaping (Balance) -> (), identifier: String? = nil) throws -> String {
 
-        let identifier = UUID().uuidString
-        balanceObservers[identifier] = block
+        let observerIdentifier = identifier ?? UUID().uuidString
+        balanceObservers[observerIdentifier] = block
 
         if balanceWatcher == nil {
             balanceWatcher = try account.watchBalance(lastBalance?.amount)
@@ -270,7 +270,7 @@ class Blockchain {
             block(balance)
         }
 
-        return identifier
+        return observerIdentifier
     }
 
     func removeBalanceObserver(with identifier: String) {

@@ -53,6 +53,8 @@ public class Kin {
     fileprivate(set) var needsReset = false
     fileprivate weak var mpPresentingController: UIViewController?
     fileprivate var bi: BIClient!
+    fileprivate var prestartBalanceObservers = [String : (Balance) -> ()]()
+    fileprivate var prestartNativeOffers = [NativeOffer]()
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
@@ -154,8 +156,15 @@ public class Kin {
             }
         }
         
+        try prestartBalanceObservers.forEach { identifier, block in
+            _ = try core?.blockchain.addBalanceObserver(with: block, identifier: identifier)
+        }
+        prestartBalanceObservers.removeAll()
         
-        
+        try prestartNativeOffers.forEach({ offer in
+            try add(nativeOffer: offer)
+        })
+        prestartNativeOffers.removeAll()
     }
     
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
@@ -192,15 +201,16 @@ public class Kin {
     
     public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
         guard let core = core else {
-            logError("Kin not started")
-            throw KinEcosystemError.client(.notStarted, nil)
+            let observerIdentifier = UUID().uuidString
+            prestartBalanceObservers[observerIdentifier] = block
+            return observerIdentifier
         }
         return try core.blockchain.addBalanceObserver(with: block)
     }
     
     public func removeBalanceObserver(_ identifier: String) {
         guard let core = core else {
-            logError("Kin not started")
+            prestartBalanceObservers[identifier] = nil
             return
         }
         core.blockchain.removeBalanceObserver(with: identifier)
@@ -289,8 +299,8 @@ public class Kin {
     
     public func add(nativeOffer: NativeOffer) throws {
         guard let core = core else {
-            logError("Kin not started")
-            throw KinEcosystemError.client(.notStarted, nil)
+            prestartNativeOffers.append(nativeOffer)
+            return
         }
         var offerExists = false
         core.data.queryObjects(of: Offer.self, with: NSPredicate(with: ["id" : nativeOffer.id])) { offers in
@@ -305,8 +315,10 @@ public class Kin {
     
     public func remove(nativeOfferId: String) throws {
         guard let core = core else {
-            logError("Kin not started")
-            throw KinEcosystemError.client(.notStarted, nil)
+            prestartNativeOffers = prestartNativeOffers.filter({ offer -> Bool in
+                offer.id != nativeOfferId
+            })
+            return
         }
         _ = core.data.changeObjects(of: Offer.self, changeBlock: { context, offers in
             if let offer = offers.first {
