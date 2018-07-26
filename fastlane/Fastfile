@@ -22,7 +22,7 @@ platform :ios do
     kinFile = "KinEcosystem/Core/Kin.swift"
     readmeFile = "README.md"
     ensure_git_branch(branch: 'master')
-    ensure_git_status_clean(show_uncommitted_changes: true)
+    #ensure_git_status_clean(show_uncommitted_changes: true)
     current = version_get_podspec(path: podspecPath)
     version = prompt(text: "Please enter a new pod version (current version is #{current}):")
     UI.user_error!("Version specified is current. don't.") unless version != current
