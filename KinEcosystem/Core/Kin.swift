@@ -55,6 +55,8 @@ public class Kin {
     fileprivate var bi: BIClient!
     fileprivate var prestartBalanceObservers = [String : (Balance) -> ()]()
     fileprivate var prestartNativeOffers = [NativeOffer]()
+    fileprivate let psBalanceObsLock = NSLock()
+    fileprivate let psNativeOLock = NSLock()
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
@@ -155,12 +157,18 @@ public class Kin {
                 }
             }
         }
-        
+        psBalanceObsLock.lock()
+        defer {
+            psBalanceObsLock.unlock()
+        }
         try prestartBalanceObservers.forEach { identifier, block in
-            _ = try core?.blockchain.addBalanceObserver(with: block, identifier: identifier)
+            _ = try core!.blockchain.addBalanceObserver(with: block, identifier: identifier)
         }
         prestartBalanceObservers.removeAll()
-        
+        psNativeOLock.lock()
+        defer {
+            psNativeOLock.unlock()
+        }
         try prestartNativeOffers.forEach({ offer in
             try add(nativeOffer: offer)
         })
@@ -201,6 +209,10 @@ public class Kin {
     
     public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
         guard let core = core else {
+            psBalanceObsLock.lock()
+            defer {
+                psBalanceObsLock.unlock()
+            }
             let observerIdentifier = UUID().uuidString
             prestartBalanceObservers[observerIdentifier] = block
             return observerIdentifier
@@ -210,6 +222,10 @@ public class Kin {
     
     public func removeBalanceObserver(_ identifier: String) {
         guard let core = core else {
+            psBalanceObsLock.lock()
+            defer {
+                psBalanceObsLock.unlock()
+            }
             prestartBalanceObservers[identifier] = nil
             return
         }
@@ -299,6 +315,10 @@ public class Kin {
     
     public func add(nativeOffer: NativeOffer) throws {
         guard let core = core else {
+            psNativeOLock.lock()
+            defer {
+                psNativeOLock.unlock()
+            }
             prestartNativeOffers.append(nativeOffer)
             return
         }
@@ -315,6 +335,10 @@ public class Kin {
     
     public func remove(nativeOfferId: String) throws {
         guard let core = core else {
+            psNativeOLock.lock()
+            defer {
+                psNativeOLock.unlock()
+            }
             prestartNativeOffers = prestartNativeOffers.filter({ offer -> Bool in
                 offer.id != nativeOfferId
             })
