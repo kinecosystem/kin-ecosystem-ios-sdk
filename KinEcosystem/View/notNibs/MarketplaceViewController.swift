@@ -194,6 +194,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             } else {
                 Kin.shared.nativeOfferHandler?(nativeOffer)
             }
+            Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, origin: .external) }
             return
         }
         switch offer.offerType {
@@ -227,7 +228,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                 self.kinNavigationController?.present(controller, animated: true)
                 return
             }
-            Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, orderID: "") }
+            Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, origin: .marketplace) }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController",
                                                       bundle: Bundle.ecosystem)
             controller.viewModel = viewModel

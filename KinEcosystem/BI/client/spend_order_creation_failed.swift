@@ -37,6 +37,7 @@ struct SpendOrderCreationFailed: KBIEvent {
     let eventType: String
     let isNative: Bool
     let offerID: String
+    let origin: KBITypes.Origin
     let user: User
 
     enum CodingKeys: String, CodingKey {
@@ -46,12 +47,14 @@ struct SpendOrderCreationFailed: KBIEvent {
         case eventType = "event_type"
         case isNative = "is_native"
         case offerID = "offer_id"
-        case user
+        case origin, user
     }
 }
 
+
+
 extension SpendOrderCreationFailed {
-    init(errorReason: String, isNative: Bool, offerID: String) throws {
+    init(errorReason: String, isNative: Bool, offerID: String, origin: KBITypes.Origin) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -70,5 +73,6 @@ extension SpendOrderCreationFailed {
         self.errorReason = errorReason
         self.isNative = isNative
         self.offerID = offerID
+        self.origin = origin
     }
 }
