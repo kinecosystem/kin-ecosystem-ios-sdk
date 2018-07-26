@@ -11,7 +11,7 @@
 import Foundation
 import CoreDataStack
 import CoreData
-import KinSDK
+import KinCoreSDK
 
 enum EcosystemDataError: Error {
     case internalInconsistency

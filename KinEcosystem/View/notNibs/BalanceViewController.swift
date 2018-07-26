@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KinSDK
+import KinCoreSDK
 import KinUtil
 import StellarKit
 import CoreDataStack

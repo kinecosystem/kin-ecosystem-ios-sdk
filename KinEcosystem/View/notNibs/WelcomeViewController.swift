@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import KinSDK
+import KinCoreSDK
 
 @available(iOS 9.0, *)
 class WelcomeViewController: KinViewController {

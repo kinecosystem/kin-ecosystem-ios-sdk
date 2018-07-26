@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 import CoreDataStack
-import KinSDK
+import KinCoreSDK
 
 @available(iOS 9.0, *)
 class OrdersViewController : KinNavigationChildController {

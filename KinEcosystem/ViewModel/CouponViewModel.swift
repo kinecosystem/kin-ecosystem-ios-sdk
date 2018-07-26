@@ -9,7 +9,7 @@
 import Foundation
 
 import KinUtil
-import KinSDK
+import KinCoreSDK
 @available(iOS 9.0, *)
 class CouponViewModel: Decodable {
     

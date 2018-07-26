@@ -6,7 +6,7 @@
 //
 
 import Foundation
-import KinSDK
+import KinCoreSDK
 
 public enum KinClientErrorCode: Int {
     case notStarted             = 4001

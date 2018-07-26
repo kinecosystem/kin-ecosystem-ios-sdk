@@ -9,7 +9,7 @@
 //
 
 import Foundation
-import KinSDK
+import KinCoreSDK
 import StellarErrors
 
 let SDKVersion = "0.4.8"

@@ -7,13 +7,13 @@
 //
 
 import Foundation
-import KinSDK
+import KinCoreSDK
 import StellarKit
 import StellarErrors
 
 struct BlockchainProvider: ServiceProvider {
     let url: URL
-    let networkId: KinSDK.NetworkId
+    let networkId: KinCoreSDK.NetworkId
 }
 
 struct PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
@@ -47,8 +47,8 @@ class Blockchain {
     private let linkBag = LinkBag()
     private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
     private var balanceObservers = [String : (Balance) -> ()]()
-    private var paymentsWatcher: KinSDK.PaymentWatch?
-    private var balanceWatcher: KinSDK.BalanceWatch?
+    private var paymentsWatcher: KinCoreSDK.PaymentWatch?
+    private var balanceWatcher: KinCoreSDK.BalanceWatch?
     let onboardEvent = Observable<Bool>()
     fileprivate(set) var balanceObservable = Observable<Balance>()
     fileprivate(set) var lastBalance: Balance? {

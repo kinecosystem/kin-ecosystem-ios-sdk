@@ -12,7 +12,7 @@ import CoreData
 import CoreDataStack
 import StellarKit
 import KinUtil
-import KinSDK
+import KinCoreSDK
 
 enum OrderStatusError: Error {
     case orderStillPending
