@@ -14,7 +14,7 @@ import StellarErrors
 
 let SDKVersion = "0.4.9"
 
-public typealias PurchaseCallback = (String?, Error?) -> ()
+public typealias ExternalOfferCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
 public enum ExternalOrderStatus {
@@ -233,11 +233,11 @@ public class Kin {
     }
         
     
-    public func launchMarketplace(from parentViewController: UIViewController) {
+    public func launchMarketplace(from parentViewController: UIViewController) throws {
         Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
             logError("Kin not started")
-            return
+            throw KinEcosystemError.client(.notStarted, nil)
         }
         mpPresentingController = parentViewController
         if core.network.tosAccepted {
@@ -256,7 +256,7 @@ public class Kin {
         
     }
     
-    public func purchase(offerJWT: String, completion: @escaping PurchaseCallback) -> Bool {
+    public func purchase(offerJWT: String, completion: @escaping ExternalOfferCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
             completion(nil, KinEcosystemError.client(.notStarted, nil))
@@ -264,6 +264,22 @@ public class Kin {
         }
         defer {
             Flows.nativeSpend(jwt: offerJWT, core: core).then { jwt in
+                completion(jwt, nil)
+                }.error { error in
+                    completion(nil, KinEcosystemError.transform(error))
+            }
+        }
+        return true
+    }
+    
+    public func requestPayment(offerJWT: String, completion: @escaping ExternalOfferCallback) -> Bool {
+        guard let core = core else {
+            logError("Kin not started")
+            completion(nil, KinEcosystemError.client(.notStarted, nil))
+            return false
+        }
+        defer {
+            Flows.nativeEarn(jwt: offerJWT, core: core).then { jwt in
                 completion(jwt, nil)
                 }.error { error in
                     completion(nil, KinEcosystemError.transform(error))
