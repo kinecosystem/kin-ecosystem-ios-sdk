@@ -9,7 +9,7 @@
 import Foundation
 
 
-class ResponseError: Decodable, LocalizedError {
+class ResponseError: Codable, LocalizedError {
     var error: String
     var message: String?
     var code: Int32
@@ -43,6 +43,17 @@ class ResponseError: Decodable, LocalizedError {
         self.error = error
         self.message = message
     }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: ResponseKeys.self)
+        try container.encode(error, forKey: .error)
+        try container.encode(code, forKey: .code)
+        try container.encodeIfPresent(message, forKey: .message)
+    }
+}
+
+struct ClientErrorPatch: Encodable {
+    var error: ResponseError
 }
 
 enum ContentType: String {
@@ -54,6 +65,7 @@ enum HTTPMethod: String {
     case get = "GET"
     case post = "POST"
     case delete = "DELETE"
+    case patch = "PATCH"
 }
 
 enum SignInType: String {

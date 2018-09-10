@@ -13,6 +13,7 @@ import CoreDataStack
 import StellarKit
 import KinUtil
 import KinCoreSDK
+import StellarErrors
 
 enum OrderStatusError: Error {
     case orderStillPending
@@ -327,6 +328,18 @@ struct Flows {
                     Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
                 } else if case let KinError.paymentFailed(payError) = error {
                     Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(payError)", offerID: offerId, orderID: openOrder?.id ?? "") }
+                    if let order = openOrder {
+                        let errorObject = ClientErrorPatch(error: ResponseError(code: 6005,
+                                                                                error: "\(payError)",
+                                                                                message: nil))
+                        if let data = try? JSONEncoder().encode(errorObject) {
+                            core.network.dataAtPath("orders/\(order.id)", method: .patch, body: data).then { _ in
+                                logInfo("order \(order.id) patch success")
+                            }.error { error in
+                                logError("error patching order: \(order.id)")
+                            }
+                        }
+                    }
                 } else if case KinError.invalidAmount = error {
                     Kin.track { try SpendTransactionBroadcastToBlockchainFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
                 }

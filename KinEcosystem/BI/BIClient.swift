@@ -69,13 +69,15 @@ class BIClient {
             group.enter()
             var success = true
             URLSession.shared.dataTask(with: request) { (data, response, error) in
+                defer {
+                    group.leave()
+                }
                 guard   let httpResponse = response as? HTTPURLResponse,
                     200 ... 299 ~= httpResponse.statusCode else {
                     success = false
                     logError("failed to send event")
                     return
                 }
-                group.leave()
             }.resume()
             group.wait()
             if success {
