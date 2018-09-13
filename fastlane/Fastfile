@@ -40,7 +40,7 @@ platform :ios do
     add_git_tag(tag: version)
     push_to_git_remote(tags: false)
     push_git_tags(tag: version)
-    pod_push
+    pod_push(allow_warnings: true)
     puts "Pod succefully release."
     if UI.confirm("""Create a release on github for \(version)?
             you will need to provide a github api personal access token with push access""") == true
