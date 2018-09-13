@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="14135" systemVersion="17E202" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
-    <entity name="BlockchainData" representedClassName=".BlockchainData" syncable="YES">
+    <entity name="BlockchainData" representedClassName="KinEcosystem.BlockchainData" syncable="YES">
         <attribute name="recipient_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="sender_address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="transaction_id" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="offer" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Offer" inverseName="blockchain_data" inverseEntity="Offer" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="blockchain_data" inverseEntity="Order" syncable="YES"/>
     </entity>
-    <entity name="CouponCode" representedClassName=".CouponCode" parentEntity="OrderResult" syncable="YES">
+    <entity name="CouponCode" representedClassName="KinEcosystem.CouponCode" parentEntity="OrderResult" syncable="YES">
         <attribute name="coupon_code" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="JWTConfirmation" representedClassName=".JWTConfirmation" parentEntity="OrderResult" syncable="YES">
+    <entity name="JWTConfirmation" representedClassName="KinEcosystem.JWTConfirmation" parentEntity="OrderResult" syncable="YES">
         <attribute name="jwt" attributeType="String" syncable="YES"/>
     </entity>
-    <entity name="Offer" representedClassName=".Offer" syncable="YES">
+    <entity name="Offer" representedClassName="KinEcosystem.Offer" syncable="YES">
         <attribute name="amount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="content" attributeType="String" syncable="YES"/>
         <attribute name="content_type" attributeType="String" syncable="YES"/>
@@ -27,7 +27,7 @@
         <attribute name="title" attributeType="String" syncable="YES"/>
         <relationship name="blockchain_data" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="BlockchainData" inverseName="offer" inverseEntity="BlockchainData" syncable="YES"/>
     </entity>
-    <entity name="Order" representedClassName=".Order" syncable="YES">
+    <entity name="Order" representedClassName="KinEcosystem.Order" syncable="YES">
         <attribute name="amount" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="call_to_action" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="completion_date" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
@@ -43,23 +43,23 @@
         <relationship name="error" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderError" inverseName="order" inverseEntity="OrderError" syncable="YES"/>
         <relationship name="result" optional="YES" maxCount="1" deletionRule="Cascade" destinationEntity="OrderResult" inverseName="order" inverseEntity="OrderResult" syncable="YES"/>
     </entity>
-    <entity name="OrderError" representedClassName=".OrderError" syncable="YES">
+    <entity name="OrderError" representedClassName="KinEcosystem.OrderError" syncable="YES">
         <attribute name="code" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="error" attributeType="String" syncable="YES"/>
         <attribute name="message" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="order" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="error" inverseEntity="Order" syncable="YES"/>
     </entity>
-    <entity name="OrderResult" representedClassName=".OrderResult" isAbstract="YES" syncable="YES">
+    <entity name="OrderResult" representedClassName="KinEcosystem.OrderResult" isAbstract="YES" syncable="YES">
         <attribute name="type" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="order" maxCount="1" deletionRule="Nullify" destinationEntity="Order" inverseName="result" inverseEntity="Order" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BlockchainData" positionX="-281" positionY="72" width="128" height="118"/>
-        <element name="CouponCode" positionX="-2" positionY="423" width="128" height="58"/>
-        <element name="JWTConfirmation" positionX="160" positionY="423" width="128" height="58"/>
+        <element name="BlockchainData" positionX="-281" positionY="72" width="128" height="120"/>
+        <element name="CouponCode" positionX="-2" positionY="423" width="128" height="60"/>
+        <element name="JWTConfirmation" positionX="160" positionY="423" width="128" height="60"/>
         <element name="Offer" positionX="-461" positionY="72" width="128" height="225"/>
-        <element name="Order" positionX="-101" positionY="72" width="128" height="253"/>
-        <element name="OrderError" positionX="-281" positionY="225" width="128" height="103"/>
-        <element name="OrderResult" positionX="72" positionY="252" width="128" height="73"/>
+        <element name="Order" positionX="-101" positionY="72" width="128" height="255"/>
+        <element name="OrderError" positionX="-281" positionY="225" width="128" height="105"/>
+        <element name="OrderResult" positionX="72" positionY="252" width="128" height="75"/>
     </elements>
 </model>
