@@ -14,7 +14,7 @@ import StellarErrors
 
 let SDKVersion = "0.5.0"
 
-public typealias ExternalOfferCallback = (String?, Error?) -> ()
+public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
 public enum ExternalOrderStatus {
@@ -256,7 +256,11 @@ public class Kin {
         
     }
     
-    public func purchase(offerJWT: String, completion: @escaping ExternalOfferCallback) -> Bool {
+    public func payToUser(offerJWT: String, completion: @escaping KinCallback) -> Bool {
+        return purchase(offerJWT: offerJWT, completion: completion)
+    }
+    
+    public func purchase(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
             completion(nil, KinEcosystemError.client(.notStarted, nil))
@@ -272,7 +276,7 @@ public class Kin {
         return true
     }
     
-    public func requestPayment(offerJWT: String, completion: @escaping ExternalOfferCallback) -> Bool {
+    public func requestPayment(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
             completion(nil, KinEcosystemError.client(.notStarted, nil))

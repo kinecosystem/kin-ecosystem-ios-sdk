@@ -43,7 +43,7 @@ class BalanceViewController: KinViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let lastBalance = Kin.shared.lastKnownBalance
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
             guard let this = self else { return }
 
@@ -52,7 +52,15 @@ class BalanceViewController: KinViewController {
 
 
         }).add(to: bag)
-        _ = core.blockchain.balance()
+        core.blockchain.balance().then { balance in
+            if let oldBalance = lastBalance,
+                oldBalance.amount != balance,
+                Kin.shared.isActivated {
+                Kin.shared.updateData(with: OrdersList.self, from: "orders").error { error in
+                        logError("data sync failed (\(error))")
+                }
+            }
+        }
         NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WatchOrderNotification"), object: nil, queue: .main) { [weak self] note in
             guard let orderId = note.object as? String else {
 
