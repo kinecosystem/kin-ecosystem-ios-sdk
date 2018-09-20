@@ -256,6 +256,36 @@ public class Kin {
         
     }
     
+    public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
+        guard let core = core else {
+            logError("Kin not started")
+            DispatchQueue.main.async {
+                handler(nil, KinEcosystemError.client(.notStarted, nil))
+            }
+            return
+        }
+        _ = core.network.dataAtPath("users/exists",
+                                    method: .get,
+                                    contentType: .json,
+                                    parameters: ["user_id" : peer])
+            .then { data in
+                if  let response = String(data: data, encoding: .utf8),
+                    let ans = Bool(response) {
+                    DispatchQueue.main.async {
+                        handler(ans, nil)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        handler(nil, KinEcosystemError.service(.response, nil))
+                    }
+                }
+            }.error { error in
+                DispatchQueue.main.async {
+                    handler(nil, KinEcosystemError.transform(error))
+                }
+        }
+    }
+    
     public func payToUser(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         return purchase(offerJWT: offerJWT, completion: completion)
     }

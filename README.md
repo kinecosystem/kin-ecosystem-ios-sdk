@@ -429,6 +429,27 @@ _ = Kin.shared.payToUser(offerJWT: encoded, completion: handler)
 
 3.	Complete the pay to user offer after you receive confirmation from the Kin Server that the funds were transferred successfully.
 
+### Finding out if another user has a kin account ###
+
+Before paying to a user, you might want to check if this user actually exists. to do that:
+
+```swift
+// from sample app:
+Kin.shared.hasAccount(peer: otherUserId) { [weak self] response, error in
+    if let response = response {
+        guard response else {
+            self?.presentAlert("User Not Found", body: "User \(otherUserId) could not be found. Make sure the receiving user has activated kin, and in on the same environment as this user")
+            return
+        }
+        // Proceed with payment (transferKin is an internal function in the sample app)
+        self?.transferKin(to: otherUserId, appId: id, pKey: jwtPKey)
+    } else if let error = error {
+        self?.presentAlert("An Error Occurred", body: "\(error.localizedDescription)")
+    } else {
+        self?.presentAlert("An Error Occurred", body: "unknown error")
+    }
+}
+```
 
 ## License
 The kin-ecosystem-ios-sdk library is licensed under [MIT license](LICENSE.md).
