@@ -12,7 +12,7 @@ import Foundation
 import KinCoreSDK
 import StellarErrors
 
-let SDKVersion = "0.5.0"
+let SDKVersion = "0.5.1"
 
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
