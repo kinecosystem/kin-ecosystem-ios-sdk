@@ -197,7 +197,7 @@ struct Flows {
         var openOrder: OpenOrder?
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
-        Kin.track { try SpendOrderCreationRequested(isNative: false, offerID: offerId) }
+        Kin.track { try SpendOrderCreationRequested(isNative: false, offerID: offerId, origin: .marketplace) }
         core.network.objectAtPath("offers/\(offerId)/orders",
             type: OpenOrder.self,
             method: .post)
@@ -206,7 +206,7 @@ struct Flows {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
                 logVerbose("created order \(order.id)")
-                Kin.track { try SpendOrderCreationReceived(isNative: false, offerID: offerId, orderID: order.id) }
+                Kin.track { try SpendOrderCreationReceived(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
                 return confirmPromise
                     .then {
                         var recipient: String? = nil
@@ -237,7 +237,7 @@ struct Flows {
                 return core.network.dataAtPath("orders/\(order.id)",
                     method: .post)
                     .then { data in
-                        Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id) }
+                        Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
                         return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
@@ -314,7 +314,7 @@ struct Flows {
                 }
                 
             }.then { order in
-                Kin.track { try SpendOrderCompleted(isNative: false, offerID: order.offer_id, orderID: order.id) }
+                Kin.track { try SpendOrderCompleted(isNative: false, kinAmount: Double(order.amount), offerID: order.offer_id, orderID: order.id, origin: .marketplace) }
             }
             .error { error in
                 if case SpendOfferError.userCanceled = error  {
@@ -346,9 +346,9 @@ struct Flows {
                 if  case let EcosystemNetError.service(responseError) = error,
                     let url = responseError.httpResponse?.url,
                     url.pathComponents.contains("offers") {
-                    Kin.track { try SpendOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", isNative: false, offerID: offerId) }
+                    Kin.track { try SpendOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", isNative: false, offerID: offerId, origin: .marketplace) }
                 }
-                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: false, offerID: offerId, orderID: openOrder?.id ?? "") }
+                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: false, offerID: offerId, orderID: openOrder?.id ?? "", origin: .marketplace) }
                 _ = core.blockchain.balance()
                 if let order = openOrder, canCancelOrder {
                     let group = DispatchGroup()
@@ -414,7 +414,7 @@ struct Flows {
         var openOrder: OpenOrder?
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
-        Kin.track { try SpendOrderCreationRequested(isNative: true, offerID: "") }
+        Kin.track { try SpendOrderCreationRequested(isNative: true, offerID: "", origin: .external) }
         core.network.objectAtPath("offers/external/orders",
                                   type: OpenOrder.self,
                                   method: .post,
@@ -422,7 +422,7 @@ struct Flows {
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
-                Kin.track { try SpendOrderCreationReceived(isNative: true, offerID: order.offer_id, orderID: order.id) }
+                Kin.track { try SpendOrderCreationReceived(isNative: true, offerID: order.offer_id, orderID: order.id, origin: .external) }
                 guard let recipient = order.blockchain_data?.recipient_address else {
                     return SDOFlowPromise().signal(KinError.internalInconsistency)
                 }
@@ -447,7 +447,7 @@ struct Flows {
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
-                        Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id) }
+                        Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id, origin: .external) }
                         return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
@@ -522,7 +522,7 @@ struct Flows {
                 }
                 
             }.then { order in
-                Kin.track { try SpendOrderCompleted(isNative: true, offerID: order.offer_id, orderID: order.id) }
+                Kin.track { try SpendOrderCompleted(isNative: true, kinAmount: Double(order.amount), offerID: order.offer_id, orderID: order.id, origin: .external) }
                 if let confirmation = jwtConfirmation {
                     jwtPromise.signal(confirmation)
                 } else {
@@ -542,9 +542,9 @@ struct Flows {
                 if  case let EcosystemNetError.service(responseError) = error,
                     let url = responseError.httpResponse?.url,
                     url.pathComponents.contains("external") {
-                    Kin.track { try SpendOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", isNative: true, offerID: openOrder?.offer_id ?? "") }
+                    Kin.track { try SpendOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", isNative: true, offerID: openOrder?.offer_id ?? "", origin: .external) }
                 }
-                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
+                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "", origin: .external) }
                 core.blockchain.stopWatchingForNewPayments()
                 _ = core.blockchain.balance()
                 if let order = openOrder, canCancelOrder {
@@ -755,7 +755,7 @@ struct Flows {
                     url.pathComponents.contains("external") {
                     Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: openOrder?.offer_id ?? "") }
                 }
-                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "") }
+                Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "", origin: .external)}
                 core.blockchain.stopWatchingForNewPayments()
                 _ = core.blockchain.balance()
                 if let order = openOrder, canCancelOrder {

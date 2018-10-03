@@ -35,7 +35,8 @@ struct SpendOfferTapped: KBIEvent {
     let eventName: String
     let eventType: String
     let kinAmount: Double
-    let offerID, orderID: String
+    let offerID: String
+    let origin: KBITypes.Origin
     let user: User
 
     enum CodingKeys: String, CodingKey {
@@ -44,13 +45,14 @@ struct SpendOfferTapped: KBIEvent {
         case eventType = "event_type"
         case kinAmount = "kin_amount"
         case offerID = "offer_id"
-        case orderID = "order_id"
-        case user
+        case origin, user
     }
 }
 
+
+
 extension SpendOfferTapped {
-    init(kinAmount: Double, offerID: String, orderID: String) throws {
+    init(kinAmount: Double, offerID: String, origin: KBITypes.Origin) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -68,6 +70,6 @@ extension SpendOfferTapped {
 
         self.kinAmount = kinAmount
         self.offerID = offerID
-        self.orderID = orderID
+        self.origin = origin
     }
 }

@@ -469,8 +469,6 @@ public class Kin {
         
         EventsStore.shared.commonProxy = CommonProxy(eventID: { () -> (String) in
             UUID().uuidString
-        }, platform: { () -> (String) in
-            "iOS"
         }, timestamp: { () -> (String) in
             "\(Date().timeIntervalSince1970)"
         }, userID: { [weak self] () -> (String) in
