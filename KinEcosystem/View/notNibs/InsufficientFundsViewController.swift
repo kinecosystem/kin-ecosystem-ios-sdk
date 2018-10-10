@@ -17,7 +17,7 @@ class InsufficientFundsViewController: UIViewController {
     @IBOutlet weak var goButton: UIButton!
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.attributedText = "Sorry, Not Enough Kin".attributed(22.0, weight: .regular, color: .kinBlueGrey)
+        titleLabel.attributedText = "kinecosystem_you_dont_have_enough_kin".localized().attributed(22.0, weight: .regular, color: .kinBlueGrey)
         descriptionLabel.attributedText = "Go to the earn section to earn more Kin".attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
         imageView.image = UIImage.bundleImage("kinlogo")
         goButton.setAttributedTitle("Earn Offers".attributed(16.0, weight: .regular, color: .kinWhite), for: .normal)

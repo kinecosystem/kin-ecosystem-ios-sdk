@@ -10,10 +10,14 @@
 
 import Foundation
 
-@available(iOS 9.0, *)
 extension Bundle {
     class var ecosystem: Bundle {
-        let bundle = Bundle(for: Kin.self)
+        var bundle: Bundle
+        if #available(iOS 9.0, *) {
+            bundle = Bundle(for: Kin.self)
+        } else {
+            bundle = Bundle.main
+        }
         if  let bundlePath = bundle.path(forResource: "KinEcosystem", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath) {
             return bundle

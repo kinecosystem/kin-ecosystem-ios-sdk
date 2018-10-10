@@ -100,6 +100,10 @@ class RestClient {
         
         request.addValue(contentType.rawValue, forHTTPHeaderField: "content-type")
         request.addValue(UUID().uuidString, forHTTPHeaderField: "X-REQUEST-ID")
+        if let lang = Locale.preferredLanguages.first {
+            request.addValue(lang, forHTTPHeaderField: "Accept-Language")
+        }
+
         
         return p.signal(request)
         

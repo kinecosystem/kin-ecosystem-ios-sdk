@@ -1,0 +1,39 @@
+/* 
+  Localizable.strings
+  KinEcosystem
+
+  Created by Elazar Yifrach on 03/10/2018.
+  Copyright © 2018 Kik Interactive. All rights reserved.
+*/
+
+"kinecosystem_kin_marketplace" = "Kin Marketplace (Beta)";
+"kinecosystem_transaction_history" = "Transaction History";
+"kinecosystem_more" = "MORE";
+"kinecosystem_spend" = "Spend";
+"kinecosystem_earn" = "Earn";
+"kinecosystem_let_s_get_started" = "Let\'s Get Started!";
+"kinecosystem_confirm" = "Confirm";
+"kinecosystem_copy_code" = "Copy Code";
+"kinecosystem_kin_balance" = "Kin Balance";
+"kinecosystem_complete_tasks_and_earn_kin" = "Complete tasks and earn KIN";
+"kinecosystem_use_your_kin_to_enjoy_stuff_you_like" = "Use your KIN to enjoy stuff you like";
+"kinecosystem_empty_tomorrow_more_opportunities" = "Check back tomorrow for more great opportunities";
+"kinecosystem_welcome_to_kin" = "Welcome to Kin!";
+"kinecosystem_welcome_kin_info" = "Kin puts you at the center of your digital life by letting you get recognized and rewarded for the time, energy, ideas, opinions, and creativity you share online.";
+"kinecosystem_digging_for_gems" = "Digging for Gems…";
+"kinecosystem_welcome_to_kin_marketplace" = "Welcome to Kin Marketplace";
+"kinecosystem_something_went_wrong" = "Oops something went wrong…";
+"kinecosystem_try_again_later" = "Please try again later";
+"kinecosystem_earn_pending" = "Thanks! %@ Kin are on the way";
+"kinecosystem_spend_pending" = "Thanks! We\'re generating your code…";
+"kinecosystem_earn_completed" = "Done! %@ Kin earned";
+"kinecosystem_spend_completed" = "Great, your code is ready";
+"kinecosystem_sorry_this_may_take_some_time" = "Sorry - this may take some time";
+"kinecosystem_copied_to_your_clipboard" = "Copied to your clipboard";
+"kinecosystem_copied_text" = "copied text";
+"kinecosystem_transaction_failed" = "Transaction failed";
+"kinecosystem_you_dont_have_enough_kin" = "You don\'t have enough Kin";
+"kinecosystem_order_submission_failed" = "Order submission failed";
+"kinecosystem_info_menu" = "Info";
+"kinecosystem_goto_earn_section" = "Go to the earn section to earn more Kin";
+"kinecosystem_earn_offers" = "Earn Offers";

@@ -68,7 +68,7 @@ class BalanceViewController: KinViewController {
                     return
                 }
                 guard let label = self?.subtitle else { return }
-                self?.switchLabel(label, text: "Welcome to Kin Marketplace".attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
+                self?.switchLabel(label, text: "kinecosystem_welcome_to_kin_marketplace".localized().attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
                 self?.watchedOrderId = nil
                 self?.watchedOrderStatus = nil
                 return
@@ -131,13 +131,13 @@ class BalanceViewController: KinViewController {
                     guard let label = self?.subtitle else { return }
                     switch status {
                     case .completed:
-                        self?.switchLabel(label, text: (spend ? "Great, your code is ready" : "Done! \(amount) Kin earned").attributed(14.0, weight: .regular, color: .kinDeepSkyBlue))
+                        self?.switchLabel(label, text: (spend ? "kinecosystem_spend_completed".localized() : "kinecosystem_earn_completed".localized("\(amount)")).attributed(14.0, weight: .regular, color: .kinDeepSkyBlue))
                     case .pending:
-                        self?.switchLabel(label, text: (spend ? "Thanks! We're generating your code..." : "Thanks! \(amount) Kin are on the way").attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
+                        self?.switchLabel(label, text: (spend ? "kinecosystem_spend_pending".localized() : "kinecosystem_earn_pending").localized("\(amount)").attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
                     case .failed:
-                        self?.switchLabel(label, text: "Oops - something went wrong".attributed(14.0, weight: .regular, color: .kinCoralPink))
+                        self?.switchLabel(label, text: "kinecosystem_something_went_wrong".localized().attributed(14.0, weight: .regular, color: .kinCoralPink))
                     case .delayed:
-                        self?.switchLabel(label, text: "Sorry - this may take some time".attributed(14.0, weight: .regular, color: .kinMango))
+                        self?.switchLabel(label, text: "kinecosystem_sorry_this_may_take_some_time".localized().attributed(14.0, weight: .regular, color: .kinMango))
                     }
                 }
             })

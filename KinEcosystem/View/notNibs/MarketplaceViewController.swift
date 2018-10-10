@@ -47,7 +47,7 @@ class MarketplaceViewController: KinNavigationChildController {
     
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
-        title = "Kin Marketplace (Beta)"
+        title = "kinecosystem_kin_marketplace".localized()
         let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
         item.tintColor = .white
         navigationItem.rightBarButtonItem = item

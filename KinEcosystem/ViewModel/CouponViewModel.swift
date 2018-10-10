@@ -58,6 +58,6 @@ class CouponViewModel: Decodable {
         let pStyle = NSMutableParagraphStyle()
         pStyle.alignment = .center
         description.addAttribute(.paragraphStyle, value: pStyle, range: NSMakeRange(0, description.string.count))
-        buttonLabel = "Copy Code".attributed(16.0, weight: .regular, color: .kinWhite)
+        buttonLabel = "kinecosystem_copy_code".localized().attributed(16.0, weight: .regular, color: .kinWhite)
     }
 }

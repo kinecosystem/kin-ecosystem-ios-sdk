@@ -42,7 +42,7 @@ class SpendViewModel: Decodable {
         confirmation = try values.decodeIfPresent(SpendViewModel.self, forKey: .confirmation)
         amount = try values.decodeIfPresent(Int32.self, forKey: .amount)
         description = descriptionString.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-        buttonLabel = "Confirm Purchase".attributed(16.0, weight: .regular, color: .kinWhite)
+        buttonLabel = "kinecosystem_confirm".localized().attributed(16.0, weight: .regular, color: .kinWhite)
         if confirmation != nil {
             guard let amount = amount else { throw KinError.internalInconsistency }
             title = (titleString + " - ").attributed(22.0, weight: .regular, color: .kinBlueGrey) +

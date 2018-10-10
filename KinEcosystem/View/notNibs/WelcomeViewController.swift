@@ -60,19 +60,21 @@ class WelcomeViewController: KinViewController {
         diggingText.adjustsFontSizeToFitWidth = true
         diggingText.minimumScaleFactor = 0.5
         diggingText.allowsDefaultTighteningForTruncation = true
-        let digg = "Kin puts you at the center of your digital life by letting you get recognized and rewarded for the time, energy, thoughts, ideas, opinions, and creativity you share online."
+        let digg = "kinecosystem_welcome_kin_info".localized()
         let mutableDigging = NSMutableAttributedString(attributedString:
             digg.attributed(14.0, weight: .regular, color: .white))
         mutableDigging.addAttributes([ .paragraphStyle : style],
                                      range: NSRange(location: 0, length: digg.count))
-
+        
         let context = NSStringDrawingContext()
         context.minimumScaleFactor = 0.5
         diggingText.attributedText = mutableDigging
-        diggingTextHeight.constant = mutableDigging.boundingRect(with: CGSize(width: diggingText.bounds.width, height: .greatestFiniteMagnitude),
-                                                                 options: [.usesLineFragmentOrigin, .usesFontLeading], context: context).height
+        diggingTextHeight.constant = mutableDigging.boundingRect(with: CGSize(width: diggingText.bounds.width,
+                                                                              height: .greatestFiniteMagnitude),
+                                                                 options: [.usesLineFragmentOrigin, .usesFontLeading],
+                                                                 context: context).height
         diggingText.layoutIfNeeded()
-        getStartedButton.setAttributedTitle("Let's get started!".attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
+        getStartedButton.setAttributedTitle("kinecosystem_let_s_get_started".localized().attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
         getStartedButton.titleLabel?.isUserInteractionEnabled = false
     }
 

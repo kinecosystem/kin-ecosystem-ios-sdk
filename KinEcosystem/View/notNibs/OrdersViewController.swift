@@ -35,7 +35,7 @@ class OrdersViewController : KinNavigationChildController {
     }
     
     fileprivate func setupNavigationItem() {
-        self.title = "Transaction History"
+        self.title = "kinecosystem_transaction_history".localized()
     }
     
     fileprivate func setupTableView() {

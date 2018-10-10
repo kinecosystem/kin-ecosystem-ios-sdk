@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
-        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -37,7 +36,7 @@
                                     <viewLayoutGuide key="safeArea" id="OeJ-1m-vtm"/>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XvN-j4-Qvp" userLabel="Earn Header">
-                                    <rect key="frame" x="0.0" y="35.5" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="35.666666666666671" width="414" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="XeV-wK-BVh" userLabel="Spacer">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
@@ -47,19 +46,25 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="Ogq-0D-1o4" userLabel="Labels">
-                                            <rect key="frame" x="20" y="4" width="374" height="42.5"/>
+                                            <rect key="frame" x="20" y="3.6666666666666572" width="374" height="42.666666666666664"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Earn" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cJt-il-OGf">
-                                                    <rect key="frame" x="0.0" y="0.0" width="37.5" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="37.666666666666664" height="21.666666666666668"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_earn"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Complete tasks and earn Kin" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="kBI-mx-bO3">
-                                                    <rect key="frame" x="0.0" y="25.5" width="185" height="17"/>
+                                                    <rect key="frame" x="0.0" y="25.666666666666671" width="185" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_complete_tasks_and_earn_kin"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                         </stackView>
@@ -74,7 +79,7 @@
                                     <viewLayoutGuide key="safeArea" id="Lf0-8i-nGx"/>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dP8-d6-KQw">
-                                    <rect key="frame" x="0.0" y="120.5" width="414" height="183.5"/>
+                                    <rect key="frame" x="0.0" y="120.33333333333333" width="414" height="183.33333333333337"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="dP8-d6-KQw" secondAttribute="height" multiplier="375:166" id="J2A-Be-zet"/>
@@ -96,14 +101,14 @@
                                     </connections>
                                 </collectionView>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="4Bd-DH-A8K" userLabel="Separator 2">
-                                    <rect key="frame" x="0.0" y="338.5" width="414" height="1"/>
+                                    <rect key="frame" x="0.0" y="338.33333333333331" width="414" height="1"/>
                                     <color key="backgroundColor" red="0.84771913290000001" green="0.86196905369999999" blue="0.90982341769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="tYQ-HM-sq9"/>
                                     </constraints>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="vT2-wi-eZZ" userLabel="Spend Header">
-                                    <rect key="frame" x="0.0" y="374.5" width="414" height="50"/>
+                                    <rect key="frame" x="0.0" y="374.33333333333331" width="414" height="50"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pOL-wZ-t9R" userLabel="Spacer">
                                             <rect key="frame" x="0.0" y="0.0" width="20" height="50"/>
@@ -113,19 +118,25 @@
                                             </constraints>
                                         </view>
                                         <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="4" translatesAutoresizingMaskIntoConstraints="NO" id="qHt-ws-b0X" userLabel="Labels">
-                                            <rect key="frame" x="20" y="3.5" width="374" height="42.5"/>
+                                            <rect key="frame" x="20" y="3.6666666666666856" width="374" height="42.666666666666664"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Spend" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="77z-Gd-TaN">
-                                                    <rect key="frame" x="0.0" y="0.0" width="53.5" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="53.333333333333336" height="21.666666666666668"/>
                                                     <fontDescription key="fontDescription" type="system" weight="medium" pointSize="18"/>
                                                     <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_spend"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Use your Kin to enjoy stuff you like" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XSg-mJ-IUr">
-                                                    <rect key="frame" x="0.0" y="25.5" width="223.5" height="17"/>
+                                                    <rect key="frame" x="0.0" y="25.666666666666686" width="223.33333333333334" height="17"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
+                                                    <userDefinedRuntimeAttributes>
+                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_use_your_kin_to_enjoy_stuff_you_like"/>
+                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                         </stackView>
@@ -140,7 +151,7 @@
                                     <viewLayoutGuide key="safeArea" id="rfu-Rd-pz0"/>
                                 </stackView>
                                 <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="none" prefetchingEnabled="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KAu-pp-CcY">
-                                    <rect key="frame" x="0.0" y="459" width="414" height="173.5"/>
+                                    <rect key="frame" x="0.0" y="458.99999999999994" width="414" height="173.33333333333331"/>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" secondItem="KAu-pp-CcY" secondAttribute="height" multiplier="375:157" id="i7l-Ug-tuw"/>
