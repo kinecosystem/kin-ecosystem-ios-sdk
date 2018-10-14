@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'KinEcosystem'
-  s.version          = '0.5.3'
+  s.version          = '0.5.4'
   s.summary          = 'Kin Ecosystem mobile sdk for iOS'
   s.description      = <<-DESC
 Kin ecosystem mobile sdk for iOS
