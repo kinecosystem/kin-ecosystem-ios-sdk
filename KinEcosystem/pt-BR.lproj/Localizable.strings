@@ -1,9 +1,9 @@
 
 "kinecosystem_kin_marketplace" = "Kin Marketplace (Beta)";
-"kinecosystem_transaction_history" = "Histórico de Transação";
+"kinecosystem_transaction_history" = "Histórico de Transações";
 "kinecosystem_more" = "MAIS";
-"kinecosystem_spend" = "Pagar";
-"kinecosystem_earn" = "Adquirir";
+"kinecosystem_spend" = "Gastar";
+"kinecosystem_earn" = "Ganhar";
 "kinecosystem_let_s_get_started" = "Vamos começar!";
 "kinecosystem_confirm" = "Confirmar";
 "kinecosystem_copy_code" = "Copiar código";
@@ -20,7 +20,7 @@
 "kinecosystem_earn_pending" = "Obrigado! %@ Kin estão a caminho";
 "kinecosystem_spend_pending" = "Obrigado! Estamos gerando seu código…";
 "kinecosystem_earn_completed" = "Feito! %@ Kin adquiridos";
-"kinecosystem_spend_completed" = "Ótimo, seu código está pronto";
+"kinecosystem_spend_completed" = "Ótimo, o seu código está pronto";
 "kinecosystem_sorry_this_may_take_some_time" = "Desculpe - isso pode levar algum tempo";
 "kinecosystem_copied_to_your_clipboard" = "Copiado para a área de transferência";
 "kinecosystem_copied_text" = "texto copiado";
@@ -28,5 +28,5 @@
 "kinecosystem_you_dont_have_enough_kin" = "Você não tem suficiente Kin";
 "kinecosystem_order_submission_failed" = "A submissão do pedido falhou";
 "kinecosystem_info_menu" = "Informações";
-"kinecosystem_goto_earn_section" = "";
-"kinecosystem_earn_offers" = "";
+"kinecosystem_goto_earn_section" = "Vá para a seção de ofertas para ganhar mais Kin";
+"kinecosystem_earn_offers" = "Ofertas Para Ganhar";
