@@ -18,4 +18,11 @@ Kin ecosystem mobile sdk for iOS
   s.swift_version = '4.1'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinCoreSDK', '0.7.6'
+
+  # s.subspec 'Recovery' do |ss|
+  #   ss.source_files = 'KinEcosystem/Recovery/**/*.{h,m,swift}'
+  #   ss.swift_version = '4.1'
+  #   ss.dependency 'KinUtil', '~> 0.0.6'
+  # end
+
 end

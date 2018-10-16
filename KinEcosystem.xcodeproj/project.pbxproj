@@ -68,6 +68,8 @@
 		E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9753C10206BD4AB0023CF94 /* CouponViewController.swift */; };
 		E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9753C11206BD4AB0023CF94 /* CouponViewController.xib */; };
 		E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9753C18206BD95A0023CF94 /* CouponViewModel.swift */; };
+		E9764F812174721900A2B48E /* Recovery.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9764F802174721900A2B48E /* Recovery.swift */; };
+		E9764F8421747BE800A2B48E /* Kin+BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9764F8321747BE800A2B48E /* Kin+BackupRestore.swift */; };
 		E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */; };
 		E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D1720E82D8D000E9E30 /* Reachability.swift */; };
 		E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D2320E8EF93000E9E30 /* DeviceData.swift */; };
@@ -278,6 +280,8 @@
 		E9753C10206BD4AB0023CF94 /* CouponViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewController.swift; sourceTree = "<group>"; };
 		E9753C11206BD4AB0023CF94 /* CouponViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = CouponViewController.xib; sourceTree = "<group>"; };
 		E9753C18206BD95A0023CF94 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
+		E9764F802174721900A2B48E /* Recovery.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recovery.swift; sourceTree = "<group>"; };
+		E9764F8321747BE800A2B48E /* Kin+BackupRestore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Kin+BackupRestore.swift"; sourceTree = "<group>"; };
 		E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBIEvent.swift; sourceTree = "<group>"; };
 		E97E5D1720E82D8D000E9E30 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		E97E5D2320E8EF93000E9E30 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
@@ -384,6 +388,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E9236ABD2175BB25005CEC95 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E9236ABF2175BB48005CEC95 /* notNibs */,
+				E9236ABE2175BB41005CEC95 /* nibs */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E9236ABE2175BB41005CEC95 /* nibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = nibs;
+			sourceTree = "<group>";
+		};
+		E9236ABF2175BB48005CEC95 /* notNibs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = notNibs;
+			sourceTree = "<group>";
+		};
 		E92501B820614A3300E2E738 /* Promises */ = {
 			isa = PBXGroup;
 			children = (
@@ -501,6 +528,8 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E9764F8221747BCA00A2B48E /* Kin+Backup */,
+				E9764F7A217471CC00A2B48E /* BackupModule */,
 				E954100420E3B30E0038FF49 /* BI */,
 				E92501B820614A3300E2E738 /* Promises */,
 				E942F8F1203191F600DD4B8E /* View */,
@@ -543,6 +572,23 @@
 				E97E5D1720E82D8D000E9E30 /* Reachability.swift */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		E9764F7A217471CC00A2B48E /* BackupModule */ = {
+			isa = PBXGroup;
+			children = (
+				E9236ABD2175BB25005CEC95 /* View */,
+				E9764F802174721900A2B48E /* Recovery.swift */,
+			);
+			path = BackupModule;
+			sourceTree = "<group>";
+		};
+		E9764F8221747BCA00A2B48E /* Kin+Backup */ = {
+			isa = PBXGroup;
+			children = (
+				E9764F8321747BE800A2B48E /* Kin+BackupRestore.swift */,
+			);
+			path = "Kin+Backup";
 			sourceTree = "<group>";
 		};
 		E97E5D3120E91E28000E9E30 /* client */ = {
@@ -923,6 +969,7 @@
 				E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */,
 				E97E5D8920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
+				E9764F8421747BE800A2B48E /* Kin+BackupRestore.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
@@ -945,6 +992,7 @@
 				E97E5D8C20E91E29000E9E30 /* types.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
 				E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */,
+				E9764F812174721900A2B48E /* Recovery.swift in Sources */,
 				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
 				E97E5D8020E91E29000E9E30 /* order_history_item_tapped.swift in Sources */,
 				E97E5D8820E91E29000E9E30 /* spend_order_failed.swift in Sources */,
