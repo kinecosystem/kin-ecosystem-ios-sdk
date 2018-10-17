@@ -7,6 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135721761ACB00749045 /* BackupIntroViewController.swift */; };
+		6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
+		6850135D21770EE700749045 /* BackupExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* BackupExplanationViewController.swift */; };
+		6850135F217747B000749045 /* BackupExplanationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6850135E217747B000749045 /* BackupExplanationViewController.xib */; };
+		685013612177488A00749045 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685013602177488A00749045 /* RoundButton.swift */; };
+		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
 		91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8720CFB22E00C3399F /* KinViewController.swift */; };
@@ -147,6 +153,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		685013592177062E00749045 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E96F24D0201729690017EF68 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E96F24D8201729690017EF68;
+			remoteInfo = KinEcosystem;
+		};
 		E93718F52113135F003DCA6F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
@@ -213,6 +226,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6850135721761ACB00749045 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
+		6850135C21770EE700749045 /* BackupExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupExplanationViewController.swift; sourceTree = "<group>"; };
+		6850135E217747B000749045 /* BackupExplanationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackupExplanationViewController.xib; sourceTree = "<group>"; };
+		685013602177488A00749045 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
 		91A4EA8720CFB22E00C3399F /* KinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinViewController.swift; sourceTree = "<group>"; };
@@ -366,6 +384,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -388,25 +407,30 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		E9236ABD2175BB25005CEC95 /* View */ = {
+		68501352217607C700749045 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				E9236ABF2175BB48005CEC95 /* notNibs */,
-				E9236ABE2175BB41005CEC95 /* nibs */,
+				68501353217607C700749045 /* nibs */,
+				68501354217607C700749045 /* notNibs */,
 			);
 			path = View;
 			sourceTree = "<group>";
 		};
-		E9236ABE2175BB41005CEC95 /* nibs */ = {
+		68501353217607C700749045 /* nibs */ = {
 			isa = PBXGroup;
 			children = (
+				6850135E217747B000749045 /* BackupExplanationViewController.xib */,
 			);
 			path = nibs;
 			sourceTree = "<group>";
 		};
-		E9236ABF2175BB48005CEC95 /* notNibs */ = {
+		68501354217607C700749045 /* notNibs */ = {
 			isa = PBXGroup;
 			children = (
+				6850135C21770EE700749045 /* BackupExplanationViewController.swift */,
+				6850135721761ACB00749045 /* BackupIntroViewController.swift */,
+				68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */,
+				685013602177488A00749045 /* RoundButton.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -577,7 +601,7 @@
 		E9764F7A217471CC00A2B48E /* BackupModule */ = {
 			isa = PBXGroup;
 			children = (
-				E9236ABD2175BB25005CEC95 /* View */,
+				68501352217607C700749045 /* View */,
 				E9764F802174721900A2B48E /* Recovery.swift */,
 			);
 			path = BackupModule;
@@ -760,6 +784,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				6850135A2177062E00749045 /* PBXTargetDependency */,
 			);
 			name = KinEcosystemTestsHost;
 			productName = KinEcosystemTestsHost;
@@ -929,6 +954,7 @@
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
+				6850135F217747B000749045 /* BackupExplanationViewController.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
@@ -964,6 +990,7 @@
 				E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */,
 				E97E5D6920E91E29000E9E30 /* spend_order_cancelled.swift in Sources */,
 				E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */,
+				68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */,
 				E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */,
 				E97E5D8A20E91E29000E9E30 /* spend_order_completion_submitted.swift in Sources */,
 				E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */,
@@ -986,6 +1013,7 @@
 				91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */,
 				E97E5D7020E91E29000E9E30 /* kin_balance_updated.swift in Sources */,
 				E97E5D7B20E91E29000E9E30 /* wallet_creation_succeeded.swift in Sources */,
+				6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
 				E97E5D7620E91E29000E9E30 /* common.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
@@ -1003,6 +1031,8 @@
 				E97E5D6320E91E29000E9E30 /* earn_order_creation_received.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
 				E97E5D6C20E91E29000E9E30 /* stellar_account_creation_requested.swift in Sources */,
+				6850135D21770EE700749045 /* BackupExplanationViewController.swift in Sources */,
+				685013612177488A00749045 /* RoundButton.swift in Sources */,
 				E97E5D6A20E91E29000E9E30 /* earn_order_creation_failed.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
 				E97E5D9120E91E29000E9E30 /* earn_order_creation_requested.swift in Sources */,
@@ -1090,6 +1120,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		6850135A2177062E00749045 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E96F24D8201729690017EF68 /* KinEcosystem */;
+			targetProxy = 685013592177062E00749045 /* PBXContainerItemProxy */;
+		};
 		E942F8CE203081B400DD4B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CoreDataStack;

@@ -74,6 +74,8 @@ public class RecoveryManager {
          */
         
         
+        let vc = BackupCompletedViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
+        presentor.present(vc, animated: true)
         
     }
     
