@@ -74,7 +74,6 @@ public class RecoveryManager {
          */
         
         
-        
     }
     
     private func restoreFlow(events: KinRecoveryEventsHandler,
