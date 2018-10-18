@@ -36,5 +36,6 @@ public class BackupExplanationViewController: UIViewController {
         super.viewDidLoad()
         
         view.backgroundColor = .kinPrimaryBlue
+        continueButton.setTitleColor(.kinPrimaryBlue, for: .normal)
     }
 }

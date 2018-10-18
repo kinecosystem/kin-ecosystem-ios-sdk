@@ -100,16 +100,20 @@ public class RecoveryManager {
     @objc private func pushPasswordViewController() {
         let passwordViewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: Bundle.ecosystem)
-        passwordViewController.doneButton.addTarget(self, action: #selector(validatePassword), for: .touchUpInside)
+        passwordViewController.delegate = self
         navigationController.pushViewController(passwordViewController, animated: true)
     }
-    
-    @objc private func validatePassword() {
+}
+
+@available(iOS 9.0, *)
+extension RecoveryManager: PasswordEntryDelegate {
+    func validatePasswordConformance(_ password: String) -> Bool {
         do {
-            try storeProvider.validatePassword("")
+            try storeProvider.validatePassword(password)
+            return true
         }
         catch {
-            
+            return false
         }
     }
 }
