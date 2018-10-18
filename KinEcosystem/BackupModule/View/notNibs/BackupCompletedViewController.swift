@@ -12,6 +12,7 @@ class BackupCompletedViewController: BackupExplanationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.image = UIImage(named: "safeIcon", in: Bundle.ecosystem, compatibleWith: nil)
         titleLabel.text = "kinecosystem_backup_completed_title".localized()
         descriptionLabel.text = "kinecosystem_backup_completed_description".localized()
         bottomContainerView.isHidden = false

@@ -16,6 +16,20 @@ public class BackupExplanationViewController: UIViewController {
     @IBOutlet weak var bottomContainerView: UIView!
     @IBOutlet weak var bottomTitleLabel: UILabel!
     @IBOutlet weak var bottomDescriptionLabel: UILabel!
+
+    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        commonInit()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        loadViewIfNeeded()
+    }
     
     override public func viewDidLoad() {
         super.viewDidLoad()

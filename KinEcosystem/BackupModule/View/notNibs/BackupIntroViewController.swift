@@ -12,6 +12,7 @@ class BackupIntroViewController: BackupExplanationViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        imageView.image = UIImage(named: "safeIcon", in: Bundle.ecosystem, compatibleWith: nil)
         titleLabel.text = "kinecosystem_backup_intro_title".localized()
         descriptionLabel.text = "kinecosystem_backup_intro_description".localized()
         continueButton.setTitle("kinecosystem_backup_intro_continue".localized(), for: .normal)

@@ -7,9 +7,11 @@
 //
 
 import UIKit
+import KinEcosystem
 
 class ViewController: UIViewController {
-
+    let recoverManager = RecoveryManager(with: Kin.shared)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -21,6 +23,14 @@ class ViewController: UIViewController {
     }
 
     
-    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        recoverManager.start(.backup, from: self, events: { _ in
+            
+        }) { _ in
+            
+        }
+    }
 }
 

@@ -74,15 +74,29 @@ public class RecoveryManager {
          */
         
         
-        let vc = BackupCompletedViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
-        presentor.present(vc, animated: true)
+        let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlow))
         
+        let introViewController = BackupIntroViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
+        introViewController.navigationItem.leftBarButtonItem = dismissItem
+        introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
+        
+        let navigationController = UINavigationController(rootViewController: introViewController)
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
+        navigationController.navigationBar.tintColor = .white
+        presentor.present(navigationController, animated: true)
     }
     
     private func restoreFlow(events: KinRecoveryEventsHandler,
                      completion: KinRecoveryCompletionHandler) {
         
     }
+    
+    @objc private func dismissFlow() {
+        presentor.dismiss(animated: true)
+    }
+    
+    @objc private func pushPasswordViewController() {
+        
+    }
 }
-
-          
