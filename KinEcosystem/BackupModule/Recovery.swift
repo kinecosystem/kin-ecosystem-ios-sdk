@@ -76,6 +76,7 @@ public class RecoveryManager {
         
         
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlow))
+        dismissItem.tintColor = .white
         
         let introViewController = BackupIntroViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
         introViewController.navigationItem.leftBarButtonItem = dismissItem
@@ -84,7 +85,7 @@ public class RecoveryManager {
         navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.navigationBar.tintColor = .white
+        navigationController.navigationBar.tintColor = .black
         presentor.present(navigationController, animated: true)
     }
     

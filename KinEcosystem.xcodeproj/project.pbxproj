@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		6806D520217883A90027CB86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6806D51F217883A90027CB86 /* Assets.xcassets */; };
 		6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135721761ACB00749045 /* BackupIntroViewController.swift */; };
 		6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		6850135D21770EE700749045 /* BackupExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* BackupExplanationViewController.swift */; };
@@ -229,6 +230,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		6806D51F217883A90027CB86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6850135721761ACB00749045 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
 		6850135C21770EE700749045 /* BackupExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupExplanationViewController.swift; sourceTree = "<group>"; };
 		6850135E217747B000749045 /* BackupExplanationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackupExplanationViewController.xib; sourceTree = "<group>"; };
@@ -620,6 +622,7 @@
 				68501352217607C700749045 /* View */,
 				E9236AC421761388005CEC95 /* ViewModel */,
 				E9764F802174721900A2B48E /* Recovery.swift */,
+				6806D51F217883A90027CB86 /* Assets.xcassets */,
 			);
 			path = BackupModule;
 			sourceTree = "<group>";
@@ -977,6 +980,7 @@
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
+				6806D520217883A90027CB86 /* Assets.xcassets in Resources */,
 				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
