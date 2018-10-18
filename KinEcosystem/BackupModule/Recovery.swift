@@ -38,7 +38,7 @@ public class RecoveryManager {
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController!
     private var isIdle = true
-    private let navigationController = UINavigationController()
+    private let navigationController = BackupNavigationController()
     
     public init(with storeProvider: KeystoreProvider) {
         self.storeProvider = storeProvider

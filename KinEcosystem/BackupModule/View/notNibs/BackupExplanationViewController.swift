@@ -32,6 +32,10 @@ public class BackupExplanationViewController: UIViewController {
         loadViewIfNeeded()
     }
     
+    public override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
+    
     override public func viewDidLoad() {
         super.viewDidLoad()
         
