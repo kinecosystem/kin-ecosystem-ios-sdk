@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PasswordEntryDelegate {
+    func validatePasswordConformance(_ password: String) -> Bool
+}
+
 @available(iOS 9.0, *)
 class PasswordEntryViewController: UIViewController {
     
@@ -21,6 +25,7 @@ class PasswordEntryViewController: UIViewController {
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     
     var viewModel = PasswordEntryViewModel()
+    var delegate: PasswordEntryDelegate?
     
     var kbObservers = [NSObjectProtocol]()
     
@@ -69,6 +74,10 @@ class PasswordEntryViewController: UIViewController {
                 }
             }
         })
+    }
+    
+    @IBAction func passwordEntryChanged(_ sender: Any) {
+        // 
     }
     
     deinit {

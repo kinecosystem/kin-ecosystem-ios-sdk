@@ -8,6 +8,7 @@
 
 import UIKit
 
+@available(iOS 9.0, *)
 public class BackupExplanationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
