@@ -38,6 +38,7 @@ public class RecoveryManager {
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController!
     private var isIdle = true
+    private let navigationController = UINavigationController()
     
     public init(with storeProvider: KeystoreProvider) {
         self.storeProvider = storeProvider
@@ -80,7 +81,7 @@ public class RecoveryManager {
         introViewController.navigationItem.leftBarButtonItem = dismissItem
         introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
         
-        let navigationController = UINavigationController(rootViewController: introViewController)
+        navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.navigationBar.tintColor = .white
@@ -97,6 +98,18 @@ public class RecoveryManager {
     }
     
     @objc private func pushPasswordViewController() {
-        
+        let passwordViewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
+                                                                 bundle: Bundle.ecosystem)
+        passwordViewController.doneButton.addTarget(self, action: #selector(validatePassword), for: .touchUpInside)
+        navigationController.pushViewController(passwordViewController, animated: true)
+    }
+    
+    @objc private func validatePassword() {
+        do {
+            try storeProvider.validatePassword("")
+        }
+        catch {
+            
+        }
     }
 }

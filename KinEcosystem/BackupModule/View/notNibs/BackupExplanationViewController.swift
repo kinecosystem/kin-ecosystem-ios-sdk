@@ -34,6 +34,6 @@ public class BackupExplanationViewController: UIViewController {
     override public func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = .kinDeepSkyBlue
+        view.backgroundColor = .kinPrimaryBlue
     }
 }

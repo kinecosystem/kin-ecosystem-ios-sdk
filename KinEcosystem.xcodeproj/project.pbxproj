@@ -30,6 +30,9 @@
 		E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */; };
 		E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */; };
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
+		E9236AC22175EC06005CEC95 /* PasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */; };
+		E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */; };
+		E9236AC6217613A4005CEC95 /* PasswordEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */; };
 		E92501BA20614A4400E2E738 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* Flows.swift */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
@@ -248,6 +251,9 @@
 		E91E6403203AB16400BB4104 /* UINavigationBar+gradient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+gradient.swift"; sourceTree = "<group>"; };
 		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
+		E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEntryViewController.swift; sourceTree = "<group>"; };
+		E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordEntryViewController.xib; sourceTree = "<group>"; };
+		E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEntryViewModel.swift; sourceTree = "<group>"; };
 		E92501B920614A4400E2E738 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
@@ -420,6 +426,7 @@
 			isa = PBXGroup;
 			children = (
 				6850135E217747B000749045 /* BackupExplanationViewController.xib */,
+				E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */,
 			);
 			path = nibs;
 			sourceTree = "<group>";
@@ -431,8 +438,17 @@
 				6850135721761ACB00749045 /* BackupIntroViewController.swift */,
 				68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */,
 				685013602177488A00749045 /* RoundButton.swift */,
+				E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */,
 			);
 			path = notNibs;
+			sourceTree = "<group>";
+		};
+		E9236AC421761388005CEC95 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		E92501B820614A3300E2E738 /* Promises */ = {
@@ -602,6 +618,7 @@
 			isa = PBXGroup;
 			children = (
 				68501352217607C700749045 /* View */,
+				E9236AC421761388005CEC95 /* ViewModel */,
 				E9764F802174721900A2B48E /* Recovery.swift */,
 			);
 			path = BackupModule;
@@ -952,6 +969,7 @@
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
+				E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
 				6850135F217747B000749045 /* BackupExplanationViewController.xib in Resources */,
@@ -999,6 +1017,7 @@
 				E9764F8421747BE800A2B48E /* Kin+BackupRestore.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
+				E9236AC22175EC06005CEC95 /* PasswordEntryViewController.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
 				E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
@@ -1089,6 +1108,7 @@
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
 				E97E5D7A20E91E29000E9E30 /* spend_order_creation_requested.swift in Sources */,
 				E97E5D7220E91E29000E9E30 /* earn_order_completed.swift in Sources */,
+				E9236AC6217613A4005CEC95 /* PasswordEntryViewModel.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
 				E97E5D6820E91E29000E9E30 /* spend_order_completed.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,
