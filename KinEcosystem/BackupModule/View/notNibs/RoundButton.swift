@@ -27,4 +27,10 @@ class RoundButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = bounds.height / 2
     }
+    
+    override var intrinsicContentSize: CGSize {
+        var size = super.intrinsicContentSize
+        size.height = 44
+        return size
+    }
 }

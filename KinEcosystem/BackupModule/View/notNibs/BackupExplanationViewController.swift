@@ -13,10 +13,10 @@ public class BackupExplanationViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var continueButton: RoundButton!
     @IBOutlet weak var bottomContainerView: UIView!
-    @IBOutlet weak var bottomTitleLabel: UILabel!
-    @IBOutlet weak var bottomDescriptionLabel: UILabel!
+    @IBOutlet weak var continueButton: RoundButton!
+    @IBOutlet weak var reminderTitleLabel: UILabel!
+    @IBOutlet weak var reminderDescriptionLabel: UILabel!
 
     public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
         super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)

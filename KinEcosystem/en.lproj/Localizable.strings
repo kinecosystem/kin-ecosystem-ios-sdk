@@ -43,11 +43,15 @@
 "kinecosystem_backup_intro_continue" = "Let's Go";
 "kinecosystem_backup_completed_title" = "Well done, you Kin is safe!";
 "kinecosystem_backup_completed_description" = "In order to restore your Kin, you will need the QR code and the password you've created.";
-"kinecosystem_backup_completed_sub_title" = "Remember!";
-"kinecosystem_backup_completed_sub_description" = "Keep your password in a safe place and the QR code handy.";
+"kinecosystem_backup_reminder_title" = "Remember!";
+"kinecosystem_backup_reminder_description" = "Keep your password in a safe place\nand the QR code handy.";
 
 "kinecosystem_create_password" = "Create Password";
 "kinecosystem_password_instructions" = "Create a strong password to backup your Kin. Password must include the following: (9 characters, 1 upper case, 1 special charcter \"#, !, @\", 1 digit)";
 "kinecosystem_password_confirmation" = "I understand this password is requiered to restore my Kin and it can’t be recovered if lost.";
 "kinecosystem_keep_kin_safe" = "Keep your Kin safe";
 "kinecosystem_next" = "Next";
+
+"kinecosystem_backup_qr_title" = "Save your QR Code";
+"kinecosystem_backup_qr_description" = "You will need it to restore your Kin.\nSend it to yourself by email.";
+"kinecosystem_backup_qr_continue" = "Send QR code via Email";

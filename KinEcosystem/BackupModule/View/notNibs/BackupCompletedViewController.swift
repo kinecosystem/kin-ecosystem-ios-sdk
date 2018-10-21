@@ -17,7 +17,7 @@ class BackupCompletedViewController: BackupExplanationViewController {
         titleLabel.text = "kinecosystem_backup_completed_title".localized()
         descriptionLabel.text = "kinecosystem_backup_completed_description".localized()
         bottomContainerView.isHidden = false
-        bottomTitleLabel.text = "kinecosystem_backup_completed_sub_title".localized()
-        bottomDescriptionLabel.text = "kinecosystem_backup_completed_sub_description".localized()
+        reminderTitleLabel.text = "kinecosystem_backup_reminder_title".localized()
+        reminderDescriptionLabel.text = "kinecosystem_backup_reminder_description".localized()
     }
 }

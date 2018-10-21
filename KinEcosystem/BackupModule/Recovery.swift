@@ -82,7 +82,10 @@ public class RecoveryManager {
         introViewController.navigationItem.leftBarButtonItem = dismissItem
         introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
         
-        navigationController.viewControllers = [introViewController]
+        let vc = QRViewController(nibName: "QRViewController", bundle: Bundle.ecosystem)
+        
+        navigationController.viewControllers = [vc]
+//        navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.navigationBar.tintColor = .black
