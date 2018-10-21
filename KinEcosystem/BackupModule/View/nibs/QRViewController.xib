@@ -14,6 +14,7 @@
             <connections>
                 <outlet property="continueButton" destination="qSm-aW-kDu" id="YY9-kM-gIt"/>
                 <outlet property="descriptionLabel" destination="1Ah-cp-ELa" id="Son-5z-Ay9"/>
+                <outlet property="qrImageView" destination="gbr-q3-utQ" id="i7X-47-b9b"/>
                 <outlet property="reminderDescriptionLabel" destination="c4d-TT-b3n" id="dgk-C7-vO3"/>
                 <outlet property="reminderImageView" destination="BSr-WA-RaZ" id="MM7-NO-lnb"/>
                 <outlet property="reminderTitleLabel" destination="LF1-ZL-QR2" id="omm-NS-dEq"/>

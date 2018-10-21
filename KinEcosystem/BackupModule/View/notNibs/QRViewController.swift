@@ -12,6 +12,7 @@ import UIKit
 class QRViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
+    @IBOutlet weak var qrImageView: UIImageView!
     @IBOutlet weak var reminderImageView: UIImageView!
     @IBOutlet weak var reminderTitleLabel: UILabel!
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
