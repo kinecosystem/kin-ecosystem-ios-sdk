@@ -1,5 +1,5 @@
 //
-//  BackupNavigationController.swift
+//  NavigationController.swift
 //  KinEcosystem
 //
 //  Created by Corey Werner on 18/10/2018.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BackupNavigationController: UINavigationController {
+class NavigationController: UINavigationController {
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
     }

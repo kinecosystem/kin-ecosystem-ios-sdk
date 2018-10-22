@@ -1,5 +1,5 @@
 //
-//  BackupExplanationViewController.swift
+//  ExplanationTemplateViewController.swift
 //  KinEcosystem
 //
 //  Created by Corey Werner on 17/10/2018.
@@ -9,7 +9,7 @@
 import UIKit
 
 @available(iOS 9.0, *)
-public class BackupExplanationViewController: UIViewController {
+public class ExplanationTemplateViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!

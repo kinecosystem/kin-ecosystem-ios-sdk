@@ -10,11 +10,11 @@
 		6806D520217883A90027CB86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6806D51F217883A90027CB86 /* Assets.xcassets */; };
 		6806D527217888710027CB86 /* QRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6806D526217888710027CB86 /* QRViewController.xib */; };
 		6806D5292178888B0027CB86 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D5282178888B0027CB86 /* QRViewController.swift */; };
-		6806D52C21789DCA0027CB86 /* BackupNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D52B21789DCA0027CB86 /* BackupNavigationController.swift */; };
+		6806D52C21789DCA0027CB86 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D52B21789DCA0027CB86 /* NavigationController.swift */; };
 		6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135721761ACB00749045 /* BackupIntroViewController.swift */; };
 		6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
-		6850135D21770EE700749045 /* BackupExplanationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* BackupExplanationViewController.swift */; };
-		6850135F217747B000749045 /* BackupExplanationViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6850135E217747B000749045 /* BackupExplanationViewController.xib */; };
+		6850135D21770EE700749045 /* ExplanationTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */; };
+		6850135F217747B000749045 /* ExplanationTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6850135E217747B000749045 /* ExplanationTemplateViewController.xib */; };
 		685013612177488A00749045 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685013602177488A00749045 /* RoundButton.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
@@ -236,10 +236,10 @@
 		6806D51F217883A90027CB86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6806D526217888710027CB86 /* QRViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRViewController.xib; sourceTree = "<group>"; };
 		6806D5282178888B0027CB86 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
-		6806D52B21789DCA0027CB86 /* BackupNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupNavigationController.swift; sourceTree = "<group>"; };
+		6806D52B21789DCA0027CB86 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		6850135721761ACB00749045 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
-		6850135C21770EE700749045 /* BackupExplanationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupExplanationViewController.swift; sourceTree = "<group>"; };
-		6850135E217747B000749045 /* BackupExplanationViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BackupExplanationViewController.xib; sourceTree = "<group>"; };
+		6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationTemplateViewController.swift; sourceTree = "<group>"; };
+		6850135E217747B000749045 /* ExplanationTemplateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExplanationTemplateViewController.xib; sourceTree = "<group>"; };
 		685013602177488A00749045 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		68501353217607C700749045 /* nibs */ = {
 			isa = PBXGroup;
 			children = (
-				6850135E217747B000749045 /* BackupExplanationViewController.xib */,
+				6850135E217747B000749045 /* ExplanationTemplateViewController.xib */,
 				E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */,
 				6806D526217888710027CB86 /* QRViewController.xib */,
 			);
@@ -443,10 +443,10 @@
 		68501354217607C700749045 /* notNibs */ = {
 			isa = PBXGroup;
 			children = (
-				6850135C21770EE700749045 /* BackupExplanationViewController.swift */,
+				6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */,
 				6850135721761ACB00749045 /* BackupIntroViewController.swift */,
 				68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */,
-				6806D52B21789DCA0027CB86 /* BackupNavigationController.swift */,
+				6806D52B21789DCA0027CB86 /* NavigationController.swift */,
 				685013602177488A00749045 /* RoundButton.swift */,
 				E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */,
 				6806D5282178888B0027CB86 /* QRViewController.swift */,
@@ -985,7 +985,7 @@
 				E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
-				6850135F217747B000749045 /* BackupExplanationViewController.xib in Resources */,
+				6850135F217747B000749045 /* ExplanationTemplateViewController.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
@@ -1064,7 +1064,7 @@
 				E97E5D6320E91E29000E9E30 /* earn_order_creation_received.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
 				E97E5D6C20E91E29000E9E30 /* stellar_account_creation_requested.swift in Sources */,
-				6850135D21770EE700749045 /* BackupExplanationViewController.swift in Sources */,
+				6850135D21770EE700749045 /* ExplanationTemplateViewController.swift in Sources */,
 				685013612177488A00749045 /* RoundButton.swift in Sources */,
 				E97E5D6A20E91E29000E9E30 /* earn_order_creation_failed.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
@@ -1122,7 +1122,7 @@
 				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
 				E97E5D7A20E91E29000E9E30 /* spend_order_creation_requested.swift in Sources */,
-				6806D52C21789DCA0027CB86 /* BackupNavigationController.swift in Sources */,
+				6806D52C21789DCA0027CB86 /* NavigationController.swift in Sources */,
 				E97E5D7220E91E29000E9E30 /* earn_order_completed.swift in Sources */,
 				E9236AC6217613A4005CEC95 /* PasswordEntryViewModel.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
