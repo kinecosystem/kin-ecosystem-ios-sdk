@@ -78,10 +78,10 @@ public class RecoveryManager {
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlow))
         dismissItem.tintColor = .white
         
-        let introViewController = BackupIntroViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
+        let introViewController = BackupIntroViewController()
         introViewController.navigationItem.leftBarButtonItem = dismissItem
-        introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
-//        introViewController.continueButton.addTarget(self, action: #selector(pushQRViewController), for: .touchUpInside)
+//        introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
+        introViewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
         
         navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
@@ -115,7 +115,7 @@ public class RecoveryManager {
     }
     
     @objc private func pushCompletedViewController() {
-        let completedViewController = BackupCompletedViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
+        let completedViewController = BackupCompletedViewController()
         navigationController.pushViewController(completedViewController, animated: true)
     }
 }

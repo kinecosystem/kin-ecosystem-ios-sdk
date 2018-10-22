@@ -9,7 +9,7 @@
 import UIKit
 
 @available(iOS 9.0, *)
-public class ExplanationTemplateViewController: UIViewController {
+class ExplanationTemplateViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
@@ -17,9 +17,9 @@ public class ExplanationTemplateViewController: UIViewController {
     @IBOutlet weak var continueButton: RoundButton!
     @IBOutlet weak var reminderTitleLabel: UILabel!
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
-
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    init() {
+        super.init(nibName: "ExplanationTemplateViewController", bundle: Bundle.ecosystem)
         commonInit()
     }
     
@@ -32,7 +32,7 @@ public class ExplanationTemplateViewController: UIViewController {
         loadViewIfNeeded()
     }
     
-    public override var preferredStatusBarStyle: UIStatusBarStyle {
+    override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
     

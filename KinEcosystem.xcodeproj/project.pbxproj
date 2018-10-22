@@ -11,10 +11,10 @@
 		6806D527217888710027CB86 /* QRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6806D526217888710027CB86 /* QRViewController.xib */; };
 		6806D5292178888B0027CB86 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D5282178888B0027CB86 /* QRViewController.swift */; };
 		6806D52C21789DCA0027CB86 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D52B21789DCA0027CB86 /* NavigationController.swift */; };
+		6806D533217DF8F60027CB86 /* ExplanationTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */; };
 		6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135721761ACB00749045 /* BackupIntroViewController.swift */; };
 		6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		6850135D21770EE700749045 /* ExplanationTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */; };
-		6850135F217747B000749045 /* ExplanationTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6850135E217747B000749045 /* ExplanationTemplateViewController.xib */; };
 		685013612177488A00749045 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685013602177488A00749045 /* RoundButton.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
@@ -237,9 +237,9 @@
 		6806D526217888710027CB86 /* QRViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = QRViewController.xib; sourceTree = "<group>"; };
 		6806D5282178888B0027CB86 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		6806D52B21789DCA0027CB86 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
+		6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExplanationTemplateViewController.xib; sourceTree = "<group>"; };
 		6850135721761ACB00749045 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
 		6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationTemplateViewController.swift; sourceTree = "<group>"; };
-		6850135E217747B000749045 /* ExplanationTemplateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExplanationTemplateViewController.xib; sourceTree = "<group>"; };
 		685013602177488A00749045 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
@@ -433,7 +433,7 @@
 		68501353217607C700749045 /* nibs */ = {
 			isa = PBXGroup;
 			children = (
-				6850135E217747B000749045 /* ExplanationTemplateViewController.xib */,
+				6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */,
 				E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */,
 				6806D526217888710027CB86 /* QRViewController.xib */,
 			);
@@ -978,6 +978,7 @@
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
 				6806D527217888710027CB86 /* QRViewController.xib in Resources */,
+				6806D533217DF8F60027CB86 /* ExplanationTemplateViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */,
@@ -985,7 +986,6 @@
 				E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
-				6850135F217747B000749045 /* ExplanationTemplateViewController.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
