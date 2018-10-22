@@ -18,14 +18,16 @@ class QRViewController: UIViewController {
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
     @IBOutlet weak var continueButton: RoundButton!
     
-    public override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        super.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    private let qrString: String
+    
+    init(qrString: String) {
+        self.qrString = qrString
+        super.init(nibName: "QRViewController", bundle: Bundle.ecosystem)
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        commonInit()
+        fatalError("init(coder:) has not been implemented")
     }
     
     private func commonInit() {
@@ -39,14 +41,49 @@ class QRViewController: UIViewController {
         titleLabel.textColor = .kinPrimaryBlue
         descriptionLabel.text = "kinecosystem_backup_qr_description".localized()
         descriptionLabel.textColor = .kinBlueGreyTwo
+        qrImageView.image = generateQRImage(from: qrString, for: qrImageView.bounds.size)
         reminderImageView.tintColor = .kinWarningRed
         reminderTitleLabel.text = "kinecosystem_backup_reminder_title".localized()
         reminderTitleLabel.textColor = .kinWarningRed
         reminderDescriptionLabel.text = "kinecosystem_backup_reminder_description".localized()
         reminderDescriptionLabel.textColor = .kinWarningRed
         continueButton.setTitle("kinecosystem_backup_qr_continue".localized(), for: .normal)
-        continueButton.setTitleColor(.kinPrimaryBlue, for: .normal)
-        continueButton.backgroundColor = .kinPrimaryBlue
         continueButton.setTitleColor(.white, for: .normal)
+        continueButton.backgroundColor = .kinPrimaryBlue
+    }
+    
+    /**
+     Create a QR image from a string.
+     
+     - Parameter string: The string used in the QR image.
+     - Parameter size: The size of the `UIImageView` that will display the image.
+     - Returns: A QR image.
+    */
+    private func generateQRImage(from string: String, for size: CGSize? = nil) -> UIImage? {
+        let data = string.data(using: .isoLatin1)
+        
+        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
+            return nil
+        }
+        
+        filter.setValue(data, forKey: "inputMessage")
+        filter.setValue("H", forKey: "inputCorrectionLevel")
+        
+        guard let outputImage = filter.outputImage else {
+            return nil
+        }
+        
+        let transform: CGAffineTransform
+        
+        if let size = size {
+            let scaleX = size.width / outputImage.extent.width
+            let scaleY = size.height / outputImage.extent.height
+            transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+        }
+        else {
+            transform = CGAffineTransform(scaleX: 10, y: 10)
+        }
+        
+        return UIImage(ciImage: outputImage.transformed(by: transform))
     }
 }

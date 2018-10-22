@@ -82,7 +82,7 @@ public class RecoveryManager {
         introViewController.navigationItem.leftBarButtonItem = dismissItem
         introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
         
-        let vc = QRViewController(nibName: "QRViewController", bundle: Bundle.ecosystem)
+        let vc = QRViewController(qrString: "")
         
         navigationController.viewControllers = [vc]
 //        navigationController.viewControllers = [introViewController]
