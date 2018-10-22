@@ -13,7 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="QRViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
                 <outlet property="continueButton" destination="qSm-aW-kDu" id="YY9-kM-gIt"/>
+                <outlet property="continueContainerView" destination="jeh-iH-9h7" id="0pT-Zo-JCE"/>
                 <outlet property="descriptionLabel" destination="1Ah-cp-ELa" id="Son-5z-Ay9"/>
+                <outlet property="emailButton" destination="P27-Ju-s2g" id="9EB-7Z-TUT"/>
                 <outlet property="qrImageView" destination="gbr-q3-utQ" id="i7X-47-b9b"/>
                 <outlet property="reminderDescriptionLabel" destination="c4d-TT-b3n" id="dgk-C7-vO3"/>
                 <outlet property="reminderImageView" destination="BSr-WA-RaZ" id="MM7-NO-lnb"/>
@@ -127,10 +129,26 @@
                                 <constraint firstAttribute="height" constant="20" id="riW-TK-RbP"/>
                             </constraints>
                         </view>
-                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSm-aW-kDu" customClass="RoundButton" customModule="KinEcosystem" customModuleProvider="target">
+                        <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" verticalCompressionResistancePriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="P27-Ju-s2g" customClass="RoundButton" customModule="KinEcosystem" customModuleProvider="target">
                             <rect key="frame" x="0.0" y="606" width="334" height="30"/>
                             <state key="normal" title="Button"/>
                         </button>
+                        <stackView hidden="YES" opaque="NO" contentMode="scaleToFill" verticalCompressionResistancePriority="1000" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="jeh-iH-9h7">
+                            <rect key="frame" x="0.0" y="636" width="334" height="20"/>
+                            <subviews>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="If2-v1-77J">
+                                    <rect key="frame" x="0.0" y="0.0" width="334" height="20"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="20" id="JcO-zE-tFE"/>
+                                    </constraints>
+                                </view>
+                                <button opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="1000" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qSm-aW-kDu" customClass="RoundButton" customModule="KinEcosystem" customModuleProvider="target">
+                                    <rect key="frame" x="0.0" y="20" width="334" height="0.0"/>
+                                    <state key="normal" title="Button"/>
+                                </button>
+                            </subviews>
+                        </stackView>
                     </subviews>
                 </stackView>
             </subviews>

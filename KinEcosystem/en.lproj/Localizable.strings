@@ -54,4 +54,5 @@
 
 "kinecosystem_backup_qr_title" = "Save your QR Code";
 "kinecosystem_backup_qr_description" = "You will need it to restore your Kin.\nSend it to yourself by email.";
-"kinecosystem_backup_qr_continue" = "Send QR code via Email";
+"kinecosystem_backup_qr_email" = "Send QR code via Email";
+"kinecosystem_backup_qr_continue" = "My QR code is saved";

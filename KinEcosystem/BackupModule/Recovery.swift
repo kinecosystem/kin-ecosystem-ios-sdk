@@ -81,11 +81,9 @@ public class RecoveryManager {
         let introViewController = BackupIntroViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
         introViewController.navigationItem.leftBarButtonItem = dismissItem
         introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
+//        introViewController.continueButton.addTarget(self, action: #selector(pushQRViewController), for: .touchUpInside)
         
-        let vc = QRViewController(qrString: "")
-        
-        navigationController.viewControllers = [vc]
-//        navigationController.viewControllers = [introViewController]
+        navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
         navigationController.navigationBar.tintColor = .black
@@ -97,6 +95,8 @@ public class RecoveryManager {
         
     }
     
+    // MARK: Navigation
+    
     @objc private func dismissFlow() {
         presentor.dismiss(animated: true)
     }
@@ -106,6 +106,17 @@ public class RecoveryManager {
                                                                  bundle: Bundle.ecosystem)
         passwordViewController.delegate = self
         navigationController.pushViewController(passwordViewController, animated: true)
+    }
+    
+    @objc private func pushQRViewController() {
+        let qrViewController = QRViewController(qrString: "exported keyphrase etc") // TODO:
+        qrViewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
+        navigationController.pushViewController(qrViewController, animated: true)
+    }
+    
+    @objc private func pushCompletedViewController() {
+        let completedViewController = BackupCompletedViewController(nibName: "BackupExplanationViewController", bundle: Bundle.ecosystem)
+        navigationController.pushViewController(completedViewController, animated: true)
     }
 }
 
