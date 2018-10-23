@@ -9,7 +9,36 @@
 import UIKit
 
 class NavigationController: UINavigationController {
+    let keystoreProvider: KeystoreProvider
+    let dismissBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
+    
+    init(keystoreProvider: KeystoreProvider) {
+        self.keystoreProvider = keystoreProvider
+        
+        super.init(nibName: nil, bundle: nil)
+        
+        delegate = self
+        navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationBar.shadowImage = UIImage()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        navigationBar.tintColor = topViewController?.preferredStatusBarStyle.color
+    }
+    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return topViewController?.preferredStatusBarStyle ?? super.preferredStatusBarStyle
+    }
+}
+
+extension NavigationController: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
     }
 }
