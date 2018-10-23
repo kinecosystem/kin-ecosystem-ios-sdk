@@ -152,6 +152,10 @@ extension QRViewController {
     }
     
     @objc private func presentEmailViewController() {
+        // !!!: DEBUG
+        showContinueButton()
+        return
+        
         guard MFMailComposeViewController.canSendMail() else {
             presentEmailErrorAlert(.noClient)
             return

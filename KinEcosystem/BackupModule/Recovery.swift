@@ -33,7 +33,7 @@ public enum RecoveryEventType {
 }
 
 @available(iOS 9.0, *)
-public class RecoveryManager {
+public class RecoveryManager: NSObject {
     
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController!
@@ -44,6 +44,10 @@ public class RecoveryManager {
         self.storeProvider = storeProvider
     }
     
+    deinit {
+        navigationController.delegate = nil
+    }
+    
     public func start(_ phase: RecoveryPhase,
                       from viewController: UIViewController,
                       events: KinRecoveryEventsHandler,
@@ -52,7 +56,7 @@ public class RecoveryManager {
         switch phase {
         case .backup:
             backupFlow(events: events, completion: completion)
-        default:
+        case .restore:
             restoreFlow(events: events, completion: completion)
         }
     }
@@ -76,17 +80,17 @@ public class RecoveryManager {
         
         
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlow))
-        dismissItem.tintColor = .white
         
         let introViewController = BackupIntroViewController()
         introViewController.navigationItem.leftBarButtonItem = dismissItem
 //        introViewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
-        introViewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
+        introViewController.continueButton.addTarget(self, action: #selector(pushQRViewController), for: .touchUpInside)
         
+        navigationController.delegate = self
         navigationController.viewControllers = [introViewController]
         navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         navigationController.navigationBar.shadowImage = UIImage()
-        navigationController.navigationBar.tintColor = .black
+        navigationController.navigationBar.tintColor = navigationController.topViewController?.preferredStatusBarStyle.color
         presentor.present(navigationController, animated: true)
     }
     
@@ -94,9 +98,12 @@ public class RecoveryManager {
                      completion: KinRecoveryCompletionHandler) {
         
     }
-    
-    // MARK: Navigation
-    
+}
+
+// MARK: - Navigation
+
+@available(iOS 9.0, *)
+extension RecoveryManager {
     @objc private func dismissFlow() {
         presentor.dismiss(animated: true)
     }
@@ -119,6 +126,26 @@ public class RecoveryManager {
         navigationController.pushViewController(completedViewController, animated: true)
     }
 }
+
+@available(iOS 9.0, *)
+extension RecoveryManager: UINavigationControllerDelegate {
+    public func navigationController(_ navigationController: UINavigationController, willShow viewController: UIViewController, animated: Bool) {
+        navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
+    }
+}
+
+extension UIStatusBarStyle {
+    var color: UIColor {
+        switch self {
+        case .default:
+            return .black
+        case .lightContent:
+            return .white
+        }
+    }
+}
+
+// MARK: - Password
 
 @available(iOS 9.0, *)
 extension RecoveryManager: PasswordEntryDelegate {
