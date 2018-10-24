@@ -20,7 +20,7 @@ class BackupFlowController: FlowController {
     
     private lazy var _entryViewController: UIViewController = {
         let viewController = BackupIntroViewController()
-        viewController.continueButton.addTarget(self, action: #selector(pushQRViewController), for: .touchUpInside)
+        viewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
         return viewController
     }()
     
@@ -73,5 +73,8 @@ extension BackupFlowController: PasswordEntryDelegate {
         catch {
             return false
         }
+    }
+    func passwordEntryViewControllerDidComplete() {
+        pushQRViewController()
     }
 }

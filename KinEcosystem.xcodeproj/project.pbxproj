@@ -47,16 +47,14 @@
 		E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7E206921BC008A027F /* SpendViewModel.swift */; };
 		E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B80206923A0008A027F /* SheetTransition.swift */; };
 		E92F7B882069992A008A027F /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B872069992A008A027F /* Animations.swift */; };
-		E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93146262164F160008F2D74 /* MarketplaceViewController.xib */; };
 		E93146332164F52B008F2D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93146312164F52B008F2D74 /* Localizable.strings */; };
+		E93228CA217E03DE005B273E /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93228C9217E03DE005B273E /* MarketplaceViewController.xib */; };
 		E93718FD21131375003DCA6F /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93718F62113135F003DCA6F /* KinCoreSDK.framework */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
 		E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DA2031120D00DD4B8E /* AppDelegate.swift */; };
 		E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DC2031120D00DD4B8E /* ViewController.swift */; };
-		E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8DE2031120D00DD4B8E /* Main.storyboard */; };
-		E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */; };
 		E942F8F32031B54800DD4B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F22031B54800DD4B8E /* Logger.swift */; };
 		E942F8F52032D7E300DD4B8E /* BaseDataNetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F42032D7E300DD4B8E /* BaseDataNetworkTest.swift */; };
 		E942F8F72032D7F500DD4B8E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F62032D7F500DD4B8E /* DataTests.swift */; };
@@ -276,7 +274,8 @@
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
 		E92F7B80206923A0008A027F /* SheetTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
 		E92F7B872069992A008A027F /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
-		E93146322164F52B008F2D74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E93228C9217E03DE005B273E /* MarketplaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
+		E93228CB217E042E005B273E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
 		E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
@@ -285,8 +284,6 @@
 		E942F8D82031120D00DD4B8E /* KinEcosystemTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinEcosystemTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E942F8DA2031120D00DD4B8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E942F8DC2031120D00DD4B8E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		E942F8DF2031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E942F8F22031B54800DD4B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		E942F8F42032D7E300DD4B8E /* BaseDataNetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataNetworkTest.swift; sourceTree = "<group>"; };
@@ -390,7 +387,6 @@
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTConfirmation.swift; sourceTree = "<group>"; };
 		E9DC201C216B353E00746B81 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
-		E9DC201F216B4B3D00746B81 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E9DC2020216B807500746B81 /* Xib+localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Xib+localization.swift"; sourceTree = "<group>"; };
 		E9DC2026216B97E900746B81 /* String+localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
@@ -543,8 +539,6 @@
 			children = (
 				E942F8DA2031120D00DD4B8E /* AppDelegate.swift */,
 				E942F8DC2031120D00DD4B8E /* ViewController.swift */,
-				E942F8DE2031120D00DD4B8E /* Main.storyboard */,
-				E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */,
 				E942F8E62031120D00DD4B8E /* Info.plist */,
 			);
 			path = KinEcosystemTestsHost;
@@ -722,7 +716,7 @@
 		E98D17892051395100FEB57A /* nibs */ = {
 			isa = PBXGroup;
 			children = (
-				E93146262164F160008F2D74 /* MarketplaceViewController.xib */,
+				E93228C9217E03DE005B273E /* MarketplaceViewController.xib */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
 				E96A582F204458AF00285C7B /* OrdersViewController.xib */,
@@ -910,7 +904,6 @@
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
-				Base,
 				"pt-BR",
 			);
 			mainGroup = E96F24CF201729690017EF68;
@@ -986,8 +979,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */,
-				E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1001,8 +992,8 @@
 				6806D533217DF8F60027CB86 /* ExplanationTemplateViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
-				E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
+				E93228CA217E03DE005B273E /* MarketplaceViewController.xib in Resources */,
 				E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
@@ -1203,37 +1194,13 @@
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		E93146262164F160008F2D74 /* MarketplaceViewController.xib */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E9DC201F216B4B3D00746B81 /* en */,
-			);
-			name = MarketplaceViewController.xib;
-			sourceTree = "<group>";
-		};
 		E93146312164F52B008F2D74 /* Localizable.strings */ = {
 			isa = PBXVariantGroup;
 			children = (
-				E93146322164F52B008F2D74 /* en */,
 				E9DC201C216B353E00746B81 /* pt-BR */,
+				E93228CB217E042E005B273E /* en */,
 			);
 			name = Localizable.strings;
-			sourceTree = "<group>";
-		};
-		E942F8DE2031120D00DD4B8E /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E942F8DF2031120D00DD4B8E /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				E942F8E42031120D00DD4B8E /* Base */,
-			);
-			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
@@ -1320,7 +1287,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1376,7 +1343,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

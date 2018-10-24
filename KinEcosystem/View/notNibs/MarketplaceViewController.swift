@@ -16,7 +16,7 @@ import KinCoreSDK
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
-    
+    let recovery = RecoveryManager(with: Kin.shared)
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
@@ -184,6 +184,12 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
+        recovery.start(.backup, presentedOn: self, events: { _ in
+            
+        }) { _ in
+            
+        }
+        return
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer

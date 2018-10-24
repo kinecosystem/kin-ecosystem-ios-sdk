@@ -10,6 +10,15 @@ import UIKit
 
 protocol PasswordEntryDelegate {
     func validatePasswordConformance(_ password: String) -> Bool
+    func passwordEntryViewControllerDidComplete()
+}
+
+class PEDoneButton: UIButton {
+    override var isEnabled: Bool {
+        didSet {
+            self.backgroundColor = isEnabled ? UIColor.kinPrimaryBlue : UIColor.kinLightBlueGrey
+        }
+    }
 }
 
 @available(iOS 9.0, *)
@@ -17,8 +26,8 @@ class PasswordEntryViewController: UIViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var passwordInfo: UILabel!
-    @IBOutlet weak var passwordInput1: UITextField!
-    @IBOutlet weak var passwordInput2: UITextField!
+    @IBOutlet weak var passwordInput1: PasswordEntryField!
+    @IBOutlet weak var passwordInput2: PasswordEntryField!
     @IBOutlet weak var confirmLabel: UILabel!
     @IBOutlet weak var confirmTick: UIView!
     @IBOutlet weak var doneButton: UIButton!
@@ -27,28 +36,17 @@ class PasswordEntryViewController: UIViewController {
     var viewModel = PasswordEntryViewModel()
     var delegate: PasswordEntryDelegate?
     
-    var kbObservers = [NSObjectProtocol]()
+    private var kbObservers = [NSObjectProtocol]()
+    private var tickMarked = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let paddingView1 = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 22.0, height: passwordInput1.frame.height))
-        let paddingView2 = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 22.0, height: passwordInput2.frame.height))
-        title = "kinecosystem_keep_kin_safe".localized()
-        passwordInput1.layer.borderWidth = 1.0
-        passwordInput1.layer.borderColor = UIColor.kinPrimaryBlue.cgColor
-        passwordInput1.layer.cornerRadius = 20.0
-        passwordInput1.leftView = paddingView1
-        passwordInput1.leftViewMode = .always
-        passwordInput2.leftView = paddingView2
-        passwordInput2.leftViewMode = .always
-        passwordInput2.layer.borderWidth = 1.0
-        passwordInput2.layer.borderColor = UIColor.kinPrimaryBlue.cgColor
-        passwordInput2.layer.cornerRadius = 20.0
         confirmTick.layer.borderWidth = 1.0
         confirmTick.layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
         confirmTick.layer.cornerRadius = 2.0
         doneButton.layer.cornerRadius = 25.0
-        doneButton.backgroundColor = UIColor.kinPrimaryBlue
+        doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
+        doneButton.isEnabled = false
         titleLabel.attributedText = viewModel.passwordTitle
         passwordInfo.attributedText = viewModel.passwordInfo
         confirmLabel.attributedText = viewModel.confirmInfo
@@ -76,8 +74,55 @@ class PasswordEntryViewController: UIViewController {
         })
     }
     
-    @IBAction func passwordEntryChanged(_ sender: Any) {
-        // 
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let touch = event?.allTouches?.first
+        if (passwordInput1.isFirstResponder || passwordInput2.isFirstResponder) &&
+            type(of: touch?.view) != UITextField.self {
+            passwordInput1.resignFirstResponder()
+            passwordInput2.resignFirstResponder()
+        }
+        super.touchesBegan(touches, with: event)
+    }
+    
+    @IBAction func passwordEntryChanged(_ sender: UITextField) {
+        updateDoneButton()
+    }
+    
+    
+    
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        guard let text = passwordInput1.text, passwordInput1.hasText && passwordInput2.hasText else {
+            return // shouldn't really happen, here for documenting
+        }
+        guard passwordInput1.text == passwordInput2.text else {
+            alertPasswordsDontMatch()
+            return
+        }
+        guard let delegate = delegate else { fatalError() }
+        
+        guard delegate.validatePasswordConformance(text) else {
+            alertPasswordsConformance()
+            return
+        }
+        delegate.passwordEntryViewControllerDidComplete()
+    }
+    
+    @IBAction func tickSelected(_ sender: Any) {
+        tickMarked = !tickMarked
+        confirmTick.backgroundColor = tickMarked ? UIColor.kinLightBlueGrey : UIColor.kinWhite
+        updateDoneButton()
+    }
+    
+    func alertPasswordsDontMatch() {
+        
+    }
+    
+    func alertPasswordsConformance() {
+        
+    }
+    
+    func updateDoneButton() {
+        doneButton.isEnabled = passwordInput1.hasText && passwordInput2.hasText && tickMarked
     }
     
     deinit {
