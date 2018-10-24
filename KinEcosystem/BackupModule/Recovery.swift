@@ -75,7 +75,8 @@ public class RecoveryManager: NSObject {
         }
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
-        navigationController.pushViewController(flowController.entryViewController, animated: true)
+        let isStackEmpty = navigationController.viewControllers.isEmpty
+        navigationController.pushViewController(flowController.entryViewController, animated: !isStackEmpty)
         
         recoveryInstance = RecoveryInstance(presentationType: .pushed, flowController: flowController, completion: completion)
     }
