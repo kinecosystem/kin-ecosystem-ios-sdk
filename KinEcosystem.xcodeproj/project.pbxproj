@@ -12,13 +12,14 @@
 		6806D5292178888B0027CB86 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D5282178888B0027CB86 /* QRViewController.swift */; };
 		6806D52C21789DCA0027CB86 /* NavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D52B21789DCA0027CB86 /* NavigationController.swift */; };
 		6806D533217DF8F60027CB86 /* ExplanationTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */; };
-		6806D535217ED93C0027CB86 /* BackupNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D534217ED93C0027CB86 /* BackupNavigationController.swift */; };
 		6806D538217ED9960027CB86 /* StatusBarStyle+Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D537217ED9960027CB86 /* StatusBarStyle+Color.swift */; };
-		6806D53A217EF4010027CB86 /* RestoreNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D539217EF4010027CB86 /* RestoreNavigationController.swift */; };
+		6806D53C217F05990027CB86 /* BackupFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6806D53B217F05990027CB86 /* BackupFlowController.swift */; };
 		6850135821761ACB00749045 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135721761ACB00749045 /* BackupIntroViewController.swift */; };
 		6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		6850135D21770EE700749045 /* ExplanationTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */; };
 		685013612177488A00749045 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685013602177488A00749045 /* RoundButton.swift */; };
+		68C7AE68217F0F8F00D4F575 /* RestoreFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */; };
+		68C7AE6A217F10F300D4F575 /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE69217F10F300D4F575 /* FlowController.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
@@ -241,12 +242,13 @@
 		6806D5282178888B0027CB86 /* QRViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
 		6806D52B21789DCA0027CB86 /* NavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationController.swift; sourceTree = "<group>"; };
 		6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExplanationTemplateViewController.xib; sourceTree = "<group>"; };
-		6806D534217ED93C0027CB86 /* BackupNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupNavigationController.swift; sourceTree = "<group>"; };
 		6806D537217ED9960027CB86 /* StatusBarStyle+Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "StatusBarStyle+Color.swift"; sourceTree = "<group>"; };
-		6806D539217EF4010027CB86 /* RestoreNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreNavigationController.swift; sourceTree = "<group>"; };
+		6806D53B217F05990027CB86 /* BackupFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupFlowController.swift; sourceTree = "<group>"; };
 		6850135721761ACB00749045 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
 		6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExplanationTemplateViewController.swift; sourceTree = "<group>"; };
 		685013602177488A00749045 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreFlowController.swift; sourceTree = "<group>"; };
+		68C7AE69217F10F300D4F575 /* FlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
@@ -461,11 +463,12 @@
 				6850135721761ACB00749045 /* BackupIntroViewController.swift */,
 				68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */,
 				6806D52B21789DCA0027CB86 /* NavigationController.swift */,
-				6806D534217ED93C0027CB86 /* BackupNavigationController.swift */,
 				685013602177488A00749045 /* RoundButton.swift */,
 				E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */,
 				6806D5282178888B0027CB86 /* QRViewController.swift */,
-				6806D539217EF4010027CB86 /* RestoreNavigationController.swift */,
+				6806D53B217F05990027CB86 /* BackupFlowController.swift */,
+				68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */,
+				68C7AE69217F10F300D4F575 /* FlowController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -1046,10 +1049,10 @@
 				E97E5D8920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
 				E9764F8421747BE800A2B48E /* Kin+BackupRestore.swift in Sources */,
-				6806D53A217EF4010027CB86 /* RestoreNavigationController.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
 				E9236AC22175EC06005CEC95 /* PasswordEntryViewController.swift in Sources */,
+				68C7AE68217F0F8F00D4F575 /* RestoreFlowController.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
 				E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
@@ -1086,7 +1089,6 @@
 				685013612177488A00749045 /* RoundButton.swift in Sources */,
 				E97E5D6A20E91E29000E9E30 /* earn_order_creation_failed.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
-				6806D535217ED93C0027CB86 /* BackupNavigationController.swift in Sources */,
 				E97E5D9120E91E29000E9E30 /* earn_order_creation_requested.swift in Sources */,
 				E97E5D8E20E91E29000E9E30 /* entrypoint_button_tapped.swift in Sources */,
 				E97E5D8F20E91E29000E9E30 /* earn_page_loaded.swift in Sources */,
@@ -1116,6 +1118,7 @@
 				E97E5D7820E91E29000E9E30 /* welcome_screen_page_viewed.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E97E5D7120E91E29000E9E30 /* welcome_screen_button_tapped.swift in Sources */,
+				6806D53C217F05990027CB86 /* BackupFlowController.swift in Sources */,
 				E97E5D7D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E97E5D6B20E91E29000E9E30 /* not_enough_kin_page_viewed.swift in Sources */,
@@ -1154,6 +1157,7 @@
 				E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */,
 				E97E5D6620E91E29000E9E30 /* redeem_url_tapped.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
+				68C7AE6A217F10F300D4F575 /* FlowController.swift in Sources */,
 				E9DC202C216B97E900746B81 /* String+localized.swift in Sources */,
 				E97E5D8720E91E29000E9E30 /* spend_redeem_page_viewed.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,

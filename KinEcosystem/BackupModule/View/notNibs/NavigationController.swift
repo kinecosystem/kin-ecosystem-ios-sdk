@@ -9,12 +9,7 @@
 import UIKit
 
 class NavigationController: UINavigationController {
-    let keystoreProvider: KeystoreProvider
-    let dismissBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: nil, action: nil)
-    
-    init(keystoreProvider: KeystoreProvider) {
-        self.keystoreProvider = keystoreProvider
-        
+    init() {
         super.init(nibName: nil, bundle: nil)
         
         delegate = self

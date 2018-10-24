@@ -13,10 +13,10 @@ class ExplanationTemplateViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var bottomContainerView: UIView!
-    @IBOutlet weak var continueButton: RoundButton!
+    @IBOutlet weak var reminderContainerView: UIView!
     @IBOutlet weak var reminderTitleLabel: UILabel!
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
+    @IBOutlet weak var continueButton: RoundButton!
     
     init() {
         super.init(nibName: "ExplanationTemplateViewController", bundle: Bundle.ecosystem)

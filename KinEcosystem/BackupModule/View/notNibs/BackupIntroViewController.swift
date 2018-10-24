@@ -17,6 +17,6 @@ class BackupIntroViewController: ExplanationTemplateViewController {
         titleLabel.text = "kinecosystem_backup_intro_title".localized()
         descriptionLabel.text = "kinecosystem_backup_intro_description".localized()
         continueButton.setTitle("kinecosystem_backup_intro_continue".localized(), for: .normal)
-        continueButton.isHidden = false
+        reminderContainerView.isHidden = true
     }
 }
