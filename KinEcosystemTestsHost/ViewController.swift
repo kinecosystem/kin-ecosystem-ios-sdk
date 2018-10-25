@@ -26,22 +26,24 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
+        let brPhase: RecoveryPhase = .restore
+        
         // Push with existing stack
-        let vc = UIViewController()
-        vc.view.backgroundColor = .green
-        let nc = UINavigationController(rootViewController: vc)
-        present(nc, animated: true) {
-            self.recoveryManager.start(.backup, pushedOnto: nc, events: { _ in
-
-            }) { _ in
-
-            }
-        }
+//        let vc = UIViewController()
+//        vc.view.backgroundColor = .green
+//        let nc = UINavigationController(rootViewController: vc)
+//        present(nc, animated: true) {
+//            self.recoveryManager.start(brPhase, pushedOnto: nc, events: { _ in
+//
+//            }) { _ in
+//
+//            }
+//        }
         
         // Push with empty stack
 //        let nc = UINavigationController()
 //        present(nc, animated: true) {
-//            self.recoveryManager.start(.backup, pushedOnto: nc, events: { _ in
+//            self.recoveryManager.start(brPhase, pushedOnto: nc, events: { _ in
 //
 //            }) { _ in
 //
@@ -49,11 +51,11 @@ class ViewController: UIViewController {
 //        }
         
         // Present
-//        recoveryManager.start(.backup, presentedOn: self, events: { _ in
-//
-//        }) { _ in
-//
-//        }
+        recoveryManager.start(brPhase, presentedOn: self, events: { _ in
+
+        }) { _ in
+
+        }
     }
 }
 

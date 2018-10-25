@@ -18,7 +18,9 @@ class RestoreFlowController: FlowController {
     weak var delegate: RestoreFlowControllerDelegate?
     
     private lazy var _entryViewController: UIViewController = {
-        return BackupIntroViewController()
+        let viewController = RestoreIntroViewController()
+        viewController.lifeCycleDelegate = self
+        return viewController
     }()
     
     override var entryViewController: UIViewController {

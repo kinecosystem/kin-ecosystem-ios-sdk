@@ -24,6 +24,7 @@
 		68C7AE8A21818D7B00D4F575 /* LifeCycleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8921818D7B00D4F575 /* LifeCycleProtocol.swift */; };
 		68C7AE8C2181927F00D4F575 /* UINavigationBar+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8B2181927F00D4F575 /* UINavigationBar+Appearance.swift */; };
 		68C7AE8E218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8D218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift */; };
+		68C7AE902181AA4000D4F575 /* RestoreIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
@@ -255,6 +256,7 @@
 		68C7AE8921818D7B00D4F575 /* LifeCycleProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LifeCycleProtocol.swift; sourceTree = "<group>"; };
 		68C7AE8B2181927F00D4F575 /* UINavigationBar+Appearance.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Appearance.swift"; sourceTree = "<group>"; };
 		68C7AE8D218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+Appearance.swift"; sourceTree = "<group>"; };
+		68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreIntroViewController.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
@@ -475,6 +477,7 @@
 				68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */,
 				68C7AE69217F10F300D4F575 /* FlowController.swift */,
 				68C7AE8421818B5100D4F575 /* BRViewController.swift */,
+				68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -1174,6 +1177,7 @@
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
 				68C7AE6A217F10F300D4F575 /* FlowController.swift in Sources */,
 				E9DC202C216B97E900746B81 /* String+localized.swift in Sources */,
+				68C7AE902181AA4000D4F575 /* RestoreIntroViewController.swift in Sources */,
 				E97E5D8720E91E29000E9E30 /* spend_redeem_page_viewed.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */,
