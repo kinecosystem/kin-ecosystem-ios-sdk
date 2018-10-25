@@ -14,8 +14,13 @@ extension UINavigationBar {
         shadowImage = UIImage()
     }
     
-    func restoreBackground(backgroundImage: UIImage?, shadowImage: UIImage?) {
-        setBackgroundImage(backgroundImage, for: .default)
+    func restoreBackground(backgroundImages: [UIBarMetrics: UIImage?]?, shadowImage: UIImage?) {
+        if let backgroundImages = backgroundImages {
+            for (barMetric, backgroundImage) in backgroundImages {
+                setBackgroundImage(backgroundImage, for: barMetric)
+            }
+        }
+        
         self.shadowImage = shadowImage
     }
 }

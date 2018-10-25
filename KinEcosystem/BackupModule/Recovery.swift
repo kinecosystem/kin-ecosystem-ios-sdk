@@ -49,7 +49,7 @@ public class RecoveryManager: NSObject {
     private var presentor: UIViewController?
     private var recoveryInstance: RecoveryInstance?
     
-    private var navigationBarBackgroundImage: UIImage?
+    private var navigationBarBackgroundImages: [UIBarMetrics: UIImage?]?
     private var navigationBarShadowImage: UIImage?
     
     public init(with storeProvider: KeystoreProvider) {
@@ -213,8 +213,17 @@ extension RecoveryManager: RestoreFlowControllerDelegate {
 extension RecoveryManager {
     private func removeNavigationBarBackground(_ navigationBar: UINavigationBar, shouldSave: Bool = false) {
         if shouldSave {
-            // TODO: all backgroundImage types should be saved
-            navigationBarBackgroundImage = navigationBar.backgroundImage(for: .default)
+            let barMetrics: [UIBarMetrics] = [.default, .defaultPrompt, .compact, .compactPrompt]
+            var navigationBarBackgroundImages = [UIBarMetrics: UIImage?]()
+            
+            for barMetric in barMetrics {
+                navigationBarBackgroundImages[barMetric] = navigationBar.backgroundImage(for: barMetric)
+            }
+            
+            if !navigationBarBackgroundImages.isEmpty {
+                self.navigationBarBackgroundImages = navigationBarBackgroundImages
+            }
+            
             navigationBarShadowImage = navigationBar.shadowImage
         }
         
@@ -222,8 +231,8 @@ extension RecoveryManager {
     }
     
     private func restoreNavigationBarBackground(_ navigationBar: UINavigationBar) {
-        navigationBar.restoreBackground(backgroundImage: navigationBarBackgroundImage, shadowImage: navigationBarShadowImage)
-        navigationBarBackgroundImage = nil
+        navigationBar.restoreBackground(backgroundImages: navigationBarBackgroundImages, shadowImage: navigationBarShadowImage)
+        navigationBarBackgroundImages = nil
         navigationBarShadowImage = nil
     }
 }
