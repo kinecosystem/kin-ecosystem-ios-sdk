@@ -26,11 +26,34 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        recoveryManager.start(.backup, presentedOn: self, events: { _ in
-            
-        }) { _ in
-            
+        // Push with existing stack
+        let vc = UIViewController()
+        vc.view.backgroundColor = .green
+        let nc = UINavigationController(rootViewController: vc)
+        present(nc, animated: true) {
+            self.recoveryManager.start(.backup, pushedOnto: nc, events: { _ in
+
+            }) { _ in
+
+            }
         }
+        
+        // Push with empty stack
+//        let nc = UINavigationController()
+//        present(nc, animated: true) {
+//            self.recoveryManager.start(.backup, pushedOnto: nc, events: { _ in
+//
+//            }) { _ in
+//
+//            }
+//        }
+        
+        // Present
+//        recoveryManager.start(.backup, presentedOn: self, events: { _ in
+//
+//        }) { _ in
+//
+//        }
     }
 }
 

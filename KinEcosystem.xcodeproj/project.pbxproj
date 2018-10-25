@@ -20,6 +20,8 @@
 		685013612177488A00749045 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 685013602177488A00749045 /* RoundButton.swift */; };
 		68C7AE68217F0F8F00D4F575 /* RestoreFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */; };
 		68C7AE6A217F10F300D4F575 /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE69217F10F300D4F575 /* FlowController.swift */; };
+		68C7AE8121817D2E00D4F575 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 68C7AE8021817D2D00D4F575 /* Main.storyboard */; };
+		68C7AE8321817FF900D4F575 /* PasswordEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8221817FF900D4F575 /* PasswordEntryField.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
@@ -247,6 +249,8 @@
 		685013602177488A00749045 /* RoundButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
 		68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreFlowController.swift; sourceTree = "<group>"; };
 		68C7AE69217F10F300D4F575 /* FlowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
+		68C7AE8021817D2D00D4F575 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		68C7AE8221817FF900D4F575 /* PasswordEntryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEntryField.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
@@ -461,6 +465,7 @@
 				6806D52B21789DCA0027CB86 /* NavigationController.swift */,
 				685013602177488A00749045 /* RoundButton.swift */,
 				E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */,
+				68C7AE8221817FF900D4F575 /* PasswordEntryField.swift */,
 				6806D5282178888B0027CB86 /* QRViewController.swift */,
 				6806D53B217F05990027CB86 /* BackupFlowController.swift */,
 				68C7AE67217F0F8F00D4F575 /* RestoreFlowController.swift */,
@@ -539,6 +544,7 @@
 			children = (
 				E942F8DA2031120D00DD4B8E /* AppDelegate.swift */,
 				E942F8DC2031120D00DD4B8E /* ViewController.swift */,
+				68C7AE8021817D2D00D4F575 /* Main.storyboard */,
 				E942F8E62031120D00DD4B8E /* Info.plist */,
 			);
 			path = KinEcosystemTestsHost;
@@ -979,6 +985,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				68C7AE8121817D2E00D4F575 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1064,6 +1071,7 @@
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
 				E97E5D8C20E91E29000E9E30 /* types.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
+				68C7AE8321817FF900D4F575 /* PasswordEntryField.swift in Sources */,
 				E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */,
 				E9764F812174721900A2B48E /* Recovery.swift in Sources */,
 				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
@@ -1211,7 +1219,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z37J743B3H;
+				DEVELOPMENT_TEAM = F879J8YSJ9;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
@@ -1226,7 +1234,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Z37J743B3H;
+				DEVELOPMENT_TEAM = F879J8YSJ9;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;

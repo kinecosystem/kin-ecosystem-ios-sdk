@@ -74,6 +74,7 @@ extension BackupFlowController: PasswordEntryDelegate {
             return false
         }
     }
+    
     func passwordEntryViewControllerDidComplete() {
         pushQRViewController()
     }
