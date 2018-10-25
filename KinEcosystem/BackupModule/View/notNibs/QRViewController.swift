@@ -152,7 +152,6 @@ extension QRViewController {
     }
     
     @objc private func presentEmailViewController() {
-        
         guard MFMailComposeViewController.canSendMail() else {
             presentEmailErrorAlert(.noClient)
             return
@@ -173,8 +172,7 @@ extension QRViewController {
     
     private func presentEmailErrorAlert(_ error: EmailError) {
         let alertController = UIAlertController(title: error.title, message: error.message, preferredStyle: .alert)
-        // TODO: get correct copy
-        alertController.addAction(UIAlertAction(title: "Ok", style: .cancel))
+        alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
         present(alertController, animated: true)
     }
 }

@@ -19,8 +19,8 @@ class RestoreFlowController: FlowController {
     
     private lazy var _entryViewController: UIViewController = {
         let viewController = RestoreIntroViewController()
+        viewController.delegate = self
         viewController.lifeCycleDelegate = self
-        
         return viewController
     }()
     
@@ -40,5 +40,16 @@ extension RestoreFlowController: LifeCycleProtocol {
 
 @available(iOS 9.0, *)
 extension RestoreFlowController {
-    
+    private func pushImagePickerViewController() {
+        
+    }
+}
+
+// MARK: - Flow
+
+@available(iOS 9.0, *)
+extension RestoreFlowController: RestoreIntroViewControllerDelegate {
+    func restoreIntroViewControllerDidComplete(_ viewController: RestoreIntroViewController) {
+        pushImagePickerViewController()
+    }
 }
