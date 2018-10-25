@@ -85,7 +85,7 @@ public class RecoveryManager: NSObject {
      Start a backup or recovery phase by presenting the navigation controller onto a view controller.
      
      - Parameter phase: Perform a backup or restore
-     - Parameter viewController: The view controller being present onto
+     - Parameter viewController: The view controller being presented onto
      - Parameter events:
      - Parameter completion:
      */
