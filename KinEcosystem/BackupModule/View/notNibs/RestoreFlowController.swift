@@ -40,8 +40,14 @@ extension RestoreFlowController: LifeCycleProtocol {
 
 @available(iOS 9.0, *)
 extension RestoreFlowController {
-    private func pushImagePickerViewController() {
+    private func presentQRPickerViewController() {
+        guard QRPickerController.canOpenImagePicker else {
+            // TODO: present an alert
+            return
+        }
         
+        let qrPickerController = QRPickerController()
+        navigationController.present(qrPickerController.imagePickerController, animated: true)
     }
 }
 
@@ -50,6 +56,6 @@ extension RestoreFlowController {
 @available(iOS 9.0, *)
 extension RestoreFlowController: RestoreIntroViewControllerDelegate {
     func restoreIntroViewControllerDidComplete(_ viewController: RestoreIntroViewController) {
-        pushImagePickerViewController()
+        presentQRPickerViewController()
     }
 }

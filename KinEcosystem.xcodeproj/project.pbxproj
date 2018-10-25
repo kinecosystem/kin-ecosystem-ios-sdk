@@ -26,6 +26,7 @@
 		68C7AE8E218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8D218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift */; };
 		68C7AE902181AA4000D4F575 /* RestoreIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */; };
 		68C7AE922181B1AA00D4F575 /* BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE912181B1A800D4F575 /* BackupRestore.swift */; };
+		68C7AE942181BAAF00D4F575 /* QRPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE932181BAAF00D4F575 /* QRPickerController.swift */; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
@@ -258,6 +259,7 @@
 		68C7AE8D218192AB00D4F575 /* UIStatusBarStyle+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+Appearance.swift"; sourceTree = "<group>"; };
 		68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreIntroViewController.swift; sourceTree = "<group>"; };
 		68C7AE912181B1A800D4F575 /* BackupRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupRestore.swift; sourceTree = "<group>"; };
+		68C7AE932181BAAF00D4F575 /* QRPickerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRPickerController.swift; sourceTree = "<group>"; };
 		68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
@@ -478,6 +480,7 @@
 				68C7AE69217F10F300D4F575 /* FlowController.swift */,
 				68C7AE8421818B5100D4F575 /* BRViewController.swift */,
 				68C7AE8F2181AA4000D4F575 /* RestoreIntroViewController.swift */,
+				68C7AE932181BAAF00D4F575 /* QRPickerController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -1135,6 +1138,7 @@
 				E97E5D7F20E91E29000E9E30 /* client.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
+				68C7AE942181BAAF00D4F575 /* QRPickerController.swift in Sources */,
 				E97E5D7820E91E29000E9E30 /* welcome_screen_page_viewed.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E97E5D7120E91E29000E9E30 /* welcome_screen_button_tapped.swift in Sources */,
