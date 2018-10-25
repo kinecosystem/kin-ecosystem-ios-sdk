@@ -20,6 +20,7 @@ class RestoreFlowController: FlowController {
     private lazy var _entryViewController: UIViewController = {
         let viewController = RestoreIntroViewController()
         viewController.lifeCycleDelegate = self
+        
         return viewController
     }()
     

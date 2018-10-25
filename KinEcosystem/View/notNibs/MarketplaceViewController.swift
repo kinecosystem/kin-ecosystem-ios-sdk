@@ -16,7 +16,7 @@ import KinCoreSDK
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
-    let recovery = RecoveryManager(with: Kin.shared)
+    let recovery = BRManager(with: Kin.shared)
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"

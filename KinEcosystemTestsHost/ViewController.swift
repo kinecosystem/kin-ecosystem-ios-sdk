@@ -10,7 +10,7 @@ import UIKit
 import KinEcosystem
 
 class ViewController: UIViewController {
-    let recoveryManager = RecoveryManager(with: Kin.shared)
+    let brManager = BRManager(with: Kin.shared)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,14 +26,14 @@ class ViewController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        let brPhase: RecoveryPhase = .restore
+        let brPhase: BRPhase = .restore
         
         // Push with existing stack
 //        let vc = UIViewController()
 //        vc.view.backgroundColor = .green
 //        let nc = UINavigationController(rootViewController: vc)
 //        present(nc, animated: true) {
-//            self.recoveryManager.start(brPhase, pushedOnto: nc, events: { _ in
+//            self.brManager.start(brPhase, pushedOnto: nc, events: { _ in
 //
 //            }) { _ in
 //
@@ -43,7 +43,7 @@ class ViewController: UIViewController {
         // Push with empty stack
 //        let nc = UINavigationController()
 //        present(nc, animated: true) {
-//            self.recoveryManager.start(brPhase, pushedOnto: nc, events: { _ in
+//            self.brManager.start(brPhase, pushedOnto: nc, events: { _ in
 //
 //            }) { _ in
 //
@@ -51,7 +51,7 @@ class ViewController: UIViewController {
 //        }
         
         // Present
-        recoveryManager.start(brPhase, presentedOn: self, events: { _ in
+        brManager.start(brPhase, presentedOn: self, events: { _ in
 
         }) { _ in
 

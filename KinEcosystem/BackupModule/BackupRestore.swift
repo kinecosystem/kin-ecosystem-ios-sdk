@@ -1,5 +1,5 @@
 //
-//  Recovery.swift
+//  BackupRestore.swift
 //  KinEcosystem
 //
 //  Created by Elazar Yifrach on 15/10/2018.
@@ -14,40 +14,41 @@ public protocol KeystoreProvider {
     func validatePassword(_ password: String) throws
 }
 
-public typealias KinRecoveryCompletionHandler = (_ success: Bool) -> ()
-public typealias KinRecoveryEventsHandler = (_ event: RecoveryEvent) -> ()
+public typealias BRCompletionHandler = (_ success: Bool) -> ()
+public typealias BREventsHandler = (_ event: BREvent) -> ()
 
-public enum RecoveryPhase {
+public enum BRPhase {
     case backup
     case restore
 }
 
-public enum RecoveryEvent {
-    case backup(RecoveryEventType)
-    case restore(RecoveryEventType)
+public enum BREvent {
+    case backup(BREventType)
+    case restore(BREventType)
 }
-public enum RecoveryEventType {
+
+public enum BREventType {
     case nextTapped
     case passwordMismatch
     case qrMailSent
 }
 
-private enum RecoveryPresentationType {
+private enum BRPresentationType {
     case pushed
     case presented
 }
 
-private struct RecoveryInstance {
-    let presentationType: RecoveryPresentationType
+private struct BRInstance {
+    let presentationType: BRPresentationType
     let flowController: FlowController
-    let completion: KinRecoveryCompletionHandler
+    let completion: BRCompletionHandler
 }
 
 @available(iOS 9.0, *)
-public class RecoveryManager: NSObject {
+public class BRManager: NSObject {
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController?
-    private var recoveryInstance: RecoveryInstance?
+    private var brInstance: BRInstance?
     
     private var navigationBarBackgroundImages: [UIBarMetrics: UIImage?]?
     private var navigationBarShadowImage: UIImage?
@@ -67,12 +68,12 @@ public class RecoveryManager: NSObject {
      - Parameter events:
      - Parameter completion:
      */
-    public func start(_ phase: RecoveryPhase,
+    public func start(_ phase: BRPhase,
                       pushedOnto navigationController: UINavigationController,
-                      events: KinRecoveryEventsHandler,
-                      completion: @escaping KinRecoveryCompletionHandler)
+                      events: BREventsHandler,
+                      completion: @escaping BRCompletionHandler)
     {
-        guard recoveryInstance == nil else {
+        guard brInstance == nil else {
             completion(false)
             return
         }
@@ -84,7 +85,7 @@ public class RecoveryManager: NSObject {
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         navigationController.pushViewController(flowController.entryViewController, animated: !isStackEmpty)
         
-        recoveryInstance = RecoveryInstance(presentationType: .pushed, flowController: flowController, completion: completion)
+        brInstance = BRInstance(presentationType: .pushed, flowController: flowController, completion: completion)
     }
     
     /**
@@ -95,12 +96,12 @@ public class RecoveryManager: NSObject {
      - Parameter events:
      - Parameter completion:
      */
-    public func start(_ phase: RecoveryPhase,
+    public func start(_ phase: BRPhase,
                       presentedOn viewController: UIViewController,
-                      events: KinRecoveryEventsHandler,
-                      completion: @escaping KinRecoveryCompletionHandler)
+                      events: BREventsHandler,
+                      completion: @escaping BRCompletionHandler)
     {
-        guard recoveryInstance == nil else {
+        guard brInstance == nil else {
             completion(false)
             return
         }
@@ -114,11 +115,11 @@ public class RecoveryManager: NSObject {
         navigationController.viewControllers = [flowController.entryViewController]
         viewController.present(navigationController, animated: true)
         
-        recoveryInstance = RecoveryInstance(presentationType: .presented, flowController: flowController, completion: completion)
+        brInstance = BRInstance(presentationType: .presented, flowController: flowController, completion: completion)
         presentor = viewController
     }
     
-    private func createFlowController(phase: RecoveryPhase, keystoreProvider: KeystoreProvider, navigationController: UINavigationController) -> FlowController {
+    private func createFlowController(phase: BRPhase, keystoreProvider: KeystoreProvider, navigationController: UINavigationController) -> FlowController {
         switch phase {
         case .backup:
             let controller = BackupFlowController(keystoreProvider: storeProvider, navigationController: navigationController)
@@ -135,9 +136,9 @@ public class RecoveryManager: NSObject {
 // MARK: - Navigation
 
 @available(iOS 9.0, *)
-extension RecoveryManager {
+extension BRManager {
     private func flowCompleted() {
-        guard let recoveryInstance = recoveryInstance else {
+        guard let recoveryInstance = brInstance else {
             return
         }
         
@@ -150,7 +151,7 @@ extension RecoveryManager {
             popNavigationStackIfNeeded()
         }
         
-        self.recoveryInstance = nil
+        self.brInstance = nil
     }
     
     private func dismissFlow() {
@@ -158,7 +159,7 @@ extension RecoveryManager {
     }
     
     @objc private func dismissFlowCanceled() {
-        guard let recoveryInstance = recoveryInstance else {
+        guard let recoveryInstance = brInstance else {
             return
         }
         
@@ -167,7 +168,7 @@ extension RecoveryManager {
     }
     
     private func popNavigationStackIfNeeded() {
-        guard let flowController = recoveryInstance?.flowController else {
+        guard let flowController = brInstance?.flowController else {
             return
         }
         
@@ -190,7 +191,7 @@ extension RecoveryManager {
 // MARK: - Flow
 
 @available(iOS 9.0, *)
-extension RecoveryManager: BackupFlowControllerDelegate {
+extension BRManager: BackupFlowControllerDelegate {
     func backupFlowControllerQRString(_ controller: BackupFlowController) -> String {
         return "sample string"
     }
@@ -201,7 +202,7 @@ extension RecoveryManager: BackupFlowControllerDelegate {
 }
 
 @available(iOS 9.0, *)
-extension RecoveryManager: RestoreFlowControllerDelegate {
+extension BRManager: RestoreFlowControllerDelegate {
     func restoreFlowControllerDidComplete(_ controller: RestoreFlowController) {
         flowCompleted()
     }
@@ -210,7 +211,7 @@ extension RecoveryManager: RestoreFlowControllerDelegate {
 // MARK: - Navigation Bar Appearance
 
 @available(iOS 9.0, *)
-extension RecoveryManager {
+extension BRManager {
     private func removeNavigationBarBackground(_ navigationBar: UINavigationBar, shouldSave: Bool = false) {
         if shouldSave {
             let barMetrics: [UIBarMetrics] = [.default, .defaultPrompt, .compact, .compactPrompt]
