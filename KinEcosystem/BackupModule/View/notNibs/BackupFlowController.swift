@@ -20,12 +20,20 @@ class BackupFlowController: FlowController {
     
     private lazy var _entryViewController: UIViewController = {
         let viewController = BackupIntroViewController()
+        viewController.lifeCycleDelegate = self
         viewController.continueButton.addTarget(self, action: #selector(pushPasswordViewController), for: .touchUpInside)
         return viewController
     }()
     
     override var entryViewController: UIViewController {
         return _entryViewController
+    }
+}
+
+@available(iOS 9.0, *)
+extension BackupFlowController: LifeCycleProtocol {
+    func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
+        syncNavigationBarColor(with: viewController)
     }
 }
 
@@ -37,6 +45,7 @@ extension BackupFlowController {
         let viewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: Bundle.ecosystem)
         viewController.delegate = self
+        viewController.lifeCycleDelegate = self
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -46,12 +55,14 @@ extension BackupFlowController {
         }
         
         let viewController = QRViewController(qrString: qrString)
+        viewController.lifeCycleDelegate = self
         viewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
         navigationController.pushViewController(viewController, animated: true)
     }
     
     @objc private func pushCompletedViewController() {
         let viewController = BackupCompletedViewController()
+        viewController.lifeCycleDelegate = self
         viewController.continueButton.addTarget(self, action: #selector(completedFlow), for: .touchUpInside)
         navigationController.pushViewController(viewController, animated: true)
     }

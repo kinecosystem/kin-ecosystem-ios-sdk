@@ -22,7 +22,7 @@ class PEDoneButton: UIButton {
 }
 
 @available(iOS 9.0, *)
-class PasswordEntryViewController: UIViewController {
+class PasswordEntryViewController: BRViewController {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var passwordInfo: UILabel!

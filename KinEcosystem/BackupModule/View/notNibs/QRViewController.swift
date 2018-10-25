@@ -10,7 +10,7 @@ import UIKit
 import MessageUI
 
 @available(iOS 9.0, *)
-class QRViewController: UIViewController {
+class QRViewController: BRViewController {
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!

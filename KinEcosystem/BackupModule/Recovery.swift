@@ -49,6 +49,9 @@ public class RecoveryManager: NSObject {
     private var presentor: UIViewController?
     private var recoveryInstance: RecoveryInstance?
     
+    private var navigationBarBackgroundImage: UIImage?
+    private var navigationBarShadowImage: UIImage?
+    
     public init(with storeProvider: KeystoreProvider) {
         self.storeProvider = storeProvider
     }
@@ -74,8 +77,11 @@ public class RecoveryManager: NSObject {
             return
         }
         
-        let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         let isStackEmpty = navigationController.viewControllers.isEmpty
+        
+        removeNavigationBarBackground(navigationController.navigationBar, shouldSave: !isStackEmpty)
+        
+        let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         navigationController.pushViewController(flowController.entryViewController, animated: !isStackEmpty)
         
         recoveryInstance = RecoveryInstance(presentationType: .pushed, flowController: flowController, completion: completion)
@@ -99,7 +105,9 @@ public class RecoveryManager: NSObject {
             return
         }
         
-        let navigationController = NavigationController()
+        let navigationController = UINavigationController()
+        removeNavigationBarBackground(navigationController.navigationBar)
+        
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlowCanceled))
         flowController.entryViewController.navigationItem.leftBarButtonItem = dismissItem
@@ -171,6 +179,8 @@ extension RecoveryManager {
         }
         
         if index > 0 {
+            restoreNavigationBarBackground(navigationController.navigationBar)
+            
             let externalViewController = navigationController.viewControllers[index - 1]
             navigationController.popToViewController(externalViewController, animated: true)
         }
@@ -197,8 +207,23 @@ extension RecoveryManager: RestoreFlowControllerDelegate {
     }
 }
 
-//extension UINavigationController {
-//    open override var preferredStatusBarStyle: UIStatusBarStyle {
-//        return super.preferredStatusBarStyle
-//    }
-//}
+// MARK: - Navigation Bar Appearance
+
+@available(iOS 9.0, *)
+extension RecoveryManager {
+    private func removeNavigationBarBackground(_ navigationBar: UINavigationBar, shouldSave: Bool = false) {
+        if shouldSave {
+            // TODO: all backgroundImage types should be saved
+            navigationBarBackgroundImage = navigationBar.backgroundImage(for: .default)
+            navigationBarShadowImage = navigationBar.shadowImage
+        }
+        
+        navigationBar.removeBackground()
+    }
+    
+    private func restoreNavigationBarBackground(_ navigationBar: UINavigationBar) {
+        navigationBar.restoreBackground(backgroundImage: navigationBarBackgroundImage, shadowImage: navigationBarShadowImage)
+        navigationBarBackgroundImage = nil
+        navigationBarShadowImage = nil
+    }
+}
