@@ -7,10 +7,22 @@
 
 import UIKit
 
+public enum PasswordEntryFieldState {
+    case idle
+    case valid
+    case invalid
+}
+
 @available(iOS 9.0, *)
 class PasswordEntryField: UITextField {
     
-    let revealIcon = UIButton(37.0, 15.0)
+    public var entryState = PasswordEntryFieldState.idle {
+        didSet {
+            updateFieldStateStyle()
+        }
+    }
+    
+    private let revealIcon = UIButton(37.0, 15.0)
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -33,21 +45,32 @@ class PasswordEntryField: UITextField {
         rightView = revealIcon
         rightViewMode = .whileEditing
         layer.borderWidth = 1.0
-        layer.borderColor = UIColor.kinPrimaryBlue.cgColor
         leftView = paddingView
         leftViewMode = .always
         isSecureTextEntry = true
+        updateFieldStateStyle()
     }
     
-    @objc func revealPassword(_ sender: Any) {
+    private func updateFieldStateStyle() {
+        switch entryState {
+        case .idle:
+            layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
+        case .valid:
+            layer.borderColor = UIColor.kinPrimaryBlue.cgColor
+        case .invalid:
+            layer.borderColor = UIColor.kinWarning.cgColor
+        }
+    }
+    
+    @objc private func revealPassword(_ sender: Any) {
         secureButtonHandler(false)
     }
     
-    @objc func hidePassword(_ sender: Any) {
+    @objc private func hidePassword(_ sender: Any) {
         secureButtonHandler(true)
     }
     
-    func secureButtonHandler(_ secure: Bool) {
+    private func secureButtonHandler(_ secure: Bool) {
         let isFirst = isFirstResponder
         if isFirst {
             resignFirstResponder()

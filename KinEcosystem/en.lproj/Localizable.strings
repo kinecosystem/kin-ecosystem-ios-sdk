@@ -50,8 +50,13 @@
 "kinecosystem_backup_reminder_description" = "Keep your password in a safe place\nand the QR code handy.";
 
 "kinecosystem_create_password" = "Create Password";
+"kinecosystem_password" = "Password";
+"kinecosystem_confirm_password" = "Confirm Password";
 "kinecosystem_password_instructions" = "Create a strong password to backup your Kin. Password must include the following: (9 characters, 1 upper case, 1 special charcter \"#, !, @\", 1 digit)";
 "kinecosystem_password_confirmation" = "I understand this password is requiered to restore my Kin and it can’t be recovered if lost.";
+"kinecosystem_password_mismatch" = "Passwords do not match";
+"kinecosystem_password_invalid_warning" = "Make sure you’ve included all the following:\n";
+"kinecosystem_password_invalid_info" = "9 characters, 1 upper case, 1 special charcter “#, !, @“, 1 digit";
 "kinecosystem_keep_kin_safe" = "Keep your Kin safe";
 "kinecosystem_next" = "Next";
 
