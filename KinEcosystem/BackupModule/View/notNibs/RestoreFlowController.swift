@@ -17,6 +17,8 @@ protocol RestoreFlowControllerDelegate: NSObjectProtocol {
 class RestoreFlowController: FlowController {
     weak var delegate: RestoreFlowControllerDelegate?
     
+    private var qrPickerController: QRPickerController?
+    
     private lazy var _entryViewController: UIViewController = {
         let viewController = RestoreIntroViewController()
         viewController.delegate = self
@@ -42,12 +44,20 @@ extension RestoreFlowController: LifeCycleProtocol {
 extension RestoreFlowController {
     private func presentQRPickerViewController() {
         guard QRPickerController.canOpenImagePicker else {
-            // TODO: present an alert
+            // TODO: how to deal with this case?
+            // why would the users device not allow for image picker presentation and
+            // is there a way to circumvent this path?
             return
         }
         
         let qrPickerController = QRPickerController()
+        qrPickerController.delegate = self
         navigationController.present(qrPickerController.imagePickerController, animated: true)
+        self.qrPickerController = qrPickerController
+    }
+    
+    private func pushPasswordViewController(with qrString: String) {
+        // TODO:
     }
 }
 
@@ -57,5 +67,19 @@ extension RestoreFlowController {
 extension RestoreFlowController: RestoreIntroViewControllerDelegate {
     func restoreIntroViewControllerDidComplete(_ viewController: RestoreIntroViewController) {
         presentQRPickerViewController()
+    }
+}
+
+@available(iOS 9.0, *)
+extension RestoreFlowController: QRPickerControllerDelegate {
+    func qrPickerControllerDidComplete(_ controller: QRPickerController, with qrString: String?) {
+        controller.imagePickerController.presentingViewController?.dismiss(animated: true)
+        
+        if let qrString = qrString {
+            pushPasswordViewController(with: qrString)
+        }
+        else {
+            // ???: possibly do nothing.
+        }
     }
 }

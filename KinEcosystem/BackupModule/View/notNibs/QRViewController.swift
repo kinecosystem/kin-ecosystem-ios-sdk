@@ -44,7 +44,7 @@ class QRViewController: BRViewController {
         titleLabel.textColor = .kinPrimaryBlue
         descriptionLabel.text = "kinecosystem_backup_qr_description".localized()
         descriptionLabel.textColor = .kinBlueGreyTwo
-        qrImageView.image = generateQRImage(from: qrString, for: qrImageView.bounds.size)
+        qrImageView.image = QR.generateImage(from: qrString, for: qrImageView.bounds.size)
         reminderImageView.tintColor = .kinWarning
         reminderTitleLabel.text = "kinecosystem_backup_reminder_title".localized()
         reminderTitleLabel.textColor = .kinWarning
@@ -72,53 +72,25 @@ class QRViewController: BRViewController {
     }
     
     @objc private func applicationDidTakeScreenshot() {
-        if isViewLoaded && view.window != nil && continueButton.isHidden {
+        if isViewLoaded && view.window != nil && isContinueButtonHidden {
             showContinueButton()
         }
     }
     
     private func showContinueButton() {
-        continueContainerView.isHidden = false
-    }
-}
-
-// MARK: - QR
-
-@available(iOS 9.0, *)
-extension QRViewController {
-    /**
-     Create a QR image from a string.
-     
-     - Parameter string: The string used in the QR image.
-     - Parameter size: The size of the `UIImageView` that will display the image.
-     - Returns: A QR image.
-     */
-    private func generateQRImage(from string: String, for size: CGSize? = nil) -> UIImage? {
-        let data = string.data(using: .isoLatin1)
-        
-        guard let filter = CIFilter(name: "CIQRCodeGenerator") else {
-            return nil
-        }
-        
-        filter.setValue(data, forKey: "inputMessage")
-        filter.setValue("H", forKey: "inputCorrectionLevel")
-        
-        guard let outputImage = filter.outputImage else {
-            return nil
-        }
-        
-        let transform: CGAffineTransform
-        
-        if let size = size {
-            let scaleX = size.width / outputImage.extent.width
-            let scaleY = size.height / outputImage.extent.height
-            transform = CGAffineTransform(scaleX: scaleX, y: scaleY)
+        if view.window == nil {
+            continueContainerView.isHidden = false
         }
         else {
-            transform = CGAffineTransform(scaleX: 10, y: 10)
+            let delay = 0.2 // Create a delay to prevent a UI jump from the screenshot flash animation
+            UIView.animate(withDuration: 0.3, delay: delay, options: UIViewAnimationOptions(rawValue: 0), animations: {
+                self.continueContainerView.isHidden = false
+            })
         }
-        
-        return UIImage(ciImage: outputImage.transformed(by: transform))
+    }
+    
+    private var isContinueButtonHidden: Bool {
+        return continueContainerView.isHidden
     }
 }
 
@@ -157,7 +129,7 @@ extension QRViewController {
             return
         }
         
-        guard let qrImage = generateQRImage(from: qrString), let data = UIImagePNGRepresentation(qrImage) else {
+        guard let qrImage = QR.generateImage(from: qrString), let data = UIImagePNGRepresentation(qrImage) else {
             presentEmailErrorAlert(.critical)
             return
         }

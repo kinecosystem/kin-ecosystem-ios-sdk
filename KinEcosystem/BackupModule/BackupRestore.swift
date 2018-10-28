@@ -138,13 +138,13 @@ public class BRManager: NSObject {
 @available(iOS 9.0, *)
 extension BRManager {
     private func flowCompleted() {
-        guard let recoveryInstance = brInstance else {
+        guard let brInstance = brInstance else {
             return
         }
         
-        recoveryInstance.completion(true)
+        brInstance.completion(true)
         
-        switch recoveryInstance.presentationType {
+        switch brInstance.presentationType {
         case .presented:
             dismissFlow()
         case .pushed:
@@ -159,11 +159,11 @@ extension BRManager {
     }
     
     @objc private func dismissFlowCanceled() {
-        guard let recoveryInstance = brInstance else {
+        guard let brInstance = brInstance else {
             return
         }
         
-        recoveryInstance.completion(false)
+        brInstance.completion(false)
         dismissFlow()
     }
     
@@ -193,7 +193,7 @@ extension BRManager {
 @available(iOS 9.0, *)
 extension BRManager: BackupFlowControllerDelegate {
     func backupFlowControllerQRString(_ controller: BackupFlowController) -> String {
-        return "sample string"
+        return "sample string" // TODO: get passphrase
     }
     
     func backupFlowControllerDidComplete(_ controller: BackupFlowController) {
