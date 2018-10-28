@@ -26,10 +26,6 @@ class QRPickerController: NSObject {
         imagePickerController.delegate = self
         imagePickerController.sourceType = .photoLibrary
     }
-    
-    deinit {
-        print("|||")
-    }
 }
 
 extension QRPickerController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
@@ -48,10 +44,6 @@ extension QRPickerController: UIImagePickerControllerDelegate, UINavigationContr
             let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
             alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
             imagePickerController.present(alertController, animated: true)
-            
-            // ???:
-            // if the image picker dismisses automatically then pass the did complete with no image here
-            // otherweise maybe present an alert saying its not a qr coded image..?
         }
     }
 }

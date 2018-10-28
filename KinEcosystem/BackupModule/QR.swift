@@ -41,9 +41,32 @@ class QR {
             transform = CGAffineTransform(scaleX: 10, y: 10)
         }
         
-        return UIImage(ciImage: outputImage.transformed(by: transform))
+        // A new image is created to provide a known format when converting the image to data.
+        // This step is not possible with the existing CIImage backed object.
+        return newImage(UIImage(ciImage: outputImage.transformed(by: transform)))
     }
     
+    /**
+     Create an image by drawing an existing image in a new context.
+     
+     - Parameter image: An image to be drawn in a new context.
+     - Returns: The newly drawn image.
+     */
+    private static func newImage(_ image: UIImage) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)
+        defer {
+            UIGraphicsEndImageContext()
+        }
+        image.draw(in: CGRect(origin: .zero, size: image.size))
+        return UIGraphicsGetImageFromCurrentImageContext()
+    }
+    
+    /**
+     Decode the string from a QR image.
+     
+     - Parameter image: A QR image.
+     - Returns: The decoded string.
+     */
     class func decode(image: UIImage) -> String? {
         guard let ciImage = CIImage(image: image) else {
             return nil

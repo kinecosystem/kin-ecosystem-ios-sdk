@@ -78,8 +78,5 @@ extension RestoreFlowController: QRPickerControllerDelegate {
         if let qrString = qrString {
             pushPasswordViewController(with: qrString)
         }
-        else {
-            // ???: possibly do nothing.
-        }
     }
 }

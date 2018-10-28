@@ -165,6 +165,8 @@ extension BRManager {
         
         brInstance.completion(false)
         dismissFlow()
+        
+        self.brInstance = nil
     }
     
     private func popNavigationStackIfNeeded() {

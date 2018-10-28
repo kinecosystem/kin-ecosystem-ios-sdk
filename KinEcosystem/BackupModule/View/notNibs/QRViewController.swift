@@ -22,6 +22,7 @@ class QRViewController: BRViewController {
     @IBOutlet weak var continueButton: RoundButton!
     
     private let qrString: String
+    private var mailViewController: MFMailComposeViewController?
     
     init(qrString: String) {
         self.qrString = qrString
@@ -73,16 +74,17 @@ class QRViewController: BRViewController {
     
     @objc private func applicationDidTakeScreenshot() {
         if isViewLoaded && view.window != nil && isContinueButtonHidden {
-            showContinueButton()
+            showContinueButton(becauseOfScreenshot: true)
         }
     }
     
-    private func showContinueButton() {
+    private func showContinueButton(becauseOfScreenshot: Bool = false) {
         if view.window == nil {
             continueContainerView.isHidden = false
         }
         else {
-            let delay = 0.2 // Create a delay to prevent a UI jump from the screenshot flash animation
+            // Create a delay to prevent a UI jump from the screenshot flash animation
+            let delay = becauseOfScreenshot ? 0.3 : 0
             UIView.animate(withDuration: 0.3, delay: delay, options: UIViewAnimationOptions(rawValue: 0), animations: {
                 self.continueContainerView.isHidden = false
             })
@@ -136,10 +138,10 @@ extension QRViewController {
         
         let mailViewController = MFMailComposeViewController()
         mailViewController.mailComposeDelegate = self
-//        mailViewController.setToRecipients([""])
         mailViewController.setSubject("Kin Backup QR Code") // TODO: get correct copy
         mailViewController.addAttachmentData(data, mimeType: "image/png", fileName: "qr.png")
         present(mailViewController, animated: true)
+        self.mailViewController = mailViewController
     }
     
     private func presentEmailErrorAlert(_ error: EmailError) {
@@ -152,6 +154,9 @@ extension QRViewController {
 @available(iOS 9.0, *)
 extension QRViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
-        showContinueButton()
+        dismiss(animated: true) {
+            self.showContinueButton()
+        }
+        mailViewController = nil
     }
 }
