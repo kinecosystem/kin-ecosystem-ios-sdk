@@ -8,12 +8,13 @@
 
 import UIKit
 
-protocol PasswordEntryDelegate {
+@available(iOS 9.0, *)
+protocol PasswordEntryDelegate: NSObjectProtocol {
     func validatePasswordConformance(_ password: String) -> Bool
-    func passwordEntryViewControllerDidComplete()
+    func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController)
 }
 
-class PEDoneButton: UIButton {
+private class PEDoneButton: UIButton {
     override var isEnabled: Bool {
         didSet {
             self.backgroundColor = isEnabled ? UIColor.kinPrimaryBlue : UIColor.kinLightBlueGrey
@@ -33,7 +34,7 @@ class PasswordEntryViewController: BRViewController {
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     
-    var delegate: PasswordEntryDelegate?
+    weak var delegate: PasswordEntryDelegate?
     
     private var kbObservers = [NSObjectProtocol]()
     private var tickMarked = false
@@ -45,6 +46,10 @@ class PasswordEntryViewController: BRViewController {
     private let passwordInvalidInfo = "kinecosystem_password_invalid_info".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
     private let passwordPlaceholder = "kinecosystem_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
     private let passwordConfirmPlaceholder = "kinecosystem_confirm_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
+    
+    var password: String? {
+        return passwordInput1.text
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -133,7 +138,7 @@ class PasswordEntryViewController: BRViewController {
             alertPasswordsConformance()
             return
         }
-        delegate.passwordEntryViewControllerDidComplete()
+        delegate.passwordEntryViewControllerDidComplete(self)
     }
     
     @IBAction func tickSelected(_ sender: Any) {

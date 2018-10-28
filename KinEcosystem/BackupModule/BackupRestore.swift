@@ -9,9 +9,9 @@
 import KinUtil
 
 public protocol KeystoreProvider {
-    func exportAccount(_ password: String) throws
+    func exportAccount(_ password: String) throws -> String
     func importAccount(keystore: String, password: String) throws
-    func validatePassword(_ password: String) throws
+    func validatePassword(_ password: String) -> Bool
 }
 
 public typealias BRCompletionHandler = (_ success: Bool) -> ()
@@ -194,10 +194,6 @@ extension BRManager {
 
 @available(iOS 9.0, *)
 extension BRManager: BackupFlowControllerDelegate {
-    func backupFlowControllerQRString(_ controller: BackupFlowController) -> String {
-        return "sample string" // TODO: get passphrase
-    }
-    
     func backupFlowControllerDidComplete(_ controller: BackupFlowController) {
         flowCompleted()
     }

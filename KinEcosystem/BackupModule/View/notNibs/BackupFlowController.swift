@@ -10,7 +10,6 @@ import UIKit
 
 @available(iOS 9.0, *)
 protocol BackupFlowControllerDelegate: NSObjectProtocol {
-    func backupFlowControllerQRString(_ controller: BackupFlowController) -> String
     func backupFlowControllerDidComplete(_ controller: BackupFlowController)
 }
 
@@ -49,11 +48,7 @@ extension BackupFlowController {
         navigationController.pushViewController(viewController, animated: true)
     }
     
-    @objc private func pushQRViewController() {
-        guard let qrString = delegate?.backupFlowControllerQRString(self) else {
-            fatalError("backupFlowControllerQRString(_:) has not been implemented")
-        }
-        
+    @objc private func pushQRViewController(with qrString: String) {
         let viewController = QRViewController(qrString: qrString)
         viewController.lifeCycleDelegate = self
         viewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
@@ -77,16 +72,19 @@ extension BackupFlowController {
 @available(iOS 9.0, *)
 extension BackupFlowController: PasswordEntryDelegate {
     func validatePasswordConformance(_ password: String) -> Bool {
-        do {
-            try keystoreProvider.validatePassword(password)
-            return true
-        }
-        catch {
-            return false
-        }
+        return keystoreProvider.validatePassword(password)
     }
     
-    func passwordEntryViewControllerDidComplete() {
-        pushQRViewController()
+    func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController) {
+        guard let password = viewController.password else {
+            return
+        }
+        
+        do {
+            pushQRViewController(with: try keystoreProvider.exportAccount(password))
+        }
+        catch {
+            // TODO: 
+        }
     }
 }

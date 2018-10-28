@@ -54,7 +54,6 @@
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
 		E9236AC22175EC06005CEC95 /* PasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */; };
 		E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */; };
-		E9236AC6217613A4005CEC95 /* PasswordEntryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */; };
 		E92501BA20614A4400E2E738 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* Flows.swift */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
@@ -318,7 +317,6 @@
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		E9236AC02175EC06005CEC95 /* PasswordEntryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEntryViewController.swift; sourceTree = "<group>"; };
 		E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PasswordEntryViewController.xib; sourceTree = "<group>"; };
-		E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PasswordEntryViewModel.swift; sourceTree = "<group>"; };
 		E92501B920614A4400E2E738 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
@@ -534,14 +532,6 @@
 			path = Protocol;
 			sourceTree = "<group>";
 		};
-		E9236AC421761388005CEC95 /* ViewModel */ = {
-			isa = PBXGroup;
-			children = (
-				E9236AC5217613A4005CEC95 /* PasswordEntryViewModel.swift */,
-			);
-			path = ViewModel;
-			sourceTree = "<group>";
-		};
 		E92501B820614A3300E2E738 /* Promises */ = {
 			isa = PBXGroup;
 			children = (
@@ -710,7 +700,6 @@
 				6806D536217ED9790027CB86 /* Extension */,
 				68C7AE8821818D6E00D4F575 /* Protocol */,
 				68501352217607C700749045 /* View */,
-				E9236AC421761388005CEC95 /* ViewModel */,
 				68C7AE912181B1A800D4F575 /* BackupRestore.swift */,
 				68C7AE972185990700D4F575 /* QR.swift */,
 				6806D51F217883A90027CB86 /* Assets.xcassets */,
@@ -1215,7 +1204,6 @@
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
 				E97E5D7A20E91E29000E9E30 /* spend_order_creation_requested.swift in Sources */,
 				E97E5D7220E91E29000E9E30 /* earn_order_completed.swift in Sources */,
-				E9236AC6217613A4005CEC95 /* PasswordEntryViewModel.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
 				E97E5D6820E91E29000E9E30 /* spend_order_completed.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,

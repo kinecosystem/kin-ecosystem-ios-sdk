@@ -16,7 +16,7 @@ extension Kin : KeystoreProvider {
         
     }
     
-    public func validatePassword(_ password: String) throws {
-        
+    public func validatePassword(_ password: String) -> Bool {
+        return true
     }
 }
