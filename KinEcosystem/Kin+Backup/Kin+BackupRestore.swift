@@ -8,8 +8,8 @@
 
 @available(iOS 9.0, *)
 extension Kin : KeystoreProvider {
-    public func exportAccount(_ password: String) throws {
-        
+    public func exportAccount(_ password: String) throws -> String {
+        return "some account json"
     }
     
     public func importAccount(keystore: String, password: String) throws {
