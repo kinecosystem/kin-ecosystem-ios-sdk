@@ -14,7 +14,7 @@ protocol PasswordEntryDelegate: NSObjectProtocol {
     func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController)
 }
 
-private class PEDoneButton: UIButton {
+class PEDoneButton: RoundButton {
     override var isEnabled: Bool {
         didSet {
             self.backgroundColor = isEnabled ? UIColor.kinPrimaryBlue : UIColor.kinLightBlueGrey
@@ -56,7 +56,6 @@ class PasswordEntryViewController: BRViewController {
         confirmTick.layer.borderWidth = 1.0
         confirmTick.layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
         confirmTick.layer.cornerRadius = 2.0
-        doneButton.layer.cornerRadius = 25.0
         doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
         doneButton.isEnabled = false
         titleLabel.attributedText = passwordTitle
