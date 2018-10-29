@@ -42,8 +42,11 @@ class PasswordEntryField: UITextField {
         revealIcon.imageEdgeInsets = UIEdgeInsetsMake(0.0, -15.0, 0.0, 0.0)
         layer.cornerRadius = bounds.height / 2
         let paddingView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 22.0, height: frame.height))
-        rightView = revealIcon
-        rightViewMode = .whileEditing
+        UIView.performWithoutAnimation {
+            rightView = revealIcon
+            rightViewMode = .whileEditing
+            rightView?.frame = rightViewRect(forBounds: bounds)
+        }
         layer.borderWidth = 1.0
         leftView = paddingView
         leftViewMode = .always

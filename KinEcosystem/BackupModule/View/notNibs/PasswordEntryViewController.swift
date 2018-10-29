@@ -33,6 +33,7 @@ class PasswordEntryViewController: BRViewController {
     @IBOutlet weak var confirmTick: UIView!
     @IBOutlet weak var doneButton: UIButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var tickStack: UIStackView!
     
     weak var delegate: PasswordEntryDelegate?
     
@@ -96,7 +97,8 @@ class PasswordEntryViewController: BRViewController {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         let touch = event?.allTouches?.first
         if (passwordInput1.isFirstResponder || passwordInput2.isFirstResponder) &&
-            type(of: touch?.view) != UITextField.self {
+            type(of: touch?.view) != UITextField.self &&
+            touch?.view?.isDescendant(of: tickStack) == false {
             passwordInput1.resignFirstResponder()
             passwordInput2.resignFirstResponder()
         }
