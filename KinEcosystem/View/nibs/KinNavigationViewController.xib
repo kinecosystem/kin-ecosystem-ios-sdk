@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -13,7 +13,6 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="KinNavigationViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
                 <outlet property="balanceViewContainer" destination="cJQ-dP-SZ6" id="TWj-SQ-8c8"/>
-                <outlet property="barBackground" destination="ALe-Gc-0Gy" id="XyQ-rc-ZgB"/>
                 <outlet property="navigationBar" destination="zoL-kY-bK7" id="ZeV-nd-ezH"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
@@ -23,9 +22,6 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ALe-Gc-0Gy">
-                    <rect key="frame" x="0.0" y="0.0" width="375" height="64"/>
-                </imageView>
                 <navigationBar contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" translucent="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zoL-kY-bK7">
                     <rect key="frame" x="0.0" y="20" width="375" height="44"/>
                     <constraints>
@@ -50,10 +46,6 @@
                 <constraint firstItem="cJQ-dP-SZ6" firstAttribute="top" secondItem="zoL-kY-bK7" secondAttribute="bottom" id="Dao-ve-mb6"/>
                 <constraint firstItem="zoL-kY-bK7" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="M5G-IX-aGM"/>
                 <constraint firstItem="zoL-kY-bK7" firstAttribute="top" secondItem="tki-x7-sJg" secondAttribute="top" priority="999" id="P8V-mL-cPl"/>
-                <constraint firstAttribute="trailing" secondItem="ALe-Gc-0Gy" secondAttribute="trailing" id="QFP-AZ-ZrT"/>
-                <constraint firstItem="ALe-Gc-0Gy" firstAttribute="bottom" secondItem="zoL-kY-bK7" secondAttribute="bottom" id="UaB-t8-ecq"/>
-                <constraint firstItem="ALe-Gc-0Gy" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="ZUO-ea-MOb"/>
-                <constraint firstItem="ALe-Gc-0Gy" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="on2-8i-exy"/>
                 <constraint firstItem="zoL-kY-bK7" firstAttribute="top" relation="greaterThanOrEqual" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="20" id="pga-uA-HSp"/>
                 <constraint firstItem="cJQ-dP-SZ6" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="wlc-S4-He4"/>
             </constraints>

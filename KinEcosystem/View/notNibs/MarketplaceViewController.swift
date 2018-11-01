@@ -16,7 +16,6 @@ import KinCoreSDK
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
-    let recovery = BRManager(with: Kin.shared)
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
@@ -48,9 +47,14 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         title = "kinecosystem_kin_marketplace".localized()
-        let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
-        item.tintColor = .white
-        navigationItem.rightBarButtonItem = item
+        
+        let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
+        navigationItem.leftBarButtonItem = closeItem
+        
+        let settingsImage = UIImage(named: "settingsIcob", in: Bundle.ecosystem, compatibleWith: nil)
+        let settingsBadgeImage = settingsImage // TODO:
+        let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
+        navigationItem.rightBarButtonItem = settingsItem
     }
     
     fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
@@ -142,7 +146,19 @@ class MarketplaceViewController: KinNavigationChildController {
         Kin.track { try BackButtonOnMarketplacePageTapped() }
         Kin.shared.closeMarketPlace()
     }
+    
+    @objc private func presentSettings() {
+        let settingsViewController = SettingsViewController()
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissSettings))
+        settingsViewController.navigationItem.leftBarButtonItem = cancelItem
+        
+        let navigationController = UINavigationController(rootViewController: settingsViewController)
+        kinNavigationController?.present(navigationController, animated: true)
+    }
 
+    @objc private func dismissSettings() {
+        kinNavigationController?.dismiss(animated: true)
+    }
 }
 
 @available(iOS 9.0, *)
@@ -183,13 +199,6 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         return cell
     }
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        recovery.start(.backup, presentedOn: self, events: { _ in
-            
-        }) { _ in
-            
-        }
-        return
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer
