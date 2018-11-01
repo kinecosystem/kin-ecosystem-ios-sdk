@@ -41,6 +41,10 @@
 "kinecosystem_ok" = "Ok";
 "kinecosystem_cancel" = "Cancel";
 
+"kinecosystem_settings_title" = "Settings";
+"kinecosystem_settings_row_backup" = "Keep yout Kin safe";
+"kinecosystem_settings_row_restore" = "Restore previous wallet";
+
 "kinecosystem_backup_intro_title" = "Keep your Kin safe";
 "kinecosystem_backup_intro_description" = "Backing up your current balance will allow you to recover it in case you switch phones, delete the app or clear your data.";
 "kinecosystem_backup_intro_continue" = "Let's Go";

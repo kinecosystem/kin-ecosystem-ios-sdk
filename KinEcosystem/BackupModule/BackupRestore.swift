@@ -52,6 +52,7 @@ public class BRManager: NSObject {
     
     private var navigationBarBackgroundImages: [UIBarMetrics: UIImage?]?
     private var navigationBarShadowImage: UIImage?
+    private var navigationBarTintColor: UIColor?
     
     public init(with storeProvider: KeystoreProvider) {
         self.storeProvider = storeProvider
@@ -120,16 +121,17 @@ public class BRManager: NSObject {
     }
     
     private func createFlowController(phase: BRPhase, keystoreProvider: KeystoreProvider, navigationController: UINavigationController) -> FlowController {
+        let controller: FlowController
+        
         switch phase {
         case .backup:
-            let controller = BackupFlowController(keystoreProvider: storeProvider, navigationController: navigationController)
-            controller.delegate = self
-            return controller
+            controller = BackupFlowController(keystoreProvider: storeProvider, navigationController: navigationController)
         case .restore:
-            let controller = RestoreFlowController(keystoreProvider: storeProvider, navigationController: navigationController)
-            controller.delegate = self
-            return controller
+            controller = RestoreFlowController(keystoreProvider: storeProvider, navigationController: navigationController)
         }
+        
+        controller.delegate = self
+        return controller
     }
 }
 
@@ -225,6 +227,7 @@ extension BRManager {
             }
             
             navigationBarShadowImage = navigationBar.shadowImage
+            navigationBarTintColor = navigationBar.tintColor
         }
         
         navigationBar.removeBackground()
@@ -232,7 +235,10 @@ extension BRManager {
     
     private func restoreNavigationBarBackground(_ navigationBar: UINavigationBar) {
         navigationBar.restoreBackground(backgroundImages: navigationBarBackgroundImages, shadowImage: navigationBarShadowImage)
+        navigationBar.tintColor = navigationBarTintColor
+        
         navigationBarBackgroundImages = nil
         navigationBarShadowImage = nil
+        navigationBarTintColor = nil
     }
 }

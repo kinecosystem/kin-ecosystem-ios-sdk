@@ -27,8 +27,8 @@ class SettingsViewController: UITableViewController {
         
         var title: String {
             switch self {
-            case .backup: return "Keep yout Kin safe"
-            case .restore: return "Restore previous wallet"
+            case .backup: return "kinecosystem_settings_row_backup".localized()
+            case .restore: return "kinecosystem_settings_row_restore".localized()
             }
         }
         
@@ -50,7 +50,7 @@ class SettingsViewController: UITableViewController {
     override var title: String? {
         set {}
         get {
-            return "Settings"
+            return "kinecosystem_settings_title".localized()
         }
     }
     
@@ -61,7 +61,7 @@ class SettingsViewController: UITableViewController {
         tableView.rowHeight = 54
         tableView.separatorColor = .kinLightBlueGrey
         tableView.separatorInset = .zero
-//        tableView.tableFooterView = UIView()
+        tableView.tableFooterView = UIView()
     }
     
     // MARK: Table View

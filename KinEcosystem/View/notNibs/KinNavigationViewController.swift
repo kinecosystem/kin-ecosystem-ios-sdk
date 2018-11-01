@@ -58,12 +58,11 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
 
     fileprivate func setupNavigationBarAppearance() {
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.delegate = self
-        
-        UIBarButtonItem.appearance(whenContainedInInstancesOf: [UINavigationBar.self]).tintColor = .black
+        navigationBar.tintColor = .black
     }
 
     fileprivate func setupTransitionController() {
