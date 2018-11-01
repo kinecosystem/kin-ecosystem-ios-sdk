@@ -49,6 +49,7 @@
 "kinecosystem_backup_reminder_title" = "Remember!";
 "kinecosystem_backup_reminder_description" = "Keep your password in a safe place\nand the QR code handy.";
 
+"kinecosystem_enter_password" = "Enter Password";
 "kinecosystem_create_password" = "Create Password";
 "kinecosystem_password" = "Password";
 "kinecosystem_confirm_password" = "Confirm Password";
@@ -70,3 +71,6 @@
 "kinecosystem_restore_intro_continue" = "Upload your QR code";
 "kinecosystem_restore_intro_alert_title" = "Are you sure you want to restore your previous balance?";
 "kinecosystem_restore_intro_alert_message" = "Restoring your old balance will replace your current Kin balance.";
+
+"kinecosystem_restore_instructions" = "Great, we’re almost there!\nPlease enter your password";
+"kinecosystem_restore_title" = "Restore Previous Wallet";

@@ -30,8 +30,6 @@
 		68C7AE982185990700D4F575 /* QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68C7AE972185990700D4F575 /* QR.swift */; };
 		68C7AE992185B56E00D4F575 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		68C7AE9A2185B56E00D4F575 /* KinEcosystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		68C7AE9C2185B59900D4F575 /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93718F62113135F003DCA6F /* KinCoreSDK.framework */; };
-		68C7AE9D2185B59900D4F575 /* KinCoreSDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E93718F62113135F003DCA6F /* KinCoreSDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68C7AEA02185B5CA00D4F575 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; };
 		68C7AEA12185B5CA00D4F575 /* CoreDataStack.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		68FDE8BF21775AC000F8E52E /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */; };
@@ -61,8 +59,11 @@
 		E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B80206923A0008A027F /* SheetTransition.swift */; };
 		E92F7B882069992A008A027F /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B872069992A008A027F /* Animations.swift */; };
 		E93146332164F52B008F2D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93146312164F52B008F2D74 /* Localizable.strings */; };
-		E93228CA217E03DE005B273E /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93228C9217E03DE005B273E /* MarketplaceViewController.xib */; };
-		E93718FD21131375003DCA6F /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93718F62113135F003DCA6F /* KinCoreSDK.framework */; };
+		E932BD8A21870480009C8796 /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E932BD8921870480009C8796 /* MarketplaceViewController.xib */; };
+		E932BD96218725D9009C8796 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; };
+		E932BD97218725D9009C8796 /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E932BD7D2187030A009C8796 /* KinCoreSDK.framework */; };
+		E932BD9E218736B2009C8796 /* RestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E932BD9C218736B2009C8796 /* RestoreViewController.swift */; };
+		E932BD9F218736B2009C8796 /* RestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E932BD9D218736B2009C8796 /* RestoreViewController.xib */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
@@ -181,13 +182,6 @@
 			remoteGlobalIDString = E96F24D8201729690017EF68;
 			remoteInfo = KinEcosystem;
 		};
-		68C7AE9E2185B59900D4F575 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
-			remoteInfo = KinCoreSDK;
-		};
 		68C7AEA22185B5CA00D4F575 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */;
@@ -195,33 +189,40 @@
 			remoteGlobalIDString = 8246E72D1FC84AEE0087140A;
 			remoteInfo = CoreDataStack;
 		};
-		E93718F52113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E932BD7C2187030A009C8796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82140EA91FA88E5B00FAF19B;
 			remoteInfo = KinCoreSDK;
 		};
-		E93718F72113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E932BD7E2187030A009C8796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8278352E1FA9B5F20006C3DF;
 			remoteInfo = KinTestHost;
 		};
-		E93718F92113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E932BD802187030A009C8796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 827835411FA9B5F20006C3DF;
 			remoteInfo = KinCoreSDKTests;
 		};
-		E93718FB2113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E932BD822187030A009C8796 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82BA2113204D867200396AE2;
 			remoteInfo = "KinCoreSDK-macos";
+		};
+		E932BD8F218725C6009C8796 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
+			remoteInfo = KinCoreSDK;
 		};
 		E942F8BA2030819C00DD4B8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -269,7 +270,6 @@
 			files = (
 				68C7AE9A2185B56E00D4F575 /* KinEcosystem.framework in Embed Frameworks */,
 				68C7AEA12185B5CA00D4F575 /* CoreDataStack.framework in Embed Frameworks */,
-				68C7AE9D2185B59900D4F575 /* KinCoreSDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -323,9 +323,11 @@
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
 		E92F7B80206923A0008A027F /* SheetTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
 		E92F7B872069992A008A027F /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
-		E93228C9217E03DE005B273E /* MarketplaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E93228CB217E042E005B273E /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
+		E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
+		E932BD8921870480009C8796 /* MarketplaceViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MarketplaceViewController.xib; sourceTree = "<group>"; };
+		E932BD9C218736B2009C8796 /* RestoreViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestoreViewController.swift; sourceTree = "<group>"; };
+		E932BD9D218736B2009C8796 /* RestoreViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestoreViewController.xib; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
@@ -452,7 +454,6 @@
 			files = (
 				68C7AEA02185B5CA00D4F575 /* CoreDataStack.framework in Frameworks */,
 				68C7AE992185B56E00D4F575 /* KinEcosystem.framework in Frameworks */,
-				68C7AE9C2185B59900D4F575 /* KinCoreSDK.framework in Frameworks */,
 				6850135B2177063B00749045 /* KinEcosystem.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -461,7 +462,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E93718FD21131375003DCA6F /* KinCoreSDK.framework in Frameworks */,
+				E932BD96218725D9009C8796 /* CoreDataStack.framework in Frameworks */,
+				E932BD97218725D9009C8796 /* KinCoreSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -500,6 +502,7 @@
 				6806D532217DF8F60027CB86 /* ExplanationTemplateViewController.xib */,
 				E9236AC12175EC06005CEC95 /* PasswordEntryViewController.xib */,
 				6806D526217888710027CB86 /* QRViewController.xib */,
+				E932BD9D218736B2009C8796 /* RestoreViewController.xib */,
 			);
 			path = nibs;
 			sourceTree = "<group>";
@@ -507,6 +510,7 @@
 		68501354217607C700749045 /* notNibs */ = {
 			isa = PBXGroup;
 			children = (
+				E932BD9C218736B2009C8796 /* RestoreViewController.swift */,
 				6850135C21770EE700749045 /* ExplanationTemplateViewController.swift */,
 				6850135721761ACB00749045 /* BackupIntroViewController.swift */,
 				68FDE8BE21775ABF00F8E52E /* BackupCompletedViewController.swift */,
@@ -549,13 +553,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		E93718ED2113135F003DCA6F /* Products */ = {
+		E932BD742187030A009C8796 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				E93718F62113135F003DCA6F /* KinCoreSDK.framework */,
-				E93718F82113135F003DCA6F /* KinTestHost.app */,
-				E93718FA2113135F003DCA6F /* KinSDKTests.xctest */,
-				E93718FC2113135F003DCA6F /* KinCoreSDK.framework */,
+				E932BD7D2187030A009C8796 /* KinCoreSDK.framework */,
+				E932BD7F2187030A009C8796 /* KinTestHost.app */,
+				E932BD812187030A009C8796 /* KinSDKTests.xctest */,
+				E932BD832187030A009C8796 /* KinCoreSDK.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -625,7 +629,7 @@
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
-				E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */,
+				E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */,
 				E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
@@ -773,7 +777,7 @@
 		E98D17892051395100FEB57A /* nibs */ = {
 			isa = PBXGroup;
 			children = (
-				E93228C9217E03DE005B273E /* MarketplaceViewController.xib */,
+				E932BD8921870480009C8796 /* MarketplaceViewController.xib */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
 				E96A582F204458AF00285C7B /* OrdersViewController.xib */,
@@ -886,7 +890,6 @@
 			);
 			dependencies = (
 				6850135A2177062E00749045 /* PBXTargetDependency */,
-				68C7AE9F2185B59900D4F575 /* PBXTargetDependency */,
 				68C7AEA32185B5CA00D4F575 /* PBXTargetDependency */,
 			);
 			name = KinEcosystemTestsHost;
@@ -906,6 +909,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E932BD90218725C6009C8796 /* PBXTargetDependency */,
 				E942F8CE203081B400DD4B8E /* PBXTargetDependency */,
 			);
 			name = KinEcosystem;
@@ -965,6 +969,7 @@
 			knownRegions = (
 				en,
 				"pt-BR",
+				Base,
 			);
 			mainGroup = E96F24CF201729690017EF68;
 			productRefGroup = E96F24DA201729690017EF68 /* Products */;
@@ -975,8 +980,8 @@
 					ProjectRef = E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */;
 				},
 				{
-					ProductGroup = E93718ED2113135F003DCA6F /* Products */;
-					ProjectRef = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+					ProductGroup = E932BD742187030A009C8796 /* Products */;
+					ProjectRef = E932BD732187030A009C8796 /* KinCoreSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -989,33 +994,33 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E93718F62113135F003DCA6F /* KinCoreSDK.framework */ = {
+		E932BD7D2187030A009C8796 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E93718F52113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E932BD7C2187030A009C8796 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718F82113135F003DCA6F /* KinTestHost.app */ = {
+		E932BD7F2187030A009C8796 /* KinTestHost.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = KinTestHost.app;
-			remoteRef = E93718F72113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E932BD7E2187030A009C8796 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718FA2113135F003DCA6F /* KinSDKTests.xctest */ = {
+		E932BD812187030A009C8796 /* KinSDKTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			name = KinSDKTests.xctest;
 			path = KinCoreSDKTests.xctest;
-			remoteRef = E93718F92113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E932BD802187030A009C8796 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718FC2113135F003DCA6F /* KinCoreSDK.framework */ = {
+		E932BD832187030A009C8796 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E93718FB2113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E932BD822187030A009C8796 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */ = {
@@ -1050,11 +1055,12 @@
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
 				6806D527217888710027CB86 /* QRViewController.xib in Resources */,
+				E932BD9F218736B2009C8796 /* RestoreViewController.xib in Resources */,
 				6806D533217DF8F60027CB86 /* ExplanationTemplateViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
+				E932BD8A21870480009C8796 /* MarketplaceViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
-				E93228CA217E03DE005B273E /* MarketplaceViewController.xib in Resources */,
 				E9236AC32175EC06005CEC95 /* PasswordEntryViewController.xib in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
 				E904415C2035C83000E3E261 /* SpendOfferCell.xib in Resources */,
@@ -1187,6 +1193,7 @@
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E97E5D6F20E91E29000E9E30 /* earn_order_cancelled.swift in Sources */,
+				E932BD9E218736B2009C8796 /* RestoreViewController.swift in Sources */,
 				E92501BA20614A4400E2E738 /* Flows.swift in Sources */,
 				E97E5D7420E91E29000E9E30 /* general_ecosystem_sdk_error.swift in Sources */,
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
@@ -1242,15 +1249,15 @@
 			target = E96F24D8201729690017EF68 /* KinEcosystem */;
 			targetProxy = 685013592177062E00749045 /* PBXContainerItemProxy */;
 		};
-		68C7AE9F2185B59900D4F575 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = KinCoreSDK;
-			targetProxy = 68C7AE9E2185B59900D4F575 /* PBXContainerItemProxy */;
-		};
 		68C7AEA32185B5CA00D4F575 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CoreDataStack;
 			targetProxy = 68C7AEA22185B5CA00D4F575 /* PBXContainerItemProxy */;
+		};
+		E932BD90218725C6009C8796 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KinCoreSDK;
+			targetProxy = E932BD8F218725C6009C8796 /* PBXContainerItemProxy */;
 		};
 		E942F8CE203081B400DD4B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1438,7 +1445,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = F879J8YSJ9;
+				DEVELOPMENT_TEAM = Z37J743B3H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -1462,7 +1469,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = F879J8YSJ9;
+				DEVELOPMENT_TEAM = Z37J743B3H;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

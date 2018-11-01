@@ -54,7 +54,10 @@ extension RestoreFlowController {
     }
     
     private func pushPasswordViewController(with qrString: String) {
-        // TODO:
+        let restoreViewController = RestoreViewController()
+        restoreViewController.lifeCycleDelegate = self
+        restoreViewController.imageView.image = QR.generateImage(from: qrString, for: CGSize(width: 100, height: 100))
+        navigationController.pushViewController(restoreViewController, animated: true)
     }
 }
 

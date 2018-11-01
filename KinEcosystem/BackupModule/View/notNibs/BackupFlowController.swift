@@ -81,7 +81,7 @@ extension BackupFlowController: PasswordEntryDelegate {
             pushQRViewController(with: try keystoreProvider.exportAccount(password))
         }
         catch {
-            // TODO: 
+            print(error)
         }
     }
 }
