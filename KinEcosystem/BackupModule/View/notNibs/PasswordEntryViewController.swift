@@ -14,14 +14,6 @@ protocol PasswordEntryDelegate: NSObjectProtocol {
     func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController)
 }
 
-class PEDoneButton: RoundButton {
-    override var isEnabled: Bool {
-        didSet {
-            self.backgroundColor = isEnabled ? UIColor.kinPrimaryBlue : UIColor.kinLightBlueGrey
-        }
-    }
-}
-
 @available(iOS 9.0, *)
 class PasswordEntryViewController: BRViewController {
     
@@ -31,7 +23,7 @@ class PasswordEntryViewController: BRViewController {
     @IBOutlet weak var passwordInput2: PasswordEntryField!
     @IBOutlet weak var confirmLabel: UILabel!
     @IBOutlet weak var confirmTick: UIView!
-    @IBOutlet weak var doneButton: UIButton!
+    @IBOutlet weak var doneButton: RoundButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var tickStack: UIStackView!
     
@@ -87,11 +79,6 @@ class PasswordEntryViewController: BRViewController {
             }
         })
         passwordInput1.becomeFirstResponder()
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {

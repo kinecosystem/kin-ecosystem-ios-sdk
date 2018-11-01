@@ -60,21 +60,21 @@ public class Kin {
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
-        guard let core = Kin.shared.core else {
+        guard let core = core else {
             return nil
         }
         return core.blockchain.lastBalance
     }
     
     public var publicAddress: String? {
-        guard let core = Kin.shared.core else {
+        guard let core = core else {
             return nil
         }
         return core.blockchain.account.publicAddress
     }
     
     public var isActivated: Bool {
-        guard let core = Kin.shared.core else {
+        guard let core = core else {
             return false
         }
         return core.blockchain.onboarded && core.network.tosAccepted
@@ -85,7 +85,7 @@ public class Kin {
     static func track<T: KBIEvent>(block: () throws -> (T)) {
         do {
             let event = try block()
-            try Kin.shared.bi.send(event)
+            try shared.bi.send(event)
         } catch {
             logError("failed to send event, error: \(error)")
         }
@@ -93,7 +93,7 @@ public class Kin {
     
     public func start(userId: String,
                       apiKey: String? = nil,
-                      appId: String? = nil,
+                      appId: String,
                       jwt: String? = nil,
                       environment: Environment) throws {
         guard core == nil else {
@@ -121,7 +121,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment)
+            chain = try Blockchain(environment: environment, appId: AppId(appId))
             try chain.startAccount()
         } catch {
             logError("start failed")

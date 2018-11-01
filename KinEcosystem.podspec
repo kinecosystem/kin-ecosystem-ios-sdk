@@ -17,7 +17,7 @@ Kin ecosystem mobile sdk for iOS
   s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
   s.swift_version = '4.1'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
-  s.dependency 'KinCoreSDK', '0.7.6'
+  s.dependency 'KinCoreSDK', '0.7.7'
 
   # s.subspec 'Recovery' do |ss|
   #   ss.source_files = 'KinEcosystem/Recovery/**/*.{h,m,swift}'
