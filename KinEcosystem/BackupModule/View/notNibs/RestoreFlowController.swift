@@ -9,14 +9,7 @@
 import UIKit
 
 @available(iOS 9.0, *)
-protocol RestoreFlowControllerDelegate: NSObjectProtocol {
-    func restoreFlowControllerDidComplete(_ controller: RestoreFlowController)
-}
-
-@available(iOS 9.0, *)
 class RestoreFlowController: FlowController {
-    weak var delegate: RestoreFlowControllerDelegate?
-    
     private var qrPickerController: QRPickerController?
     
     private lazy var _entryViewController: UIViewController = {
@@ -35,6 +28,10 @@ class RestoreFlowController: FlowController {
 extension RestoreFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
         syncNavigationBarColor(with: viewController)
+    }
+    
+    func viewController(_ viewController: UIViewController, willDisappear animated: Bool) {
+        cancelFlowIfNeeded(viewController)
     }
 }
 

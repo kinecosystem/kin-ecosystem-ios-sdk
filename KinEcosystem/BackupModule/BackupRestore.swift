@@ -110,7 +110,7 @@ public class BRManager: NSObject {
         removeNavigationBarBackground(navigationController.navigationBar)
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
-        let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissFlowCanceled))
+        let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: flowController, action: #selector(flowController.cancelFlow))
         flowController.entryViewController.navigationItem.leftBarButtonItem = dismissItem
         navigationController.viewControllers = [flowController.entryViewController]
         viewController.present(navigationController, animated: true)
@@ -137,36 +137,12 @@ public class BRManager: NSObject {
 
 @available(iOS 9.0, *)
 extension BRManager {
-    private func flowCompleted() {
-        guard let brInstance = brInstance else {
-            return
-        }
-        
-        brInstance.completion(true)
-        
-        switch brInstance.presentationType {
-        case .presented:
-            dismissFlow()
-        case .pushed:
-            popNavigationStackIfNeeded()
-        }
-        
-        self.brInstance = nil
+    private var navigationController: UINavigationController? {
+        return brInstance?.flowController.navigationController
     }
     
     private func dismissFlow() {
         presentor?.dismiss(animated: true)
-    }
-    
-    @objc private func dismissFlowCanceled() {
-        guard let brInstance = brInstance else {
-            return
-        }
-        
-        brInstance.completion(false)
-        dismissFlow()
-        
-        self.brInstance = nil
     }
     
     private func popNavigationStackIfNeeded() {
@@ -193,16 +169,41 @@ extension BRManager {
 // MARK: - Flow
 
 @available(iOS 9.0, *)
-extension BRManager: BackupFlowControllerDelegate {
-    func backupFlowControllerDidComplete(_ controller: BackupFlowController) {
-        flowCompleted()
+extension BRManager: FlowControllerDelegate {
+    func flowControllerDidComplete(_ controller: FlowController) {
+        guard let brInstance = brInstance else {
+            return
+        }
+        
+        brInstance.completion(true)
+        
+        switch brInstance.presentationType {
+        case .presented:
+            dismissFlow()
+        case .pushed:
+            popNavigationStackIfNeeded()
+        }
+        
+        self.brInstance = nil
     }
-}
-
-@available(iOS 9.0, *)
-extension BRManager: RestoreFlowControllerDelegate {
-    func restoreFlowControllerDidComplete(_ controller: RestoreFlowController) {
-        flowCompleted()
+    
+    func flowControllerDidCancel(_ controller: FlowController) {
+        guard let brInstance = brInstance else {
+            return
+        }
+        
+        brInstance.completion(false)
+        
+        switch brInstance.presentationType {
+        case .presented:
+            dismissFlow()
+        case .pushed:
+            if let navigationController = navigationController {
+                restoreNavigationBarBackground(navigationController.navigationBar)
+            }
+        }
+        
+        self.brInstance = nil
     }
 }
 

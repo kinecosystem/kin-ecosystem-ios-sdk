@@ -9,14 +9,7 @@
 import UIKit
 
 @available(iOS 9.0, *)
-protocol BackupFlowControllerDelegate: NSObjectProtocol {
-    func backupFlowControllerDidComplete(_ controller: BackupFlowController)
-}
-
-@available(iOS 9.0, *)
 class BackupFlowController: FlowController {
-    weak var delegate: BackupFlowControllerDelegate?
-    
     private lazy var _entryViewController: UIViewController = {
         let viewController = BackupIntroViewController()
         viewController.lifeCycleDelegate = self
@@ -33,6 +26,10 @@ class BackupFlowController: FlowController {
 extension BackupFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
         syncNavigationBarColor(with: viewController)
+    }
+    
+    func viewController(_ viewController: UIViewController, willDisappear animated: Bool) {
+        cancelFlowIfNeeded(viewController)
     }
 }
 
@@ -63,7 +60,7 @@ extension BackupFlowController {
     }
     
     @objc private func completedFlow() {
-        delegate?.backupFlowControllerDidComplete(self)
+        delegate?.flowControllerDidComplete(self)
     }
 }
 

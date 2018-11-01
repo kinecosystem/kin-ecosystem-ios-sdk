@@ -10,4 +10,5 @@ import Foundation
 
 protocol LifeCycleProtocol: NSObjectProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool)
+    func viewController(_ viewController: UIViewController, willDisappear animated: Bool)
 }

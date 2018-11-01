@@ -15,4 +15,9 @@ class BRViewController: UIViewController {
         super.viewWillAppear(animated)
         lifeCycleDelegate?.viewController(self, willAppear: animated)
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        lifeCycleDelegate?.viewController(self, willDisappear: animated)
+    }
 }

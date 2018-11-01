@@ -61,7 +61,7 @@ class SettingsViewController: UITableViewController {
         tableView.rowHeight = 54
         tableView.separatorColor = .kinLightBlueGrey
         tableView.separatorInset = .zero
-        tableView.tableFooterView = UIView()
+//        tableView.tableFooterView = UIView()
     }
     
     // MARK: Table View

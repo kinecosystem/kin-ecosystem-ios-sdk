@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol FlowControllerDelegate: NSObjectProtocol {
+    func flowControllerDidComplete(_ controller: FlowController)
+    func flowControllerDidCancel(_ controller: FlowController)
+}
+
 class FlowController: NSObject {
+    weak var delegate: FlowControllerDelegate?
+    
     let keystoreProvider: KeystoreProvider
     let navigationController: UINavigationController
     
@@ -24,5 +31,18 @@ class FlowController: NSObject {
     
     func syncNavigationBarColor(with viewController: UIViewController) {
         navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
+    }
+    
+    @objc func cancelFlow() {
+        delegate?.flowControllerDidCancel(self)
+    }
+    
+    func cancelFlowIfNeeded(_ viewController: UIViewController) {
+        if viewController == entryViewController,
+            let navigationController = viewController.navigationController,
+            !(navigationController.topViewController is BRViewController)
+        {
+            cancelFlow()
+        }
     }
 }
