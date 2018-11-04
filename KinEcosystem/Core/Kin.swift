@@ -93,7 +93,7 @@ public class Kin {
     
     public func start(userId: String,
                       apiKey: String? = nil,
-                      appId: String? = nil,
+                      appId: String,
                       jwt: String? = nil,
                       environment: Environment) throws {
         guard core == nil else {
@@ -121,7 +121,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment)
+            chain = try Blockchain(environment: environment, appId: appId)
             try chain.startAccount()
         } catch {
             logError("start failed")

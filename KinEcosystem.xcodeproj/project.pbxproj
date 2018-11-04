@@ -25,6 +25,8 @@
 		E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */; };
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
 		E92501BA20614A4400E2E738 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* Flows.swift */; };
+		E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; };
+		E9295BBB218EFB33001B7B56 /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
 		E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7E206921BC008A027F /* SpendViewModel.swift */; };
@@ -32,7 +34,6 @@
 		E92F7B882069992A008A027F /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B872069992A008A027F /* Animations.swift */; };
 		E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93146262164F160008F2D74 /* MarketplaceViewController.xib */; };
 		E93146332164F52B008F2D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93146312164F52B008F2D74 /* Localizable.strings */; };
-		E93718FD21131375003DCA6F /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E93718F62113135F003DCA6F /* KinCoreSDK.framework */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
@@ -145,33 +146,40 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E93718F52113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E9295BB0218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82140EA91FA88E5B00FAF19B;
 			remoteInfo = KinCoreSDK;
 		};
-		E93718F72113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E9295BB2218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8278352E1FA9B5F20006C3DF;
 			remoteInfo = KinTestHost;
 		};
-		E93718F92113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E9295BB4218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 827835411FA9B5F20006C3DF;
 			remoteInfo = KinCoreSDKTests;
 		};
-		E93718FB2113135F003DCA6F /* PBXContainerItemProxy */ = {
+		E9295BB6218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82BA2113204D867200396AE2;
 			remoteInfo = "KinCoreSDK-macos";
+		};
+		E9295BB8218EFB21001B7B56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
+			remoteInfo = KinCoreSDK;
 		};
 		E942F8BA2030819C00DD4B8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -229,13 +237,13 @@
 		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		E92501B920614A4400E2E738 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
+		E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-core-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
 		E92F7B80206923A0008A027F /* SheetTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
 		E92F7B872069992A008A027F /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		E93146322164F52B008F2D74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-sdk-core-stellar-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
@@ -369,7 +377,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E93718FD21131375003DCA6F /* KinCoreSDK.framework in Frameworks */,
+				E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */,
+				E9295BBB218EFB33001B7B56 /* KinCoreSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +401,17 @@
 			path = Promises;
 			sourceTree = "<group>";
 		};
+		E9295BA8218EFAD5001B7B56 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */,
+				E9295BB3218EFAD5001B7B56 /* KinTestHost.app */,
+				E9295BB5218EFAD5001B7B56 /* KinSDKTests.xctest */,
+				E9295BB7218EFAD5001B7B56 /* KinCoreSDK.framework */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E92D18DF2029ACE2002E357D /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -399,17 +419,6 @@
 				E942F94E2034751000DD4B8E /* CoreData.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E93718ED2113135F003DCA6F /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				E93718F62113135F003DCA6F /* KinCoreSDK.framework */,
-				E93718F82113135F003DCA6F /* KinTestHost.app */,
-				E93718FA2113135F003DCA6F /* KinSDKTests.xctest */,
-				E93718FC2113135F003DCA6F /* KinCoreSDK.framework */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 		E942F8A3202C4C4A00DD4B8E /* ViewModel */ = {
@@ -478,8 +487,8 @@
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
-				E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */,
 				E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */,
+				E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
@@ -732,6 +741,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				E9295BB9218EFB21001B7B56 /* PBXTargetDependency */,
 				E942F8CE203081B400DD4B8E /* PBXTargetDependency */,
 			);
 			name = KinEcosystem;
@@ -802,8 +812,8 @@
 					ProjectRef = E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */;
 				},
 				{
-					ProductGroup = E93718ED2113135F003DCA6F /* Products */;
-					ProjectRef = E93718EC2113135F003DCA6F /* KinCoreSDK.xcodeproj */;
+					ProductGroup = E9295BA8218EFAD5001B7B56 /* Products */;
+					ProjectRef = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -816,33 +826,33 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E93718F62113135F003DCA6F /* KinCoreSDK.framework */ = {
+		E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E93718F52113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E9295BB0218EFAD5001B7B56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718F82113135F003DCA6F /* KinTestHost.app */ = {
+		E9295BB3218EFAD5001B7B56 /* KinTestHost.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = KinTestHost.app;
-			remoteRef = E93718F72113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E9295BB2218EFAD5001B7B56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718FA2113135F003DCA6F /* KinSDKTests.xctest */ = {
+		E9295BB5218EFAD5001B7B56 /* KinSDKTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			name = KinSDKTests.xctest;
 			path = KinCoreSDKTests.xctest;
-			remoteRef = E93718F92113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E9295BB4218EFAD5001B7B56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E93718FC2113135F003DCA6F /* KinCoreSDK.framework */ = {
+		E9295BB7218EFAD5001B7B56 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E93718FB2113135F003DCA6F /* PBXContainerItemProxy */;
+			remoteRef = E9295BB6218EFAD5001B7B56 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */ = {
@@ -1042,6 +1052,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		E9295BB9218EFB21001B7B56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KinCoreSDK;
+			targetProxy = E9295BB8218EFB21001B7B56 /* PBXContainerItemProxy */;
+		};
 		E942F8CE203081B400DD4B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CoreDataStack;
@@ -1177,7 +1192,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1233,7 +1248,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
