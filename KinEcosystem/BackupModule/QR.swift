@@ -24,9 +24,7 @@ class QR {
         }
         
         filter.setValue(data, forKey: "inputMessage")
-        // Comment out this line to reduce the correction level. A reduced correction level
-        // will create an image with less pixel depth.
-        filter.setValue("H", forKey: "inputCorrectionLevel")
+        filter.setValue("L", forKey: "inputCorrectionLevel")
         
         guard let outputImage = filter.outputImage else {
             return nil
