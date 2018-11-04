@@ -40,6 +40,7 @@ extension BackupFlowController {
     @objc private func pushPasswordViewController() {
         let viewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: Bundle.ecosystem)
+        viewController.title = "kinecosystem_password_backup_title".localized()
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
         navigationController.pushViewController(viewController, animated: true)

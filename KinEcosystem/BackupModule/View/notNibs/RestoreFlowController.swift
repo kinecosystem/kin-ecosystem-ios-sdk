@@ -55,8 +55,9 @@ extension RestoreFlowController {
     
     private func pushPasswordViewController(with qrString: String) {
         let restoreViewController = RestoreViewController()
+        restoreViewController.delegate = self
         restoreViewController.lifeCycleDelegate = self
-        restoreViewController.imageView.image = QR.generateImage(from: qrString, for: CGSize(width: 100, height: 100))
+        restoreViewController.imageView.image = QR.generateImage(from: qrString)
         navigationController.pushViewController(restoreViewController, animated: true)
     }
 }
@@ -77,6 +78,36 @@ extension RestoreFlowController: QRPickerControllerDelegate {
         
         if let qrString = qrString {
             pushPasswordViewController(with: qrString)
+        }
+    }
+}
+
+@available(iOS 9.0, *)
+extension RestoreFlowController: RestoreViewControllerDelegate {
+    func restoreViewControllerDidImport(_ viewController: RestoreViewController) -> RestoreViewController.ImportResult {
+        guard let password = viewController.password else {
+            return .wrongPassword
+        }
+        guard let qrImage = viewController.imageView.image, let keystore = QR.decode(image: qrImage) else {
+            return .invalidImage
+        }
+        
+        do  {
+            try keystoreProvider.importAccount(keystore: keystore, password: password)
+            return .success
+        }
+        catch {
+            return .internalIssue
+        }
+    }
+    
+    func restoreViewControllerDidComplete(_ viewController: RestoreViewController) {
+        // Delay to prevent a jarring jump after the checkmark animation.
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+            guard let strongSelf = self else {
+                return
+            }
+            strongSelf.delegate?.flowControllerDidComplete(strongSelf)
         }
     }
 }

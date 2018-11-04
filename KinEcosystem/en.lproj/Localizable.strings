@@ -53,6 +53,7 @@
 "kinecosystem_backup_reminder_title" = "Remember!";
 "kinecosystem_backup_reminder_description" = "Keep your password in a safe place\nand the QR code handy.";
 
+"kinecosystem_password_backup_title" = "Keep your Kin safe";
 "kinecosystem_enter_password" = "Enter Password";
 "kinecosystem_create_password" = "Create Password";
 "kinecosystem_password" = "Password";

@@ -20,10 +20,17 @@ extension Kin : KeystoreProvider {
     }
     
     public func importAccount(keystore: String, password: String) throws {
-        
+        guard let core = core else {
+            throw KinEcosystemError.client(.notStarted, nil)
+        }
+        guard isActivated else {
+            throw KinEcosystemError.blockchain(.activation, nil)
+        }
+        _ = try core.blockchain.client.importAccount(keystore, passphrase: password)
     }
     
     public func validatePassword(_ password: String) -> Bool {
+        // TODO: 
         return true
     }
 }

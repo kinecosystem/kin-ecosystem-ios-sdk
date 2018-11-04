@@ -40,7 +40,9 @@ class RoundButton: UIButton {
         }
     }
     
-    func transitionToConfirmed() {
+    private var transitionToConfirmedCompletion: (()->())?
+    
+    func transitionToConfirmed(completion: (()->())? = nil) {
         let shape = CAShapeLayer()
         shape.frame = bounds
         shape.fillColor = UIColor.kinPrimaryBlue.cgColor
@@ -71,9 +73,18 @@ class RoundButton: UIButton {
         let vPathAnimation = Animations.animation(with: "strokeEnd", duration: duration * 0.45, beginTime: duration * 0.55, from: 0.0, to: 1.0)
         let shapeGroup = Animations.animationGroup(animations: [pathAnimation], duration: duration)
         let vPathGroup = Animations.animationGroup(animations: [vPathAnimation], duration: duration)
+        vPathGroup.delegate = self
         shape.add(shapeGroup, forKey: "shrink")
         vShape.add(vPathGroup, forKey: "vStroke")
         
+        transitionToConfirmedCompletion = completion
     }
         
+}
+
+extension RoundButton: CAAnimationDelegate {
+    func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
+        transitionToConfirmedCompletion?()
+        transitionToConfirmedCompletion = nil
+    }
 }
