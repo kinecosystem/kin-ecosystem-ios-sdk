@@ -12,7 +12,7 @@ import Foundation
 import KinCoreSDK
 import StellarErrors
 
-let SDKVersion = "0.5.4"
+let SDKVersion = "0.5.5"
 
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
@@ -47,7 +47,7 @@ public struct NativeOffer: Equatable {
 
 @available(iOS 9.0, *)
 public class Kin {
-    
+
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate(set) var needsReset = false
@@ -58,30 +58,30 @@ public class Kin {
     fileprivate let psBalanceObsLock = NSLock()
     fileprivate let psNativeOLock = NSLock()
     fileprivate init() { }
-    
+
     public var lastKnownBalance: Balance? {
         guard let core = core else {
             return nil
         }
         return core.blockchain.lastBalance
     }
-    
+
     public var publicAddress: String? {
         guard let core = core else {
             return nil
         }
         return core.blockchain.account.publicAddress
     }
-    
+
     public var isActivated: Bool {
         guard let core = core else {
             return false
         }
-        return core.blockchain.onboarded && core.network.tosAccepted
+        return core.blockchain.onboarded
     }
-    
+
     public var nativeOfferHandler: ((NativeOffer) -> ())?
-    
+
     static func track<T: KBIEvent>(block: () throws -> (T)) {
         do {
             let event = try block()
@@ -90,7 +90,7 @@ public class Kin {
             logError("failed to send event, error: \(error)")
         }
     }
-    
+
     public func start(userId: String,
                       apiKey: String? = nil,
                       appId: String,
@@ -121,13 +121,13 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment, appId: AppId(appId))
+            chain = try Blockchain(environment: environment, appId: appId)
             try chain.startAccount()
         } catch {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
         }
-        
+
         guard let marketplaceURL = URL(string: environment.marketplaceURL) else {
             throw KinEcosystemError.client(.badRequest, nil)
         }
@@ -139,7 +139,6 @@ public class Kin {
                                                                   publicAddress: chain.account.publicAddress))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
 
-        let tosAccepted = core!.network.tosAccepted
         network.authorize().then { [weak self] _ in
             self?.core!.blockchain.onboard()
                 .then {
@@ -149,12 +148,11 @@ public class Kin {
                     logError("blockchain onboarding failed - \(error)")
             }
             self?.updateData(with: OffersList.self, from: "offers").error { error in
-                    logError("data sync failed (\(error))")
-            }
-            if tosAccepted {
-                self?.updateData(with: OrdersList.self, from: "orders").error { error in
-                    logError("data sync failed (\(error))")
-                }
+                logError("data sync failed (\(error))")
+                }.then {
+                    self?.updateData(with: OrdersList.self, from: "orders").error { error in
+                        logError("data sync failed (\(error))")
+                    }
             }
         }
         psBalanceObsLock.lock()
@@ -174,7 +172,7 @@ public class Kin {
         })
         prestartNativeOffers.removeAll()
     }
-    
+
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
         guard let core = core else {
             logError("Kin not started")
@@ -206,7 +204,7 @@ public class Kin {
                 completion(nil, esError)
         }
     }
-    
+
     public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
         guard let core = core else {
             psBalanceObsLock.lock()
@@ -219,7 +217,7 @@ public class Kin {
         }
         return try core.blockchain.addBalanceObserver(with: block)
     }
-    
+
     public func removeBalanceObserver(_ identifier: String) {
         guard let core = core else {
             psBalanceObsLock.lock()
@@ -231,8 +229,8 @@ public class Kin {
         }
         core.blockchain.removeBalanceObserver(with: identifier)
     }
-        
-    
+
+
     public func launchMarketplace(from parentViewController: UIViewController) throws {
         Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
@@ -240,7 +238,7 @@ public class Kin {
             throw KinEcosystemError.client(.notStarted, nil)
         }
         mpPresentingController = parentViewController
-        if core.network.tosAccepted {
+        if isActivated {
             let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
             mpViewController.core = core
             let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
@@ -253,9 +251,9 @@ public class Kin {
             welcomeVC.core = core
             parentViewController.present(welcomeVC, animated: true)
         }
-        
+
     }
-    
+
     public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
         guard let core = core else {
             logError("Kin not started")
@@ -285,11 +283,11 @@ public class Kin {
                 }
         }
     }
-    
+
     public func payToUser(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         return purchase(offerJWT: offerJWT, completion: completion)
     }
-    
+
     public func purchase(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
@@ -305,7 +303,7 @@ public class Kin {
         }
         return true
     }
-    
+
     public func requestPayment(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         guard let core = core else {
             logError("Kin not started")
@@ -321,7 +319,7 @@ public class Kin {
         }
         return true
     }
-    
+
     public func orderConfirmation(for offerID: String, completion: @escaping OrderConfirmationCallback) {
         guard let core = core else {
             logError("Kin not started")
@@ -333,7 +331,7 @@ public class Kin {
                 return Promise<Void>().signal(KinError.internalInconsistency)
             }
             return this.updateData(with: OrdersList.self, from: "orders")
-            }.then { 
+            }.then {
                 core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
                     guard let order = orders.first else {
                         let responseError = ResponseError(code: 4043, error: "NotFound", message: "Order not found")
@@ -358,11 +356,11 @@ public class Kin {
                 completion(nil, KinEcosystemError.transform(error))
         }
     }
-    
+
     public func setLogLevel(_ level: LogLevel) {
         Logger.setLogLevel(level)
     }
-    
+
     public func add(nativeOffer: NativeOffer) throws {
         guard let core = core else {
             psNativeOLock.lock()
@@ -382,7 +380,7 @@ public class Kin {
                 })
         }
     }
-    
+
     public func remove(nativeOfferId: String) throws {
         guard let core = core else {
             psNativeOLock.lock()
@@ -400,7 +398,7 @@ public class Kin {
             }
         }, with: NSPredicate(with: ["id" : nativeOfferId]))
     }
-    
+
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
@@ -410,11 +408,11 @@ public class Kin {
             return self.core!.data.sync(dataPresentorType, with: data)
         }
     }
-    
+
     func closeMarketPlace(completion: (() -> ())? = nil) {
         mpPresentingController?.dismiss(animated: true, completion: completion)
     }
-    
+
     fileprivate func setupBIProxies() {
         EventsStore.shared.userProxy = UserProxy(balance: { [weak self] () -> (Double) in
             guard let balance = self?.core?.blockchain.lastBalance else {
@@ -452,7 +450,7 @@ public class Kin {
         }, transactionCount: { () -> (Int) in
             0
         })
-        
+
         EventsStore.shared.clientProxy = ClientProxy(carrier: { [weak self] () -> (String) in
             return self?.bi.networkInfo.subscriberCellularProvider?.carrierName ?? ""
             }, deviceID: { () -> (String) in
@@ -466,7 +464,7 @@ public class Kin {
         }, os: { () -> (String) in
             UIDevice.current.systemVersion
         })
-        
+
         EventsStore.shared.commonProxy = CommonProxy(eventID: { () -> (String) in
             UUID().uuidString
         }, timestamp: { () -> (String) in

@@ -191,6 +191,13 @@
 			remoteGlobalIDString = 8246E72D1FC84AEE0087140A;
 			remoteInfo = CoreDataStack;
 		};
+		E9295BC82190945F001B7B56 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E9A53363218B090300DE42E4 /* KinCoreSDK.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
+			remoteInfo = KinCoreSDK;
+		};
 		E942F8BA2030819C00DD4B8E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */;
@@ -459,8 +466,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E9A53374218B0A6600DE42E4 /* KinCoreSDK.framework in Frameworks */,
 				E932BD96218725D9009C8796 /* CoreDataStack.framework in Frameworks */,
+				E9A53374218B0A6600DE42E4 /* KinCoreSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -909,6 +916,7 @@
 			);
 			dependencies = (
 				E942F8CE203081B400DD4B8E /* PBXTargetDependency */,
+				E9295BC92190945F001B7B56 /* PBXTargetDependency */,
 			);
 			name = KinEcosystem;
 			productName = KinEcosystem;
@@ -1254,6 +1262,11 @@
 			name = CoreDataStack;
 			targetProxy = 68C7AEA22185B5CA00D4F575 /* PBXContainerItemProxy */;
 		};
+		E9295BC92190945F001B7B56 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = KinCoreSDK;
+			targetProxy = E9295BC82190945F001B7B56 /* PBXContainerItemProxy */;
+		};
 		E942F8CE203081B400DD4B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = CoreDataStack;
@@ -1367,7 +1380,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1423,7 +1436,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";

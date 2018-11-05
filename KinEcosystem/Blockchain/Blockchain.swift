@@ -91,12 +91,12 @@ class Blockchain {
         }
     }
 
-    init(environment: Environment, appId: AppId) throws {
+    init(environment: Environment, appId: String) throws {
         guard let bURL = URL(string: environment.blockchainURL) else {
             throw KinEcosystemError.client(.badRequest, nil)
         }
         let provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
-        let client = KinClient(provider: provider, appId: appId)
+        let client = try KinClient(provider: provider, appId: AppId(appId))
         self.client = client
     }
 
@@ -113,7 +113,7 @@ class Blockchain {
         }
         _ = balance()
     }
-    
+
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
         account.balance(completion: { [weak self] balance, error in
