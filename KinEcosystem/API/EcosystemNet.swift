@@ -25,18 +25,10 @@ struct EcosystemConfiguration {
 class EcosystemNet {
     
     var client: RestClient!
-    var tosAccepted: Bool {
-        get {
-            return UserDefaults.standard.bool(forKey: KinPreferenceKey.tosAccepted.rawValue)
-        }
-        set {
-            UserDefaults.standard.set(newValue, forKey: KinPreferenceKey.tosAccepted.rawValue)
-        }
-    }
+    
     init(config: EcosystemConfiguration) {
         client = RestClient(config)
         if Kin.shared.needsReset {
-            tosAccepted = false
             client.authToken = nil
         }
     }
@@ -61,33 +53,6 @@ class EcosystemNet {
                 }
                 self.client.authToken = token
                 p.signal(token)
-            }.error { error in
-                p.signal(error)
-        }
-        return p
-    }
-    
-    func acceptTOS() -> Promise<Void> {
-        let p = Promise<Void>()
-        guard tosAccepted == false else {
-            return p.signal(())
-        }
-        authorize().then { _ in
-                self.client.buildRequest(path: "users/me/activate", method: .post)
-            }.then { request in
-                self.client.dataRequest(request)
-            }.then { data in
-                guard let token = try? JSONDecoder().decode(AuthToken.self, from: data) else {
-                    p.signal(EcosystemNetError.responseParse)
-                    return
-                }
-                guard token.activated else {
-                    p.signal(EcosystemNetError.server("server returned non active token"))
-                    return
-                }
-                self.tosAccepted = true
-                self.client.authToken = token
-                p.signal(())
             }.error { error in
                 p.signal(error)
         }

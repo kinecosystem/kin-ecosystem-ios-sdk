@@ -41,7 +41,7 @@ class WelcomeViewController: KinViewController {
         shrinkButton()
             .then(on: .main) { [weak self] in
                 self?.diamondsLoader.startAnimating()
-                self?.acceptTosAndOnboard()
+                self?.onboard()
             .then(on: .main) {
                 self?.diamondsLoader.stopAnimating() {
                     self?.presentMarketplace()
@@ -94,22 +94,14 @@ class WelcomeViewController: KinViewController {
        return p
     }
 
-    func acceptTosAndOnboard() -> Promise<Void> {
+    func onboard() -> Promise<Void> {
         let p = Promise<Void>()
-        core.network.acceptTOS().then {
-            if (self.core.blockchain.onboarded) {
+        if (self.core.blockchain.onboarded) {
+            p.signal(())
+        } else {
+            self.core.blockchain.onboardEvent.on(next: { _ in
                 p.signal(())
-            } else {
-                self.core.blockchain.onboardEvent.on(next: { _ in
-                    p.signal(())
-                }).add(to: self.linkBag)
-            }
-            }.error { error in
-                if case let EcosystemNetError.server(errString) = error {
-                    logError("server returned bad answer: \(errString)")
-                } else {
-                    logError("onboarding wait failed - \(error)")
-                }
+            }).add(to: self.linkBag)
         }
         return p
     }
