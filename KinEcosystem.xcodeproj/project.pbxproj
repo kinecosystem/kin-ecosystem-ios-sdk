@@ -353,7 +353,6 @@
 		E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
 		E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTConfirmation.swift; sourceTree = "<group>"; };
-		E9DC201C216B353E00746B81 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E9DC201F216B4B3D00746B81 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E9DC2020216B807500746B81 /* Xib+localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Xib+localization.swift"; sourceTree = "<group>"; };
 		E9DC2026216B97E900746B81 /* String+localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
@@ -801,7 +800,6 @@
 			knownRegions = (
 				en,
 				Base,
-				"pt-BR",
 			);
 			mainGroup = E96F24CF201729690017EF68;
 			productRefGroup = E96F24DA201729690017EF68 /* Products */;
@@ -1087,7 +1085,6 @@
 			isa = PBXVariantGroup;
 			children = (
 				E93146322164F52B008F2D74 /* en */,
-				E9DC201C216B353E00746B81 /* pt-BR */,
 			);
 			name = Localizable.strings;
 			sourceTree = "<group>";
