@@ -34,6 +34,82 @@
 		E92F7B882069992A008A027F /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B872069992A008A027F /* Animations.swift */; };
 		E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93146262164F160008F2D74 /* MarketplaceViewController.xib */; };
 		E93146332164F52B008F2D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93146312164F52B008F2D74 /* Localizable.strings */; };
+		E93A54E1219973F000A32BEA /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5495219973F000A32BEA /* restore_wallet_completed.swift */; };
+		E93A54E2219973F000A32BEA /* settings_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5496219973F000A32BEA /* settings_button_tapped.swift */; };
+		E93A54E3219973F000A32BEA /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */; };
+		E93A54E4219973F000A32BEA /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5498219973F000A32BEA /* earn_order_failed.swift */; };
+		E93A54E5219973F000A32BEA /* backup_popup_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */; };
+		E93A54E6219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */; };
+		E93A54E7219973F000A32BEA /* earn_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549B219973F000A32BEA /* earn_order_creation_received.swift */; };
+		E93A54E8219973F000A32BEA /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */; };
+		E93A54E9219973F000A32BEA /* balance_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549D219973F000A32BEA /* balance_tapped.swift */; };
+		E93A54EA219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */; };
+		E93A54EB219973F000A32BEA /* redeem_url_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549F219973F000A32BEA /* redeem_url_tapped.swift */; };
+		E93A54EC219973F000A32BEA /* spend_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */; };
+		E93A54ED219973F000A32BEA /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A1219973F000A32BEA /* spend_order_completed.swift */; };
+		E93A54EE219973F000A32BEA /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */; };
+		E93A54EF219973F000A32BEA /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */; };
+		E93A54F0219973F000A32BEA /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */; };
+		E93A54F1219973F000A32BEA /* stellar_account_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */; };
+		E93A54F2219973F000A32BEA /* spend_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */; };
+		E93A54F3219973F000A32BEA /* backup_welcome_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */; };
+		E93A54F4219973F000A32BEA /* spend_redeem_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */; };
+		E93A54F5219973F000A32BEA /* earn_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */; };
+		E93A54F6219973F000A32BEA /* kin_balance_updated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AA219973F000A32BEA /* kin_balance_updated.swift */; };
+		E93A54F7219973F000A32BEA /* welcome_screen_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */; };
+		E93A54F8219973F000A32BEA /* earn_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AC219973F000A32BEA /* earn_order_completed.swift */; };
+		E93A54F9219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */; };
+		E93A54FA219973F000A32BEA /* marketplace_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */; };
+		E93A54FB219973F000A32BEA /* general_ecosystem_sdk_error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */; };
+		E93A54FC219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */; };
+		E93A54FD219973F000A32BEA /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B1219973F000A32BEA /* common.swift */; };
+		E93A54FE219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */; };
+		E93A54FF219973F000A32BEA /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */; };
+		E93A5500219973F000A32BEA /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B4219973F000A32BEA /* user.swift */; };
+		E93A5501219973F000A32BEA /* settings_option_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B5219973F000A32BEA /* settings_option_tapped.swift */; };
+		E93A5502219973F000A32BEA /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */; };
+		E93A5503219973F000A32BEA /* earn_order_payment_confirmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */; };
+		E93A5504219973F000A32BEA /* backup_popup_later_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */; };
+		E93A5505219973F000A32BEA /* spend_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */; };
+		E93A5506219973F000A32BEA /* wallet_creation_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */; };
+		E93A5507219973F000A32BEA /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */; };
+		E93A5508219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */; };
+		E93A5509219973F000A32BEA /* confirm_purchase_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */; };
+		E93A550A219973F000A32BEA /* settings_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BE219973F000A32BEA /* settings_page_viewed.swift */; };
+		E93A550B219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */; };
+		E93A550C219973F000A32BEA /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C0219973F000A32BEA /* client.swift */; };
+		E93A550D219973F000A32BEA /* backup_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */; };
+		E93A550E219973F000A32BEA /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */; };
+		E93A550F219973F000A32BEA /* order_history_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */; };
+		E93A5510219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */; };
+		E93A5511219973F000A32BEA /* restore_password_entry_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */; };
+		E93A5512219973F000A32BEA /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */; };
+		E93A5513219973F000A32BEA /* backup_create_password_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */; };
+		E93A5514219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */; };
+		E93A5515219973F000A32BEA /* backup_qr_code_send_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */; };
+		E93A5516219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
+		E93A5517219973F000A32BEA /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */; };
+		E93A5518219973F000A32BEA /* kin_sdk_initiated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */; };
+		E93A5519219973F000A32BEA /* spend_redeem_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */; };
+		E93A551A219973F000A32BEA /* backup_completed_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */; };
+		E93A551B219973F000A32BEA /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CF219973F000A32BEA /* spend_order_failed.swift */; };
+		E93A551C219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */; };
+		E93A551D219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */; };
+		E93A551E219973F000A32BEA /* backup_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */; };
+		E93A551F219973F000A32BEA /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */; };
+		E93A5520219973F000A32BEA /* settings_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */; };
+		E93A5521219973F000A32BEA /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */; };
+		E93A5522219973F000A32BEA /* earn_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */; };
+		E93A5523219973F000A32BEA /* backup_start_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */; };
+		E93A5524219973F000A32BEA /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D8219973F000A32BEA /* types.swift */; };
+		E93A5525219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */; };
+		E93A5526219973F000A32BEA /* backup_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */; };
+		E93A5527219973F000A32BEA /* entrypoint_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */; };
+		E93A5528219973F000A32BEA /* earn_page_loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DC219973F000A32BEA /* earn_page_loaded.swift */; };
+		E93A5529219973F000A32BEA /* backup_popup_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */; };
+		E93A552A219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
+		E93A552B219973F000A32BEA /* restore_password_entry_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */; };
+		E93A552C219973F000A32BEA /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
@@ -72,54 +148,6 @@
 		E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */; };
 		E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D1720E82D8D000E9E30 /* Reachability.swift */; };
 		E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D2320E8EF93000E9E30 /* DeviceData.swift */; };
-		E97E5D6220E91E29000E9E30 /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3220E91E28000E9E30 /* earn_order_failed.swift */; };
-		E97E5D6320E91E29000E9E30 /* earn_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3320E91E28000E9E30 /* earn_order_creation_received.swift */; };
-		E97E5D6420E91E29000E9E30 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3420E91E28000E9E30 /* spend_thankyou_page_viewed.swift */; };
-		E97E5D6520E91E29000E9E30 /* balance_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3520E91E28000E9E30 /* balance_tapped.swift */; };
-		E97E5D6620E91E29000E9E30 /* redeem_url_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3620E91E28000E9E30 /* redeem_url_tapped.swift */; };
-		E97E5D6720E91E29000E9E30 /* spend_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3720E91E28000E9E30 /* spend_order_creation_failed.swift */; };
-		E97E5D6820E91E29000E9E30 /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3820E91E28000E9E30 /* spend_order_completed.swift */; };
-		E97E5D6920E91E29000E9E30 /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3920E91E28000E9E30 /* spend_order_cancelled.swift */; };
-		E97E5D6A20E91E29000E9E30 /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3A20E91E28000E9E30 /* earn_order_creation_failed.swift */; };
-		E97E5D6B20E91E29000E9E30 /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3B20E91E28000E9E30 /* not_enough_kin_page_viewed.swift */; };
-		E97E5D6C20E91E29000E9E30 /* stellar_account_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3C20E91E28000E9E30 /* stellar_account_creation_requested.swift */; };
-		E97E5D6D20E91E29000E9E30 /* spend_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3D20E91E28000E9E30 /* spend_offer_tapped.swift */; };
-		E97E5D6E20E91E29000E9E30 /* spend_redeem_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3E20E91E28000E9E30 /* spend_redeem_button_tapped.swift */; };
-		E97E5D6F20E91E29000E9E30 /* earn_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D3F20E91E28000E9E30 /* earn_order_cancelled.swift */; };
-		E97E5D7020E91E29000E9E30 /* kin_balance_updated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4020E91E28000E9E30 /* kin_balance_updated.swift */; };
-		E97E5D7120E91E29000E9E30 /* welcome_screen_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4120E91E28000E9E30 /* welcome_screen_button_tapped.swift */; };
-		E97E5D7220E91E29000E9E30 /* earn_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4220E91E28000E9E30 /* earn_order_completed.swift */; };
-		E97E5D7320E91E29000E9E30 /* marketplace_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4320E91E28000E9E30 /* marketplace_page_viewed.swift */; };
-		E97E5D7420E91E29000E9E30 /* general_ecosystem_sdk_error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4420E91E28000E9E30 /* general_ecosystem_sdk_error.swift */; };
-		E97E5D7520E91E29000E9E30 /* back_button_on_marketplace_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4520E91E29000E9E30 /* back_button_on_marketplace_page_tapped.swift */; };
-		E97E5D7620E91E29000E9E30 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4620E91E29000E9E30 /* common.swift */; };
-		E97E5D7720E91E29000E9E30 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4720E91E29000E9E30 /* user.swift */; };
-		E97E5D7820E91E29000E9E30 /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4820E91E29000E9E30 /* welcome_screen_page_viewed.swift */; };
-		E97E5D7920E91E29000E9E30 /* earn_order_payment_confirmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4920E91E29000E9E30 /* earn_order_payment_confirmed.swift */; };
-		E97E5D7A20E91E29000E9E30 /* spend_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4A20E91E29000E9E30 /* spend_order_creation_requested.swift */; };
-		E97E5D7B20E91E29000E9E30 /* wallet_creation_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4B20E91E29000E9E30 /* wallet_creation_succeeded.swift */; };
-		E97E5D7C20E91E29000E9E30 /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4C20E91E29000E9E30 /* earn_order_completion_submitted.swift */; };
-		E97E5D7D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift */; };
-		E97E5D7E20E91E29000E9E30 /* stellar_kin_trustline_setup_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4E20E91E29000E9E30 /* stellar_kin_trustline_setup_succeeded.swift */; };
-		E97E5D7F20E91E29000E9E30 /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D4F20E91E29000E9E30 /* client.swift */; };
-		E97E5D8020E91E29000E9E30 /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5020E91E29000E9E30 /* order_history_item_tapped.swift */; };
-		E97E5D8120E91E29000E9E30 /* order_history_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5120E91E29000E9E30 /* order_history_page_viewed.swift */; };
-		E97E5D8220E91E29000E9E30 /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5220E91E29000E9E30 /* stellar_kin_trustline_setup_failed.swift */; };
-		E97E5D8320E91E29000E9E30 /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5320E91E29000E9E30 /* confirm_purchase_button_tapped.swift */; };
-		E97E5D8420E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5420E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
-		E97E5D8520E91E29000E9E30 /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5520E91E29000E9E30 /* spend_order_creation_received.swift */; };
-		E97E5D8620E91E29000E9E30 /* kin_sdk_initiated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5620E91E29000E9E30 /* kin_sdk_initiated.swift */; };
-		E97E5D8720E91E29000E9E30 /* spend_redeem_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5720E91E29000E9E30 /* spend_redeem_page_viewed.swift */; };
-		E97E5D8820E91E29000E9E30 /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5820E91E29000E9E30 /* spend_order_failed.swift */; };
-		E97E5D8920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift */; };
-		E97E5D8A20E91E29000E9E30 /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5A20E91E29000E9E30 /* spend_order_completion_submitted.swift */; };
-		E97E5D8B20E91E29000E9E30 /* earn_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5B20E91E29000E9E30 /* earn_offer_tapped.swift */; };
-		E97E5D8C20E91E29000E9E30 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5C20E91E29000E9E30 /* types.swift */; };
-		E97E5D8D20E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5D20E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */; };
-		E97E5D8E20E91E29000E9E30 /* entrypoint_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5E20E91E29000E9E30 /* entrypoint_button_tapped.swift */; };
-		E97E5D8F20E91E29000E9E30 /* earn_page_loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D5F20E91E29000E9E30 /* earn_page_loaded.swift */; };
-		E97E5D9020E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D6020E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
-		E97E5D9120E91E29000E9E30 /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D6120E91E29000E9E30 /* earn_order_creation_requested.swift */; };
 		E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D175A20481D8900FEB57A /* OrderCell.swift */; };
 		E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D175B20481D8900FEB57A /* OrderCell.xib */; };
 		E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1763204840C500FEB57A /* OrderViewModel.swift */; };
@@ -244,6 +272,82 @@
 		E92F7B80206923A0008A027F /* SheetTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
 		E92F7B872069992A008A027F /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		E93146322164F52B008F2D74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
+		E93A5495219973F000A32BEA /* restore_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_wallet_completed.swift; sourceTree = "<group>"; };
+		E93A5496219973F000A32BEA /* settings_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_button_tapped.swift; sourceTree = "<group>"; };
+		E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_next_button_tapped.swift; sourceTree = "<group>"; };
+		E93A5498219973F000A32BEA /* earn_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_failed.swift; sourceTree = "<group>"; };
+		E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_page_viewed.swift; sourceTree = "<group>"; };
+		E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_button_tapped.swift; sourceTree = "<group>"; };
+		E93A549B219973F000A32BEA /* earn_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_received.swift; sourceTree = "<group>"; };
+		E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
+		E93A549D219973F000A32BEA /* balance_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = balance_tapped.swift; sourceTree = "<group>"; };
+		E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A549F219973F000A32BEA /* redeem_url_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = redeem_url_tapped.swift; sourceTree = "<group>"; };
+		E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_failed.swift; sourceTree = "<group>"; };
+		E93A54A1219973F000A32BEA /* spend_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completed.swift; sourceTree = "<group>"; };
+		E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_cancelled.swift; sourceTree = "<group>"; };
+		E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_failed.swift; sourceTree = "<group>"; };
+		E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = not_enough_kin_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
+		E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_offer_tapped.swift; sourceTree = "<group>"; };
+		E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_cancelled.swift; sourceTree = "<group>"; };
+		E93A54AA219973F000A32BEA /* kin_balance_updated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_balance_updated.swift; sourceTree = "<group>"; };
+		E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54AC219973F000A32BEA /* earn_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completed.swift; sourceTree = "<group>"; };
+		E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marketplace_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
+		E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_marketplace_page_tapped.swift; sourceTree = "<group>"; };
+		E93A54B1219973F000A32BEA /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_ok_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54B4219973F000A32BEA /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		E93A54B5219973F000A32BEA /* settings_option_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_option_tapped.swift; sourceTree = "<group>"; };
+		E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_payment_confirmed.swift; sourceTree = "<group>"; };
+		E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_later_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_requested.swift; sourceTree = "<group>"; };
+		E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wallet_creation_succeeded.swift; sourceTree = "<group>"; };
+		E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completion_submitted.swift; sourceTree = "<group>"; };
+		E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_cancel_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54BE219973F000A32BEA /* settings_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_succeeded.swift; sourceTree = "<group>"; };
+		E93A54C0219973F000A32BEA /* client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = client.swift; sourceTree = "<group>"; };
+		E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_wallet_completed.swift; sourceTree = "<group>"; };
+		E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_item_tapped.swift; sourceTree = "<group>"; };
+		E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
+		E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_myqrcode_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_send_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_failed.swift; sourceTree = "<group>"; };
+		E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_received.swift; sourceTree = "<group>"; };
+		E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_sdk_initiated.swift; sourceTree = "<group>"; };
+		E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_completed_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54CF219973F000A32BEA /* spend_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_failed.swift; sourceTree = "<group>"; };
+		E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_welcome_screen_page_tapped.swift; sourceTree = "<group>"; };
+		E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_done_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_back_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completion_submitted.swift; sourceTree = "<group>"; };
+		E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_offer_tapped.swift; sourceTree = "<group>"; };
+		E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_start_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54D8219973F000A32BEA /* types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
+		E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
+		E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = entrypoint_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54DC219973F000A32BEA /* earn_page_loaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_page_loaded.swift; sourceTree = "<group>"; };
+		E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_button_tapped.swift; sourceTree = "<group>"; };
+		E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_submitted.swift; sourceTree = "<group>"; };
+		E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_page_viewed.swift; sourceTree = "<group>"; };
+		E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
@@ -289,54 +393,6 @@
 		E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBIEvent.swift; sourceTree = "<group>"; };
 		E97E5D1720E82D8D000E9E30 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		E97E5D2320E8EF93000E9E30 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
-		E97E5D3220E91E28000E9E30 /* earn_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_failed.swift; sourceTree = "<group>"; };
-		E97E5D3320E91E28000E9E30 /* earn_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_received.swift; sourceTree = "<group>"; };
-		E97E5D3420E91E28000E9E30 /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D3520E91E28000E9E30 /* balance_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = balance_tapped.swift; sourceTree = "<group>"; };
-		E97E5D3620E91E28000E9E30 /* redeem_url_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = redeem_url_tapped.swift; sourceTree = "<group>"; };
-		E97E5D3720E91E28000E9E30 /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_failed.swift; sourceTree = "<group>"; };
-		E97E5D3820E91E28000E9E30 /* spend_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completed.swift; sourceTree = "<group>"; };
-		E97E5D3920E91E28000E9E30 /* spend_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_cancelled.swift; sourceTree = "<group>"; };
-		E97E5D3A20E91E28000E9E30 /* earn_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_failed.swift; sourceTree = "<group>"; };
-		E97E5D3B20E91E28000E9E30 /* not_enough_kin_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = not_enough_kin_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D3C20E91E28000E9E30 /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
-		E97E5D3D20E91E28000E9E30 /* spend_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_offer_tapped.swift; sourceTree = "<group>"; };
-		E97E5D3E20E91E28000E9E30 /* spend_redeem_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_button_tapped.swift; sourceTree = "<group>"; };
-		E97E5D3F20E91E28000E9E30 /* earn_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_cancelled.swift; sourceTree = "<group>"; };
-		E97E5D4020E91E28000E9E30 /* kin_balance_updated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_balance_updated.swift; sourceTree = "<group>"; };
-		E97E5D4120E91E28000E9E30 /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
-		E97E5D4220E91E28000E9E30 /* earn_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completed.swift; sourceTree = "<group>"; };
-		E97E5D4320E91E28000E9E30 /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marketplace_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D4420E91E28000E9E30 /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
-		E97E5D4520E91E29000E9E30 /* back_button_on_marketplace_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_marketplace_page_tapped.swift; sourceTree = "<group>"; };
-		E97E5D4620E91E29000E9E30 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
-		E97E5D4720E91E29000E9E30 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
-		E97E5D4820E91E29000E9E30 /* welcome_screen_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D4920E91E29000E9E30 /* earn_order_payment_confirmed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_payment_confirmed.swift; sourceTree = "<group>"; };
-		E97E5D4A20E91E29000E9E30 /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_requested.swift; sourceTree = "<group>"; };
-		E97E5D4B20E91E29000E9E30 /* wallet_creation_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wallet_creation_succeeded.swift; sourceTree = "<group>"; };
-		E97E5D4C20E91E29000E9E30 /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completion_submitted.swift; sourceTree = "<group>"; };
-		E97E5D4D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D4E20E91E29000E9E30 /* stellar_kin_trustline_setup_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_succeeded.swift; sourceTree = "<group>"; };
-		E97E5D4F20E91E29000E9E30 /* client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = client.swift; sourceTree = "<group>"; };
-		E97E5D5020E91E29000E9E30 /* order_history_item_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_item_tapped.swift; sourceTree = "<group>"; };
-		E97E5D5120E91E29000E9E30 /* order_history_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D5220E91E29000E9E30 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
-		E97E5D5320E91E29000E9E30 /* confirm_purchase_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_button_tapped.swift; sourceTree = "<group>"; };
-		E97E5D5420E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_failed.swift; sourceTree = "<group>"; };
-		E97E5D5520E91E29000E9E30 /* spend_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_received.swift; sourceTree = "<group>"; };
-		E97E5D5620E91E29000E9E30 /* kin_sdk_initiated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_sdk_initiated.swift; sourceTree = "<group>"; };
-		E97E5D5720E91E29000E9E30 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
-		E97E5D5820E91E29000E9E30 /* spend_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_failed.swift; sourceTree = "<group>"; };
-		E97E5D5920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_welcome_screen_page_tapped.swift; sourceTree = "<group>"; };
-		E97E5D5A20E91E29000E9E30 /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completion_submitted.swift; sourceTree = "<group>"; };
-		E97E5D5B20E91E29000E9E30 /* earn_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_offer_tapped.swift; sourceTree = "<group>"; };
-		E97E5D5C20E91E29000E9E30 /* types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
-		E97E5D5D20E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
-		E97E5D5E20E91E29000E9E30 /* entrypoint_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = entrypoint_button_tapped.swift; sourceTree = "<group>"; };
-		E97E5D5F20E91E29000E9E30 /* earn_page_loaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_page_loaded.swift; sourceTree = "<group>"; };
-		E97E5D6020E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_submitted.swift; sourceTree = "<group>"; };
-		E97E5D6120E91E29000E9E30 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		E98D17562047FD6100FEB57A /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98D175A20481D8900FEB57A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		E98D175B20481D8900FEB57A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
@@ -421,6 +477,89 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		E93A5494219973F000A32BEA /* client */ = {
+			isa = PBXGroup;
+			children = (
+				E93A5495219973F000A32BEA /* restore_wallet_completed.swift */,
+				E93A5496219973F000A32BEA /* settings_button_tapped.swift */,
+				E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */,
+				E93A5498219973F000A32BEA /* earn_order_failed.swift */,
+				E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */,
+				E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */,
+				E93A549B219973F000A32BEA /* earn_order_creation_received.swift */,
+				E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */,
+				E93A549D219973F000A32BEA /* balance_tapped.swift */,
+				E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */,
+				E93A549F219973F000A32BEA /* redeem_url_tapped.swift */,
+				E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */,
+				E93A54A1219973F000A32BEA /* spend_order_completed.swift */,
+				E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */,
+				E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */,
+				E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */,
+				E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */,
+				E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */,
+				E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */,
+				E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */,
+				E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */,
+				E93A54AA219973F000A32BEA /* kin_balance_updated.swift */,
+				E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */,
+				E93A54AC219973F000A32BEA /* earn_order_completed.swift */,
+				E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */,
+				E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */,
+				E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */,
+				E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */,
+				E93A54B1219973F000A32BEA /* common.swift */,
+				E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */,
+				E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */,
+				E93A54B4219973F000A32BEA /* user.swift */,
+				E93A54B5219973F000A32BEA /* settings_option_tapped.swift */,
+				E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */,
+				E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */,
+				E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */,
+				E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */,
+				E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */,
+				E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */,
+				E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */,
+				E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */,
+				E93A54BE219973F000A32BEA /* settings_page_viewed.swift */,
+				E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */,
+				E93A54C0219973F000A32BEA /* client.swift */,
+				E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */,
+				E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */,
+				E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */,
+				E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */,
+				E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */,
+				E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */,
+				E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */,
+				E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */,
+				E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */,
+				E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */,
+				E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */,
+				E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */,
+				E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */,
+				E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */,
+				E93A54CF219973F000A32BEA /* spend_order_failed.swift */,
+				E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */,
+				E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */,
+				E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */,
+				E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */,
+				E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */,
+				E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */,
+				E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */,
+				E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */,
+				E93A54D8219973F000A32BEA /* types.swift */,
+				E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */,
+				E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */,
+				E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */,
+				E93A54DC219973F000A32BEA /* earn_page_loaded.swift */,
+				E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */,
+				E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */,
+				E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */,
+				E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
 		E942F8A3202C4C4A00DD4B8E /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
@@ -474,7 +613,7 @@
 		E954100420E3B30E0038FF49 /* BI */ = {
 			isa = PBXGroup;
 			children = (
-				E97E5D3120E91E28000E9E30 /* client */,
+				E93A5494219973F000A32BEA /* client */,
 				E954106B20E3B5FA0038FF49 /* BIError.swift */,
 				E954100920E3B3230038FF49 /* BIClient.swift */,
 				E954106820E3B3A10038FF49 /* EventsStore.swift */,
@@ -552,61 +691,6 @@
 				E97E5D1720E82D8D000E9E30 /* Reachability.swift */,
 			);
 			path = Core;
-			sourceTree = "<group>";
-		};
-		E97E5D3120E91E28000E9E30 /* client */ = {
-			isa = PBXGroup;
-			children = (
-				E97E5D3220E91E28000E9E30 /* earn_order_failed.swift */,
-				E97E5D3320E91E28000E9E30 /* earn_order_creation_received.swift */,
-				E97E5D3420E91E28000E9E30 /* spend_thankyou_page_viewed.swift */,
-				E97E5D3520E91E28000E9E30 /* balance_tapped.swift */,
-				E97E5D3620E91E28000E9E30 /* redeem_url_tapped.swift */,
-				E97E5D3720E91E28000E9E30 /* spend_order_creation_failed.swift */,
-				E97E5D3820E91E28000E9E30 /* spend_order_completed.swift */,
-				E97E5D3920E91E28000E9E30 /* spend_order_cancelled.swift */,
-				E97E5D3A20E91E28000E9E30 /* earn_order_creation_failed.swift */,
-				E97E5D3B20E91E28000E9E30 /* not_enough_kin_page_viewed.swift */,
-				E97E5D3C20E91E28000E9E30 /* stellar_account_creation_requested.swift */,
-				E97E5D3D20E91E28000E9E30 /* spend_offer_tapped.swift */,
-				E97E5D3E20E91E28000E9E30 /* spend_redeem_button_tapped.swift */,
-				E97E5D3F20E91E28000E9E30 /* earn_order_cancelled.swift */,
-				E97E5D4020E91E28000E9E30 /* kin_balance_updated.swift */,
-				E97E5D4120E91E28000E9E30 /* welcome_screen_button_tapped.swift */,
-				E97E5D4220E91E28000E9E30 /* earn_order_completed.swift */,
-				E97E5D4320E91E28000E9E30 /* marketplace_page_viewed.swift */,
-				E97E5D4420E91E28000E9E30 /* general_ecosystem_sdk_error.swift */,
-				E97E5D4520E91E29000E9E30 /* back_button_on_marketplace_page_tapped.swift */,
-				E97E5D4620E91E29000E9E30 /* common.swift */,
-				E97E5D4720E91E29000E9E30 /* user.swift */,
-				E97E5D4820E91E29000E9E30 /* welcome_screen_page_viewed.swift */,
-				E97E5D4920E91E29000E9E30 /* earn_order_payment_confirmed.swift */,
-				E97E5D4A20E91E29000E9E30 /* spend_order_creation_requested.swift */,
-				E97E5D4B20E91E29000E9E30 /* wallet_creation_succeeded.swift */,
-				E97E5D4C20E91E29000E9E30 /* earn_order_completion_submitted.swift */,
-				E97E5D4D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift */,
-				E97E5D4E20E91E29000E9E30 /* stellar_kin_trustline_setup_succeeded.swift */,
-				E97E5D4F20E91E29000E9E30 /* client.swift */,
-				E97E5D5020E91E29000E9E30 /* order_history_item_tapped.swift */,
-				E97E5D5120E91E29000E9E30 /* order_history_page_viewed.swift */,
-				E97E5D5220E91E29000E9E30 /* stellar_kin_trustline_setup_failed.swift */,
-				E97E5D5320E91E29000E9E30 /* confirm_purchase_button_tapped.swift */,
-				E97E5D5420E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_failed.swift */,
-				E97E5D5520E91E29000E9E30 /* spend_order_creation_received.swift */,
-				E97E5D5620E91E29000E9E30 /* kin_sdk_initiated.swift */,
-				E97E5D5720E91E29000E9E30 /* spend_redeem_page_viewed.swift */,
-				E97E5D5820E91E29000E9E30 /* spend_order_failed.swift */,
-				E97E5D5920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift */,
-				E97E5D5A20E91E29000E9E30 /* spend_order_completion_submitted.swift */,
-				E97E5D5B20E91E29000E9E30 /* earn_offer_tapped.swift */,
-				E97E5D5C20E91E29000E9E30 /* types.swift */,
-				E97E5D5D20E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */,
-				E97E5D5E20E91E29000E9E30 /* entrypoint_button_tapped.swift */,
-				E97E5D5F20E91E29000E9E30 /* earn_page_loaded.swift */,
-				E97E5D6020E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_submitted.swift */,
-				E97E5D6120E91E29000E9E30 /* earn_order_creation_requested.swift */,
-			);
-			path = client;
 			sourceTree = "<group>";
 		};
 		E98D17892051395100FEB57A /* nibs */ = {
@@ -926,116 +1010,144 @@
 			files = (
 				E9DC2021216B807500746B81 /* Xib+localization.swift in Sources */,
 				E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */,
-				E97E5D6920E91E29000E9E30 /* spend_order_cancelled.swift in Sources */,
+				E93A54EA219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift in Sources */,
 				E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */,
+				E93A54FA219973F000A32BEA /* marketplace_page_viewed.swift in Sources */,
 				E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */,
-				E97E5D8A20E91E29000E9E30 /* spend_order_completion_submitted.swift in Sources */,
 				E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */,
-				E97E5D8920E91E29000E9E30 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
+				E93A5507219973F000A32BEA /* earn_order_completion_submitted.swift in Sources */,
+				E93A5511219973F000A32BEA /* restore_password_entry_back_button_tapped.swift in Sources */,
+				E93A5519219973F000A32BEA /* spend_redeem_page_viewed.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
+				E93A551F219973F000A32BEA /* restore_password_done_button_tapped.swift in Sources */,
+				E93A54F4219973F000A32BEA /* spend_redeem_button_tapped.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
+				E93A54FD219973F000A32BEA /* common.swift in Sources */,
+				E93A54F2219973F000A32BEA /* spend_offer_tapped.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
+				E93A5522219973F000A32BEA /* earn_offer_tapped.swift in Sources */,
+				E93A551B219973F000A32BEA /* spend_order_failed.swift in Sources */,
+				E93A54E9219973F000A32BEA /* balance_tapped.swift in Sources */,
 				E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
-				E97E5D7C20E91E29000E9E30 /* earn_order_completion_submitted.swift in Sources */,
-				E97E5D8120E91E29000E9E30 /* order_history_page_viewed.swift in Sources */,
-				E97E5D6220E91E29000E9E30 /* earn_order_failed.swift in Sources */,
+				E93A54FB219973F000A32BEA /* general_ecosystem_sdk_error.swift in Sources */,
+				E93A552A219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */,
+				E93A54F6219973F000A32BEA /* kin_balance_updated.swift in Sources */,
 				E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */,
 				E98D1784204FD09200FEB57A /* UIView+extensions.swift in Sources */,
+				E93A5506219973F000A32BEA /* wallet_creation_succeeded.swift in Sources */,
 				E954A62D2058163C00F01C8A /* OrderError.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
+				E93A54EF219973F000A32BEA /* earn_order_creation_failed.swift in Sources */,
+				E93A550D219973F000A32BEA /* backup_wallet_completed.swift in Sources */,
+				E93A5520219973F000A32BEA /* settings_back_button_tapped.swift in Sources */,
+				E93A54F5219973F000A32BEA /* earn_order_cancelled.swift in Sources */,
+				E93A5516219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */,
 				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
+				E93A5508219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift in Sources */,
 				91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */,
-				E97E5D7020E91E29000E9E30 /* kin_balance_updated.swift in Sources */,
-				E97E5D7B20E91E29000E9E30 /* wallet_creation_succeeded.swift in Sources */,
+				E93A550C219973F000A32BEA /* client.swift in Sources */,
+				E93A5521219973F000A32BEA /* spend_order_completion_submitted.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
-				E97E5D7620E91E29000E9E30 /* common.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
-				E97E5D8C20E91E29000E9E30 /* types.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
+				E93A5528219973F000A32BEA /* earn_page_loaded.swift in Sources */,
+				E93A5515219973F000A32BEA /* backup_qr_code_send_button_tapped.swift in Sources */,
+				E93A5502219973F000A32BEA /* welcome_screen_page_viewed.swift in Sources */,
+				E93A54E8219973F000A32BEA /* spend_thankyou_page_viewed.swift in Sources */,
 				E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */,
+				E93A5501219973F000A32BEA /* settings_option_tapped.swift in Sources */,
+				E93A54ED219973F000A32BEA /* spend_order_completed.swift in Sources */,
+				E93A54E5219973F000A32BEA /* backup_popup_page_viewed.swift in Sources */,
+				E93A54FE219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift in Sources */,
 				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
-				E97E5D8020E91E29000E9E30 /* order_history_item_tapped.swift in Sources */,
-				E97E5D8820E91E29000E9E30 /* spend_order_failed.swift in Sources */,
 				E954106920E3B3A10038FF49 /* EventsStore.swift in Sources */,
-				E97E5D8420E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
-				E97E5D8220E91E29000E9E30 /* stellar_kin_trustline_setup_failed.swift in Sources */,
-				E97E5D6320E91E29000E9E30 /* earn_order_creation_received.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
-				E97E5D6C20E91E29000E9E30 /* stellar_account_creation_requested.swift in Sources */,
-				E97E5D6A20E91E29000E9E30 /* earn_order_creation_failed.swift in Sources */,
+				E93A5504219973F000A32BEA /* backup_popup_later_button_tapped.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
-				E97E5D9120E91E29000E9E30 /* earn_order_creation_requested.swift in Sources */,
-				E97E5D8E20E91E29000E9E30 /* entrypoint_button_tapped.swift in Sources */,
-				E97E5D8F20E91E29000E9E30 /* earn_page_loaded.swift in Sources */,
-				E97E5D7720E91E29000E9E30 /* user.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,
-				E97E5D6D20E91E29000E9E30 /* spend_offer_tapped.swift in Sources */,
 				E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */,
+				E93A550B219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift in Sources */,
+				E93A54F0219973F000A32BEA /* not_enough_kin_page_viewed.swift in Sources */,
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
+				E93A54F9219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift in Sources */,
 				E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */,
+				E93A552B219973F000A32BEA /* restore_password_entry_page_viewed.swift in Sources */,
+				E93A54F8219973F000A32BEA /* earn_order_completed.swift in Sources */,
 				E9540F5020E01BAF0038FF49 /* Environment.swift in Sources */,
+				E93A54F1219973F000A32BEA /* stellar_account_creation_requested.swift in Sources */,
+				E93A5525219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */,
+				E93A5517219973F000A32BEA /* spend_order_creation_received.swift in Sources */,
 				E954100A20E3B3230038FF49 /* BIClient.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
+				E93A5523219973F000A32BEA /* backup_start_button_tapped.swift in Sources */,
+				E93A5509219973F000A32BEA /* confirm_purchase_page_viewed.swift in Sources */,
+				E93A54EB219973F000A32BEA /* redeem_url_tapped.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
-				E97E5D7E20E91E29000E9E30 /* stellar_kin_trustline_setup_succeeded.swift in Sources */,
+				E93A5524219973F000A32BEA /* types.swift in Sources */,
+				E93A5505219973F000A32BEA /* spend_order_creation_requested.swift in Sources */,
+				E93A551A219973F000A32BEA /* backup_completed_page_viewed.swift in Sources */,
+				E93A54FC219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift in Sources */,
+				E93A5512219973F000A32BEA /* confirm_purchase_button_tapped.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
-				E97E5D6520E91E29000E9E30 /* balance_tapped.swift in Sources */,
-				E97E5D6720E91E29000E9E30 /* spend_order_creation_failed.swift in Sources */,
-				E97E5D6420E91E29000E9E30 /* spend_thankyou_page_viewed.swift in Sources */,
+				E93A551D219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
+				E93A54E6219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift in Sources */,
+				E93A550A219973F000A32BEA /* settings_page_viewed.swift in Sources */,
 				E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */,
+				E93A5510219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift in Sources */,
+				E93A5514219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift in Sources */,
+				E93A5529219973F000A32BEA /* backup_popup_button_tapped.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
-				E97E5D7F20E91E29000E9E30 /* client.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
+				E93A550E219973F000A32BEA /* order_history_item_tapped.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
-				E97E5D7820E91E29000E9E30 /* welcome_screen_page_viewed.swift in Sources */,
+				E93A551C219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift in Sources */,
+				E93A551E219973F000A32BEA /* backup_qr_code_back_button_tapped.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
-				E97E5D7120E91E29000E9E30 /* welcome_screen_button_tapped.swift in Sources */,
-				E97E5D7D20E91E29000E9E30 /* confirm_purchase_page_viewed.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
-				E97E5D6B20E91E29000E9E30 /* not_enough_kin_page_viewed.swift in Sources */,
-				E97E5D8B20E91E29000E9E30 /* earn_offer_tapped.swift in Sources */,
+				E93A5526219973F000A32BEA /* backup_qr_code_page_viewed.swift in Sources */,
 				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
-				E97E5D7920E91E29000E9E30 /* earn_order_payment_confirmed.swift in Sources */,
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
-				E97E5D6F20E91E29000E9E30 /* earn_order_cancelled.swift in Sources */,
+				E93A5500219973F000A32BEA /* user.swift in Sources */,
+				E93A54E4219973F000A32BEA /* earn_order_failed.swift in Sources */,
 				E92501BA20614A4400E2E738 /* Flows.swift in Sources */,
-				E97E5D7420E91E29000E9E30 /* general_ecosystem_sdk_error.swift in Sources */,
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
+				E93A54EE219973F000A32BEA /* spend_order_cancelled.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
+				E93A552C219973F000A32BEA /* earn_order_creation_requested.swift in Sources */,
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,
-				E97E5D7520E91E29000E9E30 /* back_button_on_marketplace_page_tapped.swift in Sources */,
+				E93A5527219973F000A32BEA /* entrypoint_button_tapped.swift in Sources */,
+				E93A5518219973F000A32BEA /* kin_sdk_initiated.swift in Sources */,
+				E93A5513219973F000A32BEA /* backup_create_password_page_viewed.swift in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
-				E97E5D7320E91E29000E9E30 /* marketplace_page_viewed.swift in Sources */,
-				E97E5D8320E91E29000E9E30 /* confirm_purchase_button_tapped.swift in Sources */,
+				E93A54EC219973F000A32BEA /* spend_order_creation_failed.swift in Sources */,
 				E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */,
-				E97E5D6E20E91E29000E9E30 /* spend_redeem_button_tapped.swift in Sources */,
-				E97E5D8620E91E29000E9E30 /* kin_sdk_initiated.swift in Sources */,
 				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
+				E93A54E3219973F000A32BEA /* backup_create_password_next_button_tapped.swift in Sources */,
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
-				E97E5D7A20E91E29000E9E30 /* spend_order_creation_requested.swift in Sources */,
-				E97E5D7220E91E29000E9E30 /* earn_order_completed.swift in Sources */,
+				E93A550F219973F000A32BEA /* order_history_page_viewed.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
-				E97E5D6820E91E29000E9E30 /* spend_order_completed.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,
-				E97E5D9020E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */,
-				E97E5D8D20E91E29000E9E30 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */,
+				E93A5503219973F000A32BEA /* earn_order_payment_confirmed.swift in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
+				E93A54F7219973F000A32BEA /* welcome_screen_button_tapped.swift in Sources */,
+				E93A54FF219973F000A32BEA /* backup_create_password_back_button_tapped.swift in Sources */,
 				E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */,
-				E97E5D6620E91E29000E9E30 /* redeem_url_tapped.swift in Sources */,
+				E93A54F3219973F000A32BEA /* backup_welcome_page_viewed.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
 				E9DC202C216B97E900746B81 /* String+localized.swift in Sources */,
-				E97E5D8720E91E29000E9E30 /* spend_redeem_page_viewed.swift in Sources */,
+				E93A54E7219973F000A32BEA /* earn_order_creation_received.swift in Sources */,
+				E93A54E1219973F000A32BEA /* restore_wallet_completed.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */,
+				E93A54E2219973F000A32BEA /* settings_button_tapped.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
-				E97E5D8520E91E29000E9E30 /* spend_order_creation_received.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

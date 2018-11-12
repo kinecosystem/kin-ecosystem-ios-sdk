@@ -25,7 +25,7 @@ public struct CommonProxy {
         return Common(
             eventID: eventID(),
             platform: "iOS",
-            schemaVersion: "8e9577770fd487a6da617dfdd3256f74a3f58a7c",
+            schemaVersion: "8f20fa0048d59aca4cb0aac313729e7b8ecb1394",
             timestamp: timestamp(),
             userID: userID(),
             version: version())

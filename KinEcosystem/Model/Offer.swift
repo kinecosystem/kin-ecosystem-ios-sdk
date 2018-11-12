@@ -11,7 +11,7 @@
 import Foundation
 import CoreData
 
-enum OfferType: String {
+public enum OfferType: String {
     case earn
     case spend
 }
@@ -77,6 +77,7 @@ class Offer: NSManagedObject, NetworkSyncable {
                            description: description_,
                            amount: amount,
                            image: image,
+                           offerType: offerType,
                            isModal: isModal)
     }
     
@@ -110,7 +111,7 @@ class Offer: NSManagedObject, NetworkSyncable {
         description_ = nativeOffer.description
         image = nativeOffer.image
         amount = nativeOffer.amount
-        offerType = .spend
+        offerType = nativeOffer.offerType
         offerContentType = .external
         content = ""
         isModal = nativeOffer.isModal

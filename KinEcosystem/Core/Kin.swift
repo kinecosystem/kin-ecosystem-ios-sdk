@@ -30,11 +30,13 @@ public struct NativeOffer: Equatable {
     public let amount: Int32
     public let image: String
     public let isModal: Bool
+    public let offerType: OfferType
     public init(id: String,
                 title: String,
                 description: String,
                 amount: Int32,
                 image: String,
+                offerType: OfferType = .spend,
                 isModal: Bool = false) {
         self.id = id
         self.title = title
@@ -42,6 +44,7 @@ public struct NativeOffer: Equatable {
         self.amount = amount
         self.image = image
         self.isModal = isModal
+        self.offerType = offerType
     }
 }
 
