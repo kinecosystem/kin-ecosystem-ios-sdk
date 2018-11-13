@@ -187,12 +187,20 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer
+            let report: (NativeOffer) -> () = { nativeOffer in
+                if nativeOffer.offerType == .spend {
+                    Kin.track { try SpendOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, origin: .external) }
+                } else {
+                    Kin.track { try EarnOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, offerType: .external) }
+                }
+            }
             if nativeOffer.isModal {
                 Kin.shared.closeMarketPlace() {
-                    Kin.track { try SpendOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, origin: .external) }
+                    report(nativeOffer)
                     Kin.shared.nativeOfferHandler?(nativeOffer)
                 }
             } else {
+                report(nativeOffer)
                 Kin.shared.nativeOfferHandler?(nativeOffer)
             }
             return

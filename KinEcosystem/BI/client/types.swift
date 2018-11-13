@@ -8,6 +8,10 @@ struct KBITypes {
         case quiz = "quiz"
         case tutorial = "tutorial"
     }
+    enum SettingOption: String, Codable {
+        case backup = "backup"
+        case restore = "restore"
+    }
     enum Origin: String, Codable {
         case external = "external"
         case marketplace = "marketplace"

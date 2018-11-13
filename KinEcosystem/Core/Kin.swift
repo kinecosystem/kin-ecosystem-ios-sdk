@@ -14,6 +14,7 @@ import StellarErrors
 
 let SDKVersion = "0.5.6"
 
+public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
@@ -30,11 +31,13 @@ public struct NativeOffer: Equatable {
     public let amount: Int32
     public let image: String
     public let isModal: Bool
+    public let offerType: OfferType
     public init(id: String,
                 title: String,
                 description: String,
                 amount: Int32,
                 image: String,
+                offerType: OfferType = .spend,
                 isModal: Bool = false) {
         self.id = id
         self.title = title
@@ -42,6 +45,7 @@ public struct NativeOffer: Equatable {
         self.amount = amount
         self.image = image
         self.isModal = isModal
+        self.offerType = offerType
     }
 }
 
@@ -397,6 +401,22 @@ public class Kin {
                 context.delete(offer)
             }
         }, with: NSPredicate(with: ["id" : nativeOfferId]))
+    }
+    
+    public func userStats(handler: @escaping KinUserStatsCallback) {
+        guard let core = core else {
+            logError("Kin not started")
+            handler(nil, KinEcosystemError.client(.notStarted, nil))
+            return
+        }
+        core.network.objectAtPath("users/me", type: UserProfile.self)
+            .then(on: DispatchQueue.main) { profile in
+                handler(profile.stats, nil)
+            }.error { error in
+                DispatchQueue.main.async {
+                   handler(nil, KinEcosystemError.transform(error))
+                }
+            }
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {

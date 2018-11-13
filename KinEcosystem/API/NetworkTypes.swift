@@ -116,3 +116,53 @@ struct OpenOrder: Decodable {
 struct JWTOrderSubmission: Encodable {
     var jwt: String
 }
+
+public struct UserStats: Decodable, CustomStringConvertible {
+    public var description: String {
+        return """
+        earn count:     \(earnCount)
+        spend count:    \(spendCount)
+        last earn date: \({ () -> String in
+        guard let dateRawString = lastEarnDate,
+              let dateDescription = Iso8601DateFormatter.string(from: dateRawString) else {
+            return "n/a"
+        }
+        return dateDescription
+        }()
+        )
+        last spend date: \({ () -> String in
+        guard let dateRawString = lastSpendDate,
+        let dateDescription = Iso8601DateFormatter.string(from: dateRawString) else {
+        return "n/a"
+        }
+        return dateDescription
+        }()
+        )
+        """
+    }
+    var earnCount: Int32
+    var spendCount: Int32
+    var lastEarnDate: Date?
+    var lastSpendDate: Date?
+    enum UserStatsKeys: String, CodingKey {
+        case earnCount = "earn_count"
+        case spendCount = "spend_count"
+        case lastEarnDate = "last_earn_date"
+        case lastSpendDate = "last_spend_date"
+    }
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: UserStatsKeys.self)
+        earnCount = try values.decode(Int32.self, forKey: .earnCount)
+        spendCount = try values.decode(Int32.self, forKey: .spendCount)
+        if let earnDateString = try values.decodeIfPresent(String.self, forKey: .lastEarnDate) {
+            lastEarnDate = Iso8601DateFormatter.date(from: earnDateString)
+        }
+        if let lastSpendString = try values.decodeIfPresent(String.self, forKey: .lastSpendDate) {
+            lastSpendDate = Iso8601DateFormatter.date(from: lastSpendString)
+        }
+    }
+}
+
+public struct UserProfile: Decodable {
+    var stats: UserStats?
+}
