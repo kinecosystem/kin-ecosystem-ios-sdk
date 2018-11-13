@@ -452,5 +452,22 @@ Kin.shared.hasAccount(peer: otherUserId) { [weak self] response, error in
 }
 ```
 
+### User's Order History Stats ###
+
+This API provides user's stats which include information such number of Earn/Spend orders completed by the user or last earn/spend dates.
+UserStats information could be used for re-engaging users, provide specific experience for users who never earn before etc.
+
+```swift
+Kin.shared.userStats { [weak self] stats, error in
+    if let result = stats {
+        self?.presentAlert("User Stats", body: result.description)
+    } else if let err = error {
+        self?.presentAlert("Error", body: err.localizedDescription)
+    } else {
+        self?.presentAlert("Error", body: "Unknown Error")
+    }
+}
+```
+
 ## License
 The kin-ecosystem-ios-sdk library is licensed under [MIT license](LICENSE.md).

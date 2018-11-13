@@ -14,6 +14,7 @@ import StellarErrors
 
 let SDKVersion = "0.5.6"
 
+public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
@@ -400,6 +401,22 @@ public class Kin {
                 context.delete(offer)
             }
         }, with: NSPredicate(with: ["id" : nativeOfferId]))
+    }
+    
+    public func userStats(handler: @escaping KinUserStatsCallback) {
+        guard let core = core else {
+            logError("Kin not started")
+            handler(nil, KinEcosystemError.client(.notStarted, nil))
+            return
+        }
+        core.network.objectAtPath("users/me", type: UserProfile.self)
+            .then(on: DispatchQueue.main) { profile in
+                handler(profile.stats, nil)
+            }.error { error in
+                DispatchQueue.main.async {
+                   handler(nil, KinEcosystemError.transform(error))
+                }
+            }
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
