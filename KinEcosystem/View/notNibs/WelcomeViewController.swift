@@ -39,16 +39,17 @@ class WelcomeViewController: KinViewController {
         Kin.track { try WelcomeScreenButtonTapped() }
         getStartedButton.isEnabled = false
         shrinkButton()
-            .then(on: .main) { [weak self] in
-                self?.diamondsLoader.startAnimating()
-                self?.onboard()
-            .then(on: .main) {
+            .then(on: .main) { () -> Promise<Void> in
+                self.diamondsLoader.startAnimating()
+                return self.onboard()
+            }.then(on: .main) { [weak self] in
                 self?.diamondsLoader.stopAnimating() {
                     self?.presentMarketplace()
                 }
             }
-        }.error { error in
-
+            .error { error in
+                logError("onboarding failed: error: \(KinEcosystemError.transform(error))")
+                Kin.shared.closeMarketPlace()
         }
     }
 
@@ -96,12 +97,27 @@ class WelcomeViewController: KinViewController {
 
     func onboard() -> Promise<Void> {
         let p = Promise<Void>()
-        if (self.core.blockchain.onboarded) {
+        if (core.blockchain.onboarded) {
             p.signal(())
         } else {
-            self.core.blockchain.onboardEvent.on(next: { _ in
+            if let _ = core.blockchain.onboardError {
+                // blockchain onboard already failed. Try again to invoke onboard event.
+                _ = core.blockchain.onboard()
+            }
+            core.blockchain.onboardEvent.on(next: { [weak self] success in
+                guard success else {
+                    if let error = self?.core.blockchain.onboardError {
+                        p.signal(error)
+                        Kin.track { try GeneralEcosystemSDKError(errorReason: "Onboarding failed (welcome screen), error: \(error)") }
+                    } else {
+                        p.signal(KinEcosystemError.client(.internalInconsistency, nil))
+                        Kin.track { try GeneralEcosystemSDKError(errorReason: "Onboarding failed (welcome screen), error: n/a") }
+                    }
+                    
+                    return
+                }
                 p.signal(())
-            }).add(to: self.linkBag)
+            }).add(to: linkBag)
         }
         return p
     }
