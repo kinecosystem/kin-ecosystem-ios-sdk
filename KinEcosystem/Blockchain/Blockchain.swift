@@ -49,6 +49,7 @@ class Blockchain {
     private var balanceObservers = [String : (Balance) -> ()]()
     private var paymentsWatcher: KinCoreSDK.PaymentWatch?
     private var balanceWatcher: KinCoreSDK.BalanceWatch?
+    private(set) var onboardError: Error? = nil
     let onboardEvent = Observable<Bool>()
     fileprivate(set) var balanceObservable = Observable<Balance>()
     fileprivate(set) var lastBalance: Balance? {
@@ -83,10 +84,11 @@ class Blockchain {
         set {
             guard newValue else {
                 account.extra = nil
+                onboardEvent.next(false)
                 return
             }
+            onboardError = nil
             onboardEvent.next(true)
-            onboardEvent.finish()
             account.extra = Data()
         }
     }
@@ -157,10 +159,14 @@ class Blockchain {
                                     p.signal(())
                                 }.error { error in
                                     Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
+                                    self.onboardError = error
                                     p.signal(error)
+                                    self.onboarded = false
                                 }
                             } catch {
+                                self.onboardError = error
                                 p.signal(error)
+                                self.onboarded = false
                             }
                         case .missingBalance:
                             self.account.activate().then { _ in
@@ -170,18 +176,27 @@ class Blockchain {
                                 p.signal(())
                             }.error { error in
                                 Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
+                                self.onboardError = error
                                 p.signal(error)
+                                self.onboarded = false
                             }
                         default:
+                            self.onboardError = KinError.unknown
                             p.signal(KinError.unknown)
+                            self.onboarded = false
+                            
                         }
                     }
                     else {
+                        self.onboardError = bError
                         p.signal(bError)
+                        self.onboarded = false
                     }
                 }
                 else {
+                    self.onboardError = bError
                     p.signal(bError)
+                    self.onboarded = false
                 }
         }
 
