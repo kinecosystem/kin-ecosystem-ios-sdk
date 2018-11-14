@@ -10,6 +10,7 @@ import UIKit
 import WebKit
 import CoreDataStack
 import KinUtil
+import MessageUI
 
 enum JSFunctions: String {
     case handleResult
@@ -61,6 +62,7 @@ class EarnOfferViewController: KinViewController {
         contentController.addUserScript(disableCalloutScript)
 
         config.userContentController = contentController
+        
         web = WKWebView(frame: .zero, configuration: config)
         web.scrollView.delaysContentTouches = false
         web.scrollView.isScrollEnabled = true
@@ -70,6 +72,7 @@ class EarnOfferViewController: KinViewController {
         web.scrollView.delegate = self
         web.navigationDelegate = self
         web.translatesAutoresizingMaskIntoConstraints = false
+        web.uiDelegate = self as? WKUIDelegate
         view.addSubview(web)
         web.fillSuperview()
         web.layoutIfNeeded()
@@ -118,7 +121,7 @@ class EarnOfferViewController: KinViewController {
 
 
 @available(iOS 9.0, *)
-extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate {
+extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate, MFMailComposeViewControllerDelegate {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         logVerbose("got messgae: \(message.name)")
         switch message.name {
@@ -126,9 +129,9 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
             loadContent()
         case JSFunctions.handleResult.rawValue:
             guard let jsonString = (message.body as? NSArray)?.firstObject as? String else {
-                        earn.signal(EarnOfferHTMLError.invalidJSResult)
-                        self.navigationController?.dismiss(animated: true)
-                        return
+                earn.signal(EarnOfferHTMLError.invalidJSResult)
+                self.navigationController?.dismiss(animated: true)
+                return
             }
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
@@ -147,10 +150,41 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
         }
     }
     func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
-
+        
     }
-
+    
     func viewForZooming(in scrollView: UIScrollView) -> UIView? {
         return nil
+    }
+    
+    func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction, decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
+        switch navigationAction.request.url?.scheme {
+        case "mailto"?:
+            let composeVC = MFMailComposeViewController()
+            composeVC.mailComposeDelegate = self
+            if  let url = navigationAction.request.url,
+                let components = NSURLComponents(url: url, resolvingAgainstBaseURL:false) {
+                if let subject = components.queryItems?.filter({$0.name == "subject"}).first?.value {
+                    composeVC.setSubject(subject)
+                }
+                if let body = components.queryItems?.filter({$0.name == "body"}).first?.value {
+                    composeVC.setMessageBody(body, isHTML: false)
+                }
+                if let recipient = components.path {
+                    composeVC.setToRecipients([recipient])
+                }
+            }
+            
+            if MFMessageComposeViewController.canSendText() {
+                self.present(composeVC, animated: true, completion: nil)
+            }
+            decisionHandler(.cancel)
+        default:
+            decisionHandler(.allow)
+        }
+    }
+    
+    func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
+        controller.dismiss(animated: true, completion: nil)
     }
 }
