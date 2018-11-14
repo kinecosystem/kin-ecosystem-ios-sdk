@@ -161,6 +161,11 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
         switch navigationAction.request.url?.scheme {
         case "mailto"?:
             let composeVC = MFMailComposeViewController()
+            // yep, we actually need this guard here. It does return a nil object when there's no mail accounts.
+            guard composeVC != nil else {
+                decisionHandler(.cancel)
+                return
+            }
             composeVC.mailComposeDelegate = self
             if  let url = navigationAction.request.url,
                 let components = NSURLComponents(url: url, resolvingAgainstBaseURL:false) {
