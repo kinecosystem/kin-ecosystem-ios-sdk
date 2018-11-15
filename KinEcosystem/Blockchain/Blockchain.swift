@@ -98,7 +98,7 @@ class Blockchain {
             throw KinEcosystemError.client(.badRequest, nil)
         }
         let provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
-        let client = try KinClient(provider: provider, appId: AppId(appId))
+        let client = KinClient(provider: provider)
         self.client = client
     }
 
