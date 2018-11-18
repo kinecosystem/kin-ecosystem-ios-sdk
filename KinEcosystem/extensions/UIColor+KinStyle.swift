@@ -68,4 +68,17 @@ extension UIColor {
 	@nonobjc class var kinLightAqua: UIColor { 
 		return UIColor(red: 130.0 / 255.0, green: 255.0 / 255.0, blue: 238.0 / 255.0, alpha: 1.0)
 	}
+    
+    @nonobjc class var kinPrimaryBlue: UIColor {
+        return UIColor(red: 0.0, green: 0.0, blue: 1.0, alpha: 1.0)
+    }
+
+    @nonobjc class var kinWarning: UIColor {
+        return UIColor(red: 255.0 / 255.0, green: 2.0 / 255.0, blue: 50.0 / 255.0, alpha: 1.0)
+    }
+    
+    @nonobjc class var kinSuccess: UIColor {
+        return UIColor(red: 0.0 / 255.0, green: 208.0 / 255.0, blue: 102.0 / 255.0, alpha: 1.0)
+    }
+
 }

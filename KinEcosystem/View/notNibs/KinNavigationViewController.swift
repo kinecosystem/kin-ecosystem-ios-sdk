@@ -23,7 +23,6 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     }
 
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var barBackground: UIImageView!
     @IBOutlet weak var balanceViewContainer: UIView!
 
     fileprivate let transitionController = UIViewController()
@@ -35,10 +34,6 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
 
     var kinChildViewControllers: [KinNavigationChildController] {
         return transitionController.childViewControllers as! [KinNavigationChildController]
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     override var edgesForExtendedLayout: UIRectEdge {
@@ -62,15 +57,12 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     }
 
     fileprivate func setupNavigationBarAppearance() {
-        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationBar.isTranslucent = true
-        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.delegate = self
-        let colors = [UIColor.kinAzure, UIColor.kinBrightBlueTwo]
-        barBackground.image = UINavigationBar.gradient(size: barBackground.bounds.size, colors: colors)
+        navigationBar.tintColor = .black
     }
 
     fileprivate func setupTransitionController() {
