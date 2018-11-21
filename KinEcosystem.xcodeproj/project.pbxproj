@@ -51,6 +51,9 @@
 		E92BA45B21A19C0A00C952D8 /* ExplanationTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43F21A19C0A00C952D8 /* ExplanationTemplateViewController.swift */; };
 		E92BA45C21A19C0A00C952D8 /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA44021A19C0A00C952D8 /* FlowController.swift */; };
 		E92BA45D21A19C0A00C952D8 /* QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA44121A19C0A00C952D8 /* QR.swift */; };
+		E92BA46B21A19FFF00C952D8 /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */; };
+		E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */; };
+		E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
 		E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7E206921BC008A027F /* SpendViewModel.swift */; };
@@ -314,6 +317,9 @@
 		E92BA43F21A19C0A00C952D8 /* ExplanationTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplanationTemplateViewController.swift; sourceTree = "<group>"; };
 		E92BA44021A19C0A00C952D8 /* FlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
 		E92BA44121A19C0A00C952D8 /* QR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QR.swift; sourceTree = "<group>"; };
+		E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeBarButtonItem.swift; sourceTree = "<group>"; };
+		E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = KinEcosystem/View/notNibs/SettingsViewController.swift; sourceTree = SOURCE_ROOT; };
+		E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kin+BackupRestore.swift"; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
@@ -569,6 +575,7 @@
 		E92BA43221A19C0A00C952D8 /* notNibs */ = {
 			isa = PBXGroup;
 			children = (
+				E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */,
 				E92BA43321A19C0A00C952D8 /* BackupCompletedViewController.swift */,
 				E92BA43421A19C0A00C952D8 /* BRViewController.swift */,
 				E92BA43521A19C0A00C952D8 /* BackupFlowController.swift */,
@@ -835,6 +842,7 @@
 			isa = PBXGroup;
 			children = (
 				91A4EA8720CFB22E00C3399F /* KinViewController.swift */,
+				E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */,
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
 				E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */,
@@ -861,6 +869,7 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
 				E9DC2026216B97E900746B81 /* String+localized.swift */,
 				E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */,
 				E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */,
@@ -1139,6 +1148,7 @@
 				E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */,
 				E93A54FA219973F000A32BEA /* marketplace_page_viewed.swift in Sources */,
 				E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */,
+				E92BA46B21A19FFF00C952D8 /* BadgeBarButtonItem.swift in Sources */,
 				E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
 				E93A5507219973F000A32BEA /* earn_order_completion_submitted.swift in Sources */,
@@ -1239,6 +1249,7 @@
 				E93A5514219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift in Sources */,
 				E93A5529219973F000A32BEA /* backup_popup_button_tapped.swift in Sources */,
 				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
+				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E93A550E219973F000A32BEA /* order_history_item_tapped.swift in Sources */,
@@ -1272,6 +1283,7 @@
 				E93A54E3219973F000A32BEA /* backup_create_password_next_button_tapped.swift in Sources */,
 				E92BA45821A19C0A00C952D8 /* BackupIntroViewController.swift in Sources */,
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
+				E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */,
 				E93A550F219973F000A32BEA /* order_history_page_viewed.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,

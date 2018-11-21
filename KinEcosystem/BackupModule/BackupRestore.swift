@@ -10,7 +10,7 @@ import KinUtil
 
 public protocol KeystoreProvider {
     func exportAccount(_ password: String) throws -> String
-    func importAccount(keystore: String, password: String) throws
+    func importAccount(keystore: String, password: String, completion: (Error?) -> ())
     func validatePassword(_ password: String) -> Bool
 }
 

@@ -51,7 +51,7 @@ class MarketplaceViewController: KinNavigationChildController {
         let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeItem
         
-        let settingsImage = UIImage(named: "settingsIcob", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsImage = UIImage(named: "settingsIcon", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         let settingsBadgeImage = settingsImage // TODO:
         let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
         navigationItem.rightBarButtonItem = settingsItem

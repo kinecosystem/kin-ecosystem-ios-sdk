@@ -150,7 +150,8 @@ class Blockchain {
                         switch error {
                         case .missingAccount:
                             do {
-                                try self.account.watchCreation().then {
+                                try self.account.watchCreation()
+                                .then {
                                     self.account.activate()
                                 }.then { _ in
                                     Kin.track { try StellarKinTrustlineSetupSucceeded() }
@@ -295,4 +296,6 @@ class Blockchain {
             balanceWatcher = nil
         }
     }
+    
+    
 }

@@ -93,7 +93,7 @@ extension RestoreFlowController: RestoreViewControllerDelegate {
         }
         
         do  {
-            try keystoreProvider.importAccount(keystore: keystore, password: password)
+            //try keystoreProvider.importAccount(keystore: keystore, password: password)
             return .success
         }
         catch {
