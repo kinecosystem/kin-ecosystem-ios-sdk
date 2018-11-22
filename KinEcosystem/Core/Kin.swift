@@ -11,6 +11,7 @@
 import Foundation
 import KinCoreSDK
 import StellarErrors
+import KinUtil
 
 let SDKVersion = "0.5.7"
 
@@ -103,6 +104,7 @@ public class Kin {
         guard core == nil else {
             return
         }
+        
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
         Kin.track { try KinSDKInitiated() }
@@ -142,23 +144,9 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
-
-        network.authorize().then { [weak self] _ in
-            self?.core!.blockchain.onboard()
-                .then {
-                    logInfo("blockchain onboarded successfully")
-                }
-                .error { error in
-                    logError("blockchain onboarding failed - \(error)")
-            }
-            self?.updateData(with: OffersList.self, from: "offers").error { error in
-                logError("data sync failed (\(error))")
-                }.then {
-                    self?.updateData(with: OrdersList.self, from: "orders").error { error in
-                        logError("data sync failed (\(error))")
-                    }
-            }
-        }
+        
+        attempOnboard(core!)
+        
         psBalanceObsLock.lock()
         defer {
             psBalanceObsLock.unlock()
@@ -330,9 +318,9 @@ public class Kin {
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.network.authorize().then { [weak self] (_) -> Promise<Void> in
+        core.network.authorize().then { [weak self] (_) -> KinUtil.Promise<Void> in
             guard let this = self else {
-                return Promise<Void>().signal(KinError.internalInconsistency)
+                return KinUtil.Promise<Void>().signal(KinError.internalInconsistency)
             }
             return this.updateData(with: OrdersList.self, from: "orders")
             }.then { 
@@ -419,10 +407,10 @@ public class Kin {
             }
     }
     
-    func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
+    func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> KinUtil.Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
-            return Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
+            return KinUtil.Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
         }
         return core.network.dataAtPath(path).then { data in
             return self.core!.data.sync(dataPresentorType, with: data)
@@ -431,6 +419,42 @@ public class Kin {
     
     func closeMarketPlace(completion: (() -> ())? = nil) {
         mpPresentingController?.dismiss(animated: true, completion: completion)
+    }
+    
+    @discardableResult
+    func attempOnboard(_ core: Core) -> Promise<Void> {
+        return attempt(2) { attempNum -> KinUtil.Promise<Void> in
+                let p = KinUtil.Promise<Void>()
+                logInfo("attempting onboard: \(attempNum)")
+                core.network.authorize().then { [weak self] _ in
+                        core.blockchain.onboard()
+                        .then {
+                            p.signal(())
+                        }
+                        .error { error in
+                            if case KinEcosystemError.service(.timeout, _) = error {
+                                core.network.client.authToken = nil
+                                Kin.track { try GeneralEcosystemSDKError(errorReason: "Blockchain onboard timedout at attempt \(attempNum), resetting auth token") }
+                            }
+                            p.signal(error)
+                    }
+                    
+                    self?.updateData(with: OffersList.self, from: "offers").error { error in
+                        logError("data sync failed (\(error))")
+                        }.then {
+                            self?.updateData(with: OrdersList.self, from: "orders").error { error in
+                                logError("data sync failed (\(error))")
+                            }
+                    }
+                }
+                return p
+            }.then {
+                logInfo("blockchain onboarded successfully")
+            }.error { error in
+                let errorDesc = "blockchain onboarding failed - \(error.localizedDescription)"
+                logError(errorDesc)
+                Kin.track { try GeneralEcosystemSDKError(errorReason: errorDesc) }
+        }
     }
     
     fileprivate func setupBIProxies() {
