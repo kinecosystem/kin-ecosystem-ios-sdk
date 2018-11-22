@@ -19,13 +19,16 @@ class WelcomeViewController: KinViewController {
     @IBOutlet weak var diggingText: UILabel!
     @IBOutlet weak var getStartedButton: UIButton!
     @IBOutlet weak var diggingTextHeight: NSLayoutConstraint!
-    @IBOutlet weak var getStartedTrailing: NSLayoutConstraint!
-    @IBOutlet weak var getStartedLeading: NSLayoutConstraint!
+    @IBOutlet var getStartedTrailing: NSLayoutConstraint!
+    @IBOutlet var getStartedLeading: NSLayoutConstraint!
+    @IBOutlet var getStartedWidth: NSLayoutConstraint!
     @IBOutlet weak var diamondsLoader: DiamondsLoaderView!
-
+    @IBOutlet weak var closeButton: UIButton!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        closeButton.isHidden = true
         getStartedButton.adjustsImageWhenDisabled = false
         setupTextLabels()
         Kin.track { try WelcomeScreenPageViewed() }
@@ -38,18 +41,20 @@ class WelcomeViewController: KinViewController {
     @IBAction func getStartedTapped(_ sender: Any) {
         Kin.track { try WelcomeScreenButtonTapped() }
         getStartedButton.isEnabled = false
+        closeButton.isHidden = true
         shrinkButton()
             .then(on: .main) { () -> Promise<Void> in
                 self.diamondsLoader.startAnimating()
-                return self.onboard()
+                return Kin.shared.attempOnboard(self.core)
             }.then(on: .main) { [weak self] in
                 self?.diamondsLoader.stopAnimating() {
                     self?.presentMarketplace()
                 }
             }
-            .error { error in
+            .error { [weak self] error in
+                self?.closeButton.isHidden = false
                 logError("onboarding failed: error: \(KinEcosystemError.transform(error))")
-                Kin.shared.closeMarketPlace()
+                self?.expandButtonForRetry()
         }
     }
 
@@ -84,8 +89,11 @@ class WelcomeViewController: KinViewController {
         UIView.animate(withDuration: 0.1, animations: {
             self.getStartedButton.titleLabel?.alpha = 0.0
         }) { _ in
-            self.getStartedButton.superview?.removeConstraints([self.getStartedLeading, self.getStartedTrailing])
-            self.getStartedButton.widthAnchor.constraint(equalToConstant: 50.0).isActive = true
+            
+            self.getStartedLeading.isActive = false
+            self.getStartedTrailing.isActive = false
+            self.getStartedWidth.isActive = true
+            
             UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2.5, options: [], animations: {
                 self.getStartedButton.layoutIfNeeded()
             }) { _ in
@@ -94,32 +102,26 @@ class WelcomeViewController: KinViewController {
         }
        return p
     }
-
-    func onboard() -> Promise<Void> {
-        let p = Promise<Void>()
-        if (core.blockchain.onboarded) {
-            p.signal(())
-        } else {
-            if let _ = core.blockchain.onboardError {
-                // blockchain onboard already failed. Try again to invoke onboard event.
-                _ = core.blockchain.onboard()
-            }
-            core.blockchain.onboardEvent.on(next: { [weak self] success in
-                guard success else {
-                    if let error = self?.core.blockchain.onboardError {
-                        p.signal(error)
-                        Kin.track { try GeneralEcosystemSDKError(errorReason: "Onboarding failed (welcome screen), error: \(error)") }
-                    } else {
-                        p.signal(KinEcosystemError.client(.internalInconsistency, nil))
-                        Kin.track { try GeneralEcosystemSDKError(errorReason: "Onboarding failed (welcome screen), error: n/a") }
-                    }
-                    
-                    return
+    
+    func expandButtonForRetry() {
+        
+        diamondsLoader.stopAnimating() {
+        
+            self.getStartedWidth.isActive = false
+            self.getStartedLeading.isActive = true
+            self.getStartedTrailing.isActive = true
+            
+            UIView.animate(withDuration: 0.3, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 2.5, options: [], animations: {
+                self.getStartedButton.layoutIfNeeded()
+            }) { _ in
+                self.getStartedButton.setAttributedTitle("kinecosystem_retry".localized().attributed(16.0, weight: .regular, color: .kinDeepSkyBlue), for: .normal)
+                UIView.animate(withDuration: 0.1, animations: {
+                    self.getStartedButton.titleLabel?.alpha = 1.0
+                }) { _ in
+                    self.getStartedButton.isEnabled = true
                 }
-                p.signal(())
-            }).add(to: linkBag)
+            }
         }
-        return p
     }
 
     func presentMarketplace() {
@@ -135,4 +137,7 @@ class WelcomeViewController: KinViewController {
         present(navigationController, animated: true)
     }
 
+    @IBAction func closeButtonTapped(_ sender: Any) {
+        Kin.shared.closeMarketPlace()
+    }
 }
