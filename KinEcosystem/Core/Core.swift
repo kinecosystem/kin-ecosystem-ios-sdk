@@ -21,3 +21,11 @@ class Core {
         self.environment = environment
     }
 }
+
+func synced(_ lock: Any, closure: () -> ()) {
+    objc_sync_enter(lock)
+    defer {
+        objc_sync_exit(lock)
+    }
+    closure()
+}

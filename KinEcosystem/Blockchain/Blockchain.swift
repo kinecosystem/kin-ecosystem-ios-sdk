@@ -49,8 +49,26 @@ class Blockchain {
     private var balanceObservers = [String : (Balance) -> ()]()
     private var paymentsWatcher: KinCoreSDK.PaymentWatch?
     private var balanceWatcher: KinCoreSDK.BalanceWatch?
-    private(set) var onboardError: Error? = nil
-    let onboardEvent = Observable<Bool>()
+    private let provider: BlockchainProvider
+    private var creationWatch: StellarKit.PaymentWatch?
+    private var creationLinkBag = LinkBag()
+    private(set) var onboardInFlight = false
+    private var isOnboarding: Bool {
+        get {
+            var result: Bool!
+            synced(self) {
+                result = onboardInFlight
+            }
+            return result
+        }
+        set {
+            synced(self) {
+                onboardInFlight = newValue
+            }
+        }
+    }
+    private var onboardPromise = Promise<Void>()
+    private var onboardLock: Int = 1
     fileprivate(set) var balanceObservable = Observable<Balance>()
     fileprivate(set) var lastBalance: Balance? {
         get {
@@ -79,17 +97,23 @@ class Blockchain {
     }
     fileprivate(set) var onboarded: Bool {
         get {
-            return account.extra != nil
+            var result: Bool!
+            synced(onboardLock) {
+                result = account.extra != nil
+            }
+            return result
         }
         set {
+            isOnboarding = false
             guard newValue else {
-                account.extra = nil
-                onboardEvent.next(false)
+                synced(onboardLock) {
+                    account.extra = nil
+                }
                 return
             }
-            onboardError = nil
-            onboardEvent.next(true)
-            account.extra = Data()
+            synced(onboardLock) {
+                account.extra = Data()
+            }
         }
     }
 
@@ -97,7 +121,7 @@ class Blockchain {
         guard let bURL = URL(string: environment.blockchainURL) else {
             throw KinEcosystemError.client(.badRequest, nil)
         }
-        let provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
+        provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
         let client = KinClient(provider: provider)
         self.client = client
     }
@@ -133,75 +157,70 @@ class Blockchain {
     }
 
     func onboard() -> Promise<Void> {
-        let p = Promise<Void>()
-
+       
         if onboarded {
-            return p.signal(())
+            return Promise<Void>().signal(())
         }
-
+        
+        if isOnboarding {
+            return onboardPromise
+        }
+        
+        onboardPromise = Promise<Void>()
+        isOnboarding = true
+        
         balance()
             .then { _ in
+                self.onboardPromise.signal(())
                 self.onboarded = true
-                p.signal(())
             }
             .error { (bError) in
                 if case let KinError.balanceQueryFailed(error) = bError {
                     if let error = error as? StellarError {
                         switch error {
                         case .missingAccount:
-                            do {
-                                try self.account.watchCreation()
+                            self.watchAccountCreation(timeout: 15.0)
                                 .then {
                                     self.account.activate()
                                 }.then { _ in
                                     Kin.track { try StellarKinTrustlineSetupSucceeded() }
                                     Kin.track { try WalletCreationSucceeded() }
+                                    self.onboardPromise.signal(())
                                     self.onboarded = true
-                                    p.signal(())
                                 }.error { error in
                                     Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
-                                    self.onboardError = error
-                                    p.signal(error)
+                                    self.onboardPromise.signal(error)
                                     self.onboarded = false
                                 }
-                            } catch {
-                                self.onboardError = error
-                                p.signal(error)
-                                self.onboarded = false
-                            }
+                            
                         case .missingBalance:
                             self.account.activate().then { _ in
                                 Kin.track { try StellarKinTrustlineSetupSucceeded() }
                                 Kin.track { try WalletCreationSucceeded() }
+                                self.onboardPromise.signal(())
                                 self.onboarded = true
-                                p.signal(())
                             }.error { error in
                                 Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
-                                self.onboardError = error
-                                p.signal(error)
+                                self.onboardPromise.signal(error)
                                 self.onboarded = false
                             }
                         default:
-                            self.onboardError = KinError.unknown
-                            p.signal(KinError.unknown)
+                            self.onboardPromise.signal(error)
                             self.onboarded = false
-                            
                         }
                     }
                     else {
-                        self.onboardError = bError
-                        p.signal(bError)
+                        self.onboardPromise.signal(bError)
                         self.onboarded = false
                     }
                 }
                 else {
-                    self.onboardError = bError
-                    p.signal(bError)
+                    self.onboardPromise.signal(bError)
                     self.onboarded = false
                 }
         }
 
-        return p
+        return onboardPromise
     }
 
 
@@ -297,5 +316,28 @@ class Blockchain {
         }
     }
     
-    
+    func watchAccountCreation(timeout: TimeInterval = 30.0) -> Promise<Void> {
+        
+        let p = Promise<Void>()
+        let node = Stellar.Node(baseURL: provider.url, networkId: provider.networkId.stellarNetworkId)
+        var created = false
+        creationWatch = Stellar.paymentWatch(account: account.publicAddress, lastEventId: nil, node: node)
+        
+        creationWatch!.emitter.on(next: { [weak self] _ in
+            created = true
+            self?.creationWatch = nil
+            self?.creationLinkBag = LinkBag()
+            p.signal(())
+        }).add(to: creationLinkBag)
+        
+        DispatchQueue.global().asyncAfter(deadline: .now() + timeout) { [weak self] in
+            if created == false {
+                self?.creationWatch = nil
+                self?.creationLinkBag = LinkBag()
+                p.signal(KinEcosystemError.service(.timeout, nil))
+            }
+        }
+
+        return p
+    }
 }

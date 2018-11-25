@@ -1,23 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment version="2304" identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="WelcomeViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="hRQ-S2-eIs" id="65B-7k-qeI"/>
                 <outlet property="diamondsLoader" destination="FjF-1r-BcI" id="r26-3K-0G5"/>
                 <outlet property="diggingText" destination="Mgi-1O-h5j" id="ZPn-d1-nTQ"/>
                 <outlet property="diggingTextHeight" destination="vZ0-kU-cII" id="fvq-qo-3Vk"/>
                 <outlet property="getStartedButton" destination="0r0-Fx-fEq" id="9oN-0a-FLx"/>
                 <outlet property="getStartedLeading" destination="MUz-EM-uHm" id="uVf-mY-iIs"/>
                 <outlet property="getStartedTrailing" destination="HnK-89-KjZ" id="meb-XL-gH7"/>
+                <outlet property="getStartedWidth" destination="VP1-pi-l2j" id="Lko-6b-kS2"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -87,6 +89,7 @@
                             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="50" id="R9U-0b-u5h"/>
+                                <constraint firstAttribute="width" constant="50" id="VP1-pi-l2j"/>
                             </constraints>
                             <state key="normal">
                                 <attributedString key="attributedTitle">
@@ -103,6 +106,11 @@
                                     <integer key="value" value="25"/>
                                 </userDefinedRuntimeAttribute>
                             </userDefinedRuntimeAttributes>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="VP1-pi-l2j"/>
+                                </mask>
+                            </variation>
                             <connections>
                                 <action selector="getStartedTapped:" destination="-1" eventType="touchUpInside" id="3G8-Xx-WbF"/>
                             </connections>
@@ -130,6 +138,18 @@
                         <constraint firstAttribute="width" constant="58" id="rZE-ks-Im2"/>
                     </constraints>
                 </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hRQ-S2-eIs">
+                    <rect key="frame" x="270" y="28" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="dX2-UR-Ve2"/>
+                        <constraint firstAttribute="width" constant="40" id="q6L-oY-ETN"/>
+                    </constraints>
+                    <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    <state key="normal" image="closeIcon"/>
+                    <connections>
+                        <action selector="closeButtonTapped:" destination="-1" eventType="touchUpInside" id="N5J-1r-ajQ"/>
+                    </connections>
+                </button>
             </subviews>
             <color key="backgroundColor" red="0.84771913290000001" green="0.86196905369999999" blue="0.90982341769999997" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
             <constraints>
@@ -144,12 +164,15 @@
                 <constraint firstItem="m5m-tP-C2q" firstAttribute="top" relation="greaterThanOrEqual" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="30" id="k4G-iO-zDY"/>
                 <constraint firstItem="FjF-1r-BcI" firstAttribute="centerY" secondItem="0r0-Fx-fEq" secondAttribute="centerY" id="kTc-ee-8fB"/>
                 <constraint firstItem="b2A-d7-iqY" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" id="lYS-2M-fMP"/>
+                <constraint firstItem="hRQ-S2-eIs" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="8" id="lc7-Ot-ySB"/>
+                <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="hRQ-S2-eIs" secondAttribute="trailing" constant="10" id="xxN-8B-E4O"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="fnl-2z-Ty3"/>
             <point key="canvasLocation" x="41" y="50"/>
         </view>
     </objects>
     <resources>
+        <image name="closeIcon" width="24" height="24"/>
         <image name="diamondsChest" width="332" height="262"/>
         <image name="kinnlogo" width="70" height="70"/>
     </resources>

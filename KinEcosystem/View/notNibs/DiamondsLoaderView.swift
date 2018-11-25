@@ -164,8 +164,7 @@ class DiamondsLoaderView : UIView {
     }
     
     deinit {
-        timer.invalidate()
-        timer = nil
+        killTimer()
     }
     
     func commonInit() {
@@ -199,10 +198,7 @@ class DiamondsLoaderView : UIView {
     func startAnimating() {
         guard animated == false else { return }
         animated = true
-        if timer != nil {
-            timer.invalidate()
-            timer = nil
-        }
+        killTimer()
         timer = Timer.scheduledTimer(timeInterval: 1.3, target: self, selector: #selector(timerFired(timer:)), userInfo: nil, repeats: true)
         timerFired(timer: timer)
         loader.startAnimating()
@@ -213,9 +209,23 @@ class DiamondsLoaderView : UIView {
             completion?()
             return
         }
-        animated = false
-        loader.stopAnimating {
-            completion?()
+        killTimer()
+        UIView.animate(withDuration: 0.08, delay: 0.0, options: [.curveEaseOut], animations: {
+            self.imageView.layer.transform = CATransform3DMakeScale(0.86, 0.86, 1.0)
+            self.imageView.alpha = 0.0
+        }) { _ in
+            self.animated = false
+            self.loader.stopAnimating {
+                completion?()
+            }
+        }
+        
+    }
+    
+    private func killTimer() {
+        if timer != nil {
+            timer.invalidate()
+            timer = nil
         }
     }
 }
