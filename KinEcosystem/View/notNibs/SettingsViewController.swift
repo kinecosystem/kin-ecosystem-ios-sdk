@@ -76,7 +76,7 @@ class SettingsViewController: UITableViewController {
         
         cell.imageView?.image = rowData.icon
         cell.textLabel?.text = rowData.title
-        
+        cell.accessoryType = .disclosureIndicator
         return cell
     }
     

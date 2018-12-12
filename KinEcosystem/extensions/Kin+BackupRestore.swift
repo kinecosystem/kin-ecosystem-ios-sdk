@@ -8,6 +8,8 @@
 import KinCoreSDK
 import KinUtil
 
+let passRegex = try! NSRegularExpression(pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{9,}$", options: [])
+
 @available(iOS 9.0, *)
 extension Kin : KeystoreProvider {
     public func exportAccount(_ password: String) throws -> String {
@@ -20,7 +22,8 @@ extension Kin : KeystoreProvider {
         return try core.blockchain.account.export(passphrase: password)
     }
     
-    public func importAccount(keystore: String, password: String, completion: (Error?) -> ()) {
+    public func importAccount(keystore: String, password: String, completion: @escaping (Error?) -> ()) {
+        
         guard let core = core else {
             completion(KinEcosystemError.client(.notStarted, nil))
             return
@@ -30,45 +33,45 @@ extension Kin : KeystoreProvider {
             return
         }
         
-        promise { (completion: (Bool?, Error?) -> ()) -> () in
+        promise { (handler: (KinAccount?, Error?) -> ()) -> () in
             
-            // someting with network that ends with either
-            // completion(true, nil)
-            // or completion(nil, someError)
+            do {
+                let account = try core.blockchain.accountForImporting(keystore: keystore, password: password)
+                handler(account, nil)
+            } catch {
+                handler(nil, error)
+            }
             
-            }.then { success -> Promise<Void> in
+        }.then { account -> Promise<Void> in
                 
-                promise { (completion: (Void?, Error?) -> ()) in
-                    
-                    // some other thing that either completes or fails
-                    
+            promise { (handler: @escaping (Void?, Error?) -> ()) in
+                do {
+                    let data = try JSONEncoder().encode(UserProperties(wallet_address: account.publicAddress))
+                    core.network.client.buildRequest(path: "users", method: .patch, body: data)
+                    .then { request in
+                        core.network.client.request(request)
+                    }.then { _ in
+                        core.blockchain.setActiveAccount(account)
+                        handler((), nil)
+                    }.error { error in
+                        handler(nil, error)
+                    }
+                } catch {
+                    handler(nil, error)
                 }
-                
-            }.then { _ in
-                
-            }.error { error in
-                
+            }
+            
+        }.then {
+            completion(nil)
+        }.error { error in
+            completion(error)
         }
+        
     }
-        
-        
-    //try core.blockchain.importAccount(keystore, passphrase: password)
-//    public func importAccount(_ jsonString: String,
-//                              passphrase: String) throws -> Promise<Void> {
-//        let p = Promise<Void>()
-//        let account = try client.importAccount(jsonString, passphrase: passphrase)
-//        self.account = account
-//        return p
-//        /*
-//         - find wallet in accounts, or
-//         - import
-//         - set wallet address
-//         - onboard
-//         */
-//    }
     
     public func validatePassword(_ password: String) -> Bool {
-        // TODO: 
-        return true
+        let range = NSRange(location: 0, length: password.utf16.count)
+        return passRegex.firstMatch(in: password, options: [], range: range) != nil
     }
+    
 }

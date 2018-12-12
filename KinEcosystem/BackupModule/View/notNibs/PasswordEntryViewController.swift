@@ -17,7 +17,6 @@ protocol PasswordEntryDelegate: NSObjectProtocol {
 @available(iOS 9.0, *)
 class PasswordEntryViewController: BRViewController {
     
-    @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var passwordInfo: UILabel!
     @IBOutlet weak var passwordInput1: PasswordEntryField!
     @IBOutlet weak var passwordInput2: PasswordEntryField!
@@ -26,12 +25,12 @@ class PasswordEntryViewController: BRViewController {
     @IBOutlet weak var doneButton: RoundButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var tickStack: UIStackView!
+    @IBOutlet weak var tickImage: UIImageView!
     
     weak var delegate: PasswordEntryDelegate?
     
     private var kbObservers = [NSObjectProtocol]()
     private var tickMarked = false
-    private let passwordTitle = "kinecosystem_create_password".localized().attributed(20.0, weight: .light, color: UIColor.kinPrimaryBlue)
     private let passwordInstructions = "kinecosystem_password_instructions".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
     private let confirmInfo = "kinecosystem_password_confirmation".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
     private let passwordInvalidWarning = "kinecosystem_password_invalid_warning".localized().attributed(12.0, weight: .regular, color: UIColor.kinWarning)
@@ -51,7 +50,7 @@ class PasswordEntryViewController: BRViewController {
         confirmTick.layer.cornerRadius = 2.0
         doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
         doneButton.isEnabled = false
-        titleLabel.attributedText = passwordTitle
+        tickImage.isHidden = true
         passwordInfo.attributedText = passwordInstructions
         confirmLabel.attributedText = confirmInfo
         passwordInput1.attributedPlaceholder = passwordPlaceholder
@@ -81,16 +80,6 @@ class PasswordEntryViewController: BRViewController {
         passwordInput1.becomeFirstResponder()
     }
     
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        let touch = event?.allTouches?.first
-        if (passwordInput1.isFirstResponder || passwordInput2.isFirstResponder) &&
-            type(of: touch?.view) != UITextField.self &&
-            touch?.view?.isDescendant(of: tickStack) == false {
-            passwordInput1.resignFirstResponder()
-            passwordInput2.resignFirstResponder()
-        }
-        super.touchesBegan(touches, with: event)
-    }
     
     @IBAction func passwordEntryChanged(_ sender: UITextField) {
         updateDoneButton()
@@ -131,7 +120,7 @@ class PasswordEntryViewController: BRViewController {
     
     @IBAction func tickSelected(_ sender: Any) {
         tickMarked = !tickMarked
-        confirmTick.backgroundColor = tickMarked ? UIColor.kinLightBlueGrey : UIColor.kinWhite
+        tickImage.isHidden = !tickMarked
         updateDoneButton()
     }
     

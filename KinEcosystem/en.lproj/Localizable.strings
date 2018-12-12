@@ -43,7 +43,7 @@
 "kinecosystem_cancel" = "Cancel";
 
 "kinecosystem_settings_title" = "Settings";
-"kinecosystem_settings_row_backup" = "Keep yout Kin safe";
+"kinecosystem_settings_row_backup" = "Keep your Kin safe";
 "kinecosystem_settings_row_restore" = "Restore previous wallet";
 
 "kinecosystem_backup_intro_title" = "Keep your Kin safe";
@@ -63,7 +63,7 @@
 "kinecosystem_password_confirmation" = "I understand this password is requiered to restore my Kin and it can’t be recovered if lost.";
 "kinecosystem_password_mismatch" = "Passwords do not match";
 "kinecosystem_password_invalid_warning" = "Make sure you’ve included all the following:\n";
-"kinecosystem_password_invalid_info" = "9 characters, 1 upper case, 1 special charcter “#, !, @“, 1 digit";
+"kinecosystem_password_invalid_info" = "9 characters, 1 uppercase, 1 lowercase, 1 special charcter “#, !, @“, 1 digit";
 "kinecosystem_keep_kin_safe" = "Keep your Kin safe";
 "kinecosystem_next" = "Next";
 
@@ -71,6 +71,7 @@
 "kinecosystem_backup_qr_description" = "You will need it to restore your Kin.\nSend it to yourself by email.";
 "kinecosystem_backup_qr_email" = "Send QR code via Email";
 "kinecosystem_backup_qr_continue" = "My QR code is saved";
+"kinecosystem_backup_qr_confirm" = "Iv'e copied my QR code";
 
 "kinecosystem_restore_intro_title" = "Import your Kin";
 "kinecosystem_restore_intro_description" = "All you need is to upload the QR code we provided you.";

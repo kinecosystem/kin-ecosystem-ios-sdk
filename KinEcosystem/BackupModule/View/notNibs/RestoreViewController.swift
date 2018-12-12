@@ -10,7 +10,7 @@ import UIKit
 
 @available(iOS 9.0, *)
 protocol RestoreViewControllerDelegate: NSObjectProtocol {
-    func restoreViewControllerDidImport(_ viewController: RestoreViewController) -> RestoreViewController.ImportResult
+    func restoreViewControllerDidImport(_ viewController: RestoreViewController, completion:@escaping (RestoreViewController.ImportResult) -> ())
     func restoreViewControllerDidComplete(_ viewController: RestoreViewController)
 }
 
@@ -92,21 +92,30 @@ class RestoreViewController: BRViewController {
             return
         }
         
-        let result = delegate.restoreViewControllerDidImport(self)
+        sender.isEnabled = false
+        navigationItem.hidesBackButton = true
         
-        if result == .success {
-            navigationItem.hidesBackButton = true
-            
-            sender.transitionToConfirmed { [weak self] in
-                guard let strongSelf = self else {
-                    return
-                }
-                strongSelf.delegate?.restoreViewControllerDidComplete(strongSelf)
+        delegate.restoreViewControllerDidImport(self) { [weak self] result in
+            guard let this = self else {
+                return
             }
+            DispatchQueue.main.async {
+                if result == .success {
+                    
+                    sender.transitionToConfirmed { () -> () in
+                        this.delegate?.restoreViewControllerDidComplete(this)
+                    }
+                }
+                else {
+                    sender.isEnabled = true
+                    this.navigationItem.hidesBackButton = false
+                    this.presentErrorAlertController(result: result)
+                }
+            }
+            
         }
-        else {
-            presentErrorAlertController(result: result)
-        }
+        
+        
     }
     
     deinit {

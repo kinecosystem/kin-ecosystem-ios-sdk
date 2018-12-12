@@ -15,10 +15,10 @@ class BackupCompletedViewController: ExplanationTemplateViewController {
         
         navigationItem.hidesBackButton = true
         imageView.image = UIImage(named: "safeIcon", in: Bundle.ecosystem, compatibleWith: nil)
-        titleLabel.text = "kinecosystem_backup_completed_title".localized()
-        descriptionLabel.text = "kinecosystem_backup_completed_description".localized()
-        reminderTitleLabel.text = "kinecosystem_backup_reminder_title".localized()
-        reminderDescriptionLabel.text = "kinecosystem_backup_reminder_description".localized()
-        continueButton.setTitle("Done", for: .normal) // TODO: get correct copy
+        titleLabel.attributedText = "kinecosystem_backup_completed_title".localized().attributed(28.0, weight: .light, color: .kinWhite)
+        descriptionLabel.attributedText = "kinecosystem_backup_completed_description".localized().attributed(14.0, weight: .regular, color: .kinWhite)
+        reminderTitleLabel.attributedText = "kinecosystem_backup_reminder_title".localized().attributed(14.0, weight: .bold, color: .kinWhite)
+        reminderDescriptionLabel.attributedText = "kinecosystem_backup_reminder_description".localized().attributed(12.0, weight: .regular, color: .kinWhite)
+        continueButton.isHidden = true
     }
 }

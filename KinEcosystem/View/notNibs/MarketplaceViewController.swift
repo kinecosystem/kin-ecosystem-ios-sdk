@@ -149,8 +149,8 @@ class MarketplaceViewController: KinNavigationChildController {
     
     @objc private func presentSettings() {
         let settingsViewController = SettingsViewController()
-        let cancelItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissSettings))
-        settingsViewController.navigationItem.leftBarButtonItem = cancelItem
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
+        settingsViewController.navigationItem.rightBarButtonItem = cancelItem
         
         let navigationController = UINavigationController(rootViewController: settingsViewController)
         navigationController.navigationBar.tintColor = .black

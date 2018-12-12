@@ -84,21 +84,28 @@ extension RestoreFlowController: QRPickerControllerDelegate {
 
 @available(iOS 9.0, *)
 extension RestoreFlowController: RestoreViewControllerDelegate {
-    func restoreViewControllerDidImport(_ viewController: RestoreViewController) -> RestoreViewController.ImportResult {
+    func restoreViewControllerDidImport(_ viewController: RestoreViewController, completion:@escaping (RestoreViewController.ImportResult) -> ()) {
         guard let password = viewController.password else {
-            return .wrongPassword
+            completion(.wrongPassword)
+            return
         }
         guard let qrImage = viewController.imageView.image, let keystore = QR.decode(image: qrImage) else {
-            return .invalidImage
+            completion(.invalidImage)
+            return
         }
         
-        do  {
-            //try keystoreProvider.importAccount(keystore: keystore, password: password)
-            return .success
+        keystoreProvider.importAccount(keystore: keystore, password: password) { error in
+            if let error = error {
+                if case KinEcosystemError.blockchain(.invalidPassword, _) = error {
+                    completion(.wrongPassword)
+                } else {
+                    completion(.internalIssue)
+                }
+            } else {
+                completion(.success)
+            }
         }
-        catch {
-            return .internalIssue
-        }
+        
     }
     
     func restoreViewControllerDidComplete(_ viewController: RestoreViewController) {

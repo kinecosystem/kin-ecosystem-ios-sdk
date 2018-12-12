@@ -34,16 +34,36 @@ extension QRPickerController: UIImagePickerControllerDelegate, UINavigationContr
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage, let qrString = QR.decode(image: image) {
-            delegate?.qrPickerControllerDidComplete(self, with: qrString)
+        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+            
+            DispatchQueue.global().async {
+                let qrString = QR.decode(image: image)
+                if let qr = qrString {
+                    DispatchQueue.main.async {
+                        self.delegate?.qrPickerControllerDidComplete(self, with: qr)
+                    }
+                } else {
+                    DispatchQueue.main.async {
+                        self.presentImageError()
+                    }
+                }
+                
+            }
+            
+        } else {
+            DispatchQueue.main.async {
+                self.presentImageError()
+            }
         }
-        else {
-            // TODO: get correct copy
-            let title = "QR not recognized".localized()
-            let message = "A QR code could not be detected in the image.".localized()
-            let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-            alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
-            imagePickerController.present(alertController, animated: true)
-        }
+        
     }
+    
+    func presentImageError() {
+        let title = "QR not recognized".localized()
+        let message = "A QR code could not be detected in the image.".localized()
+        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
+        self.imagePickerController.present(alertController, animated: true)
+    }
+    
 }

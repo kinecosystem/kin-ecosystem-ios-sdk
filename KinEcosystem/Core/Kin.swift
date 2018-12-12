@@ -25,6 +25,11 @@ public enum ExternalOrderStatus {
     case completed(String)
 }
 
+public enum EcosystemExperience {
+    case marketplace
+    case history
+}
+
 public struct NativeOffer: Equatable {
     public let id: String
     public let title: String
@@ -115,8 +120,6 @@ public class Kin {
             logInfo("new user or environment type detected - resetting everything")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
-        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
@@ -127,7 +130,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment, appId: appId)
+            chain = try Blockchain(environment: environment, appId: appId, userId: userId)
             try chain.startAccount()
         } catch {
             logError("start failed")
@@ -144,6 +147,9 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
+        
+        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
         
         attempOnboard(core!)
         
@@ -222,7 +228,7 @@ public class Kin {
         core.blockchain.removeBalanceObserver(with: identifier)
     }
         
-    
+    //@available(*, deprecated, renamed: "launchEcosystemFrom:at:")
     public func launchMarketplace(from parentViewController: UIViewController) throws {
         Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
@@ -245,6 +251,15 @@ public class Kin {
         }
         
     }
+    
+//    public enum EcosystemExperience {
+//        case marketplace
+//        case history
+//    }
+//    
+//    public func launchEcosystem(from parentViewController: UIViewController, at experience: EcosystemExperience) {
+//        
+//    }
     
     public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
         guard let core = core else {

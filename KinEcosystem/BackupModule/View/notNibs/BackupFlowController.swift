@@ -40,7 +40,7 @@ extension BackupFlowController {
     @objc private func pushPasswordViewController() {
         let viewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: Bundle.ecosystem)
-        viewController.title = "kinecosystem_password_backup_title".localized()
+        viewController.title = "kinecosystem_create_password".localized()
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
         navigationController.pushViewController(viewController, animated: true)
@@ -48,15 +48,16 @@ extension BackupFlowController {
     
     @objc private func pushQRViewController(with qrString: String) {
         let viewController = QRViewController(qrString: qrString)
+        viewController.title = "kinecosystem_backup_qr_title".localized()
         viewController.lifeCycleDelegate = self
-        viewController.continueButton.addTarget(self, action: #selector(pushCompletedViewController), for: .touchUpInside)
+        viewController.delegate = self
         navigationController.pushViewController(viewController, animated: true)
     }
     
     @objc private func pushCompletedViewController() {
         let viewController = BackupCompletedViewController()
         viewController.lifeCycleDelegate = self
-        viewController.continueButton.addTarget(self, action: #selector(completedFlow), for: .touchUpInside)
+        viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(completedFlow))
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -85,4 +86,13 @@ extension BackupFlowController: PasswordEntryDelegate {
             print(error)
         }
     }
+}
+
+@available(iOS 9.0, *)
+extension BackupFlowController: QRViewControllerDelegate {
+    func QRViewControllerDidComplete() {
+        pushCompletedViewController()
+    }
+    
+    
 }
