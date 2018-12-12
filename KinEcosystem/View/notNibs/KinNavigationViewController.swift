@@ -16,18 +16,13 @@ class KinNavigationChildController : KinViewController {
 @available(iOS 9.0, *)
 class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
-    var core: Core! {
-        didSet {
-            balanceViewController.core = core
-        }
-    }
+    var core: Core!
 
     @IBOutlet weak var navigationBar: UINavigationBar!
     @IBOutlet weak var balanceViewContainer: UIView!
 
     fileprivate let transitionController = UIViewController()
     fileprivate var rootViewController: KinNavigationChildController!
-    fileprivate var viewDidLoadBlock: (() -> ())?
     fileprivate var tapRecognizer: UITapGestureRecognizer!
     fileprivate let transitionDuration = TimeInterval(0.3)
     fileprivate var balanceViewController: BalanceViewController!
@@ -47,13 +42,14 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         setupTransitionController()
         setupBalanceView()
         push(rootViewController, animated: false)
-        viewDidLoadBlock?()
     }
 
-    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, rootViewController: KinNavigationChildController) {
+    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, rootViewController: KinNavigationChildController, core: Core) {
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.core = core
         self.rootViewController = rootViewController
-        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem)
+        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem, core: core)
+        loadViewIfNeeded()
     }
 
     fileprivate func setupNavigationBarAppearance() {
@@ -87,24 +83,17 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         transitionToOrders()
     }
 
-    func transitionToOrders() {
+    func transitionToOrders(animated: Bool = true) {
         guard (kinChildViewControllers.last is OrdersViewController) == false else {
             return
         }
         Kin.track { try BalanceTapped() }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
         ordersController.core = core
-        push(ordersController, animated: true)
+        push(ordersController, animated: animated)
     }
 
     func push(_ viewController: KinNavigationChildController, animated: Bool, completion: (() -> Void)? = nil) {
-
-        guard isViewLoaded else {
-            viewDidLoadBlock = { [weak self] in
-                self?.push(viewController, animated: animated)
-            }
-            return
-        }
 
         guard let container = transitionController.view else { return }
 

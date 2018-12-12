@@ -228,8 +228,10 @@ public class Kin {
         core.blockchain.removeBalanceObserver(with: identifier)
     }
         
-    //@available(*, deprecated, renamed: "launchEcosystemFrom:at:")
-    public func launchMarketplace(from parentViewController: UIViewController) throws {
+    @available(*, unavailable, renamed: "launchEcosystem(from:at:)")
+    public func launchMarketplace(from parentViewController: UIViewController) throws {}
+    
+    public func launchEcosystem(from parentViewController: UIViewController, at experience: EcosystemExperience = .marketplace) throws {
         Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
             logError("Kin not started")
@@ -241,25 +243,18 @@ public class Kin {
             mpViewController.core = core
             let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
                                                                    bundle: Bundle.ecosystem,
-                                                                   rootViewController: mpViewController)
-            navigationController.core = core
+                                                                   rootViewController: mpViewController,
+                                                                   core: core)
+            if case EcosystemExperience.history = experience {
+                navigationController.transitionToOrders(animated: false)
+            }
             parentViewController.present(navigationController, animated: true)
         } else {
             let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
             welcomeVC.core = core
             parentViewController.present(welcomeVC, animated: true)
         }
-        
     }
-    
-//    public enum EcosystemExperience {
-//        case marketplace
-//        case history
-//    }
-//    
-//    public func launchEcosystem(from parentViewController: UIViewController, at experience: EcosystemExperience) {
-//        
-//    }
     
     public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
         guard let core = core else {
