@@ -67,6 +67,7 @@ public class Kin {
     fileprivate var prestartNativeOffers = [NativeOffer]()
     fileprivate let psBalanceObsLock = NSLock()
     fileprivate let psNativeOLock = NSLock()
+    fileprivate var nativeOffersInc:Int32 = -1
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
@@ -378,7 +379,9 @@ public class Kin {
             }.then {
                 guard offerExists == false else { return }
                 core.data.stack.perform({ (context, _) in
-                    let _ = try? Offer(with: nativeOffer, in: context)
+                    let offer = try? Offer(with: nativeOffer, in: context)
+                    offer?.position = self.nativeOffersInc
+                    self.nativeOffersInc -= 1
                 })
         }
     }
