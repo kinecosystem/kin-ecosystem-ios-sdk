@@ -19,6 +19,7 @@
                 <outlet property="reminderDescriptionLabel" destination="BVA-0p-ZLE" id="wao-O3-R0z"/>
                 <outlet property="reminderTitleLabel" destination="lRT-Xg-Nux" id="ArY-zN-vQl"/>
                 <outlet property="titleLabel" destination="fmt-Ae-xyA" id="S98-j4-EwM"/>
+                <outlet property="topSpace" destination="VVn-Et-zoO" id="fT9-dU-ix9"/>
                 <outlet property="view" destination="FM7-e1-b6T" id="0a3-II-YCL"/>
             </connections>
         </placeholder>

@@ -26,6 +26,7 @@ class PasswordEntryViewController: BRViewController {
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var tickStack: UIStackView!
     @IBOutlet weak var tickImage: UIImageView!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     weak var delegate: PasswordEntryDelegate?
     
@@ -77,6 +78,10 @@ class PasswordEntryViewController: BRViewController {
                 }
             }
         })
+        if #available(iOS 11, *) {
+            topSpace.constant = 0.0
+            view.layoutIfNeeded()
+        }
         passwordInput1.becomeFirstResponder()
     }
     

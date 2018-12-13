@@ -25,6 +25,7 @@ class QRViewController: BRViewController {
     @IBOutlet weak var tickImage: UIImageView!
     @IBOutlet weak var tickStack: UIStackView!
     @IBOutlet weak var confirmTick: UIView!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     private let qrString: String
     private var mailViewController: MFMailComposeViewController?
@@ -64,6 +65,10 @@ class QRViewController: BRViewController {
         confirmTick.layer.cornerRadius = 2.0
         tickStack.isHidden = true
         tickImage.isHidden = true
+        if #available(iOS 11, *) {
+            topSpace.constant = 0.0
+            view.layoutIfNeeded()
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {

@@ -17,6 +17,7 @@
                 <outlet property="imageView" destination="eJm-Ta-gkL" id="GJ1-Q2-U8x"/>
                 <outlet property="instructionsLabel" destination="lQG-oo-eoW" id="dtQ-fk-OzH"/>
                 <outlet property="passwordInput" destination="DpP-16-moM" id="tnA-Vb-WHs"/>
+                <outlet property="topSpace" destination="0XB-ku-Pv4" id="WQG-kr-66U"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>

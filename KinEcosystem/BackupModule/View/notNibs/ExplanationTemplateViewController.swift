@@ -17,6 +17,7 @@ class ExplanationTemplateViewController: BRViewController {
     @IBOutlet weak var reminderTitleLabel: UILabel!
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
     @IBOutlet weak var continueButton: RoundButton!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     init() {
         super.init(nibName: "ExplanationTemplateViewController", bundle: Bundle.ecosystem)
@@ -38,8 +39,11 @@ class ExplanationTemplateViewController: BRViewController {
     
     override public func viewDidLoad() {
         super.viewDidLoad()
-        
         view.backgroundColor = .kinPrimaryBlue
         continueButton.setTitleColor(.kinPrimaryBlue, for: .normal)
+        if #available(iOS 11, *) {
+            topSpace.constant = 0.0
+            view.layoutIfNeeded()
+        }
     }
 }

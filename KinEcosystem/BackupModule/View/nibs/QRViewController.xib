@@ -22,6 +22,7 @@
                 <outlet property="reminderTitleLabel" destination="LF1-ZL-QR2" id="omm-NS-dEq"/>
                 <outlet property="tickImage" destination="WFf-yv-ICt" id="vUu-EZ-LDT"/>
                 <outlet property="tickStack" destination="Xq4-ov-UQD" id="5gO-Ja-drr"/>
+                <outlet property="topSpace" destination="BKZ-V3-x58" id="U1Q-wE-gp1"/>
                 <outlet property="view" destination="iN0-l3-epB" id="N8a-IQ-vfO"/>
             </connections>
         </placeholder>

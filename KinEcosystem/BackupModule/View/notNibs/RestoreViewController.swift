@@ -23,6 +23,7 @@ class RestoreViewController: BRViewController {
     @IBOutlet weak var passwordInput: PasswordEntryField!
     @IBOutlet weak var doneButton: RoundButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
+    @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     private let passwordInstructions = "kinecosystem_restore_instructions".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
     private let passwordPlaceholder = "kinecosystem_enter_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
@@ -76,6 +77,10 @@ class RestoreViewController: BRViewController {
                 }
             }
         })
+        if #available(iOS 11, *) {
+            topSpace.constant = 0.0
+            view.layoutIfNeeded()
+        }
         passwordInput.becomeFirstResponder()
     }
     
