@@ -148,6 +148,7 @@ class MarketplaceViewController: KinNavigationChildController {
     }
     
     @objc private func presentSettings() {
+        Kin.track { try SettingsButtonTapped() }
         let settingsViewController = SettingsViewController()
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = cancelItem

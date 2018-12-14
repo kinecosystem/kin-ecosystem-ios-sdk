@@ -48,8 +48,16 @@ class RestoreViewController: BRViewController {
         title = "Restore Previous Wallet".localized() // TODO: 
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        if parent == nil {
+            Kin.track { try RestorePasswordEntryBackButtonTapped() }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Kin.track { try RestorePasswordEntryPageViewed() }
         passwordInput.attributedPlaceholder = passwordPlaceholder
         passwordInput.isSecureTextEntry = true
         instructionsLabel.attributedText = passwordInstructions
@@ -93,6 +101,7 @@ class RestoreViewController: BRViewController {
             // Button in mid transition
             return
         }
+        Kin.track { try RestorePasswordDoneButtonTapped() }
         guard let delegate = delegate else {
             return
         }

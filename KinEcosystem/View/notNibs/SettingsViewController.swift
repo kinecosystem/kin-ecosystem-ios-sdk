@@ -54,9 +54,16 @@ class SettingsViewController: UITableViewController {
         }
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        if parent == nil {
+            Kin.track { try SettingsBackButtonTapped() }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        Kin.track { try SettingsPageViewed() }
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: "cell")
         tableView.rowHeight = 54
         tableView.separatorColor = .kinLightBlueGrey
@@ -87,10 +94,16 @@ class SettingsViewController: UITableViewController {
         
         let phase = dataSource[indexPath.row].phase
         
+        Kin.track { try SettingsOptionTapped(settingOption: phase == .backup ? KBITypes.SettingOption.backup : KBITypes.SettingOption.backup) }
+        
         brManager.start(phase, pushedOnto: navigationController, events: { event in
             
         }) { completed in
-            
+            if case .restore = phase {
+                Kin.track { try RestoreWalletCompleted() }
+            } else {
+                Kin.track { try BackupWalletCompleted() }
+            }
         }
     }
 }

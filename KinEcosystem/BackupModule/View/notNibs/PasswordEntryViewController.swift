@@ -44,8 +44,16 @@ class PasswordEntryViewController: BRViewController {
         return passwordInput1.text
     }
     
+    override func willMove(toParentViewController parent: UIViewController?) {
+        super.willMove(toParentViewController: parent)
+        if parent == nil {
+            Kin.track { try BackupCreatePasswordBackButtonTapped() }
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        Kin.track { try BackupCreatePasswordPageViewed() }
         confirmTick.layer.borderWidth = 1.0
         confirmTick.layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
         confirmTick.layer.cornerRadius = 2.0
@@ -107,6 +115,7 @@ class PasswordEntryViewController: BRViewController {
     
     
     @IBAction func doneButtonTapped(_ sender: Any) {
+        Kin.track { try BackupCreatePasswordNextButtonTapped() }
         guard let text = passwordInput1.text, passwordInput1.hasText && passwordInput2.hasText else {
             return // shouldn't really happen, here for documenting
         }
