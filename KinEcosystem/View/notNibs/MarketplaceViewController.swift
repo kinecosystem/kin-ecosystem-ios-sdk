@@ -16,7 +16,6 @@ import KinCoreSDK
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
-    
     fileprivate(set) var offerViewModels = [String : OfferViewModel]()
     fileprivate let earnCellName = "EarnOfferCell"
     fileprivate let spendCellName = "SpendOfferCell"
@@ -48,9 +47,14 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         title = "kinecosystem_kin_marketplace".localized()
-        let item = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
-        item.tintColor = .white
-        navigationItem.rightBarButtonItem = item
+        
+        let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
+        navigationItem.leftBarButtonItem = closeItem
+        
+        let settingsImage = UIImage(named: "settingsIcon", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsBadgeImage = settingsImage // TODO:
+        let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
+        navigationItem.rightBarButtonItem = settingsItem
     }
     
     fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
@@ -142,7 +146,21 @@ class MarketplaceViewController: KinNavigationChildController {
         Kin.track { try BackButtonOnMarketplacePageTapped() }
         Kin.shared.closeMarketPlace()
     }
+    
+    @objc private func presentSettings() {
+        Kin.track { try SettingsButtonTapped() }
+        let settingsViewController = SettingsViewController()
+        let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
+        settingsViewController.navigationItem.rightBarButtonItem = cancelItem
+        
+        let navigationController = UINavigationController(rootViewController: settingsViewController)
+        navigationController.navigationBar.tintColor = .black
+        kinNavigationController?.present(navigationController, animated: true)
+    }
 
+    @objc private func dismissSettings() {
+        kinNavigationController?.dismiss(animated: true)
+    }
 }
 
 @available(iOS 9.0, *)

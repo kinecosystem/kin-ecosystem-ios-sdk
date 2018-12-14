@@ -13,7 +13,7 @@ import KinCoreSDK
 import StellarErrors
 import KinUtil
 
-let SDKVersion = "0.5.8"
+let SDKVersion = "0.5.9"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
@@ -23,6 +23,11 @@ public enum ExternalOrderStatus {
     case pending
     case failed
     case completed(String)
+}
+
+public enum EcosystemExperience {
+    case marketplace
+    case history
 }
 
 public struct NativeOffer: Equatable {
@@ -62,6 +67,7 @@ public class Kin {
     fileprivate var prestartNativeOffers = [NativeOffer]()
     fileprivate let psBalanceObsLock = NSLock()
     fileprivate let psNativeOLock = NSLock()
+    fileprivate var nativeOffersInc:Int32 = -1
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
@@ -115,8 +121,6 @@ public class Kin {
             logInfo("new user or environment type detected - resetting everything")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
         }
-        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
@@ -127,7 +131,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment, appId: appId)
+            chain = try Blockchain(environment: environment, appId: appId, userId: userId)
             try chain.startAccount()
         } catch {
             logError("start failed")
@@ -144,6 +148,9 @@ public class Kin {
                                                                   jwt: jwt,
                                                                   publicAddress: chain.account.publicAddress))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
+        
+        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
         
         attempOnboard(core!)
         
@@ -222,8 +229,10 @@ public class Kin {
         core.blockchain.removeBalanceObserver(with: identifier)
     }
         
+    @available(*, unavailable, renamed: "launchEcosystem(from:at:)")
+    public func launchMarketplace(from parentViewController: UIViewController) throws {}
     
-    public func launchMarketplace(from parentViewController: UIViewController) throws {
+    public func launchEcosystem(from parentViewController: UIViewController, at experience: EcosystemExperience = .marketplace) throws {
         Kin.track { try EntrypointButtonTapped() }
         guard let core = core else {
             logError("Kin not started")
@@ -235,15 +244,17 @@ public class Kin {
             mpViewController.core = core
             let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
                                                                    bundle: Bundle.ecosystem,
-                                                                   rootViewController: mpViewController)
-            navigationController.core = core
+                                                                   rootViewController: mpViewController,
+                                                                   core: core)
+            if case EcosystemExperience.history = experience {
+                navigationController.transitionToOrders(animated: false)
+            }
             parentViewController.present(navigationController, animated: true)
         } else {
             let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
             welcomeVC.core = core
             parentViewController.present(welcomeVC, animated: true)
         }
-        
     }
     
     public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
@@ -368,7 +379,9 @@ public class Kin {
             }.then {
                 guard offerExists == false else { return }
                 core.data.stack.perform({ (context, _) in
-                    let _ = try? Offer(with: nativeOffer, in: context)
+                    let offer = try? Offer(with: nativeOffer, in: context)
+                    offer?.position = self.nativeOffersInc
+                    self.nativeOffersInc -= 1
                 })
         }
     }

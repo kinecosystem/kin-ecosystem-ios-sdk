@@ -18,6 +18,10 @@ extension UIView {
         self.leadingAnchor.constraint(equalTo: parent.leadingAnchor).isActive = true
         self.trailingAnchor.constraint(equalTo: parent.trailingAnchor).isActive = true
     }
+    
+    convenience init(_ width: CGFloat, _ height: CGFloat) {
+        self.init(frame: CGRect(x: 0.0, y: 0.0, width: width, height: height))
+    }
 }
 
 class KinGradientLayer : CAGradientLayer {

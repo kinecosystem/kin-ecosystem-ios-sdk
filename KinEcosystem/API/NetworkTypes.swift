@@ -166,3 +166,7 @@ public struct UserStats: Decodable, CustomStringConvertible {
 public struct UserProfile: Decodable {
     var stats: UserStats?
 }
+
+public struct UserProperties: Encodable {
+    var wallet_address: String
+}

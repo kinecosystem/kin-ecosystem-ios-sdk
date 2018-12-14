@@ -3,4 +3,4 @@
 	url = https://github.com/ashevin/CoreDataStack.git
 [submodule "Dependencies/kin-core-ios"]
 	path = Dependencies/kin-core-ios
-	url = https://github.com/kinfoundation/kin-core-ios.git
+	url = https://github.com/kinecosystem/kin-core-ios.git

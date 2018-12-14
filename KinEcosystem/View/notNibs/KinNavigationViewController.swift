@@ -16,29 +16,19 @@ class KinNavigationChildController : KinViewController {
 @available(iOS 9.0, *)
 class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
-    var core: Core! {
-        didSet {
-            balanceViewController.core = core
-        }
-    }
+    var core: Core!
 
     @IBOutlet weak var navigationBar: UINavigationBar!
-    @IBOutlet weak var barBackground: UIImageView!
     @IBOutlet weak var balanceViewContainer: UIView!
 
     fileprivate let transitionController = UIViewController()
     fileprivate var rootViewController: KinNavigationChildController!
-    fileprivate var viewDidLoadBlock: (() -> ())?
     fileprivate var tapRecognizer: UITapGestureRecognizer!
     fileprivate let transitionDuration = TimeInterval(0.3)
     fileprivate var balanceViewController: BalanceViewController!
 
     var kinChildViewControllers: [KinNavigationChildController] {
         return transitionController.childViewControllers as! [KinNavigationChildController]
-    }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
     }
 
     override var edgesForExtendedLayout: UIRectEdge {
@@ -52,25 +42,23 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         setupTransitionController()
         setupBalanceView()
         push(rootViewController, animated: false)
-        viewDidLoadBlock?()
     }
 
-    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, rootViewController: KinNavigationChildController) {
+    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, rootViewController: KinNavigationChildController, core: Core) {
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.core = core
         self.rootViewController = rootViewController
-        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem)
+        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem, core: core)
+        loadViewIfNeeded()
     }
 
     fileprivate func setupNavigationBarAppearance() {
-        navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
-        navigationBar.isTranslucent = true
-        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
+        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.delegate = self
-        let colors = [UIColor.kinAzure, UIColor.kinBrightBlueTwo]
-        barBackground.image = UINavigationBar.gradient(size: barBackground.bounds.size, colors: colors)
+        navigationBar.tintColor = .black
     }
 
     fileprivate func setupTransitionController() {
@@ -95,24 +83,17 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         transitionToOrders()
     }
 
-    func transitionToOrders() {
+    func transitionToOrders(animated: Bool = true) {
         guard (kinChildViewControllers.last is OrdersViewController) == false else {
             return
         }
         Kin.track { try BalanceTapped() }
         let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
         ordersController.core = core
-        push(ordersController, animated: true)
+        push(ordersController, animated: animated)
     }
 
     func push(_ viewController: KinNavigationChildController, animated: Bool, completion: (() -> Void)? = nil) {
-
-        guard isViewLoaded else {
-            viewDidLoadBlock = { [weak self] in
-                self?.push(viewController, animated: animated)
-            }
-            return
-        }
 
         guard let container = transitionController.view else { return }
 

@@ -130,8 +130,8 @@ class WelcomeViewController: KinViewController {
         mpViewController.core = core
         let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
                                                                         bundle: Bundle.ecosystem,
-                                                                        rootViewController: mpViewController)
-        navigationController.core = core
+                                                                        rootViewController: mpViewController,
+                                                                        core: core)
         navigationController.modalPresentationStyle = .custom
         navigationController.transitioningDelegate = transition
         present(navigationController, animated: true)

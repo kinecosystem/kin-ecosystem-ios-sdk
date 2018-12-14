@@ -40,6 +40,12 @@ class BalanceViewController: KinViewController {
             setupOrderWatcherFor(orderId)
         }
     }
+    
+    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, core: Core) {
+        self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+        self.core = core
+        loadViewIfNeeded()
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -26,7 +26,110 @@
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
 		E92501BA20614A4400E2E738 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* Flows.swift */; };
 		E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; };
-		E9295BBB218EFB33001B7B56 /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */; };
+		E929BCCE21C318B4000569B7 /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */; };
+		E929BCCF21C318B4000569B7 /* settings_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8321C318B4000569B7 /* settings_button_tapped.swift */; };
+		E929BCD021C318B4000569B7 /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8421C318B4000569B7 /* backup_create_password_next_button_tapped.swift */; };
+		E929BCD121C318B4000569B7 /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8521C318B4000569B7 /* earn_order_failed.swift */; };
+		E929BCD221C318B4000569B7 /* backup_popup_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8621C318B4000569B7 /* backup_popup_page_viewed.swift */; };
+		E929BCD321C318B4000569B7 /* restore_upload_qr_code_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8721C318B4000569B7 /* restore_upload_qr_code_button_tapped.swift */; };
+		E929BCD421C318B4000569B7 /* earn_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8821C318B4000569B7 /* earn_order_creation_received.swift */; };
+		E929BCD521C318B4000569B7 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8921C318B4000569B7 /* spend_thankyou_page_viewed.swift */; };
+		E929BCD621C318B4000569B7 /* balance_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8A21C318B4000569B7 /* balance_tapped.swift */; };
+		E929BCD721C318B4000569B7 /* restore_upload_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8B21C318B4000569B7 /* restore_upload_qr_code_back_button_tapped.swift */; };
+		E929BCD821C318B4000569B7 /* redeem_url_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8C21C318B4000569B7 /* redeem_url_tapped.swift */; };
+		E929BCD921C318B4000569B7 /* spend_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8D21C318B4000569B7 /* spend_order_creation_failed.swift */; };
+		E929BCDA21C318B4000569B7 /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8E21C318B4000569B7 /* spend_order_completed.swift */; };
+		E929BCDB21C318B4000569B7 /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8F21C318B4000569B7 /* spend_order_cancelled.swift */; };
+		E929BCDC21C318B4000569B7 /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9021C318B4000569B7 /* earn_order_creation_failed.swift */; };
+		E929BCDD21C318B4000569B7 /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9121C318B4000569B7 /* not_enough_kin_page_viewed.swift */; };
+		E929BCDE21C318B4000569B7 /* stellar_account_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9221C318B4000569B7 /* stellar_account_creation_requested.swift */; };
+		E929BCDF21C318B4000569B7 /* spend_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9321C318B4000569B7 /* spend_offer_tapped.swift */; };
+		E929BCE021C318B4000569B7 /* backup_welcome_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9421C318B4000569B7 /* backup_welcome_page_viewed.swift */; };
+		E929BCE121C318B4000569B7 /* spend_redeem_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9521C318B4000569B7 /* spend_redeem_button_tapped.swift */; };
+		E929BCE221C318B4000569B7 /* earn_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9621C318B4000569B7 /* earn_order_cancelled.swift */; };
+		E929BCE321C318B4000569B7 /* kin_balance_updated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9721C318B4000569B7 /* kin_balance_updated.swift */; };
+		E929BCE421C318B4000569B7 /* welcome_screen_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9821C318B4000569B7 /* welcome_screen_button_tapped.swift */; };
+		E929BCE521C318B4000569B7 /* earn_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9921C318B4000569B7 /* earn_order_completed.swift */; };
+		E929BCE621C318B4000569B7 /* backup_welcome_page_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9A21C318B4000569B7 /* backup_welcome_page_back_button_tapped.swift */; };
+		E929BCE721C318B4000569B7 /* marketplace_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9B21C318B4000569B7 /* marketplace_page_viewed.swift */; };
+		E929BCE821C318B4000569B7 /* general_ecosystem_sdk_error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9C21C318B4000569B7 /* general_ecosystem_sdk_error.swift */; };
+		E929BCE921C318B4000569B7 /* back_button_on_marketplace_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9D21C318B4000569B7 /* back_button_on_marketplace_page_tapped.swift */; };
+		E929BCEA21C318B4000569B7 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9E21C318B4000569B7 /* common.swift */; };
+		E929BCEB21C318B4000569B7 /* restore_are_you_sure_ok_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC9F21C318B4000569B7 /* restore_are_you_sure_ok_button_tapped.swift */; };
+		E929BCEC21C318B4000569B7 /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA021C318B4000569B7 /* backup_create_password_back_button_tapped.swift */; };
+		E929BCED21C318B4000569B7 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA121C318B4000569B7 /* user.swift */; };
+		E929BCEE21C318B4000569B7 /* settings_option_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA221C318B4000569B7 /* settings_option_tapped.swift */; };
+		E929BCEF21C318B4000569B7 /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA321C318B4000569B7 /* welcome_screen_page_viewed.swift */; };
+		E929BCF021C318B4000569B7 /* earn_order_payment_confirmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA421C318B4000569B7 /* earn_order_payment_confirmed.swift */; };
+		E929BCF121C318B4000569B7 /* backup_popup_later_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA521C318B4000569B7 /* backup_popup_later_button_tapped.swift */; };
+		E929BCF221C318B4000569B7 /* spend_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA621C318B4000569B7 /* spend_order_creation_requested.swift */; };
+		E929BCF321C318B4000569B7 /* wallet_creation_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA721C318B4000569B7 /* wallet_creation_succeeded.swift */; };
+		E929BCF421C318B4000569B7 /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA821C318B4000569B7 /* earn_order_completion_submitted.swift */; };
+		E929BCF521C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCA921C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift */; };
+		E929BCF621C318B4000569B7 /* confirm_purchase_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAA21C318B4000569B7 /* confirm_purchase_page_viewed.swift */; };
+		E929BCF721C318B4000569B7 /* settings_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAB21C318B4000569B7 /* settings_page_viewed.swift */; };
+		E929BCF821C318B4000569B7 /* stellar_kin_trustline_setup_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAC21C318B4000569B7 /* stellar_kin_trustline_setup_succeeded.swift */; };
+		E929BCF921C318B4000569B7 /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAD21C318B4000569B7 /* client.swift */; };
+		E929BCFA21C318B4000569B7 /* backup_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAE21C318B4000569B7 /* backup_wallet_completed.swift */; };
+		E929BCFB21C318B4000569B7 /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCAF21C318B4000569B7 /* order_history_item_tapped.swift */; };
+		E929BCFC21C318B4000569B7 /* order_history_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB021C318B4000569B7 /* order_history_page_viewed.swift */; };
+		E929BCFD21C318B4000569B7 /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB121C318B4000569B7 /* stellar_kin_trustline_setup_failed.swift */; };
+		E929BCFE21C318B4000569B7 /* restore_password_entry_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB221C318B4000569B7 /* restore_password_entry_back_button_tapped.swift */; };
+		E929BCFF21C318B4000569B7 /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB321C318B4000569B7 /* confirm_purchase_button_tapped.swift */; };
+		E929BD0021C318B4000569B7 /* backup_create_password_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB421C318B4000569B7 /* backup_create_password_page_viewed.swift */; };
+		E929BD0121C318B4000569B7 /* backup_qr_code_myqrcode_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB521C318B4000569B7 /* backup_qr_code_myqrcode_button_tapped.swift */; };
+		E929BD0221C318B4000569B7 /* backup_qr_code_send_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB621C318B4000569B7 /* backup_qr_code_send_button_tapped.swift */; };
+		E929BD0321C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
+		E929BD0421C318B4000569B7 /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB821C318B4000569B7 /* spend_order_creation_received.swift */; };
+		E929BD0521C318B4000569B7 /* kin_sdk_initiated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCB921C318B4000569B7 /* kin_sdk_initiated.swift */; };
+		E929BD0621C318B4000569B7 /* spend_redeem_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBA21C318B4000569B7 /* spend_redeem_page_viewed.swift */; };
+		E929BD0721C318B4000569B7 /* backup_completed_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBB21C318B4000569B7 /* backup_completed_page_viewed.swift */; };
+		E929BD0821C318B4000569B7 /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBC21C318B4000569B7 /* spend_order_failed.swift */; };
+		E929BD0921C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBD21C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift */; };
+		E929BD0A21C318B4000569B7 /* back_button_on_welcome_screen_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBE21C318B4000569B7 /* back_button_on_welcome_screen_page_tapped.swift */; };
+		E929BD0B21C318B4000569B7 /* backup_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCBF21C318B4000569B7 /* backup_qr_code_back_button_tapped.swift */; };
+		E929BD0C21C318B4000569B7 /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC021C318B4000569B7 /* restore_password_done_button_tapped.swift */; };
+		E929BD0D21C318B4000569B7 /* settings_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC121C318B4000569B7 /* settings_back_button_tapped.swift */; };
+		E929BD0E21C318B4000569B7 /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC221C318B4000569B7 /* spend_order_completion_submitted.swift */; };
+		E929BD0F21C318B4000569B7 /* earn_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC321C318B4000569B7 /* earn_offer_tapped.swift */; };
+		E929BD1021C318B4000569B7 /* backup_start_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC421C318B4000569B7 /* backup_start_button_tapped.swift */; };
+		E929BD1121C318B4000569B7 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC521C318B4000569B7 /* types.swift */; };
+		E929BD1221C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC621C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */; };
+		E929BD1321C318B4000569B7 /* backup_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC721C318B4000569B7 /* backup_qr_code_page_viewed.swift */; };
+		E929BD1421C318B4000569B7 /* entrypoint_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC821C318B4000569B7 /* entrypoint_button_tapped.swift */; };
+		E929BD1521C318B4000569B7 /* earn_page_loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCC921C318B4000569B7 /* earn_page_loaded.swift */; };
+		E929BD1621C318B4000569B7 /* backup_popup_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCCA21C318B4000569B7 /* backup_popup_button_tapped.swift */; };
+		E929BD1721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCCB21C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
+		E929BD1821C318B4000569B7 /* restore_password_entry_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCCC21C318B4000569B7 /* restore_password_entry_page_viewed.swift */; };
+		E929BD1921C318B4000569B7 /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BCCD21C318B4000569B7 /* earn_order_creation_requested.swift */; };
+		E92BA41221A179D400C952D8 /* KinCoreSDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E92BA40B21A179BE00C952D8 /* KinCoreSDK.framework */; };
+		E92BA44621A19C0A00C952D8 /* BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA42521A19C0A00C952D8 /* BackupRestore.swift */; };
+		E92BA44721A19C0A00C952D8 /* UINavigationBar+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA42721A19C0A00C952D8 /* UINavigationBar+Appearance.swift */; };
+		E92BA44821A19C0A00C952D8 /* UIStatusBarStyle+Appearance.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA42821A19C0A00C952D8 /* UIStatusBarStyle+Appearance.swift */; };
+		E92BA44921A19C0A00C952D8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E92BA42921A19C0A00C952D8 /* Assets.xcassets */; };
+		E92BA44A21A19C0A00C952D8 /* LifeCycleProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA42B21A19C0A00C952D8 /* LifeCycleProtocol.swift */; };
+		E92BA44B21A19C0A00C952D8 /* PasswordEntryViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92BA42E21A19C0A00C952D8 /* PasswordEntryViewController.xib */; };
+		E92BA44C21A19C0A00C952D8 /* RestoreViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92BA42F21A19C0A00C952D8 /* RestoreViewController.xib */; };
+		E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92BA43021A19C0A00C952D8 /* QRViewController.xib */; };
+		E92BA44E21A19C0A00C952D8 /* ExplanationTemplateViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92BA43121A19C0A00C952D8 /* ExplanationTemplateViewController.xib */; };
+		E92BA44F21A19C0A00C952D8 /* BackupCompletedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43321A19C0A00C952D8 /* BackupCompletedViewController.swift */; };
+		E92BA45021A19C0A00C952D8 /* BRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43421A19C0A00C952D8 /* BRViewController.swift */; };
+		E92BA45121A19C0A00C952D8 /* BackupFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43521A19C0A00C952D8 /* BackupFlowController.swift */; };
+		E92BA45221A19C0A00C952D8 /* PasswordEntryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43621A19C0A00C952D8 /* PasswordEntryViewController.swift */; };
+		E92BA45321A19C0A00C952D8 /* QRPickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43721A19C0A00C952D8 /* QRPickerController.swift */; };
+		E92BA45421A19C0A00C952D8 /* PasswordEntryField.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43821A19C0A00C952D8 /* PasswordEntryField.swift */; };
+		E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43921A19C0A00C952D8 /* RestoreViewController.swift */; };
+		E92BA45621A19C0A00C952D8 /* RoundButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43A21A19C0A00C952D8 /* RoundButton.swift */; };
+		E92BA45721A19C0A00C952D8 /* RestoreFlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43B21A19C0A00C952D8 /* RestoreFlowController.swift */; };
+		E92BA45821A19C0A00C952D8 /* BackupIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43C21A19C0A00C952D8 /* BackupIntroViewController.swift */; };
+		E92BA45921A19C0A00C952D8 /* QRViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43D21A19C0A00C952D8 /* QRViewController.swift */; };
+		E92BA45A21A19C0A00C952D8 /* RestoreIntroViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43E21A19C0A00C952D8 /* RestoreIntroViewController.swift */; };
+		E92BA45B21A19C0A00C952D8 /* ExplanationTemplateViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA43F21A19C0A00C952D8 /* ExplanationTemplateViewController.swift */; };
+		E92BA45C21A19C0A00C952D8 /* FlowController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA44021A19C0A00C952D8 /* FlowController.swift */; };
+		E92BA45D21A19C0A00C952D8 /* QR.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA44121A19C0A00C952D8 /* QR.swift */; };
+		E92BA46B21A19FFF00C952D8 /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */; };
+		E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */; };
+		E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
 		E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7E206921BC008A027F /* SpendViewModel.swift */; };
@@ -34,93 +137,13 @@
 		E92F7B882069992A008A027F /* Animations.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B872069992A008A027F /* Animations.swift */; };
 		E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E93146262164F160008F2D74 /* MarketplaceViewController.xib */; };
 		E93146332164F52B008F2D74 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = E93146312164F52B008F2D74 /* Localizable.strings */; };
-		E93A54E1219973F000A32BEA /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5495219973F000A32BEA /* restore_wallet_completed.swift */; };
-		E93A54E2219973F000A32BEA /* settings_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5496219973F000A32BEA /* settings_button_tapped.swift */; };
-		E93A54E3219973F000A32BEA /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */; };
-		E93A54E4219973F000A32BEA /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5498219973F000A32BEA /* earn_order_failed.swift */; };
-		E93A54E5219973F000A32BEA /* backup_popup_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */; };
-		E93A54E6219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */; };
-		E93A54E7219973F000A32BEA /* earn_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549B219973F000A32BEA /* earn_order_creation_received.swift */; };
-		E93A54E8219973F000A32BEA /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */; };
-		E93A54E9219973F000A32BEA /* balance_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549D219973F000A32BEA /* balance_tapped.swift */; };
-		E93A54EA219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */; };
-		E93A54EB219973F000A32BEA /* redeem_url_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A549F219973F000A32BEA /* redeem_url_tapped.swift */; };
-		E93A54EC219973F000A32BEA /* spend_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */; };
-		E93A54ED219973F000A32BEA /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A1219973F000A32BEA /* spend_order_completed.swift */; };
-		E93A54EE219973F000A32BEA /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */; };
-		E93A54EF219973F000A32BEA /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */; };
-		E93A54F0219973F000A32BEA /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */; };
-		E93A54F1219973F000A32BEA /* stellar_account_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */; };
-		E93A54F2219973F000A32BEA /* spend_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */; };
-		E93A54F3219973F000A32BEA /* backup_welcome_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */; };
-		E93A54F4219973F000A32BEA /* spend_redeem_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */; };
-		E93A54F5219973F000A32BEA /* earn_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */; };
-		E93A54F6219973F000A32BEA /* kin_balance_updated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AA219973F000A32BEA /* kin_balance_updated.swift */; };
-		E93A54F7219973F000A32BEA /* welcome_screen_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */; };
-		E93A54F8219973F000A32BEA /* earn_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AC219973F000A32BEA /* earn_order_completed.swift */; };
-		E93A54F9219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */; };
-		E93A54FA219973F000A32BEA /* marketplace_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */; };
-		E93A54FB219973F000A32BEA /* general_ecosystem_sdk_error.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */; };
-		E93A54FC219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */; };
-		E93A54FD219973F000A32BEA /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B1219973F000A32BEA /* common.swift */; };
-		E93A54FE219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */; };
-		E93A54FF219973F000A32BEA /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */; };
-		E93A5500219973F000A32BEA /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B4219973F000A32BEA /* user.swift */; };
-		E93A5501219973F000A32BEA /* settings_option_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B5219973F000A32BEA /* settings_option_tapped.swift */; };
-		E93A5502219973F000A32BEA /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */; };
-		E93A5503219973F000A32BEA /* earn_order_payment_confirmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */; };
-		E93A5504219973F000A32BEA /* backup_popup_later_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */; };
-		E93A5505219973F000A32BEA /* spend_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */; };
-		E93A5506219973F000A32BEA /* wallet_creation_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */; };
-		E93A5507219973F000A32BEA /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */; };
-		E93A5508219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */; };
-		E93A5509219973F000A32BEA /* confirm_purchase_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */; };
-		E93A550A219973F000A32BEA /* settings_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BE219973F000A32BEA /* settings_page_viewed.swift */; };
-		E93A550B219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */; };
-		E93A550C219973F000A32BEA /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C0219973F000A32BEA /* client.swift */; };
-		E93A550D219973F000A32BEA /* backup_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */; };
-		E93A550E219973F000A32BEA /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */; };
-		E93A550F219973F000A32BEA /* order_history_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */; };
-		E93A5510219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */; };
-		E93A5511219973F000A32BEA /* restore_password_entry_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */; };
-		E93A5512219973F000A32BEA /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */; };
-		E93A5513219973F000A32BEA /* backup_create_password_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */; };
-		E93A5514219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */; };
-		E93A5515219973F000A32BEA /* backup_qr_code_send_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */; };
-		E93A5516219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
-		E93A5517219973F000A32BEA /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */; };
-		E93A5518219973F000A32BEA /* kin_sdk_initiated.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */; };
-		E93A5519219973F000A32BEA /* spend_redeem_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */; };
-		E93A551A219973F000A32BEA /* backup_completed_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */; };
-		E93A551B219973F000A32BEA /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54CF219973F000A32BEA /* spend_order_failed.swift */; };
-		E93A551C219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */; };
-		E93A551D219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */; };
-		E93A551E219973F000A32BEA /* backup_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */; };
-		E93A551F219973F000A32BEA /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */; };
-		E93A5520219973F000A32BEA /* settings_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */; };
-		E93A5521219973F000A32BEA /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */; };
-		E93A5522219973F000A32BEA /* earn_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */; };
-		E93A5523219973F000A32BEA /* backup_start_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */; };
-		E93A5524219973F000A32BEA /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D8219973F000A32BEA /* types.swift */; };
-		E93A5525219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */; };
-		E93A5526219973F000A32BEA /* backup_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */; };
-		E93A5527219973F000A32BEA /* entrypoint_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */; };
-		E93A5528219973F000A32BEA /* earn_page_loaded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DC219973F000A32BEA /* earn_page_loaded.swift */; };
-		E93A5529219973F000A32BEA /* backup_popup_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */; };
-		E93A552A219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
-		E93A552B219973F000A32BEA /* restore_password_entry_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */; };
-		E93A552C219973F000A32BEA /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */; };
 		E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */; };
 		E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8A6202C5C5900DD4B8E /* ImageCache.swift */; };
 		E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8D22030DD7D00DD4B8E /* Blockchain.swift */; };
 		E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DA2031120D00DD4B8E /* AppDelegate.swift */; };
-		E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8DC2031120D00DD4B8E /* ViewController.swift */; };
 		E942F8E02031120D00DD4B8E /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8DE2031120D00DD4B8E /* Main.storyboard */; };
 		E942F8E52031120D00DD4B8E /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */; };
 		E942F8F32031B54800DD4B8E /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F22031B54800DD4B8E /* Logger.swift */; };
-		E942F8F52032D7E300DD4B8E /* BaseDataNetworkTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F42032D7E300DD4B8E /* BaseDataNetworkTest.swift */; };
-		E942F8F72032D7F500DD4B8E /* DataTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8F62032D7F500DD4B8E /* DataTests.swift */; };
-		E942F8FD2033157600DD4B8E /* PromiseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8FC2033157600DD4B8E /* PromiseTests.swift */; };
 		E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */; };
 		E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90A2034138100DD4B8E /* EarnOfferCell.swift */; };
 		E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */; };
@@ -167,6 +190,7 @@
 		E9DC202C216B97E900746B81 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC2026216B97E900746B81 /* String+localized.swift */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
 		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
+		E9E913F521B7311F0097EE21 /* AccountSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
 		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
 		E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9FC5998203B19A800D1DA2B /* Assets.xcassets */; };
@@ -174,37 +198,37 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		E9295BB0218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
+		E92BA40A21A179BE00C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82140EA91FA88E5B00FAF19B;
 			remoteInfo = KinCoreSDK;
 		};
-		E9295BB2218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
+		E92BA40C21A179BE00C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 8278352E1FA9B5F20006C3DF;
 			remoteInfo = KinTestHost;
 		};
-		E9295BB4218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
+		E92BA40E21A179BE00C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 827835411FA9B5F20006C3DF;
 			remoteInfo = KinCoreSDKTests;
 		};
-		E9295BB6218EFAD5001B7B56 /* PBXContainerItemProxy */ = {
+		E92BA41021A179BE00C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 			proxyType = 2;
 			remoteGlobalIDString = 82BA2113204D867200396AE2;
 			remoteInfo = "KinCoreSDK-macos";
 		};
-		E9295BB8218EFB21001B7B56 /* PBXContainerItemProxy */ = {
+		E92BA41321A179D800C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 			proxyType = 1;
 			remoteGlobalIDString = 82140EA81FA88E5B00FAF19B;
 			remoteInfo = KinCoreSDK;
@@ -265,103 +289,126 @@
 		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		E92501B920614A4400E2E738 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
-		E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-core-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
+		E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_wallet_completed.swift; sourceTree = "<group>"; };
+		E929BC8321C318B4000569B7 /* settings_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC8421C318B4000569B7 /* backup_create_password_next_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_next_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC8521C318B4000569B7 /* earn_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_failed.swift; sourceTree = "<group>"; };
+		E929BC8621C318B4000569B7 /* backup_popup_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_page_viewed.swift; sourceTree = "<group>"; };
+		E929BC8721C318B4000569B7 /* restore_upload_qr_code_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC8821C318B4000569B7 /* earn_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_received.swift; sourceTree = "<group>"; };
+		E929BC8921C318B4000569B7 /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
+		E929BC8A21C318B4000569B7 /* balance_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = balance_tapped.swift; sourceTree = "<group>"; };
+		E929BC8B21C318B4000569B7 /* restore_upload_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC8C21C318B4000569B7 /* redeem_url_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = redeem_url_tapped.swift; sourceTree = "<group>"; };
+		E929BC8D21C318B4000569B7 /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_failed.swift; sourceTree = "<group>"; };
+		E929BC8E21C318B4000569B7 /* spend_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completed.swift; sourceTree = "<group>"; };
+		E929BC8F21C318B4000569B7 /* spend_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_cancelled.swift; sourceTree = "<group>"; };
+		E929BC9021C318B4000569B7 /* earn_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_failed.swift; sourceTree = "<group>"; };
+		E929BC9121C318B4000569B7 /* not_enough_kin_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = not_enough_kin_page_viewed.swift; sourceTree = "<group>"; };
+		E929BC9221C318B4000569B7 /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
+		E929BC9321C318B4000569B7 /* spend_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_offer_tapped.swift; sourceTree = "<group>"; };
+		E929BC9421C318B4000569B7 /* backup_welcome_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_viewed.swift; sourceTree = "<group>"; };
+		E929BC9521C318B4000569B7 /* spend_redeem_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC9621C318B4000569B7 /* earn_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_cancelled.swift; sourceTree = "<group>"; };
+		E929BC9721C318B4000569B7 /* kin_balance_updated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_balance_updated.swift; sourceTree = "<group>"; };
+		E929BC9821C318B4000569B7 /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC9921C318B4000569B7 /* earn_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completed.swift; sourceTree = "<group>"; };
+		E929BC9A21C318B4000569B7 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BC9B21C318B4000569B7 /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marketplace_page_viewed.swift; sourceTree = "<group>"; };
+		E929BC9C21C318B4000569B7 /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
+		E929BC9D21C318B4000569B7 /* back_button_on_marketplace_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_marketplace_page_tapped.swift; sourceTree = "<group>"; };
+		E929BC9E21C318B4000569B7 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
+		E929BC9F21C318B4000569B7 /* restore_are_you_sure_ok_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_ok_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCA021C318B4000569B7 /* backup_create_password_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCA121C318B4000569B7 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
+		E929BCA221C318B4000569B7 /* settings_option_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_option_tapped.swift; sourceTree = "<group>"; };
+		E929BCA321C318B4000569B7 /* welcome_screen_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCA421C318B4000569B7 /* earn_order_payment_confirmed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_payment_confirmed.swift; sourceTree = "<group>"; };
+		E929BCA521C318B4000569B7 /* backup_popup_later_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_later_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCA621C318B4000569B7 /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_requested.swift; sourceTree = "<group>"; };
+		E929BCA721C318B4000569B7 /* wallet_creation_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wallet_creation_succeeded.swift; sourceTree = "<group>"; };
+		E929BCA821C318B4000569B7 /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completion_submitted.swift; sourceTree = "<group>"; };
+		E929BCA921C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_cancel_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCAA21C318B4000569B7 /* confirm_purchase_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCAB21C318B4000569B7 /* settings_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCAC21C318B4000569B7 /* stellar_kin_trustline_setup_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_succeeded.swift; sourceTree = "<group>"; };
+		E929BCAD21C318B4000569B7 /* client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = client.swift; sourceTree = "<group>"; };
+		E929BCAE21C318B4000569B7 /* backup_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_wallet_completed.swift; sourceTree = "<group>"; };
+		E929BCAF21C318B4000569B7 /* order_history_item_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_item_tapped.swift; sourceTree = "<group>"; };
+		E929BCB021C318B4000569B7 /* order_history_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCB121C318B4000569B7 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
+		E929BCB221C318B4000569B7 /* restore_password_entry_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCB321C318B4000569B7 /* confirm_purchase_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCB421C318B4000569B7 /* backup_create_password_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCB521C318B4000569B7 /* backup_qr_code_myqrcode_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_myqrcode_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCB621C318B4000569B7 /* backup_qr_code_send_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_send_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCB721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_failed.swift; sourceTree = "<group>"; };
+		E929BCB821C318B4000569B7 /* spend_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_received.swift; sourceTree = "<group>"; };
+		E929BCB921C318B4000569B7 /* kin_sdk_initiated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_sdk_initiated.swift; sourceTree = "<group>"; };
+		E929BCBA21C318B4000569B7 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCBB21C318B4000569B7 /* backup_completed_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_completed_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCBC21C318B4000569B7 /* spend_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_failed.swift; sourceTree = "<group>"; };
+		E929BCBD21C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCBE21C318B4000569B7 /* back_button_on_welcome_screen_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_welcome_screen_page_tapped.swift; sourceTree = "<group>"; };
+		E929BCBF21C318B4000569B7 /* backup_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCC021C318B4000569B7 /* restore_password_done_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_done_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCC121C318B4000569B7 /* settings_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_back_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCC221C318B4000569B7 /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completion_submitted.swift; sourceTree = "<group>"; };
+		E929BCC321C318B4000569B7 /* earn_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_offer_tapped.swift; sourceTree = "<group>"; };
+		E929BCC421C318B4000569B7 /* backup_start_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_start_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCC521C318B4000569B7 /* types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
+		E929BCC621C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
+		E929BCC721C318B4000569B7 /* backup_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCC821C318B4000569B7 /* entrypoint_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = entrypoint_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCC921C318B4000569B7 /* earn_page_loaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_page_loaded.swift; sourceTree = "<group>"; };
+		E929BCCA21C318B4000569B7 /* backup_popup_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_button_tapped.swift; sourceTree = "<group>"; };
+		E929BCCB21C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_submitted.swift; sourceTree = "<group>"; };
+		E929BCCC21C318B4000569B7 /* restore_password_entry_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_page_viewed.swift; sourceTree = "<group>"; };
+		E929BCCD21C318B4000569B7 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
+		E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = KinCoreSDK.xcodeproj; path = "Dependencies/kin-core-ios/KinSDK/KinCoreSDK.xcodeproj"; sourceTree = "<group>"; };
+		E92BA42521A19C0A00C952D8 /* BackupRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupRestore.swift; sourceTree = "<group>"; };
+		E92BA42721A19C0A00C952D8 /* UINavigationBar+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Appearance.swift"; sourceTree = "<group>"; };
+		E92BA42821A19C0A00C952D8 /* UIStatusBarStyle+Appearance.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIStatusBarStyle+Appearance.swift"; sourceTree = "<group>"; };
+		E92BA42921A19C0A00C952D8 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		E92BA42B21A19C0A00C952D8 /* LifeCycleProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LifeCycleProtocol.swift; sourceTree = "<group>"; };
+		E92BA42E21A19C0A00C952D8 /* PasswordEntryViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PasswordEntryViewController.xib; sourceTree = "<group>"; };
+		E92BA42F21A19C0A00C952D8 /* RestoreViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = RestoreViewController.xib; sourceTree = "<group>"; };
+		E92BA43021A19C0A00C952D8 /* QRViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = QRViewController.xib; sourceTree = "<group>"; };
+		E92BA43121A19C0A00C952D8 /* ExplanationTemplateViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ExplanationTemplateViewController.xib; sourceTree = "<group>"; };
+		E92BA43321A19C0A00C952D8 /* BackupCompletedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupCompletedViewController.swift; sourceTree = "<group>"; };
+		E92BA43421A19C0A00C952D8 /* BRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BRViewController.swift; sourceTree = "<group>"; };
+		E92BA43521A19C0A00C952D8 /* BackupFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupFlowController.swift; sourceTree = "<group>"; };
+		E92BA43621A19C0A00C952D8 /* PasswordEntryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEntryViewController.swift; sourceTree = "<group>"; };
+		E92BA43721A19C0A00C952D8 /* QRPickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRPickerController.swift; sourceTree = "<group>"; };
+		E92BA43821A19C0A00C952D8 /* PasswordEntryField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PasswordEntryField.swift; sourceTree = "<group>"; };
+		E92BA43921A19C0A00C952D8 /* RestoreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoreViewController.swift; sourceTree = "<group>"; };
+		E92BA43A21A19C0A00C952D8 /* RoundButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RoundButton.swift; sourceTree = "<group>"; };
+		E92BA43B21A19C0A00C952D8 /* RestoreFlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoreFlowController.swift; sourceTree = "<group>"; };
+		E92BA43C21A19C0A00C952D8 /* BackupIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackupIntroViewController.swift; sourceTree = "<group>"; };
+		E92BA43D21A19C0A00C952D8 /* QRViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QRViewController.swift; sourceTree = "<group>"; };
+		E92BA43E21A19C0A00C952D8 /* RestoreIntroViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RestoreIntroViewController.swift; sourceTree = "<group>"; };
+		E92BA43F21A19C0A00C952D8 /* ExplanationTemplateViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplanationTemplateViewController.swift; sourceTree = "<group>"; };
+		E92BA44021A19C0A00C952D8 /* FlowController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowController.swift; sourceTree = "<group>"; };
+		E92BA44121A19C0A00C952D8 /* QR.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QR.swift; sourceTree = "<group>"; };
+		E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeBarButtonItem.swift; sourceTree = "<group>"; };
+		E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = KinEcosystem/View/notNibs/SettingsViewController.swift; sourceTree = SOURCE_ROOT; };
+		E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kin+BackupRestore.swift"; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
 		E92F7B80206923A0008A027F /* SheetTransition.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetTransition.swift; sourceTree = "<group>"; };
 		E92F7B872069992A008A027F /* Animations.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animations.swift; sourceTree = "<group>"; };
 		E93146322164F52B008F2D74 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Localizable.strings; sourceTree = "<group>"; };
-		E93A5495219973F000A32BEA /* restore_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_wallet_completed.swift; sourceTree = "<group>"; };
-		E93A5496219973F000A32BEA /* settings_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_button_tapped.swift; sourceTree = "<group>"; };
-		E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_next_button_tapped.swift; sourceTree = "<group>"; };
-		E93A5498219973F000A32BEA /* earn_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_failed.swift; sourceTree = "<group>"; };
-		E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_page_viewed.swift; sourceTree = "<group>"; };
-		E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_button_tapped.swift; sourceTree = "<group>"; };
-		E93A549B219973F000A32BEA /* earn_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_received.swift; sourceTree = "<group>"; };
-		E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
-		E93A549D219973F000A32BEA /* balance_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = balance_tapped.swift; sourceTree = "<group>"; };
-		E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A549F219973F000A32BEA /* redeem_url_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = redeem_url_tapped.swift; sourceTree = "<group>"; };
-		E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_failed.swift; sourceTree = "<group>"; };
-		E93A54A1219973F000A32BEA /* spend_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completed.swift; sourceTree = "<group>"; };
-		E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_cancelled.swift; sourceTree = "<group>"; };
-		E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_failed.swift; sourceTree = "<group>"; };
-		E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = not_enough_kin_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
-		E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_offer_tapped.swift; sourceTree = "<group>"; };
-		E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_cancelled.swift; sourceTree = "<group>"; };
-		E93A54AA219973F000A32BEA /* kin_balance_updated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_balance_updated.swift; sourceTree = "<group>"; };
-		E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54AC219973F000A32BEA /* earn_order_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completed.swift; sourceTree = "<group>"; };
-		E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = marketplace_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
-		E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_marketplace_page_tapped.swift; sourceTree = "<group>"; };
-		E93A54B1219973F000A32BEA /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
-		E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_ok_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54B4219973F000A32BEA /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
-		E93A54B5219973F000A32BEA /* settings_option_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_option_tapped.swift; sourceTree = "<group>"; };
-		E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = welcome_screen_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_payment_confirmed.swift; sourceTree = "<group>"; };
-		E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_later_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_requested.swift; sourceTree = "<group>"; };
-		E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = wallet_creation_succeeded.swift; sourceTree = "<group>"; };
-		E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_completion_submitted.swift; sourceTree = "<group>"; };
-		E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_cancel_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54BE219973F000A32BEA /* settings_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_succeeded.swift; sourceTree = "<group>"; };
-		E93A54C0219973F000A32BEA /* client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = client.swift; sourceTree = "<group>"; };
-		E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_wallet_completed.swift; sourceTree = "<group>"; };
-		E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_item_tapped.swift; sourceTree = "<group>"; };
-		E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = order_history_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
-		E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = confirm_purchase_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_myqrcode_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_send_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_failed.swift; sourceTree = "<group>"; };
-		E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_creation_received.swift; sourceTree = "<group>"; };
-		E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = kin_sdk_initiated.swift; sourceTree = "<group>"; };
-		E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_completed_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54CF219973F000A32BEA /* spend_order_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_failed.swift; sourceTree = "<group>"; };
-		E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = back_button_on_welcome_screen_page_tapped.swift; sourceTree = "<group>"; };
-		E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_done_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_back_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_order_completion_submitted.swift; sourceTree = "<group>"; };
-		E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_offer_tapped.swift; sourceTree = "<group>"; };
-		E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_start_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54D8219973F000A32BEA /* types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
-		E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
-		E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_qr_code_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = entrypoint_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54DC219973F000A32BEA /* earn_page_loaded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_page_loaded.swift; sourceTree = "<group>"; };
-		E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_popup_button_tapped.swift; sourceTree = "<group>"; };
-		E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_submitted.swift; sourceTree = "<group>"; };
-		E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_password_entry_page_viewed.swift; sourceTree = "<group>"; };
-		E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		E942F8A4202C4C6F00DD4B8E /* OfferVIewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OfferVIewModel.swift; sourceTree = "<group>"; };
 		E942F8A6202C5C5900DD4B8E /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
 		E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = CoreDataStack.xcodeproj; path = Dependencies/CoreDataStack/CoreDataStack/CoreDataStack.xcodeproj; sourceTree = "<group>"; };
 		E942F8D22030DD7D00DD4B8E /* Blockchain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Blockchain.swift; sourceTree = "<group>"; };
 		E942F8D82031120D00DD4B8E /* KinEcosystemTestsHost.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = KinEcosystemTestsHost.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E942F8DA2031120D00DD4B8E /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		E942F8DC2031120D00DD4B8E /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		E942F8DF2031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E942F8E42031120D00DD4B8E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E942F8E62031120D00DD4B8E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E942F8F22031B54800DD4B8E /* Logger.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
-		E942F8F42032D7E300DD4B8E /* BaseDataNetworkTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseDataNetworkTest.swift; sourceTree = "<group>"; };
-		E942F8F62032D7F500DD4B8E /* DataTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataTests.swift; sourceTree = "<group>"; };
-		E942F8FC2033157600DD4B8E /* PromiseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PromiseTests.swift; sourceTree = "<group>"; };
 		E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketplaceViewController.swift; sourceTree = "<group>"; };
 		E942F90A2034138100DD4B8E /* EarnOfferCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EarnOfferCell.swift; sourceTree = "<group>"; };
 		E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OffersCollectionViewFlowLayout.swift; sourceTree = "<group>"; };
@@ -414,6 +461,7 @@
 		E9DC2026216B97E900746B81 /* String+localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
 		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
+		E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionTests.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
 		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
 		E9FC5998203B19A800D1DA2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -432,8 +480,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E92BA41221A179D400C952D8 /* KinCoreSDK.framework in Frameworks */,
 				E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */,
-				E9295BBB218EFB33001B7B56 /* KinCoreSDK.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -456,15 +504,170 @@
 			path = Promises;
 			sourceTree = "<group>";
 		};
-		E9295BA8218EFAD5001B7B56 /* Products */ = {
+		E929BC8121C318B4000569B7 /* client */ = {
 			isa = PBXGroup;
 			children = (
-				E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */,
-				E9295BB3218EFAD5001B7B56 /* KinTestHost.app */,
-				E9295BB5218EFAD5001B7B56 /* KinSDKTests.xctest */,
-				E9295BB7218EFAD5001B7B56 /* KinCoreSDK.framework */,
+				E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */,
+				E929BC8321C318B4000569B7 /* settings_button_tapped.swift */,
+				E929BC8421C318B4000569B7 /* backup_create_password_next_button_tapped.swift */,
+				E929BC8521C318B4000569B7 /* earn_order_failed.swift */,
+				E929BC8621C318B4000569B7 /* backup_popup_page_viewed.swift */,
+				E929BC8721C318B4000569B7 /* restore_upload_qr_code_button_tapped.swift */,
+				E929BC8821C318B4000569B7 /* earn_order_creation_received.swift */,
+				E929BC8921C318B4000569B7 /* spend_thankyou_page_viewed.swift */,
+				E929BC8A21C318B4000569B7 /* balance_tapped.swift */,
+				E929BC8B21C318B4000569B7 /* restore_upload_qr_code_back_button_tapped.swift */,
+				E929BC8C21C318B4000569B7 /* redeem_url_tapped.swift */,
+				E929BC8D21C318B4000569B7 /* spend_order_creation_failed.swift */,
+				E929BC8E21C318B4000569B7 /* spend_order_completed.swift */,
+				E929BC8F21C318B4000569B7 /* spend_order_cancelled.swift */,
+				E929BC9021C318B4000569B7 /* earn_order_creation_failed.swift */,
+				E929BC9121C318B4000569B7 /* not_enough_kin_page_viewed.swift */,
+				E929BC9221C318B4000569B7 /* stellar_account_creation_requested.swift */,
+				E929BC9321C318B4000569B7 /* spend_offer_tapped.swift */,
+				E929BC9421C318B4000569B7 /* backup_welcome_page_viewed.swift */,
+				E929BC9521C318B4000569B7 /* spend_redeem_button_tapped.swift */,
+				E929BC9621C318B4000569B7 /* earn_order_cancelled.swift */,
+				E929BC9721C318B4000569B7 /* kin_balance_updated.swift */,
+				E929BC9821C318B4000569B7 /* welcome_screen_button_tapped.swift */,
+				E929BC9921C318B4000569B7 /* earn_order_completed.swift */,
+				E929BC9A21C318B4000569B7 /* backup_welcome_page_back_button_tapped.swift */,
+				E929BC9B21C318B4000569B7 /* marketplace_page_viewed.swift */,
+				E929BC9C21C318B4000569B7 /* general_ecosystem_sdk_error.swift */,
+				E929BC9D21C318B4000569B7 /* back_button_on_marketplace_page_tapped.swift */,
+				E929BC9E21C318B4000569B7 /* common.swift */,
+				E929BC9F21C318B4000569B7 /* restore_are_you_sure_ok_button_tapped.swift */,
+				E929BCA021C318B4000569B7 /* backup_create_password_back_button_tapped.swift */,
+				E929BCA121C318B4000569B7 /* user.swift */,
+				E929BCA221C318B4000569B7 /* settings_option_tapped.swift */,
+				E929BCA321C318B4000569B7 /* welcome_screen_page_viewed.swift */,
+				E929BCA421C318B4000569B7 /* earn_order_payment_confirmed.swift */,
+				E929BCA521C318B4000569B7 /* backup_popup_later_button_tapped.swift */,
+				E929BCA621C318B4000569B7 /* spend_order_creation_requested.swift */,
+				E929BCA721C318B4000569B7 /* wallet_creation_succeeded.swift */,
+				E929BCA821C318B4000569B7 /* earn_order_completion_submitted.swift */,
+				E929BCA921C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift */,
+				E929BCAA21C318B4000569B7 /* confirm_purchase_page_viewed.swift */,
+				E929BCAB21C318B4000569B7 /* settings_page_viewed.swift */,
+				E929BCAC21C318B4000569B7 /* stellar_kin_trustline_setup_succeeded.swift */,
+				E929BCAD21C318B4000569B7 /* client.swift */,
+				E929BCAE21C318B4000569B7 /* backup_wallet_completed.swift */,
+				E929BCAF21C318B4000569B7 /* order_history_item_tapped.swift */,
+				E929BCB021C318B4000569B7 /* order_history_page_viewed.swift */,
+				E929BCB121C318B4000569B7 /* stellar_kin_trustline_setup_failed.swift */,
+				E929BCB221C318B4000569B7 /* restore_password_entry_back_button_tapped.swift */,
+				E929BCB321C318B4000569B7 /* confirm_purchase_button_tapped.swift */,
+				E929BCB421C318B4000569B7 /* backup_create_password_page_viewed.swift */,
+				E929BCB521C318B4000569B7 /* backup_qr_code_myqrcode_button_tapped.swift */,
+				E929BCB621C318B4000569B7 /* backup_qr_code_send_button_tapped.swift */,
+				E929BCB721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_failed.swift */,
+				E929BCB821C318B4000569B7 /* spend_order_creation_received.swift */,
+				E929BCB921C318B4000569B7 /* kin_sdk_initiated.swift */,
+				E929BCBA21C318B4000569B7 /* spend_redeem_page_viewed.swift */,
+				E929BCBB21C318B4000569B7 /* backup_completed_page_viewed.swift */,
+				E929BCBC21C318B4000569B7 /* spend_order_failed.swift */,
+				E929BCBD21C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift */,
+				E929BCBE21C318B4000569B7 /* back_button_on_welcome_screen_page_tapped.swift */,
+				E929BCBF21C318B4000569B7 /* backup_qr_code_back_button_tapped.swift */,
+				E929BCC021C318B4000569B7 /* restore_password_done_button_tapped.swift */,
+				E929BCC121C318B4000569B7 /* settings_back_button_tapped.swift */,
+				E929BCC221C318B4000569B7 /* spend_order_completion_submitted.swift */,
+				E929BCC321C318B4000569B7 /* earn_offer_tapped.swift */,
+				E929BCC421C318B4000569B7 /* backup_start_button_tapped.swift */,
+				E929BCC521C318B4000569B7 /* types.swift */,
+				E929BCC621C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_succeeded.swift */,
+				E929BCC721C318B4000569B7 /* backup_qr_code_page_viewed.swift */,
+				E929BCC821C318B4000569B7 /* entrypoint_button_tapped.swift */,
+				E929BCC921C318B4000569B7 /* earn_page_loaded.swift */,
+				E929BCCA21C318B4000569B7 /* backup_popup_button_tapped.swift */,
+				E929BCCB21C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift */,
+				E929BCCC21C318B4000569B7 /* restore_password_entry_page_viewed.swift */,
+				E929BCCD21C318B4000569B7 /* earn_order_creation_requested.swift */,
+			);
+			path = client;
+			sourceTree = "<group>";
+		};
+		E92BA40221A179BE00C952D8 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA40B21A179BE00C952D8 /* KinCoreSDK.framework */,
+				E92BA40D21A179BE00C952D8 /* KinTestHost.app */,
+				E92BA40F21A179BE00C952D8 /* KinSDKTests.xctest */,
+				E92BA41121A179BE00C952D8 /* KinCoreSDK.framework */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		E92BA42421A19C0A00C952D8 /* BackupModule */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA42521A19C0A00C952D8 /* BackupRestore.swift */,
+				E92BA42621A19C0A00C952D8 /* Extension */,
+				E92BA42921A19C0A00C952D8 /* Assets.xcassets */,
+				E92BA42A21A19C0A00C952D8 /* Protocol */,
+				E92BA42C21A19C0A00C952D8 /* View */,
+				E92BA44121A19C0A00C952D8 /* QR.swift */,
+			);
+			path = BackupModule;
+			sourceTree = "<group>";
+		};
+		E92BA42621A19C0A00C952D8 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA42721A19C0A00C952D8 /* UINavigationBar+Appearance.swift */,
+				E92BA42821A19C0A00C952D8 /* UIStatusBarStyle+Appearance.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		E92BA42A21A19C0A00C952D8 /* Protocol */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA42B21A19C0A00C952D8 /* LifeCycleProtocol.swift */,
+			);
+			path = Protocol;
+			sourceTree = "<group>";
+		};
+		E92BA42C21A19C0A00C952D8 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA42D21A19C0A00C952D8 /* nibs */,
+				E92BA43221A19C0A00C952D8 /* notNibs */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		E92BA42D21A19C0A00C952D8 /* nibs */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA42E21A19C0A00C952D8 /* PasswordEntryViewController.xib */,
+				E92BA42F21A19C0A00C952D8 /* RestoreViewController.xib */,
+				E92BA43021A19C0A00C952D8 /* QRViewController.xib */,
+				E92BA43121A19C0A00C952D8 /* ExplanationTemplateViewController.xib */,
+			);
+			path = nibs;
+			sourceTree = "<group>";
+		};
+		E92BA43221A19C0A00C952D8 /* notNibs */ = {
+			isa = PBXGroup;
+			children = (
+				E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */,
+				E92BA43321A19C0A00C952D8 /* BackupCompletedViewController.swift */,
+				E92BA43421A19C0A00C952D8 /* BRViewController.swift */,
+				E92BA43521A19C0A00C952D8 /* BackupFlowController.swift */,
+				E92BA43621A19C0A00C952D8 /* PasswordEntryViewController.swift */,
+				E92BA43721A19C0A00C952D8 /* QRPickerController.swift */,
+				E92BA43821A19C0A00C952D8 /* PasswordEntryField.swift */,
+				E92BA43921A19C0A00C952D8 /* RestoreViewController.swift */,
+				E92BA43A21A19C0A00C952D8 /* RoundButton.swift */,
+				E92BA43B21A19C0A00C952D8 /* RestoreFlowController.swift */,
+				E92BA43C21A19C0A00C952D8 /* BackupIntroViewController.swift */,
+				E92BA43D21A19C0A00C952D8 /* QRViewController.swift */,
+				E92BA43E21A19C0A00C952D8 /* RestoreIntroViewController.swift */,
+				E92BA43F21A19C0A00C952D8 /* ExplanationTemplateViewController.swift */,
+				E92BA44021A19C0A00C952D8 /* FlowController.swift */,
+			);
+			path = notNibs;
 			sourceTree = "<group>";
 		};
 		E92D18DF2029ACE2002E357D /* Frameworks */ = {
@@ -474,89 +677,6 @@
 				E942F94E2034751000DD4B8E /* CoreData.framework */,
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		E93A5494219973F000A32BEA /* client */ = {
-			isa = PBXGroup;
-			children = (
-				E93A5495219973F000A32BEA /* restore_wallet_completed.swift */,
-				E93A5496219973F000A32BEA /* settings_button_tapped.swift */,
-				E93A5497219973F000A32BEA /* backup_create_password_next_button_tapped.swift */,
-				E93A5498219973F000A32BEA /* earn_order_failed.swift */,
-				E93A5499219973F000A32BEA /* backup_popup_page_viewed.swift */,
-				E93A549A219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift */,
-				E93A549B219973F000A32BEA /* earn_order_creation_received.swift */,
-				E93A549C219973F000A32BEA /* spend_thankyou_page_viewed.swift */,
-				E93A549D219973F000A32BEA /* balance_tapped.swift */,
-				E93A549E219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift */,
-				E93A549F219973F000A32BEA /* redeem_url_tapped.swift */,
-				E93A54A0219973F000A32BEA /* spend_order_creation_failed.swift */,
-				E93A54A1219973F000A32BEA /* spend_order_completed.swift */,
-				E93A54A2219973F000A32BEA /* spend_order_cancelled.swift */,
-				E93A54A3219973F000A32BEA /* earn_order_creation_failed.swift */,
-				E93A54A4219973F000A32BEA /* not_enough_kin_page_viewed.swift */,
-				E93A54A5219973F000A32BEA /* stellar_account_creation_requested.swift */,
-				E93A54A6219973F000A32BEA /* spend_offer_tapped.swift */,
-				E93A54A7219973F000A32BEA /* backup_welcome_page_viewed.swift */,
-				E93A54A8219973F000A32BEA /* spend_redeem_button_tapped.swift */,
-				E93A54A9219973F000A32BEA /* earn_order_cancelled.swift */,
-				E93A54AA219973F000A32BEA /* kin_balance_updated.swift */,
-				E93A54AB219973F000A32BEA /* welcome_screen_button_tapped.swift */,
-				E93A54AC219973F000A32BEA /* earn_order_completed.swift */,
-				E93A54AD219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift */,
-				E93A54AE219973F000A32BEA /* marketplace_page_viewed.swift */,
-				E93A54AF219973F000A32BEA /* general_ecosystem_sdk_error.swift */,
-				E93A54B0219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift */,
-				E93A54B1219973F000A32BEA /* common.swift */,
-				E93A54B2219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift */,
-				E93A54B3219973F000A32BEA /* backup_create_password_back_button_tapped.swift */,
-				E93A54B4219973F000A32BEA /* user.swift */,
-				E93A54B5219973F000A32BEA /* settings_option_tapped.swift */,
-				E93A54B6219973F000A32BEA /* welcome_screen_page_viewed.swift */,
-				E93A54B7219973F000A32BEA /* earn_order_payment_confirmed.swift */,
-				E93A54B8219973F000A32BEA /* backup_popup_later_button_tapped.swift */,
-				E93A54B9219973F000A32BEA /* spend_order_creation_requested.swift */,
-				E93A54BA219973F000A32BEA /* wallet_creation_succeeded.swift */,
-				E93A54BB219973F000A32BEA /* earn_order_completion_submitted.swift */,
-				E93A54BC219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift */,
-				E93A54BD219973F000A32BEA /* confirm_purchase_page_viewed.swift */,
-				E93A54BE219973F000A32BEA /* settings_page_viewed.swift */,
-				E93A54BF219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift */,
-				E93A54C0219973F000A32BEA /* client.swift */,
-				E93A54C1219973F000A32BEA /* backup_wallet_completed.swift */,
-				E93A54C2219973F000A32BEA /* order_history_item_tapped.swift */,
-				E93A54C3219973F000A32BEA /* order_history_page_viewed.swift */,
-				E93A54C4219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift */,
-				E93A54C5219973F000A32BEA /* restore_password_entry_back_button_tapped.swift */,
-				E93A54C6219973F000A32BEA /* confirm_purchase_button_tapped.swift */,
-				E93A54C7219973F000A32BEA /* backup_create_password_page_viewed.swift */,
-				E93A54C8219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift */,
-				E93A54C9219973F000A32BEA /* backup_qr_code_send_button_tapped.swift */,
-				E93A54CA219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift */,
-				E93A54CB219973F000A32BEA /* spend_order_creation_received.swift */,
-				E93A54CC219973F000A32BEA /* kin_sdk_initiated.swift */,
-				E93A54CD219973F000A32BEA /* spend_redeem_page_viewed.swift */,
-				E93A54CE219973F000A32BEA /* backup_completed_page_viewed.swift */,
-				E93A54CF219973F000A32BEA /* spend_order_failed.swift */,
-				E93A54D0219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift */,
-				E93A54D1219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift */,
-				E93A54D2219973F000A32BEA /* backup_qr_code_back_button_tapped.swift */,
-				E93A54D3219973F000A32BEA /* restore_password_done_button_tapped.swift */,
-				E93A54D4219973F000A32BEA /* settings_back_button_tapped.swift */,
-				E93A54D5219973F000A32BEA /* spend_order_completion_submitted.swift */,
-				E93A54D6219973F000A32BEA /* earn_offer_tapped.swift */,
-				E93A54D7219973F000A32BEA /* backup_start_button_tapped.swift */,
-				E93A54D8219973F000A32BEA /* types.swift */,
-				E93A54D9219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift */,
-				E93A54DA219973F000A32BEA /* backup_qr_code_page_viewed.swift */,
-				E93A54DB219973F000A32BEA /* entrypoint_button_tapped.swift */,
-				E93A54DC219973F000A32BEA /* earn_page_loaded.swift */,
-				E93A54DD219973F000A32BEA /* backup_popup_button_tapped.swift */,
-				E93A54DE219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift */,
-				E93A54DF219973F000A32BEA /* restore_password_entry_page_viewed.swift */,
-				E93A54E0219973F000A32BEA /* earn_order_creation_requested.swift */,
-			);
-			path = client;
 			sourceTree = "<group>";
 		};
 		E942F8A3202C4C4A00DD4B8E /* ViewModel */ = {
@@ -592,7 +712,6 @@
 			isa = PBXGroup;
 			children = (
 				E942F8DA2031120D00DD4B8E /* AppDelegate.swift */,
-				E942F8DC2031120D00DD4B8E /* ViewController.swift */,
 				E942F8DE2031120D00DD4B8E /* Main.storyboard */,
 				E942F8E32031120D00DD4B8E /* LaunchScreen.storyboard */,
 				E942F8E62031120D00DD4B8E /* Info.plist */,
@@ -612,7 +731,7 @@
 		E954100420E3B30E0038FF49 /* BI */ = {
 			isa = PBXGroup;
 			children = (
-				E93A5494219973F000A32BEA /* client */,
+				E929BC8121C318B4000569B7 /* client */,
 				E954106B20E3B5FA0038FF49 /* BIError.swift */,
 				E954100920E3B3230038FF49 /* BIClient.swift */,
 				E954106820E3B3A10038FF49 /* EventsStore.swift */,
@@ -626,7 +745,7 @@
 			isa = PBXGroup;
 			children = (
 				E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */,
-				E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */,
+				E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
@@ -648,6 +767,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E92BA42421A19C0A00C952D8 /* BackupModule */,
 				E954100420E3B30E0038FF49 /* BI */,
 				E92501B820614A3300E2E738 /* Promises */,
 				E942F8F1203191F600DD4B8E /* View */,
@@ -669,9 +789,7 @@
 			isa = PBXGroup;
 			children = (
 				E96F24E9201729690017EF68 /* Info.plist */,
-				E942F8F42032D7E300DD4B8E /* BaseDataNetworkTest.swift */,
-				E942F8F62032D7F500DD4B8E /* DataTests.swift */,
-				E942F8FC2033157600DD4B8E /* PromiseTests.swift */,
+				E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */,
 			);
 			path = KinEcosystemTests;
 			sourceTree = "<group>";
@@ -714,6 +832,7 @@
 			isa = PBXGroup;
 			children = (
 				91A4EA8720CFB22E00C3399F /* KinViewController.swift */,
+				E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */,
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
 				E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */,
@@ -740,6 +859,7 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
 				E9DC2026216B97E900746B81 /* String+localized.swift */,
 				E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */,
 				E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */,
@@ -824,7 +944,7 @@
 			buildRules = (
 			);
 			dependencies = (
-				E9295BB9218EFB21001B7B56 /* PBXTargetDependency */,
+				E92BA41421A179D800C952D8 /* PBXTargetDependency */,
 				E942F8CE203081B400DD4B8E /* PBXTargetDependency */,
 			);
 			name = KinEcosystem;
@@ -894,8 +1014,8 @@
 					ProjectRef = E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */;
 				},
 				{
-					ProductGroup = E9295BA8218EFAD5001B7B56 /* Products */;
-					ProjectRef = E9295BA7218EFAD5001B7B56 /* KinCoreSDK.xcodeproj */;
+					ProductGroup = E92BA40221A179BE00C952D8 /* Products */;
+					ProjectRef = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 				},
 			);
 			projectRoot = "";
@@ -908,33 +1028,33 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
-		E9295BB1218EFAD5001B7B56 /* KinCoreSDK.framework */ = {
+		E92BA40B21A179BE00C952D8 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E9295BB0218EFAD5001B7B56 /* PBXContainerItemProxy */;
+			remoteRef = E92BA40A21A179BE00C952D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E9295BB3218EFAD5001B7B56 /* KinTestHost.app */ = {
+		E92BA40D21A179BE00C952D8 /* KinTestHost.app */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.application;
 			path = KinTestHost.app;
-			remoteRef = E9295BB2218EFAD5001B7B56 /* PBXContainerItemProxy */;
+			remoteRef = E92BA40C21A179BE00C952D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E9295BB5218EFAD5001B7B56 /* KinSDKTests.xctest */ = {
+		E92BA40F21A179BE00C952D8 /* KinSDKTests.xctest */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.cfbundle;
 			name = KinSDKTests.xctest;
 			path = KinCoreSDKTests.xctest;
-			remoteRef = E9295BB4218EFAD5001B7B56 /* PBXContainerItemProxy */;
+			remoteRef = E92BA40E21A179BE00C952D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
-		E9295BB7218EFAD5001B7B56 /* KinCoreSDK.framework */ = {
+		E92BA41121A179BE00C952D8 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
 			path = KinCoreSDK.framework;
-			remoteRef = E9295BB6218EFAD5001B7B56 /* PBXContainerItemProxy */;
+			remoteRef = E92BA41021A179BE00C952D8 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */ = {
@@ -969,8 +1089,10 @@
 			files = (
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
+				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
+				E92BA44921A19C0A00C952D8 /* Assets.xcassets in Resources */,
 				E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
 				E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */,
@@ -978,6 +1100,9 @@
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
+				E92BA44B21A19C0A00C952D8 /* PasswordEntryViewController.xib in Resources */,
+				E92BA44E21A19C0A00C952D8 /* ExplanationTemplateViewController.xib in Resources */,
+				E92BA44C21A19C0A00C952D8 /* RestoreViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
 				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 			);
@@ -997,7 +1122,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E942F8DD2031120D00DD4B8E /* ViewController.swift in Sources */,
 				E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1006,146 +1130,168 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E929BD0221C318B4000569B7 /* backup_qr_code_send_button_tapped.swift in Sources */,
 				E9DC2021216B807500746B81 /* Xib+localization.swift in Sources */,
 				E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */,
-				E93A54EA219973F000A32BEA /* restore_upload_qr_code_back_button_tapped.swift in Sources */,
 				E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */,
-				E93A54FA219973F000A32BEA /* marketplace_page_viewed.swift in Sources */,
 				E98D1782204D7D1800FEB57A /* OrderCellTimelineView.swift in Sources */,
+				E929BCE421C318B4000569B7 /* welcome_screen_button_tapped.swift in Sources */,
+				E92BA46B21A19FFF00C952D8 /* BadgeBarButtonItem.swift in Sources */,
 				E92F7B81206923A0008A027F /* SheetTransition.swift in Sources */,
+				E929BD1321C318B4000569B7 /* backup_qr_code_page_viewed.swift in Sources */,
+				E929BCEC21C318B4000569B7 /* backup_create_password_back_button_tapped.swift in Sources */,
 				E942F90B2034138100DD4B8E /* EarnOfferCell.swift in Sources */,
-				E93A5507219973F000A32BEA /* earn_order_completion_submitted.swift in Sources */,
-				E93A5511219973F000A32BEA /* restore_password_entry_back_button_tapped.swift in Sources */,
-				E93A5519219973F000A32BEA /* spend_redeem_page_viewed.swift in Sources */,
 				E9DFCC3D2027117700F115FA /* Offer.swift in Sources */,
-				E93A551F219973F000A32BEA /* restore_password_done_button_tapped.swift in Sources */,
-				E93A54F4219973F000A32BEA /* spend_redeem_button_tapped.swift in Sources */,
+				E929BCE621C318B4000569B7 /* backup_welcome_page_back_button_tapped.swift in Sources */,
+				E929BCFC21C318B4000569B7 /* order_history_page_viewed.swift in Sources */,
 				E98D177E204BF94200FEB57A /* Core.swift in Sources */,
-				E93A54FD219973F000A32BEA /* common.swift in Sources */,
-				E93A54F2219973F000A32BEA /* spend_offer_tapped.swift in Sources */,
+				E929BD1521C318B4000569B7 /* earn_page_loaded.swift in Sources */,
 				E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */,
-				E93A5522219973F000A32BEA /* earn_offer_tapped.swift in Sources */,
-				E93A551B219973F000A32BEA /* spend_order_failed.swift in Sources */,
-				E93A54E9219973F000A32BEA /* balance_tapped.swift in Sources */,
+				E929BCF621C318B4000569B7 /* confirm_purchase_page_viewed.swift in Sources */,
+				E929BD1921C318B4000569B7 /* earn_order_creation_requested.swift in Sources */,
+				E92BA44F21A19C0A00C952D8 /* BackupCompletedViewController.swift in Sources */,
+				E92BA45921A19C0A00C952D8 /* QRViewController.swift in Sources */,
+				E92BA45D21A19C0A00C952D8 /* QR.swift in Sources */,
+				E929BCED21C318B4000569B7 /* user.swift in Sources */,
 				E9753C12206BD4AB0023CF94 /* CouponViewController.swift in Sources */,
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
-				E93A54FB219973F000A32BEA /* general_ecosystem_sdk_error.swift in Sources */,
-				E93A552A219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */,
-				E93A54F6219973F000A32BEA /* kin_balance_updated.swift in Sources */,
 				E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */,
 				E98D1784204FD09200FEB57A /* UIView+extensions.swift in Sources */,
-				E93A5506219973F000A32BEA /* wallet_creation_succeeded.swift in Sources */,
+				E929BCD921C318B4000569B7 /* spend_order_creation_failed.swift in Sources */,
+				E929BD1421C318B4000569B7 /* entrypoint_button_tapped.swift in Sources */,
+				E929BCFA21C318B4000569B7 /* backup_wallet_completed.swift in Sources */,
 				E954A62D2058163C00F01C8A /* OrderError.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
-				E93A54EF219973F000A32BEA /* earn_order_creation_failed.swift in Sources */,
-				E93A550D219973F000A32BEA /* backup_wallet_completed.swift in Sources */,
-				E93A5520219973F000A32BEA /* settings_back_button_tapped.swift in Sources */,
-				E93A54F5219973F000A32BEA /* earn_order_cancelled.swift in Sources */,
-				E93A5516219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */,
+				E929BD1221C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */,
+				E929BD1021C318B4000569B7 /* backup_start_button_tapped.swift in Sources */,
+				E929BCF421C318B4000569B7 /* earn_order_completion_submitted.swift in Sources */,
 				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
-				E93A5508219973F000A32BEA /* restore_are_you_sure_cancel_button_tapped.swift in Sources */,
+				E929BCE321C318B4000569B7 /* kin_balance_updated.swift in Sources */,
+				E929BCDB21C318B4000569B7 /* spend_order_cancelled.swift in Sources */,
+				E929BD0621C318B4000569B7 /* spend_redeem_page_viewed.swift in Sources */,
+				E929BCFB21C318B4000569B7 /* order_history_item_tapped.swift in Sources */,
+				E929BCE121C318B4000569B7 /* spend_redeem_button_tapped.swift in Sources */,
 				91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */,
-				E93A550C219973F000A32BEA /* client.swift in Sources */,
-				E93A5521219973F000A32BEA /* spend_order_completion_submitted.swift in Sources */,
+				E929BCE021C318B4000569B7 /* backup_welcome_page_viewed.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
+				E929BD0721C318B4000569B7 /* backup_completed_page_viewed.swift in Sources */,
+				E929BCF321C318B4000569B7 /* wallet_creation_succeeded.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
+				E929BCDA21C318B4000569B7 /* spend_order_completed.swift in Sources */,
+				E929BD0921C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
-				E93A5528219973F000A32BEA /* earn_page_loaded.swift in Sources */,
-				E93A5515219973F000A32BEA /* backup_qr_code_send_button_tapped.swift in Sources */,
-				E93A5502219973F000A32BEA /* welcome_screen_page_viewed.swift in Sources */,
-				E93A54E8219973F000A32BEA /* spend_thankyou_page_viewed.swift in Sources */,
+				E92BA45021A19C0A00C952D8 /* BRViewController.swift in Sources */,
 				E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */,
-				E93A5501219973F000A32BEA /* settings_option_tapped.swift in Sources */,
-				E93A54ED219973F000A32BEA /* spend_order_completed.swift in Sources */,
-				E93A54E5219973F000A32BEA /* backup_popup_page_viewed.swift in Sources */,
-				E93A54FE219973F000A32BEA /* restore_are_you_sure_ok_button_tapped.swift in Sources */,
 				E912B4EB203C6683005ADBA1 /* BlockchainData.swift in Sources */,
+				E92BA44821A19C0A00C952D8 /* UIStatusBarStyle+Appearance.swift in Sources */,
 				E954106920E3B3A10038FF49 /* EventsStore.swift in Sources */,
+				E92BA45C21A19C0A00C952D8 /* FlowController.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
-				E93A5504219973F000A32BEA /* backup_popup_later_button_tapped.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
+				E929BCF121C318B4000569B7 /* backup_popup_later_button_tapped.swift in Sources */,
+				E929BD0F21C318B4000569B7 /* earn_offer_tapped.swift in Sources */,
+				E929BCD821C318B4000569B7 /* redeem_url_tapped.swift in Sources */,
+				E92BA45421A19C0A00C952D8 /* PasswordEntryField.swift in Sources */,
+				E929BCDE21C318B4000569B7 /* stellar_account_creation_requested.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,
+				E929BCF221C318B4000569B7 /* spend_order_creation_requested.swift in Sources */,
 				E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */,
-				E93A550B219973F000A32BEA /* stellar_kin_trustline_setup_succeeded.swift in Sources */,
-				E93A54F0219973F000A32BEA /* not_enough_kin_page_viewed.swift in Sources */,
+				E929BD0C21C318B4000569B7 /* restore_password_done_button_tapped.swift in Sources */,
+				E929BCD621C318B4000569B7 /* balance_tapped.swift in Sources */,
+				E929BD1721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */,
+				E929BCD221C318B4000569B7 /* backup_popup_page_viewed.swift in Sources */,
+				E929BD0D21C318B4000569B7 /* settings_back_button_tapped.swift in Sources */,
+				E929BCF521C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift in Sources */,
+				E929BCD321C318B4000569B7 /* restore_upload_qr_code_button_tapped.swift in Sources */,
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
-				E93A54F9219973F000A32BEA /* backup_welcome_page_back_button_tapped.swift in Sources */,
+				E92BA44721A19C0A00C952D8 /* UINavigationBar+Appearance.swift in Sources */,
+				E929BD0421C318B4000569B7 /* spend_order_creation_received.swift in Sources */,
+				E92BA45A21A19C0A00C952D8 /* RestoreIntroViewController.swift in Sources */,
 				E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */,
-				E93A552B219973F000A32BEA /* restore_password_entry_page_viewed.swift in Sources */,
-				E93A54F8219973F000A32BEA /* earn_order_completed.swift in Sources */,
+				E929BCE821C318B4000569B7 /* general_ecosystem_sdk_error.swift in Sources */,
+				E929BCDC21C318B4000569B7 /* earn_order_creation_failed.swift in Sources */,
+				E929BCEF21C318B4000569B7 /* welcome_screen_page_viewed.swift in Sources */,
+				E929BCE921C318B4000569B7 /* back_button_on_marketplace_page_tapped.swift in Sources */,
+				E929BD0521C318B4000569B7 /* kin_sdk_initiated.swift in Sources */,
 				E9540F5020E01BAF0038FF49 /* Environment.swift in Sources */,
-				E93A54F1219973F000A32BEA /* stellar_account_creation_requested.swift in Sources */,
-				E93A5525219973F000A32BEA /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */,
-				E93A5517219973F000A32BEA /* spend_order_creation_received.swift in Sources */,
 				E954100A20E3B3230038FF49 /* BIClient.swift in Sources */,
 				E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */,
-				E93A5523219973F000A32BEA /* backup_start_button_tapped.swift in Sources */,
-				E93A5509219973F000A32BEA /* confirm_purchase_page_viewed.swift in Sources */,
-				E93A54EB219973F000A32BEA /* redeem_url_tapped.swift in Sources */,
+				E929BCF721C318B4000569B7 /* settings_page_viewed.swift in Sources */,
+				E929BCEB21C318B4000569B7 /* restore_are_you_sure_ok_button_tapped.swift in Sources */,
+				E929BCD521C318B4000569B7 /* spend_thankyou_page_viewed.swift in Sources */,
+				E92BA45621A19C0A00C952D8 /* RoundButton.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
-				E93A5524219973F000A32BEA /* types.swift in Sources */,
-				E93A5505219973F000A32BEA /* spend_order_creation_requested.swift in Sources */,
-				E93A551A219973F000A32BEA /* backup_completed_page_viewed.swift in Sources */,
-				E93A54FC219973F000A32BEA /* back_button_on_marketplace_page_tapped.swift in Sources */,
-				E93A5512219973F000A32BEA /* confirm_purchase_button_tapped.swift in Sources */,
+				E929BD0A21C318B4000569B7 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
+				E929BD0B21C318B4000569B7 /* backup_qr_code_back_button_tapped.swift in Sources */,
+				E92BA45221A19C0A00C952D8 /* PasswordEntryViewController.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
-				E93A551D219973F000A32BEA /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
+				E929BCEE21C318B4000569B7 /* settings_option_tapped.swift in Sources */,
+				E929BCDF21C318B4000569B7 /* spend_offer_tapped.swift in Sources */,
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
-				E93A54E6219973F000A32BEA /* restore_upload_qr_code_button_tapped.swift in Sources */,
-				E93A550A219973F000A32BEA /* settings_page_viewed.swift in Sources */,
 				E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */,
-				E93A5510219973F000A32BEA /* stellar_kin_trustline_setup_failed.swift in Sources */,
-				E93A5514219973F000A32BEA /* backup_qr_code_myqrcode_button_tapped.swift in Sources */,
-				E93A5529219973F000A32BEA /* backup_popup_button_tapped.swift in Sources */,
+				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
+				E929BD1121C318B4000569B7 /* types.swift in Sources */,
+				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
+				E929BCFD21C318B4000569B7 /* stellar_kin_trustline_setup_failed.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
+				E929BD0021C318B4000569B7 /* backup_create_password_page_viewed.swift in Sources */,
+				E929BCF921C318B4000569B7 /* client.swift in Sources */,
+				E929BCD421C318B4000569B7 /* earn_order_creation_received.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
-				E93A550E219973F000A32BEA /* order_history_item_tapped.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
-				E93A551C219973F000A32BEA /* restore_upload_qr_code_page_viewed.swift in Sources */,
-				E93A551E219973F000A32BEA /* backup_qr_code_back_button_tapped.swift in Sources */,
+				E929BD0121C318B4000569B7 /* backup_qr_code_myqrcode_button_tapped.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
-				E93A5526219973F000A32BEA /* backup_qr_code_page_viewed.swift in Sources */,
+				E929BCDD21C318B4000569B7 /* not_enough_kin_page_viewed.swift in Sources */,
+				E92BA45121A19C0A00C952D8 /* BackupFlowController.swift in Sources */,
 				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
-				E93A5500219973F000A32BEA /* user.swift in Sources */,
-				E93A54E4219973F000A32BEA /* earn_order_failed.swift in Sources */,
+				E929BCE721C318B4000569B7 /* marketplace_page_viewed.swift in Sources */,
+				E929BD0E21C318B4000569B7 /* spend_order_completion_submitted.swift in Sources */,
 				E92501BA20614A4400E2E738 /* Flows.swift in Sources */,
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
-				E93A54EE219973F000A32BEA /* spend_order_cancelled.swift in Sources */,
+				E929BCCF21C318B4000569B7 /* settings_button_tapped.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
-				E93A552C219973F000A32BEA /* earn_order_creation_requested.swift in Sources */,
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,
-				E93A5527219973F000A32BEA /* entrypoint_button_tapped.swift in Sources */,
-				E93A5518219973F000A32BEA /* kin_sdk_initiated.swift in Sources */,
-				E93A5513219973F000A32BEA /* backup_create_password_page_viewed.swift in Sources */,
+				E92BA44621A19C0A00C952D8 /* BackupRestore.swift in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
-				E93A54EC219973F000A32BEA /* spend_order_creation_failed.swift in Sources */,
+				E929BCE521C318B4000569B7 /* earn_order_completed.swift in Sources */,
 				E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */,
+				E929BD1621C318B4000569B7 /* backup_popup_button_tapped.swift in Sources */,
+				E929BCCE21C318B4000569B7 /* restore_wallet_completed.swift in Sources */,
+				E92BA45721A19C0A00C952D8 /* RestoreFlowController.swift in Sources */,
 				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
-				E93A54E3219973F000A32BEA /* backup_create_password_next_button_tapped.swift in Sources */,
+				E929BCD121C318B4000569B7 /* earn_order_failed.swift in Sources */,
+				E92BA45821A19C0A00C952D8 /* BackupIntroViewController.swift in Sources */,
 				91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */,
-				E93A550F219973F000A32BEA /* order_history_page_viewed.swift in Sources */,
+				E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */,
+				E929BCF821C318B4000569B7 /* stellar_kin_trustline_setup_succeeded.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
+				E929BD0321C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,
-				E93A5503219973F000A32BEA /* earn_order_payment_confirmed.swift in Sources */,
+				E929BCFF21C318B4000569B7 /* confirm_purchase_button_tapped.swift in Sources */,
+				E92BA45B21A19C0A00C952D8 /* ExplanationTemplateViewController.swift in Sources */,
+				E929BCF021C318B4000569B7 /* earn_order_payment_confirmed.swift in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
-				E93A54F7219973F000A32BEA /* welcome_screen_button_tapped.swift in Sources */,
-				E93A54FF219973F000A32BEA /* backup_create_password_back_button_tapped.swift in Sources */,
+				E929BCD721C318B4000569B7 /* restore_upload_qr_code_back_button_tapped.swift in Sources */,
+				E929BD0821C318B4000569B7 /* spend_order_failed.swift in Sources */,
+				E929BCFE21C318B4000569B7 /* restore_password_entry_back_button_tapped.swift in Sources */,
+				E929BCEA21C318B4000569B7 /* common.swift in Sources */,
+				E92BA44A21A19C0A00C952D8 /* LifeCycleProtocol.swift in Sources */,
 				E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */,
-				E93A54F3219973F000A32BEA /* backup_welcome_page_viewed.swift in Sources */,
+				E929BCD021C318B4000569B7 /* backup_create_password_next_button_tapped.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
 				E9DC202C216B97E900746B81 /* String+localized.swift in Sources */,
-				E93A54E7219973F000A32BEA /* earn_order_creation_received.swift in Sources */,
-				E93A54E1219973F000A32BEA /* restore_wallet_completed.swift in Sources */,
+				E92BA45321A19C0A00C952D8 /* QRPickerController.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */,
-				E93A54E2219973F000A32BEA /* settings_button_tapped.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,
+				E929BD1821C318B4000569B7 /* restore_password_entry_page_viewed.swift in Sources */,
+				E929BCE221C318B4000569B7 /* earn_order_cancelled.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1153,19 +1299,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E942F8F52032D7E300DD4B8E /* BaseDataNetworkTest.swift in Sources */,
-				E942F8F72032D7F500DD4B8E /* DataTests.swift in Sources */,
-				E942F8FD2033157600DD4B8E /* PromiseTests.swift in Sources */,
+				E9E913F521B7311F0097EE21 /* AccountSelectionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		E9295BB9218EFB21001B7B56 /* PBXTargetDependency */ = {
+		E92BA41421A179D800C952D8 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = KinCoreSDK;
-			targetProxy = E9295BB8218EFB21001B7B56 /* PBXContainerItemProxy */;
+			targetProxy = E92BA41321A179D800C952D8 /* PBXContainerItemProxy */;
 		};
 		E942F8CE203081B400DD4B8E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1227,6 +1371,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z37J743B3H;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1242,6 +1387,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z37J743B3H;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";

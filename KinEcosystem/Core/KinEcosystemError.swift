@@ -26,6 +26,7 @@ public enum KinBlockchainErrorCode: Int {
     case activation             = 6003
     case insufficientFunds      = 6004
     case txFailed               = 6005
+    case invalidPassword        = 6006
 }
 
 public enum KinUnknownErrorCode: Int {
@@ -78,6 +79,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "You do not have enough Kin to perform this operation"
             case .txFailed:
                 description = "The transaction operation failed. This can happen for several reasons. Please see underlyingError for more info"
+            case .invalidPassword:
+                description = "The provided password for this account is incorrect"
             }
         default:
             description = "An unknown error has occurred"
