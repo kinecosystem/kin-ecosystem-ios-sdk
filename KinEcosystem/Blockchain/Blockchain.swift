@@ -17,6 +17,7 @@ struct KinAccountExtraData: Codable {
     var environment: String?
     var onboarded: Bool
     var lastActive: Date
+    var backedUp: Bool
 }
 
 struct KinImportedAccountData: Decodable{
@@ -79,6 +80,11 @@ class Blockchain {
             synced(self) {
                 onboardInFlight = newValue
             }
+        }
+    }
+    var isBackedUp: Bool {
+        get {
+            return account.kinExtraData.backedUp
         }
     }
     private var onboardPromise = Promise<Void>()
@@ -543,14 +549,14 @@ extension KinAccount {
     var kinExtraData: KinAccountExtraData {
         get {
             guard let extraData = extra else {
-                let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: false, lastActive: Date.distantPast)
+                let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: false, lastActive: Date.distantPast, backedUp: false)
                 extra = try? JSONEncoder().encode(accountData)
                 return accountData
             }
             if let accountData = try? JSONDecoder().decode(KinAccountExtraData.self, from: extraData) {
                 return accountData
             }
-            let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: true, lastActive: Date())
+            let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: true, lastActive: Date(), backedUp: false)
             extra = try? JSONEncoder().encode(accountData)
             return accountData
         }

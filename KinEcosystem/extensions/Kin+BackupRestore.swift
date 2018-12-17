@@ -19,7 +19,11 @@ extension Kin : KeystoreProvider {
         guard isActivated else {
             throw KinEcosystemError.blockchain(.activation, nil)
         }
-        return try core.blockchain.account.export(passphrase: password)
+        let result = try core.blockchain.account.export(passphrase: password)
+        var data = core.blockchain.account.kinExtraData
+        data.backedUp = true
+        core.blockchain.account.kinExtraData = data
+        return result
     }
     
     public func importAccount(keystore: String, password: String, completion: @escaping (Error?) -> ()) {

@@ -157,9 +157,6 @@
                                         <constraint firstAttribute="bottom" secondItem="WFf-yv-ICt" secondAttribute="bottom" id="moq-uu-3tg"/>
                                         <constraint firstAttribute="width" constant="18" id="s9r-1O-Tkq"/>
                                     </constraints>
-                                    <connections>
-                                        <outletCollection property="gestureRecognizers" destination="rI5-CZ-PWW" appends="YES" id="2rO-0P-TJx"/>
-                                    </connections>
                                 </view>
                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="AYj-o8-HEw">
                                     <rect key="frame" x="97" y="0.0" width="133.5" height="14.5"/>
@@ -182,6 +179,9 @@
                                 <constraint firstAttribute="height" constant="20" id="c2h-k5-b0u"/>
                                 <constraint firstItem="tjJ-1I-f8c" firstAttribute="width" secondItem="OM0-2k-72M" secondAttribute="width" id="vwe-fl-1rz"/>
                             </constraints>
+                            <connections>
+                                <outletCollection property="gestureRecognizers" destination="rI5-CZ-PWW" appends="YES" id="eWp-ao-JU8"/>
+                            </connections>
                         </stackView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kT0-z7-sCc">
                             <rect key="frame" x="0.0" y="472" width="301" height="40.5"/>
@@ -220,7 +220,7 @@
         </view>
         <tapGestureRecognizer id="rI5-CZ-PWW">
             <connections>
-                <action selector="tickSelected:" destination="-1" id="RDZ-XZ-ToW"/>
+                <action selector="tickSelected:" destination="-1" id="QQb-cr-HVz"/>
             </connections>
         </tapGestureRecognizer>
     </objects>

@@ -8,10 +8,15 @@
 import UIKit
 import KinCoreSDK
 
+protocol SettingsViewControllerDelegate {
+    var didPerformBackup: Bool { get }
+}
+
 @available(iOS 9.0, *)
 class SettingsViewController: UITableViewController {
     private let brManager = BRManager(with: Kin.shared)
     
+    var delegate: SettingsViewControllerDelegate?
     // MARK: Datasource
     
     private enum Row {
@@ -29,13 +34,6 @@ class SettingsViewController: UITableViewController {
             switch self {
             case .backup: return "kinecosystem_settings_row_backup".localized()
             case .restore: return "kinecosystem_settings_row_restore".localized()
-            }
-        }
-        
-        var icon: UIImage? {
-            switch self {
-            case .backup: return UIImage(named: "greyBackupIcon", in: Bundle.ecosystem, compatibleWith: nil)
-            case .restore: return UIImage(named: "blueRestoreIcon", in: Bundle.ecosystem, compatibleWith: nil)
             }
         }
     }
@@ -81,9 +79,20 @@ class SettingsViewController: UITableViewController {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath)
         let rowData = dataSource[indexPath.row]
         
-        cell.imageView?.image = rowData.icon
+        
         cell.textLabel?.text = rowData.title
         cell.accessoryType = .disclosureIndicator
+        
+        guard let delegate = delegate else {
+            return cell
+        }
+        
+        if case .backup = rowData {
+            cell.imageView?.image = UIImage(named: delegate.didPerformBackup ? "blueBackupIcon" : "backupBadge", in: Bundle.ecosystem, compatibleWith: nil)
+        } else {
+            cell.imageView?.image = UIImage(named: "blueRestoreIcon", in: Bundle.ecosystem, compatibleWith: nil)
+        }
+        
         return cell
     }
     
@@ -105,5 +114,10 @@ class SettingsViewController: UITableViewController {
                 Kin.track { try BackupWalletCompleted() }
             }
         }
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
     }
 }

@@ -18,6 +18,11 @@ pod 'KinEcosystem', '0.5.9'
 
 ## Usage
 
+> **Important note:** Apps using the sdk must include a NSPhotoLibraryUsageDescription key entry in the info.plist file. This is becuase the sdk may ask to use the photos library when restoring a backed up wallet. For example, you can use something like:</br>
+"_Photo library access is required for backup and restore of your kin wallet_"
+</br></br>
+If your app already includes such an entry, you do not need to change anything.
+
 ### Registration for Ecosystem backend service
 
 Digital service application needs to initiate the Ecosystem sdk, which interacts with the ecosystem backend service. <br/>
@@ -100,11 +105,13 @@ Kin.shared.start(userId: "myUserId", jwt: encodedJWT, environment: .playground)
 This will create the stack needed for running the ecosystem. All account creation and activation is handled for you by the sdk.</br>
 Because blockchain onboarding might take a few seconds, It is strongly recommended to call this function as soon as you can provide a user id.
 
-### Launching the marketplace experience
-To launch the marketplace experience, with earn and spend opportunities, from a viewController, simply call:
-
+### Launching the ecosystem experience
+The ecosystem experience can be launched at one of two entry points:
+1. Marketplace - where users can view earn and spend offers
+2. Orders history - where users can view their spend and earn history
+> The default target for opening the ecosystem is the marketplace. Here's an example of launching the experience right at the history page:
 ```swift
-Kin.shared.launchMarketplace(from: self)
+try? Kin.shared.launchEcosystem(from: self, at: .history)
 ```
 ### Getting your public address
 Once kin is onboarded, you can view the stellar wallet address using:
