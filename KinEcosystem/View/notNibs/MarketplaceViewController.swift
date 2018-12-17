@@ -24,6 +24,7 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate var htmlResult: String?
     fileprivate let bag = LinkBag()
     fileprivate var balanceSnapshot: Decimal = 0
+    fileprivate var settingsBarItem: BadgeBarButtonItem?
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
     
@@ -44,6 +45,19 @@ class MarketplaceViewController: KinNavigationChildController {
         Kin.track { try MarketplacePageViewed() }
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        if core.blockchain.isBackedUp == false {
+            core.blockchain.balance().then { [weak self] balance in
+                DispatchQueue.main.async {
+                    self?.settingsBarItem?.hasBadge = balance > 0
+                }
+            }
+        } else {
+           settingsBarItem?.hasBadge = false
+        }
+    }
+    
     fileprivate func setupNavigationItem() {
         navigationItem.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
         title = "kinecosystem_kin_marketplace".localized()
@@ -52,9 +66,10 @@ class MarketplaceViewController: KinNavigationChildController {
         navigationItem.leftBarButtonItem = closeItem
         
         let settingsImage = UIImage(named: "settingsIcon", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
-        let settingsBadgeImage = settingsImage // TODO:
+        let settingsBadgeImage = UIImage(named: "settingsBadge", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
         navigationItem.rightBarButtonItem = settingsItem
+        settingsBarItem = settingsItem
     }
     
     fileprivate func resultsController(for offerType: OfferType) -> NSFetchedResultsController<NSManagedObject> {
@@ -150,6 +165,7 @@ class MarketplaceViewController: KinNavigationChildController {
     @objc private func presentSettings() {
         Kin.track { try SettingsButtonTapped() }
         let settingsViewController = SettingsViewController()
+        settingsViewController.delegate = self
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = cancelItem
         
@@ -312,3 +328,9 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
+@available(iOS 9.0, *)
+extension MarketplaceViewController: SettingsViewControllerDelegate {
+    var didPerformBackup: Bool {
+        return core.blockchain.isBackedUp || core.blockchain.lastBalance?.amount == 0
+    }
+}

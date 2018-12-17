@@ -11,12 +11,17 @@ Next version of the SDK and API will also suport native earn and P2P transaction
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.5.9'
+pod 'KinEcosystem', '0.6.0'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
 
 ## Usage
+
+> **Important note:** Apps using the sdk must include a NSPhotoLibraryUsageDescription key entry in the info.plist file. This is becuase the sdk may ask to use the photos library when restoring a backed up wallet. For example, you can use something like:</br>
+"_Photo library access is required for backup and restore of your kin wallet_"
+</br></br>
+If your app already includes such an entry, you do not need to change anything.
 
 ### Registration for Ecosystem backend service
 
@@ -100,11 +105,13 @@ Kin.shared.start(userId: "myUserId", jwt: encodedJWT, environment: .playground)
 This will create the stack needed for running the ecosystem. All account creation and activation is handled for you by the sdk.</br>
 Because blockchain onboarding might take a few seconds, It is strongly recommended to call this function as soon as you can provide a user id.
 
-### Launching the marketplace experience
-To launch the marketplace experience, with earn and spend opportunities, from a viewController, simply call:
-
+### Launching the ecosystem experience
+The ecosystem experience can be launched at one of two entry points:
+1. Marketplace - where users can view earn and spend offers
+2. Orders history - where users can view their spend and earn history
+> The default target for opening the ecosystem is the marketplace. Here's an example of launching the experience right at the history page:
 ```swift
-Kin.shared.launchMarketplace(from: self)
+try? Kin.shared.launchEcosystem(from: self, at: .history)
 ```
 ### Getting your public address
 Once kin is onboarded, you can view the stellar wallet address using:

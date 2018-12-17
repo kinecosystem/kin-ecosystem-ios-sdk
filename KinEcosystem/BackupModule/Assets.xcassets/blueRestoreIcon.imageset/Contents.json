@@ -1,8 +1,8 @@
 {
   "images" : [
     {
-      "filename" : "blueRestoreIcon.pdf",
-      "idiom" : "universal"
+      "idiom" : "universal",
+      "filename" : "blueRestoreIcon.pdf"
     }
   ],
   "info" : {
