@@ -476,7 +476,7 @@ struct Flows {
                         return POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> POFlowPromise in
-                return core.blockchain.waitForNewPayment(with: memo)
+                return core.blockchain.waitForNewPayment(with: memo, timeout: 15.0, policy: .ignore)
                     .then { txHash in
                         POFlowPromise().signal((memo, order))
                 }

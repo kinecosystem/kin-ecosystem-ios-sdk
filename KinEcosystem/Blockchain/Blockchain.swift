@@ -54,6 +54,11 @@ enum BlockchainError: Error {
     case watchTimedOut
 }
 
+enum TimeoutPolicy {
+    case fail
+    case ignore
+}
+
 @available(iOS 9.0, *)
 class Blockchain {
 
@@ -464,7 +469,7 @@ class Blockchain {
         logInfo("removed payment observer for \(memo)")
     }
 
-    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0) -> Promise<String> {
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0, policy: TimeoutPolicy = .fail) -> Promise<String> {
         let p = Promise<String>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
             key == memo
@@ -478,6 +483,10 @@ class Blockchain {
             p.signal(txHash)
         }).add(to: linkBag)
         DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+            guard policy != .ignore else {
+                p.signal("")
+                return
+            }
             if !found {
                 p.signal(BlockchainError.watchTimedOut)
             }
