@@ -13,7 +13,9 @@
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MarketplaceViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
                 <outlet property="earnOffersCollectionView" destination="dP8-d6-KQw" id="gb2-ET-1VP"/>
+                <outlet property="earnOffersLabel" destination="kBI-mx-bO3" id="LJ9-Yp-S53"/>
                 <outlet property="spendOffersCollectionView" destination="KAu-pp-CcY" id="ol5-zi-2wS"/>
+                <outlet property="spendOffersLabel" destination="XSg-mJ-IUr" id="mhk-hl-aPt"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -62,9 +64,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_complete_tasks_and_earn_kin"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                         </stackView>
@@ -134,9 +133,6 @@
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <color key="textColor" red="0.47647109630000001" green="0.51953339580000002" blue="0.63535910839999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                                     <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_use_your_kin_to_enjoy_stuff_you_like"/>
-                                                    </userDefinedRuntimeAttributes>
                                                 </label>
                                             </subviews>
                                         </stackView>

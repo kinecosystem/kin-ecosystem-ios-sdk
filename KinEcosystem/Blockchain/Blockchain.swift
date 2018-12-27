@@ -469,8 +469,8 @@ class Blockchain {
         logInfo("removed payment observer for \(memo)")
     }
 
-    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0, policy: TimeoutPolicy = .fail) -> Promise<String> {
-        let p = Promise<String>()
+    func waitForNewPayment(with memo: PaymentMemoIdentifier, timeout: TimeInterval = 300.0, policy: TimeoutPolicy = .fail) -> Promise<String?> {
+        let p = Promise<String?>()
         guard paymentObservers.keys.contains(where: { key -> Bool in
             key == memo
         }) else {
@@ -484,7 +484,7 @@ class Blockchain {
         }).add(to: linkBag)
         DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
             guard policy != .ignore else {
-                p.signal("")
+                p.signal(nil)
                 return
             }
             if !found {

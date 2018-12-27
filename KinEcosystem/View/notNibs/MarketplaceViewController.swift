@@ -27,6 +27,8 @@ class MarketplaceViewController: KinNavigationChildController {
     fileprivate var settingsBarItem: BadgeBarButtonItem?
     @IBOutlet weak var earnOffersCollectionView: UICollectionView!
     @IBOutlet weak var spendOffersCollectionView: UICollectionView!
+    @IBOutlet weak var spendOffersLabel: UILabel!
+    @IBOutlet weak var earnOffersLabel: UILabel!
     
     fileprivate var firstSpendSubmitted: Bool {
         get {
@@ -144,6 +146,14 @@ class MarketplaceViewController: KinNavigationChildController {
             spendCell.subtitle.attributedText = viewModel.subtitle
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
+        if let emptyState = UIImage(named: "spaceship", in: Bundle.ecosystem, compatibleWith: nil) {
+            let earnEmptyStateView = UIImageView(image: emptyState)
+            let spendEmptyStateView = UIImageView(image: emptyState)
+            earnEmptyStateView.contentMode = .scaleAspectFit
+            spendEmptyStateView.contentMode = .scaleAspectFit
+            spendOffersCollectionView.backgroundView = spendEmptyStateView
+            earnOffersCollectionView.backgroundView = earnEmptyStateView
+        }
     }
     
     fileprivate func setupCollectionViews() {
@@ -192,14 +202,17 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         }
     }
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        var num = 0
         switch collectionView {
         case earnOffersCollectionView:
-            return earnOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
+            num = earnOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
         case spendOffersCollectionView:
-            return spendOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
+            num = spendOffersCollectionView.fetchedResultsSection(for: section)?.objectCount ?? 0
         default:
-            return 0
+            break
         }
+        updateCollectionView(collectionView, for: num)
+        return num
     }
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         var cellIdentifier: String
@@ -320,11 +333,15 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                         successPromise: successPromise,
                         core: core)
             
-            
         }
-        
-        
-        
+    }
+    func updateCollectionView(_ cv: UICollectionView, for numOfOffers: Int) {
+        cv.backgroundView?.isHidden = numOfOffers > 0
+        if cv == spendOffersCollectionView {
+            spendOffersLabel.text = numOfOffers > 0 ? "kinecosystem_use_your_kin_to_enjoy_stuff_you_like".localized() : "kinecosystem_empty_tomorrow_more_opportunities".localized()
+        } else {
+            earnOffersLabel.text = numOfOffers > 0 ? "kinecosystem_complete_tasks_and_earn_kin".localized() : "kinecosystem_empty_tomorrow_more_opportunities".localized()
+        }
     }
 }
 

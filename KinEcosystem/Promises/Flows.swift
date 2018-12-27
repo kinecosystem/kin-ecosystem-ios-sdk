@@ -84,9 +84,11 @@ struct Flows {
                         POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> POFlowPromise in
-                return core.blockchain.waitForNewPayment(with: memo)
+                return core.blockchain.waitForNewPayment(with: memo, timeout: 15.0, policy: .ignore)
                     .then { txHash in
-                        Kin.track { try EarnOrderPaymentConfirmed(orderID: order.id, transactionID: txHash) }
+                        if let hash = txHash {
+                            Kin.track { try EarnOrderPaymentConfirmed(orderID: order.id, transactionID: hash) }
+                        }
                         return POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<OpenOrder> in
@@ -269,8 +271,8 @@ struct Flows {
                         return POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> POFlowPromise in
-                return core.blockchain.waitForNewPayment(with: memo)
-                    .then { txHash in
+                return core.blockchain.waitForNewPayment(with: memo, timeout: 15.0, policy: .ignore)
+                    .then { _ in
                         return POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<OpenOrder> in
@@ -477,7 +479,7 @@ struct Flows {
                 }
             }.then { memo, order -> POFlowPromise in
                 return core.blockchain.waitForNewPayment(with: memo, timeout: 15.0, policy: .ignore)
-                    .then { txHash in
+                    .then { _ in
                         POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<OpenOrder> in
@@ -694,8 +696,8 @@ struct Flows {
                         return POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> POFlowPromise in
-                return core.blockchain.waitForNewPayment(with: memo)
-                    .then { txHash in
+                return core.blockchain.waitForNewPayment(with: memo, timeout: 15.0, policy: .ignore)
+                    .then { _ in
                         POFlowPromise().signal((memo, order))
                 }
             }.then { memo, order -> KinUtil.Promise<OpenOrder> in

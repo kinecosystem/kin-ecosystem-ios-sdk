@@ -130,12 +130,13 @@ class RestClient {
                     logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
                     p.signal(EcosystemNetError.service(responseError))
                 } else {
-                    var errorJson: String?
-                    if let jsonString = String(data: data, encoding: .utf8) {
-                        errorJson = jsonString
+                    let errorJson = String(data: data, encoding: .utf8)
+                    logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason, extra info:\n" + (errorJson ?? "n/a"))
+                    if let jserr = errorJson {
+                        p.signal(EcosystemNetError.service(ResponseError(code: 0, error: "request failed", message: jserr)))
+                    } else {
+                        p.signal(EcosystemNetError.unknown)
                     }
-                    logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason, extra info:\n" + (errorJson ?? "none lol"))
-                    p.signal(EcosystemNetError.unknown)
                 }
                 return
             }
@@ -153,12 +154,21 @@ class RestClient {
                 return
             }
             guard   let httpResponse = response as? HTTPURLResponse,
-                        200 ... 299 ~= httpResponse.statusCode else {
-                    if  let data = data,
-                        let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
-                        responseError.httpResponse = (response as? HTTPURLResponse)
-                        logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
-                        p.signal(EcosystemNetError.service(responseError))
+                200 ... 299 ~= httpResponse.statusCode else {
+                    if  let data = data {
+                        if let responseError = try? JSONDecoder().decode(ResponseError.self, from: data) {
+                            responseError.httpResponse = (response as? HTTPURLResponse)
+                            logError("request \(String(describing: request.url?.absoluteString)) failed:\n\(responseError.localizedDescription)")
+                            p.signal(EcosystemNetError.service(responseError))
+                        } else {
+                            let errorJson = String(data: data, encoding: .utf8)
+                            logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason, extra info:\n" + (errorJson ?? "n/a"))
+                            if let jserr = errorJson {
+                                p.signal(EcosystemNetError.service(ResponseError(code: 0, error: "request failed", message: jserr)))
+                            } else {
+                                p.signal(EcosystemNetError.unknown)
+                            }
+                        }
                     } else {
                         logError("request \(String(describing: request.url?.absoluteString)) failed for unknown reason")
                         p.signal(EcosystemNetError.unknown)
