@@ -12,7 +12,7 @@ Kin ecosystem mobile sdk for iOS
   s.source           = { :git => 'https://github.com/kinfoundation/kin-ecosystem-ios-sdk.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '8.1'
-
+  s.resource_bundle = { "kinLocalization" => ["KinEcosystem/*.lproj/*.strings"] }
   s.source_files = 'KinEcosystem/**/*.{h,m,swift}'
   s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
   s.swift_version = '4.1'

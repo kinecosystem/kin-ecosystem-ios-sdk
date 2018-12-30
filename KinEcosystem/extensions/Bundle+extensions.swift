@@ -24,4 +24,18 @@ extension Bundle {
         }
         return bundle
     }
+    
+    class var kinLocalization: Bundle {
+        var bundle: Bundle
+        if #available(iOS 9.0, *) {
+            bundle = Bundle(for: Kin.self)
+        } else {
+            bundle = Bundle.main
+        }
+        if  let bundlePath = bundle.path(forResource: "kinLocalization", ofType: "bundle"),
+            let bundle = Bundle(path: bundlePath) {
+            return bundle
+        }
+        return bundle
+    }
 }
