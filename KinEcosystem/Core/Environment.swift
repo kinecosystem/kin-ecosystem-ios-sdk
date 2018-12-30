@@ -32,6 +32,7 @@ public enum Environment {
     case playground
     case production
     case beta
+    case test
     case custom(EnvironmentProperties)
     
     public var name: String {
@@ -42,6 +43,8 @@ public enum Environment {
             return "production"
         case .beta:
             return "beta"
+        case .test:
+            return "test"
         case .custom(_):
             return "custom"
         }
@@ -53,7 +56,8 @@ public enum Environment {
             return "https://stellar.kinplayground.com"
         case .production:
             return "https://horizon-kin-ecosystem.kininfrastructure.com"
-        case .beta:
+        case .beta,
+             .test:
             return "https://horizon-playground.kininfrastructure.com"
         case .custom(let envProps):
             return envProps.blockchainURL
@@ -66,7 +70,8 @@ public enum Environment {
             return "ecosystem playground"
         case .production:
             return "Public Global Kin Ecosystem Network ; June 2018"
-        case .beta:
+        case .beta,
+             .test:
             return "Kin Playground Network ; June 2018"
         case .custom(let envProps):
             return envProps.blockchainPassphrase
@@ -79,7 +84,8 @@ public enum Environment {
             return "GDVIWJ2NYBCPHMGTIBO5BBZCP5QCYC4YT4VINTV5PZOSE7BAJCH5JI64"
         case .production:
             return "GDF42M3IPERQCBLWFEZKQRK77JQ65SCKTU3CW36HZVCX7XX5A5QXZIVK"
-        case .beta:
+        case .beta,
+             .test:
             return "GBC3SG6NGTSZ2OMH3FFGB7UVRQWILW367U4GSOOF4TFSZONV42UJXUH7"
         case .custom(let envProps):
             return envProps.kinIssuer
@@ -94,6 +100,8 @@ public enum Environment {
             return "https://api.kinmarketplace.com/v1"
         case .beta:
             return "https://api.kinecosystembeta.com/v1"
+        case .test:
+            return "https://api.kinecosystemtest.com/v1"
         case .custom(let envProps):
             return envProps.marketplaceURL
         }
@@ -106,7 +114,9 @@ public enum Environment {
         case .production:
             return "https://cdn.kinmarketplace.com"
         case .beta:
-            return "https://s3.amazonaws.com/assets.kinplayground.com/web-offers/cards-based/index.html"
+            return "https://s3.amazonaws.com/assets.kinecosystembeta.com/web-offers/cards-based/index.html"
+        case .test:
+            return "https://s3.amazonaws.com/assets.kinecosystemtest.com/web-offers/cards-based/index.html"
         case .custom(let envProps):
             return envProps.webURL
         }
@@ -115,7 +125,8 @@ public enum Environment {
     public var BIURL: String {
         switch self {
         case .playground,
-             .beta:
+             .beta,
+             .test:
             return "https://kin-bi.appspot.com/eco_play_"
         case .production:
             return "https://kin-bi.appspot.com/eco_"
