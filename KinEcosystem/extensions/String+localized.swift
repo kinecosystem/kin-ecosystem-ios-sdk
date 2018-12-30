@@ -8,6 +8,6 @@
 import Foundation
 public extension String {
     func localized(_ args: CVarArg...) -> String {
-        return String(format: NSLocalizedString(self, tableName: nil, bundle: Bundle.ecosystem, value: "", comment: ""), arguments: args)
+        return String(format: NSLocalizedString(self, tableName: nil, bundle: Bundle.kinLocalization, value: "", comment: ""), arguments: args)
     }
 }
