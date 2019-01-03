@@ -13,7 +13,7 @@ import KinCoreSDK
 import StellarErrors
 import KinUtil
 
-let SDKVersion = "0.6.1"
+let SDKVersion = "0.6.2"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
