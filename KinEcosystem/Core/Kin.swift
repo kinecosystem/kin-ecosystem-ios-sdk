@@ -459,6 +459,9 @@ public class Kin {
                                 logError("data sync failed (\(error))")
                             }
                     }
+                }.error { error in
+                    logError("auth failed: \(error)")
+                    p.signal(error)
                 }
                 return p
             }.then {
