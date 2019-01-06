@@ -1,11 +1,3 @@
-/* 
-  Localizable.strings
-  KinEcosystem
-
-  Created by Elazar Yifrach on 03/10/2018.
-  Copyright © 2018 Kik Interactive. All rights reserved.
-*/
-
 "kinecosystem_kin_marketplace" = "Kin Marketplace";
 "kinecosystem_transaction_history" = "Transaction History";
 "kinecosystem_more" = "MORE";

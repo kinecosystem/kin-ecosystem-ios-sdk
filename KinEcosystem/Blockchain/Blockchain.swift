@@ -483,13 +483,12 @@ class Blockchain {
             p.signal(txHash)
         }).add(to: linkBag)
         DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
+            guard found == false else { return }
             guard policy != .ignore else {
                 p.signal(nil)
                 return
             }
-            if !found {
-                p.signal(BlockchainError.watchTimedOut)
-            }
+            p.signal(BlockchainError.watchTimedOut)
         }
         return p
     }
