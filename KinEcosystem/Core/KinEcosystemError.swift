@@ -12,12 +12,14 @@ public enum KinClientErrorCode: Int {
     case notStarted             = 4001
     case badRequest             = 4002
     case internalInconsistency  = 4003
+    case jwtMissing             = 4004
 }
 
 public enum KinServiceErrorCode: Int {
     case response               = 5001
     case network                = 5002
     case timeout                = 5003
+    case notLoggedIn            = 5004
 }
 
 public enum KinBlockchainErrorCode: Int {
@@ -27,6 +29,7 @@ public enum KinBlockchainErrorCode: Int {
     case insufficientFunds      = 6004
     case txFailed               = 6005
     case invalidPassword        = 6006
+    case notOnboarded           = 6007
 }
 
 public enum KinUnknownErrorCode: Int {
@@ -55,6 +58,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "Bad or missing parameters"
             case .internalInconsistency:
                 description = "Ecosystem SDK encountered an unexpected error"
+            case .jwtMissing:
+                description = "JWT is missing while trying to perform the request. Did you login using a valid jwt?"
             }
         case let KinEcosystemError.service(errorCode, error):
             underlyingError = error
@@ -65,6 +70,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "Network unavailable. Please check that internet is accessible"
             case .timeout:
                 description = "The operation timed out"
+            case .notLoggedIn:
+                description = "User is logged out of the ecosystem"
             }
         case let KinEcosystemError.blockchain(errorCode, error):
             underlyingError = error
@@ -81,6 +88,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "The transaction operation failed. This can happen for several reasons. Please see underlyingError for more info"
             case .invalidPassword:
                 description = "The provided password for this account is incorrect"
+            case .notOnboarded:
+                description = "Blockchain account not onboarded"
             }
         default:
             description = "An unknown error has occurred"

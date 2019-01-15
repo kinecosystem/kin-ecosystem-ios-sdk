@@ -14,49 +14,97 @@ import KinUtil
 
 struct EcosystemConfiguration {
     var baseURL: URL
-    var apiKey: String?
-    var appId: String?
-    var userId: String?
-    var jwt: String?
-    var publicAddress: String
 }
 
 @available(iOS 9.0, *)
 class EcosystemNet {
     
     var client: RestClient!
-    
-    init(config: EcosystemConfiguration) {
-        client = RestClient(config)
-        if Kin.shared.needsReset {
-            client.authToken = nil
+    private var authPromise = Promise<AuthToken>()
+    private var authLock: Int = 1
+    fileprivate var authorized: Bool {
+        get {
+            var result: Bool!
+            synced(authLock) {
+                result = client.authToken != nil
+            }
+            return result
+        }
+    }
+    private(set) var authInFlight = false
+    private var isAuthorizing: Bool {
+        get {
+            var result: Bool!
+            synced(self) {
+                result = authInFlight
+            }
+            return result
+        }
+        set {
+            synced(self) {
+                authInFlight = newValue
+            }
         }
     }
     
+    init(config: EcosystemConfiguration) {
+        client = RestClient(config)
+    }
+    
     @discardableResult
-    func authorize() -> Promise<AuthToken> {
-        let p = Promise<AuthToken>()
-        if let auth = client.authToken {
-            return p.signal(auth)
+    func authorize(jwt: String) -> Promise<AuthToken> {
+        
+        if authorized {
+            return Promise<AuthToken>().signal(client.authToken!)
         }
-        guard let data = try? JSONEncoder().encode(client.signInData) else {
-            return p.signal(EcosystemNetError.requestBuild)
+
+        let sign = SignInData(jwt: jwt, sign_in_type: SignInType.jwt.rawValue)
+        guard let data = try? JSONEncoder().encode(sign) else {
+            return Promise<AuthToken>().signal(EcosystemNetError.requestBuild)
         }
-        logVerbose("sign data: \(String(data: data, encoding: .utf8)!)")
+        
+        if isAuthorizing {
+            return authPromise
+        }
+        
+        authPromise = Promise<AuthToken>()
+        isAuthorizing = true
+        
         client.buildRequest(path: "users", method: .post, body: data)
             .then { request in
                 self.client.dataRequest(request)
             }.then { data in
-                guard let token = try? JSONDecoder().decode(AuthToken.self, from: data) else {
-                    p.signal(EcosystemNetError.responseParse)
+                guard let token = try? JSONDecoder().decode(RegisterResponse.self, from: data).auth else {
+                    self.authPromise.signal(EcosystemNetError.responseParse)
                     return
                 }
                 self.client.authToken = token
-                p.signal(token)
+                self.authPromise.signal(token)
             }.error { error in
-                p.signal(error)
+                self.authPromise.signal(error)
+            }.finally {
+                self.isAuthorizing = false
         }
-        return p
+        
+        return authPromise
+    }
+    
+    func unAuthorize() {
+        guard client.authToken != nil else {
+            return
+        }
+        Kin.track { try UserLogoutRequested() }
+        client.buildRequest(path: "users/me/session", method: .delete)
+        .then { request in
+            self.client.request(request)
+        }.then {
+            logInfo("logged out")
+        }.error { error in
+            logError("error logging out: \(error)")
+        }.finally {
+            self.client.authToken = nil
+        }
+        
     }
     
     func dataAtPath(_ path: String,
@@ -64,9 +112,11 @@ class EcosystemNet {
                     contentType: ContentType = .json,
                     body: Data? = nil,
                     parameters: [String: String]? = nil) -> Promise<Data> {
-        return authorize().then {_ in
-                self.client.buildRequest(path: path, method: method, body: body, parameters: parameters)
-            }.then { request in
+        guard client.authToken != nil else {
+            return Promise<Data>().signal(KinEcosystemError.service(.notLoggedIn, nil))
+        }
+        return client.buildRequest(path: path, method: method, body: body, parameters: parameters)
+            .then { request in
                 self.client.dataRequest(request)
             }
     }
@@ -91,9 +141,11 @@ class EcosystemNet {
     }
     
     func delete(_ path: String, parameters: [String: String]? = nil) -> Promise<Void> {
-        return authorize().then { _ in
-            self.client.buildRequest(path: path, method: .delete, parameters: parameters)
-            }.then { request in
+        guard client.authToken != nil else {
+            return Promise<Void>().signal(KinEcosystemError.service(.notLoggedIn, nil))
+        }
+        return client.buildRequest(path: path, method: .delete, parameters: parameters)
+            .then { request in
                 self.client.request(request)
         }
     }
