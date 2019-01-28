@@ -16,6 +16,7 @@ import KinUtil
 let SDKVersion = "0.6.2"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
+public typealias KinLoginCallback = (Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
 
@@ -60,7 +61,6 @@ public class Kin {
     
     public static let shared = Kin()
     fileprivate(set) var core: Core?
-    fileprivate(set) var needsReset = false
     fileprivate weak var mpPresentingController: UIViewController?
     fileprivate var bi: BIClient!
     fileprivate var prestartBalanceObservers = [String : (Balance) -> ()]()
@@ -71,24 +71,15 @@ public class Kin {
     fileprivate init() { }
     
     public var lastKnownBalance: Balance? {
-        guard let core = Kin.shared.core else {
-            return nil
-        }
-        return core.blockchain.lastBalance
+        return core?.blockchain.lastBalance ?? nil
     }
     
     public var publicAddress: String? {
-        guard let core = Kin.shared.core else {
-            return nil
-        }
-        return core.blockchain.account.publicAddress
+        return core?.blockchain.account?.publicAddress ?? nil
     }
     
     public var isActivated: Bool {
-        guard let core = Kin.shared.core else {
-            return false
-        }
-        return core.blockchain.onboarded
+        return core?.onboarded ?? false
     }
     
     public var nativeOfferHandler: ((NativeOffer) -> ())?
@@ -102,25 +93,14 @@ public class Kin {
         }
     }
     
-    public func start(userId: String,
-                      apiKey: String? = nil,
-                      appId: String,
-                      jwt: String? = nil,
-                      environment: Environment) throws {
+    public func start(environment: Environment) throws {
         guard core == nil else {
             return
         }
         
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
-        Kin.track { try KinSDKInitiated() }
-        let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        let lastEnvironmentName = UserDefaults.standard.string(forKey: KinPreferenceKey.lastEnvironment.rawValue)
-        if lastUser != userId || (lastEnvironmentName != nil && lastEnvironmentName != environment.name) {
-            needsReset = true
-            logInfo("new user or environment type detected - resetting everything")
-            UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
-        }
+        
         guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
@@ -131,8 +111,7 @@ public class Kin {
         do {
             store = try EcosystemData(modelName: "KinEcosystem",
                                       modelURL: URL(string: modelPath)!)
-            chain = try Blockchain(environment: environment, appId: appId, userId: userId)
-            try chain.startAccount()
+            chain = try Blockchain(environment: environment)
         } catch {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
@@ -141,25 +120,15 @@ public class Kin {
         guard let marketplaceURL = URL(string: environment.marketplaceURL) else {
             throw KinEcosystemError.client(.badRequest, nil)
         }
-        let network = EcosystemNet(config: EcosystemConfiguration(baseURL: marketplaceURL,
-                                                                  apiKey: apiKey,
-                                                                  appId: appId,
-                                                                  userId: userId,
-                                                                  jwt: jwt,
-                                                                  publicAddress: chain.account.publicAddress))
+        let network = EcosystemNet(config: EcosystemConfiguration(baseURL: marketplaceURL))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
-        
-        UserDefaults.standard.set(userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        UserDefaults.standard.set(environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
-        
-        attempOnboard(core!)
         
         psBalanceObsLock.lock()
         defer {
             psBalanceObsLock.unlock()
         }
-        try prestartBalanceObservers.forEach { identifier, block in
-            _ = try core!.blockchain.addBalanceObserver(with: block, identifier: identifier)
+        prestartBalanceObservers.forEach { identifier, block in
+            _ = core!.blockchain.addBalanceObserver(with: block, identifier: identifier)
         }
         prestartBalanceObservers.removeAll()
         psNativeOLock.lock()
@@ -172,13 +141,66 @@ public class Kin {
         prestartNativeOffers.removeAll()
     }
     
+    public func login(jwt: String, callback: KinLoginCallback? = nil) throws {
+        Kin.track { try UserLoginRequested() }
+        guard let core = core else {
+            logError("Kin not started")
+            let error = KinEcosystemError.client(.notStarted, nil)
+            callback?(error)
+            Kin.track { try UserLoginFailed(errorReason: error.localizedDescription) }
+            throw error
+        }
+        let jwtObj = try JWTObject(with: jwt)
+        DispatchQueue.once(token: "com.kin.init") {
+           Kin.track { try KinSDKInitiated() }
+        }
+        let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        let lastEnvironmentName = UserDefaults.standard.string(forKey: KinPreferenceKey.lastEnvironment.rawValue)
+        if lastUser != jwtObj.userId || (lastEnvironmentName != nil && lastEnvironmentName != core.environment.name) {
+            logInfo("user change detected - logging out")
+            UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
+            UserDefaults.standard.removeObject(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+            UserDefaults.standard.removeObject(forKey: KinPreferenceKey.lastEnvironment.rawValue)
+            logout()
+        }
+        core.jwt = jwtObj
+        attempOnboard(core).then {
+            UserDefaults.standard.set(jwtObj.userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+            UserDefaults.standard.set(core.environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
+            logInfo("blockchain onboarded successfully")
+            Kin.track { try UserLoginSucceeded() }
+            callback?(nil)
+            self.updateData(with: OffersList.self, from: "offers").error { error in
+                logError("data sync failed (\(error))")
+                }.then {
+                    self.updateData(with: OrdersList.self, from: "orders").error { error in
+                        logError("data sync failed (\(error))")
+                    }
+            }
+        }.error { error in
+            let tError = KinEcosystemError.transform(error)
+            Kin.track { try UserLoginFailed(errorReason: tError.localizedDescription) }
+            callback?(tError)
+        }
+    }
+    
+    public func logout() {
+        guard let core = core else {
+            logError("Kin not started")
+            return
+        }
+        core.offboard()
+    }
+    
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
         guard let core = core else {
             logError("Kin not started")
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.blockchain.balance().then(on: DispatchQueue.main) { balance in
+        core.onboard().then {
+            core.blockchain.balance()
+        }.then(on: DispatchQueue.main) { balance in
             completion(Balance(amount: balance), nil)
             }.error { error in
                 let esError: KinEcosystemError
@@ -201,10 +223,12 @@ public class Kin {
                         esError = KinEcosystemError.unknown(.unknown, error)
                 }
                 completion(nil, esError)
+        }.error { error in
+            completion(nil, KinEcosystemError.transform(error))
         }
     }
     
-    public func addBalanceObserver(with block:@escaping (Balance) -> ()) throws -> String {
+    public func addBalanceObserver(with block:@escaping (Balance) -> ()) -> String {
         guard let core = core else {
             psBalanceObsLock.lock()
             defer {
@@ -214,7 +238,7 @@ public class Kin {
             prestartBalanceObservers[observerIdentifier] = block
             return observerIdentifier
         }
-        return try core.blockchain.addBalanceObserver(with: block)
+        return core.blockchain.addBalanceObserver(with: block)
     }
     
     public func removeBalanceObserver(_ identifier: String) {
@@ -265,11 +289,13 @@ public class Kin {
             }
             return
         }
-        _ = core.network.dataAtPath("users/exists",
+        _ = core.onboard()
+            .then {
+                core.network.dataAtPath("users/exists",
                                     method: .get,
                                     contentType: .json,
                                     parameters: ["user_id" : peer])
-            .then { data in
+            }.then { data in
                 if  let response = String(data: data, encoding: .utf8),
                     let ans = Bool(response) {
                     DispatchQueue.main.async {
@@ -298,10 +324,13 @@ public class Kin {
             return false
         }
         defer {
-            Flows.nativeSpend(jwt: offerJWT, core: core).then { jwt in
+            core.onboard()
+            .then {
+                Flows.nativeSpend(jwt: offerJWT, core: core)
+            }.then { jwt in
                 completion(jwt, nil)
-                }.error { error in
-                    completion(nil, KinEcosystemError.transform(error))
+            }.error { error in
+                completion(nil, KinEcosystemError.transform(error))
             }
         }
         return true
@@ -314,10 +343,13 @@ public class Kin {
             return false
         }
         defer {
-            Flows.nativeEarn(jwt: offerJWT, core: core).then { jwt in
+            core.onboard()
+            .then {
+                Flows.nativeEarn(jwt: offerJWT, core: core)
+            }.then { jwt in
                 completion(jwt, nil)
-                }.error { error in
-                    completion(nil, KinEcosystemError.transform(error))
+            }.error { error in
+                completion(nil, KinEcosystemError.transform(error))
             }
         }
         return true
@@ -329,12 +361,13 @@ public class Kin {
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.network.authorize().then { [weak self] (_) -> KinUtil.Promise<Void> in
+        core.onboard()
+        .then { [weak self] (_) -> KinUtil.Promise<Void> in
             guard let this = self else {
                 return KinUtil.Promise<Void>().signal(KinError.internalInconsistency)
             }
             return this.updateData(with: OrdersList.self, from: "orders")
-            }.then { 
+        }.then {
                 core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
                     guard let order = orders.first else {
                         let responseError = ResponseError(code: 4043, error: "NotFound", message: "Order not found")
@@ -355,7 +388,7 @@ public class Kin {
                         completion(.failed, nil)
                     }
                 })
-            }.error { error in
+        }.error { error in
                 completion(nil, KinEcosystemError.transform(error))
         }
     }
@@ -410,14 +443,16 @@ public class Kin {
             handler(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.network.objectAtPath("users/me", type: UserProfile.self)
-            .then(on: DispatchQueue.main) { profile in
-                handler(profile.stats, nil)
-            }.error { error in
-                DispatchQueue.main.async {
-                   handler(nil, KinEcosystemError.transform(error))
-                }
+        core.onboard()
+        .then {
+            core.network.objectAtPath("users/me", type: UserProfile.self)
+        }.then(on: DispatchQueue.main) { profile in
+            handler(profile.stats, nil)
+        }.error { error in
+            DispatchQueue.main.async {
+               handler(nil, KinEcosystemError.transform(error))
             }
+        }
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> KinUtil.Promise<Void> {
@@ -439,8 +474,7 @@ public class Kin {
         return attempt(2) { attempNum -> KinUtil.Promise<Void> in
                 let p = KinUtil.Promise<Void>()
                 logInfo("attempting onboard: \(attempNum)")
-                core.network.authorize().then { [weak self] _ in
-                        core.blockchain.onboard()
+                core.onboard()
                         .then {
                             p.signal(())
                         }
@@ -451,18 +485,11 @@ public class Kin {
                             }
                             p.signal(error)
                     }
-                    
-                    self?.updateData(with: OffersList.self, from: "offers").error { error in
-                        logError("data sync failed (\(error))")
-                        }.then {
-                            self?.updateData(with: OrdersList.self, from: "orders").error { error in
-                                logError("data sync failed (\(error))")
-                            }
-                    }
+                .error { error in
+                    logError("onboard attempt failed: \(error)")
+                    p.signal(error)
                 }
                 return p
-            }.then {
-                logInfo("blockchain onboarded successfully")
             }.error { error in
                 let errorDesc = "blockchain onboarding failed - \(error.localizedDescription)"
                 logError(errorDesc)
@@ -477,23 +504,9 @@ public class Kin {
             }
             return NSDecimalNumber(decimal: balance.amount).doubleValue
             }, digitalServiceID: { [weak self] () -> (String) in
-                guard let appId = self?.core?.network.client.authToken?.app_id else {
-                    if let startAppid = self?.core?.network.client.config.appId {
-                        return startAppid
-                    }
-                    return ""
-                }
-                return appId
+                return self?.core?.jwt?.appId ?? ""
             }, digitalServiceUserID: { [weak self] () -> (String) in
-                guard let uid = self?.core?.network.client.authToken?.user_id else {
-                    if let startUid = self?.core?.network.client.config.userId {
-                        return startUid
-                    } else if let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue) {
-                        return lastUser
-                    }
-                    return ""
-                }
-                return uid
+                return self?.core?.jwt?.userId ?? ""
             }, earnCount: { () -> (Int) in
                 0
         }, entryPointParam: { () -> (String) in
@@ -510,8 +523,8 @@ public class Kin {
         
         EventsStore.shared.clientProxy = ClientProxy(carrier: { [weak self] () -> (String) in
             return self?.bi.networkInfo.subscriberCellularProvider?.carrierName ?? ""
-            }, deviceID: { () -> (String) in
-                DeviceData.deviceId
+            }, deviceID: { [weak self] () -> (String) in
+                return self?.core?.jwt?.deviceId ?? ""
             }, deviceManufacturer: { () -> (String) in
                 "Apple"
         }, deviceModel: { () -> (String) in

@@ -75,12 +75,7 @@ enum SignInType: String {
 
 struct SignInData: Encodable {
     var jwt: String?
-    var user_id: String?
-    var app_id: String?
-    var device_id: String
-    var wallet_address: String
     var sign_in_type: String
-    var api_key: String?
 }
 
 struct AuthToken: Codable {
@@ -90,6 +85,11 @@ struct AuthToken: Codable {
     var app_id: String
     var user_id: String
     var ecosystem_user_id: String
+}
+
+struct RegisterResponse: Decodable {
+    var auth: AuthToken
+    var user: UserProfile
 }
 
 struct EarnResult: Encodable {
@@ -164,9 +164,41 @@ public struct UserStats: Decodable, CustomStringConvertible {
 }
 
 public struct UserProfile: Decodable {
+    var createdDate: Date?
     var stats: UserStats?
+    enum UserProfileKeys: String, CodingKey {
+        case createdDate = "created_date"
+        case stats
+    }
+    public init(from decoder: Decoder) throws {
+        let values = try decoder.container(keyedBy: UserProfileKeys.self)
+        if let createdDateString = try values.decodeIfPresent(String.self, forKey: .createdDate) {
+            createdDate = Iso8601DateFormatter.date(from: createdDateString)
+        }
+        stats = try values.decodeIfPresent(UserStats.self, forKey: .stats)
+    }
 }
 
 public struct UserProperties: Encodable {
     var wallet_address: String
+}
+
+public struct JWTObject {
+    let appId: String
+    let deviceId: String
+    let userId: String
+    let encoded: String
+    init(with string: String) throws {
+        guard   let jwtJson = try? string.jwtJson(),
+            let body = jwtJson["body"] as? [String: Any],
+            let user = body["user_id"] as? String,
+            let device = body["device_id"] as? String,
+            let id = body["iss"] as? String else {
+                throw KinEcosystemError.client(.badRequest, nil)
+        }
+        encoded = string
+        appId = id
+        deviceId = device
+        userId = user
+    }
 }

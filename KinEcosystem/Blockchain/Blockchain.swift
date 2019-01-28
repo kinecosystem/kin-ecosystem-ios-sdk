@@ -14,6 +14,7 @@ import StellarErrors
 
 struct KinAccountExtraData: Codable {
     var user: String?
+    var kinUserId: String?
     var environment: String?
     var onboarded: Bool
     var lastActive: Date
@@ -63,13 +64,24 @@ enum TimeoutPolicy {
 class Blockchain {
 
     let client: KinClient
-    fileprivate(set) var account: KinAccount!
+    fileprivate(set) var account: KinAccount? {
+        didSet {
+            if let ac = account {
+                if balanceObservers.count > 0 {
+                    watchBalance(for: ac)
+                }
+            } else {
+                unwatchBalance()
+            }
+        }
+    }
     private let linkBag = LinkBag()
     private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
     private var balanceObservers = [String : (Balance) -> ()]()
     private var paymentsWatcher: KinCoreSDK.PaymentWatch?
     private var balanceWatcher: KinCoreSDK.BalanceWatch?
     private let provider: BlockchainProvider
+    private var kinAuthToken: AuthToken?
     private var creationWatch: StellarKit.PaymentWatch?
     private var creationLinkBag = LinkBag()
     private(set) var onboardInFlight = false
@@ -89,16 +101,16 @@ class Blockchain {
     }
     var isBackedUp: Bool {
         get {
-            return account.kinExtraData.backedUp
+            return account?.kinExtraData.backedUp ?? false
         }
     }
     private var onboardPromise = Promise<Void>()
     private var onboardLock: Int = 1
-    private let userId: String
     private let environment: Environment
     fileprivate(set) var balanceObservable = Observable<Balance>()
     fileprivate(set) var lastBalance: Balance? {
         get {
+            guard account != nil else { return nil }
             if  let data = UserDefaults.standard.data(forKey: KinPreferenceKey.lastBalance.rawValue),
                 let cachedBalance = try? JSONDecoder().decode(Balance.self, from: data) {
                     return cachedBalance
@@ -106,7 +118,6 @@ class Blockchain {
             return nil
         }
         set {
-            let oldValue = lastBalance
             if let data = try? JSONEncoder().encode(newValue) {
                 UserDefaults.standard.set(data, forKey: KinPreferenceKey.lastBalance.rawValue)
             }
@@ -115,9 +126,7 @@ class Blockchain {
             } else {
                 UserDefaults.standard.set(nil, forKey: KinPreferenceKey.lastBalance.rawValue)
             }
-            if newValue != oldValue {
-                updateBalanceObservers()
-            }
+            updateBalanceObservers(newValue ?? Balance(amount: 0))
         }
 
 
@@ -126,7 +135,7 @@ class Blockchain {
         get {
             var result: Bool!
             synced(onboardLock) {
-                result = account.kinExtraData.onboarded
+                result = account?.kinExtraData.onboarded ?? false
             }
             return result
         }
@@ -134,40 +143,38 @@ class Blockchain {
             isOnboarding = false
             guard newValue else {
                 synced(onboardLock) {
-                    var kinExtraData = account.kinExtraData
-                    kinExtraData.onboarded = false
-                    account.kinExtraData = kinExtraData
+                    lastBalance = nil
+                    account = nil
                 }
                 return
             }
             synced(onboardLock) {
-                var kinExtraData = account.kinExtraData
-                kinExtraData.onboarded = true
-                kinExtraData.user = userId
-                kinExtraData.lastActive = Date()
-                account.kinExtraData = kinExtraData
+                if  let account = account,
+                    let kinUserId = kinAuthToken?.ecosystem_user_id {
+                    var kinExtraData = account.kinExtraData
+                    kinExtraData.onboarded = true
+                    kinExtraData.kinUserId = kinUserId
+                    kinExtraData.lastActive = Date()
+                    account.kinExtraData = kinExtraData
+                }
             }
         }
     }
 
-    init(environment: Environment, appId: String, userId: String) throws {
+    init(environment: Environment) throws {
         guard let bURL = URL(string: environment.blockchainURL) else {
             throw KinEcosystemError.client(.badRequest, nil)
         }
         self.environment = environment
-        self.userId = userId
         provider = BlockchainProvider(url: bURL, networkId: .custom(issuer: environment.kinIssuer, stellarNetworkId: .custom(environment.blockchainPassphrase)))
         let client = KinClient(provider: provider)
         self.client = client
     }
     
-    func startAccount() throws {
+    func startAccount(for token: AuthToken) throws {
         
-        migrateAccountsIfNeeded()
-        
-        if Kin.shared.needsReset {
-            lastBalance = nil
-        }
+        kinAuthToken = token
+        try migrateAccountsIfNeeded()
         
         account = try getOrCreateAccount()
         _ = balance()
@@ -188,6 +195,10 @@ class Blockchain {
     */
     func getOrCreateAccount() throws -> KinAccount {
         
+        guard let token = kinAuthToken else {
+            throw KinEcosystemError.service(.notLoggedIn, nil)
+        }
+        
         var accounts = [KinAccount]()
         
         // account iteration is currently broken on Accounts
@@ -198,7 +209,7 @@ class Blockchain {
         }
         
         let candidateAccounts = accounts.filter { anAccount in
-            return  anAccount.kinExtraData.user == userId &&
+            return  anAccount.kinExtraData.kinUserId == token.ecosystem_user_id &&
                     anAccount.kinExtraData.environment == environment.name
         }
         
@@ -228,6 +239,9 @@ class Blockchain {
     
     func accountForImporting(keystore: String, password: String) throws -> KinAccount {
         
+        guard let token = kinAuthToken else {
+            throw KinEcosystemError.service(.notLoggedIn, nil)
+        }
 
         guard   let data = keystore.data(using: .utf8),
                 let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
@@ -249,8 +263,7 @@ class Blockchain {
         }
         
         let candidateAccounts = accounts.filter { anAccount in
-            return  anAccount.kinExtraData.user == userId &&
-                    anAccount.kinExtraData.environment == environment.name &&
+            return  anAccount.kinExtraData.kinUserId == token.ecosystem_user_id &&
                     anAccount.publicAddress == accountData.pkey
         }
         
@@ -295,60 +308,61 @@ class Blockchain {
         return true
     }
     
-    func setActiveAccount(_ anAccount: KinAccount) {
-        account = anAccount
-        var data = account.kinExtraData
+    func setActiveAccount(_ anAccount: KinAccount) throws {
+        guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
+        var data = anAccount.kinExtraData
         data.lastActive = Date()
-        data.onboarded = true
         data.environment = environment.name
-        data.user = userId
-        account.kinExtraData = data
+        data.kinUserId = token.ecosystem_user_id
+        anAccount.kinExtraData = data
+        account = anAccount
         _ = balance()
     }
     
     func createNewAccount() throws -> KinAccount {
+        guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         Kin.track { try StellarAccountCreationRequested() }
         let result = try client.addAccount()
         var kinExtraData = result.kinExtraData
-        kinExtraData.user = userId
+        kinExtraData.kinUserId = token.ecosystem_user_id
+        kinExtraData.user = token.user_id
         kinExtraData.environment = environment.name
         result.kinExtraData = kinExtraData
         return result
     }
     
-    func migrateAccountsIfNeeded() {
+    func migrateAccountsIfNeeded() throws {
         
-        let accounts = client.accounts
-        let previousUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
-        let previousEnvironmentName = UserDefaults.standard.string(forKey: KinPreferenceKey.lastEnvironment.rawValue)
+        guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         
-        if accounts.count == 1 {
-            logVerbose("migration: has only one account. is candidate fot migration")
-            guard accounts.first!.kinExtraData.user == nil else {
-                logVerbose("migration: already migrated")
-                return
+        var accounts = [KinAccount]()
+        
+        // account iteration is currently broken on Accounts
+        for i in 0..<client.accounts.count {
+            if let anAccount = client.accounts[i] {
+                accounts.append(anAccount)
             }
-            var kinExtraData = accounts.first!.kinExtraData
-            if Kin.shared.needsReset == false {
-                logVerbose("migration: doesn't need reset and has one account, untagged - tag current user")
-                kinExtraData.user = userId
-                kinExtraData.environment = environment.name
-            } else {
-                logVerbose("migration: needs reset, tag the account so we can sometime get back to it")
-                if let lastUser = previousUser {
-                    kinExtraData.user = lastUser
-                }
-                if let lastEnvironment = previousEnvironmentName {
-                    kinExtraData.environment = lastEnvironment
-                }
-            }
-            accounts.first!.kinExtraData = kinExtraData
+        }
+        
+        accounts.filter { anAccount in
+            return  anAccount.kinExtraData.user == token.user_id &&
+                    anAccount.kinExtraData.environment == environment.name &&
+                    anAccount.kinExtraData.kinUserId == nil
+            }.forEach { anAccount in
+                var kinExtraData = anAccount.kinExtraData
+                kinExtraData.kinUserId = token.ecosystem_user_id
+                anAccount.kinExtraData = kinExtraData
+                logVerbose("migrated wallet for \(kinExtraData.user ?? "nil")")
         }
         
     }
     
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
+        guard let account = account else {
+            p.signal(KinEcosystemError.service(.notLoggedIn, nil))
+            return p
+        }
         account.balance(completion: { [weak self] balance, error in
             if let error = error {
                 p.signal(error)
@@ -359,7 +373,6 @@ class Blockchain {
                 p.signal(KinError.internalInconsistency)
             }
         })
-
         return p
     }
 
@@ -376,6 +389,11 @@ class Blockchain {
         onboardPromise = Promise<Void>()
         isOnboarding = true
         
+        guard let account = account else {
+            onboardPromise.signal(KinEcosystemError.service(.notLoggedIn, nil))
+            return onboardPromise
+        }
+        
         balance()
             .then { _ in
                 self.onboardPromise.signal(())
@@ -388,7 +406,7 @@ class Blockchain {
                         case .missingAccount:
                             self.watchAccountCreation(timeout: 15.0)
                                 .then {
-                                    self.account.activate()
+                                    account.activate()
                                 }.then { _ in
                                     Kin.track { try StellarKinTrustlineSetupSucceeded() }
                                     Kin.track { try WalletCreationSucceeded() }
@@ -401,7 +419,7 @@ class Blockchain {
                                 }
                             
                         case .missingBalance:
-                            self.account.activate().then { _ in
+                            account.activate().then { _ in
                                 Kin.track { try StellarKinTrustlineSetupSucceeded() }
                                 Kin.track { try WalletCreationSucceeded() }
                                 self.onboardPromise.signal(())
@@ -429,9 +447,14 @@ class Blockchain {
 
         return onboardPromise
     }
+    
+    func offboard() {
+        onboarded = false
+    }
 
 
     func pay(to recipient: String, kin: Decimal, memo: String?) -> Promise<TransactionId> {
+        guard let account = account else { return Promise<TransactionId>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
         return account.sendTransaction(to: recipient, kin: kin, memo: memo)
     }
 
@@ -441,6 +464,7 @@ class Blockchain {
             paymentObservers[memo] = Observable<String>()
             return
         }
+        guard let account = account else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         paymentsWatcher = try account.watchPayments(cursor: "now")
         paymentsWatcher?.emitter.on(next: { [weak self] paymentInfo in
             guard let metadata = paymentInfo.memoText else { return }
@@ -493,26 +517,24 @@ class Blockchain {
         return p
     }
 
-    private func updateBalanceObservers() {
-        guard let balance = lastBalance else { return }
+    private func updateBalanceObservers(_ balance: Balance? = nil) {
+        guard let balance = balance else { return }
         balanceObservers.values.forEach { block in
             block(balance)
         }
     }
 
-    func addBalanceObserver(with block:@escaping (Balance) -> (), identifier: String? = nil) throws -> String {
-
+    func addBalanceObserver(with block:@escaping (Balance) -> (), identifier: String? = nil) -> String {
+        
         let observerIdentifier = identifier ?? UUID().uuidString
         balanceObservers[observerIdentifier] = block
-
-        if balanceWatcher == nil {
-            balanceWatcher = try account.watchBalance(lastBalance?.amount)
-            balanceWatcher?.emitter.on(next: { [weak self] amount in
-                self?.lastBalance = Balance(amount: amount)
-            }).add(to: linkBag)
-        }
+        
         if let balance = lastBalance {
             block(balance)
+        }
+        
+        if let ac = account {
+            watchBalance(for: ac)
         }
 
         return observerIdentifier
@@ -521,14 +543,31 @@ class Blockchain {
     func removeBalanceObserver(with identifier: String) {
         balanceObservers[identifier] = nil
         if balanceObservers.count == 0 {
-            balanceWatcher?.emitter.unlink()
-            balanceWatcher = nil
+            unwatchBalance()
         }
+    }
+    
+    private func watchBalance(for account: KinAccount) {
+        if balanceWatcher == nil {
+            balanceWatcher = try? account.watchBalance(lastBalance?.amount)
+            balanceWatcher?.emitter.on(next: { [weak self] amount in
+                self?.lastBalance = Balance(amount: amount)
+            }).add(to: linkBag)
+        }
+    }
+    
+    private func unwatchBalance() {
+        balanceWatcher?.emitter.unlink()
+        balanceWatcher = nil
     }
     
     func watchAccountCreation(timeout: TimeInterval = 30.0) -> Promise<Void> {
         
         let p = Promise<Void>()
+        guard let account = account else {
+            p.signal(KinEcosystemError.service(.notLoggedIn, nil))
+            return p
+        }
         let node = Stellar.Node(baseURL: provider.url, networkId: provider.networkId.stellarNetworkId)
         var created = false
         creationWatch = Stellar.paymentWatch(account: account.publicAddress, lastEventId: nil, node: node)
@@ -556,15 +595,18 @@ extension KinAccount {
     
     var kinExtraData: KinAccountExtraData {
         get {
+            // no data at all - means not onboarded
             guard let extraData = extra else {
-                let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: false, lastActive: Date.distantPast, backedUp: false)
+                let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: false, lastActive: Date.distantPast, backedUp: false)
                 extra = try? JSONEncoder().encode(accountData)
                 return accountData
             }
+            // has valid data, return it
             if let accountData = try? JSONDecoder().decode(KinAccountExtraData.self, from: extraData) {
                 return accountData
             }
-            let accountData = KinAccountExtraData(user: nil, environment: nil, onboarded: true, lastActive: Date(), backedUp: false)
+            // has data, no format. This empty data object was used in previous versions to indicate an onboarded account, presumably single account
+            let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: true, lastActive: Date.distantPast, backedUp: false)
             extra = try? JSONEncoder().encode(accountData)
             return accountData
         }

@@ -187,6 +187,7 @@ class DiamondsLoaderView : UIView {
             self.imageView.layer.transform = CATransform3DMakeScale(0.86, 0.86, 1.0)
             self.imageView.alpha = 0.0
         }, completion: { _ in
+            guard self.timer != nil else { return }
             self.imageView.image = image
             UIView.animate(withDuration: 0.12, delay: 0.1, options: [.curveEaseOut], animations: {
                 self.imageView.layer.transform = CATransform3DIdentity
@@ -210,7 +211,7 @@ class DiamondsLoaderView : UIView {
             return
         }
         killTimer()
-        UIView.animate(withDuration: 0.08, delay: 0.0, options: [.curveEaseOut], animations: {
+        UIView.animate(withDuration: 0.08, delay: 0.0, options: [.curveEaseOut, .beginFromCurrentState], animations: {
             self.imageView.layer.transform = CATransform3DMakeScale(0.86, 0.86, 1.0)
             self.imageView.alpha = 0.0
         }) { _ in

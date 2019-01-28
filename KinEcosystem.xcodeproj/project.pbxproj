@@ -25,6 +25,8 @@
 		E91E6406203AB30A00BB4104 /* UIColor+KinStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */; };
 		E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */; };
 		E92501BA20614A4400E2E738 /* Flows.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92501B920614A4400E2E738 /* Flows.swift */; };
+		E928960121E4EEC700656382 /* Utils.swift in Sources */ = {isa = PBXBuildFile; fileRef = E928960021E4EEC700656382 /* Utils.swift */; };
+		E928960921E4F02000656382 /* String+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E928960821E4F02000656382 /* String+extensions.swift */; };
 		E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E942F8BB2030819C00DD4B8E /* CoreDataStack.framework */; };
 		E929BCCE21C318B4000569B7 /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */; };
 		E929BCCF21C318B4000569B7 /* settings_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E929BC8321C318B4000569B7 /* settings_button_tapped.swift */; };
@@ -130,6 +132,10 @@
 		E92BA46B21A19FFF00C952D8 /* BadgeBarButtonItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */; };
 		E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */; };
 		E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */; };
+		E92EF26621F852B400B33405 /* user_login_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92EF25E21F852B300B33405 /* user_login_requested.swift */; };
+		E92EF26721F852B400B33405 /* user_logout_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92EF26321F852B400B33405 /* user_logout_requested.swift */; };
+		E92EF26821F852B400B33405 /* user_login_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92EF26421F852B400B33405 /* user_login_failed.swift */; };
+		E92EF26921F852B400B33405 /* user_login_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92EF26521F852B400B33405 /* user_login_succeeded.swift */; };
 		E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7A20691403008A027F /* SpendOfferViewController.swift */; };
 		E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E92F7B7B20691403008A027F /* SpendOfferViewController.xib */; };
 		E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E92F7B7E206921BC008A027F /* SpendViewModel.swift */; };
@@ -170,7 +176,6 @@
 		E9753C19206BD95A0023CF94 /* CouponViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9753C18206BD95A0023CF94 /* CouponViewModel.swift */; };
 		E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */; };
 		E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D1720E82D8D000E9E30 /* Reachability.swift */; };
-		E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D2320E8EF93000E9E30 /* DeviceData.swift */; };
 		E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D175A20481D8900FEB57A /* OrderCell.swift */; };
 		E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D175B20481D8900FEB57A /* OrderCell.xib */; };
 		E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1763204840C500FEB57A /* OrderViewModel.swift */; };
@@ -187,7 +192,6 @@
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
 		E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */; };
 		E9DC2021216B807500746B81 /* Xib+localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC2020216B807500746B81 /* Xib+localization.swift */; };
-		E9DC202C216B97E900746B81 /* String+localized.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC2026216B97E900746B81 /* String+localized.swift */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
 		E9DFCC3D2027117700F115FA /* Offer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3C2027117700F115FA /* Offer.swift */; };
 		E9E913F521B7311F0097EE21 /* AccountSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */; };
@@ -289,6 +293,8 @@
 		E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinStyle.swift"; sourceTree = "<group>"; };
 		E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinBaseNavigationController.swift; sourceTree = "<group>"; };
 		E92501B920614A4400E2E738 /* Flows.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Flows.swift; sourceTree = "<group>"; };
+		E928960021E4EEC700656382 /* Utils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Utils.swift; sourceTree = "<group>"; };
+		E928960821E4F02000656382 /* String+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+extensions.swift"; sourceTree = "<group>"; };
 		E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = restore_wallet_completed.swift; sourceTree = "<group>"; };
 		E929BC8321C318B4000569B7 /* settings_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = settings_button_tapped.swift; sourceTree = "<group>"; };
 		E929BC8421C318B4000569B7 /* backup_create_password_next_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = backup_create_password_next_button_tapped.swift; sourceTree = "<group>"; };
@@ -393,6 +399,10 @@
 		E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BadgeBarButtonItem.swift; sourceTree = "<group>"; };
 		E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SettingsViewController.swift; path = KinEcosystem/View/notNibs/SettingsViewController.swift; sourceTree = SOURCE_ROOT; };
 		E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Kin+BackupRestore.swift"; sourceTree = "<group>"; };
+		E92EF25E21F852B300B33405 /* user_login_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_login_requested.swift; sourceTree = "<group>"; };
+		E92EF26321F852B400B33405 /* user_logout_requested.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_logout_requested.swift; sourceTree = "<group>"; };
+		E92EF26421F852B400B33405 /* user_login_failed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_login_failed.swift; sourceTree = "<group>"; };
+		E92EF26521F852B400B33405 /* user_login_succeeded.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user_login_succeeded.swift; sourceTree = "<group>"; };
 		E92F7B7A20691403008A027F /* SpendOfferViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendOfferViewController.swift; sourceTree = "<group>"; };
 		E92F7B7B20691403008A027F /* SpendOfferViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = SpendOfferViewController.xib; sourceTree = "<group>"; };
 		E92F7B7E206921BC008A027F /* SpendViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SpendViewModel.swift; sourceTree = "<group>"; };
@@ -439,7 +449,6 @@
 		E9753C18206BD95A0023CF94 /* CouponViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CouponViewModel.swift; sourceTree = "<group>"; };
 		E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KBIEvent.swift; sourceTree = "<group>"; };
 		E97E5D1720E82D8D000E9E30 /* Reachability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-		E97E5D2320E8EF93000E9E30 /* DeviceData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeviceData.swift; sourceTree = "<group>"; };
 		E98D17562047FD6100FEB57A /* KinUtil.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinUtil.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E98D175A20481D8900FEB57A /* OrderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OrderCell.swift; sourceTree = "<group>"; };
 		E98D175B20481D8900FEB57A /* OrderCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OrderCell.xib; sourceTree = "<group>"; };
@@ -459,7 +468,6 @@
 		E9DC201C216B353E00746B81 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E9DC201F216B4B3D00746B81 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MarketplaceViewController.xib; sourceTree = "<group>"; };
 		E9DC2020216B807500746B81 /* Xib+localization.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Xib+localization.swift"; sourceTree = "<group>"; };
-		E9DC2026216B97E900746B81 /* String+localized.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "String+localized.swift"; sourceTree = "<group>"; };
 		E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CodingUserInfoKey+Decode.swift"; sourceTree = "<group>"; };
 		E9DFCC3C2027117700F115FA /* Offer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Offer.swift; sourceTree = "<group>"; };
 		E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionTests.swift; sourceTree = "<group>"; };
@@ -508,6 +516,10 @@
 		E929BC8121C318B4000569B7 /* client */ = {
 			isa = PBXGroup;
 			children = (
+				E92EF26421F852B400B33405 /* user_login_failed.swift */,
+				E92EF25E21F852B300B33405 /* user_login_requested.swift */,
+				E92EF26521F852B400B33405 /* user_login_succeeded.swift */,
+				E92EF26321F852B400B33405 /* user_logout_requested.swift */,
 				E929BC8221C318B4000569B7 /* restore_wallet_completed.swift */,
 				E929BC8321C318B4000569B7 /* settings_button_tapped.swift */,
 				E929BC8421C318B4000569B7 /* backup_create_password_next_button_tapped.swift */,
@@ -737,7 +749,6 @@
 				E954100920E3B3230038FF49 /* BIClient.swift */,
 				E954106820E3B3A10038FF49 /* EventsStore.swift */,
 				E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */,
-				E97E5D2320E8EF93000E9E30 /* DeviceData.swift */,
 			);
 			path = BI;
 			sourceTree = "<group>";
@@ -807,6 +818,7 @@
 				E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */,
 				E98D177D204BF94200FEB57A /* Core.swift */,
 				E97E5D1720E82D8D000E9E30 /* Reachability.swift */,
+				E928960021E4EEC700656382 /* Utils.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -861,7 +873,7 @@
 			isa = PBXGroup;
 			children = (
 				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
-				E9DC2026216B97E900746B81 /* String+localized.swift */,
+				E928960821E4F02000656382 /* String+extensions.swift */,
 				E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */,
 				E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */,
 				E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */,
@@ -1176,10 +1188,12 @@
 				91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */,
 				E929BCE021C318B4000569B7 /* backup_welcome_page_viewed.swift in Sources */,
 				E942F8A5202C4C6F00DD4B8E /* OfferVIewModel.swift in Sources */,
+				E92EF26921F852B400B33405 /* user_login_succeeded.swift in Sources */,
 				E929BD0721C318B4000569B7 /* backup_completed_page_viewed.swift in Sources */,
 				E929BCF321C318B4000569B7 /* wallet_creation_succeeded.swift in Sources */,
 				E912B4ED203D69FE005ADBA1 /* NetworkTypes.swift in Sources */,
 				E929BCDA21C318B4000569B7 /* spend_order_completed.swift in Sources */,
+				E928960121E4EEC700656382 /* Utils.swift in Sources */,
 				E929BD0921C318B4000569B7 /* restore_upload_qr_code_page_viewed.swift in Sources */,
 				E954A60E2056B86A00F01C8A /* SplashTransition.swift in Sources */,
 				E92BA45021A19C0A00C952D8 /* BRViewController.swift in Sources */,
@@ -1202,6 +1216,7 @@
 				E929BD0C21C318B4000569B7 /* restore_password_done_button_tapped.swift in Sources */,
 				E929BCD621C318B4000569B7 /* balance_tapped.swift in Sources */,
 				E929BD1721C318B4000569B7 /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */,
+				E92EF26721F852B400B33405 /* user_logout_requested.swift in Sources */,
 				E929BCD221C318B4000569B7 /* backup_popup_page_viewed.swift in Sources */,
 				E929BD0D21C318B4000569B7 /* settings_back_button_tapped.swift in Sources */,
 				E929BCF521C318B4000569B7 /* restore_are_you_sure_cancel_button_tapped.swift in Sources */,
@@ -1233,7 +1248,6 @@
 				E929BCEE21C318B4000569B7 /* settings_option_tapped.swift in Sources */,
 				E929BCDF21C318B4000569B7 /* spend_offer_tapped.swift in Sources */,
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
-				E97E5D2420E8EF93000E9E30 /* DeviceData.swift in Sources */,
 				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
 				E929BD1121C318B4000569B7 /* types.swift in Sources */,
 				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
@@ -1260,6 +1274,7 @@
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,
 				E92BA44621A19C0A00C952D8 /* BackupRestore.swift in Sources */,
+				E92EF26621F852B400B33405 /* user_login_requested.swift in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
 				E929BCE521C318B4000569B7 /* earn_order_completed.swift in Sources */,
 				E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */,
@@ -1287,8 +1302,9 @@
 				E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */,
 				E929BCD021C318B4000569B7 /* backup_create_password_next_button_tapped.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
-				E9DC202C216B97E900746B81 /* String+localized.swift in Sources */,
+				E92EF26821F852B400B33405 /* user_login_failed.swift in Sources */,
 				E92BA45321A19C0A00C952D8 /* QRPickerController.swift in Sources */,
+				E928960921E4F02000656382 /* String+extensions.swift in Sources */,
 				E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */,
 				E9540F5E20E01DAC0038FF49 /* Balance.swift in Sources */,
 				E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */,

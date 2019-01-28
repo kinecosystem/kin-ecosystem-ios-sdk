@@ -22,17 +22,6 @@ enum EcosystemNetError: Error {
 class RestClient {
     
     fileprivate(set) var config: EcosystemConfiguration
-    lazy var signInData: SignInData = {
-        
-        
-        return SignInData(jwt: config.jwt ?? nil,
-                          user_id: config.userId,
-                          app_id: config.appId,
-                          device_id: DeviceData.deviceId,
-                          wallet_address: config.publicAddress,
-                          sign_in_type: config.jwt != nil ? SignInType.jwt.rawValue : SignInType.whitelist.rawValue,
-                          api_key: config.apiKey)
-    }()
     
     fileprivate var lastToken: AuthToken?
     var authToken: AuthToken? {

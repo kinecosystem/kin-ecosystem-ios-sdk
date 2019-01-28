@@ -95,13 +95,13 @@ public enum Environment {
     public var marketplaceURL: String {
         switch self {
         case .playground:
-            return "https://api.kinplayground.com/v1"
+            return "https://api.kinplayground.com/v2"
         case .production:
-            return "https://api.kinmarketplace.com/v1"
+            return "https://api.kinmarketplace.com/v2"
         case .beta:
-            return "https://api.kinecosystembeta.com/v1"
+            return "https://api.kinecosystembeta.com/v2"
         case .test:
-            return "https://api.kinecosystemtest.com/v1"
+            return "https://api.kinecosystemtest.com/v2"
         case .custom(let envProps):
             return envProps.marketplaceURL
         }

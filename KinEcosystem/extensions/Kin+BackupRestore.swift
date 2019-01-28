@@ -16,13 +16,13 @@ extension Kin : KeystoreProvider {
         guard let core = core else {
             throw KinEcosystemError.client(.notStarted, nil)
         }
-        guard isActivated else {
-            throw KinEcosystemError.blockchain(.activation, nil)
+        guard isActivated, let account = core.blockchain.account else {
+            throw KinEcosystemError.service(.notLoggedIn, nil)
         }
-        let result = try core.blockchain.account.export(passphrase: password)
-        var data = core.blockchain.account.kinExtraData
+        let result = try account.export(passphrase: password)
+        var data = account.kinExtraData
         data.backedUp = true
-        core.blockchain.account.kinExtraData = data
+        account.kinExtraData = data
         return result
     }
     
@@ -32,44 +32,8 @@ extension Kin : KeystoreProvider {
             completion(KinEcosystemError.client(.notStarted, nil))
             return
         }
-        guard isActivated else {
-            completion(KinEcosystemError.blockchain(.activation, nil))
-            return
-        }
         
-        promise { (handler: (KinAccount?, Error?) -> ()) -> () in
-            
-            do {
-                let account = try core.blockchain.accountForImporting(keystore: keystore, password: password)
-                handler(account, nil)
-            } catch {
-                handler(nil, error)
-            }
-            
-        }.then { account -> Promise<Void> in
-                
-            promise { (handler: @escaping (Void?, Error?) -> ()) in
-                do {
-                    let data = try JSONEncoder().encode(UserProperties(wallet_address: account.publicAddress))
-                    core.network.client.buildRequest(path: "users", method: .patch, body: data)
-                    .then { request in
-                        core.network.client.request(request)
-                    }.then { _ in
-                        core.blockchain.setActiveAccount(account)
-                        handler((), nil)
-                    }.error { error in
-                        handler(nil, error)
-                    }
-                } catch {
-                    handler(nil, error)
-                }
-            }
-            
-        }.then {
-            completion(nil)
-        }.error { error in
-            completion(error)
-        }
+        core.importAccount(keystore: keystore, password: password, completion: completion)
         
     }
     
