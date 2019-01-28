@@ -65,6 +65,7 @@ class Core {
         isOnboarding = true
         
         guard let encoded = jwt?.encoded else {
+            self.isOnboarding = false
             onboardPromise.signal(KinEcosystemError.client(.jwtMissing, nil))
             return onboardPromise
         }
