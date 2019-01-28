@@ -7,7 +7,7 @@ The Kin Ecosystem SDK allows you to quickly and easily integrate with the Kin pl
 ## Installation
 The fastest way to get started with the sdk is with cocoapods (>= 1.4.0).
 ```
-pod 'KinEcosystem', '0.6.2'
+pod 'KinEcosystem', '0.6.3'
 ```
 > Notice for apps using swift 3.2: the pod installation will change your project's swift version target to 4.0</br>
 > This is because the sdk uses swift 4.0, and cocoapods force the pod's swift version on the project. For now, you can manually change your project's swift version in the build setting. A better solution will be available soon.
