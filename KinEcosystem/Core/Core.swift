@@ -118,6 +118,7 @@ class Core {
             
             var data = account.kinExtraData
             data.backedUp = true
+            data.onboarded = true
             account.kinExtraData = data
             
             completion(nil)

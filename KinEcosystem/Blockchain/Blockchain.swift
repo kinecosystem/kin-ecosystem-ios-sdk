@@ -312,7 +312,6 @@ class Blockchain {
         guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         var data = anAccount.kinExtraData
         data.lastActive = Date()
-        data.onboarded = true
         data.environment = environment.name
         data.kinUserId = token.ecosystem_user_id
         anAccount.kinExtraData = data
