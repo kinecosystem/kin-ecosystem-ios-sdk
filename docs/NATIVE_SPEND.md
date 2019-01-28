@@ -27,7 +27,7 @@ A native spend offer requires you prepare an encoded jwt object, describing the 
        }
 
        sender: {
-              user_id: string; // optional: user_id who will perform the order
+              user_id: string; // user_id who will perform the order
               device_id: string; // A unique ID of the purchasing user device
               title: string; // order title - appears in order history
               description: string; // order description - appears in order history
