@@ -92,10 +92,15 @@ class Core {
         return onboardPromise
     }
     
-    func offboard() {
-        network.unAuthorize()
-        blockchain.offboard()
-        jwt = nil
+    @discardableResult
+    func offboard() -> Promise<Void> {
+        let p = Promise<Void>()
+        network.unAuthorize().then {
+            self.blockchain.offboard()
+            self.jwt = nil
+            p.signal(())
+        }
+        return p
     }
     
     func importAccount(keystore: String, password: String, completion: @escaping (Error?) -> ()) {

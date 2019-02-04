@@ -89,10 +89,11 @@ class EcosystemNet {
         return authPromise
     }
     
-    func unAuthorize() {
+    func unAuthorize() -> Promise<Void>  {
         guard client.authToken != nil else {
-            return
+            return Promise<Void>().signal(())
         }
+        let p = Promise<Void>()
         Kin.track { try UserLogoutRequested() }
         client.buildRequest(path: "users/me/session", method: .delete)
         .then { request in
@@ -103,8 +104,9 @@ class EcosystemNet {
             logError("error logging out: \(error)")
         }.finally {
             self.client.authToken = nil
+            p.signal(())
         }
-        
+        return p
     }
     
     func dataAtPath(_ path: String,

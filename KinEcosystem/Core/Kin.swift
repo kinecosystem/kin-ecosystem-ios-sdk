@@ -142,7 +142,9 @@ public class Kin {
     }
     
     public func login(jwt: String, callback: KinLoginCallback? = nil) throws {
+       
         Kin.track { try UserLoginRequested() }
+       
         guard let core = core else {
             logError("Kin not started")
             let error = KinEcosystemError.client(.notStarted, nil)
@@ -150,22 +152,35 @@ public class Kin {
             Kin.track { try UserLoginFailed(errorReason: error.localizedDescription) }
             throw error
         }
+        
         let jwtObj = try JWTObject(with: jwt)
+        
         DispatchQueue.once(token: "com.kin.init") {
            Kin.track { try KinSDKInitiated() }
         }
+        
         let lastUser = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+        let lastDevice = UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInDevice.rawValue)
         let lastEnvironmentName = UserDefaults.standard.string(forKey: KinPreferenceKey.lastEnvironment.rawValue)
-        if lastUser != jwtObj.userId || (lastEnvironmentName != nil && lastEnvironmentName != core.environment.name) {
-            logInfo("user change detected - logging out")
+        
+        var needsLogout = false
+        if lastUser != jwtObj.userId ||
+            lastEnvironmentName != core.environment.name ||
+            lastDevice != jwtObj.deviceId {
+            logInfo("user / environment / device change detected - logging out first...")
             UserDefaults.standard.set(false, forKey: KinPreferenceKey.firstSpendSubmitted.rawValue)
             UserDefaults.standard.removeObject(forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+            UserDefaults.standard.removeObject(forKey: KinPreferenceKey.lastSignedInDevice.rawValue)
             UserDefaults.standard.removeObject(forKey: KinPreferenceKey.lastEnvironment.rawValue)
-            logout()
+            needsLogout = true
         }
-        core.jwt = jwtObj
-        attempOnboard(core).then {
+        
+        prepareLogin(needsLogout, jwt: jwtObj)
+        .then {
+            self.attempOnboard(core)
+        }.then {
             UserDefaults.standard.set(jwtObj.userId, forKey: KinPreferenceKey.lastSignedInUser.rawValue)
+            UserDefaults.standard.set(jwtObj.deviceId, forKey: KinPreferenceKey.lastSignedInDevice.rawValue)
             UserDefaults.standard.set(core.environment.name, forKey: KinPreferenceKey.lastEnvironment.rawValue)
             logInfo("blockchain onboarded successfully")
             Kin.track { try UserLoginSucceeded() }
@@ -453,6 +468,22 @@ public class Kin {
                handler(nil, KinEcosystemError.transform(error))
             }
         }
+    }
+    
+    func prepareLogin(_ shouldLogout: Bool, jwt: JWTObject) -> KinUtil.Promise<Void> {
+        guard let core = core else {
+            return KinUtil.Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
+        }
+        let p = KinUtil.Promise<Void>()
+        guard shouldLogout else {
+            core.jwt = jwt
+            return p.signal(())
+        }
+        core.offboard().finally {
+            core.jwt = jwt
+            p.signal(())
+        }
+        return p
     }
     
     func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> KinUtil.Promise<Void> {

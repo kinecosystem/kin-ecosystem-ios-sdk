@@ -13,6 +13,7 @@ enum KinPreferenceKey: String, CodingKey {
     case authToken
     case lastBalance
     case lastSignedInUser
+    case lastSignedInDevice
     case firstSpendSubmitted
     case lastEnvironment
 }
