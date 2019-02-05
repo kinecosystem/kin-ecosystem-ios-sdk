@@ -60,8 +60,9 @@ struct Flows {
                 let memo = PaymentMemoIdentifier(appId: appId,
                                                  id: order.id)
                 return SOPFlowPromise().signal((htmlResult, order, memo))
-            }.then { htmlResult, order, memo in
+            }.then { htmlResult, order, memo -> SOPFlowPromise in
                 try core.blockchain.startWatchingForNewPayments(with: memo)
+                return SOPFlowPromise().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo -> Promise<(PaymentMemoIdentifier, OpenOrder)> in
                 let result = EarnResult(content: htmlResult)
                 let content = try JSONEncoder().encode(result)

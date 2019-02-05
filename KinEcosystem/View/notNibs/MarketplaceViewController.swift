@@ -160,11 +160,11 @@ class MarketplaceViewController: KinNavigationChildController {
         earnOffersCollectionView.contentInset = .zero
         earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem),
                                           forCellWithReuseIdentifier: earnCellName)
-        earnOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        earnOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         spendOffersCollectionView.contentInset = .zero
         spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem),
                                            forCellWithReuseIdentifier: spendCellName)
-        spendOffersCollectionView.decelerationRate = UIScrollViewDecelerationRateFast
+        spendOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
     
     @objc func close() {

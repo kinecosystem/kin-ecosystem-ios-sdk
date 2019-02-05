@@ -41,7 +41,7 @@ class CircularDashedLoader : CAShapeLayer {
             shape.path = UIBezierPath(roundedRect: lineRect, cornerRadius: radius).cgPath
             shape.lineWidth = lineWidth
             shape.strokeColor = lineColor.cgColor
-            shape.lineCap = "round"
+            shape.lineCap = CAShapeLayerLineCap.round
             shape.fillColor = UIColor.clear.cgColor
             if (i == 1) {
                 let phase = (2.0 * Double.pi * Double(radius)) / (Double(dashes) * 2.0)
@@ -72,7 +72,7 @@ class CircularDashedLoader : CAShapeLayer {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.byValue = Float.pi * 2
         rotationAnimation.duration = 4.0
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         rotationAnimation.repeatCount = .infinity
         lines.forEach { line in
             line.add(rotationAnimation, forKey: "rotation")
@@ -103,7 +103,7 @@ class CircularDashedLoader : CAShapeLayer {
         let rotationAnimation = CABasicAnimation(keyPath: "transform.rotation")
         rotationAnimation.byValue = Float.pi * 2
         rotationAnimation.duration = 4.0
-        rotationAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionLinear)
+        rotationAnimation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.linear)
         rotationAnimation.repeatCount = .infinity
         
         lines.forEach { line in

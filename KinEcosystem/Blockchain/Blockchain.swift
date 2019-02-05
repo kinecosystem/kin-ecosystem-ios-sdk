@@ -78,11 +78,11 @@ class Blockchain {
     private let linkBag = LinkBag()
     private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
     private var balanceObservers = [String : (Balance) -> ()]()
-    private var paymentsWatcher: KinCoreSDK.PaymentWatch?
-    private var balanceWatcher: KinCoreSDK.BalanceWatch?
+    private var paymentsWatcher: PaymentWatch?
+    private var balanceWatcher: BalanceWatch?
     private let provider: BlockchainProvider
     private var kinAuthToken: AuthToken?
-    private var creationWatch: StellarKit.PaymentWatch?
+    private var creationWatch: EventWatcher<PaymentEvent>?
     private var creationLinkBag = LinkBag()
     private(set) var onboardInFlight = false
     private var isOnboarding: Bool {

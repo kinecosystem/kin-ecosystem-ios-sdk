@@ -28,7 +28,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     fileprivate var balanceViewController: BalanceViewController!
 
     var kinChildViewControllers: [KinNavigationChildController] {
-        return transitionController.childViewControllers as! [KinNavigationChildController]
+        return transitionController.children as! [KinNavigationChildController]
     }
 
     override var edgesForExtendedLayout: UIRectEdge {
@@ -119,7 +119,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
 
         outController?.beginAppearanceTransition(false, animated: animated)
 
-        transitionController.addChildViewController(viewController)
+        transitionController.addChild(viewController)
         viewController.kinNavigationController = self
 
         balanceViewController.setSelected(viewController is OrdersViewController, animated: animated)
@@ -127,7 +127,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         guard animated else {
             outView?.removeFromSuperview()
             viewController.view.frame = frame
-            viewController.didMove(toParentViewController: transitionController)
+            viewController.didMove(toParent: transitionController)
             viewController.endAppearanceTransition()
             outController?.endAppearanceTransition()
             completion?()
@@ -144,7 +144,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
             outView?.frame = leftFrame
         }, completion: { (finished) in
             outView?.removeFromSuperview()
-            viewController.didMove(toParentViewController: self.transitionController)
+            viewController.didMove(toParent: self.transitionController)
             self.tapRecognizer.isEnabled = true
             viewController.endAppearanceTransition()
             outController?.endAppearanceTransition()
@@ -183,8 +183,8 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         guard animated else {
             inView.frame = frame
             outView.removeFromSuperview()
-            outController.willMove(toParentViewController: nil)
-            outController.removeFromParentViewController()
+            outController.willMove(toParent: nil)
+            outController.removeFromParent()
             inController.endAppearanceTransition()
             outController.endAppearanceTransition()
             completion?()
@@ -201,8 +201,8 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
             outView.frame = rightFrame
         }, completion: { (finished) in
             outView.removeFromSuperview()
-            outController.willMove(toParentViewController: nil)
-            outController.removeFromParentViewController()
+            outController.willMove(toParent: nil)
+            outController.removeFromParent()
             inController.endAppearanceTransition()
             outController.endAppearanceTransition()
             self.tapRecognizer.isEnabled = true

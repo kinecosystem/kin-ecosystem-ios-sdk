@@ -14,14 +14,14 @@ class Animations {
                    beginTime: TimeInterval,
                    from: Any,
                    to: Any,
-                   curve: CAMediaTimingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseOut)) -> CABasicAnimation {
+                   curve: CAMediaTimingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeOut)) -> CABasicAnimation {
         let animation = CABasicAnimation(keyPath: keyPath)
         animation.duration = duration
         animation.fromValue = from
         animation.toValue = to
         animation.beginTime = beginTime
         animation.timingFunction = curve
-        animation.fillMode = kCAFillModeForwards
+        animation.fillMode = CAMediaTimingFillMode.forwards
         return animation
     }
     
@@ -31,8 +31,8 @@ class Animations {
         group.duration = duration
         group.repeatCount = 1
         group.isRemovedOnCompletion = false
-        group.fillMode = kCAFillModeForwards
-        group.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        group.fillMode = CAMediaTimingFillMode.forwards
+        group.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         return group
     }
 }

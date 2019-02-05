@@ -47,8 +47,8 @@ class QRViewController: BRViewController {
         NotificationCenter.default.removeObserver(self)
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
         if parent == nil {
             Kin.track { try BackupQrCodeBackButtonTapped() }
         }
@@ -81,7 +81,7 @@ class QRViewController: BRViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidTakeScreenshot), name: .UIApplicationUserDidTakeScreenshot, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(applicationDidTakeScreenshot), name: UIApplication.userDidTakeScreenshotNotification, object: nil)
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -153,7 +153,7 @@ extension QRViewController {
             return
         }
         
-        guard let qrImage = QR.generateImage(from: qrString), let data = UIImagePNGRepresentation(qrImage) else {
+        guard let qrImage = QR.generateImage(from: qrString), let data = qrImage.pngData() else {
             presentEmailErrorAlert(.critical)
             return
         }

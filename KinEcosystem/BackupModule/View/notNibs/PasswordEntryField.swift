@@ -39,7 +39,7 @@ class PasswordEntryField: UITextField {
         revealIcon.addTarget(self, action: #selector(hidePassword), for: [.touchUpInside, .touchUpOutside, .touchCancel])
         revealIcon.contentMode = .topLeft
         revealIcon.setImage(UIImage(named: "greyRevealIcon", in: Bundle.ecosystem, compatibleWith: nil), for: .normal)
-        revealIcon.imageEdgeInsets = UIEdgeInsetsMake(0.0, -15.0, 0.0, 0.0)
+        revealIcon.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -15.0, bottom: 0.0, right: 0.0)
         layer.cornerRadius = bounds.height / 2
         let paddingView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 22.0, height: frame.height))
         UIView.performWithoutAnimation {

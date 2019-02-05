@@ -51,9 +51,9 @@ class SplashTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewC
         let animation = CABasicAnimation(keyPath: "path")
         animation.toValue = finalPath
         animation.duration = 0.3
-        animation.fillMode = kCAFillModeBoth
+        animation.fillMode = CAMediaTimingFillMode.both
         animation.isRemovedOnCompletion = false
-        animation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        animation.timingFunction = CAMediaTimingFunction(name: CAMediaTimingFunctionName.easeInEaseOut)
         animation.delegate = self
         mask.add(animation, forKey: "growAnimation")
     }

@@ -15,7 +15,7 @@ Kin ecosystem mobile sdk for iOS
   s.resource_bundle = { "kinLocalization" => ["KinEcosystem/*.lproj/*.strings"] }
   s.source_files = 'KinEcosystem/**/*.{h,m,swift}'
   s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
-  s.swift_version = '4.1'
+  s.swift_version = '4.2'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
-  s.dependency 'KinCoreSDK', '0.7.12'
+  s.dependency 'KinCoreSDK', '0.7.13'
 end

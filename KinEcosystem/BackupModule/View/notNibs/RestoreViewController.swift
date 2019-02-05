@@ -48,8 +48,8 @@ class RestoreViewController: BRViewController {
         title = "Restore Previous Wallet".localized() // TODO: 
     }
     
-    override func willMove(toParentViewController parent: UIViewController?) {
-        super.willMove(toParentViewController: parent)
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
         if parent == nil {
             Kin.track { try RestorePasswordEntryBackButtonTapped() }
         }
@@ -63,9 +63,9 @@ class RestoreViewController: BRViewController {
         instructionsLabel.attributedText = passwordInstructions
         doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
         doneButton.isEnabled = false
-        kbObservers.append(NotificationCenter.default.addObserver(forName: .UIKeyboardWillShow, object: nil, queue: nil) { [weak self] note in
-            if let height = (note.userInfo?[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height,
-                let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
+        kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] note in
+            if let height = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height,
+                let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                 DispatchQueue.main.async {
                     self?.bottomSpace.constant = height
                     UIView.animate(withDuration: duration) {
@@ -75,8 +75,8 @@ class RestoreViewController: BRViewController {
             }
         })
         
-        kbObservers.append(NotificationCenter.default.addObserver(forName: .UIKeyboardWillHide, object: nil, queue: nil) { [weak self] note in
-            if let duration = note.userInfo?[UIKeyboardAnimationDurationUserInfoKey] as? Double {
+        kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] note in
+            if let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                 DispatchQueue.main.async {
                     self?.bottomSpace.constant = 0.0
                     UIView.animate(withDuration: duration) {

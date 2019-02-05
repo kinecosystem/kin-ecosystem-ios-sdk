@@ -101,7 +101,7 @@ class BalanceViewController: KinViewController {
             return
         }
 
-        UIView.animate(withDuration: TimeInterval(UINavigationControllerHideShowBarDuration)) {
+        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
             block()
         }
     }
