@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		917A59E9220B23310018E108 /* MoveKin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A59E6220B23180018E108 /* MoveKin.framework */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
 		91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8720CFB22E00C3399F /* KinViewController.swift */; };
@@ -202,6 +203,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		917A59E5220B23180018E108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 917A59DC220B23180018E108 /* MoveKin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9191EC0A21E78731002BAC48;
+			remoteInfo = MoveKin;
+		};
+		917A59E7220B23180018E108 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 917A59DC220B23180018E108 /* MoveKin.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 9191EC1321E78731002BAC48;
+			remoteInfo = MoveKinTests;
+		};
 		E92BA40A21A179BE00C952D8 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
@@ -275,6 +290,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		917A59DC220B23180018E108 /* MoveKin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MoveKin.xcodeproj; path = "Dependencies/move-kin-ios/MoveKin.xcodeproj"; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
 		91A4EA8720CFB22E00C3399F /* KinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinViewController.swift; sourceTree = "<group>"; };
@@ -489,6 +505,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				917A59E9220B23310018E108 /* MoveKin.framework in Frameworks */,
 				E92BA41221A179D400C952D8 /* KinCoreSDK.framework in Frameworks */,
 				E9295BBA218EFB33001B7B56 /* CoreDataStack.framework in Frameworks */,
 			);
@@ -505,6 +522,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		917A59DD220B23180018E108 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				917A59E6220B23180018E108 /* MoveKin.framework */,
+				917A59E8220B23180018E108 /* MoveKinTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		E92501B820614A3300E2E738 /* Promises */ = {
 			isa = PBXGroup;
 			children = (
@@ -756,6 +782,7 @@
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
+				917A59DC220B23180018E108 /* MoveKin.xcodeproj */,
 				E942F8B52030819C00DD4B8E /* CoreDataStack.xcodeproj */,
 				E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
@@ -1031,6 +1058,10 @@
 					ProductGroup = E92BA40221A179BE00C952D8 /* Products */;
 					ProjectRef = E92BA40121A179BE00C952D8 /* KinCoreSDK.xcodeproj */;
 				},
+				{
+					ProductGroup = 917A59DD220B23180018E108 /* Products */;
+					ProjectRef = 917A59DC220B23180018E108 /* MoveKin.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -1042,6 +1073,20 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		917A59E6220B23180018E108 /* MoveKin.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = MoveKin.framework;
+			remoteRef = 917A59E5220B23180018E108 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		917A59E8220B23180018E108 /* MoveKinTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = MoveKinTests.xctest;
+			remoteRef = 917A59E7220B23180018E108 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		E92BA40B21A179BE00C952D8 /* KinCoreSDK.framework */ = {
 			isa = PBXReferenceProxy;
 			fileType = wrapper.framework;
