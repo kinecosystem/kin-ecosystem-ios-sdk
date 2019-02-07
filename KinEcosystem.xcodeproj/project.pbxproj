@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		917A59E9220B23310018E108 /* MoveKin.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 917A59E6220B23180018E108 /* MoveKin.framework */; };
+		917A5F88220C38BF0018E108 /* AcceptReceiveKinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
 		91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8720CFB22E00C3399F /* KinViewController.swift */; };
@@ -291,6 +292,7 @@
 
 /* Begin PBXFileReference section */
 		917A59DC220B23180018E108 /* MoveKin.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = MoveKin.xcodeproj; path = "Dependencies/move-kin-ios/MoveKin.xcodeproj"; sourceTree = "<group>"; };
+		917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AcceptReceiveKinViewController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
 		91A4EA8720CFB22E00C3399F /* KinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinViewController.swift; sourceTree = "<group>"; };
@@ -892,6 +894,7 @@
 				E92F7B872069992A008A027F /* Animations.swift */,
 				E9753C10206BD4AB0023CF94 /* CouponViewController.swift */,
 				E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */,
+				917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -1322,6 +1325,7 @@
 				E92EF26621F852B400B33405 /* user_login_requested.swift in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
 				E929BCE521C318B4000569B7 /* earn_order_completed.swift in Sources */,
+				917A5F88220C38BF0018E108 /* AcceptReceiveKinViewController.swift in Sources */,
 				E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */,
 				E929BD1621C318B4000569B7 /* backup_popup_button_tapped.swift in Sources */,
 				E929BCCE21C318B4000569B7 /* restore_wallet_completed.swift in Sources */,
