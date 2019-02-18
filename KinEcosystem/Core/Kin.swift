@@ -505,8 +505,10 @@ public class Kin {
         return attempt(2) { attempNum -> KinUtil.Promise<Void> in
                 let p = KinUtil.Promise<Void>()
                 logInfo("attempting onboard: \(attempNum)")
+                //logVerbose("accounts at onboard begin:\n\n\(core.blockchain.client.accounts.debugInfo)")
                 core.onboard()
                         .then {
+                            //logVerbose("accounts at onboard end:\n\n\(core.blockchain.client.accounts.debugInfo)")
                             p.signal(())
                         }
                         .error { error in
