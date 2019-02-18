@@ -214,6 +214,7 @@ class Blockchain {
         }
         
         guard candidateAccounts.count > 0 else {
+            logVerbose("no accounts found for eco uid \(token.ecosystem_user_id) with env \(environment.name), creating new")
             return try createNewAccount()
         }
         
@@ -232,7 +233,7 @@ class Blockchain {
         }).last {
             return candidateLastActiveAccount
         }
-        
+        logVerbose("no onboarded or last active accounts found from accounts of eco uid \(token.ecosystem_user_id) with env \(environment.name), creating new")
         return try createNewAccount()
         
     }
@@ -617,3 +618,31 @@ extension KinAccount {
     
 }
 
+extension KinAccounts {
+    
+    var debugInfo: String {
+        get {
+            var info = "total: \(count)\n\n"
+            for i in 0..<count {
+                if let anAccount = self[i] {
+                    let data = anAccount.kinExtraData
+                    info += """
+                    account \(i)
+                    \(anAccount.publicAddress)
+                    ----------------------
+                    user        : \(data.user ?? "nil")
+                    ecosystem id: \(data.kinUserId ?? "nil")
+                    environment : \(data.environment ?? "nil")
+                    onboarded   : \(data.onboarded)
+                    lastActive  : \(data.lastActive)
+                    backedUp    : \(data.backedUp)
+                    ----------------------
+                    
+                    """
+                }
+            }
+            return info
+        }
+    }
+    
+}
