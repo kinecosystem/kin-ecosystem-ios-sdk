@@ -73,3 +73,7 @@
 
 "kinecosystem_restore_instructions" = "Great, we’re almost there!\nPlease enter your password";
 "kinecosystem_restore_title" = "Restore Previous Wallet";
+
+"kinecosystem_move_kin_accept_message" = "In order to send Kin, %@ would like to receive your Kin account information (i.e. your public address) from %@.";
+"kinecosystem_move_kin_accept_button_title" = "I Agree";
+"kinecosystem_thisapp" = "this app";

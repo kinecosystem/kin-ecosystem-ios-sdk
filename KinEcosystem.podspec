@@ -18,4 +18,5 @@ Kin ecosystem mobile sdk for iOS
   s.swift_version = '4.2'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinCoreSDK', '0.7.16'
+  s.dependency 'MoveKin', '0.1.0'
 end
