@@ -20,7 +20,7 @@ platform :ios do
   lane :release do
     podspecPath = "KinEcosystem.podspec"
     kinFile = "KinEcosystem/Core/Kin.swift"
-    readmeFile = "README.md"
+    #readmeFile = "README.md"
     ensure_git_branch(branch: 'master')
     #ensure_git_status_clean(show_uncommitted_changes: true)
     current = version_get_podspec(path: podspecPath)
@@ -32,8 +32,8 @@ platform :ios do
     Dir.chdir("..") do
       updated = File.read(kinFile).gsub(/^.*let SDKVersion = .*$/, "let SDKVersion = \"#{version}\"")
       File.open(kinFile, "w") { |file| file.puts updated }
-      updated = File.read(readmeFile).gsub(/^.*pod 'KinEcosystem',.*$/, "pod 'KinEcosystem', '#{version}'")
-      File.open(readmeFile, "w") { |file| file.puts updated }
+      #updated = File.read(readmeFile).gsub(/^.*pod 'KinEcosystem',.*$/, "pod 'KinEcosystem', '#{version}'")
+      #File.open(readmeFile, "w") { |file| file.puts updated }
     end
     git_add
     git_commit(path: ".", message: "release #{version}")
