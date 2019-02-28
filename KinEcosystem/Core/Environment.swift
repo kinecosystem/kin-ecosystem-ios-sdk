@@ -127,9 +127,9 @@ public enum Environment {
         case .playground,
              .beta,
              .test:
-            return "https://kin-bi.appspot.com/eco_play_"
+            return "https://bi.kinecosystembi.com/eco_play_"
         case .production:
-            return "https://kin-bi.appspot.com/eco_"
+            return "https://bi.kinecosystembi.com/eco_"
         case .custom(let envProps):
             return envProps.BIURL
         }

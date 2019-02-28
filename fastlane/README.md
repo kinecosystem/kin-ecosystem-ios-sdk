@@ -21,6 +21,11 @@ or alternatively using `brew cask install fastlane`
 fastlane ios release
 ```
 Release a new pod version
+### ios events
+```
+fastlane ios events
+```
+
 
 ----
 

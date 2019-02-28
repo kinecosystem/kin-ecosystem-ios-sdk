@@ -2,12 +2,11 @@ import Foundation
 
 /// common properties for all client events
 struct Client: Codable {
-    let carrier, deviceID, deviceManufacturer, deviceModel: String
-    let language, os: String
+    let carrier, deviceManufacturer, deviceModel, language: String
+    let os: String
 
     enum CodingKeys: String, CodingKey {
         case carrier
-        case deviceID = "device_id"
         case deviceManufacturer = "device_manufacturer"
         case deviceModel = "device_model"
         case language, os
@@ -16,7 +15,6 @@ struct Client: Codable {
 
 public struct ClientProxy {
     var carrier: () -> (String)
-    var deviceID: () -> (String)
     var deviceManufacturer: () -> (String)
     var deviceModel: () -> (String)
     var language: () -> (String)
@@ -24,7 +22,6 @@ public struct ClientProxy {
     var snapshot: Client {
         return Client(
             carrier: carrier(),
-            deviceID: deviceID(),
             deviceManufacturer: deviceManufacturer(),
             deviceModel: deviceModel(),
             language: language(),

@@ -59,4 +59,32 @@ platform :ios do
                        is_prerelease: pre)
     end
   end
+
+  lane :events do
+    require 'xcodeproj'
+    project_path = '../KinEcosystem.xcodeproj'
+    project = Xcodeproj::Project.open(project_path)
+    target = project.targets.first
+    UI.abort_with_message!("make sure target is Ecosystem") unless target.name == "KinEcosystem"
+    Dir.chdir("../../kin-bi/events") do
+      ensure_git_branch(branch: 'master')
+      git_pull
+      sh("npm i")
+      sh("npm run build")
+      sh("npm run generate")
+      FileUtils.cp_r('gen/swift/client/.', '../../kin-ecosystem-ios-sdk/KinEcosystem/BI/client')
+      Dir.chdir("gen/swift/client") do
+        eventsGroup = project.main_group.find_subpath("KinEcosystem/BI/client", false)
+        file_refs = []
+        children = eventsGroup.children.map { |f| f.path }
+        Dir.glob("*.swift") do |item|
+          next if children.include? item
+          puts "addind #{item}"
+          file_refs << eventsGroup.new_reference(item)
+        end
+        target.add_file_references(file_refs)
+      end
+      project.save
+    end
+  end
 end
