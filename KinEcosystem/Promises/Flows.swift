@@ -48,7 +48,7 @@ struct Flows {
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
                 openOrder = order
-                Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id) }
+                Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id, origin: .marketplace) }
                 return resultPromise
                     .then { htmlResult in
                         KinUtil.Promise<(String, OpenOrder)>().signal((htmlResult, order))
@@ -70,7 +70,7 @@ struct Flows {
                     method: .post,
                     body: content)
                     .then { data in
-                        Kin.track { try EarnOrderCompletionSubmitted(offerID: order.offer_id, orderID: order.id) }
+                        Kin.track { try EarnOrderCompletionSubmitted(offerID: order.offer_id, orderID: order.id, origin: .marketplace) }
                         return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
@@ -134,7 +134,7 @@ struct Flows {
                         return
                     }
                     if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
-                        Kin.track { try EarnOrderCompleted(kinAmount: Double(order.amount), offerID: order.offer_id, offerType: type, orderID: order.id) }
+                        Kin.track { try EarnOrderCompleted(kinAmount: Double(order.amount), offerID: order.offer_id, offerType: type, orderID: order.id, origin: .marketplace) }
                     }
                 }
             }.error { error in
@@ -143,9 +143,9 @@ struct Flows {
                 if  case let EcosystemNetError.service(responseError) = error,
                     let url = responseError.httpResponse?.url,
                     url.pathComponents.contains("offers") {
-                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: offerId) }
+                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: offerId, origin: .marketplace) }
                 }
-                Kin.track { try EarnOrderFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "") }
+                Kin.track { try EarnOrderFailed(errorReason: "\(error)", offerID: offerId, orderID: openOrder?.id ?? "", origin: .marketplace) }
                 if let order = openOrder, canCancelOrder {
                     if case EarnOfferHTMLError.userCanceled = error {
                         Kin.track { try EarnOrderCancelled(offerID: order.offer_id, orderID: order.id) }
@@ -665,7 +665,7 @@ struct Flows {
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
         // Todo: can't infer amount and id
-        Kin.track { try EarnOrderCreationRequested(kinAmount: 0, offerID: "", offerType: .external) }
+        Kin.track { try EarnOrderCreationRequested(kinAmount: 0, offerID: "", offerType: .external, origin: .external) }
         core.network.objectAtPath("offers/external/orders",
                                   type: OpenOrder.self,
                                   method: .post,
@@ -673,7 +673,7 @@ struct Flows {
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
-                Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id) }
+                Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id, origin: .external) }
                 guard let recipient = order.blockchain_data?.recipient_address else {
                     return SDOFlowPromise().signal(KinError.internalInconsistency)
                 }
@@ -689,7 +689,7 @@ struct Flows {
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
-                        Kin.track { try EarnOrderCompletionSubmitted(offerID: order.offer_id, orderID: order.id) }
+                        Kin.track { try EarnOrderCompletionSubmitted(offerID: order.offer_id, orderID: order.id, origin: .external) }
                         return core.data.save(Order.self, with: data)
                     }.then {
                         canCancelOrder = false
@@ -743,7 +743,7 @@ struct Flows {
                 }
                 
             }.then { order in
-                Kin.track { try EarnOrderCompleted(kinAmount: Double(order.amount), offerID: order.offer_id, offerType: .external, orderID: order.id) }
+                Kin.track { try EarnOrderCompleted(kinAmount: Double(order.amount), offerID: order.offer_id, offerType: .external, orderID: order.id, origin: .external) }
                 if let confirmation = jwtConfirmation {
                     jwtPromise.signal(confirmation)
                 } else {
@@ -756,7 +756,7 @@ struct Flows {
                 if  case let EcosystemNetError.service(responseError) = error,
                     let url = responseError.httpResponse?.url,
                     url.pathComponents.contains("external") {
-                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: openOrder?.offer_id ?? "") }
+                    Kin.track { try EarnOrderCreationFailed(errorReason: responseError.message ?? "\(responseError.code)", offerID: openOrder?.offer_id ?? "", origin: .external) }
                 }
                 Kin.track { try SpendOrderFailed(errorReason: "\(error)", isNative: true, offerID: openOrder?.offer_id ?? "", orderID: openOrder?.id ?? "", origin: .external)}
                 core.blockchain.stopWatchingForNewPayments()

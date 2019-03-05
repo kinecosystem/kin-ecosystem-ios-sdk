@@ -238,7 +238,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                 if nativeOffer.offerType == .spend {
                     Kin.track { try SpendOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, origin: .external) }
                 } else {
-                    Kin.track { try EarnOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, offerType: .external) }
+                    Kin.track { try EarnOfferTapped(kinAmount: Double(nativeOffer.amount), offerID: nativeOffer.id, offerType: .external, origin: .external) }
                 }
             }
             if nativeOffer.isModal {
@@ -263,8 +263,8 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             self.kinNavigationController?.present(navContoller, animated: true)
             
             if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
-                Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type) }
-                Kin.track { try EarnOrderCreationRequested(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type) }
+                Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
+                Kin.track { try EarnOrderCreationRequested(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
             }
             Flows.earn(offerId: offer.id, resultPromise: html.earn, core: core)
         default: // spend
