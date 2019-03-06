@@ -20,6 +20,15 @@ public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()
 public typealias KinCallback = (String?, Error?) -> ()
 public typealias OrderConfirmationCallback = (ExternalOrderStatus?, Error?) -> ()
+public typealias KinExternalOrderTapHandler = (String) -> (CuponData?)
+
+public struct CuponData {
+    public var title: String
+    public var description: String
+    public var code: String
+    public var image: String
+    public var link: String
+}
 
 public enum ExternalOrderStatus {
     case pending
@@ -76,6 +85,8 @@ public class Kin {
     fileprivate init() {
         moveKinFlow.receiveDelegate = self
     }
+    
+    public var externalOrderTapHandler: KinExternalOrderTapHandler?
     
     public var lastKnownBalance: Balance? {
         return core?.blockchain.lastBalance ?? nil

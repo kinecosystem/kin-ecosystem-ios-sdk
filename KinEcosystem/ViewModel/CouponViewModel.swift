@@ -38,6 +38,10 @@ class CouponViewModel: Decodable {
         case link
     }
     
+//    convenience init(with: CuponData) {
+//        
+//    }
+    
     required init(from decoder: Decoder) throws {
         
         let values = try decoder.container(keyedBy: CouponCodingKeys.self)
