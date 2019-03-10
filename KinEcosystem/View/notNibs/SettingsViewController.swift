@@ -105,9 +105,8 @@ class SettingsViewController: UITableViewController {
         
         Kin.track { try SettingsOptionTapped(settingOption: phase == .backup ? KBITypes.SettingOption.backup : KBITypes.SettingOption.backup) }
         
-        brManager.start(phase, pushedOnto: navigationController, events: { event in
-            
-        }) { completed in
+        brManager.start(phase, pushedOnto: navigationController) { completed in
+            guard completed else { return }
             if case .restore = phase {
                 Kin.track { try RestoreWalletCompleted() }
             } else {

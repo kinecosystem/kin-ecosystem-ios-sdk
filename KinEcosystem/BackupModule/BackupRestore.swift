@@ -15,7 +15,6 @@ public protocol KeystoreProvider {
 }
 
 public typealias BRCompletionHandler = (_ success: Bool) -> ()
-public typealias BREventsHandler = (_ event: BREvent) -> ()
 
 public enum BRPhase {
     case backup
@@ -28,9 +27,8 @@ public enum BREvent {
 }
 
 public enum BREventType {
-    case nextTapped
-    case passwordMismatch
-    case qrMailSent
+    case done
+    case cancel
 }
 
 private enum BRPresentationType {
@@ -66,12 +64,10 @@ public class BRManager: NSObject {
      
      - Parameter phase: Perform a backup or restore
      - Parameter navigationController: The navigation controller being pushed onto
-     - Parameter events:
      - Parameter completion:
      */
     public func start(_ phase: BRPhase,
                       pushedOnto navigationController: UINavigationController,
-                      events: BREventsHandler,
                       completion: @escaping BRCompletionHandler)
     {
         guard brInstance == nil else {
@@ -94,12 +90,10 @@ public class BRManager: NSObject {
      
      - Parameter phase: Perform a backup or restore
      - Parameter viewController: The view controller being presented onto
-     - Parameter events:
      - Parameter completion:
      */
     public func start(_ phase: BRPhase,
                       presentedOn viewController: UIViewController,
-                      events: BREventsHandler,
                       completion: @escaping BRCompletionHandler)
     {
         guard brInstance == nil else {

@@ -30,6 +30,8 @@ public enum ExternalOrderStatus {
 public enum EcosystemExperience {
     case marketplace
     case history
+    case backup((BREvent) -> ())
+    case restore((BREvent) -> ())
 }
 
 public struct NativeOffer: Equatable {
@@ -70,7 +72,7 @@ public class Kin {
     fileprivate let psNativeOLock = NSLock()
     fileprivate let moveKinFlow = MoveKinFlow()
     fileprivate var nativeOffersInc:Int32 = -1
-
+    fileprivate var brManager:BRManager?
     fileprivate init() {
         moveKinFlow.receiveDelegate = self
     }
@@ -282,6 +284,31 @@ public class Kin {
             logError("Kin not started")
             throw KinEcosystemError.client(.notStarted, nil)
         }
+        
+        if case let .backup(handler) = experience {
+            guard isActivated else { throw KinEcosystemError.service(.notLoggedIn, nil) }
+            brManager = BRManager(with: self)
+            brManager!.start(.backup, presentedOn: parentViewController) { success in
+                if success {
+                    handler(.backup(.done))
+                } else {
+                    handler(.backup(.cancel))
+                }
+            }
+            return
+        } else if case let .restore(handler) = experience {
+            guard isActivated else { throw KinEcosystemError.service(.notLoggedIn, nil) }
+            brManager = BRManager(with: self)
+            brManager!.start(.restore, presentedOn: parentViewController) { success in
+                if success {
+                    handler(.restore(.done))
+                } else {
+                    handler(.restore(.cancel))
+                }
+            }
+            return
+        }
+        
         mpPresentingController = parentViewController
         if isActivated {
             let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
@@ -561,8 +588,6 @@ public class Kin {
         
         EventsStore.shared.clientProxy = ClientProxy(carrier: { [weak self] () -> (String) in
             return self?.bi.networkInfo.subscriberCellularProvider?.carrierName ?? ""
-            }, deviceID: { [weak self] () -> (String) in
-                return self?.core?.jwt?.deviceId ?? ""
             }, deviceManufacturer: { () -> (String) in
                 "Apple"
         }, deviceModel: { () -> (String) in
@@ -573,7 +598,9 @@ public class Kin {
             UIDevice.current.systemVersion
         })
         
-        EventsStore.shared.commonProxy = CommonProxy(eventID: { () -> (String) in
+        EventsStore.shared.commonProxy = CommonProxy(deviceID: { [weak self] () -> (String) in
+            return self?.core?.jwt?.deviceId ?? ""
+        }, eventID: { () -> (String) in
             UUID().uuidString
         }, timestamp: { () -> (String) in
             "\(Date().timeIntervalSince1970)"

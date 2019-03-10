@@ -28,37 +28,26 @@
 
 import Foundation
 
-/// Users completes earn offer successfully
-struct EarnOrderCompleted: KBIEvent {
+/// Client reports failure to complete backup
+struct BackupWalletFailed: KBIEvent {
     let client: Client
     let common: Common
+    let errorReason: String
     let eventName: String
     let eventType: String
-    let kinAmount: Double
-    let offerID: String
-    let offerType: KBITypes.OfferType
-    let orderID: String
-    let origin: KBITypes.Origin
     let user: User
 
     enum CodingKeys: String, CodingKey {
         case client, common
+        case errorReason = "error_reason"
         case eventName = "event_name"
         case eventType = "event_type"
-        case kinAmount = "kin_amount"
-        case offerID = "offer_id"
-        case offerType = "offer_type"
-        case orderID = "order_id"
-        case origin, user
+        case user
     }
 }
 
-
-
-
-
-extension EarnOrderCompleted {
-    init(kinAmount: Double, offerID: String, offerType: KBITypes.OfferType, orderID: String, origin: KBITypes.Origin) throws {
+extension BackupWalletFailed {
+    init(errorReason: String) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -71,13 +60,9 @@ extension EarnOrderCompleted {
         self.common = common
         self.client = client
 
-        eventName = "earn_order_completed"
+        eventName = "backup_wallet_failed"
         eventType = "business"
 
-        self.kinAmount = kinAmount
-        self.offerID = offerID
-        self.offerType = offerType
-        self.orderID = orderID
-        self.origin = origin
+        self.errorReason = errorReason
     }
 }

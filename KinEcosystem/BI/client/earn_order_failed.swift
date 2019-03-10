@@ -36,6 +36,7 @@ struct EarnOrderFailed: KBIEvent {
     let eventName: String
     let eventType: String
     let offerID, orderID: String
+    let origin: KBITypes.Origin
     let user: User
 
     enum CodingKeys: String, CodingKey {
@@ -45,12 +46,14 @@ struct EarnOrderFailed: KBIEvent {
         case eventType = "event_type"
         case offerID = "offer_id"
         case orderID = "order_id"
-        case user
+        case origin, user
     }
 }
 
+
+
 extension EarnOrderFailed {
-    init(errorReason: String, offerID: String, orderID: String) throws {
+    init(errorReason: String, offerID: String, orderID: String, origin: KBITypes.Origin) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -69,5 +72,6 @@ extension EarnOrderFailed {
         self.errorReason = errorReason
         self.offerID = offerID
         self.orderID = orderID
+        self.origin = origin
     }
 }
