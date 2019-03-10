@@ -14,7 +14,7 @@ import StellarErrors
 import KinUtil
 import MoveKin
 
-let SDKVersion = "0.8.0"
+let SDKVersion = "0.8.1"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()
