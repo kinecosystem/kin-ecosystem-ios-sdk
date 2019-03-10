@@ -154,6 +154,7 @@ class Blockchain {
                     var kinExtraData = account.kinExtraData
                     kinExtraData.onboarded = true
                     kinExtraData.kinUserId = kinUserId
+                    kinExtraData.environment = environment.name
                     kinExtraData.lastActive = Date()
                     account.kinExtraData = kinExtraData
                 }
@@ -182,7 +183,7 @@ class Blockchain {
     
     /* account finding pririty:
      
-    from same users and environment,
+    from same kin users,
         from onboarded
             last active
         else
@@ -209,12 +210,11 @@ class Blockchain {
         }
         
         let candidateAccounts = accounts.filter { anAccount in
-            return  anAccount.kinExtraData.kinUserId == token.ecosystem_user_id &&
-                    anAccount.kinExtraData.environment == environment.name
+            return anAccount.kinExtraData.kinUserId == token.ecosystem_user_id
         }
         
         guard candidateAccounts.count > 0 else {
-            logVerbose("no accounts found for eco uid \(token.ecosystem_user_id) with env \(environment.name), creating new")
+            logVerbose("no accounts found for eco uid \(token.ecosystem_user_id), creating new")
             return try createNewAccount()
         }
         
@@ -596,23 +596,31 @@ extension KinAccount {
     
     var kinExtraData: KinAccountExtraData {
         get {
-            // no data at all - means not onboarded
-            guard let extraData = extra else {
-                let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: false, lastActive: Date.distantPast, backedUp: false)
+            var result: KinAccountExtraData!
+            synced(self) {
+                // no data at all - means not onboarded
+                guard let extraData = extra else {
+                    let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: false, lastActive: Date.distantPast, backedUp: false)
+                    extra = try? JSONEncoder().encode(accountData)
+                    result = accountData
+                    return
+                }
+                // has valid data, return it
+                if let accountData = try? JSONDecoder().decode(KinAccountExtraData.self, from: extraData) {
+                    result = accountData
+                    return
+                }
+                // has data, no format. This empty data object was used in previous versions to indicate an onboarded account, presumably single account
+                let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: true, lastActive: Date.distantPast, backedUp: false)
                 extra = try? JSONEncoder().encode(accountData)
-                return accountData
+                result = accountData
             }
-            // has valid data, return it
-            if let accountData = try? JSONDecoder().decode(KinAccountExtraData.self, from: extraData) {
-                return accountData
-            }
-            // has data, no format. This empty data object was used in previous versions to indicate an onboarded account, presumably single account
-            let accountData = KinAccountExtraData(user: nil, kinUserId: nil, environment: nil, onboarded: true, lastActive: Date.distantPast, backedUp: false)
-            extra = try? JSONEncoder().encode(accountData)
-            return accountData
+            return result
         }
         set {
-            extra = try? JSONEncoder().encode(newValue)
+            synced(self) {
+                extra = try? JSONEncoder().encode(newValue)
+            }
         }
     }
     
