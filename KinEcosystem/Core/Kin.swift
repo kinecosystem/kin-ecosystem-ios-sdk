@@ -9,10 +9,10 @@
 //
 
 import Foundation
-import KinCoreSDK
 import StellarErrors
-import KinUtil
 import MoveKin
+import KinUtil
+import KinMigrationModule
 
 let SDKVersion = "0.8.1"
 
@@ -192,7 +192,7 @@ public class Kin {
             logInfo("blockchain onboarded successfully")
             Kin.track { try UserLoginSucceeded() }
             callback?(nil)
-            self.updateData(with: OffersList.self, from: "offers").error { error in
+            _ = self.updateData(with: OffersList.self, from: "offers").error { error in
                 logError("data sync failed (\(error))")
                 }.then {
                     self.updateData(with: OrdersList.self, from: "orders").error { error in
@@ -409,9 +409,9 @@ public class Kin {
             return
         }
         core.onboard()
-        .then { [weak self] (_) -> KinUtil.Promise<Void> in
+        .then { [weak self] (_) -> Promise<Void> in
             guard let this = self else {
-                return KinUtil.Promise<Void>().signal(KinError.internalInconsistency)
+                return Promise<Void>().signal(KinError.internalInconsistency)
             }
             return this.updateData(with: OrdersList.self, from: "orders")
         }.then {
@@ -502,11 +502,11 @@ public class Kin {
         }
     }
     
-    func prepareLogin(_ shouldLogout: Bool, jwt: JWTObject) -> KinUtil.Promise<Void> {
+    func prepareLogin(_ shouldLogout: Bool, jwt: JWTObject) -> Promise<Void> {
         guard let core = core else {
-            return KinUtil.Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
+            return Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
         }
-        let p = KinUtil.Promise<Void>()
+        let p = Promise<Void>()
         guard shouldLogout else {
             core.jwt = jwt
             return p.signal(())
@@ -518,10 +518,10 @@ public class Kin {
         return p
     }
     
-    func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> KinUtil.Promise<Void> {
+    func updateData<T: EntityPresentor>(with dataPresentorType: T.Type, from path: String) -> Promise<Void> {
         guard let core = core else {
             logError("Kin not started")
-            return KinUtil.Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
+            return Promise<Void>().signal(KinEcosystemError.client(.notStarted, nil))
         }
         return core.network.dataAtPath(path).then { data in
             return self.core!.data.sync(dataPresentorType, with: data)
@@ -534,8 +534,8 @@ public class Kin {
     
     @discardableResult
     func attempOnboard(_ core: Core) -> Promise<Void> {
-        return attempt(2) { attempNum -> KinUtil.Promise<Void> in
-                let p = KinUtil.Promise<Void>()
+        return attempt(2) { attempNum -> Promise<Void> in
+                let p = Promise<Void>()
                 logInfo("attempting onboard: \(attempNum)")
                 //logVerbose("accounts at onboard begin:\n\n\(core.blockchain.client.accounts.debugInfo)")
                 core.onboard()

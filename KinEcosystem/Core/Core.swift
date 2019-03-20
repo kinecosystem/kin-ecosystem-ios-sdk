@@ -6,7 +6,7 @@
 //  Copyright © 2018 Kik Interactive. All rights reserved.
 //
 
-import KinCoreSDK
+import KinMigrationModule
 
 @available(iOS 9.0, *)
 class Core {
@@ -72,14 +72,15 @@ class Core {
         
         network.authorize(jwt: encoded)
             
-        .then { auth in
-            self.selectAccount(for: auth)
-        }.then { account -> Promise<KinAccount> in
+        .then { auth -> Promise<KinAccountProtocol> in
+            try self.blockchain.start(with: auth)
+            return self.blockchain.accountPromise
+        }.then { account -> Promise<KinAccountProtocol> in
             self.updateWalletAddress(for: account)
         }.then { account in
             return self.blockchain.onboard()
                 .then { _ in
-                    Promise<KinAccount>().signal(account)
+                    Promise<KinAccountProtocol>().signal(account)
             }
         }.then {
             self.isOnboarding = false
@@ -109,7 +110,7 @@ class Core {
             completion(KinEcosystemError.service(.notLoggedIn, nil))
             return
         }
-        var account: KinAccount!
+        var account: KinAccountProtocol!
         
         do {
             account = try blockchain.accountForImporting(keystore: keystore, password: password)
@@ -119,7 +120,7 @@ class Core {
         }
         
         updateWalletAddress(for: account)
-        .then { account in
+        .then { _ in
             
             var data = account.kinExtraData
             data.backedUp = true
@@ -127,7 +128,8 @@ class Core {
             account.kinExtraData = data
             
             completion(nil)
-            self.network.dataAtPath("offers")
+            
+            _ = self.network.dataAtPath("offers")
             .then { offersData in
                 self.data.sync(OffersList.self, with: offersData)
             }.then {
@@ -140,25 +142,9 @@ class Core {
         }
         
     }
-
     
-    fileprivate func selectAccount(for token: AuthToken) -> Promise<KinAccount> {
-        let p = Promise<KinAccount>()
-        do {
-            try blockchain.startAccount(for: token)
-            guard let account = blockchain.account else {
-                p.signal(KinEcosystemError.blockchain(.activation, nil))
-                return p
-            }
-            p.signal(account)
-        } catch {
-            p.signal(error)
-        }
-        return p
-    }
-    
-    fileprivate func updateWalletAddress(for account: KinAccount) -> Promise<KinAccount> {
-        let p = Promise<KinAccount>()
+    fileprivate func updateWalletAddress(for account: KinAccountProtocol) -> Promise<KinAccountProtocol> {
+        let p = Promise<KinAccountProtocol>()
         do {
             let data = try JSONEncoder().encode(UserProperties(wallet_address: account.publicAddress))
             network.client.buildRequest(path: "users/me", method: .patch, body: data)

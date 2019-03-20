@@ -8,12 +8,9 @@
 
 import Foundation
 import UIKit
-import CoreData
 import CoreDataStack
-import StellarKit
 import KinUtil
-import KinCoreSDK
-import StellarErrors
+import KinMigrationModule
 
 enum OrderStatusError: Error {
     case orderStillPending
@@ -25,10 +22,11 @@ enum FirstSpendError: Error {
     case spendFailed
 }
 
-typealias SDOPFlowPromise = KinUtil.Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>
-typealias SDOFlowPromise = KinUtil.Promise<(String, Decimal, OpenOrder)>
-typealias SOPFlowPromise = KinUtil.Promise<(String, OpenOrder, PaymentMemoIdentifier)>
-typealias POFlowPromise = KinUtil.Promise<(PaymentMemoIdentifier, OpenOrder)>
+typealias SDOPFlowPromise = Promise<(String, Decimal, OpenOrder, PaymentMemoIdentifier)>
+typealias SDOFlowPromise = Promise<(String, Decimal, OpenOrder)>
+typealias SOPFlowPromise = Promise<(String, OpenOrder, PaymentMemoIdentifier)>
+typealias POFlowPromise = Promise<(PaymentMemoIdentifier, OpenOrder)>
+typealias Promise = KinUtil.Promise
 
 @available(iOS 9.0, *)
 struct Flows {
@@ -51,7 +49,7 @@ struct Flows {
                 Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id, origin: .marketplace) }
                 return resultPromise
                     .then { htmlResult in
-                        KinUtil.Promise<(String, OpenOrder)>().signal((htmlResult, order))
+                        Promise<(String, OpenOrder)>().signal((htmlResult, order))
                 }
             }.then(on: .main) { htmlResult, order -> SOPFlowPromise in
                 guard let appId = core.network.client.authToken?.app_id else {
@@ -92,12 +90,12 @@ struct Flows {
                         }
                         return POFlowPromise().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
+            }.then { memo, order -> Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals,
                                closure: { attemptNumber -> Promise<Void> in
-                    let p = KinUtil.Promise<Void>()
+                    let p = Promise<Void>()
                     logVerbose("attempt to get earn order with !pending state: (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
@@ -126,7 +124,7 @@ struct Flows {
                     }
                     return p
                 }).then {
-                    KinUtil.Promise<OpenOrder>().signal(order)
+                    Promise<OpenOrder>().signal(order)
                 }
             }.then { order in
                 core.data.queryObjects(of: Offer.self, with: NSPredicate(with: ["id" : order.offer_id])) { result in
@@ -265,7 +263,8 @@ struct Flows {
                 Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
-                                           memo: memo.description)
+                                           memo: memo.description,
+                                           whitelist: whitelist())
                     .then { txId in
                         Kin.track { try SpendTransactionBroadcastToBlockchainSucceeded(offerID: order.offer_id, orderID: order.id, transactionID: txId) }
                         logVerbose("\(amount) kin sent to \(recipient)")
@@ -276,12 +275,12 @@ struct Flows {
                     .then { _ in
                         return POFlowPromise().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
+            }.then { memo, order -> Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
                 return attempt(retryIntervals: intervals,
                                closure: { attemptNumber -> Promise<Void> in
-                    let p = KinUtil.Promise<Void>()
+                    let p = Promise<Void>()
                     logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
@@ -313,7 +312,7 @@ struct Flows {
                     }
                     return p
                 }).then {
-                    KinUtil.Promise<OpenOrder>().signal(order)
+                    Promise<OpenOrder>().signal(order)
                 }
                 
             }.then { order in
@@ -409,7 +408,7 @@ struct Flows {
     
     static func nativeSpend(jwt: String,
                             core: Core) -> Promise<String> {
-        let jwtPromise = KinUtil.Promise<String>()
+        let jwtPromise = Promise<String>()
         var jwtConfirmation: String?
         guard let jwtSubmission = try? JSONEncoder().encode(JWTOrderSubmission(jwt: jwt)) else {
             return jwtPromise.signal(EcosystemDataError.encodeError)
@@ -472,7 +471,8 @@ struct Flows {
                 Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
-                                           memo: memo.description)
+                                           memo: memo.description,
+                                           whitelist: whitelist())
                     .then { txId in
                         Kin.track { try SpendTransactionBroadcastToBlockchainSucceeded(offerID: order.offer_id, orderID: order.id, transactionID: txId) }
                         logVerbose("\(amount) kin sent to \(recipient)")
@@ -483,12 +483,12 @@ struct Flows {
                     .then { _ in
                         POFlowPromise().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
+            }.then { memo, order -> Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-                return KinUtil.attempt(retryIntervals: intervals,
+                return attempt(retryIntervals: intervals,
                                        closure: { attemptNumber -> Promise<Void> in
-                    let p = KinUtil.Promise<Void>()
+                    let p = Promise<Void>()
                     logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                     var pending = true
                     core.network.dataAtPath("orders/\(order.id)")
@@ -521,7 +521,7 @@ struct Flows {
                     }
                     return p
                 }).then {
-                    KinUtil.Promise<OpenOrder>().signal(order)
+                    Promise<OpenOrder>().signal(order)
                 }
                 
             }.then { order in
@@ -565,9 +565,9 @@ struct Flows {
                     openOrder = nil
                     logInfo("Order already pending or complete: (\(order))")
                     let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-                    _ = KinUtil.attempt(retryIntervals: intervals,
+                    _ = attempt(retryIntervals: intervals,
                                         closure: { attemptNumber -> Promise<Void> in
-                                            let p = KinUtil.Promise<Void>()
+                                            let p = Promise<Void>()
                                             logVerbose("attempt to get spend order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                                             var pending = true
                                             
@@ -656,7 +656,7 @@ struct Flows {
     
     static func nativeEarn(jwt: String,
                             core: Core) -> Promise<String> {
-        let jwtPromise = KinUtil.Promise<String>()
+        let jwtPromise = Promise<String>()
         var jwtConfirmation: String?
         guard let jwtSubmission = try? JSONEncoder().encode(JWTOrderSubmission(jwt: jwt)) else {
             return jwtPromise.signal(EcosystemDataError.encodeError)
@@ -701,12 +701,12 @@ struct Flows {
                     .then { _ in
                         POFlowPromise().signal((memo, order))
                 }
-            }.then { memo, order -> KinUtil.Promise<OpenOrder> in
+            }.then { memo, order -> Promise<OpenOrder> in
                 core.blockchain.stopWatchingForNewPayments(with: memo)
                 let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-                return KinUtil.attempt(retryIntervals: intervals,
+                return attempt(retryIntervals: intervals,
                                        closure: { attemptNumber -> Promise<Void> in
-                                        let p = KinUtil.Promise<Void>()
+                                        let p = Promise<Void>()
                                         logVerbose("attempt to get earn order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                                         var pending = true
                                         core.network.dataAtPath("orders/\(order.id)")
@@ -739,7 +739,7 @@ struct Flows {
                                         }
                                         return p
                 }).then {
-                    KinUtil.Promise<OpenOrder>().signal(order)
+                    Promise<OpenOrder>().signal(order)
                 }
                 
             }.then { order in
@@ -776,9 +776,9 @@ struct Flows {
                     openOrder = nil
                     logInfo("Order already pending or complete: (\(order))")
                     let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-                    _ = KinUtil.attempt(retryIntervals: intervals,
+                    _ = attempt(retryIntervals: intervals,
                                         closure: { attemptNumber -> Promise<Void> in
-                                            let p = KinUtil.Promise<Void>()
+                                            let p = Promise<Void>()
                                             logVerbose("attempt to get earn order with !pending state (and result): (\(attemptNumber)/\(intervals.count + 1))")
                                             var pending = true
                                             
@@ -866,3 +866,13 @@ struct Flows {
     }
     
 }
+
+@available(iOS 9.0, *)
+extension Flows {
+    static func whitelist() -> WhitelistClosure {
+        return { txEnvelope -> (Promise<TransactionEnvelope>) in
+            return Promise<TransactionEnvelope>().signal(txEnvelope)
+        }
+    }
+}
+

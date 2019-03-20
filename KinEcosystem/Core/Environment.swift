@@ -5,15 +5,16 @@
 //
 
 import Foundation
+import KinMigrationModule
 
 public struct EnvironmentProperties: Codable, Equatable {
-    let blockchainURL: String
+    let blockchainURL: URL
     let blockchainPassphrase: String
     let kinIssuer: String
     let marketplaceURL: String
     let webURL: String
     let BIURL: String
-    public init(blockchainURL: String,
+    public init(blockchainURL: URL,
                 blockchainPassphrase: String,
                 kinIssuer: String,
                 marketplaceURL: String,
@@ -50,17 +51,30 @@ public enum Environment {
         }
     }
     
-    public var blockchainURL: String {
+    public var blockchainURL: URL {
         switch self {
         case .playground:
-            return "https://stellar.kinplayground.com"
+            return URL(string: "https://stellar.kinplayground.com")!
         case .production:
-            return "https://horizon-kin-ecosystem.kininfrastructure.com"
+            return URL(string: "https://horizon-kin-ecosystem.kininfrastructure.com")!
         case .beta,
              .test:
-            return "https://horizon-playground.kininfrastructure.com"
+            return URL(string: "https://horizon-playground.kininfrastructure.com")!
         case .custom(let envProps):
             return envProps.blockchainURL
+        }
+    }
+    
+    public var migrationURL: URL {
+        switch self {
+        case .playground,
+             .beta,
+             .test:
+            return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
+        case .production:
+            return URL(string: "https://migration-devplatform-production.developers.kinecosystem.com")!
+        case .custom:
+            fatalError()
         }
     }
     
@@ -142,5 +156,30 @@ public enum Environment {
                                      marketplaceURL: marketplaceURL,
                                      webURL: webURL,
                                      BIURL: BIURL)
+    }
+}
+
+extension Environment {
+    internal var mapToMigrationModuleNetwork: KinMigrationModule.Network {
+        switch self {
+        case .production:
+            return .mainNet
+        case .beta,
+             .playground:
+            return .custom(issuer: kinIssuer, networkId: blockchainPassphrase)
+        case .test:
+            return .testNet
+        case .custom(let properties):
+            return .custom(issuer: properties.kinIssuer, networkId: properties.blockchainPassphrase)
+        }
+    }
+    
+    internal func mapToMigrationModuleServiceProvider() throws -> KinMigrationModule.ServiceProviderProtocol {
+        if case .custom = self {
+            return try CustomServiceProvider(network: mapToMigrationModuleNetwork, migrateBaseURL: migrationURL, nodeURL: properties.blockchainURL)
+        }
+        else {
+            return try ServiceProvider(network: mapToMigrationModuleNetwork, migrateBaseURL: migrationURL)
+        }
     }
 }
