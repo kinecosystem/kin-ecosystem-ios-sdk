@@ -164,9 +164,10 @@ extension Environment {
         switch self {
         case .production:
             return .mainNet
-        case .playground,
-             .beta,
-             .test:
+        case .beta,
+             .playground:
+            return .custom(issuer: kinIssuer, networkId: blockchainPassphrase)
+        case .test:
             return .testNet
         case .custom(let properties):
             return .custom(issuer: properties.kinIssuer, networkId: properties.blockchainPassphrase)

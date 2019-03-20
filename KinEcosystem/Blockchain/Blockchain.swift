@@ -646,6 +646,8 @@ extension KinAccountsProtocol {
     
 }
 
+// note: module goes and migrates through all the accounts in the client!
+
 @available(iOS 9.0, *)
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
@@ -655,8 +657,7 @@ extension Blockchain: KinMigrationManagerDelegate {
     }
     
     public func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
-        //didStartMigration = true
-        //migrationDelegate?.kinMigrationDidStart()
+        // TODO: delegate outside
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
@@ -667,18 +668,13 @@ extension Blockchain: KinMigrationManagerDelegate {
         } catch {
             accountPromise.signal(error)
         }
-//        if didStartMigration {
-//            didStartMigration = false
-//            migrationDelegate?.kinMigrationDidFinish()
-//        }
-        
-        //migrationDelegate?.kinMigrationIsReady()
+        /// TODO: delegate outside - done (in defer)
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {
         logError(error.localizedDescription)
         accountPromise.signal(error)
-        //migrationDelegate?.kinMigration(error: error)
+        // TODO: delegate outside
     }
 }
 
