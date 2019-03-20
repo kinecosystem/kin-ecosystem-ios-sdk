@@ -91,10 +91,10 @@ public enum KinEcosystemError: LocalizedError {
             case .notOnboarded:
                 description = "Blockchain account not onboarded"
             }
-        default:
+        case let KinEcosystemError.unknown(_, error):
             description = "An unknown error has occurred"
+            underlyingError = error
         }
-        
         if let uErr = underlyingError {
             description += "\nUnderlying error: \(uErr.localizedDescription)"
         }
