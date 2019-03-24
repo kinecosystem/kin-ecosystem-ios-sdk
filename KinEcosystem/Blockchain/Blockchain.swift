@@ -169,11 +169,10 @@ class Blockchain: NSObject {
     
     private func startAccount() throws {
         
-        try migrateAccountsIfNeeded()
-        
+        try migrateAccountsExtraDataIfNeeded()
         account = try getOrCreateAccount()
         accountPromise.signal(account!)
-        _ = balance()
+        
     }
     
     /* account finding pririty:
@@ -328,7 +327,7 @@ class Blockchain: NSObject {
         return result
     }
     
-    func migrateAccountsIfNeeded() throws {
+    func migrateAccountsExtraDataIfNeeded() throws {
         
         guard let token = kinAuthToken, let client = client else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         
@@ -392,8 +391,7 @@ class Blockchain: NSObject {
                 self.onboarded = true
             }
             .error { (bError) in
-                if case let KinError.balanceQueryFailed(error) = bError {
-                    if let error = error as? StellarError {
+                    if let error = bError as? KinError {
                         switch error {
                         case .missingAccount:
                             self.watchAccountCreation(timeout: 15.0)
@@ -425,16 +423,10 @@ class Blockchain: NSObject {
                             self.onboardPromise.signal(error)
                             self.onboarded = false
                         }
-                    }
-                    else {
+                    } else {
                         self.onboardPromise.signal(bError)
                         self.onboarded = false
                     }
-                }
-                else {
-                    self.onboardPromise.signal(bError)
-                    self.onboarded = false
-                }
         }
 
         return onboardPromise

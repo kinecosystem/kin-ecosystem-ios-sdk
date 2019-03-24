@@ -16,7 +16,7 @@ extension Kin : KeystoreProvider {
         guard let core = core else {
             throw KinEcosystemError.client(.notStarted, nil)
         }
-        guard isActivated, var account = core.blockchain.account else {
+        guard core.blockchain.onboarded, var account = core.blockchain.account else {
             throw KinEcosystemError.service(.notLoggedIn, nil)
         }
         let result = try account.export(passphrase: password)
