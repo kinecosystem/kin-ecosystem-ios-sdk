@@ -17,6 +17,6 @@ Kin ecosystem mobile sdk for iOS
   s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
   s.swift_version = '4.2'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
-  s.dependency 'KinMigrationModule', '0.0.4'
+  s.dependency 'KinMigrationModule', '0.0.5'
   s.dependency 'MoveKin', '0.1.0'
 end

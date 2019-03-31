@@ -395,27 +395,21 @@ class Blockchain: NSObject {
                         switch error {
                         case .missingAccount:
                             self.watchAccountCreation(timeout: 15.0)
-                                .then {
-                                    account.activate()
-                                }.then { _ in
-                                    Kin.track { try StellarKinTrustlineSetupSucceeded() }
+                                .then { _ in
                                     Kin.track { try WalletCreationSucceeded() }
                                     self.onboardPromise.signal(())
                                     self.onboarded = true
                                 }.error { error in
-                                    Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
                                     self.onboardPromise.signal(error)
                                     self.onboarded = false
                                 }
                             
                         case .missingBalance:
                             account.activate().then { _ in
-                                Kin.track { try StellarKinTrustlineSetupSucceeded() }
                                 Kin.track { try WalletCreationSucceeded() }
                                 self.onboardPromise.signal(())
                                 self.onboarded = true
                             }.error { error in
-                                Kin.track { try StellarKinTrustlineSetupFailed(errorReason: error.localizedDescription) }
                                 self.onboardPromise.signal(error)
                                 self.onboarded = false
                             }
