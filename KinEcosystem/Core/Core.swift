@@ -51,6 +51,13 @@ class Core {
         self.environment = environment
     }
     
+    /*  get blockchain version for current app:
+        applications/:app_id/blockchain_version
+ 
+        get blockchain version and if account needs migration:
+        migration/info/:app_id/:account_address
+    */
+    
     func onboard() -> Promise<Void> {
         
         if onboarded {

@@ -71,6 +71,7 @@ platform :ios do
       git_pull
       sh("npm i")
       sh("npm run build")
+      FileUtils.rm_rf(Dir.glob('gen/swift/client/*'))
       sh("npm run generate")
       FileUtils.cp_r('gen/swift/client/.', '../../kin-ecosystem-ios-sdk/KinEcosystem/BI/client')
       Dir.chdir("gen/swift/client") do

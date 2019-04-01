@@ -70,9 +70,9 @@ public enum Environment {
         case .playground,
              .beta,
              .test:
-            return URL(string: "https://migration-devplatform-playground.developers.kinecosystem.com")!
+            return URL(string: "https://migration-service.kinecosystemtest.com")!
         case .production:
-            return URL(string: "https://migration-devplatform-production.developers.kinecosystem.com")!
+            return URL(string: "https://migration-service.kinmarketplace.com")!
         case .custom:
             fatalError()
         }

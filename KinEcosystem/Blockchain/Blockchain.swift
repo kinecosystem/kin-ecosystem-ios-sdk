@@ -637,6 +637,7 @@ extension KinAccountsProtocol {
 @available(iOS 9.0, *)
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
+        // ask server current block version and if wallet needs migrate
         let promise = Promise<KinVersion>()
         promise.signal(.kinCore)
         return promise
