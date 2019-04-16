@@ -19,6 +19,7 @@ enum EcosystemNetError: Error {
     case unknown
 }
 
+@available(iOS 9.0, *)
 class RestClient {
     
     fileprivate(set) var config: EcosystemConfiguration
@@ -52,6 +53,15 @@ class RestClient {
                 lastToken = newValue
                 UserDefaults.standard.set(tokenString, forKey: KinPreferenceKey.authToken.rawValue)
             }
+        }
+    }
+    
+    var blockchainVersion: String {
+        get {
+            guard let core = Kin.shared.core else {
+                return "2"
+            }
+            return core.blockchain.blockchainVersion
         }
     }
     
@@ -89,11 +99,15 @@ class RestClient {
         
         request.addValue(contentType.rawValue, forHTTPHeaderField: "content-type")
         request.addValue(UUID().uuidString, forHTTPHeaderField: "X-REQUEST-ID")
+        request.addValue(UIDevice.modelName, forHTTPHeaderField: "X-DEVICE-MODEL")
+        request.addValue(SDKVersion, forHTTPHeaderField: "X-SDK-VERSION")
+        request.addValue(blockchainVersion, forHTTPHeaderField: "X-KIN-BLOCKCHAIN-VERSION")
+        request.addValue("apple", forHTTPHeaderField: "X-DEVICE-MANUFACTURER")
+        request.addValue(UIDevice.current.systemName, forHTTPHeaderField: "X-OS")
         if let lang = Locale.preferredLanguages.first {
             request.addValue(lang, forHTTPHeaderField: "Accept-Language")
         }
 
-        
         return p.signal(request)
         
     }

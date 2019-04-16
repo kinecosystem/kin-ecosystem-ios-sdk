@@ -56,6 +56,19 @@ enum TimeoutPolicy {
 @available(iOS 9.0, *)
 class Blockchain: NSObject {
 
+    var lastKnownWalletAddress: String?
+    var versionQuery: (() -> Promise<KinVersion>)?
+    var blockchainVersion: String {
+        get {
+            guard let version = migrationManager?.version else {
+                return "2"
+            }
+            if case .kinCore = version {
+                return "2"
+            }
+            return "3"
+        }
+    }
     fileprivate(set) var account: KinAccountProtocol? {
         didSet {
             if let ac = account {
@@ -74,9 +87,10 @@ class Blockchain: NSObject {
     private var balanceWatcher: BalanceWatchProtocol?
     private var kinAuthToken: AuthToken?
     private var client: KinClientProtocol?
-    private var migrationManager: KinMigrationManager?
+    private(set) var migrationManager: KinMigrationManager?
+    private var startingAddress: String?
     private(set) var onboardInFlight = false
-    var accountPromise = Promise<KinAccountProtocol>()
+    private(set) var accountPromise = Promise<KinAccountProtocol>()
     private var isOnboarding: Bool {
         get {
             var result: Bool!
@@ -135,9 +149,11 @@ class Blockchain: NSObject {
             isOnboarding = false
             guard newValue else {
                 synced(onboardLock) {
+                    lastKnownWalletAddress = nil
                     lastBalance = nil
                     account = nil
                     client = nil
+                    startingAddress = nil
                 }
                 return
             }
@@ -159,79 +175,16 @@ class Blockchain: NSObject {
         self.environment = environment
     }
     
-    func start(with token: AuthToken) throws {
+    func start(with token: AuthToken, publicAddress: String?) throws {
+        startingAddress = publicAddress
         migrationManager = KinMigrationManager(serviceProvider: try environment.mapToMigrationModuleServiceProvider(), appId: try AppId(token.app_id))
         migrationManager!.delegate = self
         kinAuthToken = token
         accountPromise = Promise<KinAccountProtocol>()
-        try migrationManager!.start()
+        try migrationManager!.start(with: publicAddress)
     }
     
-    private func startAccount() throws {
-        
-        try migrateAccountsExtraDataIfNeeded()
-        account = try getOrCreateAccount()
-        accountPromise.signal(account!)
-        
-    }
-    
-    /* account finding pririty:
-     
-    from same kin users,
-        from onboarded
-            last active
-        else
-            last active
-        else
-            create new
-     else
-        create new
-     
-    */
-    func getOrCreateAccount() throws -> KinAccountProtocol {
-        
-        guard let token = kinAuthToken, let client = client else {
-            throw KinEcosystemError.service(.notLoggedIn, nil)
-        }
-        
-        var accounts = [KinAccountProtocol]()
-        
-        // account iteration is currently broken on Accounts
-        for i in 0..<client.accounts.count {
-            if let anAccount = client.accounts[i] {
-                accounts.append(anAccount)
-            }
-        }
-        
-        let candidateAccounts = accounts.filter { anAccount in
-            return anAccount.kinExtraData.kinUserId == token.ecosystem_user_id
-        }
-        
-        guard candidateAccounts.count > 0 else {
-            logVerbose("no accounts found for eco uid \(token.ecosystem_user_id), creating new")
-            return try createNewAccount()
-        }
-        
-        let candidateOnboardedAccounts = candidateAccounts.filter ({ anAccount in
-            return anAccount.kinExtraData.onboarded
-        })
-            
-        if let candidateOnboardedAccount =  candidateOnboardedAccounts.sorted (by: { accountA, accountB in
-                return accountA.kinExtraData.lastActive.compare(accountB.kinExtraData.lastActive) == .orderedAscending
-        }).last {
-            return candidateOnboardedAccount
-        }
-        
-        if let candidateLastActiveAccount =  candidateAccounts.sorted (by: { accountA, accountB in
-            return accountA.kinExtraData.lastActive.compare(accountB.kinExtraData.lastActive) == .orderedAscending
-        }).last {
-            return candidateLastActiveAccount
-        }
-        logVerbose("no onboarded or last active accounts found from accounts of eco uid \(token.ecosystem_user_id) with env \(environment.name), creating new")
-        return try createNewAccount()
-        
-    }
-    
+    // TODO: needs re write with the new iterator
     func accountForImporting(keystore: String, password: String) throws -> KinAccountProtocol {
         
         guard let token = kinAuthToken, let client = client else {
@@ -304,6 +257,7 @@ class Blockchain: NSObject {
     }
     
     func setActiveAccount(_ anAccount: KinAccountProtocol) throws {
+        lastKnownWalletAddress = anAccount.publicAddress
         guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         account = anAccount
         guard var ac = account else {throw KinEcosystemError.client(.internalInconsistency, nil) }
@@ -325,31 +279,6 @@ class Blockchain: NSObject {
         kinExtraData.environment = environment.name
         result.kinExtraData = kinExtraData
         return result
-    }
-    
-    func migrateAccountsExtraDataIfNeeded() throws {
-        
-        guard let token = kinAuthToken, let client = client else { throw KinEcosystemError.service(.notLoggedIn, nil) }
-        
-        var accounts = [KinAccountProtocol]()
-        
-        // account iteration is currently broken on Accounts
-        for i in 0..<client.accounts.count {
-            if let anAccount = client.accounts[i] {
-                accounts.append(anAccount)
-            }
-        }
-        
-        for var anAccount in accounts.filter ({ anAccount in
-            return  anAccount.kinExtraData.user == token.user_id &&
-                anAccount.kinExtraData.environment == environment.name &&
-                anAccount.kinExtraData.kinUserId == nil
-            }) {
-                var kinExtraData = anAccount.kinExtraData
-                kinExtraData.kinUserId = token.ecosystem_user_id
-                anAccount.kinExtraData = kinExtraData
-                logVerbose("migrated wallet for \(kinExtraData.user ?? "nil")")
-        }
     }
     
     func balance() -> Promise<Decimal> {
@@ -637,30 +566,57 @@ extension KinAccountsProtocol {
 @available(iOS 9.0, *)
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
-        // ask server current block version and if wallet needs migrate
-        let promise = Promise<KinVersion>()
-        promise.signal(.kinCore)
-        return promise
+        guard let query = versionQuery else {
+            fatalError("version query closure not set on blockchain object")
+        }
+        return query()
     }
     
     public func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
-        // TODO: delegate outside
+        logInfo("migration started...")
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
-        
+        logInfo("migration manager is ready with client.")
         self.client = client
-        do {
-            try startAccount()
-        } catch {
-            accountPromise.signal(error)
+        
+        if  let address = startingAddress,
+            let addressAccount = client.accounts.makeIterator().first(where: { $0.publicAddress == address }) {
+            do {
+                try setActiveAccount(addressAccount)
+                accountPromise.signal(addressAccount)
+            } catch {
+                accountPromise.signal(error)
+            }
+        } else {
+            do {
+                logInfo("no starting address provided or not found in persisted accounts - creating new")
+                let newAccount = try createNewAccount()
+                try setActiveAccount(newAccount)
+                accountPromise.signal(newAccount)
+            } catch {
+                accountPromise.signal(error)
+            }
+            
         }
         /// TODO: delegate outside - done (in defer)
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {
         logError(error.localizedDescription)
-        accountPromise.signal(error)
+        if case KinMigrationError.invalidPublicAddress = error {
+            kinMigrationManagerNeedsVersion(kinMigrationManager)
+                .then { version in
+                    self.client = kinMigrationManager.kinClient(version: version)
+                    let newAccount = try self.createNewAccount()
+                    self.account = newAccount
+                    self.accountPromise.signal(newAccount)
+            }.error { error in
+                self.accountPromise.signal(error)
+            }
+        } else {
+            accountPromise.signal(error)
+        }
         // TODO: delegate outside
     }
 }

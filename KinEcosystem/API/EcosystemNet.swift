@@ -20,7 +20,7 @@ struct EcosystemConfiguration {
 class EcosystemNet {
     
     var client: RestClient!
-    private var authPromise = Promise<AuthToken>()
+    private var authPromise = Promise<(AuthToken, String?)>()
     private var authLock: Int = 1
     fileprivate var authorized: Bool {
         get {
@@ -52,34 +52,34 @@ class EcosystemNet {
     }
     
     @discardableResult
-    func authorize(jwt: String) -> Promise<AuthToken> {
+    func authorize(jwt: String, lastKnownWalletAddress: String?) -> Promise<(AuthToken, String?)> {
         
-        if authorized {
-            return Promise<AuthToken>().signal(client.authToken!)
+        if authorized && lastKnownWalletAddress != nil {
+            return Promise<(AuthToken, String?)>().signal((client.authToken!, nil))
         }
 
         let sign = SignInData(jwt: jwt, sign_in_type: SignInType.jwt.rawValue)
         guard let data = try? JSONEncoder().encode(sign) else {
-            return Promise<AuthToken>().signal(EcosystemNetError.requestBuild)
+            return Promise<(AuthToken, String?)>().signal(EcosystemNetError.requestBuild)
         }
         
         if isAuthorizing {
             return authPromise
         }
         
-        authPromise = Promise<AuthToken>()
+        authPromise = Promise<(AuthToken, String?)>()
         isAuthorizing = true
         
         client.buildRequest(path: "users", method: .post, body: data)
             .then { request in
                 self.client.dataRequest(request)
             }.then { data in
-                guard let token = try? JSONDecoder().decode(RegisterResponse.self, from: data).auth else {
+                guard let response = try? JSONDecoder().decode(RegisterResponse.self, from: data) else {
                     self.authPromise.signal(EcosystemNetError.responseParse)
                     return
                 }
-                self.client.authToken = token
-                self.authPromise.signal(token)
+                self.client.authToken = response.auth
+                self.authPromise.signal((response.auth, response.user.currentWallet))
             }.error { error in
                 self.authPromise.signal(error)
             }.finally {

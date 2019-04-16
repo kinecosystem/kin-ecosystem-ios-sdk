@@ -49,6 +49,7 @@ class Core {
         self.data = data
         self.blockchain = blockchain
         self.environment = environment
+        self.blockchain.versionQuery = applicationBlockchainVersion
     }
     
     /*  get blockchain version for current app:
@@ -77,13 +78,16 @@ class Core {
             return onboardPromise
         }
         
-        network.authorize(jwt: encoded)
+        network.authorize(jwt: encoded, lastKnownWalletAddress: blockchain.lastKnownWalletAddress)
             
-        .then { auth -> Promise<KinAccountProtocol> in
-            try self.blockchain.start(with: auth)
+        .then { auth, publicAddress -> Promise<(KinAccountProtocol, String?)> in
+            try self.blockchain.start(with: auth, publicAddress: publicAddress)
             return self.blockchain.accountPromise
-        }.then { account -> Promise<KinAccountProtocol> in
-            self.updateWalletAddress(for: account)
+                .then { account in
+                   Promise<(KinAccountProtocol, String?)>().signal((account, publicAddress))
+            }
+        }.then { account, publicAddress -> Promise<KinAccountProtocol> in
+            self.updateOnlineWalletAddressIfNeeded(for: account, lastLocalAddress: publicAddress)
         }.then { account in
             return self.blockchain.onboard()
                 .then { _ in
@@ -92,6 +96,7 @@ class Core {
         }.then {
             self.isOnboarding = false
             self.onboardPromise.signal(())
+            _ = self.blockchain.balance()
         }.error { error in
             self.isOnboarding = false
             self.onboardPromise.signal(error)
@@ -126,31 +131,34 @@ class Core {
             return
         }
         
-        updateWalletAddress(for: account)
-        .then { _ in
-            
-            var data = account.kinExtraData
-            data.backedUp = true
-            data.onboarded = true
-            account.kinExtraData = data
-            
-            completion(nil)
-            
-            _ = self.network.dataAtPath("offers")
-            .then { offersData in
-                self.data.sync(OffersList.self, with: offersData)
-            }.then {
-                self.network.dataAtPath("orders")
-            }.then { ordersData in
-                self.data.sync(OrdersList.self, with: ordersData)
-            }
-        }.error { error in
-           completion(error)
-        }
+//        updateWalletAddress(for: account)
+//        .then { _ in
+//
+//            var data = account.kinExtraData
+//            data.backedUp = true
+//            data.onboarded = true
+//            account.kinExtraData = data
+//
+//            completion(nil)
+//
+//            _ = self.network.dataAtPath("offers")
+//            .then { offersData in
+//                self.data.sync(OffersList.self, with: offersData)
+//            }.then {
+//                self.network.dataAtPath("orders")
+//            }.then { ordersData in
+//                self.data.sync(OrdersList.self, with: ordersData)
+//            }
+//        }.error { error in
+//           completion(error)
+//        }
         
     }
     
-    fileprivate func updateWalletAddress(for account: KinAccountProtocol) -> Promise<KinAccountProtocol> {
+    fileprivate func updateOnlineWalletAddressIfNeeded(for account: KinAccountProtocol, lastLocalAddress: String?) -> Promise<KinAccountProtocol> {
+        guard account.publicAddress != lastLocalAddress else {
+            return Promise<KinAccountProtocol>().signal(account)
+        }
         let p = Promise<KinAccountProtocol>()
         do {
             let data = try JSONEncoder().encode(UserProperties(wallet_address: account.publicAddress))
@@ -170,4 +178,24 @@ class Core {
         
         return p
     }
+    
+    fileprivate func applicationBlockchainVersion() -> Promise<KinVersion> {
+        let p = Promise<KinVersion>()
+        guard let jwt = jwt else {
+            return p.signal(KinEcosystemError.client(.jwtMissing, nil))
+        }
+        guard network.client.authToken != nil else {
+            return p.signal(KinEcosystemError.service(.notLoggedIn, nil))
+        }
+        return network.dataAtPath("applications/\(jwt.appId)/blockchain_version").then { data in
+            guard let versionString = String(data: data, encoding: .utf8),
+                  let num = Int(versionString),
+                  let version = KinVersion(rawValue: num) else {
+                return p.signal(KinEcosystemError.service(.response, nil))
+            }
+            return p.signal(version)
+        }
+    }
+    
+    
 }

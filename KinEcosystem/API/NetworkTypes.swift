@@ -166,9 +166,11 @@ public struct UserStats: Decodable, CustomStringConvertible {
 public struct UserProfile: Decodable {
     var createdDate: Date?
     var stats: UserStats?
+    var currentWallet: String?
     enum UserProfileKeys: String, CodingKey {
         case createdDate = "created_date"
         case stats
+        case currentWallet = "current_wallet"
     }
     public init(from decoder: Decoder) throws {
         let values = try decoder.container(keyedBy: UserProfileKeys.self)
@@ -176,6 +178,7 @@ public struct UserProfile: Decodable {
             createdDate = Iso8601DateFormatter.date(from: createdDateString)
         }
         stats = try values.decodeIfPresent(UserStats.self, forKey: .stats)
+        currentWallet = try values.decodeIfPresent(String.self, forKey: .currentWallet)
     }
 }
 
