@@ -96,7 +96,6 @@ class Core {
         }.then {
             self.isOnboarding = false
             self.onboardPromise.signal(())
-            _ = self.blockchain.balance()
         }.error { error in
             self.isOnboarding = false
             self.onboardPromise.signal(error)
