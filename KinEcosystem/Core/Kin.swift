@@ -220,34 +220,41 @@ public class Kin {
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.onboard().then {
-            core.blockchain.balance()
+        _ = attemptEx(2, closure: { attemptNum -> Promise<Balance> in
+            core.onboard().then {
+                core.blockchain.balance()
+            }.then { balance in
+                Promise<Balance>().signal(Balance(amount: balance))
+            }
+        }) { error -> Promise<Void> in
+            self.recoverByMigratingIfNeeded(from: error)
         }.then(on: DispatchQueue.main) { balance in
-            completion(Balance(amount: balance), nil)
-            }.error { error in
+            completion(balance, nil)
+        }.error { error in
                 let esError: KinEcosystemError
                 switch error {
-                    case KinError.internalInconsistency,
-                         KinError.accountDeleted:
-                        esError = KinEcosystemError.client(.internalInconsistency, error)
-                    case KinError.balanceQueryFailed(let queryError):
-                        switch queryError {
-                        case StellarError.missingAccount:
-                            esError = KinEcosystemError.blockchain(.notFound, error)
-                        case StellarError.missingBalance:
-                            esError = KinEcosystemError.blockchain(.activation, error)
-                        case StellarError.unknownError:
-                            esError = KinEcosystemError.unknown(.unknown, error)
-                        default:
-                            esError = KinEcosystemError.unknown(.unknown, error)
-                        }
+                case KinError.internalInconsistency,
+                     KinError.accountDeleted:
+                    esError = KinEcosystemError.client(.internalInconsistency, error)
+                case KinError.balanceQueryFailed(let queryError):
+                    switch queryError {
+                    case StellarError.missingAccount:
+                        esError = KinEcosystemError.blockchain(.notFound, error)
+                    case StellarError.missingBalance:
+                        esError = KinEcosystemError.blockchain(.activation, error)
+                    case StellarError.unknownError:
+                        esError = KinEcosystemError.unknown(.unknown, error)
                     default:
                         esError = KinEcosystemError.unknown(.unknown, error)
+                    }
+                default:
+                    esError = KinEcosystemError.unknown(.unknown, error)
                 }
                 completion(nil, esError)
-        }.error { error in
-            completion(nil, KinEcosystemError.transform(error))
+            }.error { error in
+                completion(nil, KinEcosystemError.transform(error))
         }
+        
     }
     
     public func addBalanceObserver(with block:@escaping (Balance) -> ()) -> String {
@@ -336,28 +343,32 @@ public class Kin {
             }
             return
         }
-        _ = core.onboard()
-            .then {
-                core.network.dataAtPath("users/exists",
-                                    method: .get,
-                                    contentType: .json,
-                                    parameters: ["user_id" : peer])
-            }.then { data in
-                if  let response = String(data: data, encoding: .utf8),
-                    let ans = Bool(response) {
-                    DispatchQueue.main.async {
-                        handler(ans, nil)
+        _ = attemptEx(2, closure: { attemptNum -> Promise<Bool> in
+            return core.onboard()
+                .then {
+                    core.network.dataAtPath("users/exists",
+                                            method: .get,
+                                            contentType: .json,
+                                            parameters: ["user_id" : peer])
+                }.then { data in
+                    if  let response = String(data: data, encoding: .utf8),
+                        let ans = Bool(response) {
+                        return Promise<Bool>().signal(ans)
                     }
-                } else {
-                    DispatchQueue.main.async {
-                        handler(nil, KinEcosystemError.service(.response, nil))
-                    }
+                    return Promise<Bool>().signal(KinEcosystemError.service(.response, nil))
                 }
-            }.error { error in
-                DispatchQueue.main.async {
-                    handler(nil, KinEcosystemError.transform(error))
-                }
+        }) { error -> Promise<Void> in
+            self.recoverByMigratingIfNeeded(from: error)
+        }.then { ans in
+            DispatchQueue.main.async {
+                handler(ans, nil)
+            }
+        }.error { error in
+            DispatchQueue.main.async {
+                handler(nil, KinEcosystemError.transform(error))
+            }
         }
+        
     }
     
     public func payToUser(offerJWT: String, completion: @escaping KinCallback) -> Bool {
@@ -371,14 +382,19 @@ public class Kin {
             return false
         }
         defer {
-            core.onboard()
-            .then {
-                Flows.nativeSpend(jwt: offerJWT, core: core)
+            _ = attemptEx(2, closure: { attemptNum -> Promise<String> in
+                return core.onboard()
+                    .then {
+                        Flows.nativeSpend(jwt: offerJWT, core: core)
+                }
+            }) { error in
+                self.recoverByMigratingIfNeeded(from: error)
             }.then { jwt in
-                completion(jwt, nil)
+                    completion(jwt, nil)
             }.error { error in
-                completion(nil, KinEcosystemError.transform(error))
+                    completion(nil, KinEcosystemError.transform(error))
             }
+            
         }
         return true
     }
@@ -390,9 +406,13 @@ public class Kin {
             return false
         }
         defer {
-            core.onboard()
-            .then {
-                Flows.nativeEarn(jwt: offerJWT, core: core)
+            _ = attemptEx(2, closure: { attemptNum -> Promise<String> in
+                core.onboard()
+                    .then {
+                        Flows.nativeEarn(jwt: offerJWT, core: core)
+                }
+            }) { error -> Promise<Void> in
+               self.recoverByMigratingIfNeeded(from: error)
             }.then { jwt in
                 completion(jwt, nil)
             }.error { error in
@@ -408,36 +428,44 @@ public class Kin {
             completion(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.onboard()
-        .then { [weak self] (_) -> Promise<Void> in
-            guard let this = self else {
-                return Promise<Void>().signal(KinError.internalInconsistency)
-            }
-            return this.updateData(with: OrdersList.self, from: "orders")
-        }.then {
-                core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
-                    guard let order = orders.first else {
-                        let responseError = ResponseError(code: 4043, error: "NotFound", message: "Order not found")
-                        completion(nil, KinEcosystemError.service(.response, responseError))
-                        return
-                    }
-                    switch order.orderStatus {
-                    case .pending,
-                         .delayed:
-                       completion(.pending, nil)
-                    case .completed:
-                        guard let jwt = (order.result as? JWTConfirmation)?.jwt else {
-                            completion(nil, KinEcosystemError.client(.internalInconsistency, nil))
+        _ = attemptEx(2, closure: { attemptNum -> Promise<ExternalOrderStatus> in
+            let p = Promise<ExternalOrderStatus>()
+            _ = core.onboard()
+                .then {
+                    self.updateData(with: OrdersList.self, from: "orders")
+                }.then {
+                    core.data.queryObjects(of: Order.self, with: NSPredicate(with: ["offer_id":offerID]), queryBlock: { orders in
+                        guard let order = orders.first else {
+                            let responseError = ResponseError(code: 4043, error: "NotFound", message: "Order not found")
+                            p.signal(KinEcosystemError.service(.response, responseError))
                             return
                         }
-                        completion(.completed(jwt), nil)
-                    case .failed:
-                        completion(.failed, nil)
+                        switch order.orderStatus {
+                        case .pending,
+                             .delayed:
+                            p.signal(.pending)
+                        case .completed:
+                            guard let jwt = (order.result as? JWTConfirmation)?.jwt else {
+                                p.signal(KinEcosystemError.client(.internalInconsistency, nil))
+                                break
+                            }
+                            p.signal(.completed(jwt))
+                        case .failed:
+                            p.signal(.failed)
+                        }
+                    }).error { error in
+                        p.signal(error)
                     }
-                })
+            }
+            return p
+        }) { error -> Promise<Void> in
+            self.recoverByMigratingIfNeeded(from: error)
+        }.then { status in
+             completion(status, nil)
         }.error { error in
-                completion(nil, KinEcosystemError.transform(error))
+             completion(nil, KinEcosystemError.transform(error))
         }
+        
     }
     
     public func setLogLevel(_ level: LogLevel) {
@@ -490,16 +518,24 @@ public class Kin {
             handler(nil, KinEcosystemError.client(.notStarted, nil))
             return
         }
-        core.onboard()
-        .then {
-            core.network.objectAtPath("users/me", type: UserProfile.self)
-        }.then(on: DispatchQueue.main) { profile in
-            handler(profile.stats, nil)
+        
+        _ = attemptEx(2, closure: { attemptNum -> Promise<UserStats?> in
+            return core.onboard()
+                .then {
+                    core.network.objectAtPath("users/me", type: UserProfile.self)
+                }.then { profile in
+                    Promise<UserStats?>().signal(profile.stats)
+                }
+        }) { error -> Promise<Void> in
+            self.recoverByMigratingIfNeeded(from: error)
+        }.then(on: DispatchQueue.main) { stats in
+            handler(stats, nil)
         }.error { error in
             DispatchQueue.main.async {
-               handler(nil, KinEcosystemError.transform(error))
+                handler(nil, KinEcosystemError.transform(error))
             }
         }
+        
     }
     
     func prepareLogin(_ shouldLogout: Bool, jwt: JWTObject) -> Promise<Void> {
@@ -561,6 +597,21 @@ public class Kin {
                 Kin.track { try GeneralEcosystemSDKError(errorReason: errorDesc) }
         }
     }
+    
+    fileprivate func recoverByMigratingIfNeeded(from error: Error) -> Promise<Void> {
+        if case let KinEcosystemError.service(.response, response) = KinEcosystemError.transform(error),
+            let responseError = response as? ResponseError,
+            responseError.code == 4101,
+            let core = core {
+            
+            core.blockchain.offboard()
+            
+            return core.onboard()
+        }
+        return Promise<Void>().signal(error)
+    }
+    
+ 
     
     fileprivate func setupBIProxies() {
         EventsStore.shared.userProxy = UserProxy(balance: { [weak self] () -> (Double) in

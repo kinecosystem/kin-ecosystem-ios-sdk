@@ -577,7 +577,7 @@ extension Blockchain: KinMigrationManagerDelegate {
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
-        logInfo("migration manager is ready with client.")
+        logInfo("migration manager is ready with client, version: \(kinMigrationManager.version?.rawValue ?? 0)")
         self.client = client
         
         if  let address = startingAddress,

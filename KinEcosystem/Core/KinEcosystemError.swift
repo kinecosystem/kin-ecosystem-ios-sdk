@@ -103,6 +103,9 @@ public enum KinEcosystemError: LocalizedError {
     }
     
     public static func transform(_ rawError: Error) -> Error {
+        guard (rawError is KinEcosystemError) == false else {
+            return rawError
+        }
         if rawError is ResponseError {
             return KinEcosystemError.service(.response, rawError)
         } else if case KinError.insufficientFunds = rawError {
