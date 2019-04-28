@@ -364,6 +364,25 @@ class Blockchain: NSObject {
         guard let account = account else { return Promise<TransactionId>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
         return account.sendTransaction(to: recipient, kin: kin, memo: memo, fee: 0, whitelist: whitelist)
     }
+    
+    func generateTransactionData(to recipient: String, kin: Decimal, memo: String?, fee: Stroop) -> Promise<Data> {
+        guard let account = account else { return Promise<Data>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
+        let p = Promise<Data>()
+        _ = account.sendTransaction(to: recipient, kin: kin, memo: memo, fee: fee) { envelope -> (Promise<(TransactionEnvelope, Bool)>) in
+            do {
+                let wlEnvelope = EcosystemWhitelistEnvelope(transactionEnvelope: envelope)
+                let encoded = try JSONEncoder().encode(wlEnvelope)
+                p.signal(encoded)
+            } catch {
+                p.signal(error)
+            }
+            return Promise<(TransactionEnvelope, Bool)>().signal((envelope, false))
+        }.error { error in
+              p.signal(error)
+        }
+        return p
+        
+    }
 
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
         guard paymentsWatcher == nil else {
@@ -599,7 +618,6 @@ extension Blockchain: KinMigrationManagerDelegate {
             }
             
         }
-        /// TODO: delegate outside - done (in defer)
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {
@@ -617,7 +635,6 @@ extension Blockchain: KinMigrationManagerDelegate {
         } else {
             accountPromise.signal(error)
         }
-        // TODO: delegate outside
     }
 }
 
@@ -675,3 +692,6 @@ extension Blockchain: KinMigrationBIDelegate {
         //Kin.track { try MigrationRequestAccountMigrationFailed(errorCode: "", errorMessage: error.localizedDescription, errorReason: "", publicAddress: publicAddress) }
     }
 }
+
+
+

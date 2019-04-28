@@ -30,6 +30,7 @@ public enum KinBlockchainErrorCode: Int {
     case txFailed               = 6005
     case invalidPassword        = 6006
     case notOnboarded           = 6007
+    case operationNotSupported  = 6008
 }
 
 public enum KinUnknownErrorCode: Int {
@@ -90,6 +91,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "The provided password for this account is incorrect"
             case .notOnboarded:
                 description = "Blockchain account not onboarded"
+            case .operationNotSupported:
+                description = "Operation not supported on this blockchain version"
             }
         case let KinEcosystemError.unknown(_, error):
             description = "An unknown error has occurred"

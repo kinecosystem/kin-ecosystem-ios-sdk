@@ -7,7 +7,7 @@
 //
 
 import Foundation
-
+import KinMigrationModule
 
 class ResponseError: Codable, LocalizedError {
     var error: String
@@ -203,5 +203,27 @@ public struct JWTObject {
         appId = id
         deviceId = device
         userId = user
+    }
+}
+
+public struct EcosystemWhitelistEnvelope: Encodable {
+    
+    public let transactionEnvelope: TransactionEnvelope
+    
+    
+    public init(transactionEnvelope: TransactionEnvelope) {
+        self.transactionEnvelope = transactionEnvelope
+    }
+    
+    enum CodingKeys: String, CodingKey {
+        case transaction
+    }
+    
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.container(keyedBy: CodingKeys.self)
+        
+        let transactionEnvelopeData = try XDREncoder.encode(transactionEnvelope)
+        try container.encode(transactionEnvelopeData, forKey: .transaction)
+        
     }
 }

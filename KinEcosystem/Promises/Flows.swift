@@ -52,7 +52,7 @@ struct Flows {
                         Promise<(String, OpenOrder)>().signal((htmlResult, order))
                 }
             }.then(on: .main) { htmlResult, order -> SOPFlowPromise in
-                guard let appId = core.network.client.authToken?.app_id else {
+                guard let appId = core.jwt?.appId else {
                     return SOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
                 let memo = PaymentMemoIdentifier(appId: appId,
@@ -230,23 +230,42 @@ struct Flows {
                         
                 }
             }.then { recipient, amount, order -> SDOPFlowPromise in
-                guard let appId = core.network.client.authToken?.app_id else {
+                guard let appId = core.jwt?.appId else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
                 let memo = PaymentMemoIdentifier(appId: appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
-                return core.network.dataAtPath("orders/\(order.id)",
-                    method: .post)
-                    .then { data in
-                        Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
-                        return core.data.save(Order.self, with: data)
-                    }.then {
-                        canCancelOrder = false
-                        logVerbose("Submitted order \(order.id)")
-                        if let p = submissionPromise {
-                            p.signal(())
-                        }
-                        return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                
+                if let version = core.blockchain.migrationManager?.version,
+                    case .kinSDK = version {
+                    return core.blockchain.generateTransactionData(to: recipient, kin: amount, memo: memo.description, fee: 0)
+                        .then { data in
+                            return core.network.dataAtPath("orders/\(order.id)", method: .post)
+                                .then { data in
+                                    Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
+                                    return core.data.save(Order.self, with: data)
+                                }.then {
+                                    canCancelOrder = false
+                                    logVerbose("Submitted order \(order.id)")
+                                    if let p = submissionPromise {
+                                        p.signal(())
+                                    }
+                                    return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                            }
+                    }
+                } else {
+                    return core.network.dataAtPath("orders/\(order.id)", method: .post)
+                        .then { data in
+                            Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
+                            return core.data.save(Order.self, with: data)
+                        }.then {
+                            canCancelOrder = false
+                            logVerbose("Submitted order \(order.id)")
+                            if let p = submissionPromise {
+                                p.signal(())
+                            }
+                            return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                    }
                 }
             }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
@@ -441,20 +460,36 @@ struct Flows {
                 }
             }
             .then { recipient, amount, order -> SDOPFlowPromise in
-                guard let appId = core.network.client.authToken?.app_id else {
+                guard let appId = core.jwt?.appId else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
                 let memo = PaymentMemoIdentifier(appId: appId,
                                                  id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
-                return core.network.dataAtPath("orders/\(order.id)", method: .post)
-                    .then { data in
-                        Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id, origin: .external) }
-                        return core.data.save(Order.self, with: data)
-                    }.then {
-                        canCancelOrder = false
-                        logVerbose("Submitted order \(order.id)")
-                        return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                if let version = core.blockchain.migrationManager?.version,
+                    case .kinSDK = version {
+                    return core.blockchain.generateTransactionData(to: recipient, kin: amount, memo: memo.description, fee: 0)
+                        .then { data in
+                            core.network.dataAtPath("orders/\(order.id)", method: .post, body: data)
+                                .then { data in
+                                    Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id, origin: .external) }
+                                    return core.data.save(Order.self, with: data)
+                                }.then {
+                                    canCancelOrder = false
+                                    logVerbose("Submitted order \(order.id)")
+                                    return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                            }
+                    }
+                } else {
+                    return core.network.dataAtPath("orders/\(order.id)", method: .post)
+                        .then { data in
+                            Kin.track { try SpendOrderCompletionSubmitted(isNative: true, offerID: order.offer_id, orderID: order.id, origin: .external) }
+                            return core.data.save(Order.self, with: data)
+                        }.then {
+                            canCancelOrder = false
+                            logVerbose("Submitted order \(order.id)")
+                            return SDOPFlowPromise().signal((recipient, amount, order, memo))
+                    }
                 }
             }.then { recipient, amount, order, memo -> SDOPFlowPromise in
                 return core.data.changeObjects(of: Offer.self,
@@ -469,6 +504,10 @@ struct Flows {
                 }
             }.then { recipient, amount, order, memo -> POFlowPromise in
                 Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
+                if let version = core.blockchain.migrationManager?.version,
+                    case .kinSDK = version {
+                    return POFlowPromise().signal((memo, order))
+                }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
                                            memo: memo.description,
@@ -681,7 +720,7 @@ struct Flows {
                 return SDOFlowPromise().signal((recipient, Decimal(order.amount), order))
                 
             }.then { recipient, amount, order -> POFlowPromise in
-                guard let appId = core.network.client.authToken?.app_id else {
+                guard let appId = core.jwt?.appId else {
                     return POFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
                 let memo = PaymentMemoIdentifier(appId: appId,
@@ -870,8 +909,8 @@ struct Flows {
 @available(iOS 9.0, *)
 extension Flows {
     static func whitelist() -> WhitelistClosure {
-        return { txEnvelope -> (Promise<TransactionEnvelope>) in
-            return Promise<TransactionEnvelope>().signal(txEnvelope)
+        return { txEnvelope -> (Promise<(TransactionEnvelope, Bool)>) in
+            return Promise<(TransactionEnvelope, Bool)>().signal((txEnvelope, true))
         }
     }
 }
