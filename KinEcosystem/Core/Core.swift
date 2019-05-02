@@ -117,41 +117,45 @@ class Core {
     
     func importAccount(keystore: String, password: String, completion: @escaping (Error?) -> ()) {
         
-        guard network.client.authToken != nil else {
+        guard   let jwt = jwt, let version = blockchain.migrationManager?.version,
+                network.client.authToken != nil else {
             completion(KinEcosystemError.service(.notLoggedIn, nil))
             return
         }
-        var account: KinAccountProtocol!
-        
-        do {
-            account = try blockchain.accountForImporting(keystore: keystore, password: password)
-        } catch {
-            completion(error)
-            return
+        guard let data = keystore.data(using: .utf8),
+            let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
+                completion(KinEcosystemError.client(.accountReadFailed, nil))
+                return
         }
         
-//        updateWalletAddress(for: account)
-//        .then { _ in
-//
-//            var data = account.kinExtraData
-//            data.backedUp = true
-//            data.onboarded = true
-//            account.kinExtraData = data
-//
-//            completion(nil)
-//
-//            _ = self.network.dataAtPath("offers")
-//            .then { offersData in
-//                self.data.sync(OffersList.self, with: offersData)
-//            }.then {
-//                self.network.dataAtPath("orders")
-//            }.then { ordersData in
-//                self.data.sync(OrdersList.self, with: ordersData)
-//            }
-//        }.error { error in
-//           completion(error)
-//        }
+        network.objectAtPath("migration/info/\(jwt.appId)/\(accountData.pkey)", type: AccountMigrationInfo.self)
+            .then { info in
+                Kin.track { try MigrationStatusCheckSucceeded(blockchainVersion: version == .kinCore ? .the2 : .the3, isRestorable: info.restoreAllowed ? .yes : .no, publicAddress: accountData.pkey, shouldMigrate: info.shouldMigrate ? .yes : .no) }
+                guard info.restoreAllowed else {
+                    completion(KinEcosystemError.blockchain(.restoreNotAllowed, nil))
+                    return
+                }
+                self.blockchain.importAccount(info: (keystore, password), byMigratingFirst: info.shouldMigrate)
+                .then { _ in
+                    self.blockchain.accountPromise
+                }.then { account in
+                    self.updateOnlineWalletAddressIfNeeded(for: account, lastLocalAddress: nil)
+                }.then { account in
+                    var anAccount = account
+                    var data = anAccount.kinExtraData
+                    data.backedUp = true
+                    data.onboarded = true
+                    anAccount.kinExtraData = data
+                    completion(nil)
+                }.error { error in
+                     completion(KinEcosystemError.transform(error))
+                }
+            }.error { error in
+                Kin.track { try MigrationStatusCheckFailed(errorReason: error.localizedDescription, publicAddress: accountData.pkey) }
+                completion(KinEcosystemError.transform(error))
+        }
         
+
     }
     
     fileprivate func updateOnlineWalletAddressIfNeeded(for account: KinAccountProtocol, lastLocalAddress: String?) -> Promise<KinAccountProtocol> {
@@ -186,14 +190,16 @@ class Core {
         guard network.client.authToken != nil else {
             return p.signal(KinEcosystemError.service(.notLoggedIn, nil))
         }
-        return network.dataAtPath("applications/\(jwt.appId)/blockchain_version").then { data in
+        network.dataAtPath("applications/\(jwt.appId)/blockchain_version").then { data in
             guard let versionString = String(data: data, encoding: .utf8),
-                  let num = Int(versionString),
-                  let version = KinVersion(rawValue: num) else {
-                return p.signal(KinEcosystemError.service(.response, nil))
+                let num = Int(versionString),
+                let version = KinVersion(rawValue: num) else {
+                    p.signal(KinEcosystemError.service(.response, nil))
+                    return
             }
-            return p.signal(version)
+            p.signal(version)
         }
+        return p
     }
     
     

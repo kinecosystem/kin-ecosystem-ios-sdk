@@ -28,28 +28,30 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// migration process has been completed all events in the process has been succeeded
+struct MigrationAccountCompleted: KBIEvent {
+    let blockchainVersion: KBITypes.BlockchainVersion
     let client: Client
     let common: Common
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let publicAddress: String
     let user: User
 
     enum CodingKeys: String, CodingKey {
+        case blockchainVersion = "blockchain_version"
         case client, common
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case publicAddress = "public_address"
         case user
     }
 }
 
 
 
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+extension MigrationAccountCompleted {
+    init(blockchainVersion: KBITypes.BlockchainVersion, publicAddress: String) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +64,10 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
-        eventType = "analytics"
+        eventName = "migration_account_completed"
+        eventType = "business"
 
-        self.exitType = exitType
+        self.blockchainVersion = blockchainVersion
+        self.publicAddress = publicAddress
     }
 }

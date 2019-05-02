@@ -55,7 +55,7 @@ class SettingsViewController: UITableViewController {
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {
-            Kin.track { try SettingsBackButtonTapped() }
+            Kin.track { try SettingsBackButtonTapped(exitType: .xButton) }
         }
     }
     

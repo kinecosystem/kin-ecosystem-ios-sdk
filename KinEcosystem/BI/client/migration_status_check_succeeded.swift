@@ -28,28 +28,36 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// Asking the server for account status - succeeded
+struct MigrationStatusCheckSucceeded: KBIEvent {
+    let blockchainVersion: KBITypes.BlockchainVersion
     let client: Client
     let common: Common
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let isRestorable: KBITypes.IsRestorable
+    let publicAddress: String
+    let shouldMigrate: KBITypes.IsRestorable
     let user: User
 
     enum CodingKeys: String, CodingKey {
+        case blockchainVersion = "blockchain_version"
         case client, common
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case isRestorable = "is_restorable"
+        case publicAddress = "public_address"
+        case shouldMigrate = "should_migrate"
         case user
     }
 }
 
 
 
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+
+
+extension MigrationStatusCheckSucceeded {
+    init(blockchainVersion: KBITypes.BlockchainVersion, isRestorable: KBITypes.IsRestorable, publicAddress: String, shouldMigrate: KBITypes.IsRestorable) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +70,12 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
-        eventType = "analytics"
+        eventName = "migration_status_check_succeeded"
+        eventType = "log"
 
-        self.exitType = exitType
+        self.blockchainVersion = blockchainVersion
+        self.isRestorable = isRestorable
+        self.publicAddress = publicAddress
+        self.shouldMigrate = shouldMigrate
     }
 }

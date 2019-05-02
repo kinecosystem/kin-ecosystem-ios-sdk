@@ -28,28 +28,36 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// User click on "call to action" button on  page in new UI
+struct ContinueButtonTapped: KBIEvent {
     let client: Client
     let common: Common
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let pageContinue: KBITypes.PageContinue
+    let pageName: KBITypes.PageName
+    let settingOption: KBITypes.SettingOption
     let user: User
 
     enum CodingKeys: String, CodingKey {
         case client, common
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case pageContinue = "page_continue"
+        case pageName = "page_name"
+        case settingOption = "setting_option"
         case user
     }
 }
 
 
 
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+
+
+
+
+extension ContinueButtonTapped {
+    init(pageContinue: KBITypes.PageContinue, pageName: KBITypes.PageName, settingOption: KBITypes.SettingOption) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +70,11 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
+        eventName = "continue_button_tapped"
         eventType = "analytics"
 
-        self.exitType = exitType
+        self.pageContinue = pageContinue
+        self.pageName = pageName
+        self.settingOption = settingOption
     }
 }

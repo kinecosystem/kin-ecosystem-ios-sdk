@@ -598,7 +598,7 @@ public class Kin {
         }
     }
     
-    fileprivate func recoverByMigratingIfNeeded(from error: Error) -> Promise<Void> {
+    func recoverByMigratingIfNeeded(from error: Error) -> Promise<Void> {
         if case let KinEcosystemError.service(.response, response) = KinEcosystemError.transform(error),
             let responseError = response as? ResponseError,
             responseError.code == 4101,

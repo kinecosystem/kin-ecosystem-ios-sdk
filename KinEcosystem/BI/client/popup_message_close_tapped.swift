@@ -28,8 +28,8 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// User exit on boarding page by tapping on background app or  X  or android navigator
+struct PopupMessageCloseTapped: KBIEvent {
     let client: Client
     let common: Common
     let eventName: String
@@ -48,7 +48,7 @@ struct SettingsBackButtonTapped: KBIEvent {
 
 
 
-extension SettingsBackButtonTapped {
+extension PopupMessageCloseTapped {
     init(exitType: KBITypes.ExitType) throws {
         let es = EventsStore.shared
 
@@ -62,7 +62,7 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
+        eventName = "popup_message_close_tapped"
         eventType = "analytics"
 
         self.exitType = exitType

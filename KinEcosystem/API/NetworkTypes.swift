@@ -117,6 +117,17 @@ struct JWTOrderSubmission: Encodable {
     var jwt: String
 }
 
+struct AccountMigrationInfo: Decodable {
+    var shouldMigrate: Bool
+    var applicationBlockchainVersion: String
+    var restoreAllowed: Bool
+    enum CodingKeys: String, CodingKey {
+        case shouldMigrate = "should_migrate"
+        case applicationBlockchainVersion = "app_blockchain_version"
+        case restoreAllowed = "restore_allowed"
+    }
+}
+
 public struct UserStats: Decodable, CustomStringConvertible {
     public var description: String {
         return """

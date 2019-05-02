@@ -28,28 +28,27 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// Main_page offers view -once we receive a feedback from the server regarding the available
+/// offers and present them in new UI
+struct OffersPageViewed: KBIEvent {
     let client: Client
     let common: Common
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let isEmpty: Bool
     let user: User
 
     enum CodingKeys: String, CodingKey {
         case client, common
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case isEmpty = "is_empty"
         case user
     }
 }
 
-
-
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+extension OffersPageViewed {
+    init(isEmpty: Bool) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +61,9 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
+        eventName = "offers_page_viewed"
         eventType = "analytics"
 
-        self.exitType = exitType
+        self.isEmpty = isEmpty
     }
 }

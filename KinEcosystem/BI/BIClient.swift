@@ -79,7 +79,7 @@ class BIClient {
                     return
                 }
             }.resume()
-            group.wait()
+            group.wait(timeout: .now() + 20.0)
             if success {
                 do {
                     try this.fm.removeItem(at: url)

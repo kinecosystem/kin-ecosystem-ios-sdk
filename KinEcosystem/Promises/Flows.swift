@@ -39,9 +39,14 @@ struct Flows {
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
         
-        core.network.objectAtPath("offers/\(offerId)/orders",
-            type: OpenOrder.self,
-            method: .post)
+        attemptEx(2, closure: { attempNum -> Promise<OpenOrder> in
+            core.network.objectAtPath("offers/\(offerId)/orders",
+                type: OpenOrder.self,
+                method: .post)
+        }) { error -> Promise<Void> in
+            Kin.shared.recoverByMigratingIfNeeded(from: error)
+        }
+
             .then { order -> Promise<(String, OpenOrder)> in
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
                                                 object: order.id)
@@ -157,7 +162,7 @@ struct Flows {
                         }.finally {
                             group.leave()
                     }
-                    group.wait()
+                    group.wait(timeout: .now() + 5.0)
                 }
                 openOrder = nil
             }.finally {
@@ -199,9 +204,15 @@ struct Flows {
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
         Kin.track { try SpendOrderCreationRequested(isNative: false, offerID: offerId, origin: .marketplace) }
-        core.network.objectAtPath("offers/\(offerId)/orders",
-            type: OpenOrder.self,
-            method: .post)
+        
+        attemptEx(2, closure: { attempNum -> Promise<OpenOrder> in
+            core.network.objectAtPath("offers/\(offerId)/orders",
+                type: OpenOrder.self,
+                method: .post)
+        }) { error -> Promise<Void> in
+            Kin.shared.recoverByMigratingIfNeeded(from: error)
+        }
+
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
@@ -240,7 +251,7 @@ struct Flows {
                     case .kinSDK = version {
                     return core.blockchain.generateTransactionData(to: recipient, kin: amount, memo: memo.description, fee: 0)
                         .then { data in
-                            return core.network.dataAtPath("orders/\(order.id)", method: .post)
+                            return core.network.dataAtPath("orders/\(order.id)", method: .post, body: data)
                                 .then { data in
                                     Kin.track { try SpendOrderCompletionSubmitted(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
                                     return core.data.save(Order.self, with: data)
@@ -280,6 +291,10 @@ struct Flows {
                 }
             }.then { recipient, amount, order, memo -> POFlowPromise in
                 Kin.track { try SpendTransactionBroadcastToBlockchainSubmitted(offerID: order.offer_id, orderID: order.id) }
+                if let version = core.blockchain.migrationManager?.version,
+                    case .kinSDK = version {
+                    return POFlowPromise().signal((memo, order))
+                }
                 return core.blockchain.pay(to: recipient,
                                            kin: amount,
                                            memo: memo.description,
@@ -381,7 +396,7 @@ struct Flows {
                         }.finally {
                             group.leave()
                     }
-                    group.wait()
+                    group.wait(timeout: .now() + 5.0)
                 }
                 openOrder = nil
                 if let subp = submissionPromise {
@@ -436,10 +451,17 @@ struct Flows {
         var canCancelOrder = true
         let prevBalance = core.blockchain.lastBalance
         Kin.track { try SpendOrderCreationRequested(isNative: true, offerID: "", origin: .external) }
-        core.network.objectAtPath("offers/external/orders",
-                                  type: OpenOrder.self,
-                                  method: .post,
-                                  body: jwtSubmission)
+        
+        attemptEx(2, closure: { attempNum -> Promise<OpenOrder> in
+            core.network.objectAtPath("offers/external/orders",
+                                      type: OpenOrder.self,
+                                      method: .post,
+                                      body: jwtSubmission)
+        }) { error -> Promise<Void> in
+            Kin.shared.recoverByMigratingIfNeeded(from: error)
+        }
+        
+        
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
@@ -705,10 +727,17 @@ struct Flows {
         let prevBalance = core.blockchain.lastBalance
         // Todo: can't infer amount and id
         Kin.track { try EarnOrderCreationRequested(kinAmount: 0, offerID: "", offerType: .external, origin: .external) }
-        core.network.objectAtPath("offers/external/orders",
-                                  type: OpenOrder.self,
-                                  method: .post,
-                                  body: jwtSubmission)
+        
+        attemptEx(2, closure: { attempNum -> Promise<OpenOrder> in
+            core.network.objectAtPath("offers/external/orders",
+                                      type: OpenOrder.self,
+                                      method: .post,
+                                      body: jwtSubmission)
+        }) { error -> Promise<Void> in
+            Kin.shared.recoverByMigratingIfNeeded(from: error)
+        }
+        
+        
             .then { order -> SDOFlowPromise in
                 openOrder = order
                 logVerbose("created order \(order.id)")
@@ -909,8 +938,8 @@ struct Flows {
 @available(iOS 9.0, *)
 extension Flows {
     static func whitelist() -> WhitelistClosure {
-        return { txEnvelope -> (Promise<(TransactionEnvelope, Bool)>) in
-            return Promise<(TransactionEnvelope, Bool)>().signal((txEnvelope, true))
+        return { txEnvelope -> (Promise<TransactionEnvelope?>) in
+            return Promise<TransactionEnvelope?>().signal(txEnvelope)
         }
     }
 }

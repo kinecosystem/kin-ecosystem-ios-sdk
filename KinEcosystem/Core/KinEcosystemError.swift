@@ -13,6 +13,7 @@ public enum KinClientErrorCode: Int {
     case badRequest             = 4002
     case internalInconsistency  = 4003
     case jwtMissing             = 4004
+    case accountReadFailed      = 4005
 }
 
 public enum KinServiceErrorCode: Int {
@@ -31,6 +32,7 @@ public enum KinBlockchainErrorCode: Int {
     case invalidPassword        = 6006
     case notOnboarded           = 6007
     case operationNotSupported  = 6008
+    case restoreNotAllowed      = 6009
 }
 
 public enum KinUnknownErrorCode: Int {
@@ -61,6 +63,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "Ecosystem SDK encountered an unexpected error"
             case .jwtMissing:
                 description = "JWT is missing while trying to perform the request. Did you login using a valid jwt?"
+            case .accountReadFailed:
+                description = "The account data could not be parsed"
             }
         case let KinEcosystemError.service(errorCode, error):
             underlyingError = error
@@ -93,6 +97,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "Blockchain account not onboarded"
             case .operationNotSupported:
                 description = "Operation not supported on this blockchain version"
+            case .restoreNotAllowed:
+                description = "This wallet belongs to another app and cannot be restored on this app"
             }
         case let KinEcosystemError.unknown(_, error):
             description = "An unknown error has occurred"

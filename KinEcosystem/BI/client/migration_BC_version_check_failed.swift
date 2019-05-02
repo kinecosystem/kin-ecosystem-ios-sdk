@@ -28,28 +28,32 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// Asking the server for the current blockchain version for the account- failed
+struct MigrationBCVersionCheckFailed: KBIEvent {
+    let blockchainVersion: KBITypes.BlockchainVersion
     let client: Client
     let common: Common
+    let errorReason: String
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let publicAddress: String
     let user: User
 
     enum CodingKeys: String, CodingKey {
+        case blockchainVersion = "blockchain_version"
         case client, common
+        case errorReason = "error_reason"
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case publicAddress = "public_address"
         case user
     }
 }
 
 
 
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+extension MigrationBCVersionCheckFailed {
+    init(blockchainVersion: KBITypes.BlockchainVersion, errorReason: String, publicAddress: String) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +66,11 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
-        eventType = "analytics"
+        eventName = "migration_BC_version_check_failed"
+        eventType = "log"
 
-        self.exitType = exitType
+        self.blockchainVersion = blockchainVersion
+        self.errorReason = errorReason
+        self.publicAddress = publicAddress
     }
 }

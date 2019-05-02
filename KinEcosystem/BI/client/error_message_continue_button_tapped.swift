@@ -28,28 +28,24 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// User click on "call to action" button on error_message to continue the funnel
+struct ErrorMessageContinueButtonTapped: KBIEvent {
     let client: Client
     let common: Common
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
     let user: User
 
     enum CodingKeys: String, CodingKey {
         case client, common
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
         case user
     }
 }
 
-
-
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+extension ErrorMessageContinueButtonTapped {
+    init() throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +58,9 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
+        eventName = "error_message_continue_button_tapped"
         eventType = "analytics"
 
-        self.exitType = exitType
+
     }
 }

@@ -80,6 +80,7 @@ class Blockchain: NSObject {
             }
         }
     }
+    private var importedAccount: (String, String)?
     private let linkBag = LinkBag()
     private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
     private var balanceObservers = [String : (Balance) -> ()]()
@@ -181,61 +182,43 @@ class Blockchain: NSObject {
         migrationManager!.delegate = self
         kinAuthToken = token
         accountPromise = Promise<KinAccountProtocol>()
+        cleanup()
         try migrationManager!.start(with: publicAddress)
     }
     
-    // TODO: needs re write with the new iterator
-    func accountForImporting(keystore: String, password: String) throws -> KinAccountProtocol {
-        
-        guard let token = kinAuthToken, let client = client else {
-            throw KinEcosystemError.service(.notLoggedIn, nil)
+    func importAccount(info: (String, String), byMigratingFirst migrate: Bool) -> Promise<Void> {
+        let p = Promise<Void>()
+        guard let mm = migrationManager else {
+            return p.signal(KinEcosystemError.client(.internalInconsistency, nil))
         }
-
-        guard   let data = keystore.data(using: .utf8),
-                let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
-                    
-                return try client.importAccount(keystore, passphrase: password)
+        guard let data = info.0.data(using: .utf8),
+            let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
+                return p.signal(KinEcosystemError.client(.accountReadFailed, nil))
         }
         
-        guard validateAccountPassword(accountData, password: password) else {
-            throw KinEcosystemError.blockchain(.invalidPassword, nil)
+        guard validateAccountPassword(accountData, password: info.1) else {
+            return p.signal(KinEcosystemError.blockchain(.invalidPassword, nil))
         }
-        
-        var accounts = [KinAccountProtocol]()
-        
-        // account iteration is currently broken on Accounts
-        for i in 0..<client.accounts.count {
-            if let anAccount = client.accounts[i] {
-                accounts.append(anAccount)
+        if migrate {
+            let coreClient = mm.kinClient(version: .kinCore)
+            if coreClient.accounts.makeIterator().first(where: { $0.publicAddress == accountData.pkey }) == nil {
+                do {
+                    _ = try coreClient.importAccount(info.0, passphrase: info.1)
+                } catch {
+                    p.signal(error)
+                }
             }
         }
-        
-        let candidateAccounts = accounts.filter { anAccount in
-            return  anAccount.kinExtraData.kinUserId == token.ecosystem_user_id &&
-                    anAccount.publicAddress == accountData.pkey
+        self.importedAccount = info
+        self.accountPromise = Promise<KinAccountProtocol>()
+        do {
+            try mm.start(with: accountData.pkey)
+            p.signal(())
+        } catch {
+            p.signal(error)
         }
         
-        guard candidateAccounts.count > 0 else {
-            return try client.importAccount(keystore, passphrase: password)
-        }
-        
-        let candidateOnboardedAccounts = candidateAccounts.filter ({ anAccount in
-            return anAccount.kinExtraData.onboarded
-        })
-        
-        if let candidateOnboardedAccount =  candidateOnboardedAccounts.sorted (by: { accountA, accountB in
-            return accountA.kinExtraData.lastActive.compare(accountB.kinExtraData.lastActive) == .orderedAscending
-        }).last {
-            return candidateOnboardedAccount
-        }
-        
-        if let candidateLastActiveAccount =  candidateAccounts.sorted (by: { accountA, accountB in
-            return accountA.kinExtraData.lastActive.compare(accountB.kinExtraData.lastActive) == .orderedAscending
-        }).last {
-            return candidateLastActiveAccount
-        }
-        
-        return try client.importAccount(keystore, passphrase: password)
+        return p
     }
     
     func validateAccountPassword(_ accountData: KinImportedAccountData, password: String) -> Bool {
@@ -368,7 +351,7 @@ class Blockchain: NSObject {
     func generateTransactionData(to recipient: String, kin: Decimal, memo: String?, fee: Stroop) -> Promise<Data> {
         guard let account = account else { return Promise<Data>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
         let p = Promise<Data>()
-        _ = account.sendTransaction(to: recipient, kin: kin, memo: memo, fee: fee) { envelope -> (Promise<(TransactionEnvelope, Bool)>) in
+        _ = account.sendTransaction(to: recipient, kin: kin, memo: memo, fee: fee) { envelope -> (Promise<TransactionEnvelope?>) in
             do {
                 let wlEnvelope = EcosystemWhitelistEnvelope(transactionEnvelope: envelope)
                 let encoded = try JSONEncoder().encode(wlEnvelope)
@@ -376,7 +359,7 @@ class Blockchain: NSObject {
             } catch {
                 p.signal(error)
             }
-            return Promise<(TransactionEnvelope, Bool)>().signal((envelope, false))
+            return Promise<TransactionEnvelope?>().signal(nil)
         }.error { error in
               p.signal(error)
         }
@@ -517,6 +500,21 @@ class Blockchain: NSObject {
 
         return p
     }
+    
+    fileprivate func cleanup() {
+        for version in [KinVersion.kinCore, KinVersion.kinSDK] {
+            if let versionClient = migrationManager?.kinClient(version: version) {
+                let count = versionClient.accounts.count
+                if count > 10 {
+                    logWarn("client \(version) holds more than 10 accounts (\(count)). This is slow for performance. Clearing up \(count - 10) accounts...")
+                    for _ in 0..<(count - 10) {
+                        try? versionClient.deleteAccount(at: 0)
+                    }
+                    logWarn("done.")
+                }
+            }
+        }
+    }
 }
 
 
@@ -580,8 +578,6 @@ extension KinAccountsProtocol {
     
 }
 
-// note: module goes and migrates through all the accounts in the client!
-
 @available(iOS 9.0, *)
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
@@ -596,100 +592,123 @@ extension Blockchain: KinMigrationManagerDelegate {
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
-        logInfo("migration manager is ready with client, version: \(kinMigrationManager.version?.rawValue ?? 0)")
+        logInfo("migration manager is ready with client, version: \(kinMigrationManager.version?.rawValue ?? 0), number of accounts: \(client.accounts.count)")
         self.client = client
-        
-        if  let address = startingAddress,
+        if  let address = self.startingAddress,
             let addressAccount = client.accounts.makeIterator().first(where: { $0.publicAddress == address }) {
             do {
-                try setActiveAccount(addressAccount)
-                accountPromise.signal(addressAccount)
+                try self.setActiveAccount(addressAccount)
+                self.accountPromise.signal(addressAccount)
             } catch {
-                accountPromise.signal(error)
+                self.accountPromise.signal(error)
             }
         } else {
             do {
-                logInfo("no starting address provided or not found in persisted accounts - creating new")
-                let newAccount = try createNewAccount()
-                try setActiveAccount(newAccount)
-                accountPromise.signal(newAccount)
+                if let info = self.importedAccount {
+                    guard let data = info.0.data(using: .utf8),
+                        let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
+                            throw KinEcosystemError.client(.accountReadFailed, nil)
+                    }
+                    var imported: KinAccountProtocol!
+                    if let acc = client.accounts.makeIterator().first(where: { $0.publicAddress == accountData.pkey }) {
+                        imported = acc
+                    } else {
+                        imported = try client.importAccount(info.0, passphrase: info.1)
+                    }
+                    try self.setActiveAccount(imported)
+                    self.accountPromise.signal(imported)
+                } else {
+                    logInfo("no starting address provided or not found in persisted accounts - creating new")
+                    let newAccount = try self.createNewAccount()
+                    try self.setActiveAccount(newAccount)
+                    self.accountPromise.signal(newAccount)
+                }
             } catch {
-                accountPromise.signal(error)
+                self.accountPromise.signal(error)
             }
-            
         }
+        self.importedAccount = nil
+        self.startingAddress = nil
     }
-    
+
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, error: Error) {
-        logError(error.localizedDescription)
         if case KinMigrationError.invalidPublicAddress = error {
             kinMigrationManagerNeedsVersion(kinMigrationManager)
                 .then { version in
-                    self.client = kinMigrationManager.kinClient(version: version)
-                    let newAccount = try self.createNewAccount()
-                    self.account = newAccount
-                    self.accountPromise.signal(newAccount)
+                    let aClient = kinMigrationManager.kinClient(version: version)
+                    self.client = aClient
+                    if let info = self.importedAccount {
+                        let imported = try aClient.importAccount(info.0, passphrase: info.1)
+                        try self.setActiveAccount(imported)
+                        self.accountPromise.signal(imported)
+                    } else {
+                        let newAccount = try self.createNewAccount()
+                        try self.setActiveAccount(newAccount)
+                        self.accountPromise.signal(newAccount)
+                    }
             }.error { error in
                 self.accountPromise.signal(error)
+            }.finally {
+                self.importedAccount = nil
+                self.startingAddress = nil
             }
         } else {
             accountPromise.signal(error)
         }
     }
+    
 }
 
 @available(iOS 9.0, *)
 extension Blockchain: KinMigrationBIDelegate {
     public func kinMigrationMethodStarted() {
-        //Kin.track { try MigrationMethodStarted() }
+        Kin.track { try MigrationModuleStarted(publicAddress: startingAddress ?? "") }
     }
     
     public func kinMigrationCallbackStart() {
-        //Kin.track { try MigrationCallbackStart() }
+        
     }
     
     public func kinMigrationCallbackReady(reason: KinMigrationBIReadyReason, version: KinVersion) {
-        //Kin.track { try MigrationCallbackReady(sdkVersion: version.mapToKBI, selectedSDKReason: reason.mapToKBI) }
     }
     
     public func kinMigrationCallbackFailed(error: Error) {
-        //Kin.track { try MigrationCallbackFailed(errorCode: "", errorMessage: error.localizedDescription, errorReason: "") }
+        
     }
     
     public func kinMigrationVersionCheckStarted() {
-        //Kin.track { try MigrationVersionCheckStarted() }
     }
     
     public func kinMigrationVersionCheckSucceeded(version: KinVersion) {
-        //Kin.track { try MigrationVersionCheckSucceeded(sdkVersion: version.mapToKBI) }
+        Kin.track { try MigrationBCVersionCheckSucceeded(blockchainVersion: version == .kinCore ? .the2 : .the3, publicAddress: account?.publicAddress ?? "") }
     }
     
     public func kinMigrationVersionCheckFailed(error: Error) {
-        //Kin.track { try MigrationVersionCheckFailed(errorCode: "", errorMessage: error.localizedDescription, errorReason: "") }
+        Kin.track { try MigrationBCVersionCheckFailed(blockchainVersion: migrationManager?.version == .kinSDK ? .the3 : .the2,
+                                                      errorReason: error.localizedDescription,
+                                                      publicAddress: account?.publicAddress ?? "") }
     }
     
     public func kinMigrationBurnStarted(publicAddress: String) {
-        //Kin.track { try MigrationBurnStarted(publicAddress: publicAddress) }
     }
     
     public func kinMigrationBurnSucceeded(reason: KinMigrationBIBurnReason, publicAddress: String) {
-        //Kin.track { try MigrationBurnSucceeded(burnReason: reason.mapToKBI, publicAddress: publicAddress) }
     }
     
     public func kinMigrationBurnFailed(error: Error, publicAddress: String) {
-        //Kin.track { try MigrationBurnFailed(errorCode: "", errorMessage: error.localizedDescription, errorReason: "", publicAddress: publicAddress) }
     }
     
     public func kinMigrationRequestAccountMigrationStarted(publicAddress: String) {
-        //Kin.track { try MigrationRequestAccountMigrationStarted(publicAddress: publicAddress) }
+        Kin.track { try MigrationAccountStarted(publicAddress: publicAddress) }
     }
     
     public func kinMigrationRequestAccountMigrationSucceeded(reason: KinMigrationBIMigrateReason, publicAddress: String) {
-        //Kin.track { try MigrationRequestAccountMigrationSucceeded(migrationReason: reason.mapToKBI, publicAddress: publicAddress) }
+        Kin.track { try MigrationAccountCompleted(blockchainVersion: migrationManager?.version == .kinSDK ? .the3 : .the2, publicAddress: publicAddress) }
+
     }
     
     public func kinMigrationRequestAccountMigrationFailed(error: Error, publicAddress: String) {
-        //Kin.track { try MigrationRequestAccountMigrationFailed(errorCode: "", errorMessage: error.localizedDescription, errorReason: "", publicAddress: publicAddress) }
+        Kin.track { try MigrationAccountFailed(errorReason: error.localizedDescription, publicAddress: publicAddress) }
     }
 }
 

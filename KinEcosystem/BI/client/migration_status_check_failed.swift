@@ -28,28 +28,28 @@
 
 import Foundation
 
-/// User backs off the settings page
-struct SettingsBackButtonTapped: KBIEvent {
+/// Asking the server for account status - failed
+struct MigrationStatusCheckFailed: KBIEvent {
     let client: Client
     let common: Common
+    let errorReason: String
     let eventName: String
     let eventType: String
-    let exitType: KBITypes.ExitType
+    let publicAddress: String
     let user: User
 
     enum CodingKeys: String, CodingKey {
         case client, common
+        case errorReason = "error_reason"
         case eventName = "event_name"
         case eventType = "event_type"
-        case exitType = "exit_type"
+        case publicAddress = "public_address"
         case user
     }
 }
 
-
-
-extension SettingsBackButtonTapped {
-    init(exitType: KBITypes.ExitType) throws {
+extension MigrationStatusCheckFailed {
+    init(errorReason: String, publicAddress: String) throws {
         let es = EventsStore.shared
 
         guard   let user = es.userProxy?.snapshot,
@@ -62,9 +62,10 @@ extension SettingsBackButtonTapped {
         self.common = common
         self.client = client
 
-        eventName = "settings_back_button_tapped"
-        eventType = "analytics"
+        eventName = "migration_status_check_failed"
+        eventType = "log"
 
-        self.exitType = exitType
+        self.errorReason = errorReason
+        self.publicAddress = publicAddress
     }
 }

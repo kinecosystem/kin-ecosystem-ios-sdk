@@ -21,6 +21,7 @@
 		19D7AA8B288768EB1765D50E /* migration_method_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D8D50E952DF434C32D454F /* migration_method_started.swift */; };
 		1B94E7D4FDFFEE06B3BCDA31 /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202AB21509750816E41036C4 /* order_history_item_tapped.swift */; };
 		20AB02537B304BF815D6DA79 /* migration_burn_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E959F0A2ABCFD65827EE492 /* migration_burn_succeeded.swift */; };
+		21444364B59BBF97F014615F /* error_message_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */; };
 		21556B5F45EBCA4F64E9503A /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D790CE0DB5E840FDEC72F3 /* spend_order_completed.swift */; };
 		22DA98744E708BF74AFC5426 /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957719090F337AEF7D2D32F /* restore_upload_qr_code_page_viewed.swift */; };
 		25E60FA1F9F211FF13678F46 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29EA3F53CFCC007640A248B4 /* common.swift */; };
@@ -30,6 +31,7 @@
 		2A783F419A47818A689A64C9 /* marketplace_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE899F6E12ACF33410C876E /* marketplace_page_viewed.swift */; };
 		2BA053F90A8CD83041FFF685 /* migration_status_check_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F384ED368971596F5DC7620D /* migration_status_check_failed.swift */; };
 		34523DD5F4744B73FE9F712C /* migration_account_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69955E4601C47B71203D274A /* migration_account_failed.swift */; };
+		3747CD76F2085F990E3B3A75 /* offers_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C15137EEFEA31E72DC2A /* offers_page_viewed.swift */; };
 		3759E2B5BA37356AD35383D0 /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A64A33C1A594A45F601C02 /* confirm_purchase_button_tapped.swift */; };
 		38323E7A2FD576D55159C95C /* my_kin_page_settings_element_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C34B27237262634E0AB9B /* my_kin_page_settings_element_tapped.swift */; };
 		384F4884D992C70FC31A33D3 /* main_page_my_kin_element_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09940C68482942E6768D01 /* main_page_my_kin_element_tapped.swift */; };
@@ -49,6 +51,7 @@
 		5625EFEDB113CF783312CA7C /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D549E94942F4C660F0C578 /* types.swift */; };
 		5D68D1AB00EB3205B9466781 /* user_login_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5618A88C439707E789550C /* user_login_requested.swift */; };
 		5EEE53E05A25289FF5CE3A72 /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB423AE008514970870EF4AD /* backup_create_password_back_button_tapped.swift */; };
+		64A594282664F82FCAE2D162 /* page_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBB05A86ADE047F9539994 /* page_close_tapped.swift */; };
 		6A2C6DF2AFD4D82A972F9D83 /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78247DBFE7B7EAE390CB239A /* backup_create_password_next_button_tapped.swift */; };
 		6BF1E2D6BF0B9336BA562F96 /* main_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BD696A6CACB744E6BC2E6 /* main_page_viewed.swift */; };
 		74A98490A373CE7222188AA3 /* error_message_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F338961A7824899B8285C24 /* error_message_continue_button_tapped.swift */; };
@@ -57,16 +60,19 @@
 		79617912FDAA66E8903A424D /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4F7E6ACEB41360EB6C612 /* spend_order_completion_submitted.swift */; };
 		7A1F482C345C31759B36A9F9 /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FFEADA44F183BC01A1B88 /* spend_order_creation_received.swift */; };
 		7C5D79FB6CC829FB8F9788C9 /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B2CD5A03DAA27CAF01A52 /* earn_order_creation_failed.swift */; };
+		7CECD1F2482E8ED04A01155E /* continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */; };
 		7E9A1A3519EB6C43E9C1AF15 /* back_button_on_marketplace_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8F6101CE028B66540DD3153F /* back_button_on_marketplace_page_tapped.swift */; };
 		7F3A5E6B236E43B3E04C641A /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */; };
 		81106820005DDE0D6AFE0B4F /* restore_password_entry_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81073B5A9D9DD80FC41DE4 /* restore_password_entry_page_viewed.swift */; };
 		835E159280A574796554D790 /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59265E55135519EB11B5BAE6 /* earn_order_completion_submitted.swift */; };
 		84259400828643C66F80430F /* migration_request_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A3470E57A8ECA430A253D6 /* migration_request_failed.swift */; };
+		85C03E4B823D74FC5F3356B5 /* popup_message_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704BA9035E72B185704F588C /* popup_message_close_tapped.swift */; };
 		85CB0FC502AFA2F130A3F98D /* empty_main_page_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D29DCF0F587AF2730BDC35C /* empty_main_page_back_tapped.swift */; };
 		8A2F8FC30198FF4820887B0F /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380A0DFB07B0294EDCACD88 /* welcome_screen_page_viewed.swift */; };
 		8A82AFA9E6022319AF93B99B /* migration_status_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205796C42EFAD3659F7369D5 /* migration_status_check_succeeded.swift */; };
 		8AFDE46E81ED0D554B7D2623 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD37ECE8C16E9328DF1BF7D0 /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
 		8E7EF42290D9A1EC7184E72B /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19E7E1AFC9E0430B783FA14 /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
+		8FFD660595E182CAB5F6050C /* migration_module_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF36FF97FE4C36729D1B2 /* migration_module_started.swift */; };
 		917A5F88220C38BF0018E108 /* AcceptReceiveKinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
@@ -78,6 +84,7 @@
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		A405D23EF2E254B919F9D9A7 /* popup_message_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F0C4E7EF885377DEEED7 /* popup_message_back_tapped.swift */; };
+		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
 		ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F717D333E5908066A0CA32 /* migration_BC_version_check_succeeded.swift */; };
 		AC30BF03130EBEDF10C45FFE /* migration_account_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C3E05AD3E49F3EA1C7969C4 /* migration_account_completed.swift */; };
@@ -257,6 +264,7 @@
 		0B0FFEADA44F183BC01A1B88 /* spend_order_creation_received.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_order_creation_received.swift; sourceTree = "<group>"; };
 		0CADC2EC0A618D3401D25254 /* restore_are_you_sure_cancel_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = restore_are_you_sure_cancel_button_tapped.swift; sourceTree = "<group>"; };
 		0DE899F6E12ACF33410C876E /* marketplace_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = marketplace_page_viewed.swift; sourceTree = "<group>"; };
+		0E87C15137EEFEA31E72DC2A /* offers_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = offers_page_viewed.swift; sourceTree = "<group>"; };
 		110D7E324B1F3BA34D873CB8 /* backup_popup_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_popup_button_tapped.swift; sourceTree = "<group>"; };
 		11A58833684BE8AA9B94AA53 /* backup_create_password_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_create_password_page_viewed.swift; sourceTree = "<group>"; };
 		12C0DF66963CA9A521B05379 /* settings_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = settings_page_viewed.swift; sourceTree = "<group>"; };
@@ -280,6 +288,7 @@
 		3957719090F337AEF7D2D32F /* restore_upload_qr_code_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_page_viewed.swift; sourceTree = "<group>"; };
 		39D549E94942F4C660F0C578 /* types.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
 		39D8D50E952DF434C32D454F /* migration_method_started.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_method_started.swift; sourceTree = "<group>"; };
+		3AEBB05A86ADE047F9539994 /* page_close_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = page_close_tapped.swift; sourceTree = "<group>"; };
 		3C62A3975E729ACF07C2391F /* migration_request_succeeded.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_request_succeeded.swift; sourceTree = "<group>"; };
 		3E1F8302CD99F06330712857 /* earn_order_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_failed.swift; sourceTree = "<group>"; };
 		3F25C36D92EFF3035A9AFD69 /* settings_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = settings_button_tapped.swift; sourceTree = "<group>"; };
@@ -304,8 +313,10 @@
 		6B9DEDFBB09018F9F9BE7895 /* earn_order_completed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_completed.swift; sourceTree = "<group>"; };
 		6BF638A877AE7D9DC6040988 /* user_login_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = user_login_failed.swift; sourceTree = "<group>"; };
 		6E20C98566463706CD43D1DA /* balance_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = balance_tapped.swift; sourceTree = "<group>"; };
+		704BA9035E72B185704F588C /* popup_message_close_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = popup_message_close_tapped.swift; sourceTree = "<group>"; };
 		70CAECC2ECD0911F2720BE1E /* spend_transaction_broadcast_to_blockchain_succeeded.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_succeeded.swift; sourceTree = "<group>"; };
 		7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_order_cancelled.swift; sourceTree = "<group>"; };
+		766EF36FF97FE4C36729D1B2 /* migration_module_started.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_module_started.swift; sourceTree = "<group>"; };
 		77F1B00878E6E96607FB1797 /* spend_order_creation_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_order_creation_failed.swift; sourceTree = "<group>"; };
 		77FFAF0A29447BBE73268D57 /* not_enough_kin_back_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = not_enough_kin_back_tapped.swift; sourceTree = "<group>"; };
 		78247DBFE7B7EAE390CB239A /* backup_create_password_next_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_create_password_next_button_tapped.swift; sourceTree = "<group>"; };
@@ -335,6 +346,7 @@
 		99664C759CF6366938599F0F /* backup_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
+		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
 		A82BACF88CE30BB486724F14 /* empty_main_page_my_kin_element_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = empty_main_page_my_kin_element_tapped.swift; sourceTree = "<group>"; };
@@ -354,9 +366,11 @@
 		CF93248B7CC87600E9BDEBB2 /* order_history_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = order_history_page_viewed.swift; sourceTree = "<group>"; };
 		D1167CDA22007CD4D3392A28 /* spend_offer_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_offer_tapped.swift; sourceTree = "<group>"; };
 		D19E7E1AFC9E0430B783FA14 /* spend_transaction_broadcast_to_blockchain_submitted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_transaction_broadcast_to_blockchain_submitted.swift; sourceTree = "<group>"; };
+		D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = error_message_close_tapped.swift; sourceTree = "<group>"; };
 		D343393AABD2FDA2E343E698 /* restore_upload_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = restore_upload_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
 		D675825C6AE75F3E1899CC12 /* kin_balance_updated.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = kin_balance_updated.swift; sourceTree = "<group>"; };
 		E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = restore_password_done_button_tapped.swift; sourceTree = "<group>"; };
+		E76576947B67C937AB0B34C5 /* a_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = a_page_viewed.swift; sourceTree = "<group>"; };
 		E7BE6BB0E5952710ECAC911F /* spend_redeem_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_button_tapped.swift; sourceTree = "<group>"; };
 		E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsufficientFundsViewController.swift; sourceTree = "<group>"; };
 		E9037502207DFC8E00704DBB /* InsufficientFundsViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = InsufficientFundsViewController.xib; sourceTree = "<group>"; };
@@ -632,6 +646,13 @@
 				371ED9A74174E9132A10E9F8 /* my_kin_page_viewed.swift */,
 				36CAC66AF70930E24B7FD2EB /* migration_account_started.swift */,
 				8013D813690925603D8E5418 /* popup_message_viewed.swift */,
+				9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */,
+				0E87C15137EEFEA31E72DC2A /* offers_page_viewed.swift */,
+				766EF36FF97FE4C36729D1B2 /* migration_module_started.swift */,
+				3AEBB05A86ADE047F9539994 /* page_close_tapped.swift */,
+				D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */,
+				E76576947B67C937AB0B34C5 /* a_page_viewed.swift */,
+				704BA9035E72B185704F588C /* popup_message_close_tapped.swift */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -1300,6 +1321,13 @@
 				E7EEA4008736401B5B459155 /* my_kin_page_viewed.swift in Sources */,
 				FE11D63BE62BE292E3F003D1 /* migration_account_started.swift in Sources */,
 				D79C2D9FF8BDD5A6B7938BFC /* popup_message_viewed.swift in Sources */,
+				7CECD1F2482E8ED04A01155E /* continue_button_tapped.swift in Sources */,
+				3747CD76F2085F990E3B3A75 /* offers_page_viewed.swift in Sources */,
+				8FFD660595E182CAB5F6050C /* migration_module_started.swift in Sources */,
+				64A594282664F82FCAE2D162 /* page_close_tapped.swift in Sources */,
+				21444364B59BBF97F014615F /* error_message_close_tapped.swift in Sources */,
+				A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */,
+				85C03E4B823D74FC5F3356B5 /* popup_message_close_tapped.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
