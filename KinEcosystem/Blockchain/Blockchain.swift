@@ -180,6 +180,7 @@ class Blockchain: NSObject {
         startingAddress = publicAddress
         migrationManager = KinMigrationManager(serviceProvider: try environment.mapToMigrationModuleServiceProvider(), appId: try AppId(token.app_id))
         migrationManager!.delegate = self
+        migrationManager!.biDelegate = self
         kinAuthToken = token
         accountPromise = Promise<KinAccountProtocol>()
         cleanup()

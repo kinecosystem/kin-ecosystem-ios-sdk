@@ -10,7 +10,6 @@
 
 import Foundation
 import StellarErrors
-import MoveKin
 import KinUtil
 import KinMigrationModule
 
@@ -70,12 +69,8 @@ public class Kin {
     fileprivate var prestartNativeOffers = [NativeOffer]()
     fileprivate let psBalanceObsLock = NSLock()
     fileprivate let psNativeOLock = NSLock()
-    fileprivate let moveKinFlow = MoveKinFlow()
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
-    fileprivate init() {
-        moveKinFlow.receiveDelegate = self
-    }
     
     public var lastKnownBalance: Balance? {
         return core?.blockchain.lastBalance ?? nil
@@ -663,33 +658,4 @@ public class Kin {
     }
 }
 
-//MARK: - MoveKin
 
-@available(iOS 9.0, *)
-public extension Kin {
-    public func canHandleURL(_ url: URL) -> Bool {
-        guard moveKinFlow.canHandleURL(url) else {
-            return false
-        }
-
-        return true
-    }
-
-    public func handleURL(_ url: URL, options: [UIApplication.OpenURLOptionsKey: Any]) {
-        if let sourceApp = options[.sourceApplication] as? String,
-            moveKinFlow.canHandleURL(url) {
-            moveKinFlow.handleURL(url, from: sourceApp)
-        }
-    }
-}
-
-@available(iOS 9.0, *)
-extension Kin: ReceiveKinFlowDelegate {
-    public func acceptReceiveKinViewController() -> UIViewController & AcceptReceiveKinPage {
-        return AcceptReceiveKinViewController()
-    }
-
-    public func provideUserAddress(addressHandler: @escaping (String?) -> Void) {
-        addressHandler(publicAddress)
-    }
-}
