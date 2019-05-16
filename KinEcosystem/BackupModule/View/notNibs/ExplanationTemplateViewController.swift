@@ -20,7 +20,7 @@ class ExplanationTemplateViewController: BRViewController {
     @IBOutlet weak var topSpace: NSLayoutConstraint!
     
     init() {
-        super.init(nibName: "ExplanationTemplateViewController", bundle: Bundle.ecosystem)
+        super.init(nibName: "ExplanationTemplateViewController", bundle: KinBundle.ecosystem.rawValue)
         commonInit()
     }
     

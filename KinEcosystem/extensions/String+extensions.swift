@@ -17,7 +17,7 @@ public extension String {
     }
     
     func localized(_ args: CVarArg...) -> String {
-        return String(format: NSLocalizedString(self, tableName: nil, bundle: Bundle.kinLocalization, value: "", comment: ""), arguments: args)
+        return String(format: NSLocalizedString(self, tableName: nil, bundle: KinBundle.localization.rawValue, value: "", comment: ""), arguments: args)
     }
     
     func jwtJson() throws -> [String: Any] {

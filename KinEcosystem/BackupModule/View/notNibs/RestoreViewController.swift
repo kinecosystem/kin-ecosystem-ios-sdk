@@ -34,7 +34,7 @@ class RestoreViewController: BRViewController {
     }
     
     init() {
-        super.init(nibName: "RestoreViewController", bundle: Bundle.ecosystem)
+        super.init(nibName: "RestoreViewController", bundle: KinBundle.ecosystem.rawValue)
         commonInit()
     }
     

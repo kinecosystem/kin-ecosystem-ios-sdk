@@ -39,7 +39,7 @@ class OrdersViewController : KinNavigationChildController {
     }
     
     fileprivate func setupTableView() {
-        tableView.register(UINib(nibName:orderCellName, bundle: Bundle.ecosystem), forCellReuseIdentifier: orderCellName)
+        tableView.register(UINib(nibName:orderCellName, bundle: KinBundle.ecosystem.rawValue), forCellReuseIdentifier: orderCellName)
     }
     
     fileprivate func setupFRCSections() {
@@ -91,7 +91,7 @@ class OrdersViewController : KinNavigationChildController {
     }
     
     func presentCoupon(with viewModel: CouponViewModel, biData: CouponViewController.BIData) {
-        let controller = CouponViewController(nibName: "CouponViewController", bundle: Bundle.ecosystem)
+        let controller = CouponViewController(nibName: "CouponViewController", bundle: KinBundle.ecosystem.rawValue)
         controller.viewModel = viewModel
         controller.biData = biData
         let transition = SheetTransition()

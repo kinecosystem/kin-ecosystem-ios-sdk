@@ -28,7 +28,7 @@ class OrderViewModel {
         var detailsColor: UIColor = .kinDeepSkyBlue
         switch model.offerType {
         case .spend:
-            image = UIImage(named: "invoice", in: Bundle.ecosystem, compatibleWith: nil)
+            image = UIImage(named: "invoice", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
             switch model.orderStatus {
             case .completed:
                 indicatorColor = .kinDeepSkyBlue
@@ -46,7 +46,7 @@ class OrderViewModel {
                 details = ""
             }
         default:
-            image = UIImage(named: "coins", in: Bundle.ecosystem, compatibleWith: nil)
+            image = UIImage(named: "coins", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
             details = ""
         }
         color = indicatorColor

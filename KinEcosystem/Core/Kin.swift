@@ -72,6 +72,10 @@ public class Kin {
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
     
+    fileprivate init() {
+        UIFont.loadFonts(from: KinBundle.fonts.rawValue)
+    }
+    
     public var lastKnownBalance: Balance? {
         return core?.blockchain.lastBalance ?? nil
     }
@@ -103,7 +107,7 @@ public class Kin {
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
         
-        guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
+        guard   let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
@@ -313,10 +317,10 @@ public class Kin {
         
         mpPresentingController = parentViewController
         if isActivated {
-            let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
+            let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
             mpViewController.core = core
             let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                   bundle: Bundle.ecosystem,
+                                                                   bundle: KinBundle.ecosystem.rawValue,
                                                                    rootViewController: mpViewController,
                                                                    core: core)
             if case EcosystemExperience.history = experience {
@@ -324,7 +328,7 @@ public class Kin {
             }
             parentViewController.present(navigationController, animated: true)
         } else {
-            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
+            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: KinBundle.ecosystem.rawValue)
             welcomeVC.core = core
             parentViewController.present(welcomeVC, animated: true)
         }

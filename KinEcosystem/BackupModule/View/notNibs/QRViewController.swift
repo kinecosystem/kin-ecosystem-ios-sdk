@@ -35,7 +35,7 @@ class QRViewController: BRViewController {
     
     init(qrString: String) {
         self.qrString = qrString
-        super.init(nibName: "QRViewController", bundle: Bundle.ecosystem)
+        super.init(nibName: "QRViewController", bundle: KinBundle.ecosystem.rawValue)
         loadViewIfNeeded()
     }
     

@@ -18,9 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>$(CURRENT_PROJECT_VERSION)</string>
-	<key>NSPrincipalClass</key>
-	<string></string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library access is required for backup and restore of your wallet</string>
+	<key>NSPrincipalClass</key>
+	<string></string>
 </dict>
 </plist>

@@ -67,8 +67,8 @@ class MarketplaceViewController: KinNavigationChildController {
         let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeItem
         
-        let settingsImage = UIImage(named: "settingsIcon", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
-        let settingsBadgeImage = UIImage(named: "settingsBadge", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsImage = UIImage(named: "settingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsBadgeImage = UIImage(named: "settingsBadge", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
         navigationItem.rightBarButtonItem = settingsItem
         settingsBarItem = settingsItem
@@ -146,7 +146,7 @@ class MarketplaceViewController: KinNavigationChildController {
             spendCell.subtitle.attributedText = viewModel.subtitle
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
-        if let emptyState = UIImage(named: "spaceship", in: Bundle.ecosystem, compatibleWith: nil) {
+        if let emptyState = UIImage(named: "spaceship", in: KinBundle.ecosystem.rawValue, compatibleWith: nil) {
             let earnEmptyStateView = UIImageView(image: emptyState)
             let spendEmptyStateView = UIImageView(image: emptyState)
             earnEmptyStateView.contentMode = .scaleAspectFit
@@ -158,11 +158,11 @@ class MarketplaceViewController: KinNavigationChildController {
     
     fileprivate func setupCollectionViews() {
         earnOffersCollectionView.contentInset = .zero
-        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem),
+        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: KinBundle.ecosystem.rawValue),
                                           forCellWithReuseIdentifier: earnCellName)
         earnOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         spendOffersCollectionView.contentInset = .zero
-        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem),
+        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: KinBundle.ecosystem.rawValue),
                                            forCellWithReuseIdentifier: spendCellName)
         spendOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
@@ -277,7 +277,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                         amount >= Decimal(offer.amount) else {
                 let transition = SheetTransition()
                 let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
-                                                                 bundle: Bundle.ecosystem)
+                                                                 bundle: KinBundle.ecosystem.rawValue)
                 controller.modalPresentationStyle = .custom
                 controller.transitioningDelegate = transition
                 self.kinNavigationController?.present(controller, animated: true)
@@ -285,7 +285,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             }
             Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, origin: .marketplace) }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController",
-                                                      bundle: Bundle.ecosystem)
+                                                      bundle: KinBundle.ecosystem.rawValue)
             controller.viewModel = viewModel
             controller.biData = SpendOfferViewController.BIData(amount: Double(offer.amount), offerId: offer.id)
             let transition = SheetTransition()

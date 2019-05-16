@@ -221,6 +221,10 @@
 		E98D178E20518B3600FEB57A /* UIImage+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D178D20518B3600FEB57A /* UIImage+extensions.swift */; };
 		E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */; };
 		E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = E98E48B5201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld */; };
+		E9D3F806228C510F0019253E /* Sailec Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9D3F804228C510F0019253E /* Sailec Medium.otf */; };
+		E9D3F807228C510F0019253E /* Sailec.otf in Resources */ = {isa = PBXBuildFile; fileRef = E9D3F805228C510F0019253E /* Sailec.otf */; };
+		E9D3F80F228D82D70019253E /* UIColor+KinNewUi.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3F80D228D82D70019253E /* UIColor+KinNewUi.swift */; };
+		E9D3F810228D82D70019253E /* TextStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9D3F80E228D82D70019253E /* TextStyles.swift */; };
 		E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */; };
 		E9DC2021216B807500746B81 /* Xib+localization.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DC2020216B807500746B81 /* Xib+localization.swift */; };
 		E9DFCC3B2027114300F115FA /* CodingUserInfoKey+Decode.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9DFCC3A2027114300F115FA /* CodingUserInfoKey+Decode.swift */; };
@@ -476,6 +480,10 @@
 		E98D178D20518B3600FEB57A /* UIImage+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+extensions.swift"; sourceTree = "<group>"; };
 		E98E48A2201A110C00CB8CC2 /* Bundle+extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Bundle+extensions.swift"; sourceTree = "<group>"; };
 		E98E48B6201A12AC00CB8CC2 /* KinEcosystem.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = KinEcosystem.xcdatamodel; sourceTree = "<group>"; };
+		E9D3F804228C510F0019253E /* Sailec Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sailec Medium.otf"; sourceTree = "<group>"; };
+		E9D3F805228C510F0019253E /* Sailec.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sailec.otf; sourceTree = "<group>"; };
+		E9D3F80D228D82D70019253E /* UIColor+KinNewUi.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIColor+KinNewUi.swift"; sourceTree = "<group>"; };
+		E9D3F80E228D82D70019253E /* TextStyles.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TextStyles.swift; sourceTree = "<group>"; };
 		E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JWTConfirmation.swift; sourceTree = "<group>"; };
 		E9DC201C216B353E00746B81 /* pt-BR */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "pt-BR"; path = "pt-BR.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		E9DC201F216B4B3D00746B81 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MarketplaceViewController.xib; sourceTree = "<group>"; };
@@ -814,6 +822,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				E9D3F803228C510F0019253E /* fonts */,
 				E92BA42421A19C0A00C952D8 /* BackupModule */,
 				E954100420E3B30E0038FF49 /* BI */,
 				E92501B820614A3300E2E738 /* Promises */,
@@ -908,6 +917,8 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				E9D3F80E228D82D70019253E /* TextStyles.swift */,
+				E9D3F80D228D82D70019253E /* UIColor+KinNewUi.swift */,
 				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
 				E928960821E4F02000656382 /* String+extensions.swift */,
 				E91E6405203AB30A00BB4104 /* UIColor+KinStyle.swift */,
@@ -938,6 +949,15 @@
 				E9DB9E2A20A2EFFE00AD9EB1 /* JWTConfirmation.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		E9D3F803228C510F0019253E /* fonts */ = {
+			isa = PBXGroup;
+			children = (
+				E9D3F804228C510F0019253E /* Sailec Medium.otf */,
+				E9D3F805228C510F0019253E /* Sailec.otf */,
+			);
+			path = fonts;
 			sourceTree = "<group>";
 		};
 		E9DFCC39202710F000F115FA /* API */ = {
@@ -1084,6 +1104,7 @@
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
+				E9D3F806228C510F0019253E /* Sailec Medium.otf in Resources */,
 				E92BA44921A19C0A00C952D8 /* Assets.xcassets in Resources */,
 				E93146242164F160008F2D74 /* MarketplaceViewController.xib in Resources */,
 				E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */,
@@ -1096,6 +1117,7 @@
 				E92BA44E21A19C0A00C952D8 /* ExplanationTemplateViewController.xib in Resources */,
 				E92BA44C21A19C0A00C952D8 /* RestoreViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
+				E9D3F807228C510F0019253E /* Sailec.otf in Resources */,
 				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1178,6 +1200,7 @@
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
+				E9D3F80F228D82D70019253E /* UIColor+KinNewUi.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E92BA45121A19C0A00C952D8 /* BackupFlowController.swift in Sources */,
@@ -1221,6 +1244,7 @@
 				FB1A4CDB74E04A3AB33BC399 /* restore_upload_qr_code_back_button_tapped.swift in Sources */,
 				5D68D1AB00EB3205B9466781 /* user_login_requested.swift in Sources */,
 				1287136D9496A23BA551644B /* redeem_url_tapped.swift in Sources */,
+				E9D3F810228D82D70019253E /* TextStyles.swift in Sources */,
 				0457056D9B95AD5B9E92171F /* spend_order_creation_failed.swift in Sources */,
 				21556B5F45EBCA4F64E9503A /* spend_order_completed.swift in Sources */,
 				98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */,
@@ -1398,7 +1422,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z37J743B3H;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1414,7 +1437,6 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = Z37J743B3H;
 				INFOPLIST_FILE = KinEcosystemTestsHost/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystemTestsHost;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1474,7 +1496,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1530,7 +1552,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1553,7 +1575,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinEcosystem/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystem;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
@@ -1577,7 +1598,6 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = KinEcosystem/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = Kik.KinEcosystem;
 				PRODUCT_NAME = "$(TARGET_NAME:c99extidentifier)";
