@@ -48,13 +48,13 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.core = core
         self.rootViewController = rootViewController
-        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem, core: core)
+        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: KinBundle.ecosystem.rawValue, core: core)
         loadViewIfNeeded()
     }
 
     fileprivate func setupNavigationBarAppearance() {
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)
+        let backImage = UIImage(named: "back", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.delegate = self
@@ -88,7 +88,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
             return
         }
         Kin.track { try BalanceTapped() }
-        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
+        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
         ordersController.core = core
         push(ordersController, animated: animated)
     }

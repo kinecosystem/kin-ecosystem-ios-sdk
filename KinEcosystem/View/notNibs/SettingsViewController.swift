@@ -88,9 +88,9 @@ class SettingsViewController: UITableViewController {
         }
         
         if case .backup = rowData {
-            cell.imageView?.image = UIImage(named: delegate.didPerformBackup ? "blueBackupIcon" : "backupBadge", in: Bundle.ecosystem, compatibleWith: nil)
+            cell.imageView?.image = UIImage(named: delegate.didPerformBackup ? "blueBackupIcon" : "backupBadge", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         } else {
-            cell.imageView?.image = UIImage(named: "blueRestoreIcon", in: Bundle.ecosystem, compatibleWith: nil)
+            cell.imageView?.image = UIImage(named: "blueRestoreIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         }
         
         return cell

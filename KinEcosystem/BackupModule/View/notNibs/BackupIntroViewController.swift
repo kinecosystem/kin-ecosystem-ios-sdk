@@ -13,7 +13,7 @@ class BackupIntroViewController: ExplanationTemplateViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         Kin.track { try BackupWelcomePageViewed() }
-        imageView.image = UIImage(named: "safeIcon", in: Bundle.ecosystem, compatibleWith: nil)
+        imageView.image = UIImage(named: "safeIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         titleLabel.text = "kinecosystem_backup_intro_title".localized()
         descriptionLabel.text = "kinecosystem_backup_intro_description".localized()
         continueButton.setTitle("kinecosystem_backup_intro_continue".localized(), for: .normal)

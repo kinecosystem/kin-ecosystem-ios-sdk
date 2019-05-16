@@ -11,10 +11,11 @@ Kin ecosystem mobile sdk for iOS
   s.author           = { 'Kin' => 'kin@kinfoundation.com' }
   s.source           = { :git => 'https://github.com/kinfoundation/kin-ecosystem-ios-sdk.git', :tag => s.version.to_s }
 
-  s.ios.deployment_target = '8.1'
-  s.resource_bundle = { "kinLocalization" => ["KinEcosystem/*.lproj/*.strings"] }
+  s.ios.deployment_target = '9.0'
+  s.resource_bundles = { "kinLocalization" => ["KinEcosystem/*.lproj/*.strings"],
+                         "kinFonts" => ["KinEcosystem/fonts/*.otf"] }
   s.source_files = 'KinEcosystem/**/*.{h,m,swift}'
-  s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
+  s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings,otf}'
   s.swift_version = '4.2'
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinMigrationModule', '0.1.0'
