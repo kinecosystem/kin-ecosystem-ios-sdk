@@ -10,11 +10,99 @@ import Foundation
 
 import UIKit
 
+enum SheetTransitionCover: CGFloat {
+    case half = 0.5
+    case most = 0.75
+    case all = 0.9
+}
+
+class PresentationController: UIPresentationController {
+    private var calculatedFrameOfPresentedViewInContainerView = CGRect.zero
+    private var shouldSetFrameWhenAccessingPresentedView = false
+    
+    override var presentedView: UIView? {
+        if shouldSetFrameWhenAccessingPresentedView {
+            super.presentedView?.frame = calculatedFrameOfPresentedViewInContainerView
+        }
+        
+        return super.presentedView
+    }
+    
+    override func presentationTransitionDidEnd(_ completed: Bool) {
+        super.presentationTransitionDidEnd(completed)
+        shouldSetFrameWhenAccessingPresentedView = completed
+    }
+    
+    override func dismissalTransitionWillBegin() {
+        super.dismissalTransitionWillBegin()
+        shouldSetFrameWhenAccessingPresentedView = false
+    }
+    
+    override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        calculatedFrameOfPresentedViewInContainerView = frameOfPresentedViewInContainerView
+    }
+}
+
+class SheetPresentationController: PresentationController {
+    
+    var cover: SheetTransitionCover = .half
+    
+    override var frameOfPresentedViewInContainerView: CGRect {
+        guard let containerView = containerView else { return .zero }
+        let frame = containerView.bounds
+        let frameHeight = frame.height * cover.rawValue
+        return CGRect(x: 0.0, y: frame.height - frameHeight, width: frame.width, height: frameHeight)
+    }
+    
+    override func containerViewDidLayoutSubviews() {
+        super.containerViewDidLayoutSubviews()
+        guard let pView = presentedView else { return }
+        pView.frame = frameOfPresentedViewInContainerView
+        let viewMask = CAShapeLayer()
+        viewMask.fillColor = UIColor.green.cgColor
+        viewMask.frame = pView.bounds
+        viewMask.path = UIBezierPath(roundedRect: pView.bounds,
+                                     byRoundingCorners: [.topLeft, .topRight],
+                                     cornerRadii: CGSize(width: 10.4, height: 10.4)).cgPath
+        pView.layer.mask = viewMask
+    }
+    
+    override func presentationTransitionWillBegin() {
+        super.presentationTransitionWillBegin()
+        containerView?.backgroundColor = .clear
+        if let coordinator = presentingViewController.transitionCoordinator {
+            coordinator.animate(alongsideTransition: { [weak self] _ in
+                self?.containerView?.backgroundColor = UIColor.black.withAlphaComponent(0.3)
+                }, completion: nil)
+        }
+    }
+    
+    override func dismissalTransitionWillBegin() {
+        if let coordinator = presentingViewController.transitionCoordinator {
+            coordinator.animate(alongsideTransition: { [weak self] _ in
+                self?.containerView?.backgroundColor = .clear
+                }, completion: nil)
+        }
+    }
+}
+
+
+// TODO: remove
 class SheetTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewControllerTransitioningDelegate, CAAnimationDelegate {
     
     var isPresenting = true
     var transitionDuration: TimeInterval = 0.6
+    var cover: SheetTransitionCover
     
+    func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
+        
+        return SheetPresentationController(presentedViewController: presented, presenting: presenting)
+    }
+    
+    init(covering: SheetTransitionCover = .half) {
+        self.cover = covering
+    }
     
     func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return self.transitionDuration
@@ -25,11 +113,10 @@ class SheetTransition: NSObject, UIViewControllerAnimatedTransitioning, UIViewCo
         let blurEffectView: UIVisualEffectView
 
         let frame = transitionContext.containerView.bounds
+        let frameHeight = frame.height * cover.rawValue
         
-        let recommandedHeight: CGFloat = max(335.0, frame.height / 2.0)
-        
-        let inFrame = CGRect(x: 0.0, y: frame.height - recommandedHeight, width: frame.width, height: recommandedHeight)
-        let outFrame = CGRect(x: 0.0, y: frame.height, width: frame.width, height: recommandedHeight)
+        let inFrame = CGRect(x: 0.0, y: frame.height - frameHeight, width: frame.width, height: frameHeight)
+        let outFrame = CGRect(x: 0.0, y: frame.height, width: frame.width, height: frameHeight)
         let spendController = transitionContext.viewController(forKey: isPresenting ? .to : .from)!
         let presentor = transitionContext.viewController(forKey: isPresenting ? .from : .to)!
         spendController.view.frame = isPresenting ? outFrame : inFrame

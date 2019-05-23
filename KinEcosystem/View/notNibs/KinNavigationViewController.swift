@@ -14,7 +14,7 @@ class KinNavigationChildController : KinViewController {
 }
 
 @available(iOS 9.0, *)
-class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+class KinNavigationViewController: SheetViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
     var core: Core!
 
@@ -30,6 +30,8 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     var kinChildViewControllers: [KinNavigationChildController] {
         return transitionController.children as! [KinNavigationChildController]
     }
+    
+    
 
     override var edgesForExtendedLayout: UIRectEdge {
         get { return [] }

@@ -319,13 +319,15 @@ public class Kin {
         if isActivated {
             let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
             mpViewController.core = core
-            let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                   bundle: KinBundle.ecosystem.rawValue,
-                                                                   rootViewController: mpViewController,
-                                                                   core: core)
-            if case EcosystemExperience.history = experience {
-                navigationController.transitionToOrders(animated: false)
-            }
+//            let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
+//                                                                   bundle: KinBundle.ecosystem.rawValue,
+//                                                                   rootViewController: mpViewController,
+//                                                                   core: core)
+//            if case EcosystemExperience.history = experience {
+//                navigationController.transitionToOrders(animated: false)
+//            }
+            let navigationController = SheetNavigationController(rootViewController: mpViewController)
+            navigationController.cover = .most
             parentViewController.present(navigationController, animated: true)
         } else {
             let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: KinBundle.ecosystem.rawValue)
