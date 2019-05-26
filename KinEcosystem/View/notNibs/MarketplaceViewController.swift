@@ -259,8 +259,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             html.offerId = offer.id
             html.title = offer.title
             htmlController = html
-            let navContoller = KinBaseNavigationController(rootViewController: html)
-            self.kinNavigationController?.present(navContoller, animated: true)
+            self.kinNavigationController?.present(html, animated: true)
             
             if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
                 Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }

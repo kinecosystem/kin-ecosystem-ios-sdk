@@ -81,7 +81,7 @@ class EarnOfferViewController: KinViewController {
     }
 
     override var prefersStatusBarHidden: Bool {
-        return hideStatusBar
+        return true
     }
 
     func loadContent() {
@@ -114,8 +114,8 @@ class EarnOfferViewController: KinViewController {
 
     @objc func userCanceled() {
         earn.signal(EarnOfferHTMLError.userCanceled)
-        guard self.navigationController?.isBeingDismissed == false else { return }
-        self.navigationController?.dismiss(animated: true)
+        guard isBeingDismissed == false else { return }
+        dismiss(animated: true)
     }
 }
 
@@ -130,21 +130,15 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
         case JSFunctions.handleResult.rawValue:
             guard let jsonString = (message.body as? NSArray)?.firstObject as? String else {
                 earn.signal(EarnOfferHTMLError.invalidJSResult)
-                self.navigationController?.dismiss(animated: true)
+                dismiss(animated: true)
                 return
             }
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
             userCanceled()
         case JSFunctions.handleClose.rawValue:
-            guard self.navigationController?.isBeingDismissed == false else { return }
-            self.navigationController?.dismiss(animated: true)
-        case JSFunctions.displayTopBar.rawValue:
-            if let displayed = (message.body as? NSArray)?.firstObject as? Bool {
-                self.navigationController?.setNavigationBarHidden(!displayed, animated: true)
-                hideStatusBar = !displayed
-                setNeedsStatusBarAppearanceUpdate()
-            }
+            guard isBeingDismissed == false else { return }
+            dismiss(animated: true)
         default:
             logWarn("unhandled webkit message received: \(message)")
         }
