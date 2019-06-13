@@ -14,5 +14,7 @@ extension Color {
 		static let tealish = Color(red: 29/255.0, green: 194/255.0, blue: 164/255.0, alpha: 1)
 		static let whiteTwo = Color(red: 249/255.0, green: 249/255.0, blue: 249/255.0, alpha: 1)
 		static let brownGrey = Color(red: 166/255.0, green: 166/255.0, blue: 166/255.0, alpha: 1)
+		static let veryLightPink = Color(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1)
+		static let blackTwo = Color(red: 28/255.0, green: 28/255.0, blue: 28/255.0, alpha: 1)
 	}
 }

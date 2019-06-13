@@ -13,26 +13,68 @@ import Foundation
 import UIKit
 import KinUtil
 
-@available(iOS 9.0, *)
 struct OfferViewModel {
     
-    let id: String
-    let subtitle: NSAttributedString
-    fileprivate var imageSource: String
-    var image: Promise<ImageCacheResult> {
+    let model: Offer
+    let theme: Theme
+    
+    private var title: NSAttributedString {
+        
+        let cellTitle = model.title
+        var attributed: NSAttributedString!
+        var amount: NSAttributedString!
+        
+        if case .earn = model.offerType {
+            attributed = (cellTitle + " ").styled(as: theme.earnTitle)
+            amount = "\(model.amount)".styled(as: theme.earnTitle)
+        } else {
+            attributed = (cellTitle + " ").styled(as: theme.spendTitle)
+            amount = "\(model.amount)".styled(as: theme.spendTitle)
+        }
+        
+        if let kinImage = UIImage(named: "balanceKinIcon",
+                                  in: KinBundle.ecosystem.rawValue,
+                                  compatibleWith: nil)?.withRenderingMode(.alwaysTemplate) {
+            let kinAttachment = NSTextAttachment()
+            kinAttachment.image = kinImage
+            attributed = attributed + NSAttributedString(attachment: kinAttachment)
+        }
+        
+        return attributed + amount
+    }
+        
+    private var subtitle: NSAttributedString {
+        return model.description_.styled(as: theme.offerDetails)
+    }
+    
+    
+    private var image: Promise<ImageCacheResult> {
         get {
-            return ImageCache.shared.image(for: URL(string:imageSource))
+            return ImageCache.shared.image(for: URL(string: model.image))
         }
     }
-    let title: NSAttributedString
-    let amount: NSAttributedString
     
-    init(with model: Offer) {
-        id = model.id
-        imageSource = model.image
-        title = model.title.attributed(16.0, weight: .regular, color: .kinBlueGrey)
-        subtitle = model.description_.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-        amount = ((model.offerType == .earn ? "+" : "") + "\(Decimal(model.amount).currencyString()) Kin").attributed(14.0, weight: .medium, color: .kinDeepSkyBlue)
+    private var cellBorderColor: UIColor {
+        return theme.cellBorderColor
     }
     
+    
+    init(with model: Offer, theme: Theme) {
+        self.model = model
+        self.theme = theme
+    }
+    
+    func setup(_ cell: OfferCell) {
+        cell.layer.cornerRadius = 5.0
+        cell.layer.borderWidth = 1.0
+        cell.layer.borderColor = theme.cellBorderColor.cgColor
+        cell.offerTitle.attributedText = title
+        cell.offerText.attributedText = subtitle
+        image.then(on: .main) { [weak cell] result in
+            cell?.offerImageView.image = result.image
+        }.error { error in
+                logError("error in offer cell image fetch: \(error.localizedDescription)")
+        }
+    }
+ 
 }

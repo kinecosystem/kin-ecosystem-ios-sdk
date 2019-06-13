@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="gTV-IL-0wX" customClass="OfferCell" customModule="KinEcosystem" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="439" height="132"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
+                <rect key="frame" x="0.0" y="0.0" width="439" height="132"/>
+                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="V8G-Vn-Knp">
+                        <rect key="frame" x="16" y="27.5" width="77" height="77"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="77" id="3Sc-Ay-G25"/>
+                            <constraint firstAttribute="width" constant="77" id="ZlL-Zq-Tm4"/>
+                        </constraints>
+                    </imageView>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="Vhg-Lg-iHc">
+                        <rect key="frame" x="105" y="31.5" width="314" height="69.5"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jDB-y9-Bfa">
+                                <rect key="frame" x="0.0" y="0.0" width="314" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="The quick brown fox The quick brown fox The quick brown fox" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1h-F5-LRw">
+                                <rect key="frame" x="0.0" y="28.5" width="314" height="41"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+            </view>
+            <constraints>
+                <constraint firstItem="Vhg-Lg-iHc" firstAttribute="leading" secondItem="V8G-Vn-Knp" secondAttribute="trailing" constant="12" id="fSy-ht-VHv"/>
+                <constraint firstItem="V8G-Vn-Knp" firstAttribute="leading" secondItem="gTV-IL-0wX" secondAttribute="leading" constant="16" id="gDR-uq-is1"/>
+                <constraint firstAttribute="trailing" secondItem="Vhg-Lg-iHc" secondAttribute="trailing" constant="20" id="gsC-Y5-cg6"/>
+                <constraint firstItem="Vhg-Lg-iHc" firstAttribute="centerY" secondItem="V8G-Vn-Knp" secondAttribute="centerY" id="lwO-X9-Flw"/>
+                <constraint firstItem="V8G-Vn-Knp" firstAttribute="centerY" secondItem="gTV-IL-0wX" secondAttribute="centerY" id="o0d-oH-BDe"/>
+            </constraints>
+            <size key="customSize" width="439" height="132"/>
+            <connections>
+                <outlet property="offerImageView" destination="V8G-Vn-Knp" id="Tnp-4f-6PR"/>
+                <outlet property="offerText" destination="K1h-F5-LRw" id="ZGb-pW-VKC"/>
+                <outlet property="offerTitle" destination="jDB-y9-Bfa" id="JwD-Vz-I8v"/>
+            </connections>
+            <point key="canvasLocation" x="150" y="-65.625"/>
+        </collectionViewCell>
+    </objects>
+</document>

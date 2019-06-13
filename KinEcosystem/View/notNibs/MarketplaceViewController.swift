@@ -101,22 +101,7 @@ class MarketplaceViewController: KinNavigationChildController {
                     return
             }
             
-            var viewModel: OfferViewModel
-            if let offerViewModel = this.offerViewModels[offer.id] {
-                viewModel = offerViewModel
-            } else {
-                viewModel = OfferViewModel(with: offer)
-                this.offerViewModels[offer.id] = viewModel
-            }
-            earnCell.title.attributedText = viewModel.title
-            earnCell.imageView.image = nil
-            viewModel.image.then(on: .main) { [weak earnCell] result in
-                earnCell?.imageView.image = result.image
-                }.error { error in
-                    logWarn("cell image error: \(error)")
-            }
-            earnCell.amount.attributedText = viewModel.amount
-            earnCell.subtitle.attributedText = viewModel.subtitle
+            
         }
         earnOffersCollectionView.add(fetchedResultsSection: earnSection)
         
@@ -128,22 +113,7 @@ class MarketplaceViewController: KinNavigationChildController {
                     return
             }
             
-            var viewModel: OfferViewModel
-            if let offerViewModel = this.offerViewModels[offer.id] {
-                viewModel = offerViewModel
-            } else {
-                viewModel = OfferViewModel(with: offer)
-                this.offerViewModels[offer.id] = viewModel
-            }
-            spendCell.title.attributedText = viewModel.title
-            spendCell.imageView.image = nil
-            viewModel.image.then(on: .main) { [weak spendCell] result in
-                spendCell?.imageView.image = result.image
-                }.error { error in
-                    logWarn("cell image error: \(error)")
-            }
-            spendCell.amount.attributedText = viewModel.amount
-            spendCell.subtitle.attributedText = viewModel.subtitle
+            
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
         if let emptyState = UIImage(named: "spaceship", in: KinBundle.ecosystem.rawValue, compatibleWith: nil) {

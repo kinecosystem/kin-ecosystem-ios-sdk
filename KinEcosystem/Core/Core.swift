@@ -59,6 +59,7 @@ class Core {
         migration/info/:app_id/:account_address
     */
     
+    @discardableResult
     func onboard() -> Promise<Void> {
         
         if onboarded {
@@ -107,7 +108,7 @@ class Core {
     @discardableResult
     func offboard() -> Promise<Void> {
         let p = Promise<Void>()
-        network.unAuthorize().then {
+        network.unAuthorize().finally {
             self.blockchain.offboard()
             self.jwt = nil
             p.signal(())

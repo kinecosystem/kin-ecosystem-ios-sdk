@@ -28,8 +28,22 @@ struct Theme {
     var settingsRowTitle: TextStyle
     var infoText: TextStyle
     var infoTitle: TextStyle
+    
     // colors
     var viewControllerColor: UIColor
+    
+    var purpleButtonEnabledColor: UIColor
+    var purpleButtonDisabledColor: UIColor
+    var purpleButtonHighlightedColor: UIColor
+    var greenButtonEnabledColor: UIColor
+    var greenButtonDisabledColor: UIColor
+    var greenButtonHighlightedColor: UIColor
+    
+    var closeButtonTint: UIColor
+    var dotsLoaderTint: UIColor
+    var kinBalanceIconTint: UIColor
+    
+    var cellBorderColor: UIColor
 }
 
 extension Theme {
@@ -54,7 +68,19 @@ extension Theme {
                              settingsRowTitle: TextStyle.settingsRowTitleLightTheme,
                              infoText: TextStyle.infoTextLightTheme,
                              infoTitle: TextStyle.infoTitleLightTheme,
-                             viewControllerColor: .kinWhite)
+                             viewControllerColor: .kinWhite,
+                             purpleButtonEnabledColor: Color.KinNewUi.bluishPurple,
+                             purpleButtonDisabledColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25).grayed(),
+                             purpleButtonHighlightedColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25),
+                             greenButtonEnabledColor: Color.KinNewUi.tealish,
+                             greenButtonDisabledColor: Color.KinNewUi.tealish.adjustBrightness(0.25).grayed(),
+                             greenButtonHighlightedColor: Color.KinNewUi.tealish.adjustBrightness(0.25),
+                             closeButtonTint: Color.KinNewUi.brownGrey,
+                             dotsLoaderTint: Color.KinNewUi.bluishPurple,
+                             kinBalanceIconTint: Color.KinNewUi.bluishPurple,
+                             cellBorderColor: Color.KinNewUi.veryLightPink
+                             )
+    
 }
 
 
@@ -69,7 +95,7 @@ protocol Themed {
 }
 
 extension Themed where Self: AnyObject {
-    func setUpTheming() {
+    func setupTheming() {
         if let theme = KinThemeProvider.shared.currentTheme.value {
             applyTheme(theme)
         }

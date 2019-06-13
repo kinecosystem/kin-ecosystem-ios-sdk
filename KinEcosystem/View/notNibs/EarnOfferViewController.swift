@@ -31,9 +31,22 @@ class EarnOfferViewController: KinViewController {
 
     var web: WKWebView!
     var offerId: String?
-    var core: Core!
+    weak var core: Core!
     fileprivate(set) var earn = Promise<String>()
     fileprivate var hideStatusBar = false
+    
+    init(core: Core) {
+        self.core = core
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+        fatalError("EarnOfferViewController must init with core")
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("EarnOfferViewController must init with core")
+    }
 
     let viewportScriptString = "var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); meta.setAttribute('initial-scale', '1.0'); meta.setAttribute('maximum-scale', '1.0'); meta.setAttribute('minimum-scale', '1.0'); meta.setAttribute('user-scalable', 'no'); document.getElementsByTagName('head')[0].appendChild(meta);"
     let disableSelectionScriptString = "document.documentElement.style.webkitUserSelect='none';"

@@ -232,6 +232,7 @@
 		E9E913F521B7311F0097EE21 /* AccountSelectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */; };
 		E9EBA02520287F0500B21DFD /* EcosystemData.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02420287F0500B21DFD /* EcosystemData.swift */; };
 		E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EBA02620288C1800B21DFD /* EcosystemNet.swift */; };
+		E9EFF328229BDF3000854E41 /* SheetNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9EFF326229BDF3000854E41 /* SheetNavigationViewController.swift */; };
 		E9FC5999203B19A800D1DA2B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E9FC5998203B19A800D1DA2B /* Assets.xcassets */; };
 		E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FC599A203B24C100D1DA2B /* Decimal+Currency.swift */; };
 		ED6E34E9179E1A5BCF0E0F64 /* back_button_on_welcome_screen_page_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FB8187A27721A00FB1495D7C /* back_button_on_welcome_screen_page_tapped.swift */; };
@@ -493,6 +494,7 @@
 		E9E913F421B7311F0097EE21 /* AccountSelectionTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountSelectionTests.swift; sourceTree = "<group>"; };
 		E9EBA02420287F0500B21DFD /* EcosystemData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemData.swift; sourceTree = "<group>"; };
 		E9EBA02620288C1800B21DFD /* EcosystemNet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EcosystemNet.swift; sourceTree = "<group>"; };
+		E9EFF326229BDF3000854E41 /* SheetNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SheetNavigationViewController.swift; sourceTree = "<group>"; };
 		E9FC5998203B19A800D1DA2B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E9FC599A203B24C100D1DA2B /* Decimal+Currency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decimal+Currency.swift"; sourceTree = "<group>"; };
 		EE3E64F5FC12F55EB3A475FF /* backup_completed_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_completed_page_viewed.swift; sourceTree = "<group>"; };
@@ -910,6 +912,7 @@
 				E9753C10206BD4AB0023CF94 /* CouponViewController.swift */,
 				E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */,
 				917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */,
+				E9EFF326229BDF3000854E41 /* SheetNavigationViewController.swift */,
 			);
 			path = notNibs;
 			sourceTree = "<group>";
@@ -1284,6 +1287,7 @@
 				4DCB27D7309E2FAE05CBC410 /* user_login_succeeded.swift in Sources */,
 				E3BAC8DFB934956D10E160F2 /* stellar_kin_trustline_setup_failed.swift in Sources */,
 				4956563E1B61C7D3A8AB5AAB /* restore_password_entry_back_button_tapped.swift in Sources */,
+				E9EFF328229BDF3000854E41 /* SheetNavigationViewController.swift in Sources */,
 				3759E2B5BA37356AD35383D0 /* confirm_purchase_button_tapped.swift in Sources */,
 				CE3669355A003DA6930C332B /* backup_create_password_page_viewed.swift in Sources */,
 				D18580D9F9ED5DCDFFACCCC9 /* backup_qr_code_myqrcode_button_tapped.swift in Sources */,

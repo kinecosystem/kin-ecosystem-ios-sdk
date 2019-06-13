@@ -77,3 +77,10 @@
 "kinecosystem_move_kin_accept_message" = "In order to send Kin, %@ would like to receive your Kin account information (i.e. your public address) from %@.";
 "kinecosystem_move_kin_accept_button_title" = "I Agree";
 "kinecosystem_thisapp" = "this app";
+
+// new ui
+
+"whats_kin" = "What is Kin?";
+"kin_is_a_digital_currency" = "Kin is a digital currency that makes your favorite apps even better.";
+"lets_go" = "Let's go";
+"what_are_you_in_the_mood_for" = "What are you in the mood for?";

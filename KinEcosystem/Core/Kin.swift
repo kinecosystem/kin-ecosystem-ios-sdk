@@ -59,8 +59,8 @@ public struct NativeOffer: Equatable {
 }
 
 @available(iOS 9.0, *)
-public class Kin {
-    
+public class Kin: NSObject {
+
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate weak var mpPresentingController: UIViewController?
@@ -71,8 +71,9 @@ public class Kin {
     fileprivate let psNativeOLock = NSLock()
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
+    fileprivate var entrypointFlowController: EntrypointFlowController?
     
-    fileprivate init() {
+    fileprivate override init() {
         UIFont.loadFonts(from: KinBundle.fonts.rawValue)
     }
     
@@ -316,9 +317,9 @@ public class Kin {
         }
         
         mpPresentingController = parentViewController
-        if isActivated {
-            let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
-            mpViewController.core = core
+        
+            //let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
+            //mpViewController.core = core
 //            let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
 //                                                                   bundle: KinBundle.ecosystem.rawValue,
 //                                                                   rootViewController: mpViewController,
@@ -326,14 +327,16 @@ public class Kin {
 //            if case EcosystemExperience.history = experience {
 //                navigationController.transitionToOrders(animated: false)
 //            }
-            let navigationController = SheetNavigationController(rootViewController: mpViewController)
-            navigationController.cover = .most
-            parentViewController.present(navigationController, animated: true)
-        } else {
-            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: KinBundle.ecosystem.rawValue)
-            welcomeVC.core = core
-            parentViewController.present(welcomeVC, animated: true)
-        }
+            //
+            
+        entrypointFlowController = EntrypointFlowController(presentingViewController: parentViewController, core: core)
+        entrypointFlowController!.delegate = self
+        entrypointFlowController!.start()
+//        } else {
+//            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: KinBundle.ecosystem.rawValue)
+//            welcomeVC.core = core
+//            parentViewController.present(welcomeVC, animated: true)
+//        }
     }
     
     public func hasAccount(peer: String, handler: @escaping (Bool?, Error?) -> ()) {
@@ -664,4 +667,16 @@ public class Kin {
     }
 }
 
+
+extension Kin: KinFlowControllerDelegate {
+    func flowControllerDidComplete(_ controller: KinFlowController) {
+        
+    }
+    
+    func flowControllerDidCancel(_ controller: KinFlowController) {
+        if controller is EntrypointFlowController {
+            entrypointFlowController = nil
+        }
+    }
+}
 
