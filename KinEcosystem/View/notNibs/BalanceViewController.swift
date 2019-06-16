@@ -19,9 +19,8 @@ class BalanceViewController: KinViewController {
     @IBOutlet weak var balanceAmount: UILabel!
     @IBOutlet weak var balance: UILabel!
     @IBOutlet weak var subtitle: UILabel!
-    @IBOutlet weak var rightAmountConstraint: NSLayoutConstraint!
-    @IBOutlet weak var rightArrowImage: UIImageView!
-
+    let themeLinkBag = LinkBag()
+    var theme: Theme?
     fileprivate var selected = false
     fileprivate let bag = LinkBag()
     fileprivate var watchedOrderStatus: OrderStatus?
@@ -49,6 +48,7 @@ class BalanceViewController: KinViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTheming()
         let lastBalance = Kin.shared.lastKnownBalance
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
             guard let this = self else { return }
@@ -83,29 +83,6 @@ class BalanceViewController: KinViewController {
         }
     }
 
-
-
-    func setSelected(_ selected: Bool, animated: Bool) {
-        guard self.selected != selected else { return }
-
-        self.selected = selected
-
-        self.rightAmountConstraint.constant = selected ? 0.0 : 20.0
-        let block = {
-            self.rightArrowImage.alpha = selected ? 0.0 : 1.0
-            self.view.layoutIfNeeded()
-        }
-
-        guard animated else {
-            block()
-            return
-        }
-
-        UIView.animate(withDuration: TimeInterval(UINavigationController.hideShowBarDuration)) {
-            block()
-        }
-    }
-
     func switchLabel(_ label: UILabel, text: NSAttributedString) {
         if let string = label.attributedText?.string {
             guard string != text.string else { return }
@@ -134,7 +111,7 @@ class BalanceViewController: KinViewController {
                 let amount = order.amount
                 self?.watchedOrderStatus = order.orderStatus
                 DispatchQueue.main.async {
-                    guard let label = self?.subtitle else { return }
+                    guard let label = self?.subtitle, let theme = self?.theme else { return }
                     switch status {
                     case .completed:
                         self?.switchLabel(label, text: (spend ? "kinecosystem_spend_completed".localized() : "kinecosystem_earn_completed".localized("\(amount)")).attributed(14.0, weight: .regular, color: .kinDeepSkyBlue))
@@ -150,4 +127,10 @@ class BalanceViewController: KinViewController {
         }
     }
 
+}
+
+extension BalanceViewController: Themed {
+    func applyTheme(_ theme: Theme) {
+        self.theme = theme
+    }
 }

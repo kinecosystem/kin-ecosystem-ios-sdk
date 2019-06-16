@@ -124,7 +124,7 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
         transitionController.addChild(viewController)
         viewController.kinNavigationController = self
 
-        balanceViewController.setSelected(viewController is OrdersViewController, animated: animated)
+        
 
         guard animated else {
             outView?.removeFromSuperview()
@@ -180,7 +180,7 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
         inView.frame = leftFrame
         container.addSubview(inView)
 
-        balanceViewController.setSelected(inController is OrdersViewController, animated: animated)
+        
 
         guard animated else {
             inView.frame = frame

@@ -12,7 +12,8 @@ import CoreData
 
 protocol OffersViewControllerDelegate: class {
     func offersViewControllerDidTapCloseButton()
-    func offersViewController(controller: OffersViewController, didTap offer: Offer)
+    func offersViewController(_ controller: OffersViewController, didTap offer: Offer)
+    func offersViewControllerDidTapSettingsButton()
 }
 
 class OffersViewController: UIViewController {
@@ -30,7 +31,7 @@ class OffersViewController: UIViewController {
     fileprivate let bag = LinkBag()
     let themeLinkBag = LinkBag()
     let balanceView = BalanceView(64.0, 20.0)
-    weak var flowDelegate: OffersViewControllerDelegate?
+    weak var delegate: OffersViewControllerDelegate?
 
     init(core: Core) {
         self.core = core
@@ -57,16 +58,21 @@ class OffersViewController: UIViewController {
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "closeBtn",
                                                                           in: KinBundle.ecosystem.rawValue,
                                                                           compatibleWith: nil),
-                                                           style: .plain,
-                                                           target: nil,
-                                                           action: nil)
-        navigationItem.leftBarButtonItem?.actionClosure = { [weak self] in
-            self?.flowDelegate?.offersViewControllerDidTapCloseButton()
+                                                           style: .plain) { [weak self] in
+            self?.delegate?.offersViewControllerDidTapCloseButton()
         }
         navigationItem.titleView = balanceView
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: nil, style: .plain) { [weak self] in
+            self?.delegate?.offersViewControllerDidTapSettingsButton()
+        }
         setupTheming()
         setupCollectionView()
         setupFRCSection()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        updateSettingsBadgeIfNeeded()
     }
     
     fileprivate func setupFRCSection() {
@@ -127,6 +133,25 @@ class OffersViewController: UIViewController {
         collectionView.register(UINib(nibName: cellIdentifier, bundle: KinBundle.ecosystem.rawValue),
                                           forCellWithReuseIdentifier: cellIdentifier)
     }
+    
+    fileprivate func updateSettingsBadgeIfNeeded() {
+        guard   let theme = theme,
+                let settingsImage = UIImage.bundleImage(theme.settingsIconImageName),
+                let badgeImage = UIImage.bundleImage(theme.settingsIconBadgeImageName) else {
+            return
+        }
+        if core.blockchain.isBackedUp == false {
+            core.blockchain.balance().then { [weak self] balance in
+                DispatchQueue.main.async {
+                    self?.navigationItem.rightBarButtonItem?.image = balance > 0 ?
+                        settingsImage.overlayed(with: badgeImage)?.withRenderingMode(.alwaysOriginal) :
+                        settingsImage.withRenderingMode(.alwaysOriginal)
+                }
+            }
+        } else {
+            navigationItem.rightBarButtonItem?.image = settingsImage.withRenderingMode(.alwaysOriginal)
+        }
+    }
 
 }
 
@@ -135,6 +160,7 @@ extension OffersViewController: Themed {
         self.theme = theme
         titleLabel.attributedText = "what_are_you_in_the_mood_for".localized().styled(as: theme.title20)
         navigationItem.leftBarButtonItem?.tintColor = theme.closeButtonTint
+        navigationItem.rightBarButtonItem?.image = UIImage.bundleImage(theme.settingsIconImageName)?.withRenderingMode(.alwaysOriginal)
     }
 }
 
@@ -160,7 +186,7 @@ extension OffersViewController: UICollectionViewDelegate, UICollectionViewDataSo
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
-        flowDelegate?.offersViewController(controller: self, didTap: offer)
+        delegate?.offersViewController(self, didTap: offer)
 
     }
     

@@ -57,21 +57,21 @@ class EntrypointFlowController: KinFlowController {
             if core.onboarded {
                 showExperience()
             } else {
-                showWhatsKin(loading: true)
+                showWhatsKin(onboarding: true)
             }
         } else {
-            showWhatsKin(loading: false)
+            showWhatsKin(onboarding: false)
         }
         
     }
     
-    func showWhatsKin(loading: Bool) {
+    func showWhatsKin(onboarding: Bool) {
         whatsKin = WhatsKinViewController()
-        whatsKin!.flowDelegate = self
+        whatsKin!.delegate = self
         navigationControllerWrapper.pushViewController(whatsKin!, animated: false)
         presentingViewController.present(navigationControllerWrapper, animated: true)
-        whatsKin!.setLoaderHidden(!loading)
-        if loading {
+        whatsKin!.setLoaderHidden(!onboarding)
+        if onboarding {
             core.onboard().then(on: .main) { [weak self] in
                 self?.showExperience()
             }.error { error in
@@ -85,7 +85,7 @@ class EntrypointFlowController: KinFlowController {
         let presented = presentingViewController.presentedViewController == navigationControllerWrapper
         let hasControllers = navigationControllerWrapper.wrappedNavigationController.viewControllers.count > 0
         let mpViewController = OffersViewController(core: core)
-        mpViewController.flowDelegate = self
+        mpViewController.delegate = self
         navigationControllerWrapper.pushViewController(mpViewController, animated: presented && hasControllers)
         if !presented {
             presentingViewController.present(navigationControllerWrapper, animated: true)
@@ -108,6 +108,7 @@ class EntrypointFlowController: KinFlowController {
 }
 
 extension EntrypointFlowController: WhatsKinViewControllerDelegate {
+    
     func whatsKinViewControllerDidTapCloseButton() {
         cancelFlow()
     }
@@ -128,11 +129,12 @@ extension EntrypointFlowController: WhatsKinViewControllerDelegate {
 }
 
 extension EntrypointFlowController: OffersViewControllerDelegate {
+    
     func offersViewControllerDidTapCloseButton() {
         cancelFlow()
     }
     
-    func offersViewController(controller: OffersViewController, didTap offer: Offer) {
+    func offersViewController(_ controller: OffersViewController, didTap offer: Offer) {
         
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer
@@ -160,30 +162,22 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
             showHTMLController(with: offer)
             
         default: // spend
-            guard   let data = offer.content.data(using: .utf8),
-                let viewModel = try? JSONDecoder().decode(SpendViewModel.self, from: data) else {
-                    logError("offer content is not in the correct format")
-                    return
-            }
-            guard let amount = core.blockchain.lastBalance?.amount,
-                amount >= Decimal(offer.amount) else {
-                    showNotEnoughKinController()
-                    return
-            }
             
-
-
+            logError("native spend isn't supported")
+            
         }
+    }
+    
+    func offersViewControllerDidTapSettingsButton() {
+        
     }
     
     func showHTMLController(with offer: Offer) {
         
         let htmlController = EarnOfferViewController(core: core)
         htmlController.offerId = offer.id
-        htmlController.title = offer.title
-        let navContoller = KinBaseNavigationController(rootViewController: htmlController)
-        
-        navigationControllerWrapper.present(navContoller, animated: true)
+        htmlController.delegate = self
+        navigationControllerWrapper.present(htmlController, animated: true)
         
         if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
             Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
@@ -197,4 +191,11 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
         
     }
     
+}
+
+extension EntrypointFlowController: EarnOfferViewControllerDelegate {
+    func earnOfferViewControllerDidFinish(_ controller: EarnOfferViewController) {
+        guard controller.isBeingDismissed == false else { return }
+        controller.dismiss(animated: true)
+    }
 }

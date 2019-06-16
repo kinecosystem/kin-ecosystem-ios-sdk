@@ -22,7 +22,7 @@ class WhatsKinViewController: UIViewController {
     @IBOutlet weak var infoLabel: UILabel!
     @IBOutlet weak var dotsActivityIndicator: KinDotsActivityIndicator!
     
-    weak var flowDelegate: WhatsKinViewControllerDelegate?
+    weak var delegate: WhatsKinViewControllerDelegate?
     
     let themeLinkBag = LinkBag()
     
@@ -51,10 +51,10 @@ class WhatsKinViewController: UIViewController {
                                                            target: nil,
                                                            action: nil)
         navigationItem.leftBarButtonItem?.actionClosure = { [weak self] in
-            self?.flowDelegate?.whatsKinViewControllerDidTapCloseButton()
+            self?.delegate?.whatsKinViewControllerDidTapCloseButton()
         }
         button.actionClosure =  { [weak self] in
-            self?.flowDelegate?.whatsKinViewControllerDidTapLetsGoButton()
+            self?.delegate?.whatsKinViewControllerDidTapLetsGoButton()
         }
         setupTheming()
     }

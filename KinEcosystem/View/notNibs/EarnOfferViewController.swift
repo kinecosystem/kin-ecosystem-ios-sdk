@@ -26,12 +26,17 @@ enum EarnOfferHTMLError: Error {
     case js(Error)
 }
 
+protocol EarnOfferViewControllerDelegate: class {
+    func earnOfferViewControllerDidFinish(_ controller: EarnOfferViewController)
+}
+
 @available(iOS 9.0, *)
-class EarnOfferViewController: KinViewController {
+class EarnOfferViewController: UIViewController {
 
     var web: WKWebView!
     var offerId: String?
     weak var core: Core!
+    weak var delegate: EarnOfferViewControllerDelegate?
     fileprivate(set) var earn = Promise<String>()
     fileprivate var hideStatusBar = false
     
@@ -127,8 +132,7 @@ class EarnOfferViewController: KinViewController {
 
     @objc func userCanceled() {
         earn.signal(EarnOfferHTMLError.userCanceled)
-        guard isBeingDismissed == false else { return }
-        dismiss(animated: true)
+        delegate?.earnOfferViewControllerDidFinish(self)
     }
 }
 
@@ -143,15 +147,14 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
         case JSFunctions.handleResult.rawValue:
             guard let jsonString = (message.body as? NSArray)?.firstObject as? String else {
                 earn.signal(EarnOfferHTMLError.invalidJSResult)
-                dismiss(animated: true)
+                delegate?.earnOfferViewControllerDidFinish(self)
                 return
             }
             earn.signal(jsonString)
         case JSFunctions.handleCancel.rawValue:
             userCanceled()
         case JSFunctions.handleClose.rawValue:
-            guard isBeingDismissed == false else { return }
-            dismiss(animated: true)
+            delegate?.earnOfferViewControllerDidFinish(self)
         default:
             logWarn("unhandled webkit message received: \(message)")
         }
@@ -168,7 +171,7 @@ extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate,
         switch navigationAction.request.url?.scheme {
         case "mailto"?:
             let composeVC = MFMailComposeViewController()
-            // yep, we actually need this guard here. It does return a nil object when there's no mail accounts.
+            // yep, we actually need this guard here. It does return a nil object when there aren't any mail accounts.
             guard composeVC != nil else {
                 decisionHandler(.cancel)
                 return

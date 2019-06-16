@@ -44,6 +44,8 @@ struct Theme {
     var kinBalanceIconTint: UIColor
     
     var cellBorderColor: UIColor
+    var settingsIconImageName: String
+    var settingsIconBadgeImageName: String
 }
 
 extension Theme {
@@ -78,7 +80,10 @@ extension Theme {
                              closeButtonTint: Color.KinNewUi.brownGrey,
                              dotsLoaderTint: Color.KinNewUi.bluishPurple,
                              kinBalanceIconTint: Color.KinNewUi.bluishPurple,
-                             cellBorderColor: Color.KinNewUi.veryLightPink
+                             cellBorderColor: Color.KinNewUi.veryLightPink,
+                             settingsIconImageName: "myKinIconLight",
+                             settingsIconBadgeImageName: "myKinIconBadgeLight"
+        
                              )
     
 }

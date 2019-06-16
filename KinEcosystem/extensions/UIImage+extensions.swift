@@ -11,7 +11,20 @@ import UIKit
 
 @available(iOS 9.0, *)
 extension UIImage {
+    
     class func bundleImage(_ name: String) -> UIImage? {
         return UIImage(named: name, in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
     }
+    
+    func overlayed(with image: UIImage?) -> UIImage? {
+        UIGraphicsBeginImageContextWithOptions(size, false, 0.0)
+        self.draw(at: .zero)
+        if let image = image {
+            image.draw(at: .zero)
+        }
+        let ol = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return ol
+    }
+    
 }
