@@ -8,27 +8,8 @@
 import Foundation
 import KinMigrationModule
 
-enum KinButtonType {
-    case purple
-    case tealish
-}
-
 class KinButton: UIButton {
-    
-    
-    var didSetupTheme = false
-    fileprivate var type_: KinButtonType = .purple
-    
-    var type: KinButtonType {
-        get {
-            return type_
-        }
-        set {
-            type_ = newValue
-            setupTheming_()
-        }
-    }
-    
+
     let themeLinkBag = LinkBag()
     
     var enabledColor: UIColor = .clear
@@ -47,14 +28,6 @@ class KinButton: UIButton {
     
     private func commonInit() {
         layer.masksToBounds = true
-        setupTheming_()
-    }
-    
-    func setupTheming_() {
-        guard didSetupTheme == false else {
-            return
-        }
-        didSetupTheme = true
         setupTheming()
     }
     
@@ -85,16 +58,11 @@ class KinButton: UIButton {
 
 extension KinButton: Themed {
     func applyTheme(_ theme: Theme) {
-        switch type {
-        case .purple:
-            enabledColor = theme.purpleButtonEnabledColor
-            disabledColor = theme.purpleButtonDisabledColor
-            highlightedColor = theme.purpleButtonHighlightedColor
-        case .tealish:
-            enabledColor = theme.greenButtonEnabledColor
-            disabledColor = theme.greenButtonDisabledColor
-            highlightedColor = theme.greenButtonHighlightedColor
-        }
+
+            enabledColor = theme.actionButtonEnabledColor
+            disabledColor = theme.actionButtonDisabledColor
+            highlightedColor = theme.actionButtonHighlightedColor
+
         backgroundColor = isEnabled ? enabledColor : disabledColor
     }
 }

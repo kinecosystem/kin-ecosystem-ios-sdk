@@ -74,7 +74,7 @@ class WhatsKinViewController: UIViewController {
 extension WhatsKinViewController: Themed {
     func applyTheme(_ theme: Theme) {
         view.backgroundColor = theme.viewControllerColor
-        button.type = .purple
+
         button.setAttributedTitle("lets_go".localized().styled(as: theme.buttonTitle), for: [])
         titleLabel.attributedText = "whats_kin".localized().styled(as: theme.title20Condensed)
         infoLabel.attributedText = "kin_is_a_digital_currency".localized().styled(as: theme.subtitle14)

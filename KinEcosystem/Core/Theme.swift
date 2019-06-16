@@ -32,12 +32,9 @@ struct Theme {
     // colors
     var viewControllerColor: UIColor
     
-    var purpleButtonEnabledColor: UIColor
-    var purpleButtonDisabledColor: UIColor
-    var purpleButtonHighlightedColor: UIColor
-    var greenButtonEnabledColor: UIColor
-    var greenButtonDisabledColor: UIColor
-    var greenButtonHighlightedColor: UIColor
+    var actionButtonEnabledColor: UIColor
+    var actionButtonDisabledColor: UIColor
+    var actionButtonHighlightedColor: UIColor
     
     var closeButtonTint: UIColor
     var dotsLoaderTint: UIColor
@@ -46,6 +43,7 @@ struct Theme {
     var cellBorderColor: UIColor
     var settingsIconImageName: String
     var settingsIconBadgeImageName: String
+
 }
 
 extension Theme {
@@ -71,12 +69,9 @@ extension Theme {
                              infoText: TextStyle.infoTextLightTheme,
                              infoTitle: TextStyle.infoTitleLightTheme,
                              viewControllerColor: .kinWhite,
-                             purpleButtonEnabledColor: Color.KinNewUi.bluishPurple,
-                             purpleButtonDisabledColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25).grayed(),
-                             purpleButtonHighlightedColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25),
-                             greenButtonEnabledColor: Color.KinNewUi.tealish,
-                             greenButtonDisabledColor: Color.KinNewUi.tealish.adjustBrightness(0.25).grayed(),
-                             greenButtonHighlightedColor: Color.KinNewUi.tealish.adjustBrightness(0.25),
+                             actionButtonEnabledColor: Color.KinNewUi.bluishPurple,
+                             actionButtonDisabledColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25).grayed(),
+                             actionButtonHighlightedColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25),
                              closeButtonTint: Color.KinNewUi.brownGrey,
                              dotsLoaderTint: Color.KinNewUi.bluishPurple,
                              kinBalanceIconTint: Color.KinNewUi.bluishPurple,
