@@ -10,7 +10,6 @@ import Foundation
 
 @available(iOS 9.0, *)
 extension String {
-    
     func attributed(_ size: CGFloat, weight: UIFont.Weight, color: UIColor) -> NSAttributedString {
         return NSAttributedString(string: self,
                                   attributes: [.font : UIFont.systemFont(ofSize: size, weight: weight),
@@ -19,10 +18,9 @@ extension String {
 }
 
 extension NSAttributedString {
-    
     var kin: NSAttributedString {
         
-        if  let kinImage = UIImage.bundleImage("balanceKinIcon")?
+        if let kinImage = UIImage.bundleImage("balanceKinIcon")?
             .padded(with: UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right: 2.0))?
             .withRenderingMode(.automatic),
             let font = self.attributes(at: 0, effectiveRange: nil)[.font] as? UIFont {
@@ -35,7 +33,24 @@ extension NSAttributedString {
         }
         return self
     }
-    
+
+    func applyingTextAlignment(_ textAlignment: NSTextAlignment) -> NSAttributedString {
+        let mAttributedString = NSMutableAttributedString(attributedString: self)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = textAlignment
+        mAttributedString.addAttribute(.paragraphStyle,
+                                       value: paragraphStyle,
+                                       range: NSRange(location: 0, length: string.count))
+        return mAttributedString
+    }
+
+    func applyingTextColor(_ color: UIColor) -> NSAttributedString {
+        let mAttributedString = NSMutableAttributedString(attributedString: self)
+        mAttributedString.addAttribute(.foregroundColor,
+                                       value: color,
+                                       range: NSRange(location: 0, length: string.count))
+        return mAttributedString
+    }
 }
 
 func + (lhs: NSAttributedString, rhs: NSAttributedString) -> NSMutableAttributedString

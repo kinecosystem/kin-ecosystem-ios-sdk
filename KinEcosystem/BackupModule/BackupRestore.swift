@@ -101,7 +101,7 @@ public class BRManager: NSObject {
             return
         }
         
-        let navigationController = UINavigationController()
+        let navigationController = BRNavigationController()
         removeNavigationBarBackground(navigationController.navigationBar)
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)

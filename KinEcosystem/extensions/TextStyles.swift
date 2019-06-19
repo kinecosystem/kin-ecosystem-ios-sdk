@@ -11,6 +11,7 @@ enum TextStyle {
 	case title20LightTheme
 	case title18LightTheme
 	case subtitle14LightTheme
+    case subtitle12LightTheme
 	case title20CondensedLightTheme
 	case buttonTitleAnyTheme
 	case titleViewBalanceAnyTheme
@@ -21,6 +22,7 @@ enum TextStyle {
 	case offerDetailsDarkTheme
 	case balanceNotificationLightTheme
 	case lightSubtitle14AnyTheme
+    case lightSubtitle12AnyTheme
 	case historyRecentEarnAmountAnyTheme
 	case balanceAmountAnyTheme
 	case segmentSelectedTitleAnyTheme
@@ -36,6 +38,7 @@ enum TextStyle {
 	case infoTitleLightTheme
 	case title20CondensedDarkTheme
 	case subtitle14DarkTheme
+    case invalidPassword
 }
 
 extension TextStyle {
@@ -56,6 +59,15 @@ extension TextStyle {
 			return [.font: Font(name: "Sailec-Regular", size: 14) as Any,
 				.paragraphStyle: paragraphStyle,
 				.foregroundColor: Color.KinNewUi.black]
+
+        case .subtitle12LightTheme:
+            let paragraphStyle = NSMutableParagraphStyle()
+            paragraphStyle.alignment = .center
+            paragraphStyle.minimumLineHeight = 18
+
+            return [.font: Font(name: "Sailec-Regular", size: 12) as Any,
+                    .paragraphStyle: paragraphStyle,
+                    .foregroundColor: Color.KinNewUi.black]
 
 		case .title20CondensedLightTheme:
 			return [.font: Font(name: "Sailec-Medium", size: 20) as Any,
@@ -111,7 +123,11 @@ extension TextStyle {
 
 		case .lightSubtitle14AnyTheme:
 			return [.font: Font(name: "Sailec-Regular", size: 14) as Any,
-				.foregroundColor: Color.KinNewUi.brownGrey]
+				.foregroundColor: Color.KinNewUi.brownGray]
+
+        case .lightSubtitle12AnyTheme:
+            return [.font: Font(name: "Sailec-Regular", size: 12) as Any,
+                    .foregroundColor: Color.KinNewUi.brownGray]
 
 		case .historyRecentEarnAmountAnyTheme:
 			return [.font: Font(name: "Sailec-Medium", size: 16) as Any,
@@ -209,7 +225,9 @@ extension TextStyle {
 			return [.font: Font(name: "Sailec-Regular", size: 14) as Any,
 				.paragraphStyle: paragraphStyle,
 				.foregroundColor: Color.KinNewUi.whiteTwo]
-
+        case .invalidPassword:
+            return [.font: Font(name: "Sailec-Regular", size: 12) as Any,
+                    .foregroundColor: Color.KinNewUi.darkishPink]
 		}
 	}
 

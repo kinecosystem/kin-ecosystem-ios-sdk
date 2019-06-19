@@ -8,49 +8,53 @@ import KinUtil
 
 struct Theme {
     // text
-    var title20: TextStyle
-    var title18: TextStyle
-    var subtitle14: TextStyle
-    var title20Condensed: TextStyle
-    var buttonTitle: TextStyle
-    var titleViewBalance: TextStyle
-    var spendTitle: TextStyle
-    var offerDetails: TextStyle
-    var earnTitle: TextStyle
-    var balanceNotification: TextStyle
-    var lightSubtitle14: TextStyle
-    var historyRecentEarnAmount: TextStyle
-    var balanceAmount: TextStyle
-    var segmentSelectedTitle: TextStyle
-    var segmentUnselectedTitle: TextStyle
-    var historyAmount: TextStyle
-    var historyRecentSpendAmount: TextStyle
-    var settingsRowTitle: TextStyle
-    var infoText: TextStyle
-    var infoTitle: TextStyle
+    let title20: TextStyle
+    let title18: TextStyle
+    let subtitle14: TextStyle
+    let subtitle12: TextStyle
+    let title20Condensed: TextStyle
+    let buttonTitle: TextStyle
+    let titleViewBalance: TextStyle
+    let spendTitle: TextStyle
+    let offerDetails: TextStyle
+    let earnTitle: TextStyle
+    let balanceNotification: TextStyle
+    let lightSubtitle14: TextStyle
+    let historyRecentEarnAmount: TextStyle
+    let balanceAmount: TextStyle
+    let segmentSelectedTitle: TextStyle
+    let segmentUnselectedTitle: TextStyle
+    let historyAmount: TextStyle
+    let historyRecentSpendAmount: TextStyle
+    let settingsRowTitle: TextStyle
+    let infoText: TextStyle
+    let infoTitle: TextStyle
     
     // colors
-    var viewControllerColor: UIColor
+    let viewControllerColor: UIColor
     
-    var actionButtonEnabledColor: UIColor
-    var actionButtonDisabledColor: UIColor
-    var actionButtonHighlightedColor: UIColor
+    let actionButtonEnabledColor: UIColor
+    let actionButtonDisabledColor: UIColor
+    let actionButtonHighlightedColor: UIColor
     
-    var closeButtonTint: UIColor
-    var dotsLoaderTint: UIColor
-    var kinBalanceIconTint: UIColor
+    let closeButtonTint: UIColor
+    let dotsLoaderTint: UIColor
+    let kinBalanceIconTint: UIColor
     
-    var cellBorderColor: UIColor
-    var settingsIconImageName: String
-    var settingsIconBadgeImageName: String
+    let cellBorderColor: UIColor
+    let settingsIconImageName: String
+    let settingsIconBadgeImageName: String
 
+    let textFieldIdle: UIColor
+    let textFieldValid: UIColor
+    let textFieldInvalid: UIColor
 }
 
 extension Theme {
-    
     static let light = Theme(title20: TextStyle.title20LightTheme,
                              title18: TextStyle.title18LightTheme,
                              subtitle14: TextStyle.subtitle14LightTheme,
+                             subtitle12: TextStyle.subtitle12LightTheme,
                              title20Condensed: TextStyle.title20CondensedLightTheme,
                              buttonTitle: TextStyle.buttonTitleAnyTheme,
                              titleViewBalance: TextStyle.titleViewBalanceAnyTheme,
@@ -70,15 +74,17 @@ extension Theme {
                              infoTitle: TextStyle.infoTitleLightTheme,
                              viewControllerColor: .kinWhite,
                              actionButtonEnabledColor: Color.KinNewUi.bluishPurple,
-                             actionButtonDisabledColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25).grayed(),
+                             actionButtonDisabledColor: Color.KinNewUi.mercuryGray,
                              actionButtonHighlightedColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25),
-                             closeButtonTint: Color.KinNewUi.brownGrey,
+                             closeButtonTint: Color.KinNewUi.brownGray,
                              dotsLoaderTint: Color.KinNewUi.bluishPurple,
                              kinBalanceIconTint: Color.KinNewUi.bluishPurple,
                              cellBorderColor: Color.KinNewUi.veryLightPink,
                              settingsIconImageName: "myKinIconLight",
-                             settingsIconBadgeImageName: "myKinIconBadgeLight"
-        
+                             settingsIconBadgeImageName: "myKinIconBadgeLight",
+                             textFieldIdle: Color.KinNewUi.black,
+                             textFieldValid: Color.KinNewUi.bluishPurple,
+                             textFieldInvalid: Color.KinNewUi.darkishPink
                              )
     
 }

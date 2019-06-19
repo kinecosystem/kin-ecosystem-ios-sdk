@@ -9,13 +9,12 @@ import Foundation
 import KinMigrationModule
 
 class KinButton: UIButton {
-
     let themeLinkBag = LinkBag()
-    
+
     var enabledColor: UIColor = .clear
     var disabledColor: UIColor = .clear
     var highlightedColor: UIColor = .clear
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -27,8 +26,12 @@ class KinButton: UIButton {
     }
     
     private func commonInit() {
+        tintColor = .white
         layer.masksToBounds = true
         setupTheming()
+        titleLabel?.font = Font(name: "Sailec-Medium", size: 16)
+        setTitleColor(UIColor.KinNewUi.white, for: .normal)
+        setTitleColor(UIColor.KinNewUi.brownGray, for: .disabled)
     }
     
     override func layoutSubviews() {
@@ -55,13 +58,11 @@ class KinButton: UIButton {
     }
 }
 
-
 extension KinButton: Themed {
     func applyTheme(_ theme: Theme) {
-
-            enabledColor = theme.actionButtonEnabledColor
-            disabledColor = theme.actionButtonDisabledColor
-            highlightedColor = theme.actionButtonHighlightedColor
+        enabledColor = theme.actionButtonEnabledColor
+        disabledColor = theme.actionButtonDisabledColor
+        highlightedColor = theme.actionButtonHighlightedColor
 
         backgroundColor = isEnabled ? enabledColor : disabledColor
     }
