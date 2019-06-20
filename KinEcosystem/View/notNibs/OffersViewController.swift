@@ -13,7 +13,7 @@ import CoreData
 protocol OffersViewControllerDelegate: class {
     func offersViewControllerDidTapCloseButton()
     func offersViewController(_ controller: OffersViewController, didTap offer: Offer)
-    func offersViewControllerDidTapSettingsButton()
+    func offersViewControllerDidTapMyKinButton()
 }
 
 class OffersViewController: UIViewController {
@@ -63,7 +63,7 @@ class OffersViewController: UIViewController {
         }
         navigationItem.titleView = balanceView
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: nil, style: .plain) { [weak self] in
-            self?.delegate?.offersViewControllerDidTapSettingsButton()
+            self?.delegate?.offersViewControllerDidTapMyKinButton()
         }
         setupTheming()
         setupCollectionView()

@@ -48,8 +48,6 @@ struct Flows {
         }
 
             .then { order -> Promise<(String, OpenOrder)> in
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
-                                                object: order.id)
                 openOrder = order
                 Kin.track { try EarnOrderCreationReceived(offerID: order.offer_id, orderID: order.id, origin: .marketplace) }
                 return resultPromise
@@ -215,8 +213,6 @@ struct Flows {
 
             .then { order -> SDOFlowPromise in
                 openOrder = order
-                NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"),
-                                                object: order.id)
                 logVerbose("created order \(order.id)")
                 Kin.track { try SpendOrderCreationReceived(isNative: false, offerID: offerId, orderID: order.id, origin: .marketplace) }
                 return confirmPromise

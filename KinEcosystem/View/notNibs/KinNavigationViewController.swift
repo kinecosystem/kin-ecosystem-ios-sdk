@@ -50,7 +50,7 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.core = core
         self.rootViewController = rootViewController
-        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: KinBundle.ecosystem.rawValue, core: core)
+        self.balanceViewController = BalanceViewController(core: core)
         loadViewIfNeeded()
     }
 
@@ -86,14 +86,7 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
     }
 
     func transitionToOrders(animated: Bool = true) {
-        guard (kinChildViewControllers.last is OrdersViewController) == false else {
-            return
-        }
-        Kin.track { try BalanceTapped() }
-        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
-        ordersController.core = core
-        push(ordersController, animated: animated)
-    }
+            }
 
     func push(_ viewController: KinNavigationChildController, animated: Bool, completion: (() -> Void)? = nil) {
 

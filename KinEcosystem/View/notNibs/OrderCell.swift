@@ -13,7 +13,6 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var amount: UILabel!
-    @IBOutlet weak var icon: UIImageView!
     @IBOutlet weak var timelineView: OrderCellTimelineView!
     
     var last: Bool? {
@@ -23,10 +22,19 @@ class OrderCell: UITableViewCell {
             }
         }
     }
-    var color: UIColor? {
+    
+    var first: Bool? {
         didSet {
             if isAwake {
-                timelineView.color = color
+                timelineView.first = first
+            }
+        }
+    }
+    
+    var icon: UIImage? {
+        didSet {
+            if isAwake {
+                timelineView.icon = icon
             }
         }
     }
@@ -37,9 +45,10 @@ class OrderCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        if let last = last, let color = color {
+        if let last = last, let first = first, let icon = icon {
             timelineView.last = last
-            timelineView.color = color
+            timelineView.icon = icon
+            timelineView.first = first
         }
         isAwake = true
     }

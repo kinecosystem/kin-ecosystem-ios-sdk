@@ -168,8 +168,9 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
         }
     }
     
-    func offersViewControllerDidTapSettingsButton() {
-        
+    func offersViewControllerDidTapMyKinButton() {
+        let myKinController = OrdersViewController(core: core)
+        navigationControllerWrapper.pushViewController(myKinController, animated: true)
     }
     
     func showHTMLController(with offer: Offer) {

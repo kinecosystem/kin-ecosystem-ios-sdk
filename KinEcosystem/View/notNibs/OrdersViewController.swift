@@ -7,35 +7,57 @@
 //
 
 import UIKit
+import KinMigrationModule
 import CoreData
 import CoreDataStack
-import KinCoreSDK
 
 @available(iOS 9.0, *)
-class OrdersViewController : KinNavigationChildController {
+class OrdersViewController : UIViewController {
 
     var core: Core!
     
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
+    let themeLinkBag = LinkBag()
+    fileprivate var theme: Theme?
     
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var balanceContainer: UIView!
+    
+    convenience init(core: Core) {
+        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
+        self.core = core
+        loadViewIfNeeded()
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupExtraViews()
+        setupTheming()
         setupTableView()
         setupFRCSections()
-        setupNavigationItem()
         Kin.track { try OrderHistoryPageViewed() }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        NotificationCenter.default.post(name: NSNotification.Name(rawValue: "WatchOrderNotification"), object: nil)
     }
     
-    fileprivate func setupNavigationItem() {
-        self.title = "kinecosystem_transaction_history".localized()
+    fileprivate func setupExtraViews() {
+        let bvc = BalanceViewController(core: core)
+        bvc.willMove(toParent: self)
+        bvc.view.translatesAutoresizingMaskIntoConstraints = false
+        balanceContainer.addSubview(bvc.view)
+        addChild(bvc)
+        bvc.didMove(toParent: self)
+        NSLayoutConstraint.activate([
+            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor, constant: 0.0),
+            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor, constant: 0.0),
+            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor, constant: 0.0),
+            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor, constant: 0.0)
+            ])
+        bvc.view.setNeedsLayout()
+        title = "my_kin".localized()
     }
     
     fileprivate func setupTableView() {
@@ -45,13 +67,19 @@ class OrdersViewController : KinNavigationChildController {
     fileprivate func setupFRCSections() {
         let request = NSFetchRequest<Order>(entityName: "Order")
         request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
-        request.predicate = !NSPredicate(with: ["status" : OrderStatus.pending.rawValue]).or(["status" : OrderStatus.delayed.rawValue])
+        
+        // TODO: connect the last bit here (.and(["offer_type" : "earn / spend"])) to a seg controll
+        request.predicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
+            .or(["status" : OrderStatus.delayed.rawValue]))
+            .and(["offer_type" : "earn"])
+        
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
                                                               managedObjectContext: core.data.stack.viewContext,
                                                               sectionNameKeyPath: nil,
                                                               cacheName: nil)
         let section = FetchedResultsTableSection(table: tableView, frc: frc) { [weak self] cell, ip in
             guard   let this = self,
+                let theme = this.theme,
                 let order = this.tableView.objectForTable(at: ip) as? Order,
                 let orderCell = cell as? OrderCell else {
                     logWarn("cell configure failed")
@@ -62,16 +90,19 @@ class OrdersViewController : KinNavigationChildController {
             if let orderViewModel = this.orderViewModels[order.id] {
                 viewModel = orderViewModel
             } else {
-                viewModel = OrderViewModel(with: order, last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1)
+                viewModel = OrderViewModel(with: order,
+                                           theme: theme,
+                                           last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
+                                           first: ip.row == 0)
                 this.orderViewModels[order.id] = viewModel
             }
             
             orderCell.amount.attributedText = viewModel.amount
             orderCell.title.attributedText = viewModel.title
             orderCell.subtitle.attributedText = viewModel.subtitle
-            orderCell.icon.image = viewModel.image
             orderCell.last = viewModel.last
-            orderCell.color = viewModel.color
+            orderCell.first = viewModel.first
+            orderCell.icon = viewModel.icon
             
         }
         tableView.add(tableSection: section)
@@ -91,13 +122,7 @@ class OrdersViewController : KinNavigationChildController {
     }
     
     func presentCoupon(with viewModel: CouponViewModel, biData: CouponViewController.BIData) {
-        let controller = CouponViewController(nibName: "CouponViewController", bundle: KinBundle.ecosystem.rawValue)
-        controller.viewModel = viewModel
-        controller.biData = biData
-        let transition = SheetTransition()
-        controller.modalPresentationStyle = .custom
-        controller.transitioningDelegate = transition
-        kinNavigationController?.present(controller, animated: true)
+        
     }
 
 }
@@ -122,4 +147,12 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
         presentCoupon(for: order)
     }
     
+}
+
+
+extension OrdersViewController: Themed {
+    func applyTheme(_ theme: Theme) {
+        self.theme = theme
+        navigationController?.navigationBar.titleTextAttributes = theme.title20.attributes
+    }
 }

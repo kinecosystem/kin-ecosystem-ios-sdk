@@ -32,15 +32,7 @@ struct OfferViewModel {
             amount = "\(model.amount)".styled(as: theme.spendTitle)
         }
         
-        if let kinImage = UIImage(named: "balanceKinIcon",
-                                  in: KinBundle.ecosystem.rawValue,
-                                  compatibleWith: nil)?.withRenderingMode(.alwaysTemplate) {
-            let kinAttachment = NSTextAttachment()
-            kinAttachment.image = kinImage
-            attributed = attributed + NSAttributedString(attachment: kinAttachment)
-        }
-        
-        return attributed + amount
+        return attributed + amount.kin
     }
         
     private var subtitle: NSAttributedString {

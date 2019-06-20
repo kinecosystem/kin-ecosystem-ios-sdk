@@ -27,4 +27,13 @@ extension UIImage {
         return ol
     }
     
+    func padded(with insets: UIEdgeInsets) -> UIImage? {
+        let paddedSize = CGSize(width: size.width + insets.left + insets.right, height:size.height + insets.top + insets.bottom)
+        UIGraphicsBeginImageContextWithOptions(paddedSize, false, 0.0)
+        self.draw(at: CGPoint(x: insets.left, y: insets.top))
+        let pd = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        return pd
+    }
+    
 }

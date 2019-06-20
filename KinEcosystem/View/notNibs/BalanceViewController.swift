@@ -7,10 +7,7 @@
 //
 
 import UIKit
-import KinCoreSDK
-import KinUtil
-import StellarKit
-import CoreDataStack
+import KinMigrationModule
 
 @available(iOS 9.0, *)
 class BalanceViewController: KinViewController {
@@ -18,30 +15,15 @@ class BalanceViewController: KinViewController {
     var core: Core!
     @IBOutlet weak var balanceAmount: UILabel!
     @IBOutlet weak var balance: UILabel!
-    @IBOutlet weak var subtitle: UILabel!
     let themeLinkBag = LinkBag()
     var theme: Theme?
     fileprivate var selected = false
     fileprivate let bag = LinkBag()
-    fileprivate var watchedOrderStatus: OrderStatus?
 
-    fileprivate var entityWatcher: EntityWatcher<Order>?
-    fileprivate var currentOrderId: String?
-    var watchedOrderId: String? {
-        get {
-            return currentOrderId
-        }
-        set {
-            guard newValue != currentOrderId else { return }
-            currentOrderId = newValue
-            entityWatcher = nil
-            guard let orderId = currentOrderId else { return }
-            setupOrderWatcherFor(orderId)
-        }
-    }
     
-    convenience init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?, core: Core) {
-        self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
+    
+    convenience init(core: Core) {
+        self.init(nibName: "BalanceViewController", bundle: KinBundle.ecosystem.rawValue)
         self.core = core
         loadViewIfNeeded()
     }
@@ -51,12 +33,8 @@ class BalanceViewController: KinViewController {
         setupTheming()
         let lastBalance = Kin.shared.lastKnownBalance
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
-            guard let this = self else { return }
-
-            this.balanceAmount.attributedText = "\(balance.amount.currencyString())".attributed(24.0, weight: .regular,
-                                                                                        color: .kinDeepSkyBlue)
-
-
+            guard let this = self, let theme = this.theme else { return }
+            this.balanceAmount.attributedText = "\(balance.amount)".styled(as: theme.balanceAmount).kin
         }).add(to: bag)
         core.blockchain.balance().then { balance in
             if let oldBalance = lastBalance,
@@ -67,70 +45,18 @@ class BalanceViewController: KinViewController {
                 }
             }
         }
-        NotificationCenter.default.addObserver(forName: NSNotification.Name(rawValue: "WatchOrderNotification"), object: nil, queue: .main) { [weak self] note in
-            guard let orderId = note.object as? String else {
-
-                guard let status = self?.watchedOrderStatus, status != .pending else {
-                    return
-                }
-                guard let label = self?.subtitle else { return }
-                self?.switchLabel(label, text: "kinecosystem_welcome_to_kin_marketplace".localized().attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
-                self?.watchedOrderId = nil
-                self?.watchedOrderStatus = nil
-                return
-            }
-            self?.watchedOrderId = orderId
-        }
+        
     }
 
-    func switchLabel(_ label: UILabel, text: NSAttributedString) {
-        if let string = label.attributedText?.string {
-            guard string != text.string else { return }
-        }
-        label.layer.transform = CATransform3DIdentity
-        UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState], animations: {
-            label.layer.transform = CATransform3DRotate(label.layer.transform, CGFloat.pi / 2.0, 1.0, 0.0, 0.0)
-        }) { finished in
-            label.attributedText = text
-            UIView.animate(withDuration: 0.04, delay: 0.1, options: [.beginFromCurrentState], animations: {
-                label.layer.transform = CATransform3DIdentity
-            })
-        }
-    }
+    
 
-    func setupOrderWatcherFor(_ orderId: String) {
-        if let watcher = try? EntityWatcher<Order>(predicate: NSPredicate(with: ["id":orderId]), sortDescriptors: [], context: core.data.stack.viewContext) {
-            entityWatcher = watcher
-            entityWatcher?.on(EntityWatcher<Order>.Event.change, handler: { [weak self] change in
-                guard let order = change?.entity else {
-                    logWarn("Entity watcher inconsistent")
-                    return
-                }
-                let status = order.orderStatus
-                let spend = order.offerType == .spend
-                let amount = order.amount
-                self?.watchedOrderStatus = order.orderStatus
-                DispatchQueue.main.async {
-                    guard let label = self?.subtitle, let theme = self?.theme else { return }
-                    switch status {
-                    case .completed:
-                        self?.switchLabel(label, text: (spend ? "kinecosystem_spend_completed".localized() : "kinecosystem_earn_completed".localized("\(amount)")).attributed(14.0, weight: .regular, color: .kinDeepSkyBlue))
-                    case .pending:
-                        self?.switchLabel(label, text: (spend ? "kinecosystem_spend_pending".localized() : "kinecosystem_earn_pending").localized("\(amount)").attributed(14.0, weight: .regular, color: .kinBlueGreyTwo))
-                    case .failed:
-                        self?.switchLabel(label, text: "kinecosystem_something_went_wrong".localized().attributed(14.0, weight: .regular, color: .kinCoralPink))
-                    case .delayed:
-                        self?.switchLabel(label, text: "kinecosystem_sorry_this_may_take_some_time".localized().attributed(14.0, weight: .regular, color: .kinMango))
-                    }
-                }
-            })
-        }
-    }
+    
 
 }
 
 extension BalanceViewController: Themed {
     func applyTheme(_ theme: Theme) {
         self.theme = theme
+        balance.attributedText = "balance".localized().styled(as: theme.title18)
     }
 }
