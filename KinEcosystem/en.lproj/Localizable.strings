@@ -65,14 +65,15 @@
 "kinecosystem_backup_qr_continue" = "My QR code is saved";
 "kinecosystem_backup_qr_confirm" = "I've copied my QR code";
 
-"kinecosystem_restore_intro_title" = "Import your Kin";
-"kinecosystem_restore_intro_description" = "All you need is to upload the QR code we provided you.";
-"kinecosystem_restore_intro_continue" = "Upload your QR code";
+"kinecosystem_restore_intro_title" = "Load your Kin from a backup";
+"kinecosystem_restore_intro_description" = "First, upload the QR code you saved\n(Hint: Check your email to find it)";
+"kinecosystem_restore_intro_continue" = "Upload QR code";
 "kinecosystem_restore_intro_alert_title" = "Are you sure you want to restore your previous balance?";
 "kinecosystem_restore_intro_alert_message" = "Restoring your old balance will replace your current Kin balance.";
 
-"kinecosystem_restore_instructions" = "Great, we’re almost there!\nPlease enter your password";
+"kinecosystem_restore_instructions" = "Now, enter your password";
 "kinecosystem_restore_title" = "Restore Previous Wallet";
+"kinecosystem_restore_done" = "All set!\nYour Kin balance is updated";
 
 "kinecosystem_move_kin_accept_message" = "In order to send Kin, %@ would like to receive your Kin account information (i.e. your public address) from %@.";
 "kinecosystem_move_kin_accept_button_title" = "I Agree";

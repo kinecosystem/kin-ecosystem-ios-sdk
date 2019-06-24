@@ -84,22 +84,22 @@
                     <rect key="frame" x="37" y="64" width="301" height="483"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="OIq-nj-lp4">
-                            <rect key="frame" x="0.0" y="0.0" width="301" height="105.5"/>
+                            <rect key="frame" x="0.0" y="0.0" width="301" height="42"/>
                         </view>
                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" translatesAutoresizingMaskIntoConstraints="NO" id="R3L-Ms-1uG">
-                            <rect key="frame" x="0.0" y="106.5" width="301" height="112"/>
+                            <rect key="frame" x="0.0" y="43" width="301" height="112"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="112" id="mff-oW-QFB"/>
                             </constraints>
                         </imageView>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WQ7-44-uKE">
-                            <rect key="frame" x="0.0" y="219.5" width="301" height="30"/>
+                            <rect key="frame" x="0.0" y="156" width="301" height="30"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="30" id="OYi-fs-wrg"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="fmt-Ae-xyA">
-                            <rect key="frame" x="0.0" y="250.5" width="301" height="56"/>
+                            <rect key="frame" x="0.0" y="187" width="301" height="56"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="56" id="jx5-Xt-GXN"/>
                             </constraints>
@@ -115,13 +115,13 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6j0-fd-Bhq">
-                            <rect key="frame" x="0.0" y="307.5" width="301" height="12"/>
+                            <rect key="frame" x="0.0" y="244" width="301" height="12"/>
                             <constraints>
                                 <constraint firstAttribute="height" constant="12" id="cv3-QX-8Y6"/>
                             </constraints>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="1000" usesAttributedText="YES" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" preferredMaxLayoutWidth="275" translatesAutoresizingMaskIntoConstraints="NO" id="NqK-dk-mSJ">
-                            <rect key="frame" x="0.0" y="320.5" width="301" height="56"/>
+                            <rect key="frame" x="0.0" y="257" width="301" height="56"/>
                             <constraints>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="56" id="peR-ZA-CtA"/>
                             </constraints>
@@ -137,11 +137,11 @@
                             <nil key="highlightedColor"/>
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lQY-WM-azp">
-                            <rect key="frame" x="0.0" y="377.5" width="301" height="105.5"/>
+                            <rect key="frame" x="0.0" y="314" width="301" height="169"/>
                         </view>
                     </subviews>
                     <constraints>
-                        <constraint firstItem="OIq-nj-lp4" firstAttribute="height" secondItem="lQY-WM-azp" secondAttribute="height" id="bKj-p6-7pe"/>
+                        <constraint firstItem="OIq-nj-lp4" firstAttribute="height" secondItem="lQY-WM-azp" secondAttribute="height" multiplier="0.25" id="bKj-p6-7pe"/>
                     </constraints>
                 </stackView>
             </subviews>

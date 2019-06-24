@@ -10,6 +10,11 @@ import KinUtil
 
 class BRNavigationController: UINavigationController {
     let themeLinkBag = LinkBag()
+    var theme: Theme = .light
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return theme.preferredStatusBarStyle
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +26,6 @@ class BRNavigationController: UINavigationController {
 extension BRNavigationController: Themed {
     func applyTheme(_ theme: Theme) {
         navigationBar.titleTextAttributes = theme.title18.attributes
-        navigationBar.tintColor = theme.closeButtonTint
+        navigationBar.tintColor = theme.mainTintColor
     }
 }

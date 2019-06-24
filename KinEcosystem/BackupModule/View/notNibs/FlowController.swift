@@ -30,7 +30,7 @@ class FlowController: NSObject {
     }
     
     func syncNavigationBarColor(with viewController: UIViewController) {
-        navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
+//        navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
     }
     
     @objc func cancelFlow() {

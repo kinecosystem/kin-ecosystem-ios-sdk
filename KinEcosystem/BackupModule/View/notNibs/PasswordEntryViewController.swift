@@ -241,6 +241,6 @@ extension PasswordEntryViewController: Themed {
             .localized()
             .styled(as: theme.subtitle12)
             .applyingTextAlignment(.left)
-        confirmTick.layer.borderColor = theme.closeButtonTint.cgColor
+        confirmTick.layer.borderColor = theme.mainTintColor.cgColor
     }
 }

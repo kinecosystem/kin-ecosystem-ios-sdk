@@ -42,7 +42,7 @@ extension BackupFlowController {
         let viewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: KinBundle.ecosystem.rawValue)
         viewController.title = "kinecosystem_create_password".localized()
-        viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "1/2", style: .plain, target: nil, action: nil)
+        viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "1/2")
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
         navigationController.pushViewController(viewController, animated: true)
@@ -51,6 +51,7 @@ extension BackupFlowController {
     @objc private func pushQRViewController(with qrString: String) {
         let viewController = QRViewController(qrString: qrString)
         viewController.title = "kinecosystem_backup_qr_title".localized()
+        viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "2/2")
         viewController.lifeCycleDelegate = self
         viewController.delegate = self
         navigationController.pushViewController(viewController, animated: true)

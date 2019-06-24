@@ -32,6 +32,7 @@ struct Theme {
     
     // colors
     let viewControllerColor: UIColor
+    let mainTintColor: UIColor
     
     let actionButtonEnabledColor: UIColor
     let actionButtonDisabledColor: UIColor
@@ -48,6 +49,8 @@ struct Theme {
     let textFieldIdle: UIColor
     let textFieldValid: UIColor
     let textFieldInvalid: UIColor
+
+    let preferredStatusBarStyle: UIStatusBarStyle
 }
 
 extension Theme {
@@ -72,7 +75,8 @@ extension Theme {
                              settingsRowTitle: TextStyle.settingsRowTitleLightTheme,
                              infoText: TextStyle.infoTextLightTheme,
                              infoTitle: TextStyle.infoTitleLightTheme,
-                             viewControllerColor: .kinWhite,
+                             viewControllerColor: Color.KinNewUi.white,
+                             mainTintColor: Color.KinNewUi.black,
                              actionButtonEnabledColor: Color.KinNewUi.bluishPurple,
                              actionButtonDisabledColor: Color.KinNewUi.mercuryGray,
                              actionButtonHighlightedColor: Color.KinNewUi.bluishPurple.adjustBrightness(0.25),
@@ -84,7 +88,8 @@ extension Theme {
                              settingsIconBadgeImageName: "myKinIconBadgeLight",
                              textFieldIdle: Color.KinNewUi.black,
                              textFieldValid: Color.KinNewUi.bluishPurple,
-                             textFieldInvalid: Color.KinNewUi.darkishPink
+                             textFieldInvalid: Color.KinNewUi.darkishPink,
+                             preferredStatusBarStyle: .default
                              )
     
 }
