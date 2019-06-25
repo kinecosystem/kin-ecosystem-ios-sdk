@@ -156,11 +156,6 @@ extension QRViewController {
             return
         }
 
-        #if DEBUG
-        tickStack.isHidden = false
-        return
-        #endif
-
         Kin.track { try BackupQrCodeSendButtonTapped() }
         guard MFMailComposeViewController.canSendMail() else {
             presentEmailErrorAlert(.noClient)

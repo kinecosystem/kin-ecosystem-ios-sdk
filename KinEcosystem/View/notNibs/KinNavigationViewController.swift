@@ -173,8 +173,6 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
         inView.frame = leftFrame
         container.addSubview(inView)
 
-        
-
         guard animated else {
             inView.frame = frame
             outView.removeFromSuperview()
