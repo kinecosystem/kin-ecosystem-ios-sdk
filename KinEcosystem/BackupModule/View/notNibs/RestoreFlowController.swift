@@ -28,7 +28,7 @@ class RestoreFlowController: FlowController {
 @available(iOS 9.0, *)
 extension RestoreFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
-        syncNavigationBarColor(with: viewController)
+
     }
     
     func viewController(_ viewController: UIViewController, willDisappear animated: Bool) {

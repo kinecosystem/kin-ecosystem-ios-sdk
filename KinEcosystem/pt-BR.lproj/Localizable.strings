@@ -36,7 +36,7 @@
 
 "kinecosystem_settings_title" = "Settings";
 "kinecosystem_settings_row_backup" = "Keep your Kin safe";
-"kinecosystem_settings_row_restore" = "Restore previous wallet";
+"kinecosystem_settings_row_restore" = "Restore Kin from backup";
 
 "kinecosystem_backup_intro_title" = "Keep your Kin safe";
 "kinecosystem_backup_intro_description" = "Backing up your current balance will allow you to recover it in case you switch phones, delete the app or clear your data.";

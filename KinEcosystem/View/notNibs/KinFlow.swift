@@ -13,7 +13,6 @@ protocol KinFlowControllerDelegate: NSObject {
 }
 
 class KinFlowController {
-    
     weak var core: Core!
     weak var delegate: KinFlowControllerDelegate?
     let presentingViewController: UIViewController
@@ -22,21 +21,19 @@ class KinFlowController {
         self.presentingViewController = presentingViewController
         self.core = core
     }
-    
+
     func start() {}
-    
+
     func cancelFlow() {
         self.delegate?.flowControllerDidCancel(self)
     }
-    
 }
 
 class EntrypointFlowController: KinFlowController {
-    
     let navigationControllerWrapper: SheetNavigationControllerWrapper
     var startingExperience: EcosystemExperience = .marketplace
     var whatsKin: WhatsKinViewController?
-    
+
     var didTapLetsGo: Bool {
         get {
             return UserDefaults.standard.bool(forKey: KinPreferenceKey.didTapLetsGo.rawValue)
@@ -45,13 +42,13 @@ class EntrypointFlowController: KinFlowController {
             UserDefaults.standard.set(newValue, forKey: KinPreferenceKey.didTapLetsGo.rawValue)
         }
     }
-    
+
     override init(presentingViewController: UIViewController, core: Core) {
         navigationControllerWrapper = SheetNavigationControllerWrapper()
         navigationControllerWrapper.cover = .most
         super.init(presentingViewController: presentingViewController, core: core)
     }
-    
+
     override func start() {
         if didTapLetsGo {
             if core.onboarded {
@@ -64,7 +61,7 @@ class EntrypointFlowController: KinFlowController {
         }
         
     }
-    
+
     func showWhatsKin(onboarding: Bool) {
         whatsKin = WhatsKinViewController()
         whatsKin!.delegate = self
@@ -74,14 +71,11 @@ class EntrypointFlowController: KinFlowController {
         if onboarding {
             core.onboard().then(on: .main) { [weak self] in
                 self?.showExperience()
-            }.error { error in
-                    
-            }
+            }.error { _ in }
         }
     }
-    
+
     func showExperience() {
-        
         let presented = presentingViewController.presentedViewController == navigationControllerWrapper
         let hasControllers = navigationControllerWrapper.wrappedNavigationController.viewControllers.count > 0
         let mpViewController = OffersViewController(core: core)
@@ -91,28 +85,26 @@ class EntrypointFlowController: KinFlowController {
             presentingViewController.present(navigationControllerWrapper, animated: true)
         }        
     }
-    
+
     func cancelFlow(completion: @escaping () -> ()) {
         navigationControllerWrapper.dismiss(animated: true) {
             super.cancelFlow()
             completion()
         }
     }
-    
+
     override func cancelFlow() {
         navigationControllerWrapper.dismiss(animated: true) {
             super.cancelFlow()
         }
     }
-    
 }
 
 extension EntrypointFlowController: WhatsKinViewControllerDelegate {
-    
     func whatsKinViewControllerDidTapCloseButton() {
         cancelFlow()
     }
-    
+
     func whatsKinViewControllerDidTapLetsGoButton() {
         didTapLetsGo = true
         if core.onboarded {
@@ -121,19 +113,23 @@ extension EntrypointFlowController: WhatsKinViewControllerDelegate {
             whatsKin?.setLoaderHidden(false)
             core.onboard().then(on: .main) { [weak self] in
                 self?.showExperience()
-            }.error { error in
-                    
-            }
+            }.error { _ in }
         }
     }
 }
 
+extension EntrypointFlowController: OrdersViewControllerDelegate {
+    func ordersViewControllerDidTapSettings() {
+        let settingsViewController = SettingsViewController()
+        navigationControllerWrapper.pushViewController(settingsViewController, animated: true)
+    }
+}
+
 extension EntrypointFlowController: OffersViewControllerDelegate {
-    
     func offersViewControllerDidTapCloseButton() {
         cancelFlow()
     }
-    
+
     func offersViewController(_ controller: OffersViewController, didTap offer: Offer) {
         
         guard offer.offerContentType != .external else {
@@ -170,6 +166,7 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
     
     func offersViewControllerDidTapMyKinButton() {
         let myKinController = OrdersViewController(core: core)
+        myKinController.delegate = self
         navigationControllerWrapper.pushViewController(myKinController, animated: true)
     }
     

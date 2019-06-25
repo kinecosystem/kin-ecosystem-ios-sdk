@@ -36,7 +36,7 @@
 
 "kinecosystem_settings_title" = "Settings";
 "kinecosystem_settings_row_backup" = "Keep your Kin safe";
-"kinecosystem_settings_row_restore" = "Restore previous wallet";
+"kinecosystem_settings_row_restore" = "Restore Kin from backup";
 
 "kinecosystem_backup_intro_title" = "Keep your Kin safe";
 "kinecosystem_backup_intro_description" = "Back up your wallet so that you don’t lose your Kin if you change phones, delete the app or clear your data.\n\nTo do this, you’ll first need to create a password and save your unique QR code somewhere you can access it later.";

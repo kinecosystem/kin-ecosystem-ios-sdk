@@ -145,7 +145,6 @@ class MarketplaceViewController: KinNavigationChildController {
     @objc private func presentSettings() {
         Kin.track { try SettingsButtonTapped() }
         let settingsViewController = SettingsViewController()
-        settingsViewController.delegate = self
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = cancelItem
         
@@ -304,6 +303,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             
         }
     }
+
     func updateCollectionView(_ cv: UICollectionView, for numOfOffers: Int) {
         cv.backgroundView?.isHidden = numOfOffers > 0
         if cv == spendOffersCollectionView {
@@ -311,12 +311,5 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         } else {
             earnOffersLabel.text = numOfOffers > 0 ? "kinecosystem_complete_tasks_and_earn_kin".localized() : "kinecosystem_empty_tomorrow_more_opportunities".localized()
         }
-    }
-}
-
-@available(iOS 9.0, *)
-extension MarketplaceViewController: SettingsViewControllerDelegate {
-    var didPerformBackup: Bool {
-        return core.blockchain.isBackedUp || core.blockchain.lastBalance?.amount == 0
     }
 }
