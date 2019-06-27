@@ -13,13 +13,11 @@ import Foundation
 import UIKit
 import KinUtil
 
-struct OfferViewModel {
-    
+struct OfferViewModel {    
     let model: Offer
     let theme: Theme
-    
+
     private var title: NSAttributedString {
-        
         let cellTitle = model.title
         var attributed: NSAttributedString!
         var amount: NSAttributedString!
@@ -34,11 +32,10 @@ struct OfferViewModel {
         
         return attributed + amount.kin
     }
-        
+
     private var subtitle: NSAttributedString {
         return model.description_.styled(as: theme.offerDetails)
     }
-    
     
     private var image: Promise<ImageCacheResult> {
         get {

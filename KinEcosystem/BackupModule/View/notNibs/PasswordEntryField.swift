@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import KinUtil
 
 public enum PasswordEntryFieldState {
     case idle
@@ -15,7 +16,6 @@ public enum PasswordEntryFieldState {
 
 @available(iOS 9.0, *)
 class PasswordEntryField: UITextField {
-    
     public var entryState = PasswordEntryFieldState.idle {
         didSet {
             updateFieldStateStyle()
@@ -23,7 +23,9 @@ class PasswordEntryField: UITextField {
     }
     
     private let revealIcon = UIButton(37.0, 15.0)
-    
+    let themeLinkBag = LinkBag()
+    var theme: Theme?
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -35,18 +37,18 @@ class PasswordEntryField: UITextField {
     }
     
     private func commonInit() {
+        setupTheming()
         revealIcon.addTarget(self, action: #selector(revealPassword), for: .touchDown)
         revealIcon.addTarget(self, action: #selector(hidePassword), for: [.touchUpInside, .touchUpOutside, .touchCancel])
         revealIcon.contentMode = .topLeft
-        revealIcon.setImage(UIImage(named: "greyRevealIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil), for: .normal)
         revealIcon.imageEdgeInsets = UIEdgeInsets(top: 0.0, left: -15.0, bottom: 0.0, right: 0.0)
-        layer.cornerRadius = bounds.height / 2
         let paddingView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: 22.0, height: frame.height))
         UIView.performWithoutAnimation {
             rightView = revealIcon
             rightViewMode = .whileEditing
             rightView?.frame = rightViewRect(forBounds: bounds)
         }
+        layer.cornerRadius = 2
         layer.borderWidth = 1.0
         leftView = paddingView
         leftViewMode = .always
@@ -55,13 +57,15 @@ class PasswordEntryField: UITextField {
     }
     
     private func updateFieldStateStyle() {
+        let theme = self.theme ?? .light
+
         switch entryState {
         case .idle:
-            layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
+            layer.borderColor = theme.textFieldIdle.cgColor
         case .valid:
-            layer.borderColor = UIColor.kinPrimaryBlue.cgColor
+            layer.borderColor = theme.textFieldValid.cgColor
         case .invalid:
-            layer.borderColor = UIColor.kinWarning.cgColor
+            layer.borderColor = theme.textFieldInvalid.cgColor
         }
     }
     
@@ -83,5 +87,15 @@ class PasswordEntryField: UITextField {
             becomeFirstResponder()
         }
     }
-    
+}
+
+extension PasswordEntryField: Themed {
+    func applyTheme(_ theme: Theme) {
+        self.theme = theme
+
+        let revealImage = UIImage(named: "revealIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
+        revealIcon.setImage(revealImage,
+                            for: .normal)
+        updateFieldStateStyle()
+    }
 }

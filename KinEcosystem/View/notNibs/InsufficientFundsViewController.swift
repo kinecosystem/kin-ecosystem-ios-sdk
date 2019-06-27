@@ -7,37 +7,53 @@
 //
 
 import UIKit
+import KinUtil
 
 @available(iOS 9.0, *)
 class InsufficientFundsViewController: UIViewController {
-
-    @IBOutlet weak var imageView: UIImageView!
+    let themeLinkBag = LinkBag()
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var descriptionLabel: UILabel!
-    @IBOutlet weak var goButton: UIButton!
+    @IBOutlet weak var goButton: KinButton!
+    @IBOutlet weak var cancelButton: UIButton!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        titleLabel.attributedText = "kinecosystem_you_dont_have_enough_kin".localized().attributed(22.0, weight: .regular, color: .kinBlueGrey)
-        descriptionLabel.attributedText = "Go to the earn section to earn more Kin".attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
-        imageView.image = UIImage.bundleImage("kinlogo")
-        goButton.setAttributedTitle("Earn Offers".attributed(16.0, weight: .regular, color: .kinWhite), for: .normal)
-        goButton.backgroundColor = .kinDeepSkyBlue
-        goButton.adjustsImageWhenDisabled = false
+
+        setupTheming()
         Kin.track { try NotEnoughKinPageViewed() }
+
+        let balanceView = BalanceView()
+        balanceView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(balanceView)
+        cancelButton.centerYAnchor.constraint(equalTo: balanceView.centerYAnchor).isActive = true
+        view.centerXAnchor.constraint(equalTo: balanceView.centerXAnchor).isActive = true
     }
 
     @IBAction func goTapped(_ sender: Any) {
         close()
     }
+
     @IBAction func closeTapped(_ sender: Any) {
         close()
     }
     
     func close() {
-        let transition = SheetTransition()
-        self.modalPresentationStyle = .custom
-        self.transitioningDelegate = transition
-        self.dismiss(animated: true)
+        dismiss(animated: true)
     }
 }
 
+extension InsufficientFundsViewController: Themed {
+    func applyTheme(_ theme: Theme) {
+        titleLabel.attributedText = "kinecosystem_you_dont_have_enough_kin"
+            .localized()
+            .styled(as: theme.title20)
+        descriptionLabel.attributedText = "kinecosystem_you_dont_have_enough_kin_subtitle"
+            .localized()
+            .styled(as: theme.subtitle14)
+        let buttonTitle = "kinecosystem_goto_earn_section"
+            .localized()
+            .styled(as: theme.buttonTitle)
+        goButton.setAttributedTitle(buttonTitle, for: .normal)
+    }
+}

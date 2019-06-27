@@ -11,17 +11,20 @@ import KinMigrationModule
 
 @available(iOS 9.0, *)
 class BalanceViewController: KinViewController {
-
     var core: Core!
-    @IBOutlet weak var balanceAmount: UILabel!
-    @IBOutlet weak var balance: UILabel!
+    @IBOutlet weak var amountLabel: UILabel!
+    @IBOutlet weak var titleLabel: UILabel!
+    fileprivate(set) var balance = Balance(amount: 0) {
+        didSet {
+            updateBalance(balance)
+        }
+    }
+
     let themeLinkBag = LinkBag()
-    var theme: Theme?
+    var theme: Theme = .light
     fileprivate var selected = false
     fileprivate let bag = LinkBag()
 
-    
-    
     convenience init(core: Core) {
         self.init(nibName: "BalanceViewController", bundle: KinBundle.ecosystem.rawValue)
         self.core = core
@@ -30,11 +33,12 @@ class BalanceViewController: KinViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupTheming()
         let lastBalance = Kin.shared.lastKnownBalance
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
-            guard let this = self, let theme = this.theme else { return }
-            this.balanceAmount.attributedText = "\(balance.amount)".styled(as: theme.balanceAmount).kin
+            guard let self = self else { return }
+            self.balance = balance
         }).add(to: bag)
         core.blockchain.balance().then { balance in
             if let oldBalance = lastBalance,
@@ -45,18 +49,26 @@ class BalanceViewController: KinViewController {
                 }
             }
         }
-        
     }
 
-    
+    fileprivate func updateBalance(_ balance: Balance) {
+        let attributedText = NSMutableAttributedString(attributedString:  "\(balance.amount)".styled(as: theme.balanceAmount).kinPrefixed(with: textColor))
+        amountLabel.attributedText = attributedText
+    }
 
-    
+    var textColor: UIColor {
+        guard let color = theme.balanceAmount.attributes[.foregroundColor] as? UIColor else {
+            return .black
+        }
 
+        return color
+    }
 }
 
 extension BalanceViewController: Themed {
     func applyTheme(_ theme: Theme) {
         self.theme = theme
-        balance.attributedText = "balance".localized().styled(as: theme.title18)
+        titleLabel.attributedText = "balance".localized().styled(as: theme.title18)
+        updateBalance(balance)
     }
 }

@@ -25,7 +25,7 @@ class BackupFlowController: FlowController {
 @available(iOS 9.0, *)
 extension BackupFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
-        syncNavigationBarColor(with: viewController)
+
     }
     
     func viewController(_ viewController: UIViewController, willDisappear animated: Bool) {
@@ -42,6 +42,7 @@ extension BackupFlowController {
         let viewController = PasswordEntryViewController(nibName: "PasswordEntryViewController",
                                                                  bundle: KinBundle.ecosystem.rawValue)
         viewController.title = "kinecosystem_create_password".localized()
+        viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "1/2")
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
         navigationController.pushViewController(viewController, animated: true)
@@ -50,6 +51,7 @@ extension BackupFlowController {
     @objc private func pushQRViewController(with qrString: String) {
         let viewController = QRViewController(qrString: qrString)
         viewController.title = "kinecosystem_backup_qr_title".localized()
+        viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "2/2")
         viewController.lifeCycleDelegate = self
         viewController.delegate = self
         navigationController.pushViewController(viewController, animated: true)
@@ -58,7 +60,8 @@ extension BackupFlowController {
     @objc private func pushCompletedViewController() {
         let viewController = BackupCompletedViewController()
         viewController.lifeCycleDelegate = self
-        viewController.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(completedFlow))
+        viewController.navigationItem.hidesBackButton = true
+        viewController.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(completedFlow))
         navigationController.pushViewController(viewController, animated: true)
     }
     
@@ -94,6 +97,4 @@ extension BackupFlowController: QRViewControllerDelegate {
     func QRViewControllerDidComplete() {
         pushCompletedViewController()
     }
-    
-    
 }

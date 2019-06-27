@@ -11,6 +11,7 @@
 "kinecosystem_complete_tasks_and_earn_kin" = "Complete tasks and earn KIN";
 "kinecosystem_use_your_kin_to_enjoy_stuff_you_like" = "Use your KIN to enjoy stuff you like";
 "kinecosystem_empty_tomorrow_more_opportunities" = "Check back tomorrow for more great opportunities";
+"kinecosystem_empty_well_done" = "Well done!\nCheck back soon";
 "kinecosystem_welcome_to_kin" = "Welcome to Kin!";
 "kinecosystem_welcome_kin_info" = "Kin puts you at the center of your digital life by letting you get recognized and rewarded for the time, energy, ideas, opinions, and creativity you share online.";
 "kinecosystem_digging_for_gems" = "Digging for Gems…";
@@ -25,10 +26,11 @@
 "kinecosystem_copied_to_your_clipboard" = "Copied to your clipboard";
 "kinecosystem_copied_text" = "copied text";
 "kinecosystem_transaction_failed" = "Transaction failed";
-"kinecosystem_you_dont_have_enough_kin" = "You don\'t have enough Kin";
+"kinecosystem_you_dont_have_enough_kin" = "Load up on Kin";
+"kinecosystem_you_dont_have_enough_kin_subtitle" = "to enjoy this experience";
 "kinecosystem_order_submission_failed" = "Order submission failed";
 "kinecosystem_info_menu" = "Info";
-"kinecosystem_goto_earn_section" = "Go to the earn section to earn more Kin";
+"kinecosystem_goto_earn_section" = "Earn more Kin";
 "kinecosystem_earn_offers" = "Earn Offers";
 
 "kinecosystem_ok" = "Ok";
@@ -36,43 +38,44 @@
 
 "kinecosystem_settings_title" = "Settings";
 "kinecosystem_settings_row_backup" = "Keep your Kin safe";
-"kinecosystem_settings_row_restore" = "Restore previous wallet";
+"kinecosystem_settings_row_restore" = "Restore Kin from backup";
 
 "kinecosystem_backup_intro_title" = "Keep your Kin safe";
-"kinecosystem_backup_intro_description" = "Backing up your current balance will allow you to recover it in case you switch phones, delete the app or clear your data.";
+"kinecosystem_backup_intro_description" = "Back up your wallet so that you don’t lose your Kin if you change phones, delete the app or clear your data.\n\nTo do this, you’ll first need to create a password and save your unique QR code somewhere you can access it later.";
 "kinecosystem_backup_intro_continue" = "Let's Go";
-"kinecosystem_backup_completed_title" = "Well done,\nyour Kin is safe!";
-"kinecosystem_backup_completed_description" = "In order to restore your Kin, you will need the QR code and the password you've created.";
+"kinecosystem_backup_completed_title" = "Your Kin is backed up and safe!";
+"kinecosystem_backup_completed_description" = "To load your Kin from a backup later on, you’ll need your password and QR code";
 "kinecosystem_backup_reminder_title" = "Remember!";
-"kinecosystem_backup_reminder_description" = "Keep your password in a safe place\nand the QR code handy.";
+"kinecosystem_backup_reminder_description" = "Be sure to save your password and keep your QR code handy";
 
 "kinecosystem_password_backup_title" = "Keep your Kin safe";
 "kinecosystem_enter_password" = "Enter Password";
 "kinecosystem_create_password" = "Create Password";
 "kinecosystem_password" = "Password";
 "kinecosystem_confirm_password" = "Confirm Password";
-"kinecosystem_password_instructions" = "Create a strong password to backup your Kin. Password must include the following: (9 characters, 1 upper case, 1 special charcter \"#, !, @\", 1 digit)";
-"kinecosystem_password_confirmation" = "I understand this password is requiered to restore my Kin and it can’t be recovered if lost.";
-"kinecosystem_password_mismatch" = "Passwords do not match";
+"kinecosystem_password_instructions" = "To back up your Kin, first create a strong password. It should have: ";
+"kinecosystem_password_conditions" = "at least 9 characters, including 1 uppercase, 1 special character (#, !, @) and 1 number";
+"kinecosystem_password_confirmation" = "I understand that I won’t be able to restore my Kin without this password.";
+"kinecosystem_password_mismatch" = "Passwords do not match\n";
 "kinecosystem_password_invalid_warning" = "Make sure you’ve included all the following:\n";
-"kinecosystem_password_invalid_info" = "9 characters, 1 uppercase, 1 lowercase, 1 special charcter “#, !, @“, 1 digit";
 "kinecosystem_keep_kin_safe" = "Keep your Kin safe";
 "kinecosystem_next" = "Next";
 
 "kinecosystem_backup_qr_title" = "Save your QR Code";
-"kinecosystem_backup_qr_description" = "You will need it to restore your Kin.\nSend it to yourself by email.";
-"kinecosystem_backup_qr_email" = "Send QR code via Email";
+"kinecosystem_backup_qr_description" = "Now, save your unique QR code by emailing it to yourself.\nYou’ll need it to load your Kin from a backup later on.";
+"kinecosystem_backup_qr_email" = "Email QR code";
 "kinecosystem_backup_qr_continue" = "My QR code is saved";
-"kinecosystem_backup_qr_confirm" = "Iv'e copied my QR code";
+"kinecosystem_backup_qr_confirm" = "I've copied my QR code";
 
-"kinecosystem_restore_intro_title" = "Import your Kin";
-"kinecosystem_restore_intro_description" = "All you need is to upload the QR code we provided you.";
-"kinecosystem_restore_intro_continue" = "Upload your QR code";
+"kinecosystem_restore_intro_title" = "Load your Kin from a backup";
+"kinecosystem_restore_intro_description" = "First, upload the QR code you saved\n(Hint: Check your email to find it)";
+"kinecosystem_restore_intro_continue" = "Upload QR code";
 "kinecosystem_restore_intro_alert_title" = "Are you sure you want to restore your previous balance?";
 "kinecosystem_restore_intro_alert_message" = "Restoring your old balance will replace your current Kin balance.";
 
-"kinecosystem_restore_instructions" = "Great, we’re almost there!\nPlease enter your password";
+"kinecosystem_restore_instructions" = "Now, enter your password";
 "kinecosystem_restore_title" = "Restore Previous Wallet";
+"kinecosystem_restore_done" = "All set!\nYour Kin balance is updated";
 
 "kinecosystem_move_kin_accept_message" = "In order to send Kin, %@ would like to receive your Kin account information (i.e. your public address) from %@.";
 "kinecosystem_move_kin_accept_button_title" = "I Agree";

@@ -12,97 +12,96 @@ protocol SheetPresented: UIViewController, UIViewControllerTransitioningDelegate
 }
 
 class SheetViewController: UIViewController, SheetPresented, Themed {
-    
     var themeLinkBag = LinkBag()
     var cover: SheetTransitionCover = .half
-    
+
     override var transitioningDelegate: UIViewControllerTransitioningDelegate? {
         get { return self }
         set { }
     }
+
     override var modalPresentationStyle: UIModalPresentationStyle {
         get{
             return .custom
         }
         set {}
     }
-    
+
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
     }
-    
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [.portrait]
     }
-    
+
     override var shouldAutorotate: Bool {
         return false
     }
-    
+
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         let controller = SheetPresentationController(presentedViewController: presented, presenting: presenting)
         controller.cover = cover
         return controller
     }
-    
 }
 
 class SheetNavigationControllerWrapper: UIViewController, SheetPresented, Themed {
-    
     var themeLinkBag = LinkBag()
     var cover: SheetTransitionCover = .half
-    
+
     let wrappedNavigationController: UINavigationController
-    
+
     init() {
-        wrappedNavigationController = UINavigationController(nibName: nil, bundle: nil)
+        wrappedNavigationController = ThemedNavigationController()
         super.init(nibName: nil, bundle: nil)
         commonInit()
     }
     
     init(rootViewController: UIViewController) {
-        wrappedNavigationController = UINavigationController(rootViewController: rootViewController)
+        wrappedNavigationController = ThemedNavigationController(rootViewController: rootViewController)
         super.init(nibName: nil, bundle: nil)
         commonInit()
     }
-    
+
     func commonInit() {
         loadViewIfNeeded()
     }
-    
+
     override var transitioningDelegate: UIViewControllerTransitioningDelegate? {
         get { return self }
         set { }
     }
+
     override var modalPresentationStyle: UIModalPresentationStyle {
         get{
             return .custom
         }
         set {}
     }
-    
+
     override var preferredInterfaceOrientationForPresentation: UIInterfaceOrientation {
         return .portrait
     }
-    
+
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
         return [.portrait]
     }
-    
+
     override var shouldAutorotate: Bool {
         return false
     }
-    
+
     func presentationController(forPresented presented: UIViewController, presenting: UIViewController?, source: UIViewController) -> UIPresentationController? {
         let controller = SheetPresentationController(presentedViewController: presented, presenting: presenting)
         controller.cover = cover
         return controller
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
+
     override func loadView() {
         view = UIView(frame: UIScreen.main.bounds)
         wrappedNavigationController.loadViewIfNeeded()
@@ -125,8 +124,6 @@ class SheetNavigationControllerWrapper: UIViewController, SheetPresented, Themed
         setupTheming()
     }
     
-    
-    
     func pushViewController(_ viewController: UIViewController, animated: Bool) {
         wrappedNavigationController.pushViewController(viewController, animated: animated)
     }
@@ -134,19 +131,15 @@ class SheetNavigationControllerWrapper: UIViewController, SheetPresented, Themed
     func popViewController(_ viewController: UIViewController, animated: Bool) -> UIViewController? {
         return wrappedNavigationController.popViewController(animated: animated)
     }
-    
 }
 
 extension SheetViewController {
-    
     func applyTheme(_ theme: Theme) {
         view.backgroundColor = theme.viewControllerColor
     }
-    
 }
 
 extension SheetNavigationControllerWrapper {
-    
     func applyTheme(_ theme: Theme) {
         wrappedNavigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
         wrappedNavigationController.navigationBar.shadowImage = UIImage()
@@ -154,11 +147,9 @@ extension SheetNavigationControllerWrapper {
         wrappedNavigationController.navigationBar.titleTextAttributes = theme.title20.attributes
         view.backgroundColor = theme.viewControllerColor
     }
-    
 }
 
 extension UIViewController {
-    
     var bcSafeAreaLayoutGuide: UILayoutGuide {
         if #available(iOS 11.0, *) {
             return view.safeAreaLayoutGuide
@@ -179,6 +170,4 @@ extension UIViewController {
             }
         }
     }
-    
 }
-
