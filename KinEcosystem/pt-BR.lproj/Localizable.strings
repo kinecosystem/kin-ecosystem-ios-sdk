@@ -26,10 +26,11 @@
 "kinecosystem_copied_to_your_clipboard" = "Copiado para a área de transferência";
 "kinecosystem_copied_text" = "texto copiado";
 "kinecosystem_transaction_failed" = "A transação falhou";
-"kinecosystem_you_dont_have_enough_kin" = "Você não tem suficiente Kin";
+"kinecosystem_you_dont_have_enough_kin" = "Ganhe mais Kin";
+"kinecosystem_you_dont_have_enough_kin_subtitle" = "para aproveitar esta experiência";
 "kinecosystem_order_submission_failed" = "A submissão do pedido falhou";
 "kinecosystem_info_menu" = "Informações";
-"kinecosystem_goto_earn_section" = "Vá para a seção de ofertas para ganhar mais Kin";
+"kinecosystem_goto_earn_section" = "Ganhar mais Kin";
 "kinecosystem_earn_offers" = "Ofertas Para Ganhar";
 
 "kinecosystem_ok" = "Ok";

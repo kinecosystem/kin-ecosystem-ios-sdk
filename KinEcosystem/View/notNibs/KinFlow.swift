@@ -58,8 +58,7 @@ class EntrypointFlowController: KinFlowController {
             }
         } else {
             showWhatsKin(onboarding: false)
-        }
-        
+        }        
     }
 
     func showWhatsKin(onboarding: Bool) {
@@ -131,7 +130,14 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
     }
 
     func offersViewController(_ controller: OffersViewController, didTap offer: Offer) {
-        
+        if offer.offerType == .spend {
+            guard let amount = core.blockchain.lastBalance?.amount,
+                amount >= Decimal(offer.amount) else {
+                    showNotEnoughKinController()
+                    return
+            }
+        }
+
         guard offer.offerContentType != .external else {
             let nativeOffer = offer.nativeOffer
             let report: (NativeOffer) -> () = { nativeOffer in
@@ -152,26 +158,20 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
             }
             return
         }
+
         switch offer.offerType {
-        case .earn:
-            
-            showHTMLController(with: offer)
-            
-        default: // spend
-            
-            logError("native spend isn't supported")
-            
+        case .earn: showHTMLController(with: offer)
+        case .spend: purchaseOffer(offer)
         }
     }
-    
+
     func offersViewControllerDidTapMyKinButton() {
         let myKinController = OrdersViewController(core: core)
         myKinController.delegate = self
         navigationControllerWrapper.pushViewController(myKinController, animated: true)
     }
-    
+
     func showHTMLController(with offer: Offer) {
-        
         let htmlController = EarnOfferViewController(core: core)
         htmlController.offerId = offer.id
         htmlController.delegate = self
@@ -181,14 +181,20 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
             Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
             Kin.track { try EarnOrderCreationRequested(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
         }
-        
+
         Flows.earn(offerId: offer.id, resultPromise: htmlController.earn, core: core)
     }
-    
+
     func showNotEnoughKinController() {
-        
+        let insufficientFundsViewController = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
+                                                                              bundle: KinBundle.ecosystem.rawValue)
+        insufficientFundsViewController.modalPresentationStyle = .currentContext
+        navigationControllerWrapper.present(insufficientFundsViewController, animated: true)
     }
-    
+
+    func purchaseOffer(_ offer: Offer) {
+        //TODO: invoke purchase
+    }
 }
 
 extension EntrypointFlowController: EarnOfferViewControllerDelegate {

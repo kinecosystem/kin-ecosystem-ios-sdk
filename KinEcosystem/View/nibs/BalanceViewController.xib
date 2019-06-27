@@ -12,8 +12,8 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BalanceViewController" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
-                <outlet property="balance" destination="orx-UV-ApP" id="Ovc-ev-j6f"/>
-                <outlet property="balanceAmount" destination="EJE-YY-uhe" id="qt8-WD-oXc"/>
+                <outlet property="amountLabel" destination="EJE-YY-uhe" id="WWa-Bb-IUA"/>
+                <outlet property="titleLabel" destination="orx-UV-ApP" id="yXS-w9-sks"/>
                 <outlet property="view" destination="QOW-eh-esg" id="51R-6y-Ut7"/>
             </connections>
         </placeholder>

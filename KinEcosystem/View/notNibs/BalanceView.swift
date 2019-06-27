@@ -7,12 +7,13 @@
 
 import KinMigrationModule
 
+@available(iOS 9.0, *)
 class BalanceView: UIView {
-    
     let themeLinkBag = LinkBag()
     var theme: Theme?
     let label = UILabel(frame: .zero)
     let kinView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 8.0))
+    let stackView: UIStackView
     var balanceObserver: String?
     var balance: Balance? {
         didSet {
@@ -21,11 +22,13 @@ class BalanceView: UIView {
     }
 
     override init(frame: CGRect) {
+        stackView = UIStackView(arrangedSubviews: [kinView, label])
         super.init(frame: frame)
         commonInit()
     }
     
     required init?(coder aDecoder: NSCoder) {
+        stackView = UIStackView(arrangedSubviews: [kinView, label])
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -36,41 +39,42 @@ class BalanceView: UIView {
         kinView.backgroundColor = .clear
         backgroundColor = .clear
         kinView.image = UIImage(named: "balanceKinIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
-        kinView.layer.anchorPoint = CGPoint(x: 0.5, y: 0.5)
+        kinView.transform = CGAffineTransform(translationX: 0, y: -2)
+
         balanceObserver = Kin.shared.addBalanceObserver { [weak self] balance in
             DispatchQueue.main.async {
                 self?.balance = balance
             }
         }
-        addSubview(label)
-        addSubview(kinView)
+
+        stackView.alignment = .center
+        stackView.axis = .horizontal
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        stackView.spacing = 3
+
+        addSubview(stackView)
+        NSLayoutConstraint.activate([
+            leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
+            trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
+            topAnchor.constraint(equalTo: stackView.topAnchor),
+            bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
+            ])
         setupTheming()
-    }
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        label.sizeToFit()
-        kinView.center = CGPoint(x: 7.0, y: label.bounds.height / 2.0)
-        label.frame = CGRect(x: 14.0, y: 0.0, width: label.bounds.width, height: frame.height)
-        self.bounds = CGRect(x: 0.0, y: 0.0, width: 17.0 + label.bounds.width, height: frame.height)
     }
     
     func updateBalanceLabel() {
         guard let theme = theme else { return }
         let amount = balance?.amount ?? 0
         label.attributedText = "\(amount)".styled(as: theme.titleViewBalance)
-        setNeedsLayout()
+        invalidateIntrinsicContentSize()
     }
     
     deinit {
-        guard let currentObserver = balanceObserver else {
-            return
+        if let currentObserver = balanceObserver {
+            Kin.shared.removeBalanceObserver(currentObserver)
         }
-        Kin.shared.removeBalanceObserver(currentObserver)
     }
-    
 }
-
 
 extension BalanceView: Themed {
     func applyTheme(_ theme: Theme) {

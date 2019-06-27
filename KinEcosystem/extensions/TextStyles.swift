@@ -235,8 +235,8 @@ extension TextStyle {
 }
 
 extension String {
-  func styled(as style: TextStyle) -> NSAttributedString {
-    return NSAttributedString(string: self,
-                              attributes: style.attributes)
-  }
+    func styled(as style: TextStyle) -> NSAttributedString {
+        return NSAttributedString(string: self,
+                                  attributes: style.attributes)
+    }
 }

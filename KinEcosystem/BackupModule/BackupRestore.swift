@@ -96,7 +96,7 @@ public class BRManager: NSObject {
             return
         }
         
-        let navigationController = BRNavigationController()
+        let navigationController = ThemedNavigationController()
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .stop, target: flowController, action: #selector(flowController.cancelFlow))

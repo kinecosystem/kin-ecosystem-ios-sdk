@@ -179,10 +179,8 @@ extension OffersViewController: UICollectionViewDelegate, UICollectionViewDataSo
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
         guard let offer = collectionView.objectForCollection(at: indexPath) as? Offer else { return }
         delegate?.offersViewController(self, didTap: offer)
-
     }
     
     func updateCollectionView(_ cv: UICollectionView, for numOfOffers: Int) {
