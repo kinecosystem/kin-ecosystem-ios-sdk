@@ -61,6 +61,18 @@ class EntrypointFlowController: KinFlowController {
         }        
     }
 
+    func showTxHistory(pushAnimated animated: Bool) {
+        guard didTapLetsGo, core.onboarded else {
+            start()
+            return
+        }
+
+        showExperience()
+        let myKinController = OrdersViewController(core: core)
+        myKinController.delegate = self
+        navigationControllerWrapper.pushViewController(myKinController, animated: animated)
+    }
+
     func showWhatsKin(onboarding: Bool) {
         whatsKin = WhatsKinViewController()
         whatsKin!.delegate = self
@@ -166,9 +178,7 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
     }
 
     func offersViewControllerDidTapMyKinButton() {
-        let myKinController = OrdersViewController(core: core)
-        myKinController.delegate = self
-        navigationControllerWrapper.pushViewController(myKinController, animated: true)
+        showTxHistory(pushAnimated: true)
     }
 
     func showHTMLController(with offer: Offer) {
