@@ -63,11 +63,9 @@ class EntrypointFlowController: KinFlowController {
 
     func showTxHistory(pushAnimated animated: Bool) {
         guard didTapLetsGo, core.onboarded else {
-            start()
             return
         }
 
-        showExperience()
         let myKinController = OrdersViewController(core: core)
         myKinController.delegate = self
         navigationControllerWrapper.pushViewController(myKinController, animated: animated)

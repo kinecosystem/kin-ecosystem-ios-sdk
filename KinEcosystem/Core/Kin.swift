@@ -309,10 +309,9 @@ public class Kin: NSObject {
             mpPresentingController = parentViewController
             entrypointFlowController = EntrypointFlowController(presentingViewController: parentViewController, core: core)
             entrypointFlowController!.delegate = self
+            entrypointFlowController!.start()
 
-            if experience == .marketplace {
-                entrypointFlowController!.start()
-            } else if experience == .history {
+            if experience == .history {
                 entrypointFlowController!.showTxHistory(pushAnimated: false)
             }
         case .backup(let handler):
