@@ -13,7 +13,7 @@ import StellarErrors
 import KinUtil
 import KinMigrationModule
 
-let SDKVersion = "0.9.0"
+let SDKVersion = "0.9.1"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()
@@ -89,6 +89,9 @@ public class Kin: NSObject {
         UIFont.loadFonts(from: KinBundle.fonts.rawValue)
     }
     
+    // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
+    fileprivate let purchaseQueue = OperationQueue()
+    
     public var lastKnownBalance: Balance? {
         return core?.blockchain.lastBalance ?? nil
     }
@@ -109,6 +112,16 @@ public class Kin: NSObject {
             try Kin.shared.bi.send(event)
         } catch {
             logError("failed to send event, error: \(error)")
+        }
+    }
+    
+    init() {
+        purchaseQueue.maxConcurrentOperationCount = 1
+        NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { _ in
+            self.purchaseQueue.isSuspended = true
+        }
+        NotificationCenter.default.addObserver(forName: UIApplication.didBecomeActiveNotification, object: nil, queue: nil) { _ in
+            self.purchaseQueue.isSuspended = false
         }
     }
     
@@ -384,18 +397,30 @@ public class Kin: NSObject {
             return false
         }
         defer {
-            _ = attemptEx(2, closure: { attemptNum -> Promise<String> in
-                return core.onboard()
-                    .then {
-                        Flows.nativeSpend(jwt: offerJWT, core: core)
+            // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
+            purchaseQueue.addOperation {
+                let group = DispatchGroup()
+                group.enter()
+                let attempt = attemptEx(2, closure: { attemptNum -> Promise<String> in
+                    return core.onboard()
+                        .then {
+                            Flows.nativeSpend(jwt: offerJWT, core: core)
+                    }
+                }) { error in
+                    self.recoverByMigratingIfNeeded(from: error)
+                    }.then { jwt in
+                        completion(jwt, nil)
+                    }.error { error in
+                        completion(nil, KinEcosystemError.transform(error))
                 }
-            }) { error in
-                self.recoverByMigratingIfNeeded(from: error)
-            }.then { jwt in
-                    completion(jwt, nil)
-            }.error { error in
-                    completion(nil, KinEcosystemError.transform(error))
+                
+                attempt.finally {
+                    group.leave()
+                }
+                
+                group.wait()
             }
+            
             
         }
         return true
