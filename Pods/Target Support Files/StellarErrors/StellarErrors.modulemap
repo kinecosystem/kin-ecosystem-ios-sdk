@@ -1,0 +1,6 @@
+framework module StellarErrors {
+  umbrella header "StellarErrors-umbrella.h"
+
+  export *
+  module * { export * }
+}

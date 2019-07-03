@@ -1,0 +1,6 @@
+framework module CoreDataStack {
+  umbrella header "SimpleCoreDataStack-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,6 @@
+framework module KinUtil {
+  umbrella header "KinUtil-umbrella.h"
+
+  export *
+  module * { export * }
+}
