@@ -12,15 +12,11 @@
 		04B0974402601725A445DFAC /* earn_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814BFC3439B1F004B56285D0 /* earn_order_cancelled.swift */; };
 		053BE473B89FB99D59D0EAEC /* stellar_kin_trustline_setup_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2C8D1E48FD5AC86287089051 /* stellar_kin_trustline_setup_succeeded.swift */; };
 		09E6D281916AA3A6CF73581F /* backup_welcome_page_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */; };
-		0A8DB2FEC730EDCC984E393E /* not_enough_kin_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77FFAF0A29447BBE73268D57 /* not_enough_kin_back_tapped.swift */; };
 		103BEC0F2F1343DE863E5C2A /* user_logout_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA3B2319533652AFF89021B0 /* user_logout_requested.swift */; };
 		1287136D9496A23BA551644B /* redeem_url_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91BE2223A7635DDCB2CF8293 /* redeem_url_tapped.swift */; };
-		13338C197D5A026587CF74D9 /* onboarding_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D173442686D71CCDBA83A1B /* onboarding_back_tapped.swift */; };
 		13AC3B2FD1EF66F47DB67573 /* migration_BC_version_check_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F23B163DF520E4C8141653 /* migration_BC_version_check_failed.swift */; };
 		171514926EC55A067C1AEEC8 /* backup_welcome_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833AAC14DE38F6A98312A0C /* backup_welcome_page_viewed.swift */; };
-		19D7AA8B288768EB1765D50E /* migration_method_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D8D50E952DF434C32D454F /* migration_method_started.swift */; };
 		1B94E7D4FDFFEE06B3BCDA31 /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202AB21509750816E41036C4 /* order_history_item_tapped.swift */; };
-		20AB02537B304BF815D6DA79 /* migration_burn_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5E959F0A2ABCFD65827EE492 /* migration_burn_succeeded.swift */; };
 		21444364B59BBF97F014615F /* error_message_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */; };
 		21556B5F45EBCA4F64E9503A /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D790CE0DB5E840FDEC72F3 /* spend_order_completed.swift */; };
 		22DA98744E708BF74AFC5426 /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957719090F337AEF7D2D32F /* restore_upload_qr_code_page_viewed.swift */; };
@@ -33,18 +29,13 @@
 		34523DD5F4744B73FE9F712C /* migration_account_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69955E4601C47B71203D274A /* migration_account_failed.swift */; };
 		3747CD76F2085F990E3B3A75 /* offers_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E87C15137EEFEA31E72DC2A /* offers_page_viewed.swift */; };
 		3759E2B5BA37356AD35383D0 /* confirm_purchase_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45A64A33C1A594A45F601C02 /* confirm_purchase_button_tapped.swift */; };
-		38323E7A2FD576D55159C95C /* my_kin_page_settings_element_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 469C34B27237262634E0AB9B /* my_kin_page_settings_element_tapped.swift */; };
-		384F4884D992C70FC31A33D3 /* main_page_my_kin_element_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A09940C68482942E6768D01 /* main_page_my_kin_element_tapped.swift */; };
 		3B5EFA07B25568F27FC32950 /* restore_are_you_sure_ok_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FD2D02700C009330C1022844 /* restore_are_you_sure_ok_button_tapped.swift */; };
 		3D9F80F1679282B8D8EB397B /* spend_redeem_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */; };
-		3DD3D886CF6DD8D70C9238CA /* migration_burn_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4BFE1D584DAAD2D98EC1037 /* migration_burn_failed.swift */; };
 		3E6AE3E70563932AD7763BFC /* earn_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = 370B86A08DEB59B53FBC2A89 /* earn_order_creation_received.swift */; };
-		42B63705BB39C4EC766BA0EA /* my_kin_page_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8934E20CE7468B773949D06 /* my_kin_page_back_tapped.swift */; };
 		46B8F240FCB30EA01463F15B /* earn_order_payment_confirmed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 244DCED601D494129E30F0E8 /* earn_order_payment_confirmed.swift */; };
 		4956563E1B61C7D3A8AB5AAB /* restore_password_entry_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8063BB77877135C242350A00 /* restore_password_entry_back_button_tapped.swift */; };
 		49CE1D65F4507A95C9C08C0A /* backup_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 86AD90F0C357011F3C0BB1AB /* backup_qr_code_page_viewed.swift */; };
 		4DCB27D7309E2FAE05CBC410 /* user_login_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7C64261B64D5057EBAC1A7A1 /* user_login_succeeded.swift */; };
-		5134553F3513C3B10B6CD69A /* onboarding_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 041BEF4DC6688BDD58F989D7 /* onboarding_continue_button_tapped.swift */; };
 		5170B76D402B3F503C32313F /* settings_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 865087A228CC5D87089293F1 /* settings_back_button_tapped.swift */; };
 		51B54A6E119B402144E7F56C /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25D28B73F36ED5AEEC2989 /* client.swift */; };
 		5613636A9762FED42EFDC600 /* backup_start_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80559E5834554EA920218 /* backup_start_button_tapped.swift */; };
@@ -53,10 +44,8 @@
 		5EEE53E05A25289FF5CE3A72 /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB423AE008514970870EF4AD /* backup_create_password_back_button_tapped.swift */; };
 		64A594282664F82FCAE2D162 /* page_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBB05A86ADE047F9539994 /* page_close_tapped.swift */; };
 		6A2C6DF2AFD4D82A972F9D83 /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78247DBFE7B7EAE390CB239A /* backup_create_password_next_button_tapped.swift */; };
-		6BF1E2D6BF0B9336BA562F96 /* main_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8E2BD696A6CACB744E6BC2E6 /* main_page_viewed.swift */; };
 		74A98490A373CE7222188AA3 /* error_message_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F338961A7824899B8285C24 /* error_message_continue_button_tapped.swift */; };
 		756D8E3D1C08ADF5F0735F4B /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BC8A2B1F88B1C8F730A360 /* spend_order_failed.swift */; };
-		78046BDB49AE29928FBF3CBB /* migration_request_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6614A708B7B742A74B29C5DD /* migration_request_started.swift */; };
 		79617912FDAA66E8903A424D /* spend_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = A9E4F7E6ACEB41360EB6C612 /* spend_order_completion_submitted.swift */; };
 		7A1F482C345C31759B36A9F9 /* spend_order_creation_received.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0FFEADA44F183BC01A1B88 /* spend_order_creation_received.swift */; };
 		7C5D79FB6CC829FB8F9788C9 /* earn_order_creation_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 993B2CD5A03DAA27CAF01A52 /* earn_order_creation_failed.swift */; };
@@ -65,25 +54,20 @@
 		7F3A5E6B236E43B3E04C641A /* earn_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */; };
 		81106820005DDE0D6AFE0B4F /* restore_password_entry_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1D81073B5A9D9DD80FC41DE4 /* restore_password_entry_page_viewed.swift */; };
 		835E159280A574796554D790 /* earn_order_completion_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59265E55135519EB11B5BAE6 /* earn_order_completion_submitted.swift */; };
-		84259400828643C66F80430F /* migration_request_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 49A3470E57A8ECA430A253D6 /* migration_request_failed.swift */; };
 		85C03E4B823D74FC5F3356B5 /* popup_message_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 704BA9035E72B185704F588C /* popup_message_close_tapped.swift */; };
-		85CB0FC502AFA2F130A3F98D /* empty_main_page_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D29DCF0F587AF2730BDC35C /* empty_main_page_back_tapped.swift */; };
 		8A2F8FC30198FF4820887B0F /* welcome_screen_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = B380A0DFB07B0294EDCACD88 /* welcome_screen_page_viewed.swift */; };
 		8A82AFA9E6022319AF93B99B /* migration_status_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 205796C42EFAD3659F7369D5 /* migration_status_check_succeeded.swift */; };
 		8AFDE46E81ED0D554B7D2623 /* spend_transaction_broadcast_to_blockchain_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = BD37ECE8C16E9328DF1BF7D0 /* spend_transaction_broadcast_to_blockchain_failed.swift */; };
 		8E7EF42290D9A1EC7184E72B /* spend_transaction_broadcast_to_blockchain_submitted.swift in Sources */ = {isa = PBXBuildFile; fileRef = D19E7E1AFC9E0430B783FA14 /* spend_transaction_broadcast_to_blockchain_submitted.swift */; };
 		8FFD660595E182CAB5F6050C /* migration_module_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 766EF36FF97FE4C36729D1B2 /* migration_module_started.swift */; };
-		917A5F88220C38BF0018E108 /* AcceptReceiveKinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 917A5F87220C38BF0018E108 /* AcceptReceiveKinViewController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
 		91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8720CFB22E00C3399F /* KinViewController.swift */; };
 		9260BCF37854D28469190E7B /* backup_popup_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = A8EFEE9A16757FFF5E830F98 /* backup_popup_page_viewed.swift */; };
 		9645DE74C3A08F2168293574 /* earn_offer_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1BD28E47197D538390227437 /* earn_offer_tapped.swift */; };
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
-		97607761B0EA558D846594F5 /* migration_request_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C62A3975E729ACF07C2391F /* migration_request_succeeded.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
-		A405D23EF2E254B919F9D9A7 /* popup_message_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = FCC5F0C4E7EF885377DEEED7 /* popup_message_back_tapped.swift */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
 		ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F717D333E5908066A0CA32 /* migration_BC_version_check_succeeded.swift */; };
@@ -93,14 +77,11 @@
 		B27A008B6D866EB498CD47ED /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = C21E661B76EE6051A487FBD0 /* user.swift */; };
 		B2D5FEA2E20780CCDF2CAA73 /* backup_qr_code_send_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = F1B64AEB41FD1E96395C7FB5 /* backup_qr_code_send_button_tapped.swift */; };
 		B3ABC7638E5E69FE219A5547 /* welcome_screen_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = AF53897AE38FF2ACB4323E2B /* welcome_screen_button_tapped.swift */; };
-		BC0EBFBFAAE3886B7C925337 /* main_page_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 94646D603623546C68ED1B01 /* main_page_back_tapped.swift */; };
 		BC43408569D08DC76002C27F /* balance_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6E20C98566463706CD43D1DA /* balance_tapped.swift */; };
 		BC6135FE53387B04B6C34690 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = 70CAECC2ECD0911F2720BE1E /* spend_transaction_broadcast_to_blockchain_succeeded.swift */; };
 		BCB33FEED4F36BE3A7414E9C /* earn_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B9DEDFBB09018F9F9BE7895 /* earn_order_completed.swift */; };
 		BE302F0CA4EB10EC396D17E0 /* not_enough_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 850596664FA677221D6EA0EB /* not_enough_kin_page_viewed.swift */; };
-		BEF3DC370EC0984A0C5F6E14 /* empty_main_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63B2A543D459EDA89C37C6B2 /* empty_main_page_viewed.swift */; };
 		BFA923E5F2A808B517CED2D1 /* earn_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E1F8302CD99F06330712857 /* earn_order_failed.swift */; };
-		C16BDA266DC5189C1F48B3DB /* not_enough_kin_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4BE3451EC8CA38C9F9302CD4 /* not_enough_kin_continue_button_tapped.swift */; };
 		C2064A5180F4582A36B69458 /* restore_are_you_sure_cancel_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CADC2EC0A618D3401D25254 /* restore_are_you_sure_cancel_button_tapped.swift */; };
 		C2B882FF1DAA8D542FB7628E /* backup_wallet_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D9CAAA8B71CCF0F86EDCF30 /* backup_wallet_failed.swift */; };
 		C397BFF276D774E50A919D9E /* kin_sdk_initiated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 09D9357E815E6D10E7D17E63 /* kin_sdk_initiated.swift */; };
@@ -113,7 +94,6 @@
 		D4F202CDFAD3877FBAE18457 /* backup_popup_later_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 84AC02DFCB6AA84731A30757 /* backup_popup_later_button_tapped.swift */; };
 		D79C2D9FF8BDD5A6B7938BFC /* popup_message_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8013D813690925603D8E5418 /* popup_message_viewed.swift */; };
 		DB1CA225E99ECB6A1C49F8BB /* settings_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 12C0DF66963CA9A521B05379 /* settings_page_viewed.swift */; };
-		DB6FA618C5DC2705F7CD0BC9 /* empty_main_page_my_kin_element_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = A82BACF88CE30BB486724F14 /* empty_main_page_my_kin_element_tapped.swift */; };
 		DC04237C8C0BFE09A39E6117 /* wallet_creation_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = CB594C3523BA2450CDD6373E /* wallet_creation_succeeded.swift */; };
 		DCF6F7CF5339CDB66364A473 /* settings_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3F25C36D92EFF3035A9AFD69 /* settings_button_tapped.swift */; };
 		DCFDF4B15762652979832790 /* general_ecosystem_sdk_error.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8BEE41F072C4751472864B9 /* general_ecosystem_sdk_error.swift */; };
@@ -121,7 +101,6 @@
 		E3BAC8DFB934956D10E160F2 /* stellar_kin_trustline_setup_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */; };
 		E5CABF3110A99D3DA5504C5D /* settings_option_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6B498BBD08B21D5DB0DFB4B7 /* settings_option_tapped.swift */; };
 		E726865CFE888ACFB56930D6 /* backup_popup_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 110D7E324B1F3BA34D873CB8 /* backup_popup_button_tapped.swift */; };
-		E7EEA4008736401B5B459155 /* my_kin_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 371ED9A74174E9132A10E9F8 /* my_kin_page_viewed.swift */; };
 		E9037503207DFC8E00704DBB /* InsufficientFundsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9037501207DFC8E00704DBB /* InsufficientFundsViewController.swift */; };
 		E9037504207DFC8E00704DBB /* InsufficientFundsViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E9037502207DFC8E00704DBB /* InsufficientFundsViewController.xib */; };
 		E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E90441592035C83000E3E261 /* SpendOfferCell.swift */; };
@@ -234,7 +213,6 @@
 		EE2757AEA274D971E71C04FF /* user_login_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BF638A877AE7D9DC6040988 /* user_login_failed.swift */; };
 		F29254E1C7BAF1C6DF572310 /* restore_upload_qr_code_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8359ADEA1DBC6E84771DA6D /* restore_upload_qr_code_button_tapped.swift */; };
 		F2FAF40C8443CB7FFC37877A /* spend_order_creation_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = 57B8A3FA39899A6E5A825A10 /* spend_order_creation_requested.swift */; };
-		F6D9B85F98BCEF1672A3FD99 /* error_message_back_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F3E7F0EF8082B3DB14B9139 /* error_message_back_tapped.swift */; };
 		FB1A4CDB74E04A3AB33BC399 /* restore_upload_qr_code_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D343393AABD2FDA2E343E698 /* restore_upload_qr_code_back_button_tapped.swift */; };
 		FE11D63BE62BE292E3F003D1 /* migration_account_started.swift in Sources */ = {isa = PBXBuildFile; fileRef = 36CAC66AF70930E24B7FD2EB /* migration_account_started.swift */; };
 /* End PBXBuildFile section */
@@ -1190,7 +1168,6 @@
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,
 				E92BA44621A19C0A00C952D8 /* BackupRestore.swift in Sources */,
 				E9FC599B203B24C100D1DA2B /* Decimal+Currency.swift in Sources */,
-				917A5F88220C38BF0018E108 /* AcceptReceiveKinViewController.swift in Sources */,
 				E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */,
 				E92BA45721A19C0A00C952D8 /* RestoreFlowController.swift in Sources */,
 				E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */,
@@ -1291,34 +1268,13 @@
 				7F3A5E6B236E43B3E04C641A /* earn_order_creation_requested.swift in Sources */,
 				C2B882FF1DAA8D542FB7628E /* backup_wallet_failed.swift in Sources */,
 				2BA053F90A8CD83041FFF685 /* migration_status_check_failed.swift in Sources */,
-				BC0EBFBFAAE3886B7C925337 /* main_page_back_tapped.swift in Sources */,
-				38323E7A2FD576D55159C95C /* my_kin_page_settings_element_tapped.swift in Sources */,
-				F6D9B85F98BCEF1672A3FD99 /* error_message_back_tapped.swift in Sources */,
-				84259400828643C66F80430F /* migration_request_failed.swift in Sources */,
-				A405D23EF2E254B919F9D9A7 /* popup_message_back_tapped.swift in Sources */,
-				20AB02537B304BF815D6DA79 /* migration_burn_succeeded.swift in Sources */,
-				78046BDB49AE29928FBF3CBB /* migration_request_started.swift in Sources */,
-				19D7AA8B288768EB1765D50E /* migration_method_started.swift in Sources */,
 				ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */,
-				DB6FA618C5DC2705F7CD0BC9 /* empty_main_page_my_kin_element_tapped.swift in Sources */,
 				8A82AFA9E6022319AF93B99B /* migration_status_check_succeeded.swift in Sources */,
-				BEF3DC370EC0984A0C5F6E14 /* empty_main_page_viewed.swift in Sources */,
-				6BF1E2D6BF0B9336BA562F96 /* main_page_viewed.swift in Sources */,
 				34523DD5F4744B73FE9F712C /* migration_account_failed.swift in Sources */,
-				42B63705BB39C4EC766BA0EA /* my_kin_page_back_tapped.swift in Sources */,
-				85CB0FC502AFA2F130A3F98D /* empty_main_page_back_tapped.swift in Sources */,
-				384F4884D992C70FC31A33D3 /* main_page_my_kin_element_tapped.swift in Sources */,
 				294F11DC5BF48342D5EBEA24 /* error_message_viewed.swift in Sources */,
 				AC30BF03130EBEDF10C45FFE /* migration_account_completed.swift in Sources */,
-				3DD3D886CF6DD8D70C9238CA /* migration_burn_failed.swift in Sources */,
 				74A98490A373CE7222188AA3 /* error_message_continue_button_tapped.swift in Sources */,
-				13338C197D5A026587CF74D9 /* onboarding_back_tapped.swift in Sources */,
 				13AC3B2FD1EF66F47DB67573 /* migration_BC_version_check_failed.swift in Sources */,
-				0A8DB2FEC730EDCC984E393E /* not_enough_kin_back_tapped.swift in Sources */,
-				C16BDA266DC5189C1F48B3DB /* not_enough_kin_continue_button_tapped.swift in Sources */,
-				97607761B0EA558D846594F5 /* migration_request_succeeded.swift in Sources */,
-				5134553F3513C3B10B6CD69A /* onboarding_continue_button_tapped.swift in Sources */,
-				E7EEA4008736401B5B459155 /* my_kin_page_viewed.swift in Sources */,
 				FE11D63BE62BE292E3F003D1 /* migration_account_started.swift in Sources */,
 				D79C2D9FF8BDD5A6B7938BFC /* popup_message_viewed.swift in Sources */,
 				7CECD1F2482E8ED04A01155E /* continue_button_tapped.swift in Sources */,
