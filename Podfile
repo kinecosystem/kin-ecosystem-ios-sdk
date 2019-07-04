@@ -8,8 +8,9 @@ workspace 'KinEcosystem'
 target 'KinEcosystem' do
   project 'KinEcosystem/KinEcosystem'
 
-  pod 'KinMigrationModule'
   pod 'SimpleCoreDataStack'
+  pod 'KinMigrationModule'
+  pod 'KinAppreciationModuleOptionsMenu'
 end
 
 target 'KinEcosystemTests' do 

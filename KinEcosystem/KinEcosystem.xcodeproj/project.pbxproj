@@ -48,6 +48,7 @@
 		6831950122CCEA7F00EC2DDF /* UIDevice+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950022CCEA7F00EC2DDF /* UIDevice+extensions.swift */; };
 		6831950322CCEACA00EC2DDF /* Promise+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950222CCEACA00EC2DDF /* Promise+extenstions.swift */; };
 		6831950722CCED0800EC2DDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6831950622CCED0800EC2DDF /* Info.plist */; };
+		6831950A22CDEF1000EC2DDF /* GiftingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950922CDEF1000EC2DDF /* GiftingManager.swift */; };
 		6A2C6DF2AFD4D82A972F9D83 /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78247DBFE7B7EAE390CB239A /* backup_create_password_next_button_tapped.swift */; };
 		74A98490A373CE7222188AA3 /* error_message_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F338961A7824899B8285C24 /* error_message_continue_button_tapped.swift */; };
 		756D8E3D1C08ADF5F0735F4B /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BC8A2B1F88B1C8F730A360 /* spend_order_failed.swift */; };
@@ -295,6 +296,7 @@
 		6831950022CCEA7F00EC2DDF /* UIDevice+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+extensions.swift"; sourceTree = "<group>"; };
 		6831950222CCEACA00EC2DDF /* Promise+extenstions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Promise+extenstions.swift"; sourceTree = "<group>"; };
 		6831950622CCED0800EC2DDF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../KinEcosystemTests/Info.plist; sourceTree = "<group>"; };
+		6831950922CDEF1000EC2DDF /* GiftingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftingManager.swift; sourceTree = "<group>"; };
 		6914BA481766CB59767636FD /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
 		69955E4601C47B71203D274A /* migration_account_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_account_failed.swift; sourceTree = "<group>"; };
 		6B498BBD08B21D5DB0DFB4B7 /* settings_option_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = settings_option_tapped.swift; sourceTree = "<group>"; };
@@ -518,6 +520,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6831950822CDEEEA00EC2DDF /* GiftingModule */ = {
+			isa = PBXGroup;
+			children = (
+				6831950922CDEF1000EC2DDF /* GiftingManager.swift */,
+			);
+			path = GiftingModule;
+			sourceTree = "<group>";
+		};
 		A472BB1825C38D0E53ADAF9F /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -828,6 +838,7 @@
 			children = (
 				E92BA42421A19C0A00C952D8 /* BackupModule */,
 				E954100420E3B30E0038FF49 /* BI */,
+				6831950822CDEEEA00EC2DDF /* GiftingModule */,
 				E92501B820614A3300E2E738 /* Promises */,
 				E942F8F1203191F600DD4B8E /* View */,
 				E942F8D12030DD6000DD4B8E /* Blockchain */,
@@ -1157,6 +1168,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
@@ -1168,6 +1180,7 @@
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
@@ -1365,6 +1378,7 @@
 				7A1F482C345C31759B36A9F9 /* spend_order_creation_received.swift in Sources */,
 				C397BFF276D774E50A919D9E /* kin_sdk_initiated.swift in Sources */,
 				3D9F80F1679282B8D8EB397B /* spend_redeem_page_viewed.swift in Sources */,
+				6831950A22CDEF1000EC2DDF /* GiftingManager.swift in Sources */,
 				E1D34061E723C692210022DD /* backup_completed_page_viewed.swift in Sources */,
 				EE2757AEA274D971E71C04FF /* user_login_failed.swift in Sources */,
 				103BEC0F2F1343DE863E5C2A /* user_logout_requested.swift in Sources */,

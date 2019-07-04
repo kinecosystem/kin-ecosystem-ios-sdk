@@ -263,6 +263,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
@@ -273,11 +274,11 @@
 				"${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
 				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
-				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/KinEcosystem/KinEcosystem.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
@@ -288,7 +289,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinEcosystem.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;

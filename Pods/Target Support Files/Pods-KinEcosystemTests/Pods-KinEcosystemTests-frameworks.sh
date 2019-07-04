@@ -161,6 +161,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"
@@ -171,6 +172,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"

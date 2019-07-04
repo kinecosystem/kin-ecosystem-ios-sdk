@@ -683,4 +683,11 @@ public class Kin {
     }
 }
 
+// MARK: Gifting Module
 
+@available(iOS 9.0, *)
+extension Kin {
+//    public static func giftingManager(jwt: JWTObject) -> GiftingManager {
+//
+//    }
+}
