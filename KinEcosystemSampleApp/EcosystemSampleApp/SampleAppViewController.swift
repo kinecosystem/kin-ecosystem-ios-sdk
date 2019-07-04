@@ -28,7 +28,7 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     private var giftUserId: String?
 
     let environment: Environment = .test
-    let kid = "rs512_0"
+    let kid = "rs512_1"
 
     lazy var biClient: BIClient? = {
         return try? BIClient(endpoint: URL(string: self.environment.BIURL)!)
