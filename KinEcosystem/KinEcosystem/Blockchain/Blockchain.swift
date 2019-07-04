@@ -53,7 +53,6 @@ enum TimeoutPolicy {
     case ignore
 }
 
-@available(iOS 9.0, *)
 class Blockchain: NSObject {
 
     var lastKnownWalletAddress: String?
@@ -579,7 +578,6 @@ extension KinAccountsProtocol {
     
 }
 
-@available(iOS 9.0, *)
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
@@ -660,7 +658,6 @@ extension Blockchain: KinMigrationManagerDelegate {
     
 }
 
-@available(iOS 9.0, *)
 extension Blockchain: KinMigrationBIDelegate {
     public func kinMigrationMethodStarted() {
         Kin.track { try MigrationModuleStarted(publicAddress: startingAddress ?? "") }

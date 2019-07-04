@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 class InsufficientFundsViewController: UIViewController {
 
     @IBOutlet weak var imageView: UIImageView!

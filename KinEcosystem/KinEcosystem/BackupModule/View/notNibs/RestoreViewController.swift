@@ -8,13 +8,11 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 protocol RestoreViewControllerDelegate: NSObjectProtocol {
     func restoreViewControllerDidImport(_ viewController: RestoreViewController, completion:@escaping (RestoreViewController.ImportResult) -> ())
     func restoreViewControllerDidComplete(_ viewController: RestoreViewController)
 }
 
-@available(iOS 9.0, *)
 class RestoreViewController: BRViewController {
     weak var delegate: RestoreViewControllerDelegate?
     
@@ -141,7 +139,6 @@ class RestoreViewController: BRViewController {
     
 }
 
-@available(iOS 9.0, *)
 extension RestoreViewController {
     enum ImportResult {
         case success

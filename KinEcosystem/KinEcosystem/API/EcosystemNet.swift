@@ -16,7 +16,6 @@ struct EcosystemConfiguration {
     var baseURL: URL
 }
 
-@available(iOS 9.0, *)
 class EcosystemNet {
     
     var client: RestClient!

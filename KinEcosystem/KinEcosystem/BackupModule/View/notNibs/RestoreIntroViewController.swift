@@ -8,12 +8,10 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 protocol RestoreIntroViewControllerDelegate: NSObjectProtocol {
     func restoreIntroViewControllerDidComplete(_ viewController: RestoreIntroViewController)
 }
 
-@available(iOS 9.0, *)
 class RestoreIntroViewController: ExplanationTemplateViewController {
     weak var delegate: RestoreIntroViewControllerDelegate?
     private var canContinue = false

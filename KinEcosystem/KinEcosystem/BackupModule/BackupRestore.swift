@@ -42,7 +42,6 @@ private struct BRInstance {
     let completion: BRCompletionHandler
 }
 
-@available(iOS 9.0, *)
 public class BRManager: NSObject {
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController?
@@ -131,7 +130,6 @@ public class BRManager: NSObject {
 
 // MARK: - Navigation
 
-@available(iOS 9.0, *)
 extension BRManager {
     private var navigationController: UINavigationController? {
         return brInstance?.flowController.navigationController
@@ -164,7 +162,6 @@ extension BRManager {
 
 // MARK: - Flow
 
-@available(iOS 9.0, *)
 extension BRManager: FlowControllerDelegate {
     func flowControllerDidComplete(_ controller: FlowController) {
         guard let brInstance = brInstance else {
@@ -205,7 +202,6 @@ extension BRManager: FlowControllerDelegate {
 
 // MARK: - Navigation Bar Appearance
 
-@available(iOS 9.0, *)
 extension BRManager {
     private func removeNavigationBarBackground(_ navigationBar: UINavigationBar, shouldSave: Bool = false) {
         if shouldSave {
