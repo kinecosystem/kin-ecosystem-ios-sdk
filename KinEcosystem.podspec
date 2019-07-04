@@ -13,9 +13,11 @@ Kin ecosystem mobile sdk for iOS
 
   s.ios.deployment_target = '9.0'
   s.resource_bundle = { "kinLocalization" => ["KinEcosystem/*.lproj/*.strings"] }
-  s.source_files = 'KinEcosystem/**/*.{h,m,swift}'
-  s.resources = 'KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
+  s.source_files = 'KinEcosystem/KinEcosystem/**/*.{h,m,swift}'
+  s.resources = 'KinEcosystem/KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
   s.swift_version = '4.2'
+
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinMigrationModule', '0.1.0'
+  s.dependency 'KinAppreciationModuleOptionsMenu', '0.0.1'
 end

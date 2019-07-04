@@ -1,0 +1,6 @@
+framework module KinSDK {
+  umbrella header "KinSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}

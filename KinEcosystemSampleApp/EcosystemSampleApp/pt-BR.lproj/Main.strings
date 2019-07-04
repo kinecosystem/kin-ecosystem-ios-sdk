@@ -1,0 +1,27 @@
+
+/* Class = "UIButton"; normalTitle = "Get Kin (Native Earn)"; ObjectID = "6CR-2G-NnG"; */
+"6CR-2G-NnG.normalTitle" = "Get Kin (Native Earn)";
+
+/* Class = "UIButton"; normalTitle = "Launch Marketplace"; ObjectID = "838-ZL-O1D"; */
+"838-ZL-O1D.normalTitle" = "Launch Marketplace";
+
+/* Class = "UILabel"; text = "Use a valid user id of a loggen in user from the same environment as this user because reasons."; ObjectID = "CmR-pp-nLk"; */
+"CmR-pp-nLk.text" = "Use a valid user id of a loggen in user from the same environment as this user because reasons.";
+
+/* Class = "UIButton"; normalTitle = "Buy Something (Native Spend)"; ObjectID = "Nuk-Ba-scK"; */
+"Nuk-Ba-scK.normalTitle" = "Buy Something (Native Spend)";
+
+/* Class = "UIButton"; normalTitle = "Pay To User (P2P)"; ObjectID = "O5U-8V-i8K"; */
+"O5U-8V-i8K.normalTitle" = "Pay To User (P2P)";
+
+/* Class = "UILabel"; text = "1.0.0"; ObjectID = "VDd-2H-tbS"; */
+"VDd-2H-tbS.text" = "1.0.0";
+
+/* Class = "UIButton"; normalTitle = "Next"; ObjectID = "gH2-Ob-uCx"; */
+"gH2-Ob-uCx.normalTitle" = "Next";
+
+/* Class = "UILabel"; text = "User ID:"; ObjectID = "lbZ-Eo-U0W"; */
+"lbZ-Eo-U0W.text" = "User ID:";
+
+/* Class = "UIButton"; normalTitle = "New User (restart)"; ObjectID = "yO7-Yb-Spq"; */
+"yO7-Yb-Spq.normalTitle" = "New User (restart)";

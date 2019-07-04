@@ -1,0 +1,6 @@
+framework module KinEcosystem {
+  umbrella header "KinEcosystem-umbrella.h"
+
+  export *
+  module * { export * }
+}

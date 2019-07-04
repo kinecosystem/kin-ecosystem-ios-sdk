@@ -1,0 +1,6 @@
+framework module KinCoreSDK {
+  umbrella header "KinCoreSDK-umbrella.h"
+
+  export *
+  module * { export * }
+}
