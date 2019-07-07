@@ -7,18 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		68EA4BB522C8EE30003FCF08 /* gifting_flow_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BAD22C8EE30003FCF08 /* gifting_flow_completed.swift */; };
-		68EA4BB622C8EE30003FCF08 /* common.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BAE22C8EE30003FCF08 /* common.swift */; };
-		68EA4BB722C8EE30003FCF08 /* page_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BAF22C8EE30003FCF08 /* page_close_tapped.swift */; };
-		68EA4BB822C8EE30003FCF08 /* user.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BB022C8EE30003FCF08 /* user.swift */; };
-		68EA4BB922C8EE30003FCF08 /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BB122C8EE30003FCF08 /* client.swift */; };
-		68EA4BBA22C8EE30003FCF08 /* gifting_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BB222C8EE30003FCF08 /* gifting_button_tapped.swift */; };
-		68EA4BBB22C8EE30003FCF08 /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BB322C8EE30003FCF08 /* types.swift */; };
-		68EA4BBC22C8EE30003FCF08 /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BB422C8EE30003FCF08 /* a_page_viewed.swift */; };
-		68EA4BC022C8EF70003FCF08 /* KBIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BBF22C8EF70003FCF08 /* KBIEvent.swift */; };
-		68EA4BC222C8EF86003FCF08 /* EventsStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BC122C8EF86003FCF08 /* EventsStore.swift */; };
-		68EA4BC422C8EFB7003FCF08 /* BIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BC322C8EFB7003FCF08 /* BIError.swift */; };
-		68EA4BC622C90552003FCF08 /* BIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68EA4BC522C90552003FCF08 /* BIClient.swift */; };
 		845105E7555EC7AE2DBF211C /* Pods_EcosystemSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1BFCCC9FF8FE47A2DF537 /* Pods_EcosystemSampleApp.framework */; };
 		E93F448A209A07DA00803FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F92320346A6200DD4B8E /* Assets.xcassets */; };
 		E942F91D20346A6200DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91C20346A6200DD4B8E /* AppDelegate.swift */; };
@@ -32,18 +20,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		68EA4BAD22C8EE30003FCF08 /* gifting_flow_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gifting_flow_completed.swift; sourceTree = "<group>"; };
-		68EA4BAE22C8EE30003FCF08 /* common.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = common.swift; sourceTree = "<group>"; };
-		68EA4BAF22C8EE30003FCF08 /* page_close_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = page_close_tapped.swift; sourceTree = "<group>"; };
-		68EA4BB022C8EE30003FCF08 /* user.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = user.swift; sourceTree = "<group>"; };
-		68EA4BB122C8EE30003FCF08 /* client.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = client.swift; sourceTree = "<group>"; };
-		68EA4BB222C8EE30003FCF08 /* gifting_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gifting_button_tapped.swift; sourceTree = "<group>"; };
-		68EA4BB322C8EE30003FCF08 /* types.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = types.swift; sourceTree = "<group>"; };
-		68EA4BB422C8EE30003FCF08 /* a_page_viewed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = a_page_viewed.swift; sourceTree = "<group>"; };
-		68EA4BBF22C8EF70003FCF08 /* KBIEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KBIEvent.swift; sourceTree = "<group>"; };
-		68EA4BC122C8EF86003FCF08 /* EventsStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsStore.swift; sourceTree = "<group>"; };
-		68EA4BC322C8EFB7003FCF08 /* BIError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BIError.swift; sourceTree = "<group>"; };
-		68EA4BC522C90552003FCF08 /* BIClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BIClient.swift; sourceTree = "<group>"; };
 		7885FAD88BCC380656B9C924 /* Pods-EcosystemSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		B4D1BFCCC9FF8FE47A2DF537 /* Pods_EcosystemSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EcosystemSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99F20D27689732882E93AE /* Pods-EcosystemSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.release.xcconfig"; sourceTree = "<group>"; };
@@ -86,33 +62,6 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
-		68EA4BAB22C8EE30003FCF08 /* BI */ = {
-			isa = PBXGroup;
-			children = (
-				68EA4BC522C90552003FCF08 /* BIClient.swift */,
-				68EA4BC322C8EFB7003FCF08 /* BIError.swift */,
-				68EA4BBF22C8EF70003FCF08 /* KBIEvent.swift */,
-				68EA4BC122C8EF86003FCF08 /* EventsStore.swift */,
-				68EA4BAC22C8EE30003FCF08 /* client */,
-			);
-			path = BI;
-			sourceTree = "<group>";
-		};
-		68EA4BAC22C8EE30003FCF08 /* client */ = {
-			isa = PBXGroup;
-			children = (
-				68EA4BB422C8EE30003FCF08 /* a_page_viewed.swift */,
-				68EA4BB122C8EE30003FCF08 /* client.swift */,
-				68EA4BAE22C8EE30003FCF08 /* common.swift */,
-				68EA4BB222C8EE30003FCF08 /* gifting_button_tapped.swift */,
-				68EA4BAD22C8EE30003FCF08 /* gifting_flow_completed.swift */,
-				68EA4BAF22C8EE30003FCF08 /* page_close_tapped.swift */,
-				68EA4BB322C8EE30003FCF08 /* types.swift */,
-				68EA4BB022C8EE30003FCF08 /* user.swift */,
-			);
-			path = client;
-			sourceTree = "<group>";
-		};
 		E942F91020346A6200DD4B8E = {
 			isa = PBXGroup;
 			children = (
@@ -134,7 +83,6 @@
 		E942F91B20346A6200DD4B8E /* EcosystemSampleApp */ = {
 			isa = PBXGroup;
 			children = (
-				68EA4BAB22C8EE30003FCF08 /* BI */,
 				E942F91C20346A6200DD4B8E /* AppDelegate.swift */,
 				E942F91E20346A6200DD4B8E /* SampleAppViewController.swift */,
 				E942F92020346A6200DD4B8E /* Main.storyboard */,
@@ -263,6 +211,7 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
@@ -273,11 +222,11 @@
 				"${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework",
 				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
 				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
-				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/KinEcosystem/KinEcosystem.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
@@ -288,7 +237,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarKit.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinEcosystem.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -321,23 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				68EA4BBC22C8EE30003FCF08 /* a_page_viewed.swift in Sources */,
-				68EA4BB622C8EE30003FCF08 /* common.swift in Sources */,
-				68EA4BB722C8EE30003FCF08 /* page_close_tapped.swift in Sources */,
 				E9FE48B3214E7BA000DD6CE9 /* TargetUserViewController.swift in Sources */,
-				68EA4BBB22C8EE30003FCF08 /* types.swift in Sources */,
 				E9DB9E3120A42A6400AD9EB1 /* JWTUtil.swift in Sources */,
-				68EA4BB922C8EE30003FCF08 /* client.swift in Sources */,
-				68EA4BBA22C8EE30003FCF08 /* gifting_button_tapped.swift in Sources */,
-				68EA4BB522C8EE30003FCF08 /* gifting_flow_completed.swift in Sources */,
-				68EA4BC222C8EF86003FCF08 /* EventsStore.swift in Sources */,
-				68EA4BB822C8EE30003FCF08 /* user.swift in Sources */,
 				E942F91F20346A6200DD4B8E /* SampleAppViewController.swift in Sources */,
 				E96E3B88225356E8005677E3 /* ApplicationKeys.swift in Sources */,
-				68EA4BC422C8EFB7003FCF08 /* BIError.swift in Sources */,
 				E942F91D20346A6200DD4B8E /* AppDelegate.swift in Sources */,
-				68EA4BC022C8EF70003FCF08 /* KBIEvent.swift in Sources */,
-				68EA4BC622C90552003FCF08 /* BIClient.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

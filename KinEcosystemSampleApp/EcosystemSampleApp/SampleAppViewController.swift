@@ -23,25 +23,9 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var payButton: UIButton!
 
     var balance: Decimal = 0
-    // !!!:
-//    var appreciationViewController: KinAppreciationViewController?
-    private var giftUserId: String?
 
     let environment: Environment = .test
-    let kid = "rs512_1"
-
-    lazy var biClient: BIClient? = {
-        return try? BIClient(endpoint: URL(string: self.environment.BIURL)!)
-    }()
-
-    func trackBI<T: KBIEvent>(block: () throws -> (T)) {
-        do {
-            try biClient?.send(try block())
-        }
-        catch {
-            print(error)
-        }
-    }
+    let kid = "rs512_0"
 
     var appId: String? {
         return ApplicationKeys.AppId.isEmpty == false ? ApplicationKeys.AppId : configValue(for: "appId", of: String.self)
@@ -241,23 +225,22 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     @IBAction func requestPaymentTapped(_ sender: Any) {
         externalOfferTapped(true)
     }
-    
+
+    private var giftingUserId: String?
+
     @IBAction func payToUserTapped(_ sender: Any) {
         let alertController = UIAlertController(title: "Gift / Pay to User", message: nil, preferredStyle: .alert)
 
         let giftAction = UIAlertAction(title: "Gift", style: .default) { [weak self] _ in
             guard let textField = alertController.textFields?.first, let userId = textField.text, let strongSelf = self else {
+                self?.alertConfigIssue()
                 return
             }
 
-            strongSelf.giftUserId = userId
+            strongSelf.giftingUserId = userId
 
-            // !!!:
-//            let viewController = KinAppreciationViewController(balance: strongSelf.balance, theme: .light)
-//            viewController.delegate = strongSelf
-//            viewController.biDelegate = strongSelf
-//            strongSelf.appreciationViewController = viewController
-//            strongSelf.present(viewController, animated: true)
+            Kin.giftingManager.delegate = strongSelf
+            Kin.giftingManager.present(in: strongSelf)
         }
         let payAction = UIAlertAction(title: "Pay", style: .default) { [weak self] _ in
             guard let textField = alertController.textFields?.first, let userId = textField.text else {
@@ -403,30 +386,37 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Oh ok", style: .cancel))
         self.present(alert, animated: true, completion: nil)
     }
+
+    fileprivate func buildJWT(from: String, to: String, appId: String, pKey: String, amount: Decimal) -> String? {
+        let offerID = "WOWOMGP2P"+"\(arc4random_uniform(999999))"
+
+        return JWTUtil.encode(header: ["alg": "RS512",
+                                       "typ": "jwt",
+                                       "kid" : kid],
+                              body: ["offer":["id":offerID, "amount":amount],
+                                     "sender": ["title":"Pay to \(to)",
+                                        "description":"Kin transfer to \(to)",
+                                        "user_id":lastUser,
+                                        "device_id": deviceId],
+                                     "recipient": ["title":"\(from) paid you",
+                                        "description":"Kin transfer from \(from)",
+                                        "user_id":to]],
+                              subject: "pay_to_user",
+                              id: appId,
+                              privateKey: pKey)
+    }
     
     fileprivate func transferKin(to: String, appId: String, pKey: String, amount: Decimal) {
         guard let user = lastUser else {
             presentAlert("Not logged in", body: "try logging in.")
             return
         }
-        let offerID = "WOWOMGP2P"+"\(arc4random_uniform(999999))"
-        guard let encoded =  JWTUtil.encode(header: ["alg": "RS512",
-                                                     "typ": "jwt",
-                                                     "kid" : kid],
-                                            body: ["offer":["id":offerID, "amount":amount],
-                                                   "sender": ["title":"Pay to \(to)",
-                                                    "description":"Kin transfer to \(to)",
-                                                    "user_id":lastUser,
-                                                    "device_id": deviceId],
-                                                   "recipient": ["title":"\(user) paid you",
-                                                    "description":"Kin transfer from \(user)",
-                                                    "user_id":to]],
-                                            subject: "pay_to_user",
-                                            id: appId,
-                                            privateKey: pKey) else {
-                                                alertConfigIssue()
-                                                return
+
+        guard let encoded = buildJWT(from: user, to: to, appId: appId, pKey: pKey, amount: amount) else {
+            alertConfigIssue()
+            return
         }
+
         setActionRunning(true)
         let handler: KinCallback = { jwtConfirmation, error in
             DispatchQueue.main.async { [weak self] in
@@ -466,56 +456,34 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     }
 }
 
-// !!!:
-//extension SampleAppViewController: KinAppreciationViewControllerDelegate {
-//    func kinAppreciationViewControllerDidPresent(_ viewController: KinAppreciationViewController) {
-//
-//    }
-//
-//    func kinAppreciationViewController(_ viewController: KinAppreciationViewController, didDismissWith reason: KinAppreciationCancelReason) {
-//
-//    }
-//
-//    func kinAppreciationViewController(_ viewController: KinAppreciationViewController, didSelect amount: Decimal) {
-//        guard let userId = giftUserId else {
-//            return
-//        }
-//
-//        payToUserId(userId, amount: amount)
-//
-//        giftUserId = nil
-//    }
-//}
+extension SampleAppViewController: GiftingManagerDelegate {
+    func giftingManagerDidPresent(_ giftingManager: GiftingManager) {
 
-// !!!:
-//extension SampleAppViewController: KinAppreciationBIDelegate {
-//    func kinAppreciationDidAppear() {
-//        trackBI { try APageViewed(pageName: .giftingDialog) }
-//    }
-//
-//    func kinAppreciationDidSelect(amount: Decimal) {
-//        trackBI { try GiftingButtonTapped(kinAmount: NSDecimalNumber(decimal: amount).doubleValue) }
-//    }
-//
-//    func kinAppreciationDidCancel(reason: KinAppreciationCancelReason) {
-//        trackBI { try PageCloseTapped(exitType: reason.biMap, pageName: .giftingDialog) }
-//    }
-//
-//    func kinAppreciationDidComplete() {
-//        trackBI { try GiftingFlowCompleted() }
-//    }
-//}
+    }
 
-// !!!:
-//extension KinAppreciationCancelReason {
-//    var biMap: KBITypes.ExitType {
-//        switch self {
-//        case .closeButton:
-//            return .xButton
-//        case .hostApplication:
-//            return .hostApp
-//        case .touchOutside:
-//            return .backgroundApp
-//        }
-//    }
-//}
+    func giftingManagerDidCancel(_ giftingManager: GiftingManager) {
+
+    }
+
+    func giftingManagerNeedsJWT(_ giftingManager: GiftingManager, amount: Decimal) -> String? {
+        guard let user = lastUser else {
+            presentAlert("Not logged in", body: "try logging in.")
+            return nil
+        }
+
+        guard let appId = appId, let pKey = privateKey, let userId = giftingUserId else {
+            alertConfigIssue()
+            return nil
+        }
+
+        return buildJWT(from: user, to: userId, appId: appId, pKey: pKey, amount: amount)
+    }
+
+    func giftingManager(_ giftingManager: GiftingManager, didCompleteWith jwtConfirmation: String) {
+
+    }
+
+    func giftingManager(_ giftingManager: GiftingManager, error: Error) {
+
+    }
+}

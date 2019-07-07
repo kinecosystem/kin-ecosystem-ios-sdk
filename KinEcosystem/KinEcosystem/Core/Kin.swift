@@ -377,7 +377,8 @@ public class Kin {
         }
         
     }
-    
+
+    @discardableResult
     public func payToUser(offerJWT: String, completion: @escaping KinCallback) -> Bool {
         return purchase(offerJWT: offerJWT, completion: completion)
     }
@@ -412,8 +413,6 @@ public class Kin {
                 
                 group.wait()
             }
-            
-            
         }
         return true
     }
@@ -682,4 +681,8 @@ public class Kin {
     }
 }
 
+// MARK: Gifting Module
 
+extension Kin {
+    public static let giftingManager = GiftingManager()
+}

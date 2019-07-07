@@ -161,6 +161,7 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"
@@ -171,10 +172,10 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Base64/Base64.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JWT/JWT.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinEcosystem/KinEcosystem.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework"
@@ -185,7 +186,6 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/Base64/Base64.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/JWT/JWT.framework"
-  install_framework "${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework"
   install_framework "${BUILT_PRODUCTS_DIR}/KinEcosystem/KinEcosystem.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then

@@ -8,6 +8,7 @@ struct KBITypes {
         case myKinPage = "my_kin_page"
         case onboarding = "onboarding"
         case settings = "settings "
+        case giftingDialog = "gifting_dialog"
     }
     enum PageContinue: String, Codable {
         case mainPageContinueToMyKin = "main_page_continue_to_my_kin"
@@ -36,6 +37,7 @@ struct KBITypes {
         case androidNavigator = "Android_navigator"
         case backgroundApp = "background_app"
         case xButton = "X_button"
+        case hostApp = "host_app"
     }
     enum BlockchainVersion: String, Codable {
         case the2 = "2"
