@@ -1,6 +1,6 @@
 Pod::Spec.new do |s|
   s.name             = 'KinEcosystem'
-  s.version          = '0.9.1'
+  s.version          = '0.10.0-beta-1'
   s.summary          = 'Kin Ecosystem mobile sdk for iOS'
   s.description      = <<-DESC
 Kin ecosystem mobile sdk for iOS
@@ -20,4 +20,12 @@ Kin ecosystem mobile sdk for iOS
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinMigrationModule', '0.1.0'
   s.dependency 'KinAppreciationModuleOptionsMenu', '0.0.1'
+
+  s.app_spec 'SampleApp' do |sa|
+    root = 'KinEcosystemSampleApp/EcosystemSampleApp'
+
+    sa.pod_target_xcconfig = { 'INFOPLIST_FILE' => '${PODS_TARGET_SRCROOT}/'+root+'/Info.plist' }
+    sa.source_files        = root+'/**/*.{swift}'
+    sa.resources           = root+'/**/*.{plist,storyboard,xcassets}'
+  end
 end
