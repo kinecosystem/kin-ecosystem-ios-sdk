@@ -13,7 +13,7 @@ import StellarErrors
 import KinUtil
 import KinMigrationModule
 
-let SDKVersion = "0.10.0"
+let SDKVersion = "1.2.0"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()
