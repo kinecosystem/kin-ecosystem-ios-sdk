@@ -8,12 +8,10 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 class KinNavigationChildController : KinViewController {
     weak var kinNavigationController: KinNavigationViewController?
 }
 
-@available(iOS 9.0, *)
 class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
     var core: Core!

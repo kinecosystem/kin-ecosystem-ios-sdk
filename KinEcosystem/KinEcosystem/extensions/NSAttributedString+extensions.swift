@@ -8,7 +8,6 @@
 
 import Foundation
 
-@available(iOS 9.0, *)
 extension String {
     
     func attributed(_ size: CGFloat, weight: UIFont.Weight, color: UIColor) -> NSAttributedString {

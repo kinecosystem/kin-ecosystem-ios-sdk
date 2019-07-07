@@ -12,7 +12,6 @@ protocol SettingsViewControllerDelegate {
     var didPerformBackup: Bool { get }
 }
 
-@available(iOS 9.0, *)
 class SettingsViewController: UITableViewController {
     private let brManager = BRManager(with: Kin.shared)
     

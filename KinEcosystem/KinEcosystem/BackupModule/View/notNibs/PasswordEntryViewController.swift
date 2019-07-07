@@ -8,15 +8,12 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 protocol PasswordEntryDelegate: NSObjectProtocol {
     func validatePasswordConformance(_ password: String) -> Bool
     func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController)
 }
 
-@available(iOS 9.0, *)
 class PasswordEntryViewController: BRViewController {
-    
     @IBOutlet weak var passwordInfo: UILabel!
     @IBOutlet weak var passwordInput1: PasswordEntryField!
     @IBOutlet weak var passwordInput2: PasswordEntryField!

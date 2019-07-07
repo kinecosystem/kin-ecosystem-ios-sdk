@@ -9,7 +9,6 @@
 import Foundation
 import CoreGraphics
 
-@available(iOS 9.0, *)
 class CircularDashedLoader : CAShapeLayer {
     
     
@@ -121,7 +120,6 @@ class CircularDashedLoader : CAShapeLayer {
     
 }
 
-@available(iOS 9.0, *)
 extension CircularDashedLoader : CAAnimationDelegate {
     func animationDidStop(_ anim: CAAnimation, finished flag: Bool) {
         self.removeAllAnimations()
@@ -134,7 +132,6 @@ extension CircularDashedLoader : CAAnimationDelegate {
     }
 }
 
-@available(iOS 9.0, *)
 class DiamondsLoaderView : UIView {
     
     @IBInspectable

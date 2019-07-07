@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 class BackupFlowController: FlowController {
     private lazy var _entryViewController: UIViewController = {
         let viewController = BackupIntroViewController()
@@ -22,7 +21,6 @@ class BackupFlowController: FlowController {
     }
 }
 
-@available(iOS 9.0, *)
 extension BackupFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
         syncNavigationBarColor(with: viewController)
@@ -35,7 +33,6 @@ extension BackupFlowController: LifeCycleProtocol {
 
 // MARK: - Navigation
 
-@available(iOS 9.0, *)
 extension BackupFlowController {
     @objc private func pushPasswordViewController() {
         Kin.track { try BackupStartButtonTapped() }
@@ -69,7 +66,6 @@ extension BackupFlowController {
 
 // MARK: - Password
 
-@available(iOS 9.0, *)
 extension BackupFlowController: PasswordEntryDelegate {
     func validatePasswordConformance(_ password: String) -> Bool {
         return keystoreProvider.validatePassword(password)
@@ -89,11 +85,8 @@ extension BackupFlowController: PasswordEntryDelegate {
     }
 }
 
-@available(iOS 9.0, *)
 extension BackupFlowController: QRViewControllerDelegate {
     func QRViewControllerDidComplete() {
         pushCompletedViewController()
     }
-    
-    
 }

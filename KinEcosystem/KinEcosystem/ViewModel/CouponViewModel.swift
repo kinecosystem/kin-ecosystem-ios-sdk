@@ -10,7 +10,7 @@ import Foundation
 
 import KinUtil
 import KinCoreSDK
-@available(iOS 9.0, *)
+
 class CouponViewModel: Decodable {
     
     var title: NSAttributedString

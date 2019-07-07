@@ -19,7 +19,6 @@ enum EcosystemNetError: Error {
     case unknown
 }
 
-@available(iOS 9.0, *)
 class RestClient {
     
     fileprivate(set) var config: EcosystemConfiguration

@@ -28,7 +28,6 @@ typealias SOPFlowPromise = Promise<(String, OpenOrder, PaymentMemoIdentifier)>
 typealias POFlowPromise = Promise<(PaymentMemoIdentifier, OpenOrder)>
 typealias Promise = KinUtil.Promise
 
-@available(iOS 9.0, *)
 struct Flows {
         
     static func earn(offerId: String,
@@ -935,7 +934,6 @@ struct Flows {
     
 }
 
-@available(iOS 9.0, *)
 extension Flows {
     static func whitelist() -> WhitelistClosure {
         return { txEnvelope -> (Promise<TransactionEnvelope?>) in

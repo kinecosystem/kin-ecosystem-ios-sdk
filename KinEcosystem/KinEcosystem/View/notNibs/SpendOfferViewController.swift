@@ -14,7 +14,6 @@ enum SpendOfferError: Error {
     case userCanceled
 }
 
-@available(iOS 9.0, *)
 class SpendOfferViewController: KinViewController {
     
     struct BIData {
