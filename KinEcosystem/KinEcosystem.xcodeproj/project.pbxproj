@@ -49,6 +49,8 @@
 		6831950322CCEACA00EC2DDF /* Promise+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950222CCEACA00EC2DDF /* Promise+extenstions.swift */; };
 		6831950722CCED0800EC2DDF /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 6831950622CCED0800EC2DDF /* Info.plist */; };
 		6831950A22CDEF1000EC2DDF /* GiftingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950922CDEF1000EC2DDF /* GiftingManager.swift */; };
+		6831951D22D1ED0700EC2DDF /* gifting_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831951B22D1ED0600EC2DDF /* gifting_button_tapped.swift */; };
+		6831951E22D1ED0700EC2DDF /* gifting_flow_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831951C22D1ED0600EC2DDF /* gifting_flow_completed.swift */; };
 		6A2C6DF2AFD4D82A972F9D83 /* backup_create_password_next_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78247DBFE7B7EAE390CB239A /* backup_create_password_next_button_tapped.swift */; };
 		74A98490A373CE7222188AA3 /* error_message_continue_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7F338961A7824899B8285C24 /* error_message_continue_button_tapped.swift */; };
 		756D8E3D1C08ADF5F0735F4B /* spend_order_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23BC8A2B1F88B1C8F730A360 /* spend_order_failed.swift */; };
@@ -297,6 +299,8 @@
 		6831950222CCEACA00EC2DDF /* Promise+extenstions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Promise+extenstions.swift"; sourceTree = "<group>"; };
 		6831950622CCED0800EC2DDF /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../../KinEcosystemTests/Info.plist; sourceTree = "<group>"; };
 		6831950922CDEF1000EC2DDF /* GiftingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GiftingManager.swift; sourceTree = "<group>"; };
+		6831951B22D1ED0600EC2DDF /* gifting_button_tapped.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gifting_button_tapped.swift; sourceTree = "<group>"; };
+		6831951C22D1ED0600EC2DDF /* gifting_flow_completed.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = gifting_flow_completed.swift; sourceTree = "<group>"; };
 		6914BA481766CB59767636FD /* stellar_account_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_account_creation_requested.swift; sourceTree = "<group>"; };
 		69955E4601C47B71203D274A /* migration_account_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_account_failed.swift; sourceTree = "<group>"; };
 		6B498BBD08B21D5DB0DFB4B7 /* settings_option_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = settings_option_tapped.swift; sourceTree = "<group>"; };
@@ -672,6 +676,8 @@
 				D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */,
 				E76576947B67C937AB0B34C5 /* a_page_viewed.swift */,
 				704BA9035E72B185704F588C /* popup_message_close_tapped.swift */,
+				6831951B22D1ED0600EC2DDF /* gifting_button_tapped.swift */,
+				6831951C22D1ED0600EC2DDF /* gifting_flow_completed.swift */,
 			);
 			path = client;
 			sourceTree = "<group>";
@@ -1249,6 +1255,7 @@
 				E98D17872050205C00FEB57A /* WelcomeViewController.swift in Sources */,
 				E92F7B7F206921BC008A027F /* SpendViewModel.swift in Sources */,
 				E98D1784204FD09200FEB57A /* UIView+extensions.swift in Sources */,
+				6831951E22D1ED0700EC2DDF /* gifting_flow_completed.swift in Sources */,
 				E954A62D2058163C00F01C8A /* OrderError.swift in Sources */,
 				E942F8A7202C5C5900DD4B8E /* ImageCache.swift in Sources */,
 				E91E6404203AB16400BB4104 /* UINavigationBar+gradient.swift in Sources */,
@@ -1266,6 +1273,7 @@
 				E92BA45C21A19C0A00C952D8 /* FlowController.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
+				6831951D22D1ED0700EC2DDF /* gifting_button_tapped.swift in Sources */,
 				E912B4E2203C5792005ADBA1 /* OrderResult.swift in Sources */,
 				E92BA45421A19C0A00C952D8 /* PasswordEntryField.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,

@@ -14,6 +14,7 @@ public enum KinClientErrorCode: Int {
     case internalInconsistency  = 4003
     case jwtMissing             = 4004
     case accountReadFailed      = 4005
+    case activeGift             = 4006
 }
 
 public enum KinServiceErrorCode: Int {
@@ -65,6 +66,8 @@ public enum KinEcosystemError: LocalizedError {
                 description = "JWT is missing while trying to perform the request. Did you login using a valid jwt?"
             case .accountReadFailed:
                 description = "The account data could not be parsed"
+            case .activeGift:
+                description = "The gifting module is already active"
             }
         case let KinEcosystemError.service(errorCode, error):
             underlyingError = error
