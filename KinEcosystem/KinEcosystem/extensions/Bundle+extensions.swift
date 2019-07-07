@@ -12,12 +12,8 @@ import Foundation
 
 extension Bundle {
     class var ecosystem: Bundle {
-        var bundle: Bundle
-        if #available(iOS 9.0, *) {
-            bundle = Bundle(for: Kin.self)
-        } else {
-            bundle = Bundle.main
-        }
+        let bundle = Bundle(for: Kin.self)
+
         if  let bundlePath = bundle.path(forResource: "KinEcosystem", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath) {
             return bundle
@@ -26,12 +22,7 @@ extension Bundle {
     }
     
     class var kinLocalization: Bundle {
-        var bundle: Bundle
-        if #available(iOS 9.0, *) {
-            bundle = Bundle(for: Kin.self)
-        } else {
-            bundle = Bundle.main
-        }
+        let bundle = Bundle(for: Kin.self)
         if  let bundlePath = bundle.path(forResource: "kinLocalization", ofType: "bundle"),
             let bundle = Bundle(path: bundlePath) {
             return bundle

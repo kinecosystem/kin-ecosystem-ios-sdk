@@ -8,7 +8,6 @@
 
 import KinMigrationModule
 
-@available(iOS 9.0, *)
 class Core {
     
     let network: EcosystemNet

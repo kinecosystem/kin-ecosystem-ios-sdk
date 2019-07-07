@@ -12,7 +12,6 @@ import KinUtil
 import StellarKit
 import CoreDataStack
 
-@available(iOS 9.0, *)
 class BalanceViewController: KinViewController {
 
     var core: Core!

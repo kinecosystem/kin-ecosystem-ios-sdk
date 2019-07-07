@@ -26,7 +26,6 @@ enum EarnOfferHTMLError: Error {
     case js(Error)
 }
 
-@available(iOS 9.0, *)
 class EarnOfferViewController: KinViewController {
 
     var web: WKWebView!
@@ -119,8 +118,6 @@ class EarnOfferViewController: KinViewController {
     }
 }
 
-
-@available(iOS 9.0, *)
 extension EarnOfferViewController: WKScriptMessageHandler, WKNavigationDelegate, UIScrollViewDelegate, MFMailComposeViewControllerDelegate {
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
         logVerbose("got messgae: \(message.name)")

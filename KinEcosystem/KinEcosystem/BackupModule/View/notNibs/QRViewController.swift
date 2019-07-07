@@ -13,7 +13,6 @@ protocol QRViewControllerDelegate: NSObjectProtocol {
     func QRViewControllerDidComplete()
 }
 
-@available(iOS 9.0, *)
 class QRViewController: BRViewController {
     @IBOutlet weak var descriptionLabel: UILabel!
     @IBOutlet weak var qrImageView: UIImageView!
@@ -114,7 +113,6 @@ class QRViewController: BRViewController {
 
 // MARK: - Email
 
-@available(iOS 9.0, *)
 extension QRViewController {
     private enum EmailError: Error {
         case noClient
@@ -173,7 +171,6 @@ extension QRViewController {
     }
 }
 
-@available(iOS 9.0, *)
 extension QRViewController: MFMailComposeViewControllerDelegate {
     func mailComposeController(_ controller: MFMailComposeViewController, didFinishWith result: MFMailComposeResult, error: Error?) {
         dismiss(animated: true) { [weak self] in

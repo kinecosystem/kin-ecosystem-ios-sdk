@@ -58,7 +58,6 @@ public struct NativeOffer: Equatable {
     }
 }
 
-@available(iOS 9.0, *)
 public class Kin {
     
     public static let shared = Kin()

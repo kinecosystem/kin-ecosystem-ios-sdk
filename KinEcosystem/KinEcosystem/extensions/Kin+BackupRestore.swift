@@ -10,7 +10,6 @@ import KinUtil
 
 let passRegex = try! NSRegularExpression(pattern: "^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{9,}$", options: [])
 
-@available(iOS 9.0, *)
 extension Kin : KeystoreProvider {
     public func exportAccount(_ password: String) throws -> String {
         guard let core = core else {

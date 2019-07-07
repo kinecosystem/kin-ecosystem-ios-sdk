@@ -8,7 +8,6 @@
 
 import UIKit
 
-@available(iOS 9.0, *)
 class BackupCompletedViewController: ExplanationTemplateViewController {
     override func viewDidLoad() {
         super.viewDidLoad()

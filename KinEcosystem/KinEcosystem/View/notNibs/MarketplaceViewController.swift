@@ -12,7 +12,6 @@ import CoreDataStack
 import StellarKit
 import KinCoreSDK
 
-@available(iOS 9.0, *)
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
@@ -189,7 +188,6 @@ class MarketplaceViewController: KinNavigationChildController {
     }
 }
 
-@available(iOS 9.0, *)
 extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
@@ -345,7 +343,6 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
     }
 }
 
-@available(iOS 9.0, *)
 extension MarketplaceViewController: SettingsViewControllerDelegate {
     var didPerformBackup: Bool {
         return core.blockchain.isBackedUp || core.blockchain.lastBalance?.amount == 0

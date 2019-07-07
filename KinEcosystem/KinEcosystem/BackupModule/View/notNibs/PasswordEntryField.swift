@@ -13,7 +13,6 @@ public enum PasswordEntryFieldState {
     case invalid
 }
 
-@available(iOS 9.0, *)
 class PasswordEntryField: UITextField {
     
     public var entryState = PasswordEntryFieldState.idle {

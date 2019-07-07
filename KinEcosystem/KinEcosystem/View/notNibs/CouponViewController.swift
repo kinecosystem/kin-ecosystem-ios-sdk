@@ -9,9 +9,6 @@
 import UIKit
 import SafariServices
 
-
-
-@available(iOS 9.0, *)
 class CouponViewController: UIViewController, UITextViewDelegate {
 
     struct BIData {
