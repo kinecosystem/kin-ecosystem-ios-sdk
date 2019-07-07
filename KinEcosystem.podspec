@@ -21,11 +21,14 @@ Kin ecosystem mobile sdk for iOS
   s.dependency 'KinMigrationModule', '0.1.0'
   s.dependency 'KinAppreciationModuleOptionsMenu', '0.0.1'
 
-  s.app_spec 'SampleApp' do |sa|
+  s.app_spec 'SampleApp' do |as|
     root = 'KinEcosystemSampleApp/EcosystemSampleApp'
 
-    sa.pod_target_xcconfig = { 'INFOPLIST_FILE' => '${PODS_TARGET_SRCROOT}/'+root+'/Info.plist' }
-    sa.source_files        = root+'/**/*.{swift}'
-    sa.resources           = root+'/**/*.{plist,storyboard,xcassets}'
+    as.pod_target_xcconfig = { 'INFOPLIST_FILE' => '${PODS_TARGET_SRCROOT}/'+root+'/Info.plist' }
+    as.source_files        = [root+'/**/*.{swift}', root+'/defaultConfig.plist']
+    as.resources           = root+'/**/*.{storyboard,xcassets}'
+
+    as.dependency 'JWT', '3.0.0-beta.11'
+    as.dependency 'HockeySDK'
   end
 end
