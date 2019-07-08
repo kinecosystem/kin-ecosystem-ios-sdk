@@ -2,6 +2,12 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:KinEcosystem.xcodeproj">
+      location = "group:KinEcosystem/KinEcosystem.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:KinEcosystemSampleApp/EcosystemSampleApp.xcodeproj">
+   </FileRef>
+   <FileRef
+      location = "group:Pods/Pods.xcodeproj">
    </FileRef>
 </Workspace>
