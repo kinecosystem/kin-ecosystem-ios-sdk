@@ -40,19 +40,17 @@ class KinButton: UIButton {
         super.layoutSubviews()
         layer.cornerRadius = 5.0
     }
-    
+
     override var intrinsicContentSize: CGSize {
-        var size = super.intrinsicContentSize
-        size.height = 50
-        return size
+        return CGSize(width: UIView.noIntrinsicMetric, height: 50)
     }
-    
+
     override var isEnabled: Bool {
         didSet {
             self.backgroundColor = isEnabled ? enabledColor : disabledColor
         }
     }
-    
+
     override var isHighlighted: Bool {
         didSet {
             self.backgroundColor = isHighlighted ? highlightedColor : enabledColor

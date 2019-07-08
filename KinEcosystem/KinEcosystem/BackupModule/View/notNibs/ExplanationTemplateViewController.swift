@@ -9,7 +9,6 @@
 import UIKit
 import KinUtil
 
-@available(iOS 9.0, *)
 class ExplanationTemplateViewController: BRViewController, Themed {
     let themeLinkBag = LinkBag()
     @IBOutlet weak var imageView: UIImageView!
