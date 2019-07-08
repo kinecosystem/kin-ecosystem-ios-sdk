@@ -16,4 +16,5 @@ enum KinPreferenceKey: String, CodingKey {
     case lastSignedInDevice
     case firstSpendSubmitted
     case lastEnvironment
+    case didTapLetsGo
 }

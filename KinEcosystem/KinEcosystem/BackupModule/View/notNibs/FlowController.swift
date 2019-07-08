@@ -29,10 +29,6 @@ class FlowController: NSObject {
         fatalError("entryViewController() has not been implemented")
     }
     
-    func syncNavigationBarColor(with viewController: UIViewController) {
-        navigationController.navigationBar.tintColor = viewController.preferredStatusBarStyle.color
-    }
-    
     @objc func cancelFlow() {
         delegate?.flowControllerDidCancel(self)
     }

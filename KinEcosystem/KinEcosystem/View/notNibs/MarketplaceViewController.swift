@@ -12,6 +12,7 @@ import CoreDataStack
 import StellarKit
 import KinCoreSDK
 
+@available(iOS 9.0, *)
 class MarketplaceViewController: KinNavigationChildController {
     
     weak var core: Core!
@@ -66,8 +67,8 @@ class MarketplaceViewController: KinNavigationChildController {
         let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeItem
         
-        let settingsImage = UIImage(named: "settingsIcon", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
-        let settingsBadgeImage = UIImage(named: "settingsBadge", in: Bundle.ecosystem, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsImage = UIImage(named: "settingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
+        let settingsBadgeImage = UIImage(named: "settingsBadge", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)?.withRenderingMode(.alwaysOriginal)
         let settingsItem = BadgeBarButtonItem(image: settingsImage, badgeImage: settingsBadgeImage, target: self, action: #selector(presentSettings))
         navigationItem.rightBarButtonItem = settingsItem
         settingsBarItem = settingsItem
@@ -100,22 +101,7 @@ class MarketplaceViewController: KinNavigationChildController {
                     return
             }
             
-            var viewModel: OfferViewModel
-            if let offerViewModel = this.offerViewModels[offer.id] {
-                viewModel = offerViewModel
-            } else {
-                viewModel = OfferViewModel(with: offer)
-                this.offerViewModels[offer.id] = viewModel
-            }
-            earnCell.title.attributedText = viewModel.title
-            earnCell.imageView.image = nil
-            viewModel.image.then(on: .main) { [weak earnCell] result in
-                earnCell?.imageView.image = result.image
-                }.error { error in
-                    logWarn("cell image error: \(error)")
-            }
-            earnCell.amount.attributedText = viewModel.amount
-            earnCell.subtitle.attributedText = viewModel.subtitle
+            
         }
         earnOffersCollectionView.add(fetchedResultsSection: earnSection)
         
@@ -127,25 +113,10 @@ class MarketplaceViewController: KinNavigationChildController {
                     return
             }
             
-            var viewModel: OfferViewModel
-            if let offerViewModel = this.offerViewModels[offer.id] {
-                viewModel = offerViewModel
-            } else {
-                viewModel = OfferViewModel(with: offer)
-                this.offerViewModels[offer.id] = viewModel
-            }
-            spendCell.title.attributedText = viewModel.title
-            spendCell.imageView.image = nil
-            viewModel.image.then(on: .main) { [weak spendCell] result in
-                spendCell?.imageView.image = result.image
-                }.error { error in
-                    logWarn("cell image error: \(error)")
-            }
-            spendCell.amount.attributedText = viewModel.amount
-            spendCell.subtitle.attributedText = viewModel.subtitle
+            
         }
         spendOffersCollectionView.add(fetchedResultsSection: spendSection)
-        if let emptyState = UIImage(named: "spaceship", in: Bundle.ecosystem, compatibleWith: nil) {
+        if let emptyState = UIImage(named: "spaceship", in: KinBundle.ecosystem.rawValue, compatibleWith: nil) {
             let earnEmptyStateView = UIImageView(image: emptyState)
             let spendEmptyStateView = UIImageView(image: emptyState)
             earnEmptyStateView.contentMode = .scaleAspectFit
@@ -157,11 +128,11 @@ class MarketplaceViewController: KinNavigationChildController {
     
     fileprivate func setupCollectionViews() {
         earnOffersCollectionView.contentInset = .zero
-        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: Bundle.ecosystem),
+        earnOffersCollectionView.register(UINib(nibName: earnCellName, bundle: KinBundle.ecosystem.rawValue),
                                           forCellWithReuseIdentifier: earnCellName)
         earnOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
         spendOffersCollectionView.contentInset = .zero
-        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: Bundle.ecosystem),
+        spendOffersCollectionView.register(UINib(nibName: spendCellName, bundle: KinBundle.ecosystem.rawValue),
                                            forCellWithReuseIdentifier: spendCellName)
         spendOffersCollectionView.decelerationRate = UIScrollView.DecelerationRate.fast
     }
@@ -174,7 +145,6 @@ class MarketplaceViewController: KinNavigationChildController {
     @objc private func presentSettings() {
         Kin.track { try SettingsButtonTapped() }
         let settingsViewController = SettingsViewController()
-        settingsViewController.delegate = self
         let cancelItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(dismissSettings))
         settingsViewController.navigationItem.rightBarButtonItem = cancelItem
         
@@ -188,6 +158,7 @@ class MarketplaceViewController: KinNavigationChildController {
     }
 }
 
+@available(iOS 9.0, *)
 extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         switch collectionView {
@@ -257,8 +228,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             html.offerId = offer.id
             html.title = offer.title
             htmlController = html
-            let navContoller = KinBaseNavigationController(rootViewController: html)
-            self.kinNavigationController?.present(navContoller, animated: true)
+            self.kinNavigationController?.present(html, animated: true)
             
             if let type = KBITypes.OfferType(rawValue: offer.offerContentType.rawValue) {
                 Kin.track { try EarnOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, offerType: type, origin: .marketplace) }
@@ -275,7 +245,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
                         amount >= Decimal(offer.amount) else {
                 let transition = SheetTransition()
                 let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
-                                                                 bundle: Bundle.ecosystem)
+                                                                 bundle: KinBundle.ecosystem.rawValue)
                 controller.modalPresentationStyle = .custom
                 controller.transitioningDelegate = transition
                 self.kinNavigationController?.present(controller, animated: true)
@@ -283,7 +253,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             }
             Kin.track { try SpendOfferTapped(kinAmount: Double(offer.amount), offerID: offer.id, origin: .marketplace) }
             let controller = SpendOfferViewController(nibName: "SpendOfferViewController",
-                                                      bundle: Bundle.ecosystem)
+                                                      bundle: KinBundle.ecosystem.rawValue)
             controller.viewModel = viewModel
             controller.biData = SpendOfferViewController.BIData(amount: Double(offer.amount), offerId: offer.id)
             let transition = SheetTransition()
@@ -333,6 +303,7 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             
         }
     }
+
     func updateCollectionView(_ cv: UICollectionView, for numOfOffers: Int) {
         cv.backgroundView?.isHidden = numOfOffers > 0
         if cv == spendOffersCollectionView {
@@ -340,11 +311,5 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
         } else {
             earnOffersLabel.text = numOfOffers > 0 ? "kinecosystem_complete_tasks_and_earn_kin".localized() : "kinecosystem_empty_tomorrow_more_opportunities".localized()
         }
-    }
-}
-
-extension MarketplaceViewController: SettingsViewControllerDelegate {
-    var didPerformBackup: Bool {
-        return core.blockchain.isBackedUp || core.blockchain.lastBalance?.amount == 0
     }
 }

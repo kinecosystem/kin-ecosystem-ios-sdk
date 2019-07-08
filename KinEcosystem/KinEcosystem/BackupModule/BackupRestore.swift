@@ -42,14 +42,11 @@ private struct BRInstance {
     let completion: BRCompletionHandler
 }
 
+@available(iOS 9.0, *)
 public class BRManager: NSObject {
     private let storeProvider: KeystoreProvider
     private var presentor: UIViewController?
     private var brInstance: BRInstance?
-    
-    private var navigationBarBackgroundImages: [UIBarMetrics: UIImage?]?
-    private var navigationBarShadowImage: UIImage?
-    private var navigationBarTintColor: UIColor?
     
     public init(with storeProvider: KeystoreProvider) {
         self.storeProvider = storeProvider
@@ -65,6 +62,7 @@ public class BRManager: NSObject {
      - Parameter navigationController: The navigation controller being pushed onto
      - Parameter completion:
      */
+    @available(*, deprecated, message: "use instead `start(_ phase: presentedOn: completion:)`")
     public func start(_ phase: BRPhase,
                       pushedOnto navigationController: UINavigationController,
                       completion: @escaping BRCompletionHandler)
@@ -75,8 +73,6 @@ public class BRManager: NSObject {
         }
         
         let isStackEmpty = navigationController.viewControllers.isEmpty
-        
-        removeNavigationBarBackground(navigationController.navigationBar, shouldSave: !isStackEmpty)
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         navigationController.pushViewController(flowController.entryViewController, animated: !isStackEmpty)
@@ -100,11 +96,10 @@ public class BRManager: NSObject {
             return
         }
         
-        let navigationController = UINavigationController()
-        removeNavigationBarBackground(navigationController.navigationBar)
+        let navigationController = ThemedNavigationController()
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
-        let dismissItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: flowController, action: #selector(flowController.cancelFlow))
+        let dismissItem = UIBarButtonItem(barButtonSystemItem: .stop, target: flowController, action: #selector(flowController.cancelFlow))
         flowController.entryViewController.navigationItem.leftBarButtonItem = dismissItem
         navigationController.viewControllers = [flowController.entryViewController]
         viewController.present(navigationController, animated: true)
@@ -130,6 +125,7 @@ public class BRManager: NSObject {
 
 // MARK: - Navigation
 
+@available(iOS 9.0, *)
 extension BRManager {
     private var navigationController: UINavigationController? {
         return brInstance?.flowController.navigationController
@@ -152,8 +148,6 @@ extension BRManager {
         }
         
         if index > 0 {
-            restoreNavigationBarBackground(navigationController.navigationBar)
-            
             let externalViewController = navigationController.viewControllers[index - 1]
             navigationController.popToViewController(externalViewController, animated: true)
         }
@@ -162,6 +156,7 @@ extension BRManager {
 
 // MARK: - Flow
 
+@available(iOS 9.0, *)
 extension BRManager: FlowControllerDelegate {
     func flowControllerDidComplete(_ controller: FlowController) {
         guard let brInstance = brInstance else {
@@ -191,44 +186,9 @@ extension BRManager: FlowControllerDelegate {
         case .presented:
             dismissFlow()
         case .pushed:
-            if let navigationController = navigationController {
-                restoreNavigationBarBackground(navigationController.navigationBar)
-            }
+            break
         }
         
         self.brInstance = nil
-    }
-}
-
-// MARK: - Navigation Bar Appearance
-
-extension BRManager {
-    private func removeNavigationBarBackground(_ navigationBar: UINavigationBar, shouldSave: Bool = false) {
-        if shouldSave {
-            let barMetrics: [UIBarMetrics] = [.default, .defaultPrompt, .compact, .compactPrompt]
-            var navigationBarBackgroundImages = [UIBarMetrics: UIImage?]()
-            
-            for barMetric in barMetrics {
-                navigationBarBackgroundImages[barMetric] = navigationBar.backgroundImage(for: barMetric)
-            }
-            
-            if !navigationBarBackgroundImages.isEmpty {
-                self.navigationBarBackgroundImages = navigationBarBackgroundImages
-            }
-            
-            navigationBarShadowImage = navigationBar.shadowImage
-            navigationBarTintColor = navigationBar.tintColor
-        }
-        
-        navigationBar.removeBackground()
-    }
-    
-    private func restoreNavigationBarBackground(_ navigationBar: UINavigationBar) {
-        navigationBar.restoreBackground(backgroundImages: navigationBarBackgroundImages, shadowImage: navigationBarShadowImage)
-        navigationBar.tintColor = navigationBarTintColor
-        
-        navigationBarBackgroundImages = nil
-        navigationBarShadowImage = nil
-        navigationBarTintColor = nil
     }
 }

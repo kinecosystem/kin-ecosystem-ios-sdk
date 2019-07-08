@@ -125,10 +125,10 @@ class WelcomeViewController: KinViewController {
 
     func presentMarketplace() {
         transition = SplashTransition(animatedView: getStartedButton)
-        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
+        let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
         mpViewController.core = core
         let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                        bundle: Bundle.ecosystem,
+                                                                        bundle: KinBundle.ecosystem.rawValue,
                                                                         rootViewController: mpViewController,
                                                                         core: core)
         navigationController.modalPresentationStyle = .custom

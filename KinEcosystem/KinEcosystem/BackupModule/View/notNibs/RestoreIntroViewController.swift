@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KinUtil
 
 protocol RestoreIntroViewControllerDelegate: NSObjectProtocol {
     func restoreIntroViewControllerDidComplete(_ viewController: RestoreIntroViewController)
@@ -15,13 +16,18 @@ protocol RestoreIntroViewControllerDelegate: NSObjectProtocol {
 class RestoreIntroViewController: ExplanationTemplateViewController {
     weak var delegate: RestoreIntroViewControllerDelegate?
     private var canContinue = false
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        let arrowImage = UIImage(named: "uploadQrArrow", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
+        let arrowImageView = UIImageView(image: arrowImage)
+        arrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        continueButton.addSubview(arrowImageView)
+        continueButton.centerYAnchor.constraint(equalTo: arrowImageView.centerYAnchor).isActive = true
+        arrowImageView.trailingAnchor.constraint(equalTo: continueButton.trailingAnchor, constant: -24).isActive = true
+
         Kin.track { try RestoreUploadQrCodePageViewed() }
-        imageView.image = UIImage(named: "whiteQrCode", in: Bundle.ecosystem, compatibleWith: nil)
-        titleLabel.text = "kinecosystem_restore_intro_title".localized()
-        descriptionLabel.text = "kinecosystem_restore_intro_description".localized()
+        imageView.image = UIImage(named: "restoreQR", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         reminderContainerView.isHidden = true
         continueButton.setTitle("kinecosystem_restore_intro_continue".localized(), for: .normal)
         continueButton.addTarget(self, action: #selector(continueAction), for: .touchUpInside)
@@ -36,12 +42,13 @@ class RestoreIntroViewController: ExplanationTemplateViewController {
     
     @objc private func continueAction() {
         Kin.track { try RestoreUploadQrCodeButtonTapped() }
-        if canContinue {
-            delegate?.restoreIntroViewControllerDidComplete(self)
-        }
-        else {
+
+        guard canContinue else {
             presentAlertController()
+            return
         }
+
+        delegate?.restoreIntroViewControllerDidComplete(self)
     }
     
     @objc private func presentAlertController() {
@@ -60,5 +67,15 @@ class RestoreIntroViewController: ExplanationTemplateViewController {
         alertController.preferredAction = continueAction
         present(alertController, animated: true)
     }
-}
 
+    override func applyTheme(_ theme: Theme) {
+        super.applyTheme(theme)
+
+        titleLabel.attributedText = "kinecosystem_restore_intro_title"
+            .localized()
+            .styled(as: theme.title20)
+        descriptionLabel.attributedText = "kinecosystem_restore_intro_description"
+            .localized()
+            .styled(as: theme.subtitle14)
+    }
+}

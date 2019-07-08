@@ -33,6 +33,18 @@ public enum EcosystemExperience {
     case restore((BREvent) -> ())
 }
 
+extension EcosystemExperience: Equatable {
+    public static func == (lhs: EcosystemExperience, rhs: EcosystemExperience) -> Bool {
+        switch (lhs, rhs) {
+        case (.marketplace, .marketplace): return true
+        case (.history, .history): return true
+        case (.backup, .backup): return true
+        case (.restore, .restore): return true
+        default: return false
+        }
+    }
+}
+
 public struct NativeOffer: Equatable {
     public let id: String
     public let title: String
@@ -58,8 +70,7 @@ public struct NativeOffer: Equatable {
     }
 }
 
-public class Kin {
-    
+public class Kin: NSObject {
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate weak var mpPresentingController: UIViewController?
@@ -70,6 +81,7 @@ public class Kin {
     fileprivate let psNativeOLock = NSLock()
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
+    fileprivate var entrypointFlowController: EntrypointFlowController?
     
     // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
     fileprivate let purchaseQueue = OperationQueue()
@@ -96,8 +108,11 @@ public class Kin {
             logError("failed to send event, error: \(error)")
         }
     }
-    
-    init() {
+
+    override init() {
+        super.init()
+
+        UIFont.loadFonts(from: KinBundle.fonts.rawValue)
         purchaseQueue.maxConcurrentOperationCount = 1
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { _ in
             self.purchaseQueue.isSuspended = true
@@ -115,7 +130,7 @@ public class Kin {
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
         
-        guard   let modelPath = Bundle.ecosystem.path(forResource: "KinEcosystem",
+        guard   let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
@@ -298,8 +313,18 @@ public class Kin {
             logError("Kin not started")
             throw KinEcosystemError.client(.notStarted, nil)
         }
-        
-        if case let .backup(handler) = experience {
+
+        switch experience {
+        case .marketplace, .history:
+            mpPresentingController = parentViewController
+            entrypointFlowController = EntrypointFlowController(presentingViewController: parentViewController, core: core)
+            entrypointFlowController!.delegate = self
+            entrypointFlowController!.start()
+
+            if experience == .history {
+                entrypointFlowController!.showTxHistory(pushAnimated: false)
+            }
+        case .backup(let handler):
             guard isActivated else { throw KinEcosystemError.service(.notLoggedIn, nil) }
             brManager = BRManager(with: self)
             brManager!.start(.backup, presentedOn: parentViewController) { success in
@@ -309,8 +334,7 @@ public class Kin {
                     handler(.backup(.cancel))
                 }
             }
-            return
-        } else if case let .restore(handler) = experience {
+        case .restore(let handler):
             guard isActivated else { throw KinEcosystemError.service(.notLoggedIn, nil) }
             brManager = BRManager(with: self)
             brManager!.start(.restore, presentedOn: parentViewController) { success in
@@ -320,25 +344,6 @@ public class Kin {
                     handler(.restore(.cancel))
                 }
             }
-            return
-        }
-        
-        mpPresentingController = parentViewController
-        if isActivated {
-            let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: Bundle.ecosystem)
-            mpViewController.core = core
-            let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                   bundle: Bundle.ecosystem,
-                                                                   rootViewController: mpViewController,
-                                                                   core: core)
-            if case EcosystemExperience.history = experience {
-                navigationController.transitionToOrders(animated: false)
-            }
-            parentViewController.present(navigationController, animated: true)
-        } else {
-            let welcomeVC = WelcomeViewController(nibName: "WelcomeViewController", bundle: Bundle.ecosystem)
-            welcomeVC.core = core
-            parentViewController.present(welcomeVC, animated: true)
         }
     }
     
@@ -681,8 +686,22 @@ public class Kin {
     }
 }
 
+extension Kin: KinFlowControllerDelegate {
+    func flowControllerDidComplete(_ controller: KinFlowController) {
+        
+    }
+    
+    func flowControllerDidCancel(_ controller: KinFlowController) {
+        if controller is EntrypointFlowController {
+            entrypointFlowController = nil
+        }
+    }
+}
+
+
 // MARK: Gifting Module
 
 extension Kin {
     public static let giftingManager = GiftingManager()
 }
+

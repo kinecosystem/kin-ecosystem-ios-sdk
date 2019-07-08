@@ -10,24 +10,41 @@
 
 import Foundation
 
-extension Bundle {
-    class var ecosystem: Bundle {
-        let bundle = Bundle(for: Kin.self)
-
-        if  let bundlePath = bundle.path(forResource: "KinEcosystem", ofType: "bundle"),
-            let bundle = Bundle(path: bundlePath) {
-            return bundle
-        }
-        return bundle
+enum KinBundle: RawRepresentable {
+    init?(rawValue: Bundle) {
+        return nil
     }
     
-    class var kinLocalization: Bundle {
-        let bundle = Bundle(for: Kin.self)
-        if  let bundlePath = bundle.path(forResource: "kinLocalization", ofType: "bundle"),
+    var rawValue: Bundle {
+        get {
+            switch self {
+            case .ecosystem:
+                return Bundle.kinBundleNamed("KinEcosystem")
+            case .localization:
+                return Bundle.kinBundleNamed("kinLocalization")
+            case .fonts:
+                return Bundle.kinBundleNamed("kinFonts")
+            }
+        }
+    }
+    
+    typealias RawValue = Bundle
+
+    case ecosystem
+    case localization
+    case fonts
+}
+
+extension Bundle {
+    fileprivate class func kinBundleNamed(_ name: String) -> Bundle {
+        let mainFrameworkBundle = Bundle(for: Kin.self)
+        if
+            let bundlePath = mainFrameworkBundle.path(forResource: name, ofType: "bundle"),
             let bundle = Bundle(path: bundlePath) {
             return bundle
         }
-        return bundle
+
+        return mainFrameworkBundle
     }
 
     static var appName: String? {

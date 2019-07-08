@@ -12,8 +12,11 @@ Kin ecosystem mobile sdk for iOS
   s.source           = { :git => 'https://github.com/kinfoundation/kin-ecosystem-ios-sdk.git', :tag => s.version.to_s }
 
   s.ios.deployment_target = '9.0'
+
+  s.resource_bundles = { "kinFonts" => ["KinEcosystem/fonts/*.otf"] }
   s.source_files = 'KinEcosystem/KinEcosystem/**/*.{h,m,swift}'
-  s.resources = 'KinEcosystem/KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings}'
+  s.resources = 'KinEcosystem/KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings,otf,ttf}'
+
   s.swift_version = '4.2'
 
   s.dependency 'SimpleCoreDataStack', '0.1.6'

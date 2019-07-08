@@ -13,6 +13,7 @@ class RestoreFlowController: FlowController {
     
     private lazy var _entryViewController: UIViewController = {
         let viewController = RestoreIntroViewController()
+        viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "1/2")
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
         return viewController
@@ -25,7 +26,7 @@ class RestoreFlowController: FlowController {
 
 extension RestoreFlowController: LifeCycleProtocol {
     func viewController(_ viewController: UIViewController, willAppear animated: Bool) {
-        syncNavigationBarColor(with: viewController)
+
     }
     
     func viewController(_ viewController: UIViewController, willDisappear animated: Bool) {
@@ -52,6 +53,7 @@ extension RestoreFlowController {
     
     private func pushPasswordViewController(with qrString: String) {
         let restoreViewController = RestoreViewController()
+        restoreViewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "2/2")
         restoreViewController.delegate = self
         restoreViewController.lifeCycleDelegate = self
         restoreViewController.imageView.image = QR.generateImage(from: qrString)
@@ -104,7 +106,7 @@ extension RestoreFlowController: RestoreViewControllerDelegate {
     
     func restoreViewControllerDidComplete(_ viewController: RestoreViewController) {
         // Delay to prevent a jarring jump after the checkmark animation.
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
             guard let strongSelf = self else {
                 return
             }

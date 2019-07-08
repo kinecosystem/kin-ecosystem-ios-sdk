@@ -34,30 +34,27 @@ extension QRPickerController: UIImagePickerControllerDelegate, UINavigationContr
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
-        if let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage {
-            
-            DispatchQueue.global().async {
-                let qrString = QR.decode(image: image)
-                if let qr = qrString {
-                    DispatchQueue.main.async {
-                        self.delegate?.qrPickerControllerDidComplete(self, with: qr)
-                    }
-                } else {
-                    DispatchQueue.main.async {
-                        self.presentImageError()
-                    }
-                }
-                
-            }
-            
-        } else {
+        guard let image = info[UIImagePickerController.InfoKey.originalImage] as? UIImage else {
             DispatchQueue.main.async {
                 self.presentImageError()
             }
+            return
         }
-        
+            
+        DispatchQueue.global().async {
+            let qrString = QR.decode(image: image)
+            if let qr = qrString {
+                DispatchQueue.main.async {
+                    self.delegate?.qrPickerControllerDidComplete(self, with: qr)
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.presentImageError()
+                }
+            }
+        }
     }
-    
+
     func presentImageError() {
         let title = "QR not recognized".localized()
         let message = "A QR code could not be detected in the image.".localized()
@@ -65,5 +62,4 @@ extension QRPickerController: UIImagePickerControllerDelegate, UINavigationContr
         alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
         self.imagePickerController.present(alertController, animated: true)
     }
-    
 }

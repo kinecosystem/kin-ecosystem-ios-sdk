@@ -7,60 +7,77 @@
 //
 
 import UIKit
+import KinMigrationModule
 
+@available(iOS 9.0, *)
 protocol PasswordEntryDelegate: NSObjectProtocol {
     func validatePasswordConformance(_ password: String) -> Bool
     func passwordEntryViewControllerDidComplete(_ viewController: PasswordEntryViewController)
 }
 
+private enum PasswordsState {
+    case clean
+    case firstInvalid
+    case firstValid
+    case mismatch
+    case validAndMatch
+}
+
+@available(iOS 9.0, *)
 class PasswordEntryViewController: BRViewController {
+    let themeLinkBag = LinkBag()
+    var theme: Theme?
+
+    private var passwordState: PasswordsState = .clean {
+        didSet {
+            updatePasswordState()
+        }
+    }
+
     @IBOutlet weak var passwordInfo: UILabel!
+
     @IBOutlet weak var passwordInput1: PasswordEntryField!
     @IBOutlet weak var passwordInput2: PasswordEntryField!
-    @IBOutlet weak var confirmLabel: UILabel!
+    @IBOutlet weak var confirmLabel: UILabel! {
+        didSet {
+            confirmLabel.textAlignment = .left
+        }
+    }
+
     @IBOutlet weak var confirmTick: UIView!
-    @IBOutlet weak var doneButton: RoundButton!
+    @IBOutlet weak var doneButton: KinButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var tickStack: UIStackView!
-    @IBOutlet weak var tickImage: UIImageView!
+    @IBOutlet weak var tickImageView: UIImageView!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
-    
+
     weak var delegate: PasswordEntryDelegate?
-    
+
     private var kbObservers = [NSObjectProtocol]()
     private var tickMarked = false
-    private let passwordInstructions = "kinecosystem_password_instructions".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    private let confirmInfo = "kinecosystem_password_confirmation".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    private let passwordInvalidWarning = "kinecosystem_password_invalid_warning".localized().attributed(12.0, weight: .regular, color: UIColor.kinWarning)
-    private let passwordMismatch = "kinecosystem_password_mismatch".localized().attributed(12.0, weight: .regular, color: UIColor.kinWarning)
-    private let passwordInvalidInfo = "kinecosystem_password_invalid_info".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    private let passwordPlaceholder = "kinecosystem_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    private let passwordConfirmPlaceholder = "kinecosystem_confirm_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    
+    fileprivate let passwordConditions = "kinecosystem_password_conditions".localized()
+
     var password: String? {
         return passwordInput1.text
     }
-    
-    override func willMove(toParent parent: UIViewController?) {
-        super.willMove(toParent: parent)
-        if parent == nil {
-            Kin.track { try BackupCreatePasswordBackButtonTapped() }
+
+    deinit {
+        kbObservers.forEach { obs in
+            NotificationCenter.default.removeObserver(obs)
         }
+        kbObservers.removeAll()
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        Kin.track { try BackupCreatePasswordPageViewed() }
+
         confirmTick.layer.borderWidth = 1.0
-        confirmTick.layer.borderColor = UIColor.kinBlueGreyTwo.cgColor
         confirmTick.layer.cornerRadius = 2.0
-        doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
         doneButton.isEnabled = false
-        tickImage.isHidden = true
-        passwordInfo.attributedText = passwordInstructions
-        confirmLabel.attributedText = confirmInfo
-        passwordInput1.attributedPlaceholder = passwordPlaceholder
-        passwordInput2.attributedPlaceholder = passwordConfirmPlaceholder
+        tickImageView.isHidden = true
+
+        setupTheming()
+        Kin.track { try BackupCreatePasswordPageViewed() }
         kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] note in
             if let height = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height,
                 let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
@@ -89,71 +106,141 @@ class PasswordEntryViewController: BRViewController {
         }
         passwordInput1.becomeFirstResponder()
     }
-    
-    
-    @IBAction func passwordEntryChanged(_ sender: UITextField) {
-        updateDoneButton()
-        if passwordInput1.hasText,
-            let delegate = delegate,
-            let text = passwordInput1.text,
-            delegate.validatePasswordConformance(text) {
-            passwordInput1.entryState = .valid
-            if passwordInput2.text == text {
-                passwordInput2.entryState = .valid
-            } else {
-                passwordInput2.entryState = .idle
-            }
-        } else {
-            passwordInput1.entryState = .idle
+
+    override func willMove(toParent parent: UIViewController?) {
+        super.willMove(toParent: parent)
+        if parent == nil {
+            Kin.track { try BackupCreatePasswordBackButtonTapped() }
         }
-        passwordInfo.attributedText = passwordInstructions
-    }
-    
-    
-    
-    @IBAction func doneButtonTapped(_ sender: Any) {
-        Kin.track { try BackupCreatePasswordNextButtonTapped() }
-        guard let text = passwordInput1.text, passwordInput1.hasText && passwordInput2.hasText else {
-            return // shouldn't really happen, here for documenting
-        }
-        guard passwordInput1.text == passwordInput2.text else {
-            alertPasswordsDontMatch()
-            return
-        }
-        guard let delegate = delegate else { fatalError() }
-        
-        guard delegate.validatePasswordConformance(text) else {
-            alertPasswordsConformance()
-            return
-        }
-        delegate.passwordEntryViewControllerDidComplete(self)
-    }
-    
-    @IBAction func tickSelected(_ sender: Any) {
-        tickMarked = !tickMarked
-        tickImage.isHidden = !tickMarked
-        updateDoneButton()
-    }
-    
-    func alertPasswordsDontMatch() {
-        passwordInfo.attributedText = passwordMismatch
-        passwordInput2.text = ""
-        passwordInput1.becomeFirstResponder()
-    }
-    
-    func alertPasswordsConformance() {
-        passwordInfo.attributedText = passwordInvalidWarning + passwordInvalidInfo
-    }
-    
-    func updateDoneButton() {
-        doneButton.isEnabled = passwordInput1.hasText && passwordInput2.hasText && tickMarked
-    }
-    
-    deinit {
-        kbObservers.forEach { obs in
-            NotificationCenter.default.removeObserver(obs)
-        }
-        kbObservers.removeAll()
     }
 
+    @IBAction func passwordEntryChanged(_ sender: UITextField) {
+        guard let delegate = delegate else {
+            return
+        }
+
+        guard let input1Text = passwordInput1.text, !input1Text.isEmpty else {
+            passwordState = .clean
+            return
+        }
+
+        updateDoneButton()
+
+        guard delegate.validatePasswordConformance(input1Text) else {
+            passwordState = .firstInvalid
+            return
+        }
+
+        guard !(passwordInput2.text ?? "").isEmpty else {
+            passwordState = .firstValid
+            return
+        }
+
+        guard passwordInput2.text == input1Text else {
+            passwordState = .mismatch
+            return
+        }
+
+        passwordState = .validAndMatch
+    }
+
+    @IBAction func doneButtonTapped(_ sender: Any) {
+        Kin.track { try BackupCreatePasswordNextButtonTapped() }
+        guard
+            let text = passwordInput1.text,
+            let delegate = delegate,
+            passwordInput1.hasText,
+            passwordInput2.hasText,
+            passwordInput1.text == passwordInput2.text,
+            delegate.validatePasswordConformance(text) else {
+            return // shouldn't really happen, here for documenting
+        }
+
+        delegate.passwordEntryViewControllerDidComplete(self)
+    }
+
+    @IBAction func tickSelected(_ sender: Any) {
+        tickMarked = !tickMarked
+        tickImageView.isHidden = !tickMarked
+        confirmTick.layer.borderWidth = tickMarked ? 0 : 1.0
+        updateDoneButton()
+    }
+
+    func updateDoneButton() {
+        guard let delegate = delegate else { fatalError() }
+
+        doneButton.isEnabled = delegate.validatePasswordConformance(passwordInput1.text ?? "")
+            && passwordInput2.text == passwordInput1.text
+            && tickMarked
+    }
+
+    fileprivate func updatePasswordState() {
+        let theme = self.theme ?? .light
+        let attributedString: NSAttributedString = {
+            switch passwordState {
+            case .clean, .firstValid, .validAndMatch:
+                return "kinecosystem_password_instructions".localized().styled(as: theme.subtitle12) + passwordConditions.localized().styled(as: .lightSubtitle12AnyTheme)
+            case .firstInvalid:
+                return "kinecosystem_password_invalid_warning".localized().styled(as: .invalidPassword) + passwordConditions.localized().styled(as: theme.subtitle12)
+            case .mismatch:
+                return "kinecosystem_password_mismatch".localized().styled(as: .invalidPassword) + passwordConditions.localized().styled(as: theme.subtitle12)
+            }
+        }()
+
+        let mutableAttributedString = NSMutableAttributedString(attributedString: attributedString)
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.alignment = .center
+        paragraphStyle.lineSpacing = 6
+
+        mutableAttributedString.addAttributes([.paragraphStyle : paragraphStyle],
+                                              range: NSRange.init(location: 0, length: mutableAttributedString.string.count))
+        passwordInfo.attributedText = mutableAttributedString
+
+        switch passwordState {
+        case .clean:
+            passwordInput1.entryState = .idle
+            passwordInput2.entryState = .idle
+        case .firstInvalid:
+            passwordInput1.entryState = .invalid
+            passwordInput2.entryState = .idle
+        case .firstValid:
+            passwordInput1.entryState = .valid
+            passwordInput2.entryState = .idle
+        case .mismatch:
+            passwordInput1.entryState = .invalid
+            passwordInput2.entryState = .invalid
+        case .validAndMatch:
+            passwordInput1.entryState = .valid
+            passwordInput2.entryState = .valid
+        }
+    }
+}
+
+extension PasswordEntryViewController: UITextFieldDelegate {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        if textField == passwordInput1 {
+            passwordInput2.becomeFirstResponder()
+        }
+
+        if textField == passwordInput2 {
+            view.endEditing(true)
+        }
+
+        return false
+    }
+}
+extension PasswordEntryViewController: Themed {
+    func applyTheme(_ theme: Theme) {
+        self.theme = theme
+
+        updatePasswordState()
+        passwordInput1.attributedPlaceholder = "kinecosystem_password".localized().styled(as: .lightSubtitle14AnyTheme)
+        passwordInput2.attributedPlaceholder = "kinecosystem_confirm_password".localized().styled(as: .lightSubtitle14AnyTheme)
+
+        confirmLabel.attributedText = "kinecosystem_password_confirmation"
+            .localized()
+            .styled(as: theme.subtitle12)
+            .applyingTextAlignment(.left)
+        confirmTick.layer.borderColor = theme.mainTintColor.cgColor
+    }
 }

@@ -58,6 +58,7 @@ class Core {
         migration/info/:app_id/:account_address
     */
     
+    @discardableResult
     func onboard() -> Promise<Void> {
         
         if onboarded {
@@ -106,7 +107,8 @@ class Core {
     @discardableResult
     func offboard() -> Promise<Void> {
         let p = Promise<Void>()
-        network.unAuthorize().then {
+        resetDefaults()
+        network.unAuthorize().finally {
             self.blockchain.offboard()
             self.jwt = nil
             p.signal(())
@@ -199,6 +201,10 @@ class Core {
             p.signal(version)
         }
         return p
+    }
+    
+    fileprivate func resetDefaults() {
+        UserDefaults.standard.set(false, forKey: KinPreferenceKey.didTapLetsGo.rawValue)
     }
     
     

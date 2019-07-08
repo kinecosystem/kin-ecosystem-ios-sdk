@@ -17,7 +17,14 @@ class OrderCellTimelineView: UIView {
             setNeedsDisplay()
         }
     }
-    var color: UIColor? {
+    
+    var first: Bool? {
+        didSet {
+            setNeedsDisplay()
+        }
+    }
+    
+    var icon: UIImage? {
         didSet {
             setNeedsDisplay()
         }
@@ -25,7 +32,7 @@ class OrderCellTimelineView: UIView {
     
     override func draw(_ rect: CGRect) {
         
-        guard let last = last, let color = color else {
+        guard let last = last, let first = first, let icon = icon else {
             super.draw(rect)
             return
         }
@@ -41,24 +48,23 @@ class OrderCellTimelineView: UIView {
         line.move(to: top)
         
         if last == false {
+            if first {
+                line.move(to: mid)
+            }
             line.addLine(to: bottom)
-        } else {
+        } else if first == false {
             line.addLine(to: mid)
         }
         UIColor.kinLightBlueGrey.setStroke()
         line.stroke()
         
         UIColor.white.setFill()
-        let circleRect = CGRect(x: mid.x - 6.0, y: mid.y - 6.0, width: 12.0, height: 12.0)
-        let circleFrame = UIBezierPath(ovalIn: circleRect)
-        circleFrame.lineWidth = 1.0
-        circleFrame.fill()
-        circleFrame.stroke()
+        let imageSize = icon.size.width
+        let imagePad = icon.size.width / 2.0
+        let imageRect = CGRect(x: mid.x - imagePad, y: mid.y - imagePad, width: imageSize, height: imageSize)
+        icon.draw(in: imageRect)
         
-        color.setFill()
-        let circle = UIBezierPath(ovalIn: circleRect.insetBy(dx: 2.0, dy: 2.0))
-        circle.lineWidth = 0.0
-        circle.fill()
+        
         
     }
     

@@ -12,7 +12,7 @@ class KinNavigationChildController : KinViewController {
     weak var kinNavigationController: KinNavigationViewController?
 }
 
-class KinNavigationViewController: KinViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
+class KinNavigationViewController: SheetViewController, UINavigationBarDelegate, UIGestureRecognizerDelegate {
 
     var core: Core!
 
@@ -28,6 +28,8 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     var kinChildViewControllers: [KinNavigationChildController] {
         return transitionController.children as! [KinNavigationChildController]
     }
+    
+    
 
     override var edgesForExtendedLayout: UIRectEdge {
         get { return [] }
@@ -46,13 +48,13 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         self.init(nibName: nibNameOrNil, bundle: nibBundleOrNil)
         self.core = core
         self.rootViewController = rootViewController
-        self.balanceViewController = BalanceViewController(nibName: "BalanceViewController", bundle: Bundle.ecosystem, core: core)
+        self.balanceViewController = BalanceViewController(core: core)
         loadViewIfNeeded()
     }
 
     fileprivate func setupNavigationBarAppearance() {
         navigationBar.titleTextAttributes = [.foregroundColor: UIColor.black]
-        let backImage = UIImage(named: "back", in: Bundle.ecosystem, compatibleWith: nil)
+        let backImage = UIImage(named: "back", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         navigationBar.backIndicatorImage = backImage
         navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationBar.delegate = self
@@ -82,14 +84,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
     }
 
     func transitionToOrders(animated: Bool = true) {
-        guard (kinChildViewControllers.last is OrdersViewController) == false else {
-            return
-        }
-        Kin.track { try BalanceTapped() }
-        let ordersController = OrdersViewController(nibName: "OrdersViewController", bundle: Bundle.ecosystem)
-        ordersController.core = core
-        push(ordersController, animated: animated)
-    }
+            }
 
     func push(_ viewController: KinNavigationChildController, animated: Bool, completion: (() -> Void)? = nil) {
 
@@ -120,7 +115,7 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
         transitionController.addChild(viewController)
         viewController.kinNavigationController = self
 
-        balanceViewController.setSelected(viewController is OrdersViewController, animated: animated)
+        
 
         guard animated else {
             outView?.removeFromSuperview()
@@ -175,8 +170,6 @@ class KinNavigationViewController: KinViewController, UINavigationBarDelegate, U
 
         inView.frame = leftFrame
         container.addSubview(inView)
-
-        balanceViewController.setSelected(inController is OrdersViewController, animated: animated)
 
         guard animated else {
             inView.frame = frame

@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import KinUtil
 
 protocol RestoreViewControllerDelegate: NSObjectProtocol {
     func restoreViewControllerDidImport(_ viewController: RestoreViewController, completion:@escaping (RestoreViewController.ImportResult) -> ())
@@ -14,17 +15,17 @@ protocol RestoreViewControllerDelegate: NSObjectProtocol {
 }
 
 class RestoreViewController: BRViewController {
+    let themeLinkBag = LinkBag()
     weak var delegate: RestoreViewControllerDelegate?
-    
+    var theme: Theme = .light
+
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var instructionsLabel: UILabel!
     @IBOutlet weak var passwordInput: PasswordEntryField!
-    @IBOutlet weak var doneButton: RoundButton!
+    @IBOutlet weak var doneButton: KinButton!
     @IBOutlet weak var bottomSpace: NSLayoutConstraint!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
-    
-    private let passwordInstructions = "kinecosystem_restore_instructions".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
-    private let passwordPlaceholder = "kinecosystem_enter_password".localized().attributed(12.0, weight: .regular, color: UIColor.kinBlueGreyTwo)
+
     private var kbObservers = [NSObjectProtocol]()
     
     var password: String? {
@@ -32,7 +33,7 @@ class RestoreViewController: BRViewController {
     }
     
     init() {
-        super.init(nibName: "RestoreViewController", bundle: Bundle.ecosystem)
+        super.init(nibName: "RestoreViewController", bundle: KinBundle.ecosystem.rawValue)
         commonInit()
     }
     
@@ -43,7 +44,7 @@ class RestoreViewController: BRViewController {
     
     private func commonInit() {
         loadViewIfNeeded()
-        title = "Restore Previous Wallet".localized() // TODO: 
+        title = "kinecosystem_restore_intro_title".localized()
     }
     
     override func willMove(toParent parent: UIViewController?) {
@@ -55,10 +56,10 @@ class RestoreViewController: BRViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+
         Kin.track { try RestorePasswordEntryPageViewed() }
-        passwordInput.attributedPlaceholder = passwordPlaceholder
+
         passwordInput.isSecureTextEntry = true
-        instructionsLabel.attributedText = passwordInstructions
         doneButton.setTitleColor(UIColor.kinWhite, for: .normal)
         doneButton.isEnabled = false
         kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] note in
@@ -72,7 +73,7 @@ class RestoreViewController: BRViewController {
                 }
             }
         })
-        
+
         kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillHideNotification, object: nil, queue: nil) { [weak self] note in
             if let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                 DispatchQueue.main.async {
@@ -83,51 +84,59 @@ class RestoreViewController: BRViewController {
                 }
             }
         })
+
         if #available(iOS 11, *) {
             topSpace.constant = 0.0
             view.layoutIfNeeded()
         }
+
         passwordInput.becomeFirstResponder()
     }
     
     @IBAction func passwordInputChanges(_ sender: PasswordEntryField) {
+        if sender.entryState == .invalid {
+            sender.entryState = .idle
+        }
         doneButton.isEnabled = sender.hasText
     }
     
-    @IBAction func doneButtonTapped(_ sender: RoundButton) {
+    @IBAction func doneButtonTapped(_ sender: KinButton) {
         guard !navigationItem.hidesBackButton else {
             // Button in mid transition
             return
         }
+
         Kin.track { try RestorePasswordDoneButtonTapped() }
+
         guard let delegate = delegate else {
             return
         }
-        
+
         sender.isEnabled = false
         navigationItem.hidesBackButton = true
-        
+
         delegate.restoreViewControllerDidImport(self) { [weak self] result in
-            guard let this = self else {
+            guard let self = self else {
                 return
             }
+
             DispatchQueue.main.async {
-                if result == .success {
-                    
-                    sender.transitionToConfirmed { () -> () in
-                        this.delegate?.restoreViewControllerDidComplete(this)
-                    }
-                }
-                else {
+                guard result == .success else {
                     sender.isEnabled = true
-                    this.navigationItem.hidesBackButton = false
-                    this.presentErrorAlertController(result: result)
+                    self.navigationItem.hidesBackButton = false
+                    self.passwordInput.entryState = .invalid
+                    self.presentErrorAlertController(result: result)
+                    return
+                }
+
+                self.instructionsLabel.attributedText = "kinecosystem_restore_done"
+                    .localized()
+                    .styled(as: self.theme.subtitle12)
+                sender.transitionToConfirmed {
+                    self.delegate?.restoreViewControllerDidComplete(self)
                 }
             }
-            
         }
-        
-        
     }
     
     deinit {
@@ -136,7 +145,6 @@ class RestoreViewController: BRViewController {
         }
         kbObservers.removeAll()
     }
-    
 }
 
 extension RestoreViewController {
@@ -160,12 +168,24 @@ extension RestoreViewController {
             }
         }
     }
-    
+
     private func presentErrorAlertController(result: ImportResult) {
         // TODO: get correct copy
         
         let alertController = UIAlertController(title: "Try again", message: result.errorDescription, preferredStyle: .alert)
         alertController.addAction(UIAlertAction(title: "kinecosystem_ok".localized(), style: .cancel))
         present(alertController, animated: true)
+    }
+}
+
+extension RestoreViewController: Themed {
+    func applyTheme(_ theme: Theme) {
+        self.theme = theme
+        instructionsLabel.attributedText = "kinecosystem_restore_instructions"
+            .localized()
+            .styled(as: theme.subtitle12)
+        passwordInput.attributedPlaceholder = "kinecosystem_enter_password"
+            .localized()
+            .styled(as: theme.lightSubtitle14)
     }
 }

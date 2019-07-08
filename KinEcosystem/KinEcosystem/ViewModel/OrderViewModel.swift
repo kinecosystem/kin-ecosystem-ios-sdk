@@ -14,51 +14,52 @@ class OrderViewModel {
     let title: NSAttributedString
     let subtitle: NSAttributedString
     let amount: NSAttributedString
-    let image: UIImage?
     let last: Bool
-    let color: UIColor
+    let first: Bool
+    let theme: Theme
+    let icon: UIImage?
     
-    init(with model: Order, last: Bool) {
+    init(with model: Order, theme: Theme, last: Bool, first: Bool) {
+        self.theme = theme
         self.last = last
+        self.first = first
         id = model.id
         let details: String
-        var indicatorColor: UIColor = .kinLightBlueGrey
-        var titleColor: UIColor = .kinBlueGrey
-        var detailsColor: UIColor = .kinDeepSkyBlue
+        
         switch model.offerType {
         case .spend:
-            image = UIImage(named: "invoice", in: Bundle.ecosystem, compatibleWith: nil)
             switch model.orderStatus {
             case .completed:
-                indicatorColor = .kinDeepSkyBlue
-                titleColor = .kinDeepSkyBlue
                 if let action = model.call_to_action {
                     details = " - " + action
                 } else {
                     details =  ""
                 }
             case .failed:
-                indicatorColor = .kinWatermelon
-                detailsColor = .kinWatermelon
                 details = " - " + (model.error?.error ?? "kinecosystem_transaction_failed".localized())
             default:
                 details = ""
             }
         default:
-            image = UIImage(named: "coins", in: Bundle.ecosystem, compatibleWith: nil)
             details = ""
         }
-        color = indicatorColor
-        title = model.title.attributed(18.0, weight: .regular, color: titleColor) +
-                details.attributed(14.0, weight: .regular, color: detailsColor)
+        title = model.title.styled(as: theme.title18) +
+                details.styled(as: theme.title18)
         var subtitleString = model.description_
         if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
             subtitleString = subtitleString + " - " + shortDate
         }
-        subtitle = subtitleString.attributed(14.0, weight: .regular, color: .kinBlueGreyTwo)
+        subtitle = subtitleString.styled(as: theme.lightSubtitle14)
         
-        amount = ((model.offerType == .earn ? "+" : "-") + "\(Decimal(model.amount).currencyString()) ").attributed(16.0, weight: .medium, color: .kinBlueGreyTwo)
-
+        if case .earn = model.offerType {
+            icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
+            amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
+        } else {
+            icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
+            amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
+        }
+        
+        
         
     }
 }
