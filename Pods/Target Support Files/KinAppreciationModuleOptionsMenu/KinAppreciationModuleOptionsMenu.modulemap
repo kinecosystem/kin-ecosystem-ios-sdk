@@ -1,6 +1,0 @@
-framework module KinAppreciationModuleOptionsMenu {
-  umbrella header "KinAppreciationModuleOptionsMenu-umbrella.h"
-
-  export *
-  module * { export * }
-}

@@ -1,6 +1,0 @@
-framework module Pods_KinEcosystemTests {
-  umbrella header "Pods-KinEcosystemTests-umbrella.h"
-
-  export *
-  module * { export * }
-}
