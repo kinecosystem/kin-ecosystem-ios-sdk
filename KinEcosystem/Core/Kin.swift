@@ -85,10 +85,6 @@ public class Kin: NSObject {
     fileprivate var brManager:BRManager?
     fileprivate var entrypointFlowController: EntrypointFlowController?
     
-    fileprivate override init() {
-        UIFont.loadFonts(from: KinBundle.fonts.rawValue)
-    }
-    
     // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
     fileprivate let purchaseQueue = OperationQueue()
     
@@ -114,8 +110,11 @@ public class Kin: NSObject {
             logError("failed to send event, error: \(error)")
         }
     }
-    
-    init() {
+
+    override init() {
+        super.init()
+
+        UIFont.loadFonts(from: KinBundle.fonts.rawValue)
         purchaseQueue.maxConcurrentOperationCount = 1
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { _ in
             self.purchaseQueue.isSuspended = true
