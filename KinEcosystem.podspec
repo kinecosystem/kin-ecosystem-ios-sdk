@@ -13,7 +13,7 @@ Kin ecosystem mobile sdk for iOS
 
   s.ios.deployment_target = '9.0'
 
-  s.resource_bundles = { "kinFonts" => ["KinEcosystem/fonts/*.otf"] }
+  s.resource_bundles = { "kinFonts" => ["KinEcosystem/KinEcosystem/fonts/*.otf"] }
   s.source_files = 'KinEcosystem/KinEcosystem/**/*.{h,m,swift}'
   s.resources = 'KinEcosystem/KinEcosystem/**/*.{xcassets,xcdatamodeld,storyboard,xib,png,pdf,jpg,json,strings,otf,ttf}'
 
