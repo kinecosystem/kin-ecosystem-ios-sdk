@@ -37,13 +37,25 @@
                                             <constraint firstAttribute="height" priority="999" constant="156" id="xEY-SF-Wxv"/>
                                         </constraints>
                                     </imageView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uM8-2O-gfe">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBk-Vd-dl6">
                                         <rect key="frame" x="177.5" y="227" width="20" height="20"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uM8-2O-gfe">
+                                                <rect key="frame" x="0.0" y="9.5" width="20" height="1"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="FvT-Cf-pDk"/>
+                                                    <constraint firstAttribute="width" secondItem="uM8-2O-gfe" secondAttribute="height" multiplier="20:1" id="kP3-VY-a8j"/>
+                                                </constraints>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="FvT-Cf-pDk"/>
-                                            <constraint firstAttribute="height" constant="20" id="u2c-C4-Gc6"/>
+                                            <constraint firstAttribute="width" secondItem="WBk-Vd-dl6" secondAttribute="height" id="KAF-VW-Gwx"/>
+                                            <constraint firstAttribute="width" constant="20" id="duE-mX-0uo"/>
+                                            <constraint firstItem="uM8-2O-gfe" firstAttribute="centerX" secondItem="WBk-Vd-dl6" secondAttribute="centerX" id="l28-lX-c5m"/>
+                                            <constraint firstItem="uM8-2O-gfe" firstAttribute="centerY" secondItem="WBk-Vd-dl6" secondAttribute="centerY" id="pyp-v1-Eu8"/>
                                         </constraints>
-                                    </activityIndicatorView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDd-2H-tbS">
                                         <rect key="frame" x="172.5" y="255" width="30" height="20.5"/>
                                         <constraints>
