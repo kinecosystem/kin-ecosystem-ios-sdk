@@ -99,8 +99,13 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             }
         }
         startKin()
+        
+     
        // print( Kin.shared.isLoggedIn )
         //  uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
+    }
+    override func viewDidAppear(_ animated: Bool) {
+          Prompt.show(title: "a", message: "s")
     }
 
     func alertConfigIssue() {

@@ -7,7 +7,6 @@ workspace 'KinEcosystem'
 
 target 'KinEcosystem' do
   project 'KinEcosystem/KinEcosystem'
-
   pod 'SimpleCoreDataStack'
   pod 'KinMigrationModule'
   pod 'KinAppreciationModuleOptionsMenu'

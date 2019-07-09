@@ -102,6 +102,12 @@
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
+		9D94A83D22D4BFF1006846AE /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 9D94A83B22D4BFF1006846AE /* Podfile.lock */; };
+		9D94A83E22D4BFF1006846AE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9D94A83C22D4BFF1006846AE /* Podfile */; };
+		9D94A84022D4C028006846AE /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94A83F22D4C028006846AE /* Prompt.swift */; };
+		9D94A84222D4C039006846AE /* Prompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D94A84122D4C039006846AE /* Prompt.xib */; };
+		9D94A84322D4C10D006846AE /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94A83F22D4C028006846AE /* Prompt.swift */; };
+		9D94A84422D4C10E006846AE /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94A83F22D4C028006846AE /* Prompt.swift */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
 		ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F717D333E5908066A0CA32 /* migration_BC_version_check_succeeded.swift */; };
@@ -394,6 +400,10 @@
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
+		9D94A83B22D4BFF1006846AE /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile.lock; path = ../Podfile.lock; sourceTree = "<group>"; };
+		9D94A83C22D4BFF1006846AE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		9D94A83F22D4C028006846AE /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
+		9D94A84122D4C039006846AE /* Prompt.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = Prompt.xib; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
 		A82BACF88CE30BB486724F14 /* empty_main_page_my_kin_element_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = empty_main_page_my_kin_element_tapped.swift; sourceTree = "<group>"; };
@@ -875,6 +885,8 @@
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
+				9D94A83C22D4BFF1006846AE /* Podfile */,
+				9D94A83B22D4BFF1006846AE /* Podfile.lock */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
@@ -949,6 +961,7 @@
 			children = (
 				E93146262164F160008F2D74 /* MarketplaceViewController.xib */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
+				9D94A84122D4C039006846AE /* Prompt.xib */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
 				E96A582F204458AF00285C7B /* OrdersViewController.xib */,
 				E913AD96204692190071D329 /* KinNavigationViewController.xib */,
@@ -970,6 +983,7 @@
 			isa = PBXGroup;
 			children = (
 				91A4EA8720CFB22E00C3399F /* KinViewController.swift */,
+				9D94A83F22D4C028006846AE /* Prompt.swift */,
 				E92BA46621A19FFE00C952D8 /* BadgeBarButtonItem.swift */,
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
@@ -1199,6 +1213,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D94A84222D4C039006846AE /* Prompt.xib in Resources */,
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
@@ -1221,6 +1236,8 @@
 				913793A922D3670A00C07E76 /* WhatsKinViewController.xib in Resources */,
 				E92BA44C21A19C0A00C952D8 /* RestoreViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
+				9D94A83E22D4BFF1006846AE /* Podfile in Resources */,
+				9D94A83D22D4BFF1006846AE /* Podfile.lock in Resources */,
 				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 				913793D922D368E500C07E76 /* Sailec Medium.otf in Resources */,
 			);
@@ -1323,6 +1340,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E942F8DB2031120D00DD4B8E /* AppDelegate.swift in Sources */,
+				9D94A84322D4C10D006846AE /* Prompt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1499,6 +1517,7 @@
 				22DA98744E708BF74AFC5426 /* restore_upload_qr_code_page_viewed.swift in Sources */,
 				ED6E34E9179E1A5BCF0E0F64 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				D4CF547EF7640913FAE2499D /* backup_qr_code_back_button_tapped.swift in Sources */,
+				9D94A84022D4C028006846AE /* Prompt.swift in Sources */,
 				9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */,
 				5170B76D402B3F503C32313F /* settings_back_button_tapped.swift in Sources */,
 				79617912FDAA66E8903A424D /* spend_order_completion_submitted.swift in Sources */,
@@ -1547,6 +1566,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E9E913F521B7311F0097EE21 /* AccountSelectionTests.swift in Sources */,
+				9D94A84422D4C10E006846AE /* Prompt.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
