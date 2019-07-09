@@ -9,7 +9,7 @@
 import UIKit
 import KinEcosystem
 import JWT
-
+enum UIState { case disabled,onlyLogin,enabled }
 class SampleAppViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var continueButton: UIButton!
@@ -21,20 +21,41 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var getKinButton: UIButton!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var payButton: UIButton!
+    @IBOutlet weak var cover: UIView!
+    @IBOutlet var coverTopConstraint: NSLayoutConstraint!
+    private var uiState:UIState = .disabled {
+            didSet {
+                switch uiState {
+                case .disabled:
+                cover.isHidden = false
+                coverTopConstraint.isActive = false
+                externalIndicator.startAnimating()
+                break
+                    
+                case .enabled:
+                cover.isHidden = true
+                externalIndicator.stopAnimating()
+                break
 
+                case .onlyLogin:
+                cover.isHidden = false
+                print(coverTopConstraint)
+                coverTopConstraint.isActive = true
+                externalIndicator.stopAnimating()
+                break
+            }
+        }
+    }
     var balance: Decimal = 0
 
     let environment: Environment = .test
     let kid = "rs512_0"
-
     var appId: String? {
         return ApplicationKeys.AppId.isEmpty == false ? ApplicationKeys.AppId : configValue(for: "appId", of: String.self)
     }
-    
     var privateKey: String? {
         return ApplicationKeys.AppPrivateKey.isEmpty == false ? ApplicationKeys.AppPrivateKey : configValue(for: "RS512_PRIVATE_KEY", of: String.self)
     }
-    
     var lastUser: String? {
         get {
             if let user = UserDefaults.standard.string(forKey: "SALastUser") {
@@ -78,23 +99,35 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             }
         }
         startKin()
+       // print( Kin.shared.isLoggedIn )
+        //  uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
     }
-    
+
     func alertConfigIssue() {
         presentAlert("Config Missing", body: "an app id and app key (or a jwt) is required in order to use the sample app. Please refer to the readme in the sample app repo for more information")
-        setActionRunning(false)
+        //setActionRunning(false)
     }
-    
-    @IBAction func loginOutButtonTapped(_ sender: Any) {
+    //
+    //MARK: - Actions -
+    //
+    @IBAction func loginOutButtonTapped(_ sender: UIButton) {
         Kin.shared.logout()
         currentUserLabel.text = nil
         loginOutButton.setTitle("Login", for: .normal)
         UserDefaults.standard.removeObject(forKey: "SALastUser")
-        presentLogin(animated: true)
+        uiState = .onlyLogin
+        if sender.titleLabel?.text == "Login" {
+             uiState = .disabled
+             presentLogin(animated: true)
+        }
     }
-    
+    @IBAction func buyStickerTapped(_ sender: Any) {
+        externalOfferTapped(false)
+    }
+    @IBAction func requestPaymentTapped(_ sender: Any) {
+        externalOfferTapped(true)
+    }
     @IBAction func continueTapped(_ sender: Any) {
-        
         let alert = UIAlertController(title: "Select experience", message: nil, preferredStyle: .actionSheet)
         alert.addAction(UIAlertAction(title: "Marketplace", style: .default, handler: { _ in
             try? Kin.shared.launchEcosystem(from: self)
@@ -157,13 +190,15 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     func presentLogin(animated: Bool) {
         let pt = self.storyboard!.instantiateViewController(withIdentifier: "TargetUserViewController") as! TargetUserViewController
         pt.title = "Login"
+        
         pt.selectBlock = { [weak self] userId in
             guard let this = self else { return }
             //self?.currentUserLabel.text = lastUser
             defer {
                 UserDefaults.standard.set(userId, forKey: "SALastUser")
                 try? this.jwtLogin() { error in
-                    this.setActionRunning(false)
+                    self?.uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
+                   // this.setActionRunning(false)
                     if let e = error {
                         this.presentAlert("Login failed", body: "error: \(e.localizedDescription)")
                     }
@@ -176,15 +211,14 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
     }
     
     func jwtLogin(callback: KinLoginCallback? = nil) throws {
-        
+        print(Kin.shared.isLoggedIn)
         guard let user = lastUser else {
             loginOutButton.setTitle("Login", for: .normal)
+            uiState = .onlyLogin
             presentLogin(animated: true)
             return
         }
-        
-        
-        guard   let jwtPKey = privateKey,
+        guard  let jwtPKey = privateKey,
                 let id = appId else {
             alertConfigIssue()
             return
@@ -200,13 +234,15 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
                                             alertConfigIssue()
                                             return
         }
-        setActionRunning(true)
+       //  setActionRunning(true)
+        self.uiState = .disabled
         try Kin.shared.start(environment: environment)
         try Kin.shared.login(jwt: encoded) { [weak self] e in
             DispatchQueue.main.async {
+                self?.uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
                 self?.currentUserLabel.text = self?.lastUser
                 self?.loginOutButton.setTitle("Logout", for: .normal)
-                self?.setActionRunning(false)
+              //  self?.setActionRunning(false)
                 callback?(e)
             }
         }
@@ -217,14 +253,7 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         alert.addAction(UIAlertAction(title: "Oh ok", style: .cancel))
         self.present(alert, animated: true, completion: nil)
     }
-    
-    @IBAction func buyStickerTapped(_ sender: Any) {
-        externalOfferTapped(false)
-    }
-    
-    @IBAction func requestPaymentTapped(_ sender: Any) {
-        externalOfferTapped(true)
-    }
+   
 
     private var giftingUserId: String?
 
@@ -322,10 +351,12 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             alertConfigIssue()
             return
         }
-        setActionRunning(true)
+        uiState = .disabled
+       // setActionRunning(true)
         let handler: KinCallback = { jwtConfirmation, error in
             DispatchQueue.main.async { [weak self] in
-                self?.setActionRunning(false)
+                //self?.setActionRunning(false)
+                self?.uiState = .enabled
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                 if let confirm = jwtConfirmation {
                     alert.title = "Success"
@@ -417,10 +448,12 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             return
         }
 
-        setActionRunning(true)
+        uiState = .disabled
+       // setActionRunning(true)
         let handler: KinCallback = { jwtConfirmation, error in
             DispatchQueue.main.async { [weak self] in
-                self?.setActionRunning(false)
+                self?.uiState = .enabled
+                //self?.setActionRunning(false)
                 let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
                 if let confirm = jwtConfirmation {
                     alert.title = "Success"
@@ -443,17 +476,18 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func setActionRunning(_ value: Bool) {
-        loginOutButton.isEnabled = !value
-        buyStickerButton.isEnabled = !value
-        getKinButton.isEnabled = !value
-        payButton.isEnabled = !value
-        loginOutButton.alpha = value ? 0.3 : 1.0
-        buyStickerButton.alpha = value ? 0.3 : 1.0
-        getKinButton.alpha = value ? 0.3 : 1.0
-        payButton.alpha = value ? 0.3 : 1.0
-        value ? externalIndicator.startAnimating() : externalIndicator.stopAnimating()
-    }
+//    func setActionRunning(_ value: Bool) {
+//
+////        loginOutButton.isEnabled = !value
+////        buyStickerButton.isEnabled = !value
+////        getKinButton.isEnabled = !value
+////        payButton.isEnabled = !value
+////        loginOutButton.alpha = value ? 0.3 : 1.0
+////        buyStickerButton.alpha = value ? 0.3 : 1.0
+////        getKinButton.alpha = value ? 0.3 : 1.0
+////        payButton.alpha = value ? 0.3 : 1.0
+//        value ? externalIndicator.startAnimating() : externalIndicator.stopAnimating()
+//    }
 }
 
 extension SampleAppViewController: GiftingManagerDelegate {
