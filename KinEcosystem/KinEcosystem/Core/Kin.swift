@@ -82,7 +82,7 @@ public class Kin: NSObject {
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
     fileprivate var entrypointFlowController: EntrypointFlowController?
-    
+    public var isLoggedIn:Bool { return UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue) != nil }
     // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
     fileprivate let purchaseQueue = OperationQueue()
     

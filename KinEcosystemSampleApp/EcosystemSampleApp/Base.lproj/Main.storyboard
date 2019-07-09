@@ -37,13 +37,25 @@
                                             <constraint firstAttribute="height" priority="999" constant="156" id="xEY-SF-Wxv"/>
                                         </constraints>
                                     </imageView>
-                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uM8-2O-gfe">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="WBk-Vd-dl6">
                                         <rect key="frame" x="177.5" y="227" width="20" height="20"/>
+                                        <subviews>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="uM8-2O-gfe">
+                                                <rect key="frame" x="0.0" y="9.5" width="20" height="1"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="20" id="FvT-Cf-pDk"/>
+                                                    <constraint firstAttribute="width" secondItem="uM8-2O-gfe" secondAttribute="height" multiplier="20:1" id="kP3-VY-a8j"/>
+                                                </constraints>
+                                            </activityIndicatorView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
-                                            <constraint firstAttribute="width" constant="20" id="FvT-Cf-pDk"/>
-                                            <constraint firstAttribute="height" constant="20" id="u2c-C4-Gc6"/>
+                                            <constraint firstAttribute="width" secondItem="WBk-Vd-dl6" secondAttribute="height" id="KAF-VW-Gwx"/>
+                                            <constraint firstAttribute="width" constant="20" id="duE-mX-0uo"/>
+                                            <constraint firstItem="uM8-2O-gfe" firstAttribute="centerX" secondItem="WBk-Vd-dl6" secondAttribute="centerX" id="l28-lX-c5m"/>
+                                            <constraint firstItem="uM8-2O-gfe" firstAttribute="centerY" secondItem="WBk-Vd-dl6" secondAttribute="centerY" id="pyp-v1-Eu8"/>
                                         </constraints>
-                                    </activityIndicatorView>
+                                    </view>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1.0.0" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="VDd-2H-tbS">
                                         <rect key="frame" x="172.5" y="255" width="30" height="20.5"/>
                                         <constraints>
@@ -186,13 +198,22 @@
                                     <constraint firstItem="Nuk-Ba-scK" firstAttribute="width" secondItem="6CR-2G-NnG" secondAttribute="width" id="qae-hQ-zeL"/>
                                 </constraints>
                             </stackView>
+                            <view alpha="0.69999999999999996" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8lD-HJ-z7b" userLabel="cover">
+                                <rect key="frame" x="0.0" y="353.5" width="375" height="313.5"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rUh-Au-2YO" firstAttribute="bottom" secondItem="8lD-HJ-z7b" secondAttribute="bottom" id="1zH-RX-bhA"/>
                             <constraint firstItem="lle-UR-pca" firstAttribute="leading" secondItem="rUh-Au-2YO" secondAttribute="leading" id="4TF-Jj-CMf"/>
                             <constraint firstItem="lle-UR-pca" firstAttribute="top" secondItem="rUh-Au-2YO" secondAttribute="top" id="KoY-oM-UOV"/>
+                            <constraint firstItem="rUh-Au-2YO" firstAttribute="trailing" secondItem="8lD-HJ-z7b" secondAttribute="trailing" id="Rzk-jJ-xq3"/>
                             <constraint firstItem="rUh-Au-2YO" firstAttribute="trailing" secondItem="lle-UR-pca" secondAttribute="trailing" id="UEq-xR-ILu"/>
+                            <constraint firstItem="8lD-HJ-z7b" firstAttribute="top" secondItem="yO7-Yb-Spq" secondAttribute="bottom" id="dxC-6v-hp1"/>
                             <constraint firstItem="rUh-Au-2YO" firstAttribute="bottom" secondItem="lle-UR-pca" secondAttribute="bottom" id="jeE-ud-by7"/>
+                            <constraint firstItem="8lD-HJ-z7b" firstAttribute="leading" secondItem="rUh-Au-2YO" secondAttribute="leading" id="mEb-S6-bhw"/>
+                            <constraint firstItem="8lD-HJ-z7b" firstAttribute="top" secondItem="yO7-Yb-Spq" secondAttribute="top" priority="900" id="pOw-II-9Tm"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="rUh-Au-2YO"/>
                     </view>
@@ -200,6 +221,8 @@
                         <outlet property="balanceLabel" destination="YCZ-Zs-FhI" id="fuB-rK-t9w"/>
                         <outlet property="buyStickerButton" destination="Nuk-Ba-scK" id="BST-29-Vtq"/>
                         <outlet property="continueButton" destination="838-ZL-O1D" id="y6P-Nd-qwH"/>
+                        <outlet property="cover" destination="8lD-HJ-z7b" id="KEc-f9-1C1"/>
+                        <outlet property="coverTopConstraint" destination="dxC-6v-hp1" id="4LG-2i-uiC"/>
                         <outlet property="currentUserLabel" destination="SRd-bx-wBE" id="CJM-o4-Cwn"/>
                         <outlet property="externalIndicator" destination="uM8-2O-gfe" id="kwt-1e-Ykc"/>
                         <outlet property="getKinButton" destination="6CR-2G-NnG" id="J1x-AQ-7Gm"/>
