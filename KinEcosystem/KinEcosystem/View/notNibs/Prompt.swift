@@ -7,7 +7,8 @@
 //
 
 import UIKit
-public enum PromptCallbackAction { case tapBody,tapCloseButton,hide}
+public enum PromptCallbackAction    { case tapBody,tapCloseButton,hide }
+public enum PromptConfig            { case hasCloseButton,closeOnTap }
 typealias PromptCallback = (PromptCallbackAction) -> Void
 class Prompt: UIView {
     static var current:Prompt?
@@ -17,7 +18,7 @@ class Prompt: UIView {
     @IBOutlet var messageLabel:UILabel!
     private var content:UIView?
     private var callback:PromptCallback?
-    class func show(title:String,message:String,timeout:TimeInterval = 3,_ callback:PromptCallback? = nil)  {
+    class func show(title:String,message:String,timeout:TimeInterval = 3, config:[PromptConfig]? = nil, _ callback:PromptCallback? = nil)  {
         Prompt.hide(nil,animate:false) { action in
             if let window = UIApplication.shared.keyWindow {
                 current = Prompt(frame:CGRect(x:10,y:UIApplication.shared.statusBarFrame.height + 5,width:window.frame.width - 20,height:70),title:title,message:message)

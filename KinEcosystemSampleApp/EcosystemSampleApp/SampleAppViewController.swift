@@ -103,7 +103,8 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         Kin.shared.UI.enablePrompt(for: [.balanceChange]) { type,action in
             print(type,action)
         }
-    
+        
+    Kin.shared.UI.types(types: [.balanceChange])
        // print( Kin.shared.isLoggedIn )
         //  uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
     }
