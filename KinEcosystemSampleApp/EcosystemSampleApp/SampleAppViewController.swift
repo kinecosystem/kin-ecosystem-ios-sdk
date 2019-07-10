@@ -99,6 +99,7 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             }
         }
         startKin()
+       
         Kin.shared.UI.enablePrompt(for: [.balanceChange])
     
        // print( Kin.shared.isLoggedIn )
