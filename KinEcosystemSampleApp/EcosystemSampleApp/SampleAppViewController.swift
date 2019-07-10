@@ -100,9 +100,13 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         }
         startKin()
        // print( Kin.shared.isLoggedIn )
-        //  uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
+        
     }
-
+    override func viewWillAppear(_ animated:  Bool) {
+//        if uiState != .disabled {
+//            uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
+//        }
+    }
     func alertConfigIssue() {
         presentAlert("Config Missing", body: "an app id and app key (or a jwt) is required in order to use the sample app. Please refer to the readme in the sample app repo for more information")
         //setActionRunning(false)
@@ -195,14 +199,20 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             guard let this = self else { return }
             //self?.currentUserLabel.text = lastUser
             defer {
-                UserDefaults.standard.set(userId, forKey: "SALastUser")
-                try? this.jwtLogin() { error in
-                    self?.uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
-                   // this.setActionRunning(false)
-                    if let e = error {
-                        this.presentAlert("Login failed", body: "error: \(e.localizedDescription)")
+                if let userId = userId {
+                    UserDefaults.standard.set(userId, forKey: "SALastUser")
+                    try? this.jwtLogin() { error in
+                        self?.uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
+                        // this.setActionRunning(false)
+                        if let e = error {
+                            this.presentAlert("Login failed", body: "error: \(e.localizedDescription)")
+                        }
                     }
                 }
+                else {
+                    self?.uiState = .onlyLogin
+                }
+                
             }
             this.dismiss(animated: true)
         }

@@ -12,7 +12,7 @@ import UIKit
 
 class TargetUserViewController: UIViewController, UITextFieldDelegate {
     
-    var selectBlock: ((String) -> ())?
+    var selectBlock: ((String?) -> ())?
     
     @IBOutlet weak var nextButton: UIButton!
     @IBOutlet weak var textfield: UITextField!
@@ -36,7 +36,9 @@ class TargetUserViewController: UIViewController, UITextFieldDelegate {
     }
     
     @objc func cancelPayment() {
+        selectBlock?(nil)
         self.dismiss(animated: true)
+       
     }
 }
 
