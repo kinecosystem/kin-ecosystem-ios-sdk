@@ -2,7 +2,7 @@
 //  KinUIAPI.swift
 //  KinEcosystem
 //
-//  Created by MNM on 10/07/2019.
+//  Created by Alon Genosar on 10/07/2019.
 //  Copyright © 2019 Kik Interactive. All rights reserved.
 //
 
@@ -20,7 +20,8 @@ public struct KinUIAPI {
         formatter.currencyCode = ""
         return {}
     }()
-    static public func enablePrompt(for types:[PromptType]) {
+    static private var callback:( (PromptType,PromptCallbackAction) -> Void )?
+    static public func enablePrompt(for types:[PromptType],_ callback:((PromptType,PromptCallbackAction)->Void)? = nil) {
         doOnce()
         disablePrompt()
         promptTypes = types
@@ -31,7 +32,9 @@ public struct KinUIAPI {
                     DispatchQueue.main.async {
                         if balance.amount != lastBalance {
                             lastBalance = balance.amount
-                            Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0)
+                            Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0) { action in
+                                callback?(type,action)
+                            }
                         }
                     }
                 }

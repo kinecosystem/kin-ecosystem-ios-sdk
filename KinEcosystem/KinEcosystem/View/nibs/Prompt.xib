@@ -35,7 +35,7 @@
                             <integer key="value" value="10"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
-                            <real key="value" value="10"/>
+                            <real key="value" value="8"/>
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="color" keyPath="shadowUIColor">
                             <color key="value" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -45,6 +45,15 @@
                         </userDefinedRuntimeAttribute>
                         <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
                             <real key="value" value="0.20000000000000001"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                            <color key="value" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                            <real key="value" value="1"/>
+                        </userDefinedRuntimeAttribute>
+                        <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                            <size key="value" width="0.0" height="5"/>
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
@@ -64,7 +73,7 @@
                     <color key="highlightedColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                 </label>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dqF-C7-y7d">
-                    <rect key="frame" x="20" y="9" width="100" height="25"/>
+                    <rect key="frame" x="20" y="7" width="100" height="25"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="25" id="4nk-FZ-X4S"/>
                         <constraint firstAttribute="width" constant="100" id="Mvd-ca-FdH"/>
@@ -80,6 +89,9 @@
                         <constraint firstAttribute="width" constant="32" id="zNm-DE-kdg"/>
                     </constraints>
                     <state key="normal" image="prompt_close_button"/>
+                    <connections>
+                        <action selector="handleCloseButtonTap:" destination="-1" eventType="touchUpInside" id="oxu-Dg-Q0t"/>
+                    </connections>
                 </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -92,7 +104,7 @@
                 <constraint firstItem="Awl-d8-3G3" firstAttribute="leading" secondItem="9Nm-bN-gej" secondAttribute="trailing" constant="2" id="ODo-AK-4bY"/>
                 <constraint firstItem="bnD-PB-uGX" firstAttribute="centerY" secondItem="t8R-eg-imd" secondAttribute="centerY" id="UQa-15-TA5"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="bnD-PB-uGX" secondAttribute="trailing" constant="10" id="V5V-VZ-CPc"/>
-                <constraint firstItem="9Nm-bN-gej" firstAttribute="top" secondItem="dqF-C7-y7d" secondAttribute="bottom" constant="-5" id="VXW-GY-I2m"/>
+                <constraint firstItem="9Nm-bN-gej" firstAttribute="top" secondItem="dqF-C7-y7d" secondAttribute="bottom" constant="-3" id="VXW-GY-I2m"/>
                 <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="t8R-eg-imd" secondAttribute="trailing" id="Ytd-VV-0t3"/>
                 <constraint firstItem="9Nm-bN-gej" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" constant="5" id="ctF-bT-5bF"/>
                 <constraint firstItem="t8R-eg-imd" firstAttribute="bottom" secondItem="iN0-l3-epB" secondAttribute="bottom" id="oHO-b4-x8a"/>
