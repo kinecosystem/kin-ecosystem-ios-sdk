@@ -82,6 +82,7 @@ public class Kin: NSObject {
     fileprivate var nativeOffersInc:Int32 = -1
     fileprivate var brManager:BRManager?
     fileprivate var entrypointFlowController: EntrypointFlowController?
+    public var UI:KinUI.Type { return KinUI.self }
     public var isLoggedIn:Bool { return UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue) != nil }
     // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
     fileprivate let purchaseQueue = OperationQueue()
@@ -111,7 +112,6 @@ public class Kin: NSObject {
 
     override init() {
         super.init()
-
         UIFont.loadFonts(from: KinBundle.fonts.rawValue)
         purchaseQueue.maxConcurrentOperationCount = 1
         NotificationCenter.default.addObserver(forName: UIApplication.didEnterBackgroundNotification, object: nil, queue: nil) { _ in
@@ -705,3 +705,46 @@ extension Kin {
     public static let giftingManager = GiftingManager()
 }
 
+
+public enum PromptType { case balanceChange }
+public struct KinUI {
+    static private var balanceObserverId:String?
+    static private var promptTypes:[PromptType]?
+    static private var lastBalance:Decimal = 0
+    static private var formatter:NumberFormatter = NumberFormatter()
+    private static var doOnce:()->() = {
+        formatter.usesGroupingSeparator = true
+        formatter.numberStyle = .currency
+        formatter.currencySymbol = ""
+        formatter.currencyCode = ""
+        return {}
+    }()
+    static public func enablePrompt(for types:[PromptType]) {
+        doOnce()
+        disablePrompt()
+        promptTypes = types
+        promptTypes?.forEach { type in
+            switch type {
+            case .balanceChange:
+                balanceObserverId = Kin.shared.addBalanceObserver { balance in
+                    DispatchQueue.main.async {
+                        if balance.amount != lastBalance {
+                            lastBalance = balance.amount
+                            Prompt.show(title: "Kin Earned", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:3.0)
+                        }
+                    }
+                }
+                break
+            }
+        }
+    }
+    static public func disablePrompt() {
+        if let balanceObserverId = balanceObserverId {
+            Kin.shared.removeBalanceObserver(balanceObserverId)
+        }
+        promptTypes = nil
+    }
+    static public func dismissCurrentPrompt() {
+        Prompt.hide()
+    }
+}

@@ -102,6 +102,8 @@
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
+		9D05A30922D5C512006ECB1A /* UIView+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D05A30822D5C512006ECB1A /* UIView+More.swift */; };
+		9D05A30F22D5D183006ECB1A /* KinUIAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D05A30E22D5D183006ECB1A /* KinUIAPI.swift */; };
 		9D94A83D22D4BFF1006846AE /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 9D94A83B22D4BFF1006846AE /* Podfile.lock */; };
 		9D94A83E22D4BFF1006846AE /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9D94A83C22D4BFF1006846AE /* Podfile */; };
 		9D94A84022D4C028006846AE /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D94A83F22D4C028006846AE /* Prompt.swift */; };
@@ -400,6 +402,8 @@
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
+		9D05A30822D5C512006ECB1A /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
+		9D05A30E22D5D183006ECB1A /* KinUIAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KinUIAPI.swift; sourceTree = "<group>"; };
 		9D94A83B22D4BFF1006846AE /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile.lock; path = ../Podfile.lock; sourceTree = "<group>"; };
 		9D94A83C22D4BFF1006846AE /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
 		9D94A83F22D4C028006846AE /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
@@ -945,6 +949,7 @@
 				91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */,
 				91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
+				9D05A30E22D5D183006ECB1A /* KinUIAPI.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 				E942F8F22031B54800DD4B8E /* Logger.swift */,
 				E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */,
@@ -1023,6 +1028,7 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9D05A30822D5C512006ECB1A /* UIView+More.swift */,
 				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
 				913793CF22D3689300C07E76 /* ActionClosure.swift */,
 				913793CE22D3689300C07E76 /* TextStyles.swift */,
@@ -1497,6 +1503,7 @@
 				913793B822D3677D00C07E76 /* BalanceView.swift in Sources */,
 				B20232002235442B51216DE6 /* order_history_page_viewed.swift in Sources */,
 				4DCB27D7309E2FAE05CBC410 /* user_login_succeeded.swift in Sources */,
+				9D05A30922D5C512006ECB1A /* UIView+More.swift in Sources */,
 				E3BAC8DFB934956D10E160F2 /* stellar_kin_trustline_setup_failed.swift in Sources */,
 				4956563E1B61C7D3A8AB5AAB /* restore_password_entry_back_button_tapped.swift in Sources */,
 				3759E2B5BA37356AD35383D0 /* confirm_purchase_button_tapped.swift in Sources */,
@@ -1527,6 +1534,7 @@
 				BC6135FE53387B04B6C34690 /* spend_transaction_broadcast_to_blockchain_succeeded.swift in Sources */,
 				49CE1D65F4507A95C9C08C0A /* backup_qr_code_page_viewed.swift in Sources */,
 				913793BB22D3677D00C07E76 /* OfferCell.swift in Sources */,
+				9D05A30F22D5D183006ECB1A /* KinUIAPI.swift in Sources */,
 				6831950122CCEA7F00EC2DDF /* UIDevice+extensions.swift in Sources */,
 				CAA24A47DDC66D99EF845FBB /* entrypoint_button_tapped.swift in Sources */,
 				E914FDD7117A7F4E6EFEBE86 /* earn_page_loaded.swift in Sources */,

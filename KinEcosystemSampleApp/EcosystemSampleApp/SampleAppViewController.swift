@@ -99,15 +99,11 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
             }
         }
         startKin()
-        
-     
+        Kin.shared.UI.enablePrompt(for: [.balanceChange])
+    
        // print( Kin.shared.isLoggedIn )
         //  uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
     }
-    override func viewDidAppear(_ animated: Bool) {
-          Prompt.show(title: "a", message: "s")
-    }
-
     func alertConfigIssue() {
         presentAlert("Config Missing", body: "an app id and app key (or a jwt) is required in order to use the sample app. Please refer to the readme in the sample app repo for more information")
         //setActionRunning(false)
