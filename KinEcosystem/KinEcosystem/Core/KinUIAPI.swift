@@ -31,7 +31,7 @@ public struct KinUIAPI {
                     DispatchQueue.main.async {
                         if balance.amount != lastBalance {
                             lastBalance = balance.amount
-                            Prompt.show(title: "Kin Earned", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:3.0)
+                            Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0)
                         }
                     }
                 }
