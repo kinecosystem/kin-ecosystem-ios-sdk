@@ -104,6 +104,7 @@
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D5E4B7322D7073A006EF9C0 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7222D7073A006EF9C0 /* Prompt.swift */; };
 		9D5E4B7522D70743006EF9C0 /* Prompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7422D70743006EF9C0 /* Prompt.xib */; };
+		9D5E4B7722D707C3006EF9C0 /* KinUIAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
 		ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F717D333E5908066A0CA32 /* migration_BC_version_check_succeeded.swift */; };
@@ -398,6 +399,7 @@
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D5E4B7222D7073A006EF9C0 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		9D5E4B7422D70743006EF9C0 /* Prompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Prompt.xib; sourceTree = "<group>"; };
+		9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinUIAPI.swift; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
 		A82BACF88CE30BB486724F14 /* empty_main_page_my_kin_element_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = empty_main_page_my_kin_element_tapped.swift; sourceTree = "<group>"; };
@@ -937,6 +939,7 @@
 				91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */,
 				91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
+				9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 				E942F8F22031B54800DD4B8E /* Logger.swift */,
 				E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */,
@@ -1404,6 +1407,7 @@
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
 				E92BA45121A19C0A00C952D8 /* BackupFlowController.swift in Sources */,
 				E904415B2035C83000E3E261 /* SpendOfferCell.swift in Sources */,
+				9D5E4B7722D707C3006EF9C0 /* KinUIAPI.swift in Sources */,
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E92501BA20614A4400E2E738 /* Flows.swift in Sources */,

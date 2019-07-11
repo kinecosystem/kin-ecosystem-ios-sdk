@@ -698,10 +698,14 @@ extension Kin: KinFlowControllerDelegate {
     }
 }
 
-
 // MARK: Gifting Module
-
 extension Kin {
     public static let giftingManager = GiftingManager()
+}
+
+
+// MARK: UI API
+extension Kin {
+    public var UI:KinUIAPI.Type { return KinUIAPI.self }
 }
 
