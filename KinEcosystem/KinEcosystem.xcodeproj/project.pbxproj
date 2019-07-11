@@ -102,6 +102,8 @@
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
+		9D5E4B7322D7073A006EF9C0 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7222D7073A006EF9C0 /* Prompt.swift */; };
+		9D5E4B7522D70743006EF9C0 /* Prompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7422D70743006EF9C0 /* Prompt.xib */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
 		ABAFFA779CA4E78272171921 /* migration_BC_version_check_succeeded.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7F717D333E5908066A0CA32 /* migration_BC_version_check_succeeded.swift */; };
@@ -394,6 +396,8 @@
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
+		9D5E4B7222D7073A006EF9C0 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
+		9D5E4B7422D70743006EF9C0 /* Prompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Prompt.xib; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
 		A82BACF88CE30BB486724F14 /* empty_main_page_my_kin_element_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = empty_main_page_my_kin_element_tapped.swift; sourceTree = "<group>"; };
@@ -950,6 +954,7 @@
 				E93146262164F160008F2D74 /* MarketplaceViewController.xib */,
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
+				9D5E4B7422D70743006EF9C0 /* Prompt.xib */,
 				E96A582F204458AF00285C7B /* OrdersViewController.xib */,
 				E913AD96204692190071D329 /* KinNavigationViewController.xib */,
 				E98D175B20481D8900FEB57A /* OrderCell.xib */,
@@ -993,6 +998,7 @@
 				913793AC22D3677C00C07E76 /* BalanceView.swift */,
 				913793AB22D3677C00C07E76 /* KinButton.swift */,
 				913793AD22D3677C00C07E76 /* KinDotsActivityIndicator.swift */,
+				9D5E4B7222D7073A006EF9C0 /* Prompt.swift */,
 				913793B522D3677C00C07E76 /* KinFlow.swift */,
 				913793AE22D3677C00C07E76 /* KinSegmentedControl.swift */,
 				913793B622D3677C00C07E76 /* NoOffersViewController.swift */,
@@ -1199,6 +1205,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D5E4B7522D70743006EF9C0 /* Prompt.xib in Resources */,
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
@@ -1499,6 +1506,7 @@
 				22DA98744E708BF74AFC5426 /* restore_upload_qr_code_page_viewed.swift in Sources */,
 				ED6E34E9179E1A5BCF0E0F64 /* back_button_on_welcome_screen_page_tapped.swift in Sources */,
 				D4CF547EF7640913FAE2499D /* backup_qr_code_back_button_tapped.swift in Sources */,
+				9D5E4B7322D7073A006EF9C0 /* Prompt.swift in Sources */,
 				9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */,
 				5170B76D402B3F503C32313F /* settings_back_button_tapped.swift in Sources */,
 				79617912FDAA66E8903A424D /* spend_order_completion_submitted.swift in Sources */,
