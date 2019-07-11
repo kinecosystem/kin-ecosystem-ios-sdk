@@ -14,7 +14,6 @@ import CoreDataStack
 protocol OrdersViewControllerDelegate: class {
     func ordersViewControllerDidTapSettings()
 }
-
 @available(iOS 9.0, *)
 class OrdersViewController: UIViewController {
     var core: Core!

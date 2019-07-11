@@ -36,11 +36,14 @@ public struct KinUIAPI {
                     if balance.amount != lastBalance {
                         lastBalance = balance.amount
                         if let window = UIApplication.shared.keyWindow {
-                            let balanceView = BalancePrompt(frame:CGRect(x:10,y:UIApplication.shared.statusBarFrame.height + 5,width:window.frame.width - 20,height:70))
+                            let balanceView = BalancePrompt(
+                                frame:CGRect(x:10,y:UIApplication.shared.statusBarFrame.height + 5,width:window.frame.width - 20,height:70),
+                                title: "Balance",
+                                message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",
+                                config: [.closeOnTap,.hasCloseButton])
+                            Prompt.show(view: balanceView)
                         }
-                        //                        Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0,config: .hasCloseButton) { action in
-//                            callback?(.balanceChange,action)
-//                        }
+                        
                     }
                 }//Add ispatchQueue.main.async
             }//End balance observer block
@@ -56,7 +59,12 @@ public struct KinUIAPI {
         Prompt.hide()
     }
 }
-
+struct PromptConfig: OptionSet {
+    let rawValue: Int
+    static let hasCloseButton = PromptConfig(rawValue: 1 << 0)
+    static let closeOnTap = PromptConfig(rawValue: 1 << 1)
+    static let all:PromptConfig = [.closeOnTap]
+}
 class BalancePrompt: UIView {
     @IBOutlet var closeButton:UIButton!
     @IBOutlet var titleLabel:UILabel!
@@ -64,13 +72,27 @@ class BalancePrompt: UIView {
     private var callback:PromptCallback?
     private var config:PromptConfig?
     var content:UIView?
-    init(frame: CGRect,title:String?,message:String?) {
-        super.init(frame:frame)
-        Bundle(for: Kin.self).loadNibNamed("BalancePrompt", owner: self, options: nil)?.first as? UIView
+    init(frame: CGRect,title:String?,message:String?,config:PromptConfig? = nil) {
+        super.init(frame: frame)
+        self.config = config
+        content = Bundle(for: Kin.self).loadNibNamed("BalancePrompt", owner: self, options: nil)?.first as? UIView
         titleLabel.text = title
+        closeButton.isHidden = !(config?.contains(.hasCloseButton) ?? false) ?? true
         messageLabel.text = message
         messageLabel.sizeToFit()
         addSubview(content!)
     }
-    
+    required init?(coder aDecoder: NSCoder) { fatalError("init(coder:) has not been implemented") }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        content?.frame = bounds
+    }
+    @IBAction func handleTap(_ gr:UITapGestureRecognizer) {
+        if config?.contains(.closeOnTap) ?? false {
+            Prompt.hide(self,animate:true)
+        }
+    }
+    @IBAction func handleCloseButtonTap(_ gr:UIButton) {
+        Prompt.hide(self,animate:true)
+    }
 }

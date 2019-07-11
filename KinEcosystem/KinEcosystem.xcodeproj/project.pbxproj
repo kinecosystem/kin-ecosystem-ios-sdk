@@ -103,6 +103,7 @@
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D0F806922D70BE6004D9EB5 /* UIView+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0F806822D70BE6004D9EB5 /* UIView+More.swift */; };
+		9D0F806D22D72944004D9EB5 /* BalancePrompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D0F806C22D72944004D9EB5 /* BalancePrompt.xib */; };
 		9D5E4B7322D7073A006EF9C0 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7222D7073A006EF9C0 /* Prompt.swift */; };
 		9D5E4B7522D70743006EF9C0 /* Prompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7422D70743006EF9C0 /* Prompt.xib */; };
 		9D5E4B7722D707C3006EF9C0 /* KinUIAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */; };
@@ -399,6 +400,7 @@
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D0F806822D70BE6004D9EB5 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
+		9D0F806C22D72944004D9EB5 /* BalancePrompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BalancePrompt.xib; sourceTree = "<group>"; };
 		9D5E4B7222D7073A006EF9C0 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		9D5E4B7422D70743006EF9C0 /* Prompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Prompt.xib; sourceTree = "<group>"; };
 		9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinUIAPI.swift; sourceTree = "<group>"; };
@@ -960,6 +962,7 @@
 				E942F90E2034268300DD4B8E /* EarnOfferCell.xib */,
 				E904415A2035C83000E3E261 /* SpendOfferCell.xib */,
 				9D5E4B7422D70743006EF9C0 /* Prompt.xib */,
+				9D0F806C22D72944004D9EB5 /* BalancePrompt.xib */,
 				E96A582F204458AF00285C7B /* OrdersViewController.xib */,
 				E913AD96204692190071D329 /* KinNavigationViewController.xib */,
 				E98D175B20481D8900FEB57A /* OrderCell.xib */,
@@ -1225,6 +1228,7 @@
 				913793A822D3670A00C07E76 /* OffersViewController.xib in Resources */,
 				913793AA22D3670A00C07E76 /* NoOffersViewController.xib in Resources */,
 				913793A722D3670A00C07E76 /* OfferCell.xib in Resources */,
+				9D0F806D22D72944004D9EB5 /* BalancePrompt.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
