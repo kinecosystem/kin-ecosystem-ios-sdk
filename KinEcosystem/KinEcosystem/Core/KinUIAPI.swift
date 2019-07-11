@@ -35,9 +35,12 @@ public struct KinUIAPI {
                 DispatchQueue.main.async {
                     if balance.amount != lastBalance {
                         lastBalance = balance.amount
-                        Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0,config: .hasCloseButton) { action in
-                            callback?(.balanceChange,action)
+                        if let window = UIApplication.shared.keyWindow {
+                            let balanceView = BalancePrompt(frame:CGRect(x:10,y:UIApplication.shared.statusBarFrame.height + 5,width:window.frame.width - 20,height:70))
                         }
+                        //                        Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0,config: .hasCloseButton) { action in
+//                            callback?(.balanceChange,action)
+//                        }
                     }
                 }//Add ispatchQueue.main.async
             }//End balance observer block
@@ -60,4 +63,14 @@ class BalancePrompt: UIView {
     @IBOutlet var messageLabel:UILabel!
     private var callback:PromptCallback?
     private var config:PromptConfig?
+    var content:UIView?
+    init(frame: CGRect,title:String?,message:String?) {
+        super.init(frame:frame)
+        Bundle(for: Kin.self).loadNibNamed("BalancePrompt", owner: self, options: nil)?.first as? UIView
+        titleLabel.text = title
+        messageLabel.text = message
+        messageLabel.sizeToFit()
+        addSubview(content!)
+    }
+    
 }
