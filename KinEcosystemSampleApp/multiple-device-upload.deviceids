@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>Device UDIDs</key>
+	<array>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>22c8308a0cdab9237a431d2c36d934684a0ba073</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>5494b65ae89bf658b1f5b7fcc66657202a366376</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>c85d3421f4779f2d4c144d1335d8cc6e22746786</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>0e00eec6917e97fdc975fb6b3b0220addf070474</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>2eafed1ea18a0bba1d57904c7dd44dff94af3eef</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>db4c2f1c662c22360d1296476a8aff2d8a286d91</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>deviceIdentifier</key>
+			<string>415e488ac5dd0d82c80675fe8d8fb271c65eac5a</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>mac</string>
+			<key>New item</key>
+			<string>cd8b8d6b7d202c3fb94413a97638e1f52ac26d60</string>
+			<key>deviceName</key>
+			<string>DeviceName2</string>
+		</dict>
+		<dict>
+			<key>devicePlatform</key>
+			<string>ios</string>
+			<key>New item</key>
+			<string>f17e4a7a9f8f302ba86482227c77fcaa0065940e</string>
+			<key>deviceName</key>
+			<string>kin.qa</string>
+		</dict>
+	</array>
+</dict>
+</plist>
