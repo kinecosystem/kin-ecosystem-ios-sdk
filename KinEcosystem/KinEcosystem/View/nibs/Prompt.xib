@@ -17,6 +17,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="Prompt" customModule="KinEcosystem" customModuleProvider="target">
             <connections>
+                <outlet property="closeButton" destination="bnD-PB-uGX" id="xYX-Lh-ShL"/>
                 <outlet property="messageLabel" destination="9Nm-bN-gej" id="BKB-Gd-iPz"/>
                 <outlet property="titleLabel" destination="dqF-C7-y7d" id="I9q-9X-guw"/>
             </connections>

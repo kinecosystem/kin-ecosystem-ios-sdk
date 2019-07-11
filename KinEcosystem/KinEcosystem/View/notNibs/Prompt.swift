@@ -8,21 +8,18 @@
 
 import UIKit
 public enum PromptCallbackAction    { case tapBody,tapCloseButton,hide }
-//public enum PromptConfig            { case hasCloseButton,closeOnTap }
-
 struct PromptConfig: OptionSet {
     let rawValue: Int
     static let hasCloseButton = PromptConfig(rawValue: 1 << 0)
     static let closeOnTap = PromptConfig(rawValue: 1 << 1)
     static let all:PromptConfig = [.hasCloseButton, .closeOnTap]
 }
-
-
 typealias PromptCallback = (PromptCallbackAction) -> Void
 class Prompt: UIView {
     static var current:Prompt?
     static var balanceObserver:Any?
     static private var timer:Timer?
+    @IBOutlet var closeButton:UIButton!
     @IBOutlet var titleLabel:UILabel!
     @IBOutlet var messageLabel:UILabel!
     private var content:UIView?
@@ -32,16 +29,40 @@ class Prompt: UIView {
         Prompt.hide(nil,animate:false) { action in
             if let window = UIApplication.shared.keyWindow {
                 current = Prompt(frame:CGRect(x:10,y:UIApplication.shared.statusBarFrame.height + 5,width:window.frame.width - 20,height:70),title:title,message:message)
-                current?.callback = callback
-                current?.config = config
-                UIApplication.shared.keyWindow?.addSubview(current!)
-                current?.alpha = 0
-                UIView.animate(withDuration: 0.5, animations: {
-                    current?.alpha = 1
+                if let current = current {
+                    current.callback = callback
+                    current.config = config
+                    window.addSubview(current)
+                    current.closeButton.isHidden = !(config?.contains(.hasCloseButton) ?? false) ?? true
+                    current.alpha = 0
+                    let targetY = current.y
+                    current.y = -current.height / 2
+                    UIView.animate(withDuration: 0.4, animations: {
+                        current.alpha = 1
+                        current.y = targetY
+                    })
+                    if timeout > 0 {
+                        Prompt.timer = Timer.scheduledTimer(timeInterval:timeout, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: false)
+                    }
+                }
+            }
+        }
+    }
+    class func show(view:UIView,message:String,timeout:TimeInterval = 3, config:PromptConfig? = nil, _ callback:PromptCallback? = nil)  {
+        Prompt.hide(nil,animate:false) { action in
+            if let window = UIApplication.shared.keyWindow {
+                let targetY = view.y
+                view.alpha = 0
+                view.y = -view.height / 2
+                window.addSubview(view)
+                UIView.animate(withDuration: 0.4, animations: {
+                    view.alpha = 1
+                    view.y = targetY
                 })
                 if timeout > 0 {
                     Prompt.timer = Timer.scheduledTimer(timeInterval:timeout, target: self, selector: #selector(handleTimer), userInfo: nil, repeats: false)
                 }
+                
             }
         }
     }
@@ -51,8 +72,7 @@ class Prompt: UIView {
     class func hide(_ prompt:Prompt? =  nil,animate:Bool = true, _ callback:PromptCallback? = nil) {
         if Prompt.timer?.isValid ?? false { Prompt.timer?.invalidate() }
         if prompt == Prompt.current || prompt == nil {
-            print("animate",animate)
-            UIView.animate(withDuration: animate ? 0.5 : 0.0 , animations: {
+            UIView.animate(withDuration: animate ? 0.3 : 0.0 , animations: {
                 current?.alpha = 0
             }) { finished in
                 Prompt.current?.removeFromSuperview()
@@ -72,8 +92,10 @@ class Prompt: UIView {
     required init?(coder aDecoder: NSCoder) { super.init(coder: aDecoder) }
     override public func layoutSubviews() { content?.frame = bounds }
     @IBAction func handleTap(_ gr:UITapGestureRecognizer) {
-        Prompt.hide(self,animate:true)
-        callback?(.tapBody)
+        if config?.contains(.closeOnTap) ?? false {
+            Prompt.hide(self,animate:true)
+            callback?(.tapBody)
+        }
     }
     @IBAction func handleCloseButtonTap(_ gr:UIButton) {
         Prompt.hide(self,animate:true)

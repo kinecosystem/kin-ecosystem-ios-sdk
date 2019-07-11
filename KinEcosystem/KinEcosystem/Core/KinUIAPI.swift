@@ -35,7 +35,7 @@ public struct KinUIAPI {
                 DispatchQueue.main.async {
                     if balance.amount != lastBalance {
                         lastBalance = balance.amount
-                        Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0) { action in
+                        Prompt.show(title: "Balance", message: formatter.string(from:NSNumber(value: Double(truncating:  balance.amount as NSNumber))) ?? "0",timeout:4.0,config: .hasCloseButton) { action in
                             callback?(.balanceChange,action)
                         }
                     }
@@ -52,4 +52,12 @@ public struct KinUIAPI {
     static public func dismissCurrentPrompt() {
         Prompt.hide()
     }
+}
+
+class BalancePrompt: UIView {
+    @IBOutlet var closeButton:UIButton!
+    @IBOutlet var titleLabel:UILabel!
+    @IBOutlet var messageLabel:UILabel!
+    private var callback:PromptCallback?
+    private var config:PromptConfig?
 }
