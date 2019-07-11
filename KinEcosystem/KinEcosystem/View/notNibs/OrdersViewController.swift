@@ -35,13 +35,11 @@ class OrdersViewController: UIViewController {
             setupFRCSections()
         }
     }
-
     convenience init(core: Core) {
         self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
         self.core = core
         loadViewIfNeeded()
     }
-
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -50,8 +48,14 @@ class OrdersViewController: UIViewController {
         setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
+        
+    
+        let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
+        navigationItem.leftBarButtonItem = closeItem
     }
-
+    @objc func close() {
+        dismiss(animated: true, completion: nil)
+    }
     fileprivate func setupExtraViews() {
         let bvc = BalanceViewController(core: core)
         bvc.willMove(toParent: self)
