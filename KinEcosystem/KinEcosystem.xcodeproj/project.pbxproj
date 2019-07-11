@@ -102,6 +102,7 @@
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
+		9D0F806922D70BE6004D9EB5 /* UIView+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0F806822D70BE6004D9EB5 /* UIView+More.swift */; };
 		9D5E4B7322D7073A006EF9C0 /* Prompt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7222D7073A006EF9C0 /* Prompt.swift */; };
 		9D5E4B7522D70743006EF9C0 /* Prompt.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7422D70743006EF9C0 /* Prompt.xib */; };
 		9D5E4B7722D707C3006EF9C0 /* KinUIAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */; };
@@ -397,6 +398,7 @@
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
+		9D0F806822D70BE6004D9EB5 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
 		9D5E4B7222D7073A006EF9C0 /* Prompt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Prompt.swift; sourceTree = "<group>"; };
 		9D5E4B7422D70743006EF9C0 /* Prompt.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = Prompt.xib; sourceTree = "<group>"; };
 		9D5E4B7622D707C3006EF9C0 /* KinUIAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinUIAPI.swift; sourceTree = "<group>"; };
@@ -1018,6 +1020,7 @@
 		E98E4897201A02C700CB8CC2 /* extensions */ = {
 			isa = PBXGroup;
 			children = (
+				9D0F806822D70BE6004D9EB5 /* UIView+More.swift */,
 				E92BA46E21A1A0F100C952D8 /* Kin+BackupRestore.swift */,
 				913793CF22D3689300C07E76 /* ActionClosure.swift */,
 				913793CE22D3689300C07E76 /* TextStyles.swift */,
@@ -1383,6 +1386,7 @@
 				E92BA45421A19C0A00C952D8 /* PasswordEntryField.swift in Sources */,
 				E954A610205711CE00F01C8A /* CGPoint+functions.swift in Sources */,
 				E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */,
+				9D0F806922D70BE6004D9EB5 /* UIView+More.swift in Sources */,
 				E913AD97204692190071D329 /* KinNavigationViewController.swift in Sources */,
 				E91E6408203ABF2800BB4104 /* KinBaseNavigationController.swift in Sources */,
 				E92BA44721A19C0A00C952D8 /* UINavigationBar+Appearance.swift in Sources */,
