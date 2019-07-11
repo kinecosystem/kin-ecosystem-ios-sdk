@@ -103,7 +103,6 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         Kin.shared.UI.enablePrompt(for: [.balanceChange]) { (type, action) in
             
         }
-      
     }
 
     func alertConfigIssue() {
