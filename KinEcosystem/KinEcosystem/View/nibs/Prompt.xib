@@ -57,7 +57,7 @@
                         </userDefinedRuntimeAttribute>
                     </userDefinedRuntimeAttributes>
                 </view>
-                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="prompter_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Awl-d8-3G3">
+                <imageView clipsSubviews="YES" userInteractionEnabled="NO" alpha="0.69999999999999996" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="prompt_logo" translatesAutoresizingMaskIntoConstraints="NO" id="Awl-d8-3G3">
                     <rect key="frame" x="147.5" y="28.5" width="25" height="25"/>
                     <constraints>
                         <constraint firstAttribute="width" secondItem="Awl-d8-3G3" secondAttribute="height" id="2BY-kl-ZXU"/>
@@ -127,6 +127,6 @@
     </objects>
     <resources>
         <image name="prompt_close_button" width="31.5" height="31"/>
-        <image name="prompter_logo" width="90.5" height="90.5"/>
+        <image name="prompt_logo" width="90.5" height="90.5"/>
     </resources>
 </document>
