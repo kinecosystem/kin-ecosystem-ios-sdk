@@ -52,6 +52,7 @@ class OffersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        automaticallyAdjustsScrollViewInsets = false
         edgesForExtendedLayout = .top
         extendedLayoutIncludesOpaqueBars = true
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "closeBtn",
