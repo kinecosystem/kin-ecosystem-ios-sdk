@@ -42,6 +42,7 @@ extension BackupFlowController {
         viewController.navigationItem.rightBarButtonItem = ThemedLabelBarButtonItem(text: "1/2")
         viewController.delegate = self
         viewController.lifeCycleDelegate = self
+        
         navigationController.pushViewController(viewController, animated: true)
     }
     
