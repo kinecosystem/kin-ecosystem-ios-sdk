@@ -13,8 +13,6 @@ class BalanceView: UIView {
     var theme: Theme?
     let label = UILabel(frame: .zero)
     let kinView = UIImageView(frame: CGRect(x: 0.0, y: 0.0, width: 8.0, height: 8.0))
-    //let stackView: UIStackView
-    
     var balanceObserver: String?
     var balance: Balance? {
         didSet {
@@ -22,12 +20,11 @@ class BalanceView: UIView {
         }
     }
     override init(frame: CGRect) {
-       // stackView = UIStackView(arrangedSubviews: [kinView, label])
+      
         super.init(frame: frame)
         commonInit()
     }
     required init?(coder aDecoder: NSCoder) {
-       // stackView = UIStackView(arrangedSubviews: [kinView, label])
         super.init(coder: aDecoder)
         commonInit()
     }
@@ -47,23 +44,12 @@ class BalanceView: UIView {
                 self?.balance = balance
             }
         }
-//        stackView.alignment = .center
-//        stackView.axis = .horizontal
-//        stackView.translatesAutoresizingMaskIntoConstraints = false
-//        stackView.spacing = 3
-//
-//        addSubview(stackView)
-//        NSLayoutConstraint.activate([
-//            leadingAnchor.constraint(equalTo: stackView.leadingAnchor),
-//            trailingAnchor.constraint(equalTo: stackView.trailingAnchor),
-//            topAnchor.constraint(equalTo: stackView.topAnchor),
-//            bottomAnchor.constraint(equalTo: stackView.bottomAnchor)
-//            ])
         setupTheming()
     }
     override func layoutSubviews() {
         super.layoutSubviews()
         label.center = boundsCenter
+        label.x = label.x + kinView.width / 2.0
         kinView.center = boundsCenter
         kinView.x = label.x - kinView.frame.width - 2
     }
