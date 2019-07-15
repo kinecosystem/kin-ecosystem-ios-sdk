@@ -23,7 +23,7 @@ extension NSAttributedString {
 
     func kinPrefixed(with color: UIColor? = nil) -> NSAttributedString {
         guard var kinImage = UIImage.bundleImage("balanceKinIcon")?
-            .padded(with: UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right: 2.0))?
+            .padded(with: UIEdgeInsets(top: 0.0, left: 2.0, bottom: 0.0, right:2.0))?
             .withRenderingMode(.alwaysTemplate),
             let font = attributes(at: 0, effectiveRange: nil)[.font] as? UIFont else {
                 return self
@@ -36,7 +36,7 @@ extension NSAttributedString {
         let kinAttachment = NSTextAttachment()
         kinAttachment.bounds = CGRect(x: 0, y: (font.capHeight - kinImage.size.height).rounded() / 2, width: kinImage.size.width, height: kinImage.size.height)
         kinAttachment.image = kinImage
-        return NSAttributedString(attachment: kinAttachment) + NSAttributedString(string: " ") + self
+        return NSAttributedString(attachment: kinAttachment) + NSAttributedString(string: "") + self
     }
 
     func applyingTextAlignment(_ textAlignment: NSTextAlignment) -> NSAttributedString {

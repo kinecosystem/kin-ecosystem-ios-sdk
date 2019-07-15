@@ -104,6 +104,8 @@
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
+		9DEB660522DC543F0070887D /* Podfile.lock in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660322DC543F0070887D /* Podfile.lock */; };
+		9DEB660622DC543F0070887D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660422DC543F0070887D /* Podfile */; };
 		9DF8EE4522DB2C6300264DB2 /* UIView+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
@@ -398,6 +400,8 @@
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
+		9DEB660322DC543F0070887D /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile.lock; path = ../Podfile.lock; sourceTree = "<group>"; };
+		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
 		9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
@@ -880,6 +884,8 @@
 		E96F24CF201729690017EF68 = {
 			isa = PBXGroup;
 			children = (
+				9DEB660422DC543F0070887D /* Podfile */,
+				9DEB660322DC543F0070887D /* Podfile.lock */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
@@ -1208,6 +1214,7 @@
 			files = (
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
+				9DEB660522DC543F0070887D /* Podfile.lock in Resources */,
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
@@ -1229,6 +1236,7 @@
 				913793A922D3670A00C07E76 /* WhatsKinViewController.xib in Resources */,
 				E92BA44C21A19C0A00C952D8 /* RestoreViewController.xib in Resources */,
 				E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */,
+				9DEB660622DC543F0070887D /* Podfile in Resources */,
 				E9753C13206BD4AB0023CF94 /* CouponViewController.xib in Resources */,
 				913793D922D368E500C07E76 /* Sailec Medium.otf in Resources */,
 			);
