@@ -796,13 +796,13 @@
 		E92BA43221A19C0A00C952D8 /* notNibs */ = {
 			isa = PBXGroup;
 			children = (
+				E92BA43821A19C0A00C952D8 /* PasswordEntryField.swift */,
 				E92BA46C21A1A06600C952D8 /* SettingsViewController.swift */,
 				E92BA43321A19C0A00C952D8 /* BackupCompletedViewController.swift */,
 				E92BA43421A19C0A00C952D8 /* BRViewController.swift */,
 				E92BA43521A19C0A00C952D8 /* BackupFlowController.swift */,
 				E92BA43621A19C0A00C952D8 /* PasswordEntryViewController.swift */,
 				E92BA43721A19C0A00C952D8 /* QRPickerController.swift */,
-				E92BA43821A19C0A00C952D8 /* PasswordEntryField.swift */,
 				E92BA43921A19C0A00C952D8 /* RestoreViewController.swift */,
 				E92BA43A21A19C0A00C952D8 /* RoundButton.swift */,
 				E92BA43B21A19C0A00C952D8 /* RestoreFlowController.swift */,
@@ -986,7 +986,6 @@
 				E942F8FE20331AAE00DD4B8E /* MarketplaceViewController.swift */,
 				E942F90A2034138100DD4B8E /* EarnOfferCell.swift */,
 				E942F90C2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift */,
-				E90441592035C83000E3E261 /* SpendOfferCell.swift */,
 				E91E6407203ABF2800BB4104 /* KinBaseNavigationController.swift */,
 				E96A582E204458AF00285C7B /* OrdersViewController.swift */,
 				E913AD95204692190071D329 /* KinNavigationViewController.swift */,
@@ -998,6 +997,7 @@
 				E954A60D2056B86A00F01C8A /* SplashTransition.swift */,
 				E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */,
 				E92F7B7A20691403008A027F /* SpendOfferViewController.swift */,
+				E90441592035C83000E3E261 /* SpendOfferCell.swift */,
 				E92F7B80206923A0008A027F /* SheetTransition.swift */,
 				E92F7B872069992A008A027F /* Animations.swift */,
 				E9753C10206BD4AB0023CF94 /* CouponViewController.swift */,
