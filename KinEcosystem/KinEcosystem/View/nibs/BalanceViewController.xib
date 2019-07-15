@@ -26,6 +26,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orx-UV-ApP">
                             <rect key="frame" x="0.0" y="298.5" width="50" height="50"/>
+                            <color key="backgroundColor" red="0.72077786919999998" green="0.1466488242" blue="0.61179405450000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
@@ -35,6 +36,7 @@
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UZ-hN-XIE" userLabel="Spacer">
                             <rect key="frame" x="50" y="298.5" width="275" height="50"/>
+                            <color key="backgroundColor" red="1" green="0.17725228579999999" blue="0.84874552390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJE-YY-uhe">
                             <rect key="frame" x="325" y="298.5" width="50" height="50"/>
@@ -43,6 +45,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <color key="backgroundColor" red="0.99683815239999995" green="0.98870593309999999" blue="0.3291935325" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </stackView>
             </subviews>
             <gestureRecognizers/>
