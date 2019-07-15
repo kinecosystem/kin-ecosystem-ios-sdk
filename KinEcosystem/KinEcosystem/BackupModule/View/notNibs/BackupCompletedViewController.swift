@@ -8,6 +8,7 @@
 import UIKit
 import KinUtil
 class BackupCompletedViewController: ExplanationTemplateViewController {
+
     override func viewDidLoad() {
         super.viewDidLoad()
         Kin.track { try BackupCompletedPageViewed() }
@@ -25,6 +26,6 @@ class BackupCompletedViewController: ExplanationTemplateViewController {
         attributedString.append(NSAttributedString(string: "\n\n"))
         attributedString.append("kinecosystem_backup_reminder_description".localized().styled(as: theme.subtitle12).applyingTextColor(Color.KinNewUi.darkishPink))
         descriptionLabel.attributedText = attributedString
-       descriptionLabel.sizeToFit()
+        descriptionHeight.constant = 500
     }
 }

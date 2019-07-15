@@ -23,7 +23,7 @@ struct OfferViewModel {
         var amount: NSAttributedString!
         
         if case .earn = model.offerType {
-            attributed = (cellTitle + " ").styled(as: theme.earnTitle)
+            attributed = (cellTitle + " +").styled(as: theme.earnTitle)
             amount = "\(model.amount)".styled(as: theme.earnTitle)
         } else {
             attributed = (cellTitle + " ").styled(as: theme.spendTitle)

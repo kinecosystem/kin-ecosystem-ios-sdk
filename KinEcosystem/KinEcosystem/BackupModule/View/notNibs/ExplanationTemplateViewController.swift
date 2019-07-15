@@ -19,7 +19,7 @@ class ExplanationTemplateViewController: BRViewController, Themed {
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
     @IBOutlet weak var continueButton: KinButton!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
-    
+    @IBOutlet var descriptionHeight:NSLayoutConstraint!
     init() {
         super.init(nibName: "ExplanationTemplateViewController", bundle: KinBundle.ecosystem.rawValue)
         commonInit()
