@@ -50,7 +50,7 @@ class BalanceViewController: KinViewController {
     }
 
     fileprivate func updateBalance(_ balance: Balance) {
-        let attributedText = NSMutableAttributedString(attributedString:  "\(balance.amount)".styled(as: theme.balanceAmount).kinPrefixed(with: textColor))
+        let attributedText = NSMutableAttributedString(attributedString:  "\(balance.amount)".styled(as: theme.balanceAmount))//.kinPrefixed(with: textColor))
         amountLabel.attributedText = attributedText
     }
 
@@ -58,7 +58,6 @@ class BalanceViewController: KinViewController {
         guard let color = theme.balanceAmount.attributes[.foregroundColor] as? UIColor else {
             return .black
         }
-
         return color
     }
 }

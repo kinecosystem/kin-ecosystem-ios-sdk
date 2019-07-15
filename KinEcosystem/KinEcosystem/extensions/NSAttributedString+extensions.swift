@@ -36,7 +36,6 @@ extension NSAttributedString {
         let kinAttachment = NSTextAttachment()
         kinAttachment.bounds = CGRect(x: 0, y: (font.capHeight - kinImage.size.height).rounded() / 2, width: kinImage.size.width, height: kinImage.size.height)
         kinAttachment.image = kinImage
-
         return NSAttributedString(attachment: kinAttachment) + NSAttributedString(string: " ") + self
     }
 

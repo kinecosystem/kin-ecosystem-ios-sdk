@@ -103,6 +103,7 @@
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
+		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DF8EE4522DB2C6300264DB2 /* UIView+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */; };
 		A44AC1C31BD5E341BA22490D /* a_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = E76576947B67C937AB0B34C5 /* a_page_viewed.swift */; };
 		AA190194181C3B22171C0B8B /* restore_wallet_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00E858E4B93F3683D4BF1342 /* restore_wallet_completed.swift */; };
@@ -1238,6 +1239,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6831950722CCED0800EC2DDF /* Info.plist in Resources */,
+				9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

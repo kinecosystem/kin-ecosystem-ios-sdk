@@ -10,10 +10,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Orders View Controller-->
         <scene sceneID="GW1-nk-nuC">
             <objects>
-                <viewController id="0U7-LJ-g18" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="OrdersViewController" id="0U7-LJ-g18" customClass="OrdersViewController" customModule="KinEcosystem" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YzT-dm-SyO">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -27,21 +27,29 @@
                                     <segue destination="JFD-AJ-AUE" kind="embed" id="A7t-d3-i97"/>
                                 </connections>
                             </containerView>
-                            <view contentMode="scaleToFill" ambiguous="YES" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="6gV-ab-l6f" customClass="KinSegmentedControl" customModule="KinEcosystem" customModuleProvider="target">
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="6gV-ab-l6f" customClass="KinSegmentedControl" customModule="KinEcosystem" customModuleProvider="target">
                                 <rect key="frame" x="24" y="108" width="366" height="30"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="string" keyPath="leftItem" value="Earned"/>
                                     <userDefinedRuntimeAttribute type="string" keyPath="rightItem" value="Used"/>
                                 </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="segmedControlChangedValue:" destination="0U7-LJ-g18" eventType="valueChanged" id="dGz-VO-KIX"/>
+                                </connections>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rDu-pY-KQW">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rDu-pY-KQW">
                                 <rect key="frame" x="0.0" y="143" width="414" height="719"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0U7-LJ-g18" id="egY-E6-uZO"/>
+                                    <outlet property="delegate" destination="0U7-LJ-g18" id="3U3-Ri-8bg"/>
+                                </connections>
                             </tableView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="6gV-ab-l6f" firstAttribute="top" secondItem="hQE-Dj-WFV" secondAttribute="bottom" id="7Id-eY-FBL"/>
                             <constraint firstItem="rDu-pY-KQW" firstAttribute="top" secondItem="6gV-ab-l6f" secondAttribute="bottom" constant="5" id="J51-mo-NRf"/>
                             <constraint firstItem="hQE-Dj-WFV" firstAttribute="leading" secondItem="kJp-21-4Qc" secondAttribute="leading" constant="24" id="LQf-Pu-YhH"/>
                             <constraint firstItem="rDu-pY-KQW" firstAttribute="leading" secondItem="kJp-21-4Qc" secondAttribute="leading" id="Wba-SZ-q9f"/>
@@ -54,6 +62,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kJp-21-4Qc"/>
                     </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="6gV-ab-l6f" id="IVq-Ye-X4a"/>
+                        <outlet property="tableView" destination="rDu-pY-KQW" id="OIr-H1-XRN"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rPt-oC-R8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -72,7 +84,7 @@
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2Z-bx-Fck">
                                         <rect key="frame" x="0.0" y="13" width="70" height="24"/>
-                                        <color key="backgroundColor" red="1" green="0.096373205370000006" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -82,7 +94,7 @@
                                     </label>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-gx-6vv" userLabel="Spacer">
                                         <rect key="frame" x="70" y="0.0" width="236" height="50"/>
-                                        <color key="backgroundColor" red="0.4105686247" green="0.26269698139999997" blue="0.87455886599999999" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                     </view>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="balanceKinIcon" translatesAutoresizingMaskIntoConstraints="NO" id="mYl-ZY-9l2">
                                         <rect key="frame" x="306" y="21" width="10" height="8"/>
@@ -98,7 +110,7 @@
                                     </imageView>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs1-K2-ror">
                                         <rect key="frame" x="316" y="0.0" width="50" height="50"/>
-                                        <color key="backgroundColor" red="0.0" green="0.1639554795" blue="0.73132491440000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.018012944610000001" green="0.48562967779999999" blue="0.98989969489999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>
@@ -123,7 +135,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Gkb-kc-uuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1961" y="-2478"/>
+            <point key="canvasLocation" x="-1981" y="-2519"/>
         </scene>
     </scenes>
     <resources>

@@ -17,7 +17,7 @@ public func NSLocalizedString(_ key: String, tableName: String? = nil, bundle: B
     return Bundle.main.localizedString(forKey: key, value: fallbackString, table: nil)
 }
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+     class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 

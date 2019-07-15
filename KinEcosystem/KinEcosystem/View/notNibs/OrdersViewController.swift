@@ -18,28 +18,30 @@ protocol OrdersViewControllerDelegate: class {
 @available(iOS 9.0, *)
 class OrdersViewController: UIViewController {
     var core: Core!
-
     weak var delegate: OrdersViewControllerDelegate?
 
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
     let themeLinkBag = LinkBag()
     fileprivate var theme: Theme?
-
     @IBOutlet weak var segmentedControl: KinSegmentedControl!
-
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var balanceContainer: UIView!
+   // @IBOutlet weak var balanceContainer: UIView!
     fileprivate var offerType: OfferType = .earn {
         didSet {
             setupFRCSections()
         }
     }
-    convenience init(core: Core) {
-        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
-        self.core = core
-        loadViewIfNeeded()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? BalanceViewController {
+            vc.core = core
+        }
     }
+//    convenience init(core: Core) {
+//        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
+//        self.core = core
+//        loadViewIfNeeded()
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -60,21 +62,20 @@ class OrdersViewController: UIViewController {
        navigationController?.popViewController(animated: true)
     }
     fileprivate func setupExtraViews() {
-        let bvc = BalanceViewController(core: core)
-        bvc.willMove(toParent: self)
-        bvc.view.translatesAutoresizingMaskIntoConstraints = false
-        balanceContainer.addSubview(bvc.view)
-        addChild(bvc)
-        bvc.didMove(toParent: self)
-        NSLayoutConstraint.activate([
-            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
-            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
-            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
-            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
-            ])
-        bvc.view.setNeedsLayout()
+//        let bvc = BalanceViewController(core: core)
+//        bvc.willMove(toParent: self)
+//        bvc.view.translatesAutoresizingMaskIntoConstraints = false
+//        balanceContainer.addSubview(bvc.view)
+//        addChild(bvc)
+//        bvc.didMove(toParent: self)
+//        NSLayoutConstraint.activate([
+//            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
+//            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
+//            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
+//            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
+//            ])
+//        bvc.view.setNeedsLayout()
         title = "my_kin".localized()
-
         let settingsIcon = UIImage(named: "KinNewSettingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         let settingsBarButton = UIBarButtonItem(image: settingsIcon,
                                                 landscapeImagePhone: nil,

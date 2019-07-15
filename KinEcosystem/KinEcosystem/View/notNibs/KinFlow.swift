@@ -65,8 +65,11 @@ class EntrypointFlowController: KinFlowController {
         guard didTapLetsGo, core.onboarded else {
             return
         }
-
-        let myKinController = OrdersViewController(core: core)
+     
+        //MARK: changed to storyboard instantiaition
+        let storyboard = UIStoryboard(name: "Storyboard",bundle: KinBundle.ecosystem.rawValue)
+        let myKinController = storyboard.instantiateViewController(withIdentifier: "OrdersViewController") as! OrdersViewController
+        myKinController.core = core
         myKinController.delegate = self
         navigationControllerWrapper.pushViewController(myKinController, animated: animated)
     }
