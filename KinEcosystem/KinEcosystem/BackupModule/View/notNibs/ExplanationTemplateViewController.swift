@@ -19,21 +19,19 @@ class ExplanationTemplateViewController: BRViewController, Themed {
     @IBOutlet weak var reminderDescriptionLabel: UILabel!
     @IBOutlet weak var continueButton: KinButton!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
-    @IBOutlet var descriptionHeight:NSLayoutConstraint!
+    @IBOutlet var stackViewTopConstraint:NSLayoutConstraint!
     init() {
         super.init(nibName: "ExplanationTemplateViewController", bundle: KinBundle.ecosystem.rawValue)
         commonInit()
     }
-    
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
     private func commonInit() {
+        
         loadViewIfNeeded()
     }
-    
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
     }
@@ -45,6 +43,10 @@ class ExplanationTemplateViewController: BRViewController, Themed {
         if #available(iOS 11, *) {
             topSpace.constant = 0.0
             view.layoutIfNeeded()
+        }
+        
+        if UIScreen.main.bounds.height <= 568.0 { //Match small screen devices
+            stackViewTopConstraint.constant = 0
         }
     }
 

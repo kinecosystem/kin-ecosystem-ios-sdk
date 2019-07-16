@@ -26,6 +26,5 @@ class BackupCompletedViewController: ExplanationTemplateViewController {
         attributedString.append(NSAttributedString(string: "\n\n"))
         attributedString.append("kinecosystem_backup_reminder_description".localized().styled(as: theme.subtitle12).applyingTextColor(Color.KinNewUi.darkishPink))
         descriptionLabel.attributedText = attributedString
-        descriptionHeight.constant = 500
     }
 }
