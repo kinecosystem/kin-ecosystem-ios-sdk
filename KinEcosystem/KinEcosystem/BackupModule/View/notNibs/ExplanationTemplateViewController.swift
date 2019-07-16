@@ -40,10 +40,10 @@ class ExplanationTemplateViewController: BRViewController, Themed {
         super.viewDidLoad()
         setupTheming()
 
-        if #available(iOS 11, *) {
-            topSpace.constant = 0.0
-            view.layoutIfNeeded()
-        }
+//        if #available(iOS 11, *) {
+//            topSpace.constant = 0.0
+//            view.layoutIfNeeded()
+//        }
         
         if UIScreen.main.bounds.height <= 568.0 { //Match small screen devices
             stackViewTopConstraint.constant = 0
