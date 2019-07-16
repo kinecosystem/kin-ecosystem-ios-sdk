@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Orders View Controller-->
+        <scene sceneID="GW1-nk-nuC">
+            <objects>
+                <viewController storyboardIdentifier="OrdersViewController" id="0U7-LJ-g18" customClass="OrdersViewController" customModule="KinEcosystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="YzT-dm-SyO">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hQE-Dj-WFV" userLabel="Balance Container">
+                                <rect key="frame" x="24" y="58" width="366" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="QZU-lF-kJy"/>
+                                </constraints>
+                                <connections>
+                                    <segue destination="JFD-AJ-AUE" kind="embed" id="A7t-d3-i97"/>
+                                </connections>
+                            </containerView>
+                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="infinite" placeholderIntrinsicHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="6gV-ab-l6f" customClass="KinSegmentedControl" customModule="KinEcosystem" customModuleProvider="target">
+                                <rect key="frame" x="24" y="108" width="366" height="30"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="leftItem" value="Earned"/>
+                                    <userDefinedRuntimeAttribute type="string" keyPath="rightItem" value="Used"/>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="segmedControlChangedValue:" destination="0U7-LJ-g18" eventType="valueChanged" id="dGz-VO-KIX"/>
+                                </connections>
+                            </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="1" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="rDu-pY-KQW">
+                                <rect key="frame" x="0.0" y="143" width="414" height="719"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="0U7-LJ-g18" id="egY-E6-uZO"/>
+                                    <outlet property="delegate" destination="0U7-LJ-g18" id="3U3-Ri-8bg"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="6gV-ab-l6f" firstAttribute="top" secondItem="hQE-Dj-WFV" secondAttribute="bottom" id="7Id-eY-FBL"/>
+                            <constraint firstItem="rDu-pY-KQW" firstAttribute="top" secondItem="6gV-ab-l6f" secondAttribute="bottom" constant="5" id="J51-mo-NRf"/>
+                            <constraint firstItem="hQE-Dj-WFV" firstAttribute="leading" secondItem="kJp-21-4Qc" secondAttribute="leading" constant="24" id="LQf-Pu-YhH"/>
+                            <constraint firstItem="rDu-pY-KQW" firstAttribute="leading" secondItem="kJp-21-4Qc" secondAttribute="leading" id="Wba-SZ-q9f"/>
+                            <constraint firstItem="kJp-21-4Qc" firstAttribute="trailing" secondItem="rDu-pY-KQW" secondAttribute="trailing" id="a0Q-Qz-EuJ"/>
+                            <constraint firstItem="kJp-21-4Qc" firstAttribute="trailing" secondItem="hQE-Dj-WFV" secondAttribute="trailing" constant="24" id="bKK-Aj-P5R"/>
+                            <constraint firstItem="6gV-ab-l6f" firstAttribute="leading" secondItem="kJp-21-4Qc" secondAttribute="leading" constant="24" id="jqO-03-3rs"/>
+                            <constraint firstItem="6gV-ab-l6f" firstAttribute="centerX" secondItem="kJp-21-4Qc" secondAttribute="centerX" id="lnj-ZO-oQT"/>
+                            <constraint firstItem="kJp-21-4Qc" firstAttribute="bottom" secondItem="rDu-pY-KQW" secondAttribute="bottom" id="q7d-SC-lbJ"/>
+                            <constraint firstItem="hQE-Dj-WFV" firstAttribute="top" secondItem="YzT-dm-SyO" secondAttribute="top" constant="58" id="s3Y-bI-Y3h"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="kJp-21-4Qc"/>
+                    </view>
+                    <connections>
+                        <outlet property="segmentedControl" destination="6gV-ab-l6f" id="IVq-Ye-X4a"/>
+                        <outlet property="tableView" destination="rDu-pY-KQW" id="OIr-H1-XRN"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rPt-oC-R8F" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-2709" y="-2235"/>
+        </scene>
+        <!--Balance View Controller-->
+        <scene sceneID="xA7-bV-DRE">
+            <objects>
+                <viewController id="JFD-AJ-AUE" customClass="BalanceViewController" customModule="KinEcosystem" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eFH-1G-ecs">
+                        <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="dQz-n6-9Ne" userLabel="Balance Header">
+                                <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2Z-bx-Fck">
+                                        <rect key="frame" x="0.0" y="13" width="70" height="24"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                        <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <nil key="highlightedColor"/>
+                                        <userDefinedRuntimeAttributes>
+                                            <userDefinedRuntimeAttribute type="string" keyPath="xibLocKey" value="kinecosystem_kin_balance"/>
+                                        </userDefinedRuntimeAttributes>
+                                    </label>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="rdS-gx-6vv" userLabel="Spacer">
+                                        <rect key="frame" x="70" y="0.0" width="246" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs1-K2-ror">
+                                        <rect key="frame" x="316" y="0.0" width="50" height="50"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                        <color key="textColor" red="0.018012944610000001" green="0.48562967779999999" blue="0.98989969489999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" red="1" green="0.17725228579999999" blue="0.84874552390000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="dQz-n6-9Ne" firstAttribute="bottom" secondItem="eFH-1G-ecs" secondAttribute="bottom" id="CWI-RY-QQ4"/>
+                            <constraint firstAttribute="top" secondItem="dQz-n6-9Ne" secondAttribute="top" id="OjU-IW-lft"/>
+                            <constraint firstItem="Y7M-Ew-9MR" firstAttribute="leading" secondItem="dQz-n6-9Ne" secondAttribute="leading" id="SiL-jm-eWp"/>
+                            <constraint firstAttribute="trailing" secondItem="dQz-n6-9Ne" secondAttribute="trailing" id="xDz-6V-jRK"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="Y7M-Ew-9MR"/>
+                    </view>
+                    <connections>
+                        <outlet property="amountLabel" destination="rs1-K2-ror" id="S5H-LL-9xS"/>
+                        <outlet property="titleLabel" destination="v2Z-bx-Fck" id="mnu-Cm-Q7c"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Gkb-kc-uuW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1981" y="-2519"/>
+        </scene>
+    </scenes>
+</document>

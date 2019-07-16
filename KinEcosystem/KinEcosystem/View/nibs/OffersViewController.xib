@@ -22,7 +22,7 @@
             <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0dk-bI-BhT">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.69999999999999996" translatesAutoresizingMaskIntoConstraints="NO" id="0dk-bI-BhT">
                     <rect key="frame" x="24" y="58" width="366" height="30"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="30" id="5sz-SH-fPr"/>
@@ -31,7 +31,7 @@
                         <fragment content="Label">
                             <attributes>
                                 <font key="NSFont" metaFont="system" size="17"/>
-                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                <paragraphStyle key="NSParagraphStyle" alignment="center" lineBreakMode="truncatingTail" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
                             </attributes>
                         </fragment>
                     </attributedString>
@@ -58,7 +58,7 @@
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="dgC-iv-fPw" secondAttribute="trailing" constant="24" id="GK6-gc-Lgz"/>
                 <constraint firstItem="dgC-iv-fPw" firstAttribute="top" secondItem="0dk-bI-BhT" secondAttribute="bottom" constant="24" id="RyQ-LF-yBg"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="0dk-bI-BhT" secondAttribute="trailing" constant="24" id="bWN-tt-knv"/>
-                <constraint firstItem="0dk-bI-BhT" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="14" id="g91-Nt-wb9"/>
+                <constraint firstItem="0dk-bI-BhT" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" constant="58" id="g91-Nt-wb9"/>
                 <constraint firstItem="0dk-bI-BhT" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="24" id="gri-OD-W6O"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="dgC-iv-fPw" secondAttribute="bottom" id="kSe-cd-VDl"/>
             </constraints>

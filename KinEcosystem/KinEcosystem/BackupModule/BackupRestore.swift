@@ -97,6 +97,9 @@ public class BRManager: NSObject {
         }
         
         let navigationController = ThemedNavigationController()
+        navigationController.navigationBar.isTranslucent = false
+        navigationController.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController.navigationBar.shadowImage = UIImage()
         
         let flowController = createFlowController(phase: phase, keystoreProvider: storeProvider, navigationController: navigationController)
         let dismissItem = UIBarButtonItem(barButtonSystemItem: .stop, target: flowController, action: #selector(flowController.cancelFlow))

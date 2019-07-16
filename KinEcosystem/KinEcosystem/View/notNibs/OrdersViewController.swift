@@ -18,28 +18,30 @@ protocol OrdersViewControllerDelegate: class {
 @available(iOS 9.0, *)
 class OrdersViewController: UIViewController {
     var core: Core!
-
     weak var delegate: OrdersViewControllerDelegate?
 
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
     let themeLinkBag = LinkBag()
     fileprivate var theme: Theme?
-
     @IBOutlet weak var segmentedControl: KinSegmentedControl!
-
     @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var balanceContainer: UIView!
+   // @IBOutlet weak var balanceContainer: UIView!
     fileprivate var offerType: OfferType = .earn {
         didSet {
             setupFRCSections()
         }
     }
-    convenience init(core: Core) {
-        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
-        self.core = core
-        loadViewIfNeeded()
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let vc = segue.destination as? BalanceViewController {
+            vc.core = core
+        }
     }
+//    convenience init(core: Core) {
+//        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
+//        self.core = core
+//        loadViewIfNeeded()
+//    }
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -48,30 +50,32 @@ class OrdersViewController: UIViewController {
         setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
-        
-    
+
         let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
         navigationItem.leftBarButtonItem = closeItem
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
+                                                                          in: KinBundle.ecosystem.rawValue,
+                                                                          compatibleWith: nil),
+                                                           style: .plain) { [weak self] in self?.close() }
     }
     @objc func close() {
-        dismiss(animated: true, completion: nil)
+       navigationController?.popViewController(animated: true)
     }
     fileprivate func setupExtraViews() {
-        let bvc = BalanceViewController(core: core)
-        bvc.willMove(toParent: self)
-        bvc.view.translatesAutoresizingMaskIntoConstraints = false
-        balanceContainer.addSubview(bvc.view)
-        addChild(bvc)
-        bvc.didMove(toParent: self)
-        NSLayoutConstraint.activate([
-            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
-            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
-            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
-            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
-            ])
-        bvc.view.setNeedsLayout()
+//        let bvc = BalanceViewController(core: core)
+//        bvc.willMove(toParent: self)
+//        bvc.view.translatesAutoresizingMaskIntoConstraints = false
+//        balanceContainer.addSubview(bvc.view)
+//        addChild(bvc)
+//        bvc.didMove(toParent: self)
+//        NSLayoutConstraint.activate([
+//            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
+//            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
+//            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
+//            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
+//            ])
+//        bvc.view.setNeedsLayout()
         title = "my_kin".localized()
-
         let settingsIcon = UIImage(named: "KinNewSettingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         let settingsBarButton = UIBarButtonItem(image: settingsIcon,
                                                 landscapeImagePhone: nil,
@@ -178,6 +182,15 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
                 return
         }
         presentCoupon(for: order)
+    }
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 0
+    }
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        return nil
+    }
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return nil
     }
     
 }

@@ -26,6 +26,7 @@
                     <subviews>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="orx-UV-ApP">
                             <rect key="frame" x="0.0" y="298.5" width="50" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <fontDescription key="fontDescription" type="system" pointSize="20"/>
                             <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             <nil key="highlightedColor"/>
@@ -35,6 +36,7 @@
                         </label>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9UZ-hN-XIE" userLabel="Spacer">
                             <rect key="frame" x="50" y="298.5" width="275" height="50"/>
+                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         </view>
                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EJE-YY-uhe">
                             <rect key="frame" x="325" y="298.5" width="50" height="50"/>
@@ -43,6 +45,7 @@
                             <nil key="highlightedColor"/>
                         </label>
                     </subviews>
+                    <color key="backgroundColor" red="0.99683815239999995" green="0.98870593309999999" blue="0.3291935325" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                 </stackView>
             </subviews>
             <gestureRecognizers/>
@@ -53,7 +56,7 @@
                 <constraint firstItem="Rz9-MA-2Ly" firstAttribute="top" secondItem="u5a-gz-U7y" secondAttribute="top" id="rEi-Zx-gDz"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="u5a-gz-U7y"/>
-            <point key="canvasLocation" x="-39.200000000000003" y="31.934032983508249"/>
+            <point key="canvasLocation" x="-58" y="-7"/>
         </view>
     </objects>
 </document>

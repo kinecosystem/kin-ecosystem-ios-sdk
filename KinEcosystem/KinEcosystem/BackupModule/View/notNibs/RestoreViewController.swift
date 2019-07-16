@@ -66,7 +66,7 @@ class RestoreViewController: BRViewController {
             if let height = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height,
                 let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                 DispatchQueue.main.async {
-                    self?.bottomSpace.constant = height
+                    self?.bottomSpace.constant = height + 10
                     UIView.animate(withDuration: duration) {
                         self?.view.layoutIfNeeded()
                     }

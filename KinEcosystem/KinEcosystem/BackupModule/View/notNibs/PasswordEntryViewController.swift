@@ -75,14 +75,13 @@ class PasswordEntryViewController: BRViewController {
         confirmTick.layer.cornerRadius = 2.0
         doneButton.isEnabled = false
         tickImageView.isHidden = true
-
         setupTheming()
         Kin.track { try BackupCreatePasswordPageViewed() }
         kbObservers.append(NotificationCenter.default.addObserver(forName: UIResponder.keyboardWillShowNotification, object: nil, queue: nil) { [weak self] note in
             if let height = (note.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue.size.height,
                 let duration = note.userInfo?[UIResponder.keyboardAnimationDurationUserInfoKey] as? Double {
                 DispatchQueue.main.async {
-                    self?.bottomSpace.constant = height
+                    self?.bottomSpace.constant = height + 10
                     UIView.animate(withDuration: duration) {
                         self?.view.layoutIfNeeded()
                     }

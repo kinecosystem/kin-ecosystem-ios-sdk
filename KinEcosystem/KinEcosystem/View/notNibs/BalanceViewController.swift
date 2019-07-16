@@ -32,7 +32,6 @@ class BalanceViewController: KinViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupTheming()
         let lastBalance = Kin.shared.lastKnownBalance
         core.blockchain.balanceObservable.on(queue: .main, next: { [weak self] balance in
@@ -59,7 +58,6 @@ class BalanceViewController: KinViewController {
         guard let color = theme.balanceAmount.attributes[.foregroundColor] as? UIColor else {
             return .black
         }
-
         return color
     }
 }
