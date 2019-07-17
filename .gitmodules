@@ -7,9 +7,9 @@
 [submodule "KinEcosystem/Dependencies/kin-sdk-ios"]
 	path = KinEcosystem/Dependencies/kin-sdk-ios
 	url = https://github.com/kinecosystem/kin-sdk-ios.git
-[submodule "KinEcosystem/Dependencies/kin-util-ios"]
-	path = KinEcosystem/Dependencies/kin-util-ios
-	url = https://github.com/kinecosystem/kin-util-ios.git
 [submodule "KinEcosystem/Dependencies/kin-core-ios"]
 	path = KinEcosystem/Dependencies/kin-core-ios
 	url = https://github.com/kinecosystem/kin-core-ios.git
+[submodule "KinEcosystemSampleApp/Dependencies/JWT"]
+	path = KinEcosystemSampleApp/Dependencies/JWT
+	url = https://github.com/yourkarma/JWT.git
