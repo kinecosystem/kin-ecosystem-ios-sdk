@@ -225,36 +225,36 @@ extension UIView {
         self.init(withSize: radius*2, color: color)
         self.layer.cornerRadius = radius
     }
-    @IBInspectable public var borderColor:UIColor? {
-        get { return layer.borderColor != nil ? UIColor(cgColor: layer.shadowColor!) : nil }
-        set { layer.borderColor = newValue?.cgColor; setNeedsDisplay() }
-    }
-    @IBInspectable public var borderWidth:CGFloat {
-        get { return layer.borderWidth }
-        set { layer.borderWidth = newValue; setNeedsDisplay() }
-    }
-    @IBInspectable public var shadowUIColor:UIColor? {
-        get { return layer.shadowColor != nil ? UIColor(cgColor: layer.shadowColor!) : nil }
-        set { layer.shadowColor = newValue?.cgColor }
-    }
-    @IBInspectable public var shadowOffset:CGSize {
-        get { return layer.shadowOffset }
-        set { layer.shadowOffset = newValue }
-    }
-    @IBInspectable public var shadowOpacity:Float {
-        get { return layer.shadowOpacity }
-        set { layer.shadowOpacity = newValue }
-    }
-    @IBInspectable public var shadowRadius:CGFloat {
-        get { return layer.shadowRadius }
-        set { layer.shadowRadius = newValue }
-    }
-    @IBInspectable public var cornderRadius:CGFloat {
-        get { return layer.cornerRadius }
-        set { layer.cornerRadius = newValue.clamp(0, min(width,height) / 2.0 )
-            setNeedsDisplay()
-        }
-    }
+//    @IBInspectable public var borderColor:UIColor? {
+//        get { return layer.borderColor != nil ? UIColor(cgColor: layer.shadowColor!) : nil }
+//        set { layer.borderColor = newValue?.cgColor; setNeedsDisplay() }
+//    }
+//    @IBInspectable public var borderWidth:CGFloat {
+//        get { return layer.borderWidth }
+//        set { layer.borderWidth = newValue; setNeedsDisplay() }
+//    }
+//    @IBInspectable public var shadowUIColor:UIColor? {
+//        get { return layer.shadowColor != nil ? UIColor(cgColor: layer.shadowColor!) : nil }
+//        set { layer.shadowColor = newValue?.cgColor }
+//    }
+//    @IBInspectable public var shadowOffset:CGSize {
+//        get { return layer.shadowOffset }
+//        set { layer.shadowOffset = newValue }
+//    }
+//    @IBInspectable public var shadowOpacity:Float {
+//        get { return layer.shadowOpacity }
+//        set { layer.shadowOpacity = newValue }
+//    }
+//    @IBInspectable public var shadowRadius:CGFloat {
+//        get { return layer.shadowRadius }
+//        set { layer.shadowRadius = newValue }
+//    }
+//    @IBInspectable public var cornderRadius:CGFloat {
+//        get { return layer.cornerRadius }
+//        set { layer.cornerRadius = newValue.clamp(0, min(width,height) / 2.0 )
+//            setNeedsDisplay()
+//        }
+//    }
     public func setAssociatedData( key:inout String,value:Any) {
           objc_setAssociatedObject(self, &key, value, objc_AssociationPolicy.OBJC_ASSOCIATION_RETAIN_NONATOMIC)
     }
