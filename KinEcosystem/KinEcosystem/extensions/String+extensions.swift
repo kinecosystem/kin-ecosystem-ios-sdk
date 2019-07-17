@@ -17,14 +17,9 @@ public extension String {
     }
     func localized(_ fallback:String = "") -> String {
         let a = NSLocalizedString(self, tableName: nil, bundle: KinBundle.ecosystem.rawValue, value:"", comment: "")
-         let b = NSLocalizedString(self, tableName: "Localizable", bundle: KinBundle.ecosystem.rawValue, value:fallback, comment: "")
-        print(a,b)
-        return a
+        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.ecosystem.rawValue, value:fallback, comment: "")
+        return a != self ? a : b
     }
-//    func localized(_ fallback:String? = nil) -> String {
-//        let translated = NSLocalizedString(self, tableName: nil, bundle: KinBundle.ecosystem.rawValue, value: "", comment: "")
-//        return translated == self ? fallback ?? self : translated
-//    }
     func jwtJson() throws -> [String: Any] {
         let jwtComponents = components(separatedBy: ".")
         guard jwtComponents.count == 3 else {
