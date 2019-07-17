@@ -87,6 +87,10 @@ class QRViewController: BRViewController {
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
+                                                                          in: KinBundle.ecosystem.rawValue,
+                                                                          compatibleWith: nil),
+                                                           style: .plain) { [weak self] in self?.dismiss(animated: true, completion: nil) }
         
         navigationController?.setNavigationBarHidden(false, animated: true)
     }

@@ -69,11 +69,26 @@ class SettingsViewController: UITableViewController {
         tableView.separatorColor = .kinLightBlueGrey
         tableView.separatorInset = .zero
         tableView.tableFooterView = UIView()
+        
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
+                                                                          in: KinBundle.ecosystem.rawValue,
+                                                                          compatibleWith: nil),
+                                                           style: .plain) { [weak self] in
+                                                            
+                                                            self?.dismiss(animated: true, completion: nil)
+                                                            
+                                                            
+        }
+      
+        
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         tableView.reloadRows(at: [IndexPath(row: 0, section: 0)], with: .none)
+        
+        
     }
     
     // MARK: Table View
