@@ -16,8 +16,10 @@ public extension String {
         case invalidJSON
     }
     
-    func localized(_ args: CVarArg...) -> String {
-        return String(format: NSLocalizedString(self, tableName: nil, bundle: KinBundle.ecosystem.rawValue, value: "", comment: ""), arguments: args)
+    func localized(_ fallback:String = "") -> String {
+        let a = NSLocalizedString(self, tableName: nil, bundle: KinBundle.ecosystem.rawValue, value:"", comment: "")
+        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.ecosystem.rawValue, value:fallback, comment: "")
+        return a != self ? a : b
     }
     
     func jwtJson() throws -> [String: Any] {

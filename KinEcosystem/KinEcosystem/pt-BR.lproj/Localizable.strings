@@ -80,3 +80,11 @@
 "kinecosystem_move_kin_accept_message" = "Para mandar Kin, %@ precisa ter acesso à informação da sua conta Kin (o endereço público) de %@.";
 "kinecosystem_move_kin_accept_button_title" = "Eu Concordo";
 "kinecosystem_thisapp" = "este app";
+
+"whats_kin" = "O que é Kin?";
+"kin_is_a_digital_currency" = "Kin é uma moeda digital que faz os seus aplicativos melhores ainda.";
+"lets_go" = "Vamos lá";
+"what_are_you_in_the_mood_for" = "O que você está a fim de fazer?";
+"my_kin" = "Meu Kin";
+"balance" = "Saldo";
+
