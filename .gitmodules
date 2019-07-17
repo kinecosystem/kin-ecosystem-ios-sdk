@@ -1,0 +1,15 @@
+[submodule "KinEcosystem/Dependencies/kin-appreciation-module-options-menu-ios"]
+	path = KinEcosystem/Dependencies/kin-appreciation-module-options-menu-ios
+	url = https://github.com/kinecosystem/kin-appreciation-module-options-menu-ios.git
+[submodule "KinEcosystem/Dependencies/kin-migration-module-ios"]
+	path = KinEcosystem/Dependencies/kin-migration-module-ios
+	url = https://github.com/kinecosystem/kin-migration-module-ios.git
+[submodule "KinEcosystem/Dependencies/kin-sdk-ios"]
+	path = KinEcosystem/Dependencies/kin-sdk-ios
+	url = https://github.com/kinecosystem/kin-sdk-ios.git
+[submodule "KinEcosystem/Dependencies/kin-util-ios"]
+	path = KinEcosystem/Dependencies/kin-util-ios
+	url = https://github.com/kinecosystem/kin-util-ios.git
+[submodule "KinEcosystem/Dependencies/kin-core-ios"]
+	path = KinEcosystem/Dependencies/kin-core-ios
+	url = https://github.com/kinecosystem/kin-core-ios.git
