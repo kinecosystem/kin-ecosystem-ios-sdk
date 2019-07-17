@@ -13,3 +13,9 @@
 [submodule "KinEcosystemSampleApp/Dependencies/JWT"]
 	path = KinEcosystemSampleApp/Dependencies/JWT
 	url = https://github.com/yourkarma/JWT.git
+[submodule "KinEcosystem/Dependencies/CoreDataStack"]
+	path = KinEcosystem/Dependencies/CoreDataStack
+	url = https://github.com/ashevin/CoreDataStack.git
+[submodule "KinEcosystemSampleApp/Dependencies/HockeySDK-iOS"]
+	path = KinEcosystemSampleApp/Dependencies/HockeySDK-iOS
+	url = https://github.com/bitstadium/HockeySDK-iOS.git

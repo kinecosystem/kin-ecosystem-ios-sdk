@@ -11,6 +11,7 @@
 		9D35F3F122DEFD5100C4766C /* JWT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F3ED22DEFD2900C4766C /* JWT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		9D35F3F622DEFD8100C4766C /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */; };
 		9D35F3F722DEFD8100C4766C /* KinEcosystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		9D35F4F122DF04C000C4766C /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F4EC22DF04B400C4766C /* HockeySDK.framework */; };
 		E93F448A209A07DA00803FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F92320346A6200DD4B8E /* Assets.xcassets */; };
 		E942F91D20346A6200DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91C20346A6200DD4B8E /* AppDelegate.swift */; };
 		E942F91F20346A6200DD4B8E /* SampleAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91E20346A6200DD4B8E /* SampleAppViewController.swift */; };
@@ -44,6 +45,48 @@
 			remoteGlobalIDString = 04DEBCA21DBCDB8600C1DF52;
 			remoteInfo = JWT;
 		};
+		9D35F4E522DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1E5954F215B6F24A00A03429;
+			remoteInfo = HockeySDK;
+		};
+		9D35F4E722DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1E5A459016F0DFC200B55C04;
+			remoteInfo = HockeySDKTests;
+		};
+		9D35F4E922DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1E59550A15B6F45800A03429;
+			remoteInfo = HockeySDKResources;
+		};
+		9D35F4EB22DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1EB6173F1B0A30480035A986;
+			remoteInfo = "HockeySDK Framework";
+		};
+		9D35F4ED22DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 1EB617491B0A30480035A986;
+			remoteInfo = "HockeySDK FrameworkTests";
+		};
+		9D35F4EF22DF04B400C4766C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 803BB52A217EE85000BE92C9;
+			remoteInfo = "HockeySDK TestTarget";
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -64,6 +107,7 @@
 /* Begin PBXFileReference section */
 		9D35F3E722DEFD2900C4766C /* JWT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWT.xcodeproj; path = JWT/Framework/JWT.xcodeproj; sourceTree = "<group>"; };
 		9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HockeySDK.xcodeproj; path = "HockeySDK-iOS/Support/HockeySDK.xcodeproj"; sourceTree = "<group>"; };
 		E904414C2035662B00E3E261 /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E904414D2035662B00E3E261 /* KinSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E904414E2035662B00E3E261 /* StellarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StellarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -87,6 +131,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9D35F4F122DF04C000C4766C /* HockeySDK.framework in Frameworks */,
 				9D35F3F622DEFD8100C4766C /* KinEcosystem.framework in Frameworks */,
 				9D35F3F022DEFD5000C4766C /* JWT.framework in Frameworks */,
 			);
@@ -98,6 +143,7 @@
 		9D35F3E622DEFCD100C4766C /* Dependencies */ = {
 			isa = PBXGroup;
 			children = (
+				9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */,
 				9D35F3E722DEFD2900C4766C /* JWT.xcodeproj */,
 			);
 			path = Dependencies;
@@ -108,6 +154,19 @@
 			children = (
 				9D35F3ED22DEFD2900C4766C /* JWT.framework */,
 				9D35F3EF22DEFD2900C4766C /* libJWT.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		9D35F4DB22DF04B300C4766C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				9D35F4E622DF04B400C4766C /* libHockeySDK.a */,
+				9D35F4E822DF04B400C4766C /* HockeySDKTests.xctest */,
+				9D35F4EA22DF04B400C4766C /* HockeySDKResources.bundle */,
+				9D35F4EC22DF04B400C4766C /* HockeySDK.framework */,
+				9D35F4EE22DF04B400C4766C /* HockeySDK FrameworkTests.xctest */,
+				9D35F4F022DF04B400C4766C /* HockeySDK TestTarget.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -211,6 +270,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = 9D35F4DB22DF04B300C4766C /* Products */;
+					ProjectRef = 9D35F4DA22DF04B300C4766C /* HockeySDK.xcodeproj */;
+				},
+				{
 					ProductGroup = 9D35F3E822DEFD2900C4766C /* Products */;
 					ProjectRef = 9D35F3E722DEFD2900C4766C /* JWT.xcodeproj */;
 				},
@@ -235,6 +298,48 @@
 			fileType = archive.ar;
 			path = libJWT.a;
 			remoteRef = 9D35F3EE22DEFD2900C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4E622DF04B400C4766C /* libHockeySDK.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libHockeySDK.a;
+			remoteRef = 9D35F4E522DF04B400C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4E822DF04B400C4766C /* HockeySDKTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HockeySDKTests.xctest;
+			remoteRef = 9D35F4E722DF04B400C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4EA22DF04B400C4766C /* HockeySDKResources.bundle */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = HockeySDKResources.bundle;
+			remoteRef = 9D35F4E922DF04B400C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4EC22DF04B400C4766C /* HockeySDK.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = HockeySDK.framework;
+			remoteRef = 9D35F4EB22DF04B400C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4EE22DF04B400C4766C /* HockeySDK FrameworkTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = "HockeySDK FrameworkTests.xctest";
+			remoteRef = 9D35F4ED22DF04B400C4766C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		9D35F4F022DF04B400C4766C /* HockeySDK TestTarget.app */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.application;
+			path = "HockeySDK TestTarget.app";
+			remoteRef = 9D35F4EF22DF04B400C4766C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
