@@ -103,9 +103,7 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         
     }
     override func viewWillAppear(_ animated:  Bool) {
-//        if uiState != .disabled {
-//            uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
-//        }
+
     }
     func alertConfigIssue() {
         presentAlert("Config Missing", body: "an app id and app key (or a jwt) is required in order to use the sample app. Please refer to the readme in the sample app repo for more information")
