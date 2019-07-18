@@ -108,10 +108,10 @@ class PasswordEntryViewController: BRViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
-                                                                          in: KinBundle.ecosystem.rawValue,
-                                                                          compatibleWith: nil),
-                                                           style: .plain) { [weak self] in self?.dismiss(animated: true, completion:nil) }
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
+//                                                                          in: KinBundle.ecosystem.rawValue,
+//                                                                          compatibleWith: nil),
+//                                                           style: .plain) { [weak self] in self?.dismiss(animated: true, completion:nil) }
     }
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
