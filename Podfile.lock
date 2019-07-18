@@ -5,12 +5,12 @@ PODS:
   - HockeySDK/DefaultLib (5.1.4)
   - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
-  - KinAppreciationModuleOptionsMenu (0.0.1)
+  - KinAppreciationModuleOptionsMenu (0.0.3)
   - KinCoreSDK (0.8.0):
     - Sodium (= 0.8.0)
     - StellarKit (= 0.4.0)
-  - KinEcosystem (1.2.1):
-    - KinAppreciationModuleOptionsMenu (= 0.0.1)
+  - KinEcosystem (1.2.4):
+    - KinAppreciationModuleOptionsMenu (= 0.0.3)
     - KinMigrationModule (= 0.1.0)
     - SimpleCoreDataStack (= 0.1.6)
   - KinMigrationModule (0.1.0):
@@ -31,7 +31,7 @@ PODS:
 DEPENDENCIES:
   - HockeySDK
   - JWT (= 3.0.0-beta.11)
-  - KinAppreciationModuleOptionsMenu
+  - KinAppreciationModuleOptionsMenu (= 0.0.3)
   - KinEcosystem (from `./`)
   - KinMigrationModule
   - SimpleCoreDataStack
@@ -59,9 +59,9 @@ SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
-  KinAppreciationModuleOptionsMenu: 1bc3bffa9907d1b5e288ea52afe618034641ff14
+  KinAppreciationModuleOptionsMenu: b974352c0b04cccffc30114da505a82040af2af5
   KinCoreSDK: 419f6736c8aefcc0aef8ad45fa9032890ae6672e
-  KinEcosystem: 349ec483e56c418d82e8cfa5b97ffca4f3e463bd
+  KinEcosystem: aa8b76251e7c5de7340f79b57e40abfb81288517
   KinMigrationModule: 0f14c64bfb6e1046bd137ab829264223c20905ec
   KinSDK: 24cbb5cf8b560c6025eacabc1b5aebbe5938c141
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
@@ -70,6 +70,6 @@ SPEC CHECKSUMS:
   StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
   StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
 
-PODFILE CHECKSUM: 570bcbbb0fa47d5b85631e43b525d9fe7cb07a6a
+PODFILE CHECKSUM: 82a405058e613d4d0ad4c5251595e49045b04bcb
 
 COCOAPODS: 1.7.4
