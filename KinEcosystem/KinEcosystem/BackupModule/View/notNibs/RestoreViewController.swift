@@ -92,7 +92,13 @@ class RestoreViewController: BRViewController {
 
         passwordInput.becomeFirstResponder()
     }
-    
+    override func viewWillAppear(_ animated: Bool) {
+        
+//        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
+//                                                                          in: KinBundle.ecosystem.rawValue,
+//                                                                          compatibleWith: nil),
+//                                                           style: .plain) { [weak self] in self?.dismiss(animated: true, completion:nil) }
+    }
     @IBAction func passwordInputChanges(_ sender: PasswordEntryField) {
         if sender.entryState == .invalid {
             sender.entryState = .idle
