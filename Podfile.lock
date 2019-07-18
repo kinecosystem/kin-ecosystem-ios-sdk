@@ -1,0 +1,26 @@
+PODS:
+  - Base64 (1.1.2)
+  - HockeySDK (5.1.4):
+    - HockeySDK/DefaultLib (= 5.1.4)
+  - HockeySDK/DefaultLib (5.1.4)
+  - JWT (3.0.0-beta.11):
+    - Base64 (~> 1.1.2)
+
+DEPENDENCIES:
+  - HockeySDK
+  - JWT (= 3.0.0-beta.11)
+
+SPEC REPOS:
+  https://github.com/cocoapods/specs.git:
+    - Base64
+    - HockeySDK
+    - JWT
+
+SPEC CHECKSUMS:
+  Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
+  HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
+  JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
+
+PODFILE CHECKSUM: 8dc54949f888462e694ebd33f5809cebb0bf4beb
+
+COCOAPODS: 1.7.4

@@ -7,12 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		09923B6A650CF9B5E8689103 /* Pods_EcosystemSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 73E6F369CDF88C497923F6E2 /* Pods_EcosystemSampleApp.framework */; };
 		9D35F3F622DEFD8100C4766C /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */; };
 		9D35F3F722DEFD8100C4766C /* KinEcosystem.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9D78E57022E05564003FFF17 /* JWT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D78E56D22E05544003FFF17 /* JWT.framework */; };
-		9D78E57122E05564003FFF17 /* JWT.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D78E56D22E05544003FFF17 /* JWT.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		9D78E57422E0556C003FFF17 /* HockeySDK.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9D78E56222E0551A003FFF17 /* HockeySDK.framework */; };
-		9D78E57522E0556C003FFF17 /* HockeySDK.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9D78E56222E0551A003FFF17 /* HockeySDK.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		E93F448A209A07DA00803FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F92320346A6200DD4B8E /* Assets.xcassets */; };
 		E942F91D20346A6200DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91C20346A6200DD4B8E /* AppDelegate.swift */; };
 		E942F91F20346A6200DD4B8E /* SampleAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91E20346A6200DD4B8E /* SampleAppViewController.swift */; };
@@ -24,79 +21,6 @@
 		E9FE48B3214E7BA000DD6CE9 /* TargetUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9FE48B2214E7BA000DD6CE9 /* TargetUserViewController.swift */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		9D78E55B22E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1E5954F215B6F24A00A03429;
-			remoteInfo = HockeySDK;
-		};
-		9D78E55D22E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1E5A459016F0DFC200B55C04;
-			remoteInfo = HockeySDKTests;
-		};
-		9D78E55F22E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1E59550A15B6F45800A03429;
-			remoteInfo = HockeySDKResources;
-		};
-		9D78E56122E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1EB6173F1B0A30480035A986;
-			remoteInfo = "HockeySDK Framework";
-		};
-		9D78E56322E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 1EB617491B0A30480035A986;
-			remoteInfo = "HockeySDK FrameworkTests";
-		};
-		9D78E56522E0551A003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 803BB52A217EE85000BE92C9;
-			remoteInfo = "HockeySDK TestTarget";
-		};
-		9D78E56C22E05544003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E56722E05544003FFF17 /* JWT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 04DEBCA31DBCDB8600C1DF52;
-			remoteInfo = JWT;
-		};
-		9D78E56E22E05544003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E56722E05544003FFF17 /* JWT.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = 045146681D5E2A78007B1D7A;
-			remoteInfo = "JWT-iOS-Static";
-		};
-		9D78E57222E05564003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E56722E05544003FFF17 /* JWT.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 04DEBCA21DBCDB8600C1DF52;
-			remoteInfo = JWT;
-		};
-		9D78E57622E0556C003FFF17 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = 1EB6173E1B0A30480035A986;
-			remoteInfo = "HockeySDK Framework";
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXCopyFilesBuildPhase section */
 		9D35F3F422DEFD5100C4766C /* Embed Frameworks */ = {
 			isa = PBXCopyFilesBuildPhase;
@@ -104,9 +28,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				9D78E57122E05564003FFF17 /* JWT.framework in Embed Frameworks */,
 				9D35F3F722DEFD8100C4766C /* KinEcosystem.framework in Embed Frameworks */,
-				9D78E57522E0556C003FFF17 /* HockeySDK.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -114,9 +36,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		20335D6F3EA076F2BCDE62CB /* Pods-EcosystemSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.release.xcconfig"; path = "Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.release.xcconfig"; sourceTree = "<group>"; };
+		73E6F369CDF88C497923F6E2 /* Pods_EcosystemSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EcosystemSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = HockeySDK.xcodeproj; path = "HockeySDK-iOS/Support/HockeySDK.xcodeproj"; sourceTree = "<group>"; };
-		9D78E56722E05544003FFF17 /* JWT.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = JWT.xcodeproj; path = JWT/Framework/JWT.xcodeproj; sourceTree = "<group>"; };
+		B9B4FE4001B46F51C944C683 /* Pods-EcosystemSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.debug.xcconfig"; path = "Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
 		E904414C2035662B00E3E261 /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E904414D2035662B00E3E261 /* KinSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E904414E2035662B00E3E261 /* StellarKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = StellarKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -140,54 +63,32 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9D78E57022E05564003FFF17 /* JWT.framework in Frameworks */,
 				9D35F3F622DEFD8100C4766C /* KinEcosystem.framework in Frameworks */,
-				9D78E57422E0556C003FFF17 /* HockeySDK.framework in Frameworks */,
+				09923B6A650CF9B5E8689103 /* Pods_EcosystemSampleApp.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9D35F3E622DEFCD100C4766C /* Dependencies */ = {
+		52A54FDF333415963334D4F2 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				9D78E56722E05544003FFF17 /* JWT.xcodeproj */,
-				9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */,
+				B9B4FE4001B46F51C944C683 /* Pods-EcosystemSampleApp.debug.xcconfig */,
+				20335D6F3EA076F2BCDE62CB /* Pods-EcosystemSampleApp.release.xcconfig */,
 			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
-		9D78E55122E05519003FFF17 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9D78E55C22E0551A003FFF17 /* libHockeySDK.a */,
-				9D78E55E22E0551A003FFF17 /* HockeySDKTests.xctest */,
-				9D78E56022E0551A003FFF17 /* HockeySDKResources.bundle */,
-				9D78E56222E0551A003FFF17 /* HockeySDK.framework */,
-				9D78E56422E0551A003FFF17 /* HockeySDK FrameworkTests.xctest */,
-				9D78E56622E0551A003FFF17 /* HockeySDK TestTarget.app */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		9D78E56822E05544003FFF17 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				9D78E56D22E05544003FFF17 /* JWT.framework */,
-				9D78E56F22E05544003FFF17 /* libJWT.a */,
-			);
-			name = Products;
+			name = Pods;
+			path = ../Pods;
 			sourceTree = "<group>";
 		};
 		E942F91020346A6200DD4B8E = {
 			isa = PBXGroup;
 			children = (
 				9D35F3F522DEFD8100C4766C /* KinEcosystem.framework */,
-				9D35F3E622DEFCD100C4766C /* Dependencies */,
 				E942F91B20346A6200DD4B8E /* EcosystemSampleApp */,
 				E942F91A20346A6200DD4B8E /* Products */,
 				E942F94820346B7000DD4B8E /* Frameworks */,
+				52A54FDF333415963334D4F2 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -222,6 +123,7 @@
 				E904414C2035662B00E3E261 /* CoreDataStack.framework */,
 				E904414D2035662B00E3E261 /* KinSDK.framework */,
 				E904414E2035662B00E3E261 /* StellarKit.framework */,
+				73E6F369CDF88C497923F6E2 /* Pods_EcosystemSampleApp.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -233,16 +135,17 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = E942F92B20346A6200DD4B8E /* Build configuration list for PBXNativeTarget "EcosystemSampleApp" */;
 			buildPhases = (
+				BBDA5AA35B32C1EFE4CF5946 /* [CP] Check Pods Manifest.lock */,
 				E942F91520346A6200DD4B8E /* Sources */,
 				E942F91620346A6200DD4B8E /* Frameworks */,
 				E942F91720346A6200DD4B8E /* Resources */,
 				9D35F3F422DEFD5100C4766C /* Embed Frameworks */,
+				110E42FD44E78A1059CC3288 /* [CP] Embed Pods Frameworks */,
+				F12E2559F6C8F8FBA0CEE6BD /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				9D78E57322E05564003FFF17 /* PBXTargetDependency */,
-				9D78E57722E0556C003FFF17 /* PBXTargetDependency */,
 			);
 			name = EcosystemSampleApp;
 			productName = EcosystemSampleApp;
@@ -278,81 +181,12 @@
 			mainGroup = E942F91020346A6200DD4B8E;
 			productRefGroup = E942F91A20346A6200DD4B8E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = 9D78E55122E05519003FFF17 /* Products */;
-					ProjectRef = 9D78E55022E05519003FFF17 /* HockeySDK.xcodeproj */;
-				},
-				{
-					ProductGroup = 9D78E56822E05544003FFF17 /* Products */;
-					ProjectRef = 9D78E56722E05544003FFF17 /* JWT.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				E942F91820346A6200DD4B8E /* EcosystemSampleApp */,
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		9D78E55C22E0551A003FFF17 /* libHockeySDK.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libHockeySDK.a;
-			remoteRef = 9D78E55B22E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E55E22E0551A003FFF17 /* HockeySDKTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = HockeySDKTests.xctest;
-			remoteRef = 9D78E55D22E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56022E0551A003FFF17 /* HockeySDKResources.bundle */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = HockeySDKResources.bundle;
-			remoteRef = 9D78E55F22E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56222E0551A003FFF17 /* HockeySDK.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = HockeySDK.framework;
-			remoteRef = 9D78E56122E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56422E0551A003FFF17 /* HockeySDK FrameworkTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = "HockeySDK FrameworkTests.xctest";
-			remoteRef = 9D78E56322E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56622E0551A003FFF17 /* HockeySDK TestTarget.app */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.application;
-			path = "HockeySDK TestTarget.app";
-			remoteRef = 9D78E56522E0551A003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56D22E05544003FFF17 /* JWT.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = JWT.framework;
-			remoteRef = 9D78E56C22E05544003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		9D78E56F22E05544003FFF17 /* libJWT.a */ = {
-			isa = PBXReferenceProxy;
-			fileType = archive.ar;
-			path = libJWT.a;
-			remoteRef = 9D78E56E22E05544003FFF17 /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		E942F91720346A6200DD4B8E /* Resources */ = {
@@ -368,6 +202,69 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		110E42FD44E78A1059CC3288 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh",
+				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
+				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		BBDA5AA35B32C1EFE4CF5946 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-EcosystemSampleApp-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		F12E2559F6C8F8FBA0CEE6BD /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-resources.sh",
+				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		E942F91520346A6200DD4B8E /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -382,19 +279,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		9D78E57322E05564003FFF17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = JWT;
-			targetProxy = 9D78E57222E05564003FFF17 /* PBXContainerItemProxy */;
-		};
-		9D78E57722E0556C003FFF17 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = "HockeySDK Framework";
-			targetProxy = 9D78E57622E0556C003FFF17 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		E942F92020346A6200DD4B8E /* Main.storyboard */ = {
@@ -534,6 +418,7 @@
 		};
 		E942F92C20346A6200DD4B8E /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = B9B4FE4001B46F51C944C683 /* Pods-EcosystemSampleApp.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -555,6 +440,7 @@
 		};
 		E942F92D20346A6200DD4B8E /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20335D6F3EA076F2BCDE62CB /* Pods-EcosystemSampleApp.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
