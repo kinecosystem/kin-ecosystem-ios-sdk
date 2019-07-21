@@ -7,6 +7,40 @@
 
 import KinMigrationModule
 
+
+extension UIView {
+    var x: CGFloat {
+        get {
+            return self.frame.origin.x
+        }
+        set (value){
+            self.frame=CGRect(x: value, y: self.frame.origin.y, width: self.frame.size.width, height: self.frame.size.height)
+        }
+    }
+
+    var y: CGFloat {
+        get {
+            return self.frame.origin.y
+        }
+        set(value) {
+            self.frame=CGRect(x: self.frame.origin.x, y: value, width: self.frame.size.width, height: self.frame.size.height)
+        }
+    }
+
+    var width: CGFloat {
+        get {
+            return self.frame.size.width
+        }
+        set (value){
+            self.frame=CGRect(x: self.frame.origin.x, y: self.frame.origin.y, width: value, height: self.frame.size.height)
+        }
+    }
+
+    var height: CGFloat {
+        get { return frame.size.height }
+        set(value) { frame=CGRect(x: frame.origin.x, y: frame.origin.y, width: frame.width, height:value)}
+    }
+}
 @available(iOS 9.0, *)
 class BalanceView: UIView {
     let themeLinkBag = LinkBag()
@@ -48,9 +82,9 @@ class BalanceView: UIView {
     }
     override func layoutSubviews() {
         super.layoutSubviews()
-        label.center = boundsCenter
+        label.center = CGPoint(x:self.bounds.midX,y:self.bounds.midY)
         label.x = label.x + kinView.width / 2.0
-        kinView.center = boundsCenter
+        kinView.center = CGPoint(x:self.bounds.midX,y:self.bounds.midY)
         kinView.x = label.x - kinView.frame.width - 2
     }
     func updateBalanceLabel() {

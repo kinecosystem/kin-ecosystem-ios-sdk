@@ -7,7 +7,6 @@
 
 import Foundation
 
-
 public extension String {
     
     enum JwtJSONDecodeError: Error {
@@ -17,8 +16,9 @@ public extension String {
     }
     
     func localized(_ fallback:String = "") -> String {
-        let a = NSLocalizedString(self, tableName: nil, bundle: KinBundle.ecosystem.rawValue, value:"", comment: "")
-        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.ecosystem.rawValue, value:fallback, comment: "")
+        let s = "./\(Locale(identifier: Locale.preferredLanguages.first!).identifier).lproj/Localizable"
+        let a = NSLocalizedString(self, tableName:s, bundle: KinBundle.localization.rawValue, value: "", comment: "")
+        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.localization.rawValue, value: fallback, comment: "")
         return a != self ? a : b
     }
     
@@ -27,8 +27,7 @@ public extension String {
         guard jwtComponents.count == 3 else {
             throw JwtJSONDecodeError.invalidParts
         }
-        return ["header": try decodeJWTComponent(jwtComponents[0]),
-                "body": try decodeJWTComponent(jwtComponents[1])]
+        return ["header": try decodeJWTComponent(jwtComponents[0]), "body": try decodeJWTComponent(jwtComponents[1])]
     }
     
     private func decodeBase64(_ url: String) -> Data? {
@@ -42,8 +41,7 @@ public extension String {
         }
         return Data(base64Encoded: base64, options: .ignoreUnknownCharacters)
     }
-    
-    
+
     private func decodeJWTComponent(_ value: String) throws -> [String: Any] {
         guard let bodyData = decodeBase64(value) else {
             throw JwtJSONDecodeError.invalidBase64Url

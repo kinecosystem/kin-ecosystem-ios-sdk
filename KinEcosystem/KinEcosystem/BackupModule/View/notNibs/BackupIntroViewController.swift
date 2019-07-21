@@ -28,7 +28,6 @@ class BackupIntroViewController: ExplanationTemplateViewController {
 
     override func applyTheme(_ theme: Theme) {
         super.applyTheme(theme)
-
         imageView.image = UIImage(named: "safeIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         titleLabel.attributedText = "kinecosystem_backup_intro_title".localized().styled(as: theme.title20)
         descriptionLabel.attributedText = "kinecosystem_backup_intro_description".localized().styled(as: theme.subtitle14)

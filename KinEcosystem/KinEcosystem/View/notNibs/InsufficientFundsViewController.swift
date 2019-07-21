@@ -22,11 +22,7 @@ class InsufficientFundsViewController: UIViewController {
         setupTheming()
         Kin.track { try NotEnoughKinPageViewed() }
 
-        let balanceView = BalanceView()
-        balanceView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(balanceView)
-        cancelButton.centerYAnchor.constraint(equalTo: balanceView.centerYAnchor).isActive = true
-        view.centerXAnchor.constraint(equalTo: balanceView.centerXAnchor).isActive = true
+        
     }
 
     @IBAction func goTapped(_ sender: Any) {
