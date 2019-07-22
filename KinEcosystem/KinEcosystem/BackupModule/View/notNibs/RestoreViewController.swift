@@ -91,6 +91,7 @@ class RestoreViewController: BRViewController {
         }
 
         passwordInput.becomeFirstResponder()
+        instructionsLabel.text = "restore_wallet_email_description".localized()
     }
     override func viewWillAppear(_ animated: Bool) {
         
@@ -138,6 +139,8 @@ class RestoreViewController: BRViewController {
                 self.instructionsLabel.attributedText = "kinecosystem_restore_done"
                     .localized()
                     .styled(as: self.theme.subtitle12)
+
+                self.doneButton.setTitle("", for: .normal)
                 sender.transitionToConfirmed {
                     self.delegate?.restoreViewControllerDidComplete(self)
                 }

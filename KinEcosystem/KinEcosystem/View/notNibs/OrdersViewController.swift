@@ -51,16 +51,13 @@ class OrdersViewController: UIViewController {
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
 
-        let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
-        navigationItem.leftBarButtonItem = closeItem
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
-                                                                          in: KinBundle.ecosystem.rawValue,
-                                                                          compatibleWith: nil),
-                                                           style: .plain) { [weak self] in self?.close() }
+        let backItem =  UIBarButtonItem(image: UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil), style: .plain) { [weak self] in /*self?.close()*/}
+        navigationItem.leftBarButtonItem  = nil
+        navigationItem.backBarButtonItem = backItem
+        navigationItem.backBarButtonItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
     }
-    @objc func close() {
-       navigationController?.popViewController(animated: true)
-    }
+
     fileprivate func setupExtraViews() {
 //        let bvc = BalanceViewController(core: core)
 //        bvc.willMove(toParent: self)
