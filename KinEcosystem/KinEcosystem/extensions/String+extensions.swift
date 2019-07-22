@@ -18,8 +18,8 @@ public extension String {
     
     func localized(_ fallback:String = "") -> String {
         let path = "./\(Locale(identifier: Locale.preferredLanguages.first!).identifier).lproj/Localizable"
-        let a = NSLocalizedString(self, tableName:path, bundle: KinBundle.localization.rawValue, value: "", comment: "")
-        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.localization.rawValue, value: fallback, comment: "")
+        let a = NSLocalizedString(self, tableName:path, bundle: KinBundle.ecosystem.rawValue, value: "", comment: "")
+        let b = NSLocalizedString(self, tableName: "./en.lproj/Localizable", bundle: KinBundle.ecosystem.rawValue, value: fallback, comment: "")
         return a != self ? a : b
     }
     

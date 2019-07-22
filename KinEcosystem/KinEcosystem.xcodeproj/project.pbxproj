@@ -17,7 +17,6 @@
 		13AC3B2FD1EF66F47DB67573 /* migration_BC_version_check_failed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 40F23B163DF520E4C8141653 /* migration_BC_version_check_failed.swift */; };
 		171514926EC55A067C1AEEC8 /* backup_welcome_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7833AAC14DE38F6A98312A0C /* backup_welcome_page_viewed.swift */; };
 		1B94E7D4FDFFEE06B3BCDA31 /* order_history_item_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 202AB21509750816E41036C4 /* order_history_item_tapped.swift */; };
-		1FBF9066F5C66CFFFF49A8C7 /* Pods_KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 964569D1D5AEDBAA44A222EC /* Pods_KinEcosystem.framework */; };
 		21444364B59BBF97F014615F /* error_message_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = D2BCBE56AE920914E4A5D764 /* error_message_close_tapped.swift */; };
 		21556B5F45EBCA4F64E9503A /* spend_order_completed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63D790CE0DB5E840FDEC72F3 /* spend_order_completed.swift */; };
 		22DA98744E708BF74AFC5426 /* restore_upload_qr_code_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3957719090F337AEF7D2D32F /* restore_upload_qr_code_page_viewed.swift */; };
@@ -41,9 +40,10 @@
 		51B54A6E119B402144E7F56C /* client.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A25D28B73F36ED5AEEC2989 /* client.swift */; };
 		5613636A9762FED42EFDC600 /* backup_start_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 16D80559E5834554EA920218 /* backup_start_button_tapped.swift */; };
 		5625EFEDB113CF783312CA7C /* types.swift in Sources */ = {isa = PBXBuildFile; fileRef = 39D549E94942F4C660F0C578 /* types.swift */; };
-		5C538D69B0651199D9811429 /* Pods_KinEcosystemTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B5942817EC69B5166EA107D7 /* Pods_KinEcosystemTests.framework */; };
 		5D68D1AB00EB3205B9466781 /* user_login_requested.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA5618A88C439707E789550C /* user_login_requested.swift */; };
+		5E19C8F809FD8094C93AF3FF /* libPods-KinEcosystemTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B229FF7708579A238BC2E56D /* libPods-KinEcosystemTests.a */; };
 		5EEE53E05A25289FF5CE3A72 /* backup_create_password_back_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB423AE008514970870EF4AD /* backup_create_password_back_button_tapped.swift */; };
+		6008677E16F3099DD7E8A13A /* libPods-KinEcosystem.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 53C98D8789507AED9B58C8DE /* libPods-KinEcosystem.a */; };
 		64A594282664F82FCAE2D162 /* page_close_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3AEBB05A86ADE047F9539994 /* page_close_tapped.swift */; };
 		6831950122CCEA7F00EC2DDF /* UIDevice+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950022CCEA7F00EC2DDF /* UIDevice+extensions.swift */; };
 		6831950322CCEACA00EC2DDF /* Promise+extenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6831950222CCEACA00EC2DDF /* Promise+extenstions.swift */; };
@@ -316,6 +316,7 @@
 		49A3470E57A8ECA430A253D6 /* migration_request_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = migration_request_failed.swift; sourceTree = "<group>"; };
 		4BE3451EC8CA38C9F9302CD4 /* not_enough_kin_continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = not_enough_kin_continue_button_tapped.swift; sourceTree = "<group>"; };
 		4D29DCF0F587AF2730BDC35C /* empty_main_page_back_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = empty_main_page_back_tapped.swift; sourceTree = "<group>"; };
+		53C98D8789507AED9B58C8DE /* libPods-KinEcosystem.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinEcosystem.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_thankyou_page_viewed.swift; sourceTree = "<group>"; };
 		57B8A3FA39899A6E5A825A10 /* spend_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_order_creation_requested.swift; sourceTree = "<group>"; };
 		59265E55135519EB11B5BAE6 /* earn_order_completion_submitted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_completion_submitted.swift; sourceTree = "<group>"; };
@@ -393,7 +394,6 @@
 		91A4EA8720CFB22E00C3399F /* KinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinViewController.swift; sourceTree = "<group>"; };
 		91BE2223A7635DDCB2CF8293 /* redeem_url_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = redeem_url_tapped.swift; sourceTree = "<group>"; };
 		94646D603623546C68ED1B01 /* main_page_back_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = main_page_back_tapped.swift; sourceTree = "<group>"; };
-		964569D1D5AEDBAA44A222EC /* Pods_KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		993B2CD5A03DAA27CAF01A52 /* earn_order_creation_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_failed.swift; sourceTree = "<group>"; };
 		99664C759CF6366938599F0F /* backup_qr_code_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_qr_code_back_button_tapped.swift; sourceTree = "<group>"; };
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
@@ -411,8 +411,8 @@
 		A9E4F7E6ACEB41360EB6C612 /* spend_order_completion_submitted.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_order_completion_submitted.swift; sourceTree = "<group>"; };
 		AF53897AE38FF2ACB4323E2B /* welcome_screen_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = welcome_screen_button_tapped.swift; sourceTree = "<group>"; };
 		B197A270B0B2698CAB27FEBB /* Pods-KinEcosystem.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinEcosystem.release.xcconfig"; path = "Target Support Files/Pods-KinEcosystem/Pods-KinEcosystem.release.xcconfig"; sourceTree = "<group>"; };
+		B229FF7708579A238BC2E56D /* libPods-KinEcosystemTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-KinEcosystemTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		B380A0DFB07B0294EDCACD88 /* welcome_screen_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = welcome_screen_page_viewed.swift; sourceTree = "<group>"; };
-		B5942817EC69B5166EA107D7 /* Pods_KinEcosystemTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_KinEcosystemTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B69592807A6133B91CE3D7E2 /* Pods-KinEcosystem-KinEcosystemTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-KinEcosystem-KinEcosystemTests.debug.xcconfig"; path = "Target Support Files/Pods-KinEcosystem-KinEcosystemTests/Pods-KinEcosystem-KinEcosystemTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B8BEE41F072C4751472864B9 /* general_ecosystem_sdk_error.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = general_ecosystem_sdk_error.swift; sourceTree = "<group>"; };
 		BB423AE008514970870EF4AD /* backup_create_password_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_create_password_back_button_tapped.swift; sourceTree = "<group>"; };
@@ -569,7 +569,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				1FBF9066F5C66CFFFF49A8C7 /* Pods_KinEcosystem.framework in Frameworks */,
+				6008677E16F3099DD7E8A13A /* libPods-KinEcosystem.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -578,7 +578,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */,
-				5C538D69B0651199D9811429 /* Pods_KinEcosystemTests.framework in Frameworks */,
+				5E19C8F809FD8094C93AF3FF /* libPods-KinEcosystemTests.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -823,8 +823,8 @@
 				913793DB22D370AD00C07E76 /* KinEcosystem.framework */,
 				E98D17562047FD6100FEB57A /* KinUtil.framework */,
 				E942F94E2034751000DD4B8E /* CoreData.framework */,
-				964569D1D5AEDBAA44A222EC /* Pods_KinEcosystem.framework */,
-				B5942817EC69B5166EA107D7 /* Pods_KinEcosystemTests.framework */,
+				53C98D8789507AED9B58C8DE /* libPods-KinEcosystem.a */,
+				B229FF7708579A238BC2E56D /* libPods-KinEcosystemTests.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -1120,6 +1120,7 @@
 				E96F24D5201729690017EF68 /* Frameworks */,
 				E96F24D6201729690017EF68 /* Headers */,
 				E96F24D7201729690017EF68 /* Resources */,
+				9D6CE6E51633B683AC1E1DE2 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1138,7 +1139,7 @@
 				E96F24DE201729690017EF68 /* Sources */,
 				E96F24DF201729690017EF68 /* Frameworks */,
 				E96F24E0201729690017EF68 /* Resources */,
-				A6D7FCD6AAE21B66EC20DBC3 /* [CP] Embed Pods Frameworks */,
+				0D6CCE7D8A67F7C4F197F5BA /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -1253,6 +1254,28 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		0D6CCE7D8A67F7C4F197F5BA /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-resources.sh",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		3B1B615FFF7E34755F6363EC /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1275,38 +1298,26 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A6D7FCD6AAE21B66EC20DBC3 /* [CP] Embed Pods Frameworks */ = {
+		9D6CE6E51633B683AC1E1DE2 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
-				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleCoreDataStack/CoreDataStack.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework",
+				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystem/Pods-KinEcosystem-resources.sh",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
 			);
-			name = "[CP] Embed Pods Frameworks";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinUtil.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreDataStack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarErrors.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarKit.framework",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-frameworks.sh\"\n";
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-KinEcosystem/Pods-KinEcosystem-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		F7620D7E4A61ED46ADB246FF /* [CP] Check Pods Manifest.lock */ = {
