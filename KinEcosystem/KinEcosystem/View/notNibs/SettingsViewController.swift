@@ -55,9 +55,9 @@ class SettingsViewController: UITableViewController {
         tableView.separatorColor = .kinLightBlueGrey
         tableView.separatorInset = .zero
         tableView.tableFooterView = UIView()
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil),style: .plain) { [weak self] in
-            self?.navigationController?.popViewController(animated: true)
-        }
+
+        navigationItem.leftBarButtonItems = nil
+        navigationItem.backBarButtonItem =  UIBarButtonItem(image: UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil), style: .plain) { [weak self] in /*self?.close()*/}
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
