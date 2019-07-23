@@ -212,6 +212,7 @@
 				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-resources.sh",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Localizable.strings",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
 				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
 				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/arrowRight.imageset/arrowRight.pdf",
@@ -354,6 +355,7 @@
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/arrowRight.pdf",
@@ -420,7 +422,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PasswordEntryViewController.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRViewController.nib",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RestoreViewController.nib",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec Medium.otf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Storyboard.storyboardc",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BalanceViewController.nib",
