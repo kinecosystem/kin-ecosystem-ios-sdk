@@ -87,6 +87,15 @@ public class Kin: NSObject {
     fileprivate var sendKinController: SendKinController!
 
     public var isLoggedIn: Bool { return UserDefaults.standard.string(forKey: KinPreferenceKey.lastSignedInUser.rawValue) != nil }
+    var hasSeenTransfer: Bool {
+        get {
+            return UserDefaults.standard.bool(forKey: KinPreferenceKey.hasSeenTransfer.rawValue)
+        }
+        set {
+            UserDefaults.standard.set(newValue, forKey: KinPreferenceKey.hasSeenTransfer.rawValue)
+        }
+    }
+
     // a temporary workaround to StellarKit.TransactionError.txBAD_SEQ
     fileprivate let purchaseQueue = OperationQueue()
     
@@ -715,6 +724,7 @@ extension Kin {
 extension Kin {
     func startSendKin() {
         sendKin.start(delegate: sendKinController)
+        hasSeenTransfer = true
     }
 
     public func canHandleURL(_ url: URL) -> Bool {
@@ -729,66 +739,5 @@ extension Kin {
         sendKin.handleURL(url,
                           from: appBundleId,
                           receiveDelegate: sendKinController)
-    }
-}
-
-class SendKinController {
-    let core: Core
-
-    init(core: Core) {
-        self.core = core
-    }
-}
-
-extension SendKinController: SendKinFlowDelegate {
-    public func sendKin(amount: UInt64, to receiverAddress: String, receiverApp: App, memo: String, completion: @escaping (Result<Void, Error>) -> Void) {
-        guard core.blockchain.migrationManager?.version == .kinSDK else {
-            completion(.failure(KinEcosystemError.client(.internalInconsistency, nil)))
-            return
-        }
-
-        let core = self.core
-        var orderId = ""
-
-        let transferOrder = OutgoingTransfer(amount: amount,
-                                             appId: receiverApp.memo,
-                                             description: "Transferred on",
-                                             memo: memo,
-                                             title: "Transfer to \(receiverApp.name)",
-                                             walletAddress: receiverAddress)
-        core.network.createTransferOrder(with: transferOrder)
-            .then { order -> Promise<Data> in
-                orderId = order.id
-                return core.blockchain.generateTransactionData(to: receiverAddress,
-                                                               kin: Decimal(amount),
-                                                               memo: memo,
-                                                               fee: 0)
-            }.then { core.network.dataAtPath("orders/\(orderId)", method: .post, body: $0) }
-            .then { core.data.save(Order.self, with: $0) }
-            .then { completion(.success(())) }
-            .error { completion(.failure($0)) }
-    }
-
-    public var balance: UInt64 {
-        guard let lastBalance = core.blockchain.lastBalance else {
-            return 0
-        }
-
-        return (lastBalance.amount as NSDecimalNumber).uint64Value
-    }
-
-    public var kinAppId: String {
-        return core.jwt?.appId ?? ""
-    }
-}
-
-extension SendKinController: ReceiveKinFlowDelegate {
-    public func handlePossibleIncomingTransaction(senderAppName: String, senderAppId: String, memo: String) {
-        let transfer = IncomingTransfer(appId: senderAppId, description: "From \(senderAppName)", memo: memo, title: "Receive Kin")
-        try? core.network.createIncomingOrder(with: transfer)
-    }
-
-    public func provideUserAddress(addressHandler: @escaping (String?) -> Void) {
-        addressHandler(core.blockchain.account?.publicAddress ?? nil)
     }
 }

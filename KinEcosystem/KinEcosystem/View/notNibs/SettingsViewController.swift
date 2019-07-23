@@ -25,7 +25,7 @@ private enum Row {
         switch self {
         case .backup: return "SettingsBackupIcon"
         case .restore: return "SettingsRestoreIcon"
-        case .transfer: return "SettingsRestoreIcon"
+        case .transfer: return "TransferKinIcon"
         }
     }
 

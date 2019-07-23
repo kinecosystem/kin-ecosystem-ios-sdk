@@ -19,10 +19,13 @@ class BadgeBarButtonItem: UIBarButtonItem {
     
     convenience init(image: UIImage?, badgeImage: UIImage?, target: Any?, action: Selector?) {
         self.init(image: image, style: .plain, target: target, action: action)
+
         defaultImage = image
+
         guard let image = image, let badgeImage = badgeImage else {
             return
         }
+
         self.badgeImage = image.overlayed(with: badgeImage)
     }
     

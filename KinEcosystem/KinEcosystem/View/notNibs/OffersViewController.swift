@@ -133,21 +133,31 @@ class OffersViewController: UIViewController {
     }
 
     fileprivate func updateSettingsBadgeIfNeeded() {
-        guard   let theme = theme,
-                let settingsImage = UIImage.bundleImage(theme.settingsIconImageName),
-                let badgeImage = UIImage.bundleImage(theme.settingsIconBadgeImageName) else {
-            return
+        guard
+            let theme = theme,
+            let settingsImage = UIImage.bundleImage(theme.settingsIconImageName),
+            let badgeImage = UIImage.bundleImage(theme.settingsIconBadgeImageName) else {
+                return
         }
-        if core.blockchain.isBackedUp == false {
+
+        let isBackedUp = core.blockchain.isBackedUp
+        let hasSeenTransfer = Kin.shared.hasSeenTransfer
+
+        func setSettingsImage(withBadge: Bool) {
+            DispatchQueue.main.async {
+                self.navigationItem.rightBarButtonItem?.image =
+                    withBadge
+                    ? settingsImage.overlayed(with: badgeImage)?.withRenderingMode(.alwaysOriginal)
+                    : settingsImage.withRenderingMode(.alwaysOriginal)
+            }
+        }
+
+        if !isBackedUp && hasSeenTransfer {
             core.blockchain.balance().then { [weak self] balance in
-                DispatchQueue.main.async {
-                    self?.navigationItem.rightBarButtonItem?.image = balance > 0 ?
-                        settingsImage.overlayed(with: badgeImage)?.withRenderingMode(.alwaysOriginal) :
-                        settingsImage.withRenderingMode(.alwaysOriginal)
-                }
+                setSettingsImage(withBadge: balance > 0)
             }
         } else {
-            navigationItem.rightBarButtonItem?.image = settingsImage.withRenderingMode(.alwaysOriginal)
+            setSettingsImage(withBadge: !hasSeenTransfer)
         }
     }
 }
