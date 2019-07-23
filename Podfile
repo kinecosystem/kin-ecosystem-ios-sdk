@@ -9,7 +9,7 @@ target 'KinEcosystem' do
     project 'KinEcosystem/KinEcosystem'
     pod 'SimpleCoreDataStack'
     pod 'KinMigrationModule'
-    pod 'KinAppreciationModuleOptionsMenu', '0.0.3'
+    pod 'KinAppreciationModuleOptionsMenu', '0.0.4'
 end
 
 target 'KinEcosystemTests' do

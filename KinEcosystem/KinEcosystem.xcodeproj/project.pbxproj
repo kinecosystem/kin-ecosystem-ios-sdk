@@ -103,6 +103,7 @@
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
+		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB660622DC543F0070887D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660422DC543F0070887D /* Podfile */; };
@@ -400,6 +401,7 @@
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
+		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
@@ -885,6 +887,7 @@
 			isa = PBXGroup;
 			children = (
 				9DEB660422DC543F0070887D /* Podfile */,
+				9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */,
 				E96F24DB201729690017EF68 /* KinEcosystem */,
 				E96F24E6201729690017EF68 /* KinEcosystemTests */,
 				E942F8D92031120D00DD4B8E /* KinEcosystemTestsHost */,
@@ -1229,6 +1232,7 @@
 				913793A722D3670A00C07E76 /* OfferCell.xib in Resources */,
 				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
+				9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
 				E92BA44B21A19C0A00C952D8 /* PasswordEntryViewController.xib in Resources */,
 				E92BA44E21A19C0A00C952D8 /* ExplanationTemplateViewController.xib in Resources */,
@@ -1263,12 +1267,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystemTests/Pods-KinEcosystemTests-resources.sh",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Localizable.strings",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1307,12 +1313,14 @@
 				"${PODS_ROOT}/Target Support Files/Pods-KinEcosystem/Pods-KinEcosystem-resources.sh",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Localizable.strings",
 				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
