@@ -25,17 +25,23 @@ struct KinImportedAccountData: Decodable{
     let salt: String
 }
 
-struct PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
+enum PaymentMemoIdentifier: CustomStringConvertible, Equatable, Hashable {
+    case raw(String)
+    case components(appId: String, id: String)
+
     var hashValue: Int {
         return description.hashValue
     }
 
-    let version = "1"
-    var appId: String
-    var id: String
+    static private let version = "1"
 
     var description: String {
-        return "\(version)-\(appId)-\(id)"
+        switch self {
+        case .raw(let memo):
+            return memo
+        case .components(appId: let appId, id: let memoId):
+            return "\(PaymentMemoIdentifier.version)-\(appId)-\(memoId)"
+        }
     }
 
     static func ==(lhs: PaymentMemoIdentifier, rhs: PaymentMemoIdentifier) -> Bool {
@@ -109,6 +115,7 @@ class Blockchain: NSObject {
             return account?.kinExtraData.backedUp ?? false
         }
     }
+
     private var onboardPromise = Promise<Void>()
     private var onboardLock: Int = 1
     private let environment: Environment
@@ -367,11 +374,16 @@ class Blockchain: NSObject {
     }
 
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
-        guard paymentsWatcher == nil else {
-            logInfo("payment watcher already started, added watch for \(memo)...")
+        defer {
+            logInfo("added watch for \(memo)...")
             paymentObservers[memo] = Observable<String>()
+        }
+
+        guard paymentsWatcher == nil else {
+            logInfo("payment watcher already started")
             return
         }
+
         guard let account = account else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         paymentsWatcher = try account.watchPayments(cursor: "now")
         paymentsWatcher?.emitter.on(next: { [weak self] paymentInfo in
@@ -383,8 +395,6 @@ class Blockchain: NSObject {
             match.next(paymentInfo.hash)
             match.finish()
         }).add(to: linkBag)
-        logInfo("added watch for \(memo)...")
-        paymentObservers[memo] = Observable<String>()
     }
 
     func stopWatchingForNewPayments(with memo: PaymentMemoIdentifier? = nil) {

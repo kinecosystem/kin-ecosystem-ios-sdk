@@ -57,8 +57,7 @@ struct Flows {
                 guard let appId = core.jwt?.appId else {
                     return SOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
-                let memo = PaymentMemoIdentifier(appId: appId,
-                                                 id: order.id)
+                let memo = PaymentMemoIdentifier.components(appId: appId, id: order.id)
                 return SOPFlowPromise().signal((htmlResult, order, memo))
             }.then { htmlResult, order, memo -> SOPFlowPromise in
                 try core.blockchain.startWatchingForNewPayments(with: memo)
@@ -239,7 +238,7 @@ struct Flows {
                 guard let appId = core.jwt?.appId else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
-                let memo = PaymentMemoIdentifier(appId: appId, id: order.id)
+                let memo = PaymentMemoIdentifier.components(appId: appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 
                 if let version = core.blockchain.migrationManager?.version,
@@ -480,8 +479,7 @@ struct Flows {
                 guard let appId = core.jwt?.appId else {
                     return SDOPFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
-                let memo = PaymentMemoIdentifier(appId: appId,
-                                                 id: order.id)
+                let memo = PaymentMemoIdentifier.components(appId: appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 if let version = core.blockchain.migrationManager?.version,
                     case .kinSDK = version {
@@ -747,8 +745,7 @@ struct Flows {
                 guard let appId = core.jwt?.appId else {
                     return POFlowPromise().signal(KinEcosystemError.client(.internalInconsistency, nil))
                 }
-                let memo = PaymentMemoIdentifier(appId: appId,
-                                                 id: order.id)
+                let memo = PaymentMemoIdentifier.components(appId: appId, id: order.id)
                 try core.blockchain.startWatchingForNewPayments(with: memo)
                 return core.network.dataAtPath("orders/\(order.id)", method: .post)
                     .then { data in
