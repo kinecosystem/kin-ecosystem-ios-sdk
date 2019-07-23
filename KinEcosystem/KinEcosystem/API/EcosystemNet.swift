@@ -151,5 +151,23 @@ class EcosystemNet {
                 self.client.request(request)
         }
     }
-    
+
+    func createTransferOrder(with outgoingTransfer: OutgoingTransfer) -> Promise<OpenOrder> {
+        guard client.authToken != nil else {
+            return Promise<OpenOrder>().signal(KinEcosystemError.service(.notLoggedIn, nil))
+        }
+
+        let body = try? JSONEncoder().encode(outgoingTransfer)
+        return objectAtPath("transfers/outgoing/orders", type: OpenOrder.self, method: .post, body: body)
+    }
+
+    @discardableResult
+    func createIncomingOrder(with incomingTransfer: IncomingTransfer) throws {
+        guard client.authToken != nil else {
+            throw KinEcosystemError.service(.notLoggedIn, nil)
+        }
+
+        let body = try? JSONEncoder().encode(incomingTransfer)
+        dataAtPath("transfers/incoming/orders", method: .post, body: body)
+    }
 }

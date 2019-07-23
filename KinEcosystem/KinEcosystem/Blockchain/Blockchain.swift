@@ -54,7 +54,6 @@ enum TimeoutPolicy {
 }
 
 class Blockchain: NSObject {
-
     var lastKnownWalletAddress: String?
     var versionQuery: (() -> Promise<KinVersion>)?
     var blockchainVersion: String {
@@ -81,8 +80,8 @@ class Blockchain: NSObject {
     }
     private var importedAccount: (String, String)?
     private let linkBag = LinkBag()
-    private var paymentObservers = [PaymentMemoIdentifier : Observable<String>]()
-    private var balanceObservers = [String : (Balance) -> ()]()
+    private var paymentObservers = [PaymentMemoIdentifier: Observable<String>]()
+    private var balanceObservers = [String: (Balance) -> ()]()
     private var paymentsWatcher: PaymentWatchProtocol?
     private var balanceWatcher: BalanceWatchProtocol?
     private var kinAuthToken: AuthToken?
@@ -377,7 +376,7 @@ class Blockchain: NSObject {
         paymentsWatcher = try account.watchPayments(cursor: "now")
         paymentsWatcher?.emitter.on(next: { [weak self] paymentInfo in
             guard let metadata = paymentInfo.memoText else { return }
-            guard let match = self?.paymentObservers.first(where: { (memoKey, _) -> Bool in
+            guard let match = self?.paymentObservers.first(where: { memoKey, _ in
                 memoKey.description == metadata
             })?.value else { return }
             logInfo("payment found in blockchain for \(metadata)...")

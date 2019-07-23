@@ -94,6 +94,7 @@
 		913793D622D3689300C07E76 /* UIFont+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 913793D122D3689300C07E76 /* UIFont+extensions.swift */; };
 		913793D922D368E500C07E76 /* Sailec Medium.otf in Resources */ = {isa = PBXBuildFile; fileRef = 913793D722D368E500C07E76 /* Sailec Medium.otf */; };
 		913793DA22D368E500C07E76 /* Sailec.otf in Resources */ = {isa = PBXBuildFile; fileRef = 913793D822D368E500C07E76 /* Sailec.otf */; };
+		9137ED5422E48C3700D784B2 /* SendKinController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9137ED5322E48C3700D784B2 /* SendKinController.swift */; };
 		91A4EA8520CFB22300C3399F /* KinPreferenceKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */; };
 		91A4EA8620CFB22300C3399F /* KinEcosystemError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */; };
 		91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 91A4EA8720CFB22E00C3399F /* KinViewController.swift */; };
@@ -389,6 +390,7 @@
 		913793D722D368E500C07E76 /* Sailec Medium.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Sailec Medium.otf"; sourceTree = "<group>"; };
 		913793D822D368E500C07E76 /* Sailec.otf */ = {isa = PBXFileReference; lastKnownFileType = file; path = Sailec.otf; sourceTree = "<group>"; };
 		913793DB22D370AD00C07E76 /* KinEcosystem.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinEcosystem.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		9137ED5322E48C3700D784B2 /* SendKinController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SendKinController.swift; sourceTree = "<group>"; };
 		91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinPreferenceKey.swift; sourceTree = "<group>"; };
 		91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinEcosystemError.swift; sourceTree = "<group>"; };
 		91A4EA8720CFB22E00C3399F /* KinViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = KinViewController.swift; sourceTree = "<group>"; };
@@ -403,7 +405,7 @@
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660322DC543F0070887D /* Podfile.lock */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile.lock; path = ../Podfile.lock; sourceTree = "<group>"; };
-		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; };
+		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
 		A346D90A9820DE0DEDDF5766 /* earn_order_creation_requested.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = earn_order_creation_requested.swift; sourceTree = "<group>"; };
 		A71248072F3AC3A3982C2EA5 /* backup_welcome_page_back_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = backup_welcome_page_back_button_tapped.swift; sourceTree = "<group>"; };
@@ -947,6 +949,7 @@
 				91A4EA8420CFB22200C3399F /* KinEcosystemError.swift */,
 				91A4EA7F20CFB22200C3399F /* KinPreferenceKey.swift */,
 				E96F24F62018A8AC0017EF68 /* Kin.swift */,
+				9137ED5322E48C3700D784B2 /* SendKinController.swift */,
 				E942F8A6202C5C5900DD4B8E /* ImageCache.swift */,
 				E942F8F22031B54800DD4B8E /* Logger.swift */,
 				E912B4E8203C5E17005ADBA1 /* Iso8601DateFormatter.swift */,
@@ -1291,6 +1294,7 @@
 				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
 				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
 				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
+				"${BUILT_PRODUCTS_DIR}/SendKin/SendKin.framework",
 				"${BUILT_PRODUCTS_DIR}/SimpleCoreDataStack/CoreDataStack.framework",
 				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
 				"${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework",
@@ -1303,6 +1307,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinUtil.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendKin.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreDataStack.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarErrors.framework",
@@ -1524,6 +1529,7 @@
 				9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */,
 				5170B76D402B3F503C32313F /* settings_back_button_tapped.swift in Sources */,
 				79617912FDAA66E8903A424D /* spend_order_completion_submitted.swift in Sources */,
+				9137ED5422E48C3700D784B2 /* SendKinController.swift in Sources */,
 				9645DE74C3A08F2168293574 /* earn_offer_tapped.swift in Sources */,
 				5613636A9762FED42EFDC600 /* backup_start_button_tapped.swift in Sources */,
 				5625EFEDB113CF783312CA7C /* types.swift in Sources */,

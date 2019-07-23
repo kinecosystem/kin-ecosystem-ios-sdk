@@ -11,11 +11,13 @@ import KinCoreSDK
 private enum Row {
     case backup
     case restore
+    case transfer
 
-    var phase: BRPhase {
+    var phase: BRPhase? {
         switch self {
         case .backup: return .backup
         case .restore: return .restore
+        default: return nil
         }
     }
 
@@ -23,6 +25,7 @@ private enum Row {
         switch self {
         case .backup: return "SettingsBackupIcon"
         case .restore: return "SettingsRestoreIcon"
+        case .transfer: return "SettingsRestoreIcon"
         }
     }
 
@@ -30,6 +33,7 @@ private enum Row {
         switch self {
         case .backup: return "kinecosystem_settings_row_backup".localized()
         case .restore: return "kinecosystem_settings_row_restore".localized()
+        case .transfer: return "kinecosystem_settings_row_transfer".localized()
         }
     }
 }
@@ -41,7 +45,8 @@ class SettingsViewController: UITableViewController {
     
     private let rows: [Row] = [
         .backup,
-        .restore
+        .restore,
+        .transfer
     ]
     
     // MARK: Lifecycle
@@ -96,17 +101,21 @@ class SettingsViewController: UITableViewController {
     }
 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let phase = rows[indexPath.row].phase
+        let row = rows[indexPath.row]
+        if let phase = row.phase {
+            Kin.track { try SettingsOptionTapped(settingOption: phase == .backup ? KBITypes.SettingOption.backup : KBITypes.SettingOption.backup) }
 
-        Kin.track { try SettingsOptionTapped(settingOption: phase == .backup ? KBITypes.SettingOption.backup : KBITypes.SettingOption.backup) }
-
-        brManager.start(phase, presentedOn: self) { completed in
-            guard completed else { return }
-            if case .restore = phase {
-                Kin.track { try RestoreWalletCompleted() }
-            } else {
-                Kin.track { try BackupWalletCompleted() }
+            brManager.start(phase, presentedOn: self) { completed in
+                guard completed else { return }
+                if case .restore = phase {
+                    Kin.track { try RestoreWalletCompleted() }
+                } else {
+                    Kin.track { try BackupWalletCompleted() }
+                }
             }
+        } else if row == .transfer {
+            tableView.deselectRow(at: indexPath, animated: true)
+            Kin.shared.startSendKin()
         }
     }
 }

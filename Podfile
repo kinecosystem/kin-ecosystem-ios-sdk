@@ -11,9 +11,10 @@ target 'KinEcosystem' do
   pod 'SimpleCoreDataStack'
   pod 'KinMigrationModule'
   pod 'KinAppreciationModuleOptionsMenu'
+  pod 'SendKin', :path => '/Users/natan/Documents/Kik/send-kin-module-ios'
 end
 
-target 'KinEcosystemTests' do 
+target 'KinEcosystemTests' do
   project 'KinEcosystem/KinEcosystem'
 end
 

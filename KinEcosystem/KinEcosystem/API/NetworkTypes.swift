@@ -238,3 +238,37 @@ public struct EcosystemWhitelistEnvelope: Encodable {
         
     }
 }
+
+struct OutgoingTransfer: Codable {
+    let amount: UInt64
+    let appId: String
+    let description: String?
+    let memo: String
+    let title: String?
+    let walletAddress: String
+
+    enum CodingKeys: String, CodingKey {
+        case walletAddress = "wallet_address"
+        case memo
+        case appId = "app_id"
+        case title
+        case description
+        case amount
+    }
+}
+
+struct IncomingTransfer: Codable {
+    let appId: String
+    let description: String
+    let memo: String
+    let title: String
+    let walletAddress = ""
+
+    enum CodingKeys: String, CodingKey {
+        case walletAddress = "wallet_address"
+        case memo
+        case appId = "app_id"
+        case title
+        case description
+    }
+}

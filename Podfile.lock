@@ -12,6 +12,7 @@ PODS:
   - KinEcosystem (1.2.1):
     - KinAppreciationModuleOptionsMenu (= 0.0.1)
     - KinMigrationModule (= 0.1.0)
+    - SendKin (= 0.1.0)
     - SimpleCoreDataStack (= 0.1.6)
   - KinMigrationModule (0.1.0):
     - KinCoreSDK (= 0.8.0)
@@ -21,6 +22,7 @@ PODS:
     - KinUtil (= 0.1.0)
     - Sodium (= 0.8.0)
   - KinUtil (0.1.0)
+  - SendKin (0.1.0)
   - SimpleCoreDataStack (0.1.6)
   - Sodium (0.8.0)
   - StellarErrors (0.4.0)
@@ -34,6 +36,7 @@ DEPENDENCIES:
   - KinAppreciationModuleOptionsMenu
   - KinEcosystem (from `./`)
   - KinMigrationModule
+  - SendKin (from `/Users/natan/Documents/Kik/send-kin-module-ios`)
   - SimpleCoreDataStack
 
 SPEC REPOS:
@@ -54,6 +57,8 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   KinEcosystem:
     :path: "./"
+  SendKin:
+    :path: "/Users/natan/Documents/Kik/send-kin-module-ios"
 
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
@@ -61,15 +66,16 @@ SPEC CHECKSUMS:
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   KinAppreciationModuleOptionsMenu: 1bc3bffa9907d1b5e288ea52afe618034641ff14
   KinCoreSDK: 419f6736c8aefcc0aef8ad45fa9032890ae6672e
-  KinEcosystem: 349ec483e56c418d82e8cfa5b97ffca4f3e463bd
+  KinEcosystem: 85be6a04d851d21a8d6ca9efbe439f1121369c58
   KinMigrationModule: 0f14c64bfb6e1046bd137ab829264223c20905ec
   KinSDK: 24cbb5cf8b560c6025eacabc1b5aebbe5938c141
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
+  SendKin: 5041d41bf08e78969c1b9c61f8b5b80123a09ba0
   SimpleCoreDataStack: 80d9c5efd1861d77432477974b3be410a202bd2f
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
   StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
   StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
 
-PODFILE CHECKSUM: 570bcbbb0fa47d5b85631e43b525d9fe7cb07a6a
+PODFILE CHECKSUM: d6fd66a3f5dc0ddcd1e7b43fac6cfe13d4371af4
 
 COCOAPODS: 1.7.3
