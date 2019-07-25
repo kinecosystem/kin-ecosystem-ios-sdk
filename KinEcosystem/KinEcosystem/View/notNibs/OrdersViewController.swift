@@ -44,16 +44,16 @@ class OrdersViewController: UIViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupExtraViews()
         setupTheming()
         setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
 
-        let backItem =  UIBarButtonItem(image: UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil), style: .plain) { [weak self] in /*self?.close()*/}
-        navigationItem.leftBarButtonItem  = nil
-        navigationItem.backBarButtonItem = backItem
+        Theme.light
+        let backImage = Theme.navigationBarBackButton
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationItem.backBarButtonItem?.title = ""
         navigationController?.navigationBar.topItem?.title = ""
     }

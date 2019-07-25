@@ -113,5 +113,11 @@ extension Themed where Self: AnyObject {
         KinThemeProvider.shared.currentTheme.skip(1).on(queue: .main, next: { [weak self] theme in
             self?.applyTheme(theme)
         }).add(to: themeLinkBag)
+        
     }
+}
+
+//MARK: Asset Factory
+extension Theme {
+    static let navigationBarBackButton = UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil)?.withInsets( UIEdgeInsets(top: 10, left: 12, bottom: 0, right: 0))
 }
