@@ -94,7 +94,6 @@ extension Theme {
     
 }
 
-
 class KinThemeProvider {
     static let shared = KinThemeProvider()
     var currentTheme = KinUtil.Observable<Theme>(.light).stateful()
@@ -113,7 +112,6 @@ extension Themed where Self: AnyObject {
         KinThemeProvider.shared.currentTheme.skip(1).on(queue: .main, next: { [weak self] theme in
             self?.applyTheme(theme)
         }).add(to: themeLinkBag)
-        
     }
 }
 

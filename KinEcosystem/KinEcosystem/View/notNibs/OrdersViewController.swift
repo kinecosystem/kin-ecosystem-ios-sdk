@@ -49,8 +49,8 @@ class OrdersViewController: UIViewController {
         setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
-
         Theme.light
+        
         let backImage = Theme.navigationBarBackButton
         navigationController?.navigationBar.backIndicatorImage = backImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage

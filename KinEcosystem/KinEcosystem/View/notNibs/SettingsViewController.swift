@@ -61,6 +61,8 @@ class SettingsViewController: UITableViewController {
         let backImage = Theme.navigationBarBackButton
         navigationController?.navigationBar.backIndicatorImage = backImage
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        navigationItem.backBarButtonItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
