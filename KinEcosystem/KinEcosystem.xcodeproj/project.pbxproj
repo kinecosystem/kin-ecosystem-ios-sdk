@@ -104,6 +104,7 @@
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
+		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB660622DC543F0070887D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660422DC543F0070887D /* Podfile */; };
@@ -402,6 +403,7 @@
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
+		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
@@ -953,6 +955,7 @@
 				E98D177D204BF94200FEB57A /* Core.swift */,
 				E97E5D1720E82D8D000E9E30 /* Reachability.swift */,
 				913793A122D366C800C07E76 /* Theme.swift */,
+				9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */,
 				E928960021E4EEC700656382 /* Utils.swift */,
 			);
 			path = Core;
@@ -1513,6 +1516,7 @@
 				51B54A6E119B402144E7F56C /* client.swift in Sources */,
 				287B7E8807FCF8F824969AB2 /* backup_wallet_completed.swift in Sources */,
 				1B94E7D4FDFFEE06B3BCDA31 /* order_history_item_tapped.swift in Sources */,
+				9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */,
 				913793B822D3677D00C07E76 /* BalanceView.swift in Sources */,
 				B20232002235442B51216DE6 /* order_history_page_viewed.swift in Sources */,
 				4DCB27D7309E2FAE05CBC410 /* user_login_succeeded.swift in Sources */,

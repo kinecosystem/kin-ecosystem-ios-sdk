@@ -57,7 +57,12 @@ class SettingsViewController: UITableViewController {
         tableView.tableFooterView = UIView()
 
         navigationItem.leftBarButtonItems = nil
-        navigationItem.backBarButtonItem =  UIBarButtonItem(image: UIImage(named: "back", in: KinBundle.ecosystem.rawValue,compatibleWith: nil), style: .plain) { [weak self] in /*self?.close()*/}
+
+        let backImage = Theme.navigationBarBackButton
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        navigationItem.backBarButtonItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
