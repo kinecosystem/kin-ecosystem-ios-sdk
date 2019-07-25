@@ -104,7 +104,9 @@
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
+		9DC642B622E9AC850071D658 /* DropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC642B522E9AC850071D658 /* DropDown.swift */; };
 		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
+		9DE88BCE22E9A355008E8EDF /* DropDownBalance.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9DE88BCD22E9A355008E8EDF /* DropDownBalance.xib */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB660622DC543F0070887D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660422DC543F0070887D /* Podfile */; };
@@ -403,7 +405,9 @@
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
+		9DC642B522E9AC850071D658 /* DropDown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DropDown.swift; sourceTree = "<group>"; };
 		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
+		9DE88BCD22E9A355008E8EDF /* DropDownBalance.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DropDownBalance.xib; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DF8EE4422DB2C6300264DB2 /* UIView+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+More.swift"; sourceTree = "<group>"; };
@@ -595,6 +599,15 @@
 				6831950922CDEF1000EC2DDF /* GiftingManager.swift */,
 			);
 			path = GiftingModule;
+			sourceTree = "<group>";
+		};
+		9DE88BCF22E9AB50008E8EDF /* Drop Downs */ = {
+			isa = PBXGroup;
+			children = (
+				9DE88BCD22E9A355008E8EDF /* DropDownBalance.xib */,
+				9DC642B522E9AC850071D658 /* DropDown.swift */,
+			);
+			path = "Drop Downs";
 			sourceTree = "<group>";
 		};
 		A472BB1825C38D0E53ADAF9F /* Pods */ = {
@@ -867,6 +880,7 @@
 		E942F8F1203191F600DD4B8E /* View */ = {
 			isa = PBXGroup;
 			children = (
+				9DE88BCF22E9AB50008E8EDF /* Drop Downs */,
 				E98D178A2051395A00FEB57A /* notNibs */,
 				E98D17892051395100FEB57A /* nibs */,
 			);
@@ -1221,6 +1235,7 @@
 			files = (
 				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
+				9DE88BCE22E9A355008E8EDF /* DropDownBalance.xib in Resources */,
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
 				E942F90F2034268300DD4B8E /* EarnOfferCell.xib in Resources */,
@@ -1454,6 +1469,7 @@
 				E92BA46F21A1A0F100C952D8 /* Kin+BackupRestore.swift in Sources */,
 				E92F7B7C20691403008A027F /* SpendOfferViewController.swift in Sources */,
 				E954106C20E3B5FA0038FF49 /* BIError.swift in Sources */,
+				9DC642B622E9AC850071D658 /* DropDown.swift in Sources */,
 				E92BA45B21A19C0A00C952D8 /* ExplanationTemplateViewController.swift in Sources */,
 				E942F90D2034213400DD4B8E /* OffersCollectionViewFlowLayout.swift in Sources */,
 				E92BA44A21A19C0A00C952D8 /* LifeCycleProtocol.swift in Sources */,

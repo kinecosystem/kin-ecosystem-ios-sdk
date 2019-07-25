@@ -103,9 +103,16 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         
     }
     override func viewWillAppear(_ animated:  Bool) {
-//        if uiState != .disabled {
-//            uiState = Kin.shared.isLoggedIn ? .enabled : .onlyLogin
-//        }
+
+        let v  = UIView(frame: CGRect(x:0,y:0,width:200,height:200))
+        v.backgroundColor = .red
+        v.center = view.center
+        v.layoutMargins = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        
+        let b =  UIView(frame: CGRect(x:0,y:0,width:50,height:50))
+        b.backgroundColor = .purple
+        v.addSubview(b)
+        self.view.addSubview(v)
     }
     func alertConfigIssue() {
         presentAlert("Config Missing", body: "an app id and app key (or a jwt) is required in order to use the sample app. Please refer to the readme in the sample app repo for more information")

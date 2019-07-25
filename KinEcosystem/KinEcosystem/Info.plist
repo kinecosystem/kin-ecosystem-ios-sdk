@@ -20,6 +20,11 @@
 	<string>$(CURRENT_PROJECT_VERSION)</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Photo library access is required for backup and restore of your wallet</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Sailec.otf</string>
+		<string>Sailec Medium.otf</string>
+	</array>
 	<key>NSPrincipalClass</key>
 	<string></string>
 </dict>
