@@ -165,6 +165,7 @@ public class Kin: NSObject {
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: marketplaceURL))
         core = try Core(environment: environment, network: network, data: store, blockchain: chain)
         sendKinController = SendKinController(core: core!)
+        sendKin.delegate = sendKinController
 
         psBalanceObsLock.lock()
         defer {
@@ -723,7 +724,7 @@ extension Kin {
 
 extension Kin {
     func startSendKin() {
-        sendKin.start(delegate: sendKinController)
+        sendKin.start()
         hasSeenTransfer = true
     }
 
