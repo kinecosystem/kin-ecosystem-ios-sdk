@@ -18,5 +18,6 @@ extension Color {
         static let mercuryGray = Color(red: 231/255.0, green: 231/255.0, blue: 231/255.0, alpha: 1)
 		static let veryLightPink = Color(red: 235/255.0, green: 235/255.0, blue: 235/255.0, alpha: 1)
 		static let blackTwo = Color(red: 28/255.0, green: 28/255.0, blue: 28/255.0, alpha: 1)
+        static let errorRed = Color.red
 	}
 }

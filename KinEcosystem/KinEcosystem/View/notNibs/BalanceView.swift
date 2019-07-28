@@ -53,7 +53,7 @@ class BalanceView: UIView {
         label.center = boundsCenter
         label.centerY = label.centerY + 2
     }
-    s
+    
     deinit {
         if let currentObserver = balanceObserver {
             Kin.shared.removeBalanceObserver(currentObserver)

@@ -59,19 +59,7 @@ class OrdersViewController: UIViewController {
     }
 
     fileprivate func setupExtraViews() {
-//        let bvc = BalanceViewController(core: core)
-//        bvc.willMove(toParent: self)
-//        bvc.view.translatesAutoresizingMaskIntoConstraints = false
-//        balanceContainer.addSubview(bvc.view)
-//        addChild(bvc)
-//        bvc.didMove(toParent: self)
-//        NSLayoutConstraint.activate([
-//            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
-//            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
-//            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
-//            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
-//            ])
-//        bvc.view.setNeedsLayout()
+
         title = "my_kin".localized()
         let settingsIcon = UIImage(named: "KinNewSettingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         let settingsBarButton = UIBarButtonItem(image: settingsIcon,
@@ -103,42 +91,40 @@ class OrdersViewController: UIViewController {
                                                                   sectionNameKeyPath: nil,
                                                                   cacheName: nil)
 
-            print(frc.fetchedObjects?.count)
-
-
-                let section = FetchedResultsTableSection(table: self.tableView, frc: frc) { [weak self] cell, ip in
-                    guard   let this = self,
-                        let theme = this.theme,
-                        let order = this.tableView.objectForTable(at: ip) as? Order,
-                        let orderCell = cell as? OrderCell else {
-                            logWarn("cell configure failed")
-                            return
-                    }
-
-                    orderCell.selectionStyle = .none
-                    var viewModel: OrderViewModel
-                    if let orderViewModel = this.orderViewModels[order.id] {
-                        viewModel = orderViewModel
-                    } else {
-                        viewModel = OrderViewModel(with: order,
-                                                   theme: theme,
-                                                   last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
-                                                   first: ip.row == 0)
-                        this.orderViewModels[order.id] = viewModel
-                    }
-
-                    orderCell.amount.attributedText = viewModel.amount
-                    orderCell.title.attributedText = viewModel.title
-                    orderCell.subtitle.attributedText = viewModel.subtitle
-                    orderCell.last = viewModel.last
-                    orderCell.first = viewModel.first
-                    orderCell.icon = viewModel.icon
+            let section = FetchedResultsTableSection(table: self.tableView, frc: frc) { [weak self] cell, ip in
+                guard   let this = self,
+                    let theme = this.theme,
+                    let order = this.tableView.objectForTable(at: ip) as? Order,
+                    let orderCell = cell as? OrderCell else {
+                        logWarn("cell configure failed")
+                        return
                 }
 
-                self.tableView.add(tableSection: section)
-                try? frc.performFetch()
-                self.tableView.reloadData()
-                self.segmentedControl.isEnabled = true
+                orderCell.selectionStyle = .none
+                var viewModel: OrderViewModel
+                if let orderViewModel = this.orderViewModels[order.id] {
+                    viewModel = orderViewModel
+                } else {
+                    viewModel = OrderViewModel(with: order,
+                                               theme: theme,
+                                               last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
+                                               first: ip.row == 0)
+                    this.orderViewModels[order.id] = viewModel
+                }
+
+
+                orderCell.amount.attributedText = viewModel.amount
+                orderCell.title.attributedText = viewModel.title
+                orderCell.subtitle.attributedText = viewModel.subtitle
+                orderCell.last = viewModel.last
+                orderCell.first = viewModel.first
+                orderCell.icon = viewModel.icon
+            }
+
+            self.tableView.add(tableSection: section)
+            try? frc.performFetch()
+            self.tableView.reloadData()
+            self.segmentedControl.isEnabled = true
 
         }
     }
