@@ -22,7 +22,7 @@ Kin ecosystem mobile sdk for iOS
   s.dependency 'SimpleCoreDataStack', '0.1.6'
   s.dependency 'KinMigrationModule', '0.1.0'
   s.dependency 'KinAppreciationModuleOptionsMenu', '0.0.1'
-  s.dependency 'SendKin', '0.1.0'
+  s.dependency 'SendKin', '0.1.1'
 
   s.app_spec 'SampleApp' do |as|
     root = 'KinEcosystemSampleApp/EcosystemSampleApp'
