@@ -103,9 +103,21 @@ class PasswordEntryViewController: BRViewController {
             topSpace.constant = 0.0
             view.layoutIfNeeded()
         }
+
+        passwordInput1.inputAccessoryView?.isHidden = true
+        passwordInput1.inputAccessoryView?.isUserInteractionEnabled = false
+        passwordInput2.inputAccessoryView?.isHidden = true
+        passwordInput2.inputAccessoryView?.isUserInteractionEnabled = false
+        if #available(iOS 12, *) {
+            passwordInput1.textContentType = .oneTimeCode
+            passwordInput2.textContentType = .oneTimeCode
+        } else if #available(iOS 12, *) {
+            passwordInput1.textContentType = .init(rawValue: "")
+            passwordInput2.textContentType = .init(rawValue: "")
+        }
         passwordInput1.becomeFirstResponder()
     }
-
+    
     override func willMove(toParent parent: UIViewController?) {
         super.willMove(toParent: parent)
         if parent == nil {

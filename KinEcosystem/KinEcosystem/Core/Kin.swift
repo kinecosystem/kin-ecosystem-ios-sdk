@@ -14,7 +14,7 @@ import KinUtil
 import KinMigrationModule
 import SendKin
 
-let SDKVersion = "1.2.1"
+let SDKVersion = "1.2.4"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()

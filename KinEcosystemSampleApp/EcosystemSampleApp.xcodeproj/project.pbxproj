@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		845105E7555EC7AE2DBF211C /* Pods_EcosystemSampleApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B4D1BFCCC9FF8FE47A2DF537 /* Pods_EcosystemSampleApp.framework */; };
+		634B91637C925DF0E2A86F1E /* libPods-EcosystemSampleApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 830D612CA32BF56A8C9923A6 /* libPods-EcosystemSampleApp.a */; };
 		E93F448A209A07DA00803FFB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E942F92320346A6200DD4B8E /* Assets.xcassets */; };
 		E942F91D20346A6200DD4B8E /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91C20346A6200DD4B8E /* AppDelegate.swift */; };
 		E942F91F20346A6200DD4B8E /* SampleAppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E942F91E20346A6200DD4B8E /* SampleAppViewController.swift */; };
@@ -21,7 +21,7 @@
 
 /* Begin PBXFileReference section */
 		7885FAD88BCC380656B9C924 /* Pods-EcosystemSampleApp.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.debug.xcconfig"; path = "../../Pods/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.debug.xcconfig"; sourceTree = "<group>"; };
-		B4D1BFCCC9FF8FE47A2DF537 /* Pods_EcosystemSampleApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_EcosystemSampleApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		830D612CA32BF56A8C9923A6 /* libPods-EcosystemSampleApp.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-EcosystemSampleApp.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		BA99F20D27689732882E93AE /* Pods-EcosystemSampleApp.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EcosystemSampleApp.release.xcconfig"; path = "../../Pods/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp.release.xcconfig"; sourceTree = "<group>"; };
 		E904414C2035662B00E3E261 /* CoreDataStack.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = CoreDataStack.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E904414D2035662B00E3E261 /* KinSDK.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = KinSDK.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -46,7 +46,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				845105E7555EC7AE2DBF211C /* Pods_EcosystemSampleApp.framework in Frameworks */,
+				634B91637C925DF0E2A86F1E /* libPods-EcosystemSampleApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -103,7 +103,7 @@
 				E904414C2035662B00E3E261 /* CoreDataStack.framework */,
 				E904414D2035662B00E3E261 /* KinSDK.framework */,
 				E904414E2035662B00E3E261 /* StellarKit.framework */,
-				B4D1BFCCC9FF8FE47A2DF537 /* Pods_EcosystemSampleApp.framework */,
+				830D612CA32BF56A8C9923A6 /* libPods-EcosystemSampleApp.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -119,7 +119,6 @@
 				E942F91520346A6200DD4B8E /* Sources */,
 				E942F91620346A6200DD4B8E /* Frameworks */,
 				E942F91720346A6200DD4B8E /* Resources */,
-				477FF2A2A63BA2899D173BFD /* [CP] Embed Pods Frameworks */,
 				DB1B2900A76D986BC0E1A12E /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
@@ -204,48 +203,6 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
-		477FF2A2A63BA2899D173BFD /* [CP] Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh",
-				"${BUILT_PRODUCTS_DIR}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu.framework",
-				"${BUILT_PRODUCTS_DIR}/KinCoreSDK/KinCoreSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinMigrationModule/KinMigrationModule.framework",
-				"${BUILT_PRODUCTS_DIR}/KinSDK/KinSDK.framework",
-				"${BUILT_PRODUCTS_DIR}/KinUtil/KinUtil.framework",
-				"${BUILT_PRODUCTS_DIR}/SendKin/SendKin.framework",
-				"${BUILT_PRODUCTS_DIR}/SimpleCoreDataStack/CoreDataStack.framework",
-				"${BUILT_PRODUCTS_DIR}/Sodium/Sodium.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarErrors/StellarErrors.framework",
-				"${BUILT_PRODUCTS_DIR}/StellarKit/StellarKit.framework",
-				"${BUILT_PRODUCTS_DIR}/Base64/Base64.framework",
-				"${BUILT_PRODUCTS_DIR}/JWT/JWT.framework",
-				"${BUILT_PRODUCTS_DIR}/KinEcosystem/KinEcosystem.framework",
-			);
-			name = "[CP] Embed Pods Frameworks";
-			outputPaths = (
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinAppreciationModuleOptionsMenu.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinCoreSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinMigrationModule.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinSDK.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinUtil.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SendKin.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/CoreDataStack.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Sodium.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarErrors.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/StellarKit.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Base64.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JWT.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/KinEcosystem.framework",
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
 		DB1B2900A76D986BC0E1A12E /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -253,11 +210,242 @@
 			);
 			inputPaths = (
 				"${PODS_ROOT}/Target Support Files/Pods-EcosystemSampleApp/Pods-EcosystemSampleApp-resources.sh",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/Sailec.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Fonts/SailecMedium.otf",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Localizable.strings",
+				"${PODS_ROOT}/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/KinAppreciationModuleOptionsMenu/Assets.xcassets",
+				"${PODS_CONFIGURATION_BUILD_DIR}/SendKin/SendKin.bundle",
 				"${PODS_CONFIGURATION_BUILD_DIR}/HockeySDK/HockeySDKResources.bundle",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/arrowRight.imageset/arrowRight.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/arrowRight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/back.imageset/back.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/back.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/balanceKinIcon.imageset/balanceKinIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/balanceKinIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/closeBtn.imageset/closeBtn.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/closeBtn.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/closeIcon.imageset/closeIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/closeIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/coins.imageset/coins.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/coins.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/combinedShape.imageset/combinedShape.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/combinedShape.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond1.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond1.imageset/diamond1.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond2.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond2.imageset/diamond2.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond3.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamond3.imageset/diamond3.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/diamondsChest@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/diamondsChest.imageset/diamondsChest@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/hifiveLight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/hifiveLight.imageset/hifiveLight.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/invoice.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/invoice.imageset/invoice.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinEarnIconActive.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinEarnIconActive.imageset/kinEarnIconActive.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinEcosystemLogo.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinEcosystemLogo.imageset/KinEcosystemLogo.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinEcosystemLogo.imageset/KinEcosystemLogo@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinEcosystemLogo.imageset/KinEcosystemLogo@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinIconInactive.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinIconInactive.imageset/kinIconInactive.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinlogo.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinlogo.imageset/kinlogo.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinLogoPurple.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinLogoPurple.imageset/kinLogoPurple.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinNewSettingsIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinNewSettingsIcon.imageset/KinNewSettingsIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinnlogo.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinnlogo.imageset/kinnlogo.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedLeft.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedLeft.imageset/KinSegControlSelectedLeft.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedLeft.imageset/KinSegControlSelectedLeft@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedLeft.imageset/KinSegControlSelectedLeft@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedRight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedRight.imageset/KinSegControlSelectedRight.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedRight.imageset/KinSegControlSelectedRight@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlSelectedRight.imageset/KinSegControlSelectedRight@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedLeft.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedLeft.imageset/KinSegControlUnselectedLeft.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedLeft.imageset/KinSegControlUnselectedLeft@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedLeft.imageset/KinSegControlUnselectedLeft@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedRight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedRight.imageset/KinSegControlUnselectedRight.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedRight.imageset/KinSegControlUnselectedRight@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/KinSegControlUnselectedRight.imageset/KinSegControlUnselectedRight@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinSpendIconActive.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/kinSpendIconActive.imageset/kinSpendIconActive.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/MicDrop.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/MicDrop.imageset/MicDrop.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/myKinIconBadgeLight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/myKinIconBadgeLight.imageset/myKinIconBadgeLight.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/myKinIconLight.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/myKinIconLight.imageset/myKinIconLight.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/OhNoHands.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/OhNoHands.imageset/OhNoHands.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/rectangle17.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/rectangle17.imageset/rectangle17.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/SettingsBackupIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/SettingsBackupIcon.imageset/SettingsBackupIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/settingsBadge.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/settingsBadge.imageset/settingsBadge.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/settingsIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/settingsIcon.imageset/settingsIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/SettingsRestoreIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/SettingsRestoreIcon.imageset/SettingsRestoreIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/spaceship.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/spaceship.imageset/spaceship.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/spaceship.imageset/spaceship@2x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/spaceship.imageset/spaceship@3x.png",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/TransferKinIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/TransferKinIcon.imageset/TransferKinIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/whatsKin.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets/whatsKin.imageset/whatsKin.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/backupBadge.imageset/backupBadge.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/backupBadge.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/blueBackupIcon.imageset/blueBackupIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/blueBackupIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/purpleCheckMark.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/purpleCheckMark.imageset/purpleCheckMark.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/purpleCheckMarkMedium.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/purpleCheckMarkMedium.imageset/purpleCheckMarkMedium.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/restoreQR.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/restoreQR.imageset/restoreQR.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/revealIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/revealIcon.imageset/revealIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/safeIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/safeIcon.imageset/safeIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/uploadQrArrow.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/uploadQrArrow.imageset/uploadQrArrow.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/whiteFlagIcon.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/whiteFlagIcon.imageset/whiteFlagIcon.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/whiteQrCode.imageset/Contents.json",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets/whiteQrCode.imageset/whiteQrCode.pdf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/View/nibs/ExplanationTemplateViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/View/nibs/PasswordEntryViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/View/nibs/QRViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/View/nibs/RestoreViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/en.lproj/Localizable.strings",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/fonts/Sailec Medium.otf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/fonts/Sailec.otf",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/pt-BR.lproj/Localizable.strings",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Storyboard.storyboard",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/BalanceViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/CouponViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/EarnOfferCell.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/en.lproj/MarketplaceViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/InsufficientFundsViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/KinNavigationViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/NoOffersViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/OfferCell.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/OffersViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/OrderCell.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/OrdersViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/SpendOfferCell.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/SpendOfferViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/WelcomeViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/View/nibs/WhatsKinViewController.xib",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Assets.xcassets",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/BackupModule/Assets.xcassets",
+				"${PODS_ROOT}/../KinEcosystem/KinEcosystem/Model/KinEcosystem.xcdatamodeld",
+				"${PODS_CONFIGURATION_BUILD_DIR}/KinEcosystem/KinEcosystem.bundle",
 			);
 			name = "[CP] Copy Pods Resources";
 			outputPaths = (
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SailecMedium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Localizable.strings",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Assets.car",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SendKin.bundle",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/HockeySDKResources.bundle",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/arrowRight.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Contents.json",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/back.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/balanceKinIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/closeBtn.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/closeIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/coins.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/combinedShape.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond1.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond2.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamond3.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamondsChest@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/diamondsChest@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/hifiveLight.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/invoice.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinEarnIconActive.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystemLogo.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystemLogo@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystemLogo@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinIconInactive.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinlogo.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinLogoPurple.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinNewSettingsIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinnlogo.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedLeft.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedLeft@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedRight.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlSelectedRight@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedLeft.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedLeft@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedLeft@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedRight.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedRight@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinSegControlUnselectedRight@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/kinSpendIconActive.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MicDrop.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/myKinIconBadgeLight.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/myKinIconLight.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OhNoHands.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/rectangle17.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SettingsBackupIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/settingsBadge.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/settingsIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SettingsRestoreIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/spaceship.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/spaceship@2x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/spaceship@3x.png",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/TransferKinIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/whatsKin.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/backupBadge.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/blueBackupIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/purpleCheckMark.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/purpleCheckMarkMedium.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/restoreQR.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/revealIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/safeIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/uploadQrArrow.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/whiteFlagIcon.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/whiteQrCode.pdf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/ExplanationTemplateViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/PasswordEntryViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/QRViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RestoreViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Sailec Medium.otf",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Storyboard.storyboardc",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/BalanceViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/CouponViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/EarnOfferCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MarketplaceViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/InsufficientFundsViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinNavigationViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/NoOffersViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OfferCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OffersViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OrderCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/OrdersViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SpendOfferCell.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SpendOfferViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WelcomeViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/WhatsKinViewController.nib",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystem.momd",
+				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/KinEcosystem.bundle",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
@@ -429,10 +617,10 @@
 				DEVELOPMENT_TEAM = QUCAP2TH46;
 				INFOPLIST_FILE = EcosystemSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.kin.echosystem.sampleapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.kin.ecosystem.sample-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dbc5a8ef-59e9-4b09-bfac-2d7f57a93d0c";
-				PROVISIONING_PROFILE_SPECIFIER = org.kin.echosystem.sampleapp.dev;
+				PROVISIONING_PROFILE_SPECIFIER = "org.kin.ecosystem.sample-app.dev";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
@@ -451,10 +639,10 @@
 				DEVELOPMENT_TEAM = QUCAP2TH46;
 				INFOPLIST_FILE = EcosystemSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = org.kin.echosystem.sampleapp;
+				PRODUCT_BUNDLE_IDENTIFIER = "org.kin.ecosystem.sample-app";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7ab7e59a-4272-40b5-9b06-afea1771ab5f";
-				PROVISIONING_PROFILE_SPECIFIER = org.kin.echosystem.sampleapp.adhok;
+				PROVISIONING_PROFILE_SPECIFIER = "org.kin.ecosystem.sample-app.adhoc";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VERSIONING_SYSTEM = "apple-generic";
 			};

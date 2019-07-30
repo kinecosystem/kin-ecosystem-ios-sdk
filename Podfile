@@ -1,6 +1,6 @@
 platform :ios, '9.0'
 
-use_frameworks!
+#use_frameworks!
 inhibit_all_warnings!
 
 workspace 'KinEcosystem'
@@ -10,8 +10,8 @@ target 'KinEcosystem' do
 
   pod 'SimpleCoreDataStack'
   pod 'KinMigrationModule'
-  pod 'KinAppreciationModuleOptionsMenu'
-  pod 'SendKin', :path => '/Users/natan/Documents/Kik/send-kin-module-ios'
+  pod 'KinAppreciationModuleOptionsMenu', '0.0.4'
+  pod 'SendKin'
 end
 
 target 'KinEcosystemTests' do
@@ -19,9 +19,9 @@ target 'KinEcosystemTests' do
 end
 
 target 'EcosystemSampleApp' do
-  project 'KinEcosystemSampleApp/EcosystemSampleApp'
+    project 'KinEcosystemSampleApp/EcosystemSampleApp'
 
-  pod 'KinEcosystem', :path => './'
-  pod 'JWT', '3.0.0-beta.11', :modular_headers => true
-  pod 'HockeySDK', :modular_headers => true
+    pod 'KinEcosystem', :path => './'
+    pod 'JWT', '3.0.0-beta.11', :modular_headers => true
+    pod 'HockeySDK', :modular_headers => true
 end

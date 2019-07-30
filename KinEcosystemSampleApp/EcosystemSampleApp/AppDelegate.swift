@@ -10,21 +10,11 @@ import UIKit
 import HockeySDK
 import KinEcosystem
 
-public func NSLocalizedString(_ key: String, tableName: String? = nil, bundle: Bundle = Bundle.main, value: String = "", comment: String) -> String {
-    let fallbackLanguage = "en"
-    guard let fallbackBundlePath = Bundle.main.path(forResource: fallbackLanguage, ofType: "lproj") else { return key }
-    guard let fallbackBundle = Bundle(path: fallbackBundlePath) else { return key }
-    let fallbackString = fallbackBundle.localizedString(forKey: key, value: comment, table: nil)
-    return Bundle.main.localizedString(forKey: key, value: fallbackString, table: nil)
-}
-
 @UIApplicationMain
-     class AppDelegate: UIResponder, UIApplicationDelegate {
-
+    class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        BITHockeyManager.shared().configure(withIdentifier: "b652ffb01ad64bdeabe07a50b2a8d8d1")
+        BITHockeyManager.shared().configure(withIdentifier: "90ae7adeee724658b6b9ec5448a09fb8")
         BITHockeyManager.shared().start()
         BITHockeyManager.shared().authenticator.authenticateInstallation()
         Kin.shared.setLogLevel(.verbose)
@@ -40,4 +30,3 @@ public func NSLocalizedString(_ key: String, tableName: String? = nil, bundle: B
         return false
     }
 }
-

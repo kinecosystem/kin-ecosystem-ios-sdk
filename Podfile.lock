@@ -5,12 +5,12 @@ PODS:
   - HockeySDK/DefaultLib (5.1.4)
   - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
-  - KinAppreciationModuleOptionsMenu (0.0.1)
+  - KinAppreciationModuleOptionsMenu (0.0.4)
   - KinCoreSDK (0.8.0):
     - Sodium (= 0.8.0)
     - StellarKit (= 0.4.0)
-  - KinEcosystem (1.2.1):
-    - KinAppreciationModuleOptionsMenu (= 0.0.1)
+  - KinEcosystem (1.2.6):
+    - KinAppreciationModuleOptionsMenu (= 0.0.4)
     - KinMigrationModule (= 0.1.0)
     - SendKin (= 0.1.1)
     - SimpleCoreDataStack (= 0.1.6)
@@ -33,10 +33,10 @@ PODS:
 DEPENDENCIES:
   - HockeySDK
   - JWT (= 3.0.0-beta.11)
-  - KinAppreciationModuleOptionsMenu
+  - KinAppreciationModuleOptionsMenu (= 0.0.4)
   - KinEcosystem (from `./`)
   - KinMigrationModule
-  - SendKin (from `/Users/natan/Documents/Kik/send-kin-module-ios`)
+  - SendKin
   - SimpleCoreDataStack
 
 SPEC REPOS:
@@ -49,6 +49,7 @@ SPEC REPOS:
     - KinMigrationModule
     - KinSDK
     - KinUtil
+    - SendKin
     - SimpleCoreDataStack
     - Sodium
     - StellarErrors
@@ -57,16 +58,14 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   KinEcosystem:
     :path: "./"
-  SendKin:
-    :path: "/Users/natan/Documents/Kik/send-kin-module-ios"
 
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
-  KinAppreciationModuleOptionsMenu: 1bc3bffa9907d1b5e288ea52afe618034641ff14
+  KinAppreciationModuleOptionsMenu: 6d52396b8d1eb16a56a4f3b51f135b2835ed91ed
   KinCoreSDK: 419f6736c8aefcc0aef8ad45fa9032890ae6672e
-  KinEcosystem: 442bc8bf9e139e6bbda7492984125be48dd39970
+  KinEcosystem: 72b40127d8761967120717cf0269f08658a5b6a9
   KinMigrationModule: 0f14c64bfb6e1046bd137ab829264223c20905ec
   KinSDK: 24cbb5cf8b560c6025eacabc1b5aebbe5938c141
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
@@ -76,6 +75,6 @@ SPEC CHECKSUMS:
   StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
   StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
 
-PODFILE CHECKSUM: d6fd66a3f5dc0ddcd1e7b43fac6cfe13d4371af4
+PODFILE CHECKSUM: 773d9d7043ebbbb8cd7a35f8debfecbca6c06d07
 
-COCOAPODS: 1.7.3
+COCOAPODS: 1.7.5

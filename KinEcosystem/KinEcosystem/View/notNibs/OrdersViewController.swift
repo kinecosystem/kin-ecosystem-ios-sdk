@@ -44,23 +44,20 @@ class OrdersViewController: UIViewController {
 //    }
     override func viewDidLoad() {
         super.viewDidLoad()
-
         setupExtraViews()
         setupTheming()
         setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
+        Theme.light
+        
+        let backImage = Theme.navigationBarBackButton
+        navigationController?.navigationBar.backIndicatorImage = backImage
+        navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
+        navigationItem.backBarButtonItem?.title = ""
+        navigationController?.navigationBar.topItem?.title = ""
+    }
 
-        let closeItem = UIBarButtonItem(barButtonSystemItem: .stop, target: self, action: #selector(close))
-        navigationItem.leftBarButtonItem = closeItem
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "back",
-                                                                          in: KinBundle.ecosystem.rawValue,
-                                                                          compatibleWith: nil),
-                                                           style: .plain) { [weak self] in self?.close() }
-    }
-    @objc func close() {
-       navigationController?.popViewController(animated: true)
-    }
     fileprivate func setupExtraViews() {
 //        let bvc = BalanceViewController(core: core)
 //        bvc.willMove(toParent: self)
