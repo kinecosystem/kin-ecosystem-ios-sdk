@@ -96,9 +96,12 @@ class OrdersViewController: UIViewController {
         request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
 
         let offerTypeDescriptor = offerType == .earn ? "earn" : "spend"
-        request.predicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
+        let amountPredicate = NSPredicate(format: "amount > 0")
+        let offerPredicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
             .or(["status" : OrderStatus.delayed.rawValue]))
             .and(["offer_type" : offerTypeDescriptor])
+
+        request.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [amountPredicate, offerPredicate])
 
         let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
                                                               managedObjectContext: core.data.stack.viewContext,
