@@ -10,6 +10,7 @@ struct Theme {
     // text
     let title20: TextStyle
     let title18: TextStyle
+    let title18Error: TextStyle
     let subtitle14: TextStyle
     let subtitle12: TextStyle
     let title20Condensed: TextStyle
@@ -56,6 +57,7 @@ struct Theme {
 extension Theme {
     static let light = Theme(title20: TextStyle.title20LightTheme,
                              title18: TextStyle.title18LightTheme,
+                             title18Error: TextStyle.title18Error,
                              subtitle14: TextStyle.subtitle14LightTheme,
                              subtitle12: TextStyle.subtitle12LightTheme,
                              title20Condensed: TextStyle.title20CondensedLightTheme,
