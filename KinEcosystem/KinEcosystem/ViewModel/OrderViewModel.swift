@@ -46,7 +46,7 @@ class OrderViewModel {
             title = model.title.styled(as: theme.title18)
         }
 
-         title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
+        // title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
         var subtitleString = model.description_
         if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
             subtitleString = subtitleString + " - " + shortDate
