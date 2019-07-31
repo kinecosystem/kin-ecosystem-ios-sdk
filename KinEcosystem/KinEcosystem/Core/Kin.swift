@@ -221,19 +221,7 @@ public class Kin: NSObject {
                         logError("data sync failed (\(error))")
                     }
             }
-        }
-        .then {
-            print(self.core!.blockchain.lastBalance)
-            self.watcher =  try! self.core!.blockchain.account?.watchPayments(cursor:nil)
-            print(self.watcher)
-            self.watcher?.emitter.on(next: { [weak self] paymentInfo in
-                print("**********",paymentInfo)
-            })
-            self.watcher?.emitter.on {
-                print("**********")
-            }
-        }
-        .error { error in
+        }.error { error in
             let tError = KinEcosystemError.transform(error)
             Kin.track { try UserLoginFailed(errorReason: tError.localizedDescription) }
             callback?(tError)

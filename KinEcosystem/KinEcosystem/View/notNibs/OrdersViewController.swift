@@ -56,8 +56,35 @@ class OrdersViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationItem.backBarButtonItem?.title = ""
         navigationController?.navigationBar.topItem?.title = ""
-    }
 
+
+    }
+    private lazy var linkBag = LinkBag()
+    private var watcher:PaymentWatchProtocol??
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+
+        self.watcher = try? self.core!.blockchain.account?.watchPayments(cursor:"now")
+        self.watcher??.emitter.on(next: { [weak self] paymentInfo in
+            let p = paymentInfo as! WrappedKinCorePaymentInfo
+            if var orderId = p.memoText?.components(separatedBy:"-").last {
+                self?.core.network.dataAtPath("orders/\(orderId)", method: .post, body: nil)
+                .then { data in
+                    print(data)
+                    self?.core.data.save(Order.self, with: data)
+                }
+                .error { error in
+                     print(error)
+                }
+            }
+
+//            let task = URLSession.shared.dataTask(with: URL(string: "https://www.google.com")!) { (data, respond, error) in
+//                print("recieved")
+//            }
+           // PollingManager.add(task: PollingTask(task: task))
+
+        }).add(to: self.linkBag)
+    }
     fileprivate func setupExtraViews() {
 
         title = "my_kin".localized()

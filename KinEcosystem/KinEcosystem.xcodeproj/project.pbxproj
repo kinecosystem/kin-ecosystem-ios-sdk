@@ -104,6 +104,8 @@
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
+		9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2C22F15F9300525553 /* PollingManager.swift */; };
+		9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */; };
 		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
@@ -403,6 +405,8 @@
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
+		9DE67D2C22F15F9300525553 /* PollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingManager.swift; sourceTree = "<group>"; };
+		9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTaskFactory.swift; sourceTree = "<group>"; };
 		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -929,6 +933,8 @@
 				E9FC5998203B19A800D1DA2B /* Assets.xcassets */,
 				E93146312164F52B008F2D74 /* Localizable.strings */,
 				9DEB65C422DC3F880070887D /* Storyboard.storyboard */,
+				9DE67D2C22F15F9300525553 /* PollingManager.swift */,
+				9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */,
 			);
 			path = KinEcosystem;
 			sourceTree = "<group>";
@@ -1432,6 +1438,8 @@
 				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
+				9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */,
+				9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,
