@@ -29,7 +29,8 @@ typealias POFlowPromise = Promise<(PaymentMemoIdentifier, OpenOrder)>
 typealias Promise = KinUtil.Promise
 
 struct Flows {
-        
+
+    
     static func earn(offerId: String,
                      resultPromise: Promise<String>,
                      core: Core) {
