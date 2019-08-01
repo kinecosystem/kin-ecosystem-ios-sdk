@@ -10,6 +10,7 @@ internal typealias Font = UIFont
 enum TextStyle {
 	case title20LightTheme
 	case title18LightTheme
+    case title18Error
 	case subtitle14LightTheme
     case subtitle12LightTheme
 	case title20CondensedLightTheme
@@ -51,6 +52,10 @@ extension TextStyle {
 		case .title18LightTheme:
 			return [.font: Font(name: "Sailec-Medium", size: 18) as Any,
 				.foregroundColor: Color.KinNewUi.black]
+        
+        case .title18Error:
+            return [.font: Font(name: "Sailec-Medium", size: 18) as Any,
+                    .foregroundColor: Color.KinNewUi.errorRed]
 
 		case .subtitle14LightTheme:
 			let paragraphStyle = NSMutableParagraphStyle()

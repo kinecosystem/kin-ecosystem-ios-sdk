@@ -25,7 +25,8 @@ class QRViewController: BRViewController {
     @IBOutlet weak var tickStack: UIStackView!
     @IBOutlet weak var confirmTick: UIView!
     @IBOutlet weak var topSpace: NSLayoutConstraint!
-    
+    @IBOutlet weak var headerHeight: NSLayoutConstraint!
+
     private let qrString: String
     private var mailViewController: MFMailComposeViewController?
     private(set) var tickMarked = false
@@ -55,7 +56,6 @@ class QRViewController: BRViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         Kin.track { try BackupQrCodePageViewed() }
         qrImageView.image = QR.generateImage(from: qrString, for: qrImageView.bounds.size)
         emailButton.setTitle("kinecosystem_backup_qr_email".localized(), for: .normal)
@@ -74,6 +74,10 @@ class QRViewController: BRViewController {
 
         setupTheming()
 
+        if UIScreen.main.bounds.height < 600 {
+             headerHeight.constant = 10
+             view.layoutIfNeeded()
+        }
         if #available(iOS 11, *) {
             topSpace.constant = 0.0
             view.layoutIfNeeded()

@@ -11,7 +11,7 @@ import Foundation
 class OrderViewModel {
     
     let id: String
-    let title: NSAttributedString
+    var title: NSAttributedString
     let subtitle: NSAttributedString
     let amount: NSAttributedString
     let last: Bool
@@ -35,22 +35,25 @@ class OrderViewModel {
                 } else {
                     details =  ""
                 }
+               title = model.title.styled(as: theme.title18) + details.styled(as: theme.title18)
+            break
             case .failed:
-                details = " - " + (model.error?.error ?? "kinecosystem_transaction_failed".localized())
+                title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
             default:
-                details = ""
+                title = model.title.styled(as: theme.title18)
             }
         default:
-            details = ""
+            title = model.title.styled(as: theme.title18)
         }
-        title = model.title.styled(as: theme.title18) +
-                details.styled(as: theme.title18)
+
+        // title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
         var subtitleString = model.description_
         if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
             subtitleString = subtitleString + " - " + shortDate
         }
+
         subtitle = subtitleString.styled(as: theme.lightSubtitle14)
-        
+
         if case .earn = model.offerType {
             icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
@@ -58,8 +61,5 @@ class OrderViewModel {
             icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
             amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
         }
-        
-        
-        
     }
 }
