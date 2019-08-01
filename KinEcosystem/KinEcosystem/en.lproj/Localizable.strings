@@ -25,7 +25,7 @@
 "kinecosystem_sorry_this_may_take_some_time" = "Sorry - this may take some time";
 "kinecosystem_copied_to_your_clipboard" = "Copied to your clipboard";
 "kinecosystem_copied_text" = "copied text";
-"kinecosystem_transaction_failed" = "Failed Transaction";
+"kinecosystem_transaction_failed" = "Failed";
 "kinecosystem_you_dont_have_enough_kin" = "Load up on Kin";
 "kinecosystem_you_dont_have_enough_kin_subtitle" = "to enjoy this experience";
 "kinecosystem_order_submission_failed" = "Order submission failed";
