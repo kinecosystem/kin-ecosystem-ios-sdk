@@ -25,7 +25,7 @@
 "kinecosystem_sorry_this_may_take_some_time" = "Desculpe - isso pode levar algum tempo";
 "kinecosystem_copied_to_your_clipboard" = "Copiado para a área de transferência";
 "kinecosystem_copied_text" = "texto copiado";
-"kinecosystem_transaction_failed" = "Falhou Transação";
+"kinecosystem_transaction_failed" = "Falhou";
 "kinecosystem_you_dont_have_enough_kin" = "Ganhe mais Kin";
 "kinecosystem_you_dont_have_enough_kin_subtitle" = "para aproveitar esta experiência";
 "kinecosystem_order_submission_failed" = "A submissão do pedido falhou";
@@ -79,4 +79,6 @@
 "my_kin" = "Meu Kin";
 "balance" = "Saldo";
 "restore_wallet_email_description" = "Ótimo, estamos quase lá! Por favor insira a sua senha";
+"kinecosystem_earned"="Ganho";
+"kinecosystem_used"="Usado";
 
