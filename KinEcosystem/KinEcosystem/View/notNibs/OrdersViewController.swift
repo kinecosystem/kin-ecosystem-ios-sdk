@@ -61,13 +61,16 @@ class OrdersViewController: UIViewController {
     }
     private lazy var linkBag = LinkBag()
     private var watcher:PaymentWatchProtocol??
+    private var promise = Promise<String>()
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.watcher = try? self.core!.blockchain.account?.watchPayments(cursor:"now")
         self.watcher??.emitter.on(next: { [weak self] paymentInfo in
             let p = paymentInfo as! WrappedKinCorePaymentInfo
             if var orderId = p.memoText?.components(separatedBy:"-").last {
-                Flows.earn(offerId: orderId, resultPromise:  Promise<String>(), core: self!.core)
+                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
+                     Flows.earn(offerId: orderId, resultPromise: self!.promise, core: self!.core)
+                })
             }
         }).add(to: self.linkBag)
     }
