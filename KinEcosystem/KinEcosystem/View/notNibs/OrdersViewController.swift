@@ -69,9 +69,8 @@ class OrdersViewController: UIViewController {
         self.watcher??.emitter.on(next: { [weak self] paymentInfo in
             let p = paymentInfo as! WrappedKinCorePaymentInfo
             if var orderId = p.memoText?.components(separatedBy:"-").last {
-                DispatchQueue.main.asyncAfter(deadline: .now() + 2, execute: {
-                     Flows.earn(offerId: orderId, resultPromise: self!.promise, core: self!.core)
-                })
+                Flows.updatePayment(orderId: orderId, core: self!.core)
+              // Flows.earn(offerId: orderId, resultPromise: self!.promise, core: self!.core)
             }
         }).add(to: self.linkBag)
     }

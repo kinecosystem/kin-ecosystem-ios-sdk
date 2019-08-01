@@ -30,7 +30,39 @@ typealias Promise = KinUtil.Promise
 
 struct Flows {
 
-    
+    static func updatePayment(orderId: String,core: Core) {
+        let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+          attempt(retryIntervals: intervals, closure: {
+            attemptNumber -> Promise<Void> in
+                let p = Promise<Void>()
+                core.network.dataAtPath("orders/\(orderId)")
+                .then { data in
+                    print(String(data: data, encoding: .utf8))
+                    core.data.read(Order.self,with: data,readBlock: { order in
+                        let hasResult = (order.result as? CouponCode)?.coupon_code != nil
+                        if order.error == nil && order.result != nil && order.orderStatus != .failed {
+                            core.data.save(Order.self, with: data)
+                            p.signal(())
+                        }
+                        else {
+                             p.signal(OrderStatusError.orderStillPending)
+                        }
+                        // logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
+                        // if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
+                        //    pending = false
+                        // }
+
+                      //  return p.signal(
+                        //let hasResult = (networkOrder.result as? CouponCode)?.coupon_code != nil
+                       // logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
+                       // if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
+                       //    pending = false
+                       // }
+                    })
+                }
+             return p
+        })
+    }
     static func earn(offerId: String,
                      resultPromise: Promise<String>,
                      core: Core) {
