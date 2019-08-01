@@ -90,3 +90,6 @@
 "my_kin" = "My Kin";
 "balance" = "Balance";
 "restore_wallet_email_description" = "Great, we’re almost there! Please enter your password";
+"kinecosystem_earned"="Earned";
+"kinecosystem_used"="Used";
+

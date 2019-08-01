@@ -56,6 +56,9 @@ class OrdersViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationItem.backBarButtonItem?.title = ""
         navigationController?.navigationBar.topItem?.title = ""
+
+        segmentedControl.leftItem = "kinecosystem_earned".localized()
+        segmentedControl.rightItem = "kinecosystem_used".localized()
     }
 
     fileprivate func setupExtraViews() {

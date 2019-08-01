@@ -79,4 +79,6 @@
 "my_kin" = "Meu Kin";
 "balance" = "Saldo";
 "restore_wallet_email_description" = "Ótimo, estamos quase lá! Por favor insira a sua senha";
+"kinecosystem_earned"="Ganho";
+"kinecosystem_used"="Usado";
 
