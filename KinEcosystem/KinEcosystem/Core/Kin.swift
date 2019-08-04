@@ -168,6 +168,8 @@ public class Kin: NSObject {
             try add(nativeOffer: offer)
         })
         prestartNativeOffers.removeAll()
+
+
     }
     
     public func login(jwt: String, callback: KinLoginCallback? = nil) throws {
@@ -221,7 +223,10 @@ public class Kin: NSObject {
                         logError("data sync failed (\(error))")
                     }
             }
-        }.error { error in
+            }.then({ _ in
+                PaymentManager.resume(core:core)
+            })
+        .error { error in
             let tError = KinEcosystemError.transform(error)
             Kin.track { try UserLoginFailed(errorReason: tError.localizedDescription) }
             callback?(tError)

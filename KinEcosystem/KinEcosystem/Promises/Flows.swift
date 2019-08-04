@@ -29,40 +29,28 @@ typealias POFlowPromise = Promise<(PaymentMemoIdentifier, OpenOrder)>
 typealias Promise = KinUtil.Promise
 
 struct Flows {
-
-    static func updatePayment(orderId: String,core: Core) {
+    static func updatePayment(orderId: String,core: Core) -> Promise<Order> {
         let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
-          attempt(retryIntervals: intervals, closure: {
-            attemptNumber -> Promise<Void> in
-                let p = Promise<Void>()
+          return attempt(retryIntervals: intervals, closure: {
+            attemptNumber -> Promise<Order> in
+                let p = Promise<Order>()
                 core.network.dataAtPath("orders/\(orderId)")
                 .then { data in
-                    print(String(data: data, encoding: .utf8))
                     core.data.read(Order.self,with: data,readBlock: { order in
                         let hasResult = (order.result as? CouponCode)?.coupon_code != nil
                         if order.error == nil && order.result != nil && order.orderStatus != .failed {
                             core.data.save(Order.self, with: data)
-                            p.signal(())
+                            p.signal(order)
                         }
                         else {
                              p.signal(OrderStatusError.orderStillPending)
                         }
-                        // logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
-                        // if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
-                        //    pending = false
-                        // }
-
-                      //  return p.signal(
-                        //let hasResult = (networkOrder.result as? CouponCode)?.coupon_code != nil
-                       // logVerbose("spend order \(networkOrder.id) status: \(networkOrder.orderStatus), result: \(hasResult ? "👍🏼" : "nil")")
-                       // if (networkOrder.orderStatus != .pending && hasResult) || networkOrder.orderStatus == .failed {
-                       //    pending = false
-                       // }
                     })
                 }
              return p
         })
     }
+    
     static func earn(offerId: String,
                      resultPromise: Promise<String>,
                      core: Core) {
