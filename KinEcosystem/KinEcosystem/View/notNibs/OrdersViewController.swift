@@ -59,6 +59,10 @@ class OrdersViewController: UIViewController {
         
         segmentedControl.leftItem = "kinecosystem_earned".localized()
         segmentedControl.rightItem = "kinecosystem_used".localized()
+
+        PaymentManager.add { (order) in
+            print("hello")
+        }
     }
 
     fileprivate func setupExtraViews() {

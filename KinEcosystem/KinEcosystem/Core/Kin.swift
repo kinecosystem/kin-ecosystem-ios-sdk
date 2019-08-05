@@ -169,7 +169,9 @@ public class Kin: NSObject {
         })
         prestartNativeOffers.removeAll()
 
-
+        if let core = core, let account = core.blockchain.account {
+             PaymentManager.resume(core:core)
+        }
     }
     
     public func login(jwt: String, callback: KinLoginCallback? = nil) throws {
@@ -239,6 +241,8 @@ public class Kin: NSObject {
             return
         }
         core.offboard()
+        PaymentManager.resign()
+
     }
     
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {

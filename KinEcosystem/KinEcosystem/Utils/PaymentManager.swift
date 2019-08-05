@@ -10,20 +10,19 @@ import UIKit
 import KinMigrationModule
 import CoreData
 import CoreDataStack
+protocol ObserverProtocol: class  {
+
+}
+typealias ObserverType = NSObject & ObserverProtocol
 typealias PaymentManagerCallback = (Order)->Void
 class PaymentManager: NSObject {
-
     static private let linkBag = LinkBag()
     static private var core:Core!
-    static private var observers = [PaymentManagerCallback]()
     static private var watcher:PaymentWatchProtocol??
     static private var promise = Promise<String>()
+    static private var observers = [ObserverType]()
+    class func add(observer:ObserverProtocol) {
 
-    class func add(observer:@escaping PaymentManagerCallback) {
-        //TODO: check if observer exists by cheking the owner
-        //if !PaymentManager.observers.index(of: observer) {
-            PaymentManager.observers.append(observer)
-        //}
     }
     //TODO: implement remove observer
 //    class func remove(observer:@escaping PaymentManagerCallback) {
