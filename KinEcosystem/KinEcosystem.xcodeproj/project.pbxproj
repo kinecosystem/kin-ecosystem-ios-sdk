@@ -105,6 +105,7 @@
 		9D00E6C222F6AA87006AF776 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E6C122F6AA87006AF776 /* PaymentManager.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
+		9DB999E422F95E0A00F6987C /* Alon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB999E322F95E0A00F6987C /* Alon.swift */; };
 		9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2C22F15F9300525553 /* PollingManager.swift */; };
 		9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */; };
 		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
@@ -407,6 +408,7 @@
 		9D00E6C122F6AA87006AF776 /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
+		9DB999E322F95E0A00F6987C /* Alon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alon.swift; sourceTree = "<group>"; };
 		9DE67D2C22F15F9300525553 /* PollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingManager.swift; sourceTree = "<group>"; };
 		9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTaskFactory.swift; sourceTree = "<group>"; };
 		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
@@ -607,6 +609,7 @@
 			isa = PBXGroup;
 			children = (
 				9D00E6C122F6AA87006AF776 /* PaymentManager.swift */,
+				9DB999E322F95E0A00F6987C /* Alon.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1448,6 +1451,7 @@
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
 				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
 				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
+				9DB999E422F95E0A00F6987C /* Alon.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */,

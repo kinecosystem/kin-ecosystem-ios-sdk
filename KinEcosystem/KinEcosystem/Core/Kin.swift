@@ -70,7 +70,8 @@ public struct NativeOffer: Equatable {
     }
 }
 
-public class Kin: NSObject {
+public class Kin: NSObject,AlonObserverProtocol {
+    public var id:Int = 0
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate weak var mpPresentingController: UIViewController?
@@ -234,6 +235,7 @@ public class Kin: NSObject {
             callback?(tError)
         }
     }
+
     private var watcher:PaymentWatchProtocol?
     public func logout() {
         guard let core = core else {
