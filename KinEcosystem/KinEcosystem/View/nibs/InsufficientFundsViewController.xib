@@ -91,7 +91,7 @@
                     </constraints>
                 </stackView>
                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fqN-il-i3Y">
-                    <rect key="frame" x="10" y="30" width="40" height="40"/>
+                    <rect key="frame" x="9" y="37" width="40" height="40"/>
                     <constraints>
                         <constraint firstAttribute="width" constant="40" id="AQX-7m-dN0"/>
                         <constraint firstAttribute="height" constant="40" id="lXg-Rg-6gZ"/>
@@ -104,10 +104,10 @@
             </subviews>
             <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
-                <constraint firstItem="fqN-il-i3Y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="10" id="2vt-zN-ckv"/>
+                <constraint firstItem="fqN-il-i3Y" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" constant="17" id="2vt-zN-ckv"/>
                 <constraint firstItem="rRY-e9-Flj" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="8S2-Wh-TQQ"/>
                 <constraint firstItem="rRY-e9-Flj" firstAttribute="top" secondItem="fnl-2z-Ty3" secondAttribute="top" id="CIm-P4-jM4"/>
-                <constraint firstItem="fqN-il-i3Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="10" id="Mht-mF-Pc1"/>
+                <constraint firstItem="fqN-il-i3Y" firstAttribute="leading" secondItem="fnl-2z-Ty3" secondAttribute="leading" constant="9" id="Mht-mF-Pc1"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="bottom" secondItem="rRY-e9-Flj" secondAttribute="bottom" id="THx-vW-nrJ"/>
                 <constraint firstItem="fnl-2z-Ty3" firstAttribute="trailing" secondItem="rRY-e9-Flj" secondAttribute="trailing" id="gWL-oB-Udb"/>
             </constraints>
