@@ -13,21 +13,26 @@ class OrderViewModel {
     let id: String
     var title: NSAttributedString
     let subtitle: NSAttributedString
-    let amount: NSAttributedString
+    var amount: NSAttributedString
+    var failed: NSAttributedString
     let last: Bool
     let first: Bool
     let theme: Theme
     let icon: UIImage?
-    
+
     init(with model: Order, theme: Theme, last: Bool, first: Bool) {
         self.theme = theme
         self.last = last
         self.first = first
         id = model.id
         let details: String
+
+        failed = "".styled(as: theme.title18Error)
         
         switch model.offerType {
+
         case .spend:
+            icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
             switch model.orderStatus {
             case .completed:
                 if let action = model.call_to_action {
@@ -36,14 +41,22 @@ class OrderViewModel {
                     details =  ""
                 }
                title = model.title.styled(as: theme.title18) + details.styled(as: theme.title18)
+               amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             break
             case .failed:
-                title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
+                title = model.title.styled(as: theme.title18)
+                amount = "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error) + "\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             default:
                 title = model.title.styled(as: theme.title18)
+                amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             }
         default:
             title = model.title.styled(as: theme.title18)
+            icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
+            amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
+            failed = ( "-" + "kinecosystem_transaction_failed".localized() ).styled(as: theme.title18Error)
+            title = "*zdsrg sdflgjv sdflvj sdfv dv dfs".styled(as: theme.title18)
+            amount = "\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
         }
 
         // title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
@@ -53,13 +66,5 @@ class OrderViewModel {
         }
 
         subtitle = subtitleString.styled(as: theme.lightSubtitle14)
-
-        if case .earn = model.offerType {
-            icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
-            amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
-        } else {
-            icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
-            amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
-        }
     }
 }

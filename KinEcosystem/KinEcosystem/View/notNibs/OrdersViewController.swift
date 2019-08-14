@@ -115,7 +115,7 @@ class OrdersViewController: UIViewController {
                     this.orderViewModels[order.id] = viewModel
                 }
 
-
+                orderCell.failed.attributedText = viewModel.failed
                 orderCell.amount.attributedText = viewModel.amount
                 orderCell.title.attributedText = viewModel.title
                 orderCell.subtitle.attributedText = viewModel.subtitle
