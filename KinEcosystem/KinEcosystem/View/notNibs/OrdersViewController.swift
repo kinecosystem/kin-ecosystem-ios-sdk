@@ -125,7 +125,7 @@ class OrdersViewController: UIViewController {
             }
 
             self.tableView.add(tableSection: section)
-            try? frc.performFetch()
+           // try? frc.performFetch()
             self.tableView.reloadData()
             self.segmentedControl.isEnabled = true
 

@@ -28,7 +28,6 @@ class OrderViewModel {
         let details: String
 
         failed = "".styled(as: theme.title18Error)
-
         title = model.title.styled(as: theme.title18)
         icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
 
@@ -53,11 +52,6 @@ class OrderViewModel {
         default:
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
         }
-
-        //MARK: - Temp
-       //failed = " - ".styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
-       // title = "Very Long Title, Very Long Title, Very Long Title".styled(as: theme.title18)
-        //MARK -
 
         var subtitleString = model.description_
         if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
