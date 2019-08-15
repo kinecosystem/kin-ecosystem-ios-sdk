@@ -37,7 +37,6 @@ class PaymentManager {
                             })
                     }
                 }
-
             }).add(to: self.linkBag)
     }
     class func resign() {

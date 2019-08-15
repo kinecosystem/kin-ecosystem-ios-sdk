@@ -54,7 +54,11 @@ class OrderViewModel {
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
         }
 
-        // title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
+        //MARK: - Temp
+       //failed = " - ".styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
+       // title = "Very Long Title, Very Long Title, Very Long Title".styled(as: theme.title18)
+        //MARK -
+
         var subtitleString = model.description_
         if let shortDate = Iso8601DateFormatter.shortString(from: model.completion_date as Date) {
             subtitleString = subtitleString + " - " + shortDate
