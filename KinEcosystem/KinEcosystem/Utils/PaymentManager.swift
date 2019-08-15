@@ -28,13 +28,16 @@ class PaymentManager {
         guard  watcher == nil else { return }
         watcher = try? self.core.blockchain.account?.watchPayments(cursor:"now")
             self.watcher??.emitter.on(next: { paymentInfo in
-                let p = paymentInfo as! WrappedKinCorePaymentInfo
-                if var orderId = p.memoText?.components(separatedBy:"-").last {
-                Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
-                    .then({ order in
-                        PaymentManager.order.value = order
-                    })
+                print(type(of:paymentInfo))
+                if let p = paymentInfo as? PaymentInfoProtocol {
+                    if var orderId = p.memoText?.components(separatedBy:"-").last {
+                        Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
+                            .then({ order in
+                                PaymentManager.order.value = order
+                            })
+                    }
                 }
+
             }).add(to: self.linkBag)
     }
     class func resign() {

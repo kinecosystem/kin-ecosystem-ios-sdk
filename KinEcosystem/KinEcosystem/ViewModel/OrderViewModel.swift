@@ -28,11 +28,12 @@ class OrderViewModel {
         let details: String
 
         failed = "".styled(as: theme.title18Error)
-        
-        switch model.offerType {
 
+        title = model.title.styled(as: theme.title18)
+        icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
+
+        switch model.offerType {
         case .spend:
-            icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
             switch model.orderStatus {
             case .completed:
                 if let action = model.call_to_action {
@@ -44,19 +45,13 @@ class OrderViewModel {
                amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             break
             case .failed:
-                title = model.title.styled(as: theme.title18)
+                failed = " - ".styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
                 amount = "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error) + "\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             default:
-                title = model.title.styled(as: theme.title18)
                 amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
             }
         default:
-            title = model.title.styled(as: theme.title18)
-            icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
-            failed = ( "-" + "kinecosystem_transaction_failed".localized() ).styled(as: theme.title18Error)
-            title = "*zdsrg sdflgjv sdflvj sdfv dv dfs".styled(as: theme.title18)
-            amount = "\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
         }
 
         // title = (model.title + " - ").styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
