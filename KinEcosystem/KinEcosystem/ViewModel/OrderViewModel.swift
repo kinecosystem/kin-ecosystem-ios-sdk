@@ -29,10 +29,11 @@ class OrderViewModel {
 
         failed = "".styled(as: theme.title18Error)
         title = model.title.styled(as: theme.title18)
-        icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
+
 
         switch model.offerType {
             case .spend:
+            icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
             amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
            
             switch model.orderStatus {
@@ -51,8 +52,10 @@ class OrderViewModel {
                 default:
                 break
             }
-        default:
+            default:
+             icon = UIImage.bundleImage(first ? "kinEarnIconActive" : "kinIconInactive")
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
+            break
         }
 
         var subtitleString = model.description_
