@@ -34,7 +34,7 @@ class OrderViewModel {
         switch model.offerType {
             case .spend:
             amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
-            model.orderStatus = .failed
+           
             switch model.orderStatus {
                 case .completed:
                     if let action = model.call_to_action {
