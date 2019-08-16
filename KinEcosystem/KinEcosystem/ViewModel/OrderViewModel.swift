@@ -32,22 +32,24 @@ class OrderViewModel {
         icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
 
         switch model.offerType {
-        case .spend:
+            case .spend:
+            amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
+            model.orderStatus = .failed
             switch model.orderStatus {
-            case .completed:
-                if let action = model.call_to_action {
-                    details = " - " + action
-                } else {
-                    details =  ""
-                }
-               title = model.title.styled(as: theme.title18) + details.styled(as: theme.title18)
-               amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
-            break
-            case .failed:
-                failed = " - ".styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
-                amount = "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error) + "\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
-            default:
-                amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
+                case .completed:
+                    if let action = model.call_to_action {
+                        details = " - " + action
+                    } else {
+                        details =  ""
+                    }
+                   title = model.title.styled(as: theme.title18) + details.styled(as: theme.title18)
+
+                break
+                case .failed:
+                    failed = " - ".styled(as: theme.title18) + "kinecosystem_transaction_failed".localized().styled(as: theme.title18Error)
+
+                default:
+                break
             }
         default:
             amount = "+\(model.amount)".styled(as: first ? theme.historyRecentEarnAmount : theme.historyAmount)
