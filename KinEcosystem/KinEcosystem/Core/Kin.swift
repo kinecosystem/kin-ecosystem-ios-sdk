@@ -610,8 +610,10 @@ public class Kin: NSObject,AlonObserverProtocol {
                 //logVerbose("accounts at onboard begin:\n\n\(core.blockchain.client.accounts.debugInfo)")
                 core.onboard()
                         .then {
+                            PaymentManager.resume(core:core)
                             //logVerbose("accounts at onboard end:\n\n\(core.blockchain.client.accounts.debugInfo)")
                             p.signal(())
+
                         }
                         .error { error in
                             if case KinEcosystemError.service(.timeout, _) = error {

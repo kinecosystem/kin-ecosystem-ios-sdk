@@ -26,9 +26,11 @@ class PaymentManager {
     class func resume(core:Core) {
         self.core = core
         guard  watcher == nil else { return }
-        watcher = try? self.core.blockchain.account?.watchPayments(cursor:"now")
+        do {
+            watcher = try self.core.blockchain.account?.watchPayments(cursor:"now")
+            print("1")
             self.watcher??.emitter.on(next: { paymentInfo in
-                print(type(of:paymentInfo))
+                 print("2")
                 if let p = paymentInfo as? PaymentInfoProtocol {
                     if var orderId = p.memoText?.components(separatedBy:"-").last {
                         Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
@@ -38,8 +40,13 @@ class PaymentManager {
                     }
                 }
             }).add(to: self.linkBag)
+
+        } catch {
+             print("watcher error",error)
+        }
     }
     class func resign() {
-         watcher??.emitter.unlink()
+        watcher??.emitter.unlink()
+        watcher = nil
     }
 }

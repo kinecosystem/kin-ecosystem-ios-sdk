@@ -58,7 +58,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   SimpleCoreDataStack:
-    :commit: 16d87f831db7468116af1d8d46bf4573233f920c
+    :commit: 403be8a887fd967d2dc03f8cf1aba11c6346ba32
     :git: https://github.com/alongenosar/CoreDataStack.git
 
 SPEC CHECKSUMS:
