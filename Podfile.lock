@@ -34,7 +34,7 @@ DEPENDENCIES:
   - KinAppreciationModuleOptionsMenu (= 0.0.4)
   - KinEcosystem (from `./`)
   - KinMigrationModule
-  - SimpleCoreDataStack (from `https://github.com/alongenosar/CoreDataStack.git`)
+  - SimpleCoreDataStack (from `https://github.com/kinecosystem/CoreDataStack.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -54,12 +54,12 @@ EXTERNAL SOURCES:
   KinEcosystem:
     :path: "./"
   SimpleCoreDataStack:
-    :git: https://github.com/alongenosar/CoreDataStack.git
+    :git: https://github.com/kinecosystem/CoreDataStack.git
 
 CHECKOUT OPTIONS:
   SimpleCoreDataStack:
     :commit: 403be8a887fd967d2dc03f8cf1aba11c6346ba32
-    :git: https://github.com/alongenosar/CoreDataStack.git
+    :git: https://github.com/kinecosystem/CoreDataStack.git
 
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
@@ -76,6 +76,6 @@ SPEC CHECKSUMS:
   StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
   StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
 
-PODFILE CHECKSUM: 068a1e0514c07062f57961508a760a50ba83f185
+PODFILE CHECKSUM: 71fa6cafd356688c21b4b2b5034fb259328a6e8b
 
 COCOAPODS: 1.7.4

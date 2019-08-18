@@ -7,7 +7,7 @@ workspace 'KinEcosystem'
 
 target 'KinEcosystem' do
     project 'KinEcosystem/KinEcosystem'
-    pod 'SimpleCoreDataStack' , :git => 'https://github.com/alongenosar/CoreDataStack.git'
+    pod 'SimpleCoreDataStack' , :git => 'https://github.com/kinecosystem/CoreDataStack.git'
     pod 'KinMigrationModule'
     pod 'KinAppreciationModuleOptionsMenu', '0.0.4'
 end

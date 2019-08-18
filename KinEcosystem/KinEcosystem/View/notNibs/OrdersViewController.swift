@@ -102,7 +102,7 @@ class OrdersViewController: UIViewController {
                         logWarn("cell configure failed")
                         return
                 }
-                print("amount \(order.amount), row \(ip.row)")
+
                 orderCell.selectionStyle = .none
                 var viewModel: OrderViewModel
                if let orderViewModel = this.orderViewModels[order.id] {

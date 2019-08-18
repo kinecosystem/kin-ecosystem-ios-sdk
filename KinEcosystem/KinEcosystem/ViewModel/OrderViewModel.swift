@@ -35,7 +35,7 @@ class OrderViewModel {
             case .spend:
             icon = UIImage.bundleImage(first ? "kinSpendIconActive" : "kinIconInactive")
             amount = "-\(model.amount)".styled(as: first ? theme.historyRecentSpendAmount : theme.historyAmount)
-           
+         
             switch model.orderStatus {
                 case .completed:
                     if let action = model.call_to_action {
