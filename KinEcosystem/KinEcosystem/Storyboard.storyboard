@@ -83,8 +83,11 @@
                                 <rect key="frame" x="0.0" y="0.0" width="366" height="50"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Balance" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v2Z-bx-Fck">
-                                        <rect key="frame" x="0.0" y="13" width="70" height="24"/>
+                                        <rect key="frame" x="0.0" y="11.5" width="70" height="27"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="27" id="vru-ne-tH2"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                         <color key="textColor" red="0.3665980995" green="0.4019234478" blue="0.51380604510000005" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <nil key="highlightedColor"/>
@@ -99,6 +102,9 @@
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rs1-K2-ror">
                                         <rect key="frame" x="316" y="0.0" width="50" height="50"/>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="52" id="1ya-3S-1lV"/>
+                                        </constraints>
                                         <fontDescription key="fontDescription" type="system" pointSize="24"/>
                                         <color key="textColor" red="0.018012944610000001" green="0.48562967779999999" blue="0.98989969489999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <nil key="highlightedColor"/>

@@ -29,7 +29,28 @@ typealias POFlowPromise = Promise<(PaymentMemoIdentifier, OpenOrder)>
 typealias Promise = KinUtil.Promise
 
 struct Flows {
-        
+    static func updatePayment(orderId: String,core: Core) -> Promise<Order> {
+        let intervals: [TimeInterval] = [2, 4, 8, 16, 32, 32, 32, 32]
+          return attempt(retryIntervals: intervals, closure: {
+            attemptNumber -> Promise<Order> in
+                let p = Promise<Order>()
+                core.network.dataAtPath("orders/\(orderId)")
+                .then { data in
+                    core.data.read(Order.self,with: data,readBlock: { order in
+                        let hasResult = (order.result as? CouponCode)?.coupon_code != nil
+                        if order.error == nil && order.result != nil && order.orderStatus != .failed {
+                            core.data.save(Order.self, with: data)
+                            p.signal(order)
+                        }
+                        else {
+                             p.signal(OrderStatusError.orderStillPending)
+                        }
+                    })
+                }
+             return p
+        })
+    }
+    
     static func earn(offerId: String,
                      resultPromise: Promise<String>,
                      core: Core) {

@@ -27,6 +27,11 @@ class InsufficientFundsViewController: UIViewController {
         view.addSubview(balanceView)
         cancelButton.centerYAnchor.constraint(equalTo: balanceView.centerYAnchor).isActive = true
         view.centerXAnchor.constraint(equalTo: balanceView.centerXAnchor).isActive = true
+
+    }
+
+    override func viewDidAppear(_ animated: Bool) {
+        print(view.superview?.layer.cornerRadius)
     }
 
     @IBAction func goTapped(_ sender: Any) {

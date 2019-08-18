@@ -102,8 +102,12 @@
 		9741B6F42668E52AEDDCA79D /* restore_password_done_button_tapped.swift in Sources */ = {isa = PBXBuildFile; fileRef = E3D43945E2B2E6682148CBEB /* restore_password_done_button_tapped.swift */; };
 		97EB7C125FF55AD15AECE615 /* spend_thankyou_page_viewed.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5557FBA75D82FF862CE7F805 /* spend_thankyou_page_viewed.swift */; };
 		98DC5FACC5C4CE1AA65254BD /* spend_order_cancelled.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7553510DE380E26DE6A058DD /* spend_order_cancelled.swift */; };
+		9D00E6C222F6AA87006AF776 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E6C122F6AA87006AF776 /* PaymentManager.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
+		9DB999E422F95E0A00F6987C /* Alon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB999E322F95E0A00F6987C /* Alon.swift */; };
+		9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2C22F15F9300525553 /* PollingManager.swift */; };
+		9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */; };
 		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
@@ -401,8 +405,12 @@
 		9BF568621B072303147C8988 /* stellar_kin_trustline_setup_failed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = stellar_kin_trustline_setup_failed.swift; sourceTree = "<group>"; };
 		9CDA17F69D20CE4C0291C512 /* spend_redeem_page_viewed.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = spend_redeem_page_viewed.swift; sourceTree = "<group>"; };
 		9CDA48C798373B4DA7D2E316 /* continue_button_tapped.swift */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.swift; path = continue_button_tapped.swift; sourceTree = "<group>"; };
+		9D00E6C122F6AA87006AF776 /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
-		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; };
+		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
+		9DB999E322F95E0A00F6987C /* Alon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alon.swift; sourceTree = "<group>"; };
+		9DE67D2C22F15F9300525553 /* PollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingManager.swift; sourceTree = "<group>"; };
+		9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTaskFactory.swift; sourceTree = "<group>"; };
 		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
 		9DEB65C422DC3F880070887D /* Storyboard.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Storyboard.storyboard; sourceTree = "<group>"; };
 		9DEB660422DC543F0070887D /* Podfile */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
@@ -595,6 +603,15 @@
 				6831950922CDEF1000EC2DDF /* GiftingManager.swift */,
 			);
 			path = GiftingModule;
+			sourceTree = "<group>";
+		};
+		9D00E6C022F6AA7C006AF776 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				9D00E6C122F6AA87006AF776 /* PaymentManager.swift */,
+				9DB999E322F95E0A00F6987C /* Alon.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 		A472BB1825C38D0E53ADAF9F /* Pods */ = {
@@ -912,6 +929,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				9D00E6C022F6AA7C006AF776 /* Utils */,
 				E9D3F803228C510F0019253E /* fonts */,
 				E92BA42421A19C0A00C952D8 /* BackupModule */,
 				E954100420E3B30E0038FF49 /* BI */,
@@ -929,6 +947,8 @@
 				E9FC5998203B19A800D1DA2B /* Assets.xcassets */,
 				E93146312164F52B008F2D74 /* Localizable.strings */,
 				9DEB65C422DC3F880070887D /* Storyboard.storyboard */,
+				9DE67D2C22F15F9300525553 /* PollingManager.swift */,
+				9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */,
 			);
 			path = KinEcosystem;
 			sourceTree = "<group>";
@@ -1404,6 +1424,7 @@
 				E954106920E3B3A10038FF49 /* EventsStore.swift in Sources */,
 				913793C122D3677D00C07E76 /* KinFlow.swift in Sources */,
 				6831950322CCEACA00EC2DDF /* Promise+extenstions.swift in Sources */,
+				9D00E6C222F6AA87006AF776 /* PaymentManager.swift in Sources */,
 				E92BA45C21A19C0A00C952D8 /* FlowController.swift in Sources */,
 				E98E48A3201A110C00CB8CC2 /* Bundle+extensions.swift in Sources */,
 				E92F7B882069992A008A027F /* Animations.swift in Sources */,
@@ -1430,8 +1451,11 @@
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
 				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
 				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
+				9DB999E422F95E0A00F6987C /* Alon.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
+				9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */,
+				9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */,
 				E98D1780204D2B3D00FEB57A /* NSAttributedString+extensions.swift in Sources */,
 				91A4EA8820CFB22E00C3399F /* KinViewController.swift in Sources */,
 				E9EBA02720288C1800B21DFD /* EcosystemNet.swift in Sources */,

@@ -13,6 +13,7 @@ class OrderCell: UITableViewCell {
     @IBOutlet weak var title: UILabel!
     @IBOutlet weak var subtitle: UILabel!
     @IBOutlet weak var amount: UILabel!
+    @IBOutlet weak var failed: UILabel!
     @IBOutlet weak var timelineView: OrderCellTimelineView!
     
     var last: Bool? {
