@@ -79,14 +79,12 @@ class OrdersViewController: UIViewController {
     }
 
     fileprivate func setupFRCSections() {
-
-
         DispatchQueue.main.async {
             self.tableView.removeTableSection(for: 0)
             let request = NSFetchRequest<Order>(entityName: "Order")
             request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
             let offerTypeDescriptor = self.offerType == .earn ? "earn" : "spend"
-            print("offerTypeDescriptor",offerTypeDescriptor)
+
             request.predicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
                 .or(["status" : OrderStatus.delayed.rawValue]))
                 .and(["offer_type" : offerTypeDescriptor])
@@ -96,6 +94,7 @@ class OrdersViewController: UIViewController {
                                                                   cacheName: nil)
 
             let section = FetchedResultsTableSection(table: self.tableView, frc: frc) { [weak self] cell, ip in
+
                 guard   let this = self,
                     let theme = this.theme,
                     let order = this.tableView.objectForTable(at: ip) as? Order,
@@ -103,17 +102,20 @@ class OrdersViewController: UIViewController {
                         logWarn("cell configure failed")
                         return
                 }
-
+                print("amount \(order.amount), row \(ip.row)")
                 orderCell.selectionStyle = .none
                 var viewModel: OrderViewModel
-                if let orderViewModel = this.orderViewModels[order.id] {
-                    viewModel = orderViewModel
+               if let orderViewModel = this.orderViewModels[order.id] {
+                   viewModel = orderViewModel
                 } else {
                     viewModel = OrderViewModel(with: order,
                                                theme: theme,
                                                last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
                                                first: ip.row == 0)
-                    this.orderViewModels[order.id] = viewModel
+                    //Becouse first item might be pushed to be second, we can't store its viewmodel, as the view model determins the firs item uniqe appearence
+                    if ip.row > 0 {
+                            this.orderViewModels[order.id] = viewModel
+                    }
                 }
 
                 orderCell.failed.attributedText = viewModel.failed
@@ -173,6 +175,7 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
             segmentedControl.isEnabled = true
         }
     }
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderCellName, for: indexPath)
         let section = tableView.tableSection(for: indexPath.section)
