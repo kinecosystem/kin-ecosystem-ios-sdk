@@ -79,6 +79,7 @@ class OrdersViewController: UIViewController {
     }
 
     fileprivate func setupFRCSections() {
+
         DispatchQueue.main.async {
             self.tableView.removeTableSection(for: 0)
             let request = NSFetchRequest<Order>(entityName: "Order")
@@ -167,13 +168,9 @@ class OrdersViewController: UIViewController {
 
 @available(iOS 9.0, *)
 extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableView.tableSection(for: section)?.objectCount ?? 0
-    }
-    func tableView(_ tableView: UITableView, willDisplay cell: UITableViewCell, forRowAt indexPath: IndexPath) {
-        if indexPath.row == tableView.indexPathsForVisibleRows?.last?.row {
-            segmentedControl.isEnabled = true
-        }
     }
 
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -184,22 +181,29 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard   let order = tableView.objectForTable(at: indexPath) as? Order else {
+        guard let order = tableView.objectForTable(at: indexPath) as? Order else {
                 logError("offer content is not in the correct format")
                 return
         }
         presentCoupon(for: order)
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
+
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 1
+    }
+
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
+    
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        segmentedControl.isEnabled = true
         return nil
     }
-    
 }
 
 extension OrdersViewController: Themed {
