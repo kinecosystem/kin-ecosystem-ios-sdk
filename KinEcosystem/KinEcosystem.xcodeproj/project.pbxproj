@@ -106,6 +106,11 @@
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
 		9DB999E422F95E0A00F6987C /* Alon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB999E322F95E0A00F6987C /* Alon.swift */; };
+		9DC50901230A99F7003E1A70 /* NSPredicate+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */; };
+		9DC50902230A99F7003E1A70 /* FetchedResultsTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */; };
+		9DC50903230A99F7003E1A70 /* EntityWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FE230A99F7003E1A70 /* EntityWatcher.swift */; };
+		9DC50904230A99F7003E1A70 /* FetchedResultsCollectionSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FF230A99F7003E1A70 /* FetchedResultsCollectionSection.swift */; };
+		9DC50905230A99F7003E1A70 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC50900230A99F7003E1A70 /* CoreDataStack.swift */; };
 		9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2C22F15F9300525553 /* PollingManager.swift */; };
 		9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */; };
 		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
@@ -409,6 +414,11 @@
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		9DB999E322F95E0A00F6987C /* Alon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alon.swift; sourceTree = "<group>"; };
+		9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+extensions.swift"; sourceTree = "<group>"; };
+		9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableSection.swift; sourceTree = "<group>"; };
+		9DC508FE230A99F7003E1A70 /* EntityWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityWatcher.swift; sourceTree = "<group>"; };
+		9DC508FF230A99F7003E1A70 /* FetchedResultsCollectionSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsCollectionSection.swift; sourceTree = "<group>"; };
+		9DC50900230A99F7003E1A70 /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
 		9DE67D2C22F15F9300525553 /* PollingManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollingManager.swift; sourceTree = "<group>"; };
 		9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = URLTaskFactory.swift; sourceTree = "<group>"; };
 		9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Theme+Factory.swift"; sourceTree = "<group>"; };
@@ -612,6 +622,18 @@
 				9DB999E322F95E0A00F6987C /* Alon.swift */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		9DC508FB230A99ED003E1A70 /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+				9DC50900230A99F7003E1A70 /* CoreDataStack.swift */,
+				9DC508FE230A99F7003E1A70 /* EntityWatcher.swift */,
+				9DC508FF230A99F7003E1A70 /* FetchedResultsCollectionSection.swift */,
+				9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */,
+				9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */,
+			);
+			path = "New Group";
 			sourceTree = "<group>";
 		};
 		A472BB1825C38D0E53ADAF9F /* Pods */ = {
@@ -929,6 +951,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
+				9DC508FB230A99ED003E1A70 /* New Group */,
 				9D00E6C022F6AA7C006AF776 /* Utils */,
 				E9D3F803228C510F0019253E /* fonts */,
 				E92BA42421A19C0A00C952D8 /* BackupModule */,
@@ -1446,6 +1469,7 @@
 				9DF8EE4522DB2C6300264DB2 /* UIView+More.swift in Sources */,
 				E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */,
 				E92BA45221A19C0A00C952D8 /* PasswordEntryViewController.swift in Sources */,
+				9DC50902230A99F7003E1A70 /* FetchedResultsTableSection.swift in Sources */,
 				E942F8D32030DD7D00DD4B8E /* Blockchain.swift in Sources */,
 				E942F90020331AAE00DD4B8E /* MarketplaceViewController.swift in Sources */,
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
@@ -1464,6 +1488,7 @@
 				E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */,
 				E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */,
 				E92501BA20614A4400E2E738 /* Flows.swift in Sources */,
+				9DC50903230A99F7003E1A70 /* EntityWatcher.swift in Sources */,
 				E912B4E7203C5AE0005ADBA1 /* Order.swift in Sources */,
 				E98E48B7201A12AC00CB8CC2 /* KinEcosystem.xcdatamodeld in Sources */,
 				E954A60920568B9600F01C8A /* DiamondsLoaderView.swift in Sources */,
@@ -1483,6 +1508,7 @@
 				E92BA44A21A19C0A00C952D8 /* LifeCycleProtocol.swift in Sources */,
 				E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */,
 				E9DB9E2B20A2EFFE00AD9EB1 /* JWTConfirmation.swift in Sources */,
+				9DC50905230A99F7003E1A70 /* CoreDataStack.swift in Sources */,
 				E92BA45321A19C0A00C952D8 /* QRPickerController.swift in Sources */,
 				913793BE22D3677D00C07E76 /* SheetViewController.swift in Sources */,
 				E928960921E4F02000656382 /* String+extensions.swift in Sources */,
@@ -1511,6 +1537,7 @@
 				2A2E0B873741F7FB579EB603 /* stellar_account_creation_requested.swift in Sources */,
 				AEDEF31D87DF5BCBAE93A1EF /* spend_offer_tapped.swift in Sources */,
 				171514926EC55A067C1AEEC8 /* backup_welcome_page_viewed.swift in Sources */,
+				9DC50901230A99F7003E1A70 /* NSPredicate+extensions.swift in Sources */,
 				C8108F1B8517F53F5A2B77D3 /* spend_redeem_button_tapped.swift in Sources */,
 				04B0974402601725A445DFAC /* earn_order_cancelled.swift in Sources */,
 				CC7C6D8E7D96AAD5BFE43A74 /* kin_balance_updated.swift in Sources */,
@@ -1523,6 +1550,7 @@
 				7E9A1A3519EB6C43E9C1AF15 /* back_button_on_marketplace_page_tapped.swift in Sources */,
 				25E60FA1F9F211FF13678F46 /* common.swift in Sources */,
 				3B5EFA07B25568F27FC32950 /* restore_are_you_sure_ok_button_tapped.swift in Sources */,
+				9DC50904230A99F7003E1A70 /* FetchedResultsCollectionSection.swift in Sources */,
 				5EEE53E05A25289FF5CE3A72 /* backup_create_password_back_button_tapped.swift in Sources */,
 				B27A008B6D866EB498CD47ED /* user.swift in Sources */,
 				E5CABF3110A99D3DA5504C5D /* settings_option_tapped.swift in Sources */,

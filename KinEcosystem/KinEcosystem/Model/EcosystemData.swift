@@ -9,7 +9,6 @@
 //
 
 import Foundation
-import CoreDataStack
 import CoreData
 import KinCoreSDK
 

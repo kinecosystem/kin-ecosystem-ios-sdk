@@ -9,7 +9,6 @@
 import UIKit
 import KinMigrationModule
 import CoreData
-import CoreDataStack
 
 class PaymentManager {
 

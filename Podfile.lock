@@ -12,7 +12,6 @@ PODS:
   - KinEcosystem (1.2.6):
     - KinAppreciationModuleOptionsMenu (= 0.0.4)
     - KinMigrationModule (= 0.1.0)
-    - SimpleCoreDataStack (= 0.1.8)
   - KinMigrationModule (0.1.0):
     - KinCoreSDK (= 0.8.0)
     - KinSDK (= 0.9.0)
@@ -21,7 +20,6 @@ PODS:
     - KinUtil (= 0.1.0)
     - Sodium (= 0.8.0)
   - KinUtil (0.1.0)
-  - SimpleCoreDataStack (0.1.8)
   - Sodium (0.8.0)
   - StellarErrors (0.4.0)
   - StellarKit (0.4.0):
@@ -34,7 +32,6 @@ DEPENDENCIES:
   - KinAppreciationModuleOptionsMenu (= 0.0.4)
   - KinEcosystem (from `./`)
   - KinMigrationModule
-  - SimpleCoreDataStack (from `https://github.com/kinecosystem/CoreDataStack.git`)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -53,13 +50,6 @@ SPEC REPOS:
 EXTERNAL SOURCES:
   KinEcosystem:
     :path: "./"
-  SimpleCoreDataStack:
-    :git: https://github.com/kinecosystem/CoreDataStack.git
-
-CHECKOUT OPTIONS:
-  SimpleCoreDataStack:
-    :commit: 22d5a5f8a7b8f4afd5876dea059e467a63b54eb8
-    :git: https://github.com/kinecosystem/CoreDataStack.git
 
 SPEC CHECKSUMS:
   Base64: cecfb41a004124895a7bcee567a89bae5a89d49b
@@ -67,15 +57,14 @@ SPEC CHECKSUMS:
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   KinAppreciationModuleOptionsMenu: 6d52396b8d1eb16a56a4f3b51f135b2835ed91ed
   KinCoreSDK: 419f6736c8aefcc0aef8ad45fa9032890ae6672e
-  KinEcosystem: afa7dd99a135d53043e716eeb9037de736c604c9
+  KinEcosystem: a4c1aa21ec99357cdb3e4c444823df404585a9a8
   KinMigrationModule: 0f14c64bfb6e1046bd137ab829264223c20905ec
   KinSDK: 24cbb5cf8b560c6025eacabc1b5aebbe5938c141
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
-  SimpleCoreDataStack: 76697a0822ff42108a7ac547fefeb00b32616714
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
   StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
   StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
 
-PODFILE CHECKSUM: 71fa6cafd356688c21b4b2b5034fb259328a6e8b
+PODFILE CHECKSUM: c6454c95689da593ed5766ad391c47b7ac1a6fc6
 
 COCOAPODS: 1.7.4
