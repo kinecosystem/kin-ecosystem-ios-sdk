@@ -7,7 +7,7 @@ workspace 'KinEcosystem'
 
 target 'KinEcosystem' do
     project 'KinEcosystem/KinEcosystem'
-    pod 'SimpleCoreDataStack' , :git => 'https://github.com/kinecosystem/CoreDataStack.git'
+    pod 'SimpleCoreDataStack' , :git => 'https://github.com/kinecosystem/CoreDataStack.git', :tag => '0.1.8'
     pod 'KinMigrationModule'
     pod 'KinAppreciationModuleOptionsMenu', '0.0.4'
 end
@@ -18,7 +18,8 @@ end
 
 target 'EcosystemSampleApp' do
     project 'KinEcosystemSampleApp/EcosystemSampleApp'
-    pod 'KinEcosystem', :path => './'
+    pod 'SimpleCoreDataStack' , :git => 'https://github.com/kinecosystem/kin-ecosystem-ios-sdk.git', :branch => 'ECO-1554'
+    #pod 'KinEcosystem', :path => './'
     pod 'JWT', '3.0.0-beta.11', :modular_headers => true
     pod 'HockeySDK', :modular_headers => true
 end
