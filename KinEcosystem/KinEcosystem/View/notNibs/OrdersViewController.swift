@@ -81,6 +81,7 @@ class OrdersViewController: UIViewController {
 
         DispatchQueue.main.async {
             self.tableView.removeTableSection(for: 0)
+
             let request = NSFetchRequest<Order>(entityName: "Order")
             request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
             let offerTypeDescriptor = self.offerType == .earn ? "earn" : "spend"
@@ -132,9 +133,9 @@ class OrdersViewController: UIViewController {
 
             self.tableView.reloadData()
 
-            if section.objectCount == 0 {
-                self.segmentedControl.isEnabled = true
-            }
+//            if section.objectCount == 0 {
+//                self.segmentedControl.isEnabled = true
+//            }
 
         }
     }
@@ -160,7 +161,6 @@ class OrdersViewController: UIViewController {
     }
 
     @IBAction func segmedControlChangedValue(_ sender: Any) {
-          segmentedControl.isEnabled = false
         offerType = segmentedControl.selectedSegmentIndex == 0 ? .earn : .spend
     }
 }
@@ -191,18 +191,18 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
         return 0
     }
 
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return 1
-    }
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        return 1
+//    }
 
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
     
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        segmentedControl.isEnabled = true
-        return nil
-    }
+//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+//        segmentedControl.isEnabled = true
+//        return nil
+//    }
 }
 
 extension OrdersViewController: Themed {

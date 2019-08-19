@@ -48,6 +48,7 @@ public class FetchedResultsCollectionSection: NSObject, NSFetchedResultsControll
                 return nil
         }
 
+        
         return objects[indexPath.row] as? NSManagedObject
     }
 

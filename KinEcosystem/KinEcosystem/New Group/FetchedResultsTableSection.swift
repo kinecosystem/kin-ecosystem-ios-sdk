@@ -78,6 +78,7 @@ public class FetchedResultsTableSection: NSObject, TableSection, NSFetchedResult
                            at indexPath: IndexPath?,
                            for type: NSFetchedResultsChangeType,
                            newIndexPath: IndexPath?) {
+
         let ip = IndexPath(row: indexPath?.row ?? 0, section: section)
         let nip = IndexPath(row: newIndexPath?.row ?? 0, section: section)
 
@@ -88,8 +89,11 @@ public class FetchedResultsTableSection: NSObject, TableSection, NSFetchedResult
             table?.reloadRows(at: [nip], with: .fade)
         }
         break
-        case .delete: table?.deleteRows(at: [ip], with: .automatic)
-        case .update: table?.reloadRows(at: [ip], with: .none)
+        case .delete:
+            table?.deleteRows(at: [ip], with: .automatic)
+        case .update:
+         //   table?.reloadRows(at: [ip], with: .none)
+        break
         case .move:
             table?.moveRow(at: ip, to: nip)
         }
