@@ -131,7 +131,7 @@ public class Kin: NSObject,AlonObserverProtocol {
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
         
-        guard   let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
+        guard let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
