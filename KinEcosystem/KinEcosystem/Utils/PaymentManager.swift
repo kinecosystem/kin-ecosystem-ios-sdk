@@ -12,10 +12,6 @@ import CoreData
 
 class PaymentManager {
 
-    //MARK: StaticObservableProtocol
-    static var order = AlonObservable(value: Order())
-
-    //MARK:
     static private let linkBag = LinkBag()
     static private var core:Core!
     static private var watcher:PaymentWatchProtocol??
@@ -25,24 +21,17 @@ class PaymentManager {
     class func resume(core:Core) {
         self.core = core
         guard  watcher == nil else { return }
-        do {
-            watcher = try self.core.blockchain.account?.watchPayments(cursor:"now")
-            print("1")
-            self.watcher??.emitter.on(next: { paymentInfo in
-                 print("2")
-                if let p = paymentInfo as? PaymentInfoProtocol {
-                    if var orderId = p.memoText?.components(separatedBy:"-").last {
-                        Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
-                            .then({ order in
-                                PaymentManager.order.value = order
-                            })
-                    }
-                }
-            }).add(to: self.linkBag)
+        watcher = try? self.core.blockchain.account?.watchPayments(cursor:"now")
+        self.watcher??.emitter.on(next: { paymentInfo in
+            if let p = paymentInfo as? PaymentInfoProtocol {
+                if var orderId = p.memoText?.components(separatedBy:"-").last {
+                    Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
+                        .then({ order in
 
-        } catch {
-             print("watcher error",error)
-        }
+                        })
+                }
+            }
+        }).add(to: self.linkBag)
     }
     class func resign() {
         watcher??.emitter.unlink()
