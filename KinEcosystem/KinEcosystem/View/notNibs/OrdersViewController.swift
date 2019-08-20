@@ -38,6 +38,7 @@ class OrdersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         setupExtraViews()
         setupTheming()
         setupFRCSections()
@@ -171,7 +172,7 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
-
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
