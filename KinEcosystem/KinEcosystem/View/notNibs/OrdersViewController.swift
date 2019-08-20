@@ -18,14 +18,13 @@ protocol OrdersViewControllerDelegate: class {
 class OrdersViewController: UIViewController {
     var core: Core!
     weak var delegate: OrdersViewControllerDelegate?
-
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
     let themeLinkBag = LinkBag()
     fileprivate var theme: Theme?
     @IBOutlet weak var segmentedControl: KinSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-   // @IBOutlet weak var balanceContainer: UIView!
+
     fileprivate var offerType: OfferType = .earn {
         didSet {
             setupFRCSections()
@@ -36,16 +35,11 @@ class OrdersViewController: UIViewController {
             vc.core = core
         }
     }
-//    convenience init(core: Core) {
-//        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
-//        self.core = core
-//        loadViewIfNeeded()
-//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
         setupExtraViews()
         setupTheming()
-        setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
         Theme.light
@@ -58,7 +52,6 @@ class OrdersViewController: UIViewController {
         
         segmentedControl.leftItem = "kinecosystem_earned".localized()
         segmentedControl.rightItem = "kinecosystem_used".localized()
-
     }
 
     fileprivate func setupExtraViews() {
@@ -72,13 +65,8 @@ class OrdersViewController: UIViewController {
         navigationItem.rightBarButtonItem = settingsBarButton
     }
 
-    fileprivate func setupTableView() {
-        let nib = UINib(nibName:orderCellName, bundle: KinBundle.ecosystem.rawValue)
-        tableView.register(nib, forCellReuseIdentifier: orderCellName)
-    }
 
     fileprivate func setupFRCSections() {
-
         DispatchQueue.main.async {
             self.tableView.removeTableSection(for: 0)
 
@@ -129,14 +117,7 @@ class OrdersViewController: UIViewController {
             }
 
             self.tableView.add(tableSection: section)
-           // try? frc.performFetch()
-
             self.tableView.reloadData()
-
-//            if section.objectCount == 0 {
-//                self.segmentedControl.isEnabled = true
-//            }
-
         }
     }
 
@@ -191,18 +172,9 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
         return 0
     }
 
-//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-//        return 1
-//    }
-
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
-    
-//    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-//        segmentedControl.isEnabled = true
-//        return nil
-//    }
 }
 
 extension OrdersViewController: Themed {
