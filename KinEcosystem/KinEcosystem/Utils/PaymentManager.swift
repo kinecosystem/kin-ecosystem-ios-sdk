@@ -17,7 +17,6 @@ class PaymentManager {
     static private var watcher:PaymentWatchProtocol??
     static private var promise = Promise<String>()
 
-    //MARK: API
     class func resume(core:Core) {
         self.core = core
         guard  watcher == nil else { return }
@@ -33,6 +32,7 @@ class PaymentManager {
             }
         }).add(to: self.linkBag)
     }
+    
     class func resign() {
         watcher??.emitter.unlink()
         watcher = nil
