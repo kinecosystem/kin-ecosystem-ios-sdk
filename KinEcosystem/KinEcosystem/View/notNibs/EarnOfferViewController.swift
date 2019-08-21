@@ -8,7 +8,6 @@
 
 import UIKit
 import WebKit
-import CoreDataStack
 import KinUtil
 import MessageUI
 

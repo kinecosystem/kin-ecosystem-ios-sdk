@@ -13,7 +13,7 @@ import StellarErrors
 import KinUtil
 import KinMigrationModule
 
-let SDKVersion = "1.2.4"
+let SDKVersion = "1.2.7"
 
 public typealias KinUserStatsCallback = (UserStats?, Error?) -> ()
 public typealias KinLoginCallback = (Error?) -> ()
@@ -70,7 +70,8 @@ public struct NativeOffer: Equatable {
     }
 }
 
-public class Kin: NSObject {
+public class Kin: NSObject,SimpleObserverProtocol {
+    public var id:Int = 0
     public static let shared = Kin()
     fileprivate(set) var core: Core?
     fileprivate weak var mpPresentingController: UIViewController?
@@ -130,7 +131,7 @@ public class Kin: NSObject {
         bi = try BIClient(endpoint: URL(string: environment.BIURL)!)
         setupBIProxies()
         
-        guard   let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
+        guard let modelPath = KinBundle.ecosystem.rawValue.path(forResource: "KinEcosystem",
                                                       ofType: "momd") else {
             logError("start failed")
             throw KinEcosystemError.client(.internalInconsistency, nil)
@@ -168,6 +169,10 @@ public class Kin: NSObject {
             try add(nativeOffer: offer)
         })
         prestartNativeOffers.removeAll()
+
+        if let core = core, let account = core.blockchain.account {
+             PaymentManager.resume(core:core)
+        }
     }
     
     public func login(jwt: String, callback: KinLoginCallback? = nil) throws {
@@ -221,19 +226,25 @@ public class Kin: NSObject {
                         logError("data sync failed (\(error))")
                     }
             }
-        }.error { error in
+            }.then({ _ in
+                PaymentManager.resume(core:core)
+            })
+        .error { error in
             let tError = KinEcosystemError.transform(error)
             Kin.track { try UserLoginFailed(errorReason: tError.localizedDescription) }
             callback?(tError)
         }
     }
-    
+
+    private var watcher:PaymentWatchProtocol?
     public func logout() {
         guard let core = core else {
             logError("Kin not started")
             return
         }
         core.offboard()
+        PaymentManager.resign()
+
     }
     
     public func balance(_ completion: @escaping (Balance?, Error?) -> ()) {
@@ -599,8 +610,10 @@ public class Kin: NSObject {
                 //logVerbose("accounts at onboard begin:\n\n\(core.blockchain.client.accounts.debugInfo)")
                 core.onboard()
                         .then {
+                            PaymentManager.resume(core:core)
                             //logVerbose("accounts at onboard end:\n\n\(core.blockchain.client.accounts.debugInfo)")
                             p.signal(())
+
                         }
                         .error { error in
                             if case KinEcosystemError.service(.timeout, _) = error {

@@ -7,7 +7,6 @@
 
 import UIKit
 import KinMigrationModule
-import CoreDataStack
 import CoreData
 
 protocol OffersViewControllerDelegate: class {

@@ -9,7 +9,6 @@
 import UIKit
 import KinMigrationModule
 import CoreData
-import CoreDataStack
 
 protocol OrdersViewControllerDelegate: class {
     func ordersViewControllerDidTapSettings()
@@ -19,14 +18,13 @@ protocol OrdersViewControllerDelegate: class {
 class OrdersViewController: UIViewController {
     var core: Core!
     weak var delegate: OrdersViewControllerDelegate?
-
     fileprivate let orderCellName = "OrderCell"
     fileprivate(set) var orderViewModels = [String : OrderViewModel]()
     let themeLinkBag = LinkBag()
     fileprivate var theme: Theme?
     @IBOutlet weak var segmentedControl: KinSegmentedControl!
     @IBOutlet weak var tableView: UITableView!
-   // @IBOutlet weak var balanceContainer: UIView!
+
     fileprivate var offerType: OfferType = .earn {
         didSet {
             setupFRCSections()
@@ -37,16 +35,12 @@ class OrdersViewController: UIViewController {
             vc.core = core
         }
     }
-//    convenience init(core: Core) {
-//        self.init(nibName: "OrdersViewController", bundle: KinBundle.ecosystem.rawValue)
-//        self.core = core
-//        loadViewIfNeeded()
-//    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = UIView()
         setupExtraViews()
         setupTheming()
-        setupTableView()
         setupFRCSections()
         Kin.track { try OrderHistoryPageViewed() }
         Theme.light
@@ -56,22 +50,12 @@ class OrdersViewController: UIViewController {
         navigationController?.navigationBar.backIndicatorTransitionMaskImage = backImage
         navigationItem.backBarButtonItem?.title = ""
         navigationController?.navigationBar.topItem?.title = ""
+        
+        segmentedControl.leftItem = "kinecosystem_earned".localized()
+        segmentedControl.rightItem = "kinecosystem_used".localized()
     }
 
     fileprivate func setupExtraViews() {
-//        let bvc = BalanceViewController(core: core)
-//        bvc.willMove(toParent: self)
-//        bvc.view.translatesAutoresizingMaskIntoConstraints = false
-//        balanceContainer.addSubview(bvc.view)
-//        addChild(bvc)
-//        bvc.didMove(toParent: self)
-//        NSLayoutConstraint.activate([
-//            bvc.view.topAnchor.constraint(equalTo: balanceContainer.topAnchor),
-//            bvc.view.leftAnchor.constraint(equalTo: balanceContainer.leftAnchor),
-//            bvc.view.rightAnchor.constraint(equalTo: balanceContainer.rightAnchor),
-//            bvc.view.bottomAnchor.constraint(equalTo: balanceContainer.bottomAnchor)
-//            ])
-//        bvc.view.setNeedsLayout()
         title = "my_kin".localized()
         let settingsIcon = UIImage(named: "KinNewSettingsIcon", in: KinBundle.ecosystem.rawValue, compatibleWith: nil)
         let settingsBarButton = UIBarButtonItem(image: settingsIcon,
@@ -82,57 +66,60 @@ class OrdersViewController: UIViewController {
         navigationItem.rightBarButtonItem = settingsBarButton
     }
 
-    fileprivate func setupTableView() {
-        let nib = UINib(nibName:orderCellName, bundle: KinBundle.ecosystem.rawValue)
-        tableView.register(nib, forCellReuseIdentifier: orderCellName)
-    }
 
     fileprivate func setupFRCSections() {
-        tableView.removeTableSection(for: 0)
-        let request = NSFetchRequest<Order>(entityName: "Order")
-        request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
+        DispatchQueue.main.async {
+            self.tableView.removeTableSection(for: 0)
 
-        let offerTypeDescriptor = offerType == .earn ? "earn" : "spend"
-        request.predicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
-            .or(["status" : OrderStatus.delayed.rawValue]))
-            .and(["offer_type" : offerTypeDescriptor])
+            let request = NSFetchRequest<Order>(entityName: "Order")
+            request.sortDescriptors = [NSSortDescriptor(key: "completion_date", ascending: false)]
+            let offerTypeDescriptor = self.offerType == .earn ? "earn" : "spend"
 
-        let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
-                                                              managedObjectContext: core.data.stack.viewContext,
-                                                              sectionNameKeyPath: nil,
-                                                              cacheName: nil)
-        let section = FetchedResultsTableSection(table: tableView, frc: frc) { [weak self] cell, ip in
-            guard   let this = self,
-                let theme = this.theme,
-                let order = this.tableView.objectForTable(at: ip) as? Order,
-                let orderCell = cell as? OrderCell else {
-                    logWarn("cell configure failed")
-                    return
+            request.predicate = (!NSPredicate(with: ["status" : OrderStatus.pending.rawValue])
+                .or(["status" : OrderStatus.delayed.rawValue]))
+                .and(["offer_type" : offerTypeDescriptor])
+            let frc = NSFetchedResultsController<NSManagedObject>(fetchRequest: request as! NSFetchRequest<NSManagedObject>,
+                                                                  managedObjectContext: self.core.data.stack.viewContext,
+                                                                  sectionNameKeyPath: nil,
+                                                                  cacheName: nil)
+
+            let section = FetchedResultsTableSection(table: self.tableView, frc: frc) { [weak self] cell, ip in
+
+                guard   let this = self,
+                    let theme = this.theme,
+                    let order = this.tableView.objectForTable(at: ip) as? Order,
+                    let orderCell = cell as? OrderCell else {
+                        logWarn("cell configure failed")
+                        return
+                }
+
+                orderCell.selectionStyle = .none
+                var viewModel: OrderViewModel
+               if let orderViewModel = this.orderViewModels[order.id] {
+                   viewModel = orderViewModel
+                } else {
+                    viewModel = OrderViewModel(with: order,
+                                               theme: theme,
+                                               last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
+                                               first: ip.row == 0)
+                    //Becouse first item might be pushed to be second, we can't store its viewmodel, as the view model determins the firs item uniqe appearence
+                    if ip.row > 0 {
+                            this.orderViewModels[order.id] = viewModel
+                    }
+                }
+
+                orderCell.failed.attributedText = viewModel.failed
+                orderCell.amount.attributedText = viewModel.amount
+                orderCell.title.attributedText = viewModel.title
+                orderCell.subtitle.attributedText = viewModel.subtitle
+                orderCell.last = viewModel.last
+                orderCell.first = viewModel.first
+                orderCell.icon = viewModel.icon
             }
 
-            orderCell.selectionStyle = .none
-            var viewModel: OrderViewModel
-            if let orderViewModel = this.orderViewModels[order.id] {
-                viewModel = orderViewModel
-            } else {
-                viewModel = OrderViewModel(with: order,
-                                           theme: theme,
-                                           last: ip.row == (this.tableView.tableSection(for: ip.section)?.objectCount)! - 1,
-                                           first: ip.row == 0)
-                this.orderViewModels[order.id] = viewModel
-            }
-            
-            orderCell.amount.attributedText = viewModel.amount
-            orderCell.title.attributedText = viewModel.title
-            orderCell.subtitle.attributedText = viewModel.subtitle
-            orderCell.last = viewModel.last
-            orderCell.first = viewModel.first
-            orderCell.icon = viewModel.icon
+            self.tableView.add(tableSection: section)
+            self.tableView.reloadData()
         }
-
-        tableView.add(tableSection: section)
-        try? frc.performFetch()
-        tableView.reloadData()
     }
 
     func presentCoupon(for order: Order) {
@@ -162,10 +149,11 @@ class OrdersViewController: UIViewController {
 
 @available(iOS 9.0, *)
 extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tableView.tableSection(for: section)?.objectCount ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: orderCellName, for: indexPath)
         let section = tableView.tableSection(for: indexPath.section)
@@ -174,22 +162,20 @@ extension OrdersViewController : UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        guard   let order = tableView.objectForTable(at: indexPath) as? Order else {
+        guard let order = tableView.objectForTable(at: indexPath) as? Order else {
                 logError("offer content is not in the correct format")
                 return
         }
         presentCoupon(for: order)
     }
+
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return 0
     }
+    
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         return nil
     }
-    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
-        return nil
-    }
-    
 }
 
 extension OrdersViewController: Themed {

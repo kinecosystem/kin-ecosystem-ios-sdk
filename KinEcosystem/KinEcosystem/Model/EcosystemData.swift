@@ -9,7 +9,6 @@
 //
 
 import Foundation
-import CoreDataStack
 import CoreData
 import KinCoreSDK
 
@@ -136,7 +135,7 @@ class EcosystemData {
                 diskEntity.update(networkEntity, in: context)
                 context.delete(networkEntity)
             }
-            
+    
         }) { error in
             if let stackError = error {
                 p.signal(stackError)
