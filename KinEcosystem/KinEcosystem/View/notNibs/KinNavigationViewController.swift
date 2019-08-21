@@ -20,7 +20,7 @@ class KinNavigationViewController: SheetViewController, UINavigationBarDelegate,
     @IBOutlet weak var balanceViewContainer: UIView!
 
     fileprivate let transitionController = UIViewController()
-    fileprivate var rootViewController: KinNavigationChildController!
+    public var rootViewController: KinNavigationChildController!
     fileprivate var tapRecognizer: UITapGestureRecognizer!
     fileprivate let transitionDuration = TimeInterval(0.3)
     fileprivate var balanceViewController: BalanceViewController!

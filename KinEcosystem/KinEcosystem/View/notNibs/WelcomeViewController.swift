@@ -127,10 +127,10 @@ class WelcomeViewController: KinViewController {
         transition = SplashTransition(animatedView: getStartedButton)
         let mpViewController = MarketplaceViewController(nibName: "MarketplaceViewController", bundle: KinBundle.ecosystem.rawValue)
         mpViewController.core = core
-        let navigationController = KinNavigationViewController(nibName: "KinNavigationViewController",
-                                                                        bundle: KinBundle.ecosystem.rawValue,
-                                                                        rootViewController: mpViewController,
-                                                                        core: core)
+
+        let navigationController = UIStoryboard(name: "KinNavigationViewController", bundle: KinBundle.ecosystem.rawValue) as! KinNavigationViewController
+        navigationController.core = core
+        navigationController.rootViewController = mpViewController
         navigationController.modalPresentationStyle = .custom
         navigationController.transitioningDelegate = transition
         present(navigationController, animated: true)

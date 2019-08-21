@@ -10,7 +10,7 @@ import UIKit
 import HockeySDK
 import KinEcosystem
 @UIApplicationMain
-    class AppDelegate: UIResponder, UIApplicationDelegate {
+œ    class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         BITHockeyManager.shared().configure(withIdentifier: "90ae7adeee724658b6b9ec5448a09fb8")

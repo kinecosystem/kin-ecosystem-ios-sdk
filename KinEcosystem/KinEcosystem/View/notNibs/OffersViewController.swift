@@ -31,19 +31,19 @@ class OffersViewController: UIViewController {
     let balanceView = BalanceView(64.0, 20.0)
     weak var delegate: OffersViewControllerDelegate?
 
-    init(core: Core) {
-        self.core = core
-        super.init(nibName: "OffersViewController", bundle: KinBundle.ecosystem.rawValue)
-        commonInit()
-    }
+//    init(core: Core) {
+//        self.core = core
+//        super.init(nibName: "OffersViewController", bundle: KinBundle.ecosystem.rawValue)
+//        commonInit()
+//    }
 
-    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
-        fatalError("OffersViewController must be init with core")
-    }
-
-    required init?(coder aDecoder: NSCoder) {
-        fatalError("OffersViewController must be init with core")
-    }
+//    override init(nibName nibNameOrNil: String?, bundle nibBundleOrNil: Bundle?) {
+//        fatalError("OffersViewController must be init with core")
+//    }
+//
+//    required init?(coder aDecoder: NSCoder) {
+//        fatalError("OffersViewController must be init with core")
+//    }
 
     private func commonInit() {
         loadViewIfNeeded()
@@ -51,6 +51,9 @@ class OffersViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
+        guard core != nil else { fatalError("Missing core"); return }
+
         automaticallyAdjustsScrollViewInsets = false
         edgesForExtendedLayout = .top
         extendedLayoutIncludesOpaqueBars = true
@@ -64,8 +67,11 @@ class OffersViewController: UIViewController {
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: nil, style: .plain) { [weak self] in
             self?.delegate?.offersViewControllerDidTapMyKinButton()
         }
+
         setupTheming()
-        setupCollectionView()
+
+        collectionView.contentInset = .zero
+
         setupFRCSection()
     }
 
@@ -123,12 +129,6 @@ class OffersViewController: UIViewController {
             
         }
         collectionView.add(fetchedResultsSection: earnSection)
-    }
-
-    fileprivate func setupCollectionView() {
-        collectionView.contentInset = .zero
-        collectionView.register(UINib(nibName: cellIdentifier, bundle: KinBundle.ecosystem.rawValue),
-                                          forCellWithReuseIdentifier: cellIdentifier)
     }
 
     fileprivate func updateSettingsBadgeIfNeeded() {

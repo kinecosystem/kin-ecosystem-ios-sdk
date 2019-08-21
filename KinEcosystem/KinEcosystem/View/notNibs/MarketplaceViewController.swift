@@ -243,8 +243,8 @@ extension MarketplaceViewController: UICollectionViewDelegate, UICollectionViewD
             guard let amount = core.blockchain.lastBalance?.amount,
                         amount >= Decimal(offer.amount) else {
                 let transition = SheetTransition()
-                let controller = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
-                                                                 bundle: KinBundle.ecosystem.rawValue)
+                            
+                let controller = UIStoryboard(name: "Storyboard", bundle: KinBundle.ecosystem.rawValue).instantiateViewController(withIdentifier: "InsufficientFundsViewController")
                 controller.modalPresentationStyle = .custom
                 controller.transitioningDelegate = transition
                 self.kinNavigationController?.present(controller, animated: true)

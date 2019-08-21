@@ -90,7 +90,9 @@ class EntrypointFlowController: KinFlowController {
     func showExperience() {
         let presented = presentingViewController.presentedViewController == navigationControllerWrapper
         let hasControllers = navigationControllerWrapper.wrappedNavigationController.viewControllers.count > 0
-        let mpViewController = OffersViewController(core: core)
+
+        let mpViewController = UIStoryboard(name: "Storyboard", bundle: KinBundle.ecosystem.rawValue).instantiateViewController(withIdentifier: "OffersViewController") as! OffersViewController
+        mpViewController.core = core
         mpViewController.delegate = self
         navigationControllerWrapper.pushViewController(mpViewController, animated: presented && hasControllers)
         if !presented {
@@ -197,8 +199,7 @@ extension EntrypointFlowController: OffersViewControllerDelegate {
     }
 
     func showNotEnoughKinController() {
-        let insufficientFundsViewController = InsufficientFundsViewController(nibName: "InsufficientFundsViewController",
-                                                                              bundle: KinBundle.ecosystem.rawValue)
+        let insufficientFundsViewController = UIStoryboard(name: "Storyboard", bundle: KinBundle.ecosystem.rawValue).instantiateViewController(withIdentifier: "InsufficientFundsViewController")
         insufficientFundsViewController.modalPresentationStyle = .currentContext
         navigationControllerWrapper.present(insufficientFundsViewController, animated: true)
     }
