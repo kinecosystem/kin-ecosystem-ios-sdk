@@ -11,10 +11,6 @@ import KinMigrationModule
 import CoreData
 
 class PaymentManager {
-
-    //MARK: StaticObservableProtocol
-    static var order = AlonObservable(value: Order())
-
     //MARK:
     static private let linkBag = LinkBag()
     static private var core:Core!
@@ -34,7 +30,7 @@ class PaymentManager {
                     if var orderId = p.memoText?.components(separatedBy:"-").last {
                         Flows.updatePayment(orderId: orderId, core: PaymentManager.core)
                             .then({ order in
-                                PaymentManager.order.value = order
+                             //   PaymentManager.order.value = order
                             })
                     }
                 }

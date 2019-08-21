@@ -105,7 +105,6 @@
 		9D00E6C222F6AA87006AF776 /* PaymentManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D00E6C122F6AA87006AF776 /* PaymentManager.swift */; };
 		9D4CEF1122DD9028001DB738 /* UIDevice+More.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */; };
 		9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */ = {isa = PBXBuildFile; fileRef = 9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */; };
-		9DB999E422F95E0A00F6987C /* Alon.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DB999E322F95E0A00F6987C /* Alon.swift */; };
 		9DC50901230A99F7003E1A70 /* NSPredicate+extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */; };
 		9DC50902230A99F7003E1A70 /* FetchedResultsTableSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */; };
 		9DC50903230A99F7003E1A70 /* EntityWatcher.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC508FE230A99F7003E1A70 /* EntityWatcher.swift */; };
@@ -413,7 +412,6 @@
 		9D00E6C122F6AA87006AF776 /* PaymentManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PaymentManager.swift; sourceTree = "<group>"; };
 		9D4CEF1022DD9028001DB738 /* UIDevice+More.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIDevice+More.swift"; sourceTree = "<group>"; };
 		9DB4FBCD22E6CD1B002B2AAA /* KinEcosystem.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = KinEcosystem.podspec; path = ../KinEcosystem.podspec; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
-		9DB999E322F95E0A00F6987C /* Alon.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alon.swift; sourceTree = "<group>"; };
 		9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NSPredicate+extensions.swift"; sourceTree = "<group>"; };
 		9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchedResultsTableSection.swift; sourceTree = "<group>"; };
 		9DC508FE230A99F7003E1A70 /* EntityWatcher.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EntityWatcher.swift; sourceTree = "<group>"; };
@@ -619,12 +617,11 @@
 			isa = PBXGroup;
 			children = (
 				9D00E6C122F6AA87006AF776 /* PaymentManager.swift */,
-				9DB999E322F95E0A00F6987C /* Alon.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
 		};
-		9DC508FB230A99ED003E1A70 /* New Group */ = {
+		9DC508FB230A99ED003E1A70 /* CoreDataStackModule */ = {
 			isa = PBXGroup;
 			children = (
 				9DC50900230A99F7003E1A70 /* CoreDataStack.swift */,
@@ -633,7 +630,7 @@
 				9DC508FD230A99F7003E1A70 /* FetchedResultsTableSection.swift */,
 				9DC508FC230A99F7003E1A70 /* NSPredicate+extensions.swift */,
 			);
-			path = "New Group";
+			path = CoreDataStackModule;
 			sourceTree = "<group>";
 		};
 		A472BB1825C38D0E53ADAF9F /* Pods */ = {
@@ -951,7 +948,7 @@
 		E96F24DB201729690017EF68 /* KinEcosystem */ = {
 			isa = PBXGroup;
 			children = (
-				9DC508FB230A99ED003E1A70 /* New Group */,
+				9DC508FB230A99ED003E1A70 /* CoreDataStackModule */,
 				9D00E6C022F6AA7C006AF776 /* Utils */,
 				E9D3F803228C510F0019253E /* fonts */,
 				E92BA42421A19C0A00C952D8 /* BackupModule */,
@@ -1475,7 +1472,6 @@
 				E954A62F205817AD00F01C8A /* CouponCode.swift in Sources */,
 				E92BA45521A19C0A00C952D8 /* RestoreViewController.swift in Sources */,
 				E92BA46D21A1A06600C952D8 /* SettingsViewController.swift in Sources */,
-				9DB999E422F95E0A00F6987C /* Alon.swift in Sources */,
 				E912B4E9203C5E17005ADBA1 /* Iso8601DateFormatter.swift in Sources */,
 				E942F8F32031B54800DD4B8E /* Logger.swift in Sources */,
 				9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */,

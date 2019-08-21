@@ -70,7 +70,7 @@ public struct NativeOffer: Equatable {
     }
 }
 
-public class Kin: NSObject,AlonObserverProtocol {
+public class Kin: NSObject {
     public var id:Int = 0
     public static let shared = Kin()
     fileprivate(set) var core: Core?
