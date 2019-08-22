@@ -280,7 +280,7 @@ class Blockchain: NSObject {
     }
 
     func onboard() -> Promise<Void> {
-       
+
         if onboarded {
             return Promise<Void>().signal(())
         }
@@ -581,6 +581,7 @@ extension KinAccountsProtocol {
 extension Blockchain: KinMigrationManagerDelegate {
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
+            print(kinMigrationManager.version?.rawValue)
             fatalError("version query closure not set on blockchain object")
         }
         return query()
@@ -588,9 +589,11 @@ extension Blockchain: KinMigrationManagerDelegate {
     
     public func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
         logInfo("migration started...")
+        PaymentManager.resign()
     }
     
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
+//        PaymentManager.resume(blockchain: self)
         logInfo("migration manager is ready with client, version: \(kinMigrationManager.version?.rawValue ?? 0), number of accounts: \(client.accounts.count)")
         self.client = client
         if  let address = self.startingAddress,
