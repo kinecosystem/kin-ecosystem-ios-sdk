@@ -95,6 +95,7 @@ class Core {
             }
         }.then {
             self.isOnboarding = false
+            PaymentManager.resume(core: self)
             self.onboardPromise.signal(())
         }.error { error in
             self.isOnboarding = false
