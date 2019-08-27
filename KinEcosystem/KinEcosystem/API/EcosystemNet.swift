@@ -152,5 +152,19 @@ class EcosystemNet {
                 self.client.request(request)
         }
     }
-    
+
+    @discardableResult
+    func isMigrationAllowed(appId:String,publicAddress:String) -> Promise<Bool> {
+        return client.buildRequest(path: "/migration/info/\(appId)"+"/"+"\(publicAddress)", method: .get, contentType: .json, body: nil, parameters:nil)
+        .then { request in
+            return self.client.dataRequest(request)
+        }
+        .then { data in
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+               return Promise<Bool>().signal( json?["should_migrate"] as? Int ?? 0 == 1 )
+            } else {
+              return Promise<Bool>().signal(false)
+            }
+        }
+    }
 }

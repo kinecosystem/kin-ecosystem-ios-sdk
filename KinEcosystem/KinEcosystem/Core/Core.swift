@@ -15,6 +15,17 @@ class Core {
     let blockchain: Blockchain
     let environment: Environment
     var jwt: JWTObject? = nil
+
+    class func sharedWith(environment: Environment, network: EcosystemNet, data: EcosystemData, blockchain: Blockchain) throws -> Core? {
+        guard shared == nil  else {
+            throw NSError(domain: "Core already instantiated", code: 500, userInfo:nil)
+            return nil
+        }
+        shared = try Core(environment: environment, network: network, data: data, blockchain: blockchain)
+        return shared
+    }
+    private(set) static var shared:Core?
+
     private(set) var onboardInFlight = false
     private var isOnboarding: Bool {
         get {
@@ -43,14 +54,14 @@ class Core {
         }
     }
     
-    init(environment: Environment, network: EcosystemNet, data: EcosystemData, blockchain: Blockchain) throws {
+    fileprivate init(environment: Environment, network: EcosystemNet, data: EcosystemData, blockchain: Blockchain) throws {
         self.network = network
         self.data = data
         self.blockchain = blockchain
         self.environment = environment
         self.blockchain.versionQuery = applicationBlockchainVersion
     }
-    
+
     /*  get blockchain version for current app:
         applications/:app_id/blockchain_version
  

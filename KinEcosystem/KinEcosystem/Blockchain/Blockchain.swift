@@ -168,6 +168,7 @@ class Blockchain: NSObject {
                     account.kinExtraData = kinExtraData
                 }
             }
+
         }
     }
 
@@ -183,7 +184,17 @@ class Blockchain: NSObject {
         kinAuthToken = token
         accountPromise = Promise<KinAccountProtocol>()
         cleanup()
-        try migrationManager!.start(with: publicAddress)
+
+        if let wallet = self.lastKnownWalletAddress, let app_id = self.kinAuthToken?.app_id  {
+            Core.shared?.network.isMigrationAllowed(appId: app_id,publicAddress:wallet).then({ allowed in
+                print("***************migration allowed",allowed)
+                if(allowed) {
+
+                }
+            })
+            try self.migrationManager!.start(with: publicAddress)
+        }
+
     }
     
     func importAccount(info: (String, String), byMigratingFirst migrate: Bool) -> Promise<Void> {
@@ -297,6 +308,7 @@ class Blockchain: NSObject {
             return onboardPromise
         }
         
+        
         balance()
             .then { _ in
                 self.onboardPromise.signal(())
@@ -334,7 +346,6 @@ class Blockchain: NSObject {
                         self.onboarded = false
                     }
         }
-
         return onboardPromise
     }
     
