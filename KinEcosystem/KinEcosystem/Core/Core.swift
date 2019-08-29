@@ -88,9 +88,8 @@ class Core {
             onboardPromise.signal(KinEcosystemError.client(.jwtMissing, nil))
             return onboardPromise
         }
-        
+       
         network.authorize(jwt: encoded, lastKnownWalletAddress: blockchain.lastKnownWalletAddress)
-            
         .then { auth, publicAddress -> Promise<(KinAccountProtocol, String?)> in
             try self.blockchain.start(with: auth, publicAddress: publicAddress)
             return self.blockchain.accountPromise

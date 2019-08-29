@@ -591,20 +591,26 @@ extension Blockchain: KinMigrationManagerDelegate {
             print(kinMigrationManager.version?.rawValue)
             fatalError("version query closure not set on blockchain object")
         }
-        //print( kinMigrationManager.migratePublicAddress )
-       // print( migrationManager?.version )
 
         var ver:KinVersion!
         return query()
         .then({ v -> Promise<Bool> in
             ver = v
             if ver == KinVersion.kinSDK, let publicAddress = kinMigrationManager.migratePublicAddress {
-                return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
+                return Core.shared!.network.getBlockChainVersion(publicAddress: publicAddress)
+                .then({ currentBlockchainVersion -> Promise<Bool> in
+                    if currentBlockchainVersion == "2" {
+                       return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
+                    } else {
+                        return Promise<Bool>().signal(true)
+                    }
+                })
             } else {
                 return Promise<Bool>().signal(true)
             }
         })
         .then({ allowed -> Promise<KinVersion> in
+            print("allowed \(allowed)")
             return Promise<KinVersion>().signal( allowed ? ver : .kinCore)
         })
     }

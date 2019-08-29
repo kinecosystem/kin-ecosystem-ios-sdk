@@ -56,7 +56,7 @@ class EcosystemNet {
         if authorized && lastKnownWalletAddress != nil {
             return Promise<(AuthToken, String?)>().signal((client.authToken!, nil))
         }
-
+        
         let sign = SignInData(jwt: jwt, sign_in_type: SignInType.jwt.rawValue)
         guard let data = try? JSONEncoder().encode(sign) else {
             return Promise<(AuthToken, String?)>().signal(EcosystemNetError.requestBuild)
@@ -165,6 +165,18 @@ class EcosystemNet {
             } else {
               return Promise<Bool>().signal(false)
             }
+        }
+    }
+    @discardableResult
+    func getBlockChainVersion(publicAddress:String) -> Promise<String?> {
+        return client.buildRequest(path: "/users/\(publicAddress)/blockchain_version", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
+        .then { request in
+            return self.client.dataRequest(request)
+        }
+        .then { data in
+            let result = String(data: data, encoding: .utf8)
+            print(result)
+            return Promise<String?>().signal(result)
         }
     }
 }
