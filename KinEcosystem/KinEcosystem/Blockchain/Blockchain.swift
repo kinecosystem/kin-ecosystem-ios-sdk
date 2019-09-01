@@ -458,10 +458,14 @@ class Blockchain: NSObject {
 
     private func watchBalance(for account: KinAccountProtocol) {
         if balanceWatcher == nil {
+            print(account.publicAddress)
             balanceWatcher = try? account.watchBalance(lastBalance?.amount)
             balanceWatcher?.emitter.on(next: { [weak self] amount in
                 self?.lastBalance = Balance(amount: amount)
             }).add(to: linkBag)
+            account.balance().then { (balance) in
+                print("balance",account.publicAddress,balance)
+            }
         }
     }
 
@@ -586,33 +590,19 @@ extension Blockchain: KinMigrationManagerDelegate {
 //        }
 //        return query()
 //    }
+//    func kinMigrationManager( shoudMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
+//        if let publicAddress = kinMigrationManager.migratePublicAddress {
+//          return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
+//        } else {
+//            return Promise<Bool>().signal(false)
+//        }
+//    }
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
             print(kinMigrationManager.version?.rawValue)
             fatalError("version query closure not set on blockchain object")
         }
-
-        var ver:KinVersion!
         return query()
-        .then({ v -> Promise<Bool> in
-            ver = v
-            if ver == KinVersion.kinSDK, let publicAddress = kinMigrationManager.migratePublicAddress {
-                return Core.shared!.network.getBlockChainVersion(publicAddress: publicAddress)
-                .then({ currentBlockchainVersion -> Promise<Bool> in
-                    if currentBlockchainVersion == "2" {
-                       return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
-                    } else {
-                        return Promise<Bool>().signal(true)
-                    }
-                })
-            } else {
-                return Promise<Bool>().signal(true)
-            }
-        })
-        .then({ allowed -> Promise<KinVersion> in
-            print("allowed \(allowed)")
-            return Promise<KinVersion>().signal( allowed ? ver : .kinCore)
-        })
     }
 
     public func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
