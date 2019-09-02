@@ -583,10 +583,15 @@ extension KinAccountsProtocol {
 }
 
 extension Blockchain: KinMigrationManagerDelegate {
-
-    func kinMigrationManager( shoudMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
-        return Promise<Bool>().signal(false)
+    func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
+           print(kinMigrationManager.migratePublicAddress)
+            if let publicAddress = Core.shared?.blockchain.account?.publicAddress {
+                return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
+            } else {
+                return Promise<Bool>().signal(false)
+            }
     }
+
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
             print(kinMigrationManager.version?.rawValue)

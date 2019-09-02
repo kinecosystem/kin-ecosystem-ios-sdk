@@ -202,9 +202,7 @@ class Core {
         guard network.client.authToken != nil else {
             return p.signal(KinEcosystemError.service(.notLoggedIn, nil))
         }
-
-        network.dataAtPath("applications/\(jwt.appId)/blockchain_version")
-        .then { data in
+        network.dataAtPath("applications/\(jwt.appId)/blockchain_version").then { data in
             guard let versionString = String(data: data, encoding: .utf8),
                 let num = Int(versionString),
                 let version = KinVersion(rawValue: num) else {
@@ -213,17 +211,7 @@ class Core {
             }
             p.signal(version)
         }
-        var version:KinVersion!
-        return p.then({ kinVersion -> Promise<Bool> in
-            version = kinVersion
-            if kinVersion == .kinSDK {
-                return self.network.isMigrationAllowed(appId: "test", publicAddress: self.blockchain.account!.publicAddress)
-            } else {
-                return Promise<Bool>().signal(true)
-            }
-        }).then({ allowed -> Promise<KinVersion> in
-            return Promise<KinVersion>().signal( allowed ? version : .kinCore)
-        })
+        return p
     }
 
     fileprivate func resetDefaults() {
