@@ -464,7 +464,7 @@ class Blockchain: NSObject {
                 self?.lastBalance = Balance(amount: amount)
             }).add(to: linkBag)
             account.balance().then { (balance) in
-                print("balance",account.publicAddress,balance)
+               // print("balance",account.publicAddress,balance)
             }
         }
     }
@@ -585,7 +585,7 @@ extension KinAccountsProtocol {
 extension Blockchain: KinMigrationManagerDelegate {
     func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
            print(kinMigrationManager.migratePublicAddress)
-            if let publicAddress = Core.shared?.blockchain.account?.publicAddress {
+            if let publicAddress = kinMigrationManager.migratePublicAddress /*?? Core.shared?.blockchain.account?.publicAddress */ {
                 return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
             } else {
                 return Promise<Bool>().signal(false)

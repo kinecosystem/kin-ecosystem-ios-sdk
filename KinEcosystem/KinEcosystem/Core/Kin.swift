@@ -641,7 +641,6 @@ public class Kin: NSObject,SimpleObserverProtocol {
             let core = core {
             
             core.blockchain.offboard()
-            
             return core.onboard()
         }
         return Promise<Void>().signal(error)
