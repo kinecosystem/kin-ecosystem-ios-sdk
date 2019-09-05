@@ -15,6 +15,10 @@ extension UIStatusBarStyle {
             return .black
         case .lightContent:
             return .white
+if #available(iOS 13.0, *) {
+        case .darkContent:
+            return .black
+}
         }
     }
 }
