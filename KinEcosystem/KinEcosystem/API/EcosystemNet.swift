@@ -155,13 +155,19 @@ class EcosystemNet {
 
     @discardableResult
     func isMigrationAllowed(appId:String,publicAddress:String) -> Promise<Bool> {
-    return client.buildRequest(path: "/migration/info/\(appId)"+"/"+"\(publicAddress)", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
+     //   return Promise<Bool>().signal(true)
+        return client.buildRequest(path: "/migration/info/\(appId)"+"/"+"\(publicAddress)", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
         .then { request in
             return self.client.dataRequest(request)
         }
         .then { data in
             if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-               return Promise<Bool>().signal( json?["should_migrate"] as? Int ?? 0 == 1 )
+                print(json,json?["wallet_blockchain_version"])
+                if json?["wallet_blockchain_version"] as? String == "3" {
+                     return Promise<Bool>().signal(true)
+                } else {
+                     return Promise<Bool>().signal( json?["should_migrate"] as? Int ?? 0 == 1 )
+                }
             } else {
               return Promise<Bool>().signal(false)
             }
