@@ -61,8 +61,6 @@ struct OfferViewModel {
         cell.layer.cornerRadius = 5.0
         cell.layer.borderWidth = 1.0
         cell.layer.borderColor = theme.cellBorderColor.cgColor
-       // print(title.atri)
-
         cell.offerTitle.attributedText = title
         cell.offerText.attributedText = subtitle
         cell.priceLabel.attributedText = priceTitle

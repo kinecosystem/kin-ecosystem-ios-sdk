@@ -151,8 +151,8 @@ public class Kin: NSObject,SimpleObserverProtocol {
             throw KinEcosystemError.client(.badRequest, nil)
         }
         let network = EcosystemNet(config: EcosystemConfiguration(baseURL: marketplaceURL))
-        core = try Core(environment: environment, network: network, data: store, blockchain: chain)
-        
+        core = try Core.sharedWith(environment: environment, network: network, data: store, blockchain: chain)
+
         psBalanceObsLock.lock()
         defer {
             psBalanceObsLock.unlock()
@@ -641,7 +641,6 @@ public class Kin: NSObject,SimpleObserverProtocol {
             let core = core {
             
             core.blockchain.offboard()
-            
             return core.onboard()
         }
         return Promise<Void>().signal(error)
