@@ -119,7 +119,7 @@ class Blockchain: NSObject {
             guard account != nil else { return nil }
             if  let data = UserDefaults.standard.data(forKey: KinPreferenceKey.lastBalance.rawValue),
                 let cachedBalance = try? JSONDecoder().decode(Balance.self, from: data) {
-                    return cachedBalance
+                return cachedBalance
             }
             return nil
         }
@@ -174,7 +174,7 @@ class Blockchain: NSObject {
     init(environment: Environment) throws {
         self.environment = environment
     }
-    
+
     func start(with token: AuthToken, publicAddress: String?) throws {
         startingAddress = publicAddress
         migrationManager = KinMigrationManager(serviceProvider: try environment.mapToMigrationModuleServiceProvider(), appId: try AppId(token.app_id))
@@ -185,7 +185,7 @@ class Blockchain: NSObject {
         cleanup()
         try migrationManager!.start(with: publicAddress)
     }
-    
+
     func importAccount(info: (String, String), byMigratingFirst migrate: Bool) -> Promise<Void> {
         let p = Promise<Void>()
         guard let mm = migrationManager else {
@@ -195,7 +195,7 @@ class Blockchain: NSObject {
             let accountData = try? JSONDecoder().decode(KinImportedAccountData.self, from: data) else {
                 return p.signal(KinEcosystemError.client(.accountReadFailed, nil))
         }
-        
+
         guard validateAccountPassword(accountData, password: info.1) else {
             return p.signal(KinEcosystemError.blockchain(.invalidPassword, nil))
         }
@@ -217,28 +217,28 @@ class Blockchain: NSObject {
         } catch {
             p.signal(error)
         }
-        
+
         return p
     }
-    
+
     func validateAccountPassword(_ accountData: KinImportedAccountData, password: String) -> Bool {
-        
+
         let eseed = accountData.seed
         let salt = accountData.salt
 
         guard let newSalt = KeyUtils.salt() else {
-             return false
+            return false
         }
 
         guard   let skey = try? KeyUtils.keyHash(passphrase: "", salt: newSalt),
-                let seed = try? KeyUtils.seed(from: password, encryptedSeed: eseed, salt: salt),
-                let _ = KeyUtils.encryptSeed(seed, secretKey: skey) else {
-            return false
+            let seed = try? KeyUtils.seed(from: password, encryptedSeed: eseed, salt: salt),
+            let _ = KeyUtils.encryptSeed(seed, secretKey: skey) else {
+                return false
         }
-        
+
         return true
     }
-    
+
     func setActiveAccount(_ anAccount: KinAccountProtocol) throws {
         lastKnownWalletAddress = anAccount.publicAddress
         guard let token = kinAuthToken else { throw KinEcosystemError.service(.notLoggedIn, nil) }
@@ -251,7 +251,7 @@ class Blockchain: NSObject {
         ac.kinExtraData = data
         _ = balance()
     }
-    
+
     func createNewAccount() throws -> KinAccountProtocol {
         guard let token = kinAuthToken, let client = client else { throw KinEcosystemError.service(.notLoggedIn, nil) }
         Kin.track { try StellarAccountCreationRequested() }
@@ -263,7 +263,7 @@ class Blockchain: NSObject {
         result.kinExtraData = kinExtraData
         return result
     }
-    
+
     func balance() -> Promise<Decimal> {
         let p = Promise<Decimal>()
         guard let account = account else {
@@ -284,60 +284,60 @@ class Blockchain: NSObject {
         if onboarded {
             return Promise<Void>().signal(())
         }
-        
+
         if isOnboarding {
             return onboardPromise
         }
-        
+
         onboardPromise = Promise<Void>()
         isOnboarding = true
-        
+
         guard let account = account else {
             onboardPromise.signal(KinEcosystemError.service(.notLoggedIn, nil))
             return onboardPromise
         }
-        
+
         balance()
             .then { _ in
                 self.onboardPromise.signal(())
                 self.onboarded = true
             }
             .error { (bError) in
-                    if let error = bError as? KinError {
-                        switch error {
-                        case .missingAccount:
-                            self.watchAccountCreation(timeout: 15.0)
-                                .then { _ in
-                                    Kin.track { try WalletCreationSucceeded() }
-                                    self.onboardPromise.signal(())
-                                    self.onboarded = true
-                                }.error { error in
-                                    self.onboardPromise.signal(error)
-                                    self.onboarded = false
-                                }
-                            
-                        case .missingBalance:
-                            account.activate().then { _ in
+                if let error = bError as? KinError {
+                    switch error {
+                    case .missingAccount:
+                        self.watchAccountCreation(timeout: 15.0)
+                            .then { _ in
                                 Kin.track { try WalletCreationSucceeded() }
                                 self.onboardPromise.signal(())
                                 self.onboarded = true
                             }.error { error in
                                 self.onboardPromise.signal(error)
                                 self.onboarded = false
-                            }
-                        default:
-                            self.onboardPromise.signal(error)
-                            self.onboarded = false
                         }
-                    } else {
-                        self.onboardPromise.signal(bError)
+
+                    case .missingBalance:
+                        account.activate().then { _ in
+                            Kin.track { try WalletCreationSucceeded() }
+                            self.onboardPromise.signal(())
+                            self.onboarded = true
+                            }.error { error in
+                                self.onboardPromise.signal(error)
+                                self.onboarded = false
+                        }
+                    default:
+                        self.onboardPromise.signal(error)
                         self.onboarded = false
                     }
+                } else {
+                    self.onboardPromise.signal(bError)
+                    self.onboarded = false
+                }
         }
 
         return onboardPromise
     }
-    
+
     func offboard() {
         onboarded = false
     }
@@ -347,7 +347,7 @@ class Blockchain: NSObject {
         guard let account = account else { return Promise<TransactionId>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
         return account.sendTransaction(to: recipient, kin: kin, memo: memo, fee: 0, whitelist: whitelist)
     }
-    
+
     func generateTransactionData(to recipient: String, kin: Decimal, memo: String?, fee: Stroop) -> Promise<Data> {
         guard let account = account else { return Promise<Data>().signal(KinEcosystemError.service(.notLoggedIn, nil)) }
         let p = Promise<Data>()
@@ -360,11 +360,11 @@ class Blockchain: NSObject {
                 p.signal(error)
             }
             return Promise<TransactionEnvelope?>().signal(nil)
-        }.error { error in
-              p.signal(error)
+            }.error { error in
+                p.signal(error)
         }
         return p
-        
+
     }
 
     func startWatchingForNewPayments(with memo: PaymentMemoIdentifier) throws {
@@ -434,14 +434,14 @@ class Blockchain: NSObject {
     }
 
     func addBalanceObserver(with block:@escaping (Balance) -> (), identifier: String? = nil) -> String {
-        
+
         let observerIdentifier = identifier ?? UUID().uuidString
         balanceObservers[observerIdentifier] = block
-        
+
         if let balance = lastBalance {
             block(balance)
         }
-        
+
         if let ac = account {
             watchBalance(for: ac)
         }
@@ -455,43 +455,46 @@ class Blockchain: NSObject {
             unwatchBalance()
         }
     }
-    
+
     private func watchBalance(for account: KinAccountProtocol) {
         if balanceWatcher == nil {
             balanceWatcher = try? account.watchBalance(lastBalance?.amount)
             balanceWatcher?.emitter.on(next: { [weak self] amount in
                 self?.lastBalance = Balance(amount: amount)
             }).add(to: linkBag)
+            account.balance().then { (balance) in
+               // print("balance",account.publicAddress,balance)
+            }
         }
     }
-    
+
     private func unwatchBalance() {
         balanceWatcher?.emitter.unlink()
         balanceWatcher = nil
     }
-    
+
     func watchAccountCreation(timeout: TimeInterval = 30.0) -> Promise<Void> {
-        
+
         let p = Promise<Void>()
         guard let account = account else {
             p.signal(KinEcosystemError.service(.notLoggedIn, nil))
             return p
         }
-        
+
         var created = false
-        
+
         do {
             try account.watchCreation()
-            .then {
-                created = true
-                p.signal(())
-            }.error { error in
-                p.signal(error)
+                .then {
+                    created = true
+                    p.signal(())
+                }.error { error in
+                    p.signal(error)
             }
         } catch {
             p.signal(error)
         }
-        
+
         DispatchQueue.global().asyncAfter(deadline: .now() + timeout) {
             if created == false {
                 p.signal(KinEcosystemError.service(.timeout, nil))
@@ -500,7 +503,7 @@ class Blockchain: NSObject {
 
         return p
     }
-    
+
     fileprivate func cleanup() {
         for version in [KinVersion.kinCore, KinVersion.kinSDK] {
             if let versionClient = migrationManager?.kinClient(version: version) {
@@ -520,7 +523,7 @@ class Blockchain: NSObject {
 
 
 extension KinAccountProtocol {
-    
+
     var kinExtraData: KinAccountExtraData {
         get {
             var result: KinAccountExtraData!
@@ -546,11 +549,11 @@ extension KinAccountProtocol {
             }
         }
     }
-    
+
 }
 
 extension KinAccountsProtocol {
-    
+
     var debugInfo: String {
         get {
             var info = "total: \(count)\n\n"
@@ -568,32 +571,32 @@ extension KinAccountsProtocol {
                     lastActive  : \(data.lastActive)
                     backedUp    : \(data.backedUp)
                     ----------------------
-                    
+
                     """
                 }
             }
             return info
         }
     }
-    
+
 }
 
 extension Blockchain: KinMigrationManagerDelegate {
+
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
-            print(kinMigrationManager.version?.rawValue)
             fatalError("version query closure not set on blockchain object")
         }
         return query()
     }
-    
+
     public func kinMigrationManagerDidStart(_ kinMigrationManager: KinMigrationManager) {
         logInfo("migration started...")
         PaymentManager.resign()
     }
-    
+
     public func kinMigrationManager(_ kinMigrationManager: KinMigrationManager, readyWith client: KinClientProtocol) {
-//        PaymentManager.resume(blockchain: self)
+        //        PaymentManager.resume(blockchain: self)
         logInfo("migration manager is ready with client, version: \(kinMigrationManager.version?.rawValue ?? 0), number of accounts: \(client.accounts.count)")
         self.client = client
         if  let address = self.startingAddress,
@@ -648,66 +651,66 @@ extension Blockchain: KinMigrationManagerDelegate {
                         try self.setActiveAccount(newAccount)
                         self.accountPromise.signal(newAccount)
                     }
-            }.error { error in
-                self.accountPromise.signal(error)
-            }.finally {
-                self.importedAccount = nil
-                self.startingAddress = nil
+                }.error { error in
+                    self.accountPromise.signal(error)
+                }.finally {
+                    self.importedAccount = nil
+                    self.startingAddress = nil
             }
         } else {
             accountPromise.signal(error)
         }
     }
-    
+
 }
 
 extension Blockchain: KinMigrationBIDelegate {
     public func kinMigrationMethodStarted() {
         Kin.track { try MigrationModuleStarted(publicAddress: startingAddress ?? "") }
     }
-    
+
     public func kinMigrationCallbackStart() {
-        
+
     }
-    
+
     public func kinMigrationCallbackReady(reason: KinMigrationBIReadyReason, version: KinVersion) {
     }
-    
+
     public func kinMigrationCallbackFailed(error: Error) {
-        
+
     }
-    
+
     public func kinMigrationVersionCheckStarted() {
     }
-    
+
     public func kinMigrationVersionCheckSucceeded(version: KinVersion) {
         Kin.track { try MigrationBCVersionCheckSucceeded(blockchainVersion: version == .kinCore ? .the2 : .the3, publicAddress: account?.publicAddress ?? "") }
     }
-    
+
     public func kinMigrationVersionCheckFailed(error: Error) {
         Kin.track { try MigrationBCVersionCheckFailed(blockchainVersion: migrationManager?.version == .kinSDK ? .the3 : .the2,
                                                       errorReason: error.localizedDescription,
                                                       publicAddress: account?.publicAddress ?? "") }
     }
-    
+
     public func kinMigrationBurnStarted(publicAddress: String) {
     }
-    
+
     public func kinMigrationBurnSucceeded(reason: KinMigrationBIBurnReason, publicAddress: String) {
     }
-    
+
     public func kinMigrationBurnFailed(error: Error, publicAddress: String) {
     }
-    
+
     public func kinMigrationRequestAccountMigrationStarted(publicAddress: String) {
         Kin.track { try MigrationAccountStarted(publicAddress: publicAddress) }
     }
-    
+
     public func kinMigrationRequestAccountMigrationSucceeded(reason: KinMigrationBIMigrateReason, publicAddress: String) {
         Kin.track { try MigrationAccountCompleted(blockchainVersion: migrationManager?.version == .kinSDK ? .the3 : .the2, publicAddress: publicAddress) }
 
     }
-    
+
     public func kinMigrationRequestAccountMigrationFailed(error: Error, publicAddress: String) {
         Kin.track { try MigrationAccountFailed(errorReason: error.localizedDescription, publicAddress: publicAddress) }
     }

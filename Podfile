@@ -7,7 +7,7 @@ workspace 'KinEcosystem'
 
 target 'KinEcosystem' do
     project 'KinEcosystem/KinEcosystem'
-    pod 'KinMigrationModule'
+    pod 'KinMigrationModule', '0.1.3'
     pod 'KinAppreciationModuleOptionsMenu', '0.0.4'
 end
 

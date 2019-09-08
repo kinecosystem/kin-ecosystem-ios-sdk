@@ -34,6 +34,7 @@ class PaymentManager {
     }
     
     class func resign() {
+    
         watcher??.emitter.unlink()
         watcher = nil
     }

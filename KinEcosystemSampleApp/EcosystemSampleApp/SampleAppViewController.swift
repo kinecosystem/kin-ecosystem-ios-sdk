@@ -181,6 +181,7 @@ class SampleAppViewController: UIViewController, UITextFieldDelegate {
         } catch {
             print("failed to add native offer, error: \(error)")
         }
+
         Kin.shared.nativeOfferHandler = { offer in
             DispatchQueue.main.async {
                 let alert = UIAlertController(title: "Native Offer", message: "You tapped a native offer and the handler was invoked.", preferredStyle: .alert)

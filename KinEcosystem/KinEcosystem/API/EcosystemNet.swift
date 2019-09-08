@@ -56,7 +56,7 @@ class EcosystemNet {
         if authorized && lastKnownWalletAddress != nil {
             return Promise<(AuthToken, String?)>().signal((client.authToken!, nil))
         }
-
+        
         let sign = SignInData(jwt: jwt, sign_in_type: SignInType.jwt.rawValue)
         guard let data = try? JSONEncoder().encode(sign) else {
             return Promise<(AuthToken, String?)>().signal(EcosystemNetError.requestBuild)
@@ -152,5 +152,35 @@ class EcosystemNet {
                 self.client.request(request)
         }
     }
-    
+
+    @discardableResult
+    func isMigrationAllowed(appId:String,publicAddress:String) -> Promise<Bool> {
+     //   return Promise<Bool>().signal(true)
+        return client.buildRequest(path: "/migration/info/\(appId)"+"/"+"\(publicAddress)", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
+        .then { request in
+            return self.client.dataRequest(request)
+        }
+        .then { data in
+            if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
+                if json?["wallet_blockchain_version"] as? String == "3" {
+                     return Promise<Bool>().signal(true)
+                } else {
+                     return Promise<Bool>().signal( json?["should_migrate"] as? Int ?? 0 == 1 )
+                }
+            } else {
+              return Promise<Bool>().signal(false)
+            }
+        }
+    }
+    @discardableResult
+    func getBlockChainVersion(publicAddress:String) -> Promise<String?> {
+        return client.buildRequest(path: "/users/\(publicAddress)/blockchain_version", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
+        .then { request in
+            return self.client.dataRequest(request)
+        }
+        .then { data in
+            let result = String(data: data, encoding: .utf8)
+            return Promise<String?>().signal(result)
+        }
+    }
 }
