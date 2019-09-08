@@ -583,6 +583,14 @@ extension KinAccountsProtocol {
 
 extension Blockchain: KinMigrationManagerDelegate {
 
+    func kinMigrationManager( shouldMigrate kinMigrationManager: KinMigrationManager) -> Promise<Bool> {
+        if let publicAddress = kinMigrationManager.kinClient(version: .kinCore).accounts.last?.publicAddress {
+            return Core.shared!.network.isMigrationAllowed(appId: kinMigrationManager.appId.value, publicAddress: publicAddress)
+        } else {
+            return Promise<Bool>().signal(false)
+        }
+    }
+
     public func kinMigrationManagerNeedsVersion(_ kinMigrationManager: KinMigrationManager) -> Promise<KinVersion> {
         guard let query = versionQuery else {
             fatalError("version query closure not set on blockchain object")
