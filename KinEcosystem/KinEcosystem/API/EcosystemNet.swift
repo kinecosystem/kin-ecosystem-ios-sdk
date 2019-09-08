@@ -162,7 +162,6 @@ class EcosystemNet {
         }
         .then { data in
             if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String:Any] {
-                print(json,json?["wallet_blockchain_version"])
                 if json?["wallet_blockchain_version"] as? String == "3" {
                      return Promise<Bool>().signal(true)
                 } else {
@@ -181,7 +180,6 @@ class EcosystemNet {
         }
         .then { data in
             let result = String(data: data, encoding: .utf8)
-            print(result)
             return Promise<String?>().signal(result)
         }
     }

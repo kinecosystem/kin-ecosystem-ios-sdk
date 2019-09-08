@@ -6,32 +6,32 @@ PODS:
   - JWT (3.0.0-beta.11):
     - Base64 (~> 1.1.2)
   - KinAppreciationModuleOptionsMenu (0.0.4)
-  - KinCoreSDK (0.8.0):
+  - KinCoreSDK (0.8.1):
     - Sodium (= 0.8.0)
-    - StellarKit (= 0.4.0)
+    - StellarKit (= 0.4.1)
   - KinEcosystem (1.2.7):
     - KinAppreciationModuleOptionsMenu (= 0.0.4)
-    - KinMigrationModule (= 0.1.0)
-  - KinMigrationModule (0.1.0):
-    - KinCoreSDK (= 0.8.0)
-    - KinSDK (= 0.9.0)
+    - KinMigrationModule (= 0.1.3)
+  - KinMigrationModule (0.1.3):
+    - KinCoreSDK (= 0.8.1)
+    - KinSDK (= 0.9.2)
     - Sodium (= 0.8.0)
-  - KinSDK (0.9.0):
+  - KinSDK (0.9.2):
     - KinUtil (= 0.1.0)
     - Sodium (= 0.8.0)
   - KinUtil (0.1.0)
   - Sodium (0.8.0)
-  - StellarErrors (0.4.0)
-  - StellarKit (0.4.0):
+  - StellarErrors (0.4.1)
+  - StellarKit (0.4.1):
     - KinUtil (= 0.1.0)
-    - StellarErrors (= 0.4.0)
+    - StellarErrors (= 0.4.1)
 
 DEPENDENCIES:
   - HockeySDK
   - JWT (= 3.0.0-beta.11)
   - KinAppreciationModuleOptionsMenu (= 0.0.4)
   - KinEcosystem (from `./`)
-  - KinMigrationModule
+  - KinMigrationModule (= 0.1.3)
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
@@ -56,15 +56,15 @@ SPEC CHECKSUMS:
   HockeySDK: 15afe6bc0a5bfe3a531fd73dbf082095f37dac3b
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   KinAppreciationModuleOptionsMenu: 6d52396b8d1eb16a56a4f3b51f135b2835ed91ed
-  KinCoreSDK: 419f6736c8aefcc0aef8ad45fa9032890ae6672e
-  KinEcosystem: 3c39d0aae40cfd81a992e5fdce9a9718c49d8f4a
-  KinMigrationModule: 0f14c64bfb6e1046bd137ab829264223c20905ec
-  KinSDK: 24cbb5cf8b560c6025eacabc1b5aebbe5938c141
+  KinCoreSDK: 9dac3ae63584c09e7e9619eaf6599978078c1182
+  KinEcosystem: 5afb2886e89568f492d0b959b0ae7f972e594ed5
+  KinMigrationModule: b9d6f7b68e9c113f4aba54db485a518a8d882239
+  KinSDK: f0b371d984bdc4d3a93bb89a7187414fc353ac01
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
   Sodium: 63c0ca312a932e6da481689537d4b35568841bdc
-  StellarErrors: 936a03ecd2c92d073f4c3ec706ec4e8a4440cbd1
-  StellarKit: b30586085ec19e16a66467bdff9bab743cfd0e5e
+  StellarErrors: 58d5b1f5ed99b17d4b6fb53f8b214f85333cdaa7
+  StellarKit: a6b009027ddf18de0cbad88ff174950cc64f9df9
 
-PODFILE CHECKSUM: c6454c95689da593ed5766ad391c47b7ac1a6fc6
+PODFILE CHECKSUM: 4b676c28979cea8ca64059ad4efd13c41544457e
 
 COCOAPODS: 1.7.4

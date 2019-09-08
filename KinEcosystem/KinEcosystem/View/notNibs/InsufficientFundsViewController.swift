@@ -30,10 +30,6 @@ class InsufficientFundsViewController: UIViewController {
 
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        print(view.superview?.layer.cornerRadius)
-    }
-
     @IBAction func goTapped(_ sender: Any) {
         close()
     }
