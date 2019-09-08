@@ -155,7 +155,6 @@ class EcosystemNet {
 
     @discardableResult
     func isMigrationAllowed(appId:String,publicAddress:String) -> Promise<Bool> {
-     //   return Promise<Bool>().signal(true)
         return client.buildRequest(path: "/migration/info/\(appId)"+"/"+"\(publicAddress)", method: .get, contentType: .json, body: nil, parameters:["cach_bust": String(Date().timeIntervalSince1970)])
         .then { request in
             return self.client.dataRequest(request)
