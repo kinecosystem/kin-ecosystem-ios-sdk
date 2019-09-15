@@ -180,6 +180,8 @@ struct Flows {
                             group.leave()
                     }
                     group.wait(timeout: .now() + 5.0)
+
+                    Kin.shared.recoverByMigratingIfNeeded(from: error)
                 }
                 openOrder = nil
             }.finally {
