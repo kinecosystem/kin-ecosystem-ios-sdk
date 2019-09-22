@@ -68,9 +68,10 @@ public enum Environment {
     public var migrationURL: URL {
         switch self {
         case .playground,
-             .beta,
              .test:
             return URL(string: "https://migration-service.kinecosystemtest.com")!
+        case .beta:
+            return URL(string: "https://migration-service.kinecosystembeta.com")!
         case .production:
             return URL(string: "https://migration-service.kinmarketplace.com")!
         case .custom:
@@ -103,7 +104,7 @@ public enum Environment {
             return "GBC3SG6NGTSZ2OMH3FFGB7UVRQWILW367U4GSOOF4TFSZONV42UJXUH7"
         case .custom(let envProps):
             return envProps.kinIssuer
-        }
+        };
     }
     
     public var marketplaceURL: String {
