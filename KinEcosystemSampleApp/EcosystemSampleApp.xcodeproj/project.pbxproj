@@ -608,6 +608,7 @@
 				DEVELOPMENT_TEAM = QUCAP2TH46;
 				INFOPLIST_FILE = EcosystemSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.7.92t;
 				PRODUCT_BUNDLE_IDENTIFIER = org.kin.echosystem.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "dbc5a8ef-59e9-4b09-bfac-2d7f57a93d0c";
@@ -630,6 +631,7 @@
 				DEVELOPMENT_TEAM = QUCAP2TH46;
 				INFOPLIST_FILE = EcosystemSampleApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MARKETING_VERSION = 1.2.7.92t;
 				PRODUCT_BUNDLE_IDENTIFIER = org.kin.echosystem.sampleapp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "7ab7e59a-4272-40b5-9b06-afea1771ab5f";
