@@ -9,7 +9,7 @@ PODS:
   - KinCoreSDK (0.8.1):
     - Sodium (= 0.8.0)
     - StellarKit (= 0.4.1)
-  - KinEcosystem (1.2.7):
+  - KinEcosystem (1.2.8):
     - KinAppreciationModuleOptionsMenu (= 0.0.4)
     - KinMigrationModule (= 0.1.3)
   - KinMigrationModule (0.1.3):
@@ -57,7 +57,7 @@ SPEC CHECKSUMS:
   JWT: 05028b9624591bba9681bb57df2c5f95fa258bad
   KinAppreciationModuleOptionsMenu: 6d52396b8d1eb16a56a4f3b51f135b2835ed91ed
   KinCoreSDK: 9dac3ae63584c09e7e9619eaf6599978078c1182
-  KinEcosystem: 5afb2886e89568f492d0b959b0ae7f972e594ed5
+  KinEcosystem: 19a1215f6d2ad7ff1b9204f47496091a4a3d8332
   KinMigrationModule: b9d6f7b68e9c113f4aba54db485a518a8d882239
   KinSDK: f0b371d984bdc4d3a93bb89a7187414fc353ac01
   KinUtil: 5ba64858ba2f24156d6e229c963b37f8d808bd4c
