@@ -113,7 +113,6 @@
 		9DC50905230A99F7003E1A70 /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DC50900230A99F7003E1A70 /* CoreDataStack.swift */; };
 		9DE67D2D22F15F9300525553 /* PollingManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2C22F15F9300525553 /* PollingManager.swift */; };
 		9DE67D2F22F16D5D00525553 /* URLTaskFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE67D2E22F16D5C00525553 /* URLTaskFactory.swift */; };
-		9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DE88BCB22E993A2008E8EDF /* Theme+Factory.swift */; };
 		9DEB65C522DC3F880070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB65C622DC4D0C0070887D /* Storyboard.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB65C422DC3F880070887D /* Storyboard.storyboard */; };
 		9DEB660622DC543F0070887D /* Podfile in Resources */ = {isa = PBXBuildFile; fileRef = 9DEB660422DC543F0070887D /* Podfile */; };
@@ -227,7 +226,6 @@
 		E954A644205A7FC600F01C8A /* EarnOfferViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E954A642205A7FC600F01C8A /* EarnOfferViewController.swift */; };
 		E9657F3B203F5F0700D993F9 /* RestClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = E9657F3A203F5F0700D993F9 /* RestClient.swift */; };
 		E96A5830204458AF00285C7B /* OrdersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96A582E204458AF00285C7B /* OrdersViewController.swift */; };
-		E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E96A582F204458AF00285C7B /* OrdersViewController.xib */; };
 		E96F24E3201729690017EF68 /* KinEcosystem.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E96F24D9201729690017EF68 /* KinEcosystem.framework */; };
 		E96F24EA201729690017EF68 /* KinEcosystem.h in Headers */ = {isa = PBXBuildFile; fileRef = E96F24DC201729690017EF68 /* KinEcosystem.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		E96F24F72018A8AC0017EF68 /* Kin.swift in Sources */ = {isa = PBXBuildFile; fileRef = E96F24F62018A8AC0017EF68 /* Kin.swift */; };
@@ -237,7 +235,6 @@
 		E97E5C4F20E4C840000E9E30 /* KBIEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5C4E20E4C840000E9E30 /* KBIEvent.swift */; };
 		E97E5D1820E82D8D000E9E30 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = E97E5D1720E82D8D000E9E30 /* Reachability.swift */; };
 		E98D175C20481D8900FEB57A /* OrderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D175A20481D8900FEB57A /* OrderCell.swift */; };
-		E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D175B20481D8900FEB57A /* OrderCell.xib */; };
 		E98D1764204840C500FEB57A /* OrderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1763204840C500FEB57A /* OrderViewModel.swift */; };
 		E98D177B204BF92700FEB57A /* BalanceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E98D1779204BF92700FEB57A /* BalanceViewController.swift */; };
 		E98D177C204BF92700FEB57A /* BalanceViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = E98D177A204BF92700FEB57A /* BalanceViewController.xib */; };
@@ -1262,7 +1259,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E98D175D20481D8900FEB57A /* OrderCell.xib in Resources */,
 				E913AD98204692190071D329 /* KinNavigationViewController.xib in Resources */,
 				E92BA44D21A19C0A00C952D8 /* QRViewController.xib in Resources */,
 				E98D17882050205C00FEB57A /* WelcomeViewController.xib in Resources */,
@@ -1276,7 +1272,6 @@
 				913793A822D3670A00C07E76 /* OffersViewController.xib in Resources */,
 				913793AA22D3670A00C07E76 /* NoOffersViewController.xib in Resources */,
 				913793A722D3670A00C07E76 /* OfferCell.xib in Resources */,
-				E96A5831204458AF00285C7B /* OrdersViewController.xib in Resources */,
 				E93146332164F52B008F2D74 /* Localizable.strings in Resources */,
 				9DB4FBCE22E6CD1B002B2AAA /* KinEcosystem.podspec in Resources */,
 				E92F7B7D20691403008A027F /* SpendOfferViewController.xib in Resources */,
@@ -1568,7 +1563,6 @@
 				51B54A6E119B402144E7F56C /* client.swift in Sources */,
 				287B7E8807FCF8F824969AB2 /* backup_wallet_completed.swift in Sources */,
 				1B94E7D4FDFFEE06B3BCDA31 /* order_history_item_tapped.swift in Sources */,
-				9DE88BCC22E993A2008E8EDF /* Theme+Factory.swift in Sources */,
 				913793B822D3677D00C07E76 /* BalanceView.swift in Sources */,
 				B20232002235442B51216DE6 /* order_history_page_viewed.swift in Sources */,
 				4DCB27D7309E2FAE05CBC410 /* user_login_succeeded.swift in Sources */,
