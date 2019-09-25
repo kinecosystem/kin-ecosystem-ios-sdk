@@ -17,6 +17,8 @@ extension UIStatusBarStyle {
             return .white
         case .darkContent:
             return .darkGray
+        default:
+            return .white
         }
     }
 }
