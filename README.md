@@ -11,3 +11,6 @@ For full details, visit the documentation on our web site:
 
 ## License ##
 The `kin-ecosystem-ios-sdk` library is licensed under the MIT license.
+
+## Xcode 11 ##
+Pleaseset Xcode File -> Workspace Settings -> Build System to Legacy Build when compiling in Xcode version 11
