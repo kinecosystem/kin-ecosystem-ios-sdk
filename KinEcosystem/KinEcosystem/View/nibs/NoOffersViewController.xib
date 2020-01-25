@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
-    <device id="retina6_1" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="15705" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15706"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -42,9 +40,11 @@ Label</string>
                 <constraint firstItem="ZZw-Ge-R7H" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="Q7t-9h-cpA"/>
                 <constraint firstItem="BKA-uZ-zBh" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="e5r-f6-bsy"/>
                 <constraint firstItem="BKA-uZ-zBh" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" constant="80" id="u9a-kv-ruc"/>
-                <constraint firstItem="ZZw-Ge-R7H" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" id="w8e-1p-i7h"/>
+                <constraint firstItem="ZZw-Ge-R7H" firstAttribute="centerY" secondItem="vUN-kp-3ea" secondAttribute="centerY" priority="999" id="w8e-1p-i7h"/>
+                <constraint firstItem="ZZw-Ge-R7H" firstAttribute="top" relation="greaterThanOrEqual" secondItem="vUN-kp-3ea" secondAttribute="top" constant="200" id="z0L-2Q-qFZ"/>
             </constraints>
             <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <point key="canvasLocation" x="139" y="85"/>
         </view>
     </objects>
     <resources>

@@ -197,6 +197,7 @@ extension OffersViewController: UICollectionViewDelegate, UICollectionViewDataSo
         } else {
             if children.first(where: { $0 is NoOffersViewController }) == nil {
                 let noOffersViewController = NoOffersViewController(nibName: "NoOffersViewController", bundle: KinBundle.ecosystem.rawValue)
+                noOffersViewController.view.translatesAutoresizingMaskIntoConstraints = false
                 addChild(noOffersViewController)
                 view.addSubview(noOffersViewController.view)
                 NSLayoutConstraint.activate([

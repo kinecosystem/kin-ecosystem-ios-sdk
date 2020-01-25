@@ -110,11 +110,12 @@ class SheetNavigationControllerWrapper: UIViewController, SheetPresented, Themed
         view.addSubview(wrappedNavigationController.view)
         addChild(wrappedNavigationController)
         wrappedNavigationController.didMove(toParent: self)
+        let safeArea = bcSafeAreaLayoutGuide
         NSLayoutConstraint.activate([
-            wrappedNavigationController.view.topAnchor.constraint(equalTo: bcSafeAreaLayoutGuide.topAnchor, constant: 16.0),
-            wrappedNavigationController.view.leftAnchor.constraint(equalTo: bcSafeAreaLayoutGuide.leftAnchor, constant: 0.0),
-            wrappedNavigationController.view.rightAnchor.constraint(equalTo: bcSafeAreaLayoutGuide.rightAnchor, constant: 0.0),
-            wrappedNavigationController.view.bottomAnchor.constraint(equalTo: bcSafeAreaLayoutGuide.bottomAnchor, constant: 0.0)
+            wrappedNavigationController.view.topAnchor.constraint(equalTo: safeArea.topAnchor, constant: 16.0),
+            wrappedNavigationController.view.leftAnchor.constraint(equalTo: safeArea.leftAnchor, constant: 0.0),
+            wrappedNavigationController.view.rightAnchor.constraint(equalTo: safeArea.rightAnchor, constant: 0.0),
+            wrappedNavigationController.view.bottomAnchor.constraint(equalTo: safeArea.bottomAnchor, constant: 0.0)
             ])
         view.setNeedsLayout()
     }
